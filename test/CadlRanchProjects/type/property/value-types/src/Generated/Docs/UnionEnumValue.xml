@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetUnionEnumValueAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetUnionEnumValueAsync.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response<UnionEnumValueProperty> response = await client.GetUnionEnumValueAsync();
+]]></code>
+This sample shows how to call GetUnionEnumValueAsync with all parameters.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response<UnionEnumValueProperty> response = await client.GetUnionEnumValueAsync();
+]]></code></example>
+    </member>
+    <member name="GetUnionEnumValue(CancellationToken)">
+      <example>
+This sample shows how to call GetUnionEnumValue.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response<UnionEnumValueProperty> response = client.GetUnionEnumValue();
+]]></code>
+This sample shows how to call GetUnionEnumValue with all parameters.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response<UnionEnumValueProperty> response = client.GetUnionEnumValue();
+]]></code></example>
+    </member>
+    <member name="GetUnionEnumValueAsync(RequestContext)">
+      <example>
+This sample shows how to call GetUnionEnumValueAsync and parse the result.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response response = await client.GetUnionEnumValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetUnionEnumValueAsync with all parameters and parse the result.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response response = await client.GetUnionEnumValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="GetUnionEnumValue(RequestContext)">
+      <example>
+This sample shows how to call GetUnionEnumValue and parse the result.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response response = client.GetUnionEnumValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetUnionEnumValue with all parameters and parse the result.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+Response response = client.GetUnionEnumValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(UnionEnumValueProperty,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(UnionEnumValueProperty,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = "value2",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = "value2",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = "value2",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    property = "value2",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

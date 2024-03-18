@@ -356,6 +356,14 @@ export function getInputType(
         }
     } else if (type.kind === "Union") {
         return getInputTypeForUnion(type);
+    } else if (type.kind === "UnionVariant") {
+        return getInputType(
+            context,
+            getFormattedType(program, type.type),
+            models,
+            enums,
+            literalTypeContext
+        );
     } else if (type.kind === "Tuple") {
         return {
             Kind: InputTypeKind.Intrinsic,

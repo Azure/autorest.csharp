@@ -11,17 +11,16 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ParametersCadl.Models;
+using _Type.Property.ValueTypes.Models;
 
-namespace ParametersCadl
+namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> The ParameterOrders sub-client. </summary>
-    public partial class ParameterOrders
+    /// <summary> The UnionEnumValue sub-client. </summary>
+    public partial class UnionEnumValue
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,48 +28,44 @@ namespace ParametersCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ParameterOrders for mocking. </summary>
-        protected ParameterOrders()
+        /// <summary> Initializes a new instance of UnionEnumValue for mocking. </summary>
+        protected UnionEnumValue()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterOrders. </summary>
+        /// <summary> Initializes a new instance of UnionEnumValue. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service endpoint. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        internal UnionEnumValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
-        /// <param name="start"> The <see cref="int"/> to use. </param>
-        /// <param name="end"> The <see cref="int"/>? to use. </param>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='OperationAsync(int,int?,CancellationToken)']/*" />
-        public virtual async Task<Response<Result>> OperationAsync(int start, int? end = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValueAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<UnionEnumValueProperty>> GetUnionEnumValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OperationAsync(start, end, context).ConfigureAwait(false);
-            return Response.FromValue(Result.FromResponse(response), response);
+            Response response = await GetUnionEnumValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(UnionEnumValueProperty.FromResponse(response), response);
         }
 
-        /// <param name="start"> The <see cref="int"/> to use. </param>
-        /// <param name="end"> The <see cref="int"/>? to use. </param>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation(int,int?,CancellationToken)']/*" />
-        public virtual Response<Result> Operation(int start, int? end = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValue(CancellationToken)']/*" />
+        public virtual Response<UnionEnumValueProperty> GetUnionEnumValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Operation(start, end, context);
-            return Response.FromValue(Result.FromResponse(response), response);
+            Response response = GetUnionEnumValue(context);
+            return Response.FromValue(UnionEnumValueProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,24 +74,22 @@ namespace ParametersCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OperationAsync(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetUnionEnumValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The <see cref="int"/> to use. </param>
-        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='OperationAsync(int,int?,RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(int start, int? end, RequestContext context)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValueAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetUnionEnumValueAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrders.Operation");
+            using var scope = ClientDiagnostics.CreateScope("UnionEnumValue.GetUnionEnumValue");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(start, end, context);
+                using HttpMessage message = CreateGetUnionEnumValueRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -107,7 +100,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,24 +109,22 @@ namespace ParametersCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Operation(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetUnionEnumValue(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The <see cref="int"/> to use. </param>
-        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation(int,int?,RequestContext)']/*" />
-        public virtual Response Operation(int start, int? end, RequestContext context)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValue(RequestContext)']/*" />
+        public virtual Response GetUnionEnumValue(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrders.Operation");
+            using var scope = ClientDiagnostics.CreateScope("UnionEnumValue.GetUnionEnumValue");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(start, end, context);
+                using HttpMessage message = CreateGetUnionEnumValueRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -143,30 +134,38 @@ namespace ParametersCadl
             }
         }
 
-        /// <param name="end"> The <see cref="int"/> to use. </param>
-        /// <param name="start"> The <see cref="int"/>? to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation2Async(int,int?,CancellationToken)']/*" />
-        public virtual async Task<Response<Result>> Operation2Async(int end, int? start = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='PutAsync(UnionEnumValueProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(UnionEnumValueProperty body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(body, nameof(body));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Operation2Async(end, start, context).ConfigureAwait(false);
-            return Response.FromValue(Result.FromResponse(response), response);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutAsync(content, context).ConfigureAwait(false);
+            return response;
         }
 
-        /// <param name="end"> The <see cref="int"/> to use. </param>
-        /// <param name="start"> The <see cref="int"/>? to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation2(int,int?,CancellationToken)']/*" />
-        public virtual Response<Result> Operation2(int end, int? start = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='Put(UnionEnumValueProperty,CancellationToken)']/*" />
+        public virtual Response Put(UnionEnumValueProperty body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(body, nameof(body));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Operation2(end, start, context);
-            return Response.FromValue(Result.FromResponse(response), response);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Put(content, context);
+            return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -175,24 +174,26 @@ namespace ParametersCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Operation2Async(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(UnionEnumValueProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="end"> The <see cref="int"/> to use. </param>
-        /// <param name="start"> The <see cref="int"/>? to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation2Async(int,int?,RequestContext)']/*" />
-        public virtual async Task<Response> Operation2Async(int end, int? start, RequestContext context)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrders.Operation2");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("UnionEnumValue.Put");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperation2Request(end, start, context);
+                using HttpMessage message = CreatePutRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -203,7 +204,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -212,24 +213,26 @@ namespace ParametersCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Operation2(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(UnionEnumValueProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="end"> The <see cref="int"/> to use. </param>
-        /// <param name="start"> The <see cref="int"/>? to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterOrders.xml" path="doc/members/member[@name='Operation2(int,int?,RequestContext)']/*" />
-        public virtual Response Operation2(int end, int? start, RequestContext context)
+        /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
+        public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrders.Operation2");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("UnionEnumValue.Put");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperation2Request(end, start, context);
+                using HttpMessage message = CreatePutRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -239,40 +242,31 @@ namespace ParametersCadl
             }
         }
 
-        internal HttpMessage CreateOperationRequest(int start, int? end, RequestContext context)
+        internal HttpMessage CreateGetUnionEnumValueRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameterOrders", false);
-            uri.AppendQuery("start", start, true);
-            if (end != null)
-            {
-                uri.AppendQuery("end", end.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendPath("/type/property/value-types/union-enum-value", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateOperation2Request(int end, int? start, RequestContext context)
+        internal HttpMessage CreatePutRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
-            request.Method = RequestMethod.Head;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameterOrders", false);
-            uri.AppendQuery("end", end, true);
-            if (start != null)
-            {
-                uri.AppendQuery("start", start.Value, true);
-            }
+            uri.AppendPath("/type/property/value-types/union-enum-value", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
@@ -289,5 +283,7 @@ namespace ParametersCadl
 
         private static ResponseClassifier _responseClassifier200;
         private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier204;
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
     }
 }

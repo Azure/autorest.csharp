@@ -7,15 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Property.ValueTypes;
 
-namespace _Type.Model.Inheritance.SingleDiscriminator.Models
+namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary>
-    /// This is base model for polymorphic single level inheritance with a discriminator.
-    /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="Eagle"/>, <see cref="Goose"/>, <see cref="SeaGull"/> and <see cref="Sparrow"/>.
-    /// </summary>
-    public abstract partial class Bird
+    /// <summary> Template type for testing models with specific properties. Pass in the type of the property you are looking for. </summary>
+    public partial class UnionEnumValueProperty
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -47,34 +44,33 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
-        /// <param name="wingspan"></param>
-        protected Bird(int wingspan)
+        /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
+        public UnionEnumValueProperty(string property)
         {
-            Wingspan = wingspan;
+            Argument.AssertNotNull(property, nameof(property));
+
+            Property = property;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
-        /// <param name="wingspan"></param>
+        /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Bird(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UnionEnumValueProperty(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
-            Wingspan = wingspan;
+            Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Bird"/> for deserialization. </summary>
-        internal Bird()
+        /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/> for deserialization. </summary>
+        internal UnionEnumValueProperty()
         {
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
-        /// <summary> Gets or sets the wingspan. </summary>
-        public int Wingspan { get; set; }
+        /// <summary> Property. </summary>
+        public string Property { get; set; }
     }
 }

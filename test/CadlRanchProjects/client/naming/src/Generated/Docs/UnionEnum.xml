@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="UnionEnumNameAsync(ClientExtensibleEnum,CancellationToken)">
+      <example>
+This sample shows how to call UnionEnumNameAsync.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = await client.UnionEnumNameAsync(ClientExtensibleEnum.EnumValue1);
+]]></code>
+This sample shows how to call UnionEnumNameAsync with all parameters.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = await client.UnionEnumNameAsync(ClientExtensibleEnum.EnumValue1);
+]]></code></example>
+    </member>
+    <member name="UnionEnumName(ClientExtensibleEnum,CancellationToken)">
+      <example>
+This sample shows how to call UnionEnumName.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = client.UnionEnumName(ClientExtensibleEnum.EnumValue1);
+]]></code>
+This sample shows how to call UnionEnumName with all parameters.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = client.UnionEnumName(ClientExtensibleEnum.EnumValue1);
+]]></code></example>
+    </member>
+    <member name="UnionEnumNameAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call UnionEnumNameAsync.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = await client.UnionEnumNameAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UnionEnumNameAsync with all request content.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = await client.UnionEnumNameAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UnionEnumName(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call UnionEnumName.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = client.UnionEnumName(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UnionEnumName with all request content.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = client.UnionEnumName(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UnionEnumMemberNameAsync(ExtensibleEnum,CancellationToken)">
+      <example>
+This sample shows how to call UnionEnumMemberNameAsync.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = await client.UnionEnumMemberNameAsync(ExtensibleEnum.ClientEnumValue1);
+]]></code>
+This sample shows how to call UnionEnumMemberNameAsync with all parameters.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = await client.UnionEnumMemberNameAsync(ExtensibleEnum.ClientEnumValue1);
+]]></code></example>
+    </member>
+    <member name="UnionEnumMemberName(ExtensibleEnum,CancellationToken)">
+      <example>
+This sample shows how to call UnionEnumMemberName.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = client.UnionEnumMemberName(ExtensibleEnum.ClientEnumValue1);
+]]></code>
+This sample shows how to call UnionEnumMemberName with all parameters.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+Response response = client.UnionEnumMemberName(ExtensibleEnum.ClientEnumValue1);
+]]></code></example>
+    </member>
+    <member name="UnionEnumMemberNameAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call UnionEnumMemberNameAsync.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = await client.UnionEnumMemberNameAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UnionEnumMemberNameAsync with all request content.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = await client.UnionEnumMemberNameAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UnionEnumMemberName(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call UnionEnumMemberName.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = client.UnionEnumMemberName(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UnionEnumMemberName with all request content.
+<code><![CDATA[
+UnionEnum client = new NamingClient().GetUnionEnumClient();
+
+using RequestContent content = RequestContent.Create("value1");
+Response response = client.UnionEnumMemberName(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

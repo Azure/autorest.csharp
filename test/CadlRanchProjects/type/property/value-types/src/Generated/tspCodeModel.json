@@ -176,11 +176,28 @@
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
+  },
+  {
+   "$id": "23",
+   "Kind": "Enum",
+   "Name": "ExtendedEnum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "24",
+     "Name": "EnumValue2",
+     "Value": "value2"
+    }
+   ],
+   "Namespace": "Type.Property.ValueTypes",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "23",
+   "$id": "25",
    "Kind": "Model",
    "Name": "BooleanProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -189,12 +206,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "26",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "25",
+      "$id": "27",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": false
@@ -206,7 +223,7 @@
    ]
   },
   {
-   "$id": "26",
+   "$id": "28",
    "Kind": "Model",
    "Name": "StringProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -215,12 +232,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "27",
+     "$id": "29",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "28",
+      "$id": "30",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -232,7 +249,7 @@
    ]
   },
   {
-   "$id": "29",
+   "$id": "31",
    "Kind": "Model",
    "Name": "BytesProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -241,12 +258,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "30",
+     "$id": "32",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "31",
+      "$id": "33",
       "Kind": "Primitive",
       "Name": "Bytes",
       "IsNullable": false
@@ -258,7 +275,7 @@
    ]
   },
   {
-   "$id": "32",
+   "$id": "34",
    "Kind": "Model",
    "Name": "IntProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -267,12 +284,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "33",
+     "$id": "35",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "34",
+      "$id": "36",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -284,7 +301,7 @@
    ]
   },
   {
-   "$id": "35",
+   "$id": "37",
    "Kind": "Model",
    "Name": "FloatProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -293,12 +310,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "36",
+     "$id": "38",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "37",
+      "$id": "39",
       "Kind": "Primitive",
       "Name": "Float32",
       "IsNullable": false
@@ -310,7 +327,7 @@
    ]
   },
   {
-   "$id": "38",
+   "$id": "40",
    "Kind": "Model",
    "Name": "DecimalProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -319,12 +336,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "39",
+     "$id": "41",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "40",
+      "$id": "42",
       "Kind": "Primitive",
       "Name": "Decimal",
       "IsNullable": false
@@ -336,7 +353,7 @@
    ]
   },
   {
-   "$id": "41",
+   "$id": "43",
    "Kind": "Model",
    "Name": "Decimal128Property",
    "Namespace": "Type.Property.ValueTypes",
@@ -345,12 +362,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "42",
+     "$id": "44",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "43",
+      "$id": "45",
       "Kind": "Primitive",
       "Name": "Decimal128",
       "IsNullable": false
@@ -362,7 +379,7 @@
    ]
   },
   {
-   "$id": "44",
+   "$id": "46",
    "Kind": "Model",
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -371,12 +388,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "45",
+     "$id": "47",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "46",
+      "$id": "48",
       "Kind": "Primitive",
       "Name": "DateTimeRFC3339",
       "IsNullable": false
@@ -388,7 +405,7 @@
    ]
   },
   {
-   "$id": "47",
+   "$id": "49",
    "Kind": "Model",
    "Name": "DurationProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -397,12 +414,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "48",
+     "$id": "50",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "49",
+      "$id": "51",
       "Kind": "Primitive",
       "Name": "DurationISO8601",
       "IsNullable": false
@@ -414,7 +431,7 @@
    ]
   },
   {
-   "$id": "50",
+   "$id": "52",
    "Kind": "Model",
    "Name": "EnumProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -423,7 +440,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "51",
+     "$id": "53",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
@@ -437,7 +454,7 @@
    ]
   },
   {
-   "$id": "52",
+   "$id": "54",
    "Kind": "Model",
    "Name": "ExtensibleEnumProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -446,7 +463,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "53",
+     "$id": "55",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
@@ -460,7 +477,7 @@
    ]
   },
   {
-   "$id": "54",
+   "$id": "56",
    "Kind": "Model",
    "Name": "ModelProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -469,12 +486,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "55",
+     "$id": "57",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "56",
+      "$id": "58",
       "Kind": "Model",
       "Name": "InnerModel",
       "Namespace": "Type.Property.ValueTypes",
@@ -483,12 +500,12 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "57",
+        "$id": "59",
         "Name": "property",
         "SerializedName": "property",
         "Description": "Required string property",
         "Type": {
-         "$id": "58",
+         "$id": "60",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -506,10 +523,10 @@
    ]
   },
   {
-   "$ref": "56"
+   "$ref": "58"
   },
   {
-   "$id": "59",
+   "$id": "61",
    "Kind": "Model",
    "Name": "CollectionsStringProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -518,16 +535,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "60",
+     "$id": "62",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "61",
+      "$id": "63",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "62",
+       "$id": "64",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -541,7 +558,7 @@
    ]
   },
   {
-   "$id": "63",
+   "$id": "65",
    "Kind": "Model",
    "Name": "CollectionsIntProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -550,16 +567,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "64",
+     "$id": "66",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "65",
+      "$id": "67",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "66",
+       "$id": "68",
        "Kind": "Primitive",
        "Name": "Int32",
        "IsNullable": false
@@ -573,7 +590,7 @@
    ]
   },
   {
-   "$id": "67",
+   "$id": "69",
    "Kind": "Model",
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -582,16 +599,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "68",
+     "$id": "70",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "69",
+      "$id": "71",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "56"
+       "$ref": "58"
       },
       "IsNullable": false
      },
@@ -602,7 +619,7 @@
    ]
   },
   {
-   "$id": "70",
+   "$id": "72",
    "Kind": "Model",
    "Name": "DictionaryStringProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -611,22 +628,22 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "71",
+     "$id": "73",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "72",
+      "$id": "74",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "73",
+       "$id": "75",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "74",
+       "$id": "76",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -640,7 +657,7 @@
    ]
   },
   {
-   "$id": "75",
+   "$id": "77",
    "Kind": "Model",
    "Name": "NeverProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -650,7 +667,7 @@
    "Properties": []
   },
   {
-   "$id": "76",
+   "$id": "78",
    "Kind": "Model",
    "Name": "UnknownStringProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -659,12 +676,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "77",
+     "$id": "79",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "78",
+      "$id": "80",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -676,7 +693,7 @@
    ]
   },
   {
-   "$id": "79",
+   "$id": "81",
    "Kind": "Model",
    "Name": "UnknownIntProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -685,12 +702,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "80",
+     "$id": "82",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "81",
+      "$id": "83",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -702,7 +719,7 @@
    ]
   },
   {
-   "$id": "82",
+   "$id": "84",
    "Kind": "Model",
    "Name": "UnknownDictProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -711,12 +728,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "83",
+     "$id": "85",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "84",
+      "$id": "86",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -728,7 +745,7 @@
    ]
   },
   {
-   "$id": "85",
+   "$id": "87",
    "Kind": "Model",
    "Name": "UnknownArrayProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -737,12 +754,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "86",
+     "$id": "88",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "87",
+      "$id": "89",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -754,7 +771,7 @@
    ]
   },
   {
-   "$id": "88",
+   "$id": "90",
    "Kind": "Model",
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -763,12 +780,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "89",
+     "$id": "91",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "90",
+      "$id": "92",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -784,7 +801,7 @@
    ]
   },
   {
-   "$id": "91",
+   "$id": "93",
    "Kind": "Model",
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -793,12 +810,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "92",
+     "$id": "94",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "93",
+      "$id": "95",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -814,7 +831,7 @@
    ]
   },
   {
-   "$id": "94",
+   "$id": "96",
    "Kind": "Model",
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -823,12 +840,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "95",
+     "$id": "97",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "96",
+      "$id": "98",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -844,7 +861,7 @@
    ]
   },
   {
-   "$id": "97",
+   "$id": "99",
    "Kind": "Model",
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -853,16 +870,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "98",
+     "$id": "100",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "99",
+      "$id": "101",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
-       "$id": "100",
+       "$id": "102",
        "Kind": "Primitive",
        "Name": "Boolean",
        "IsNullable": false
@@ -877,7 +894,7 @@
    ]
   },
   {
-   "$id": "101",
+   "$id": "103",
    "Kind": "Model",
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -886,7 +903,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "102",
+     "$id": "104",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
@@ -900,7 +917,7 @@
    ]
   },
   {
-   "$id": "103",
+   "$id": "105",
    "Kind": "Model",
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -909,7 +926,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "104",
+     "$id": "106",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
@@ -923,7 +940,7 @@
    ]
   },
   {
-   "$id": "105",
+   "$id": "107",
    "Kind": "Model",
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
@@ -932,7 +949,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "106",
+     "$id": "108",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
@@ -944,37 +961,60 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "109",
+   "Kind": "Model",
+   "Name": "UnionEnumValueProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "110",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$ref": "23"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "107",
+   "$id": "111",
    "Name": "ValueTypesClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "108"
+    "$id": "112"
    },
    "Creatable": true
   },
   {
-   "$id": "109",
+   "$id": "113",
    "Name": "Boolean",
    "Description": "",
    "Operations": [
     {
-     "$id": "110",
+     "$id": "114",
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "Get call",
      "Parameters": [
       {
-       "$id": "111",
+       "$id": "115",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "112",
+        "$id": "116",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -989,9 +1029,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "117",
         "Type": {
-         "$id": "114",
+         "$id": "118",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1000,11 +1040,11 @@
        }
       },
       {
-       "$id": "115",
+       "$id": "119",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "116",
+        "$id": "120",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1019,9 +1059,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "117",
+        "$id": "121",
         "Type": {
-         "$ref": "116"
+         "$ref": "120"
         },
         "Value": "application/json"
        }
@@ -1029,12 +1069,12 @@
      ],
      "Responses": [
       {
-       "$id": "118",
+       "$id": "122",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "25"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1053,21 +1093,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "119",
+     "$id": "123",
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "120",
+       "$id": "124",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "23"
+        "$ref": "25"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1080,11 +1120,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "121",
+       "$id": "125",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "122",
+        "$id": "126",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1099,19 +1139,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "127",
         "Type": {
-         "$ref": "122"
+         "$ref": "126"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "124",
+       "$id": "128",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "125",
+        "$id": "129",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1126,9 +1166,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "126",
+        "$id": "130",
         "Type": {
-         "$ref": "125"
+         "$ref": "129"
         },
         "Value": "application/json"
        }
@@ -1136,7 +1176,7 @@
      ],
      "Responses": [
       {
-       "$id": "127",
+       "$id": "131",
        "StatusCodes": [
         204
        ],
@@ -1158,31 +1198,31 @@
     }
    ],
    "Protocol": {
-    "$id": "128"
+    "$id": "132"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "129",
+   "$id": "133",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "130",
+     "$id": "134",
      "Name": "get",
      "ResourceName": "String",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "131",
+       "$id": "135",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "132",
+        "$id": "136",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1197,9 +1237,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "133",
+        "$id": "137",
         "Type": {
-         "$ref": "132"
+         "$ref": "136"
         },
         "Value": "application/json"
        }
@@ -1207,12 +1247,12 @@
      ],
      "Responses": [
       {
-       "$id": "134",
+       "$id": "138",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "26"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1231,21 +1271,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "135",
+     "$id": "139",
      "Name": "put",
      "ResourceName": "String",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "136",
+       "$id": "140",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "26"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1258,11 +1298,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "137",
+       "$id": "141",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "138",
+        "$id": "142",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1277,19 +1317,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "139",
+        "$id": "143",
         "Type": {
-         "$ref": "138"
+         "$ref": "142"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "140",
+       "$id": "144",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "141",
+        "$id": "145",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1304,9 +1344,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "142",
+        "$id": "146",
         "Type": {
-         "$ref": "141"
+         "$ref": "145"
         },
         "Value": "application/json"
        }
@@ -1314,7 +1354,7 @@
      ],
      "Responses": [
       {
-       "$id": "143",
+       "$id": "147",
        "StatusCodes": [
         204
        ],
@@ -1336,31 +1376,31 @@
     }
    ],
    "Protocol": {
-    "$id": "144"
+    "$id": "148"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "145",
+   "$id": "149",
    "Name": "Bytes",
    "Description": "",
    "Operations": [
     {
-     "$id": "146",
+     "$id": "150",
      "Name": "get",
      "ResourceName": "Bytes",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "147",
+       "$id": "151",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
+        "$id": "152",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1375,9 +1415,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "153",
         "Type": {
-         "$ref": "148"
+         "$ref": "152"
         },
         "Value": "application/json"
        }
@@ -1385,12 +1425,12 @@
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "154",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "31"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1409,21 +1449,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "151",
+     "$id": "155",
      "Name": "put",
      "ResourceName": "Bytes",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "152",
+       "$id": "156",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "29"
+        "$ref": "31"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1436,11 +1476,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "153",
+       "$id": "157",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "154",
+        "$id": "158",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1455,19 +1495,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "155",
+        "$id": "159",
         "Type": {
-         "$ref": "154"
+         "$ref": "158"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "156",
+       "$id": "160",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "157",
+        "$id": "161",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1482,9 +1522,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "158",
+        "$id": "162",
         "Type": {
-         "$ref": "157"
+         "$ref": "161"
         },
         "Value": "application/json"
        }
@@ -1492,7 +1532,7 @@
      ],
      "Responses": [
       {
-       "$id": "159",
+       "$id": "163",
        "StatusCodes": [
         204
        ],
@@ -1514,31 +1554,31 @@
     }
    ],
    "Protocol": {
-    "$id": "160"
+    "$id": "164"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "161",
+   "$id": "165",
    "Name": "Int",
    "Description": "",
    "Operations": [
     {
-     "$id": "162",
+     "$id": "166",
      "Name": "get",
      "ResourceName": "Int",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "163",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "164",
+        "$id": "168",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1553,9 +1593,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "165",
+        "$id": "169",
         "Type": {
-         "$ref": "164"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
@@ -1563,12 +1603,12 @@
      ],
      "Responses": [
       {
-       "$id": "166",
+       "$id": "170",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "34"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1587,21 +1627,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "167",
+     "$id": "171",
      "Name": "put",
      "ResourceName": "Int",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "168",
+       "$id": "172",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "32"
+        "$ref": "34"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1614,11 +1654,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "169",
+       "$id": "173",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "170",
+        "$id": "174",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1633,19 +1673,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "171",
+        "$id": "175",
         "Type": {
-         "$ref": "170"
+         "$ref": "174"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "172",
+       "$id": "176",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "173",
+        "$id": "177",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1660,9 +1700,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "174",
+        "$id": "178",
         "Type": {
-         "$ref": "173"
+         "$ref": "177"
         },
         "Value": "application/json"
        }
@@ -1670,7 +1710,7 @@
      ],
      "Responses": [
       {
-       "$id": "175",
+       "$id": "179",
        "StatusCodes": [
         204
        ],
@@ -1692,31 +1732,31 @@
     }
    ],
    "Protocol": {
-    "$id": "176"
+    "$id": "180"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "177",
+   "$id": "181",
    "Name": "Float",
    "Description": "",
    "Operations": [
     {
-     "$id": "178",
+     "$id": "182",
      "Name": "get",
      "ResourceName": "Float",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "179",
+       "$id": "183",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "180",
+        "$id": "184",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1731,9 +1771,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "181",
+        "$id": "185",
         "Type": {
-         "$ref": "180"
+         "$ref": "184"
         },
         "Value": "application/json"
        }
@@ -1741,12 +1781,12 @@
      ],
      "Responses": [
       {
-       "$id": "182",
+       "$id": "186",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "35"
+        "$ref": "37"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1765,21 +1805,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "183",
+     "$id": "187",
      "Name": "put",
      "ResourceName": "Float",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "184",
+       "$id": "188",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "35"
+        "$ref": "37"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1792,11 +1832,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "185",
+       "$id": "189",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "186",
+        "$id": "190",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1811,19 +1851,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "187",
+        "$id": "191",
         "Type": {
-         "$ref": "186"
+         "$ref": "190"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "188",
+       "$id": "192",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "189",
+        "$id": "193",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1838,9 +1878,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "190",
+        "$id": "194",
         "Type": {
-         "$ref": "189"
+         "$ref": "193"
         },
         "Value": "application/json"
        }
@@ -1848,7 +1888,7 @@
      ],
      "Responses": [
       {
-       "$id": "191",
+       "$id": "195",
        "StatusCodes": [
         204
        ],
@@ -1870,31 +1910,31 @@
     }
    ],
    "Protocol": {
-    "$id": "192"
+    "$id": "196"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "193",
+   "$id": "197",
    "Name": "Decimal",
    "Description": "",
    "Operations": [
     {
-     "$id": "194",
+     "$id": "198",
      "Name": "get",
      "ResourceName": "Decimal",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "195",
+       "$id": "199",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "196",
+        "$id": "200",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1909,9 +1949,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "197",
+        "$id": "201",
         "Type": {
-         "$ref": "196"
+         "$ref": "200"
         },
         "Value": "application/json"
        }
@@ -1919,12 +1959,12 @@
      ],
      "Responses": [
       {
-       "$id": "198",
+       "$id": "202",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "38"
+        "$ref": "40"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1943,21 +1983,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "199",
+     "$id": "203",
      "Name": "put",
      "ResourceName": "Decimal",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "200",
+       "$id": "204",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "38"
+        "$ref": "40"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1970,11 +2010,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "201",
+       "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "202",
+        "$id": "206",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1989,19 +2029,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "207",
         "Type": {
-         "$ref": "202"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "204",
+       "$id": "208",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "205",
+        "$id": "209",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2016,9 +2056,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "206",
+        "$id": "210",
         "Type": {
-         "$ref": "205"
+         "$ref": "209"
         },
         "Value": "application/json"
        }
@@ -2026,7 +2066,7 @@
      ],
      "Responses": [
       {
-       "$id": "207",
+       "$id": "211",
        "StatusCodes": [
         204
        ],
@@ -2048,31 +2088,31 @@
     }
    ],
    "Protocol": {
-    "$id": "208"
+    "$id": "212"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "209",
+   "$id": "213",
    "Name": "Decimal128",
    "Description": "",
    "Operations": [
     {
-     "$id": "210",
+     "$id": "214",
      "Name": "get",
      "ResourceName": "Decimal128",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "211",
+       "$id": "215",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "212",
+        "$id": "216",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2087,9 +2127,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "217",
         "Type": {
-         "$ref": "212"
+         "$ref": "216"
         },
         "Value": "application/json"
        }
@@ -2097,12 +2137,12 @@
      ],
      "Responses": [
       {
-       "$id": "214",
+       "$id": "218",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "41"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2121,21 +2161,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "215",
+     "$id": "219",
      "Name": "put",
      "ResourceName": "Decimal128",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "216",
+       "$id": "220",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "41"
+        "$ref": "43"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2148,11 +2188,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "217",
+       "$id": "221",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "218",
+        "$id": "222",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2167,19 +2207,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "219",
+        "$id": "223",
         "Type": {
-         "$ref": "218"
+         "$ref": "222"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "220",
+       "$id": "224",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "221",
+        "$id": "225",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2194,9 +2234,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "222",
+        "$id": "226",
         "Type": {
-         "$ref": "221"
+         "$ref": "225"
         },
         "Value": "application/json"
        }
@@ -2204,7 +2244,7 @@
      ],
      "Responses": [
       {
-       "$id": "223",
+       "$id": "227",
        "StatusCodes": [
         204
        ],
@@ -2226,31 +2266,31 @@
     }
    ],
    "Protocol": {
-    "$id": "224"
+    "$id": "228"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "225",
+   "$id": "229",
    "Name": "Datetime",
    "Description": "",
    "Operations": [
     {
-     "$id": "226",
+     "$id": "230",
      "Name": "get",
      "ResourceName": "Datetime",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "227",
+       "$id": "231",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "228",
+        "$id": "232",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2265,9 +2305,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "229",
+        "$id": "233",
         "Type": {
-         "$ref": "228"
+         "$ref": "232"
         },
         "Value": "application/json"
        }
@@ -2275,12 +2315,12 @@
      ],
      "Responses": [
       {
-       "$id": "230",
+       "$id": "234",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "46"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2299,21 +2339,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "231",
+     "$id": "235",
      "Name": "put",
      "ResourceName": "Datetime",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "232",
+       "$id": "236",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "44"
+        "$ref": "46"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2326,11 +2366,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "233",
+       "$id": "237",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "234",
+        "$id": "238",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2345,19 +2385,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "235",
+        "$id": "239",
         "Type": {
-         "$ref": "234"
+         "$ref": "238"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "236",
+       "$id": "240",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "237",
+        "$id": "241",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2372,9 +2412,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "238",
+        "$id": "242",
         "Type": {
-         "$ref": "237"
+         "$ref": "241"
         },
         "Value": "application/json"
        }
@@ -2382,7 +2422,7 @@
      ],
      "Responses": [
       {
-       "$id": "239",
+       "$id": "243",
        "StatusCodes": [
         204
        ],
@@ -2404,31 +2444,31 @@
     }
    ],
    "Protocol": {
-    "$id": "240"
+    "$id": "244"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "241",
+   "$id": "245",
    "Name": "Duration",
    "Description": "",
    "Operations": [
     {
-     "$id": "242",
+     "$id": "246",
      "Name": "get",
      "ResourceName": "Duration",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "243",
+       "$id": "247",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "244",
+        "$id": "248",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2443,9 +2483,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "245",
+        "$id": "249",
         "Type": {
-         "$ref": "244"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
@@ -2453,12 +2493,12 @@
      ],
      "Responses": [
       {
-       "$id": "246",
+       "$id": "250",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "47"
+        "$ref": "49"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2477,21 +2517,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "247",
+     "$id": "251",
      "Name": "put",
      "ResourceName": "Duration",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "248",
+       "$id": "252",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "47"
+        "$ref": "49"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2504,11 +2544,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "249",
+       "$id": "253",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "250",
+        "$id": "254",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2523,19 +2563,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "251",
+        "$id": "255",
         "Type": {
-         "$ref": "250"
+         "$ref": "254"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "252",
+       "$id": "256",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "253",
+        "$id": "257",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2550,9 +2590,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "254",
+        "$id": "258",
         "Type": {
-         "$ref": "253"
+         "$ref": "257"
         },
         "Value": "application/json"
        }
@@ -2560,7 +2600,7 @@
      ],
      "Responses": [
       {
-       "$id": "255",
+       "$id": "259",
        "StatusCodes": [
         204
        ],
@@ -2582,31 +2622,31 @@
     }
    ],
    "Protocol": {
-    "$id": "256"
+    "$id": "260"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "257",
+   "$id": "261",
    "Name": "Enum",
    "Description": "",
    "Operations": [
     {
-     "$id": "258",
+     "$id": "262",
      "Name": "get",
      "ResourceName": "Enum",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "259",
+       "$id": "263",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "260",
+        "$id": "264",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2621,9 +2661,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "261",
+        "$id": "265",
         "Type": {
-         "$ref": "260"
+         "$ref": "264"
         },
         "Value": "application/json"
        }
@@ -2631,12 +2671,12 @@
      ],
      "Responses": [
       {
-       "$id": "262",
+       "$id": "266",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "50"
+        "$ref": "52"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2655,21 +2695,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "263",
+     "$id": "267",
      "Name": "put",
      "ResourceName": "Enum",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "264",
+       "$id": "268",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "50"
+        "$ref": "52"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2682,11 +2722,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "265",
+       "$id": "269",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "266",
+        "$id": "270",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2701,19 +2741,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "267",
+        "$id": "271",
         "Type": {
-         "$ref": "266"
+         "$ref": "270"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "268",
+       "$id": "272",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "269",
+        "$id": "273",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2728,9 +2768,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "270",
+        "$id": "274",
         "Type": {
-         "$ref": "269"
+         "$ref": "273"
         },
         "Value": "application/json"
        }
@@ -2738,7 +2778,7 @@
      ],
      "Responses": [
       {
-       "$id": "271",
+       "$id": "275",
        "StatusCodes": [
         204
        ],
@@ -2760,31 +2800,31 @@
     }
    ],
    "Protocol": {
-    "$id": "272"
+    "$id": "276"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "273",
+   "$id": "277",
    "Name": "ExtensibleEnum",
    "Description": "",
    "Operations": [
     {
-     "$id": "274",
+     "$id": "278",
      "Name": "get",
      "ResourceName": "ExtensibleEnum",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "275",
+       "$id": "279",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "276",
+        "$id": "280",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2799,9 +2839,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "277",
+        "$id": "281",
         "Type": {
-         "$ref": "276"
+         "$ref": "280"
         },
         "Value": "application/json"
        }
@@ -2809,12 +2849,12 @@
      ],
      "Responses": [
       {
-       "$id": "278",
+       "$id": "282",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "52"
+        "$ref": "54"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2833,21 +2873,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "279",
+     "$id": "283",
      "Name": "put",
      "ResourceName": "ExtensibleEnum",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "280",
+       "$id": "284",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "52"
+        "$ref": "54"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2860,11 +2900,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "281",
+       "$id": "285",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "282",
+        "$id": "286",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2879,19 +2919,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "283",
+        "$id": "287",
         "Type": {
-         "$ref": "282"
+         "$ref": "286"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "284",
+       "$id": "288",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "285",
+        "$id": "289",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2906,9 +2946,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "286",
+        "$id": "290",
         "Type": {
-         "$ref": "285"
+         "$ref": "289"
         },
         "Value": "application/json"
        }
@@ -2916,7 +2956,7 @@
      ],
      "Responses": [
       {
-       "$id": "287",
+       "$id": "291",
        "StatusCodes": [
         204
        ],
@@ -2938,31 +2978,31 @@
     }
    ],
    "Protocol": {
-    "$id": "288"
+    "$id": "292"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "289",
+   "$id": "293",
    "Name": "Model",
    "Description": "",
    "Operations": [
     {
-     "$id": "290",
+     "$id": "294",
      "Name": "get",
      "ResourceName": "Model",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "291",
+       "$id": "295",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "292",
+        "$id": "296",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2977,9 +3017,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "293",
+        "$id": "297",
         "Type": {
-         "$ref": "292"
+         "$ref": "296"
         },
         "Value": "application/json"
        }
@@ -2987,12 +3027,12 @@
      ],
      "Responses": [
       {
-       "$id": "294",
+       "$id": "298",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "54"
+        "$ref": "56"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3011,21 +3051,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "295",
+     "$id": "299",
      "Name": "put",
      "ResourceName": "Model",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "296",
+       "$id": "300",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "54"
+        "$ref": "56"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3038,11 +3078,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "297",
+       "$id": "301",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "298",
+        "$id": "302",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3057,19 +3097,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "299",
+        "$id": "303",
         "Type": {
-         "$ref": "298"
+         "$ref": "302"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "300",
+       "$id": "304",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "301",
+        "$id": "305",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3084,9 +3124,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "302",
+        "$id": "306",
         "Type": {
-         "$ref": "301"
+         "$ref": "305"
         },
         "Value": "application/json"
        }
@@ -3094,7 +3134,7 @@
      ],
      "Responses": [
       {
-       "$id": "303",
+       "$id": "307",
        "StatusCodes": [
         204
        ],
@@ -3116,31 +3156,31 @@
     }
    ],
    "Protocol": {
-    "$id": "304"
+    "$id": "308"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "305",
+   "$id": "309",
    "Name": "CollectionsString",
    "Description": "",
    "Operations": [
     {
-     "$id": "306",
+     "$id": "310",
      "Name": "get",
      "ResourceName": "CollectionsString",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "307",
+       "$id": "311",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "308",
+        "$id": "312",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3155,9 +3195,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "309",
+        "$id": "313",
         "Type": {
-         "$ref": "308"
+         "$ref": "312"
         },
         "Value": "application/json"
        }
@@ -3165,12 +3205,12 @@
      ],
      "Responses": [
       {
-       "$id": "310",
+       "$id": "314",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "59"
+        "$ref": "61"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3189,21 +3229,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "311",
+     "$id": "315",
      "Name": "put",
      "ResourceName": "CollectionsString",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "312",
+       "$id": "316",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "59"
+        "$ref": "61"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3216,11 +3256,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "313",
+       "$id": "317",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "314",
+        "$id": "318",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3235,19 +3275,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "315",
+        "$id": "319",
         "Type": {
-         "$ref": "314"
+         "$ref": "318"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "316",
+       "$id": "320",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "317",
+        "$id": "321",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3262,9 +3302,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "318",
+        "$id": "322",
         "Type": {
-         "$ref": "317"
+         "$ref": "321"
         },
         "Value": "application/json"
        }
@@ -3272,7 +3312,7 @@
      ],
      "Responses": [
       {
-       "$id": "319",
+       "$id": "323",
        "StatusCodes": [
         204
        ],
@@ -3294,31 +3334,31 @@
     }
    ],
    "Protocol": {
-    "$id": "320"
+    "$id": "324"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "321",
+   "$id": "325",
    "Name": "CollectionsInt",
    "Description": "",
    "Operations": [
     {
-     "$id": "322",
+     "$id": "326",
      "Name": "get",
      "ResourceName": "CollectionsInt",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "323",
+       "$id": "327",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "324",
+        "$id": "328",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3333,9 +3373,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "325",
+        "$id": "329",
         "Type": {
-         "$ref": "324"
+         "$ref": "328"
         },
         "Value": "application/json"
        }
@@ -3343,12 +3383,12 @@
      ],
      "Responses": [
       {
-       "$id": "326",
+       "$id": "330",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "63"
+        "$ref": "65"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3367,21 +3407,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "327",
+     "$id": "331",
      "Name": "put",
      "ResourceName": "CollectionsInt",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "328",
+       "$id": "332",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "63"
+        "$ref": "65"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3394,11 +3434,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "329",
+       "$id": "333",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "330",
+        "$id": "334",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3413,19 +3453,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "331",
+        "$id": "335",
         "Type": {
-         "$ref": "330"
+         "$ref": "334"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "332",
+       "$id": "336",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "333",
+        "$id": "337",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3440,9 +3480,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "334",
+        "$id": "338",
         "Type": {
-         "$ref": "333"
+         "$ref": "337"
         },
         "Value": "application/json"
        }
@@ -3450,7 +3490,7 @@
      ],
      "Responses": [
       {
-       "$id": "335",
+       "$id": "339",
        "StatusCodes": [
         204
        ],
@@ -3472,31 +3512,31 @@
     }
    ],
    "Protocol": {
-    "$id": "336"
+    "$id": "340"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "337",
+   "$id": "341",
    "Name": "CollectionsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "338",
+     "$id": "342",
      "Name": "get",
      "ResourceName": "CollectionsModel",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "339",
+       "$id": "343",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "340",
+        "$id": "344",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3511,9 +3551,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "341",
+        "$id": "345",
         "Type": {
-         "$ref": "340"
+         "$ref": "344"
         },
         "Value": "application/json"
        }
@@ -3521,12 +3561,12 @@
      ],
      "Responses": [
       {
-       "$id": "342",
+       "$id": "346",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "67"
+        "$ref": "69"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3545,21 +3585,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "343",
+     "$id": "347",
      "Name": "put",
      "ResourceName": "CollectionsModel",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "344",
+       "$id": "348",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "67"
+        "$ref": "69"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3572,11 +3612,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "345",
+       "$id": "349",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "346",
+        "$id": "350",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3591,19 +3631,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "347",
+        "$id": "351",
         "Type": {
-         "$ref": "346"
+         "$ref": "350"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "348",
+       "$id": "352",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "349",
+        "$id": "353",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3618,9 +3658,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "350",
+        "$id": "354",
         "Type": {
-         "$ref": "349"
+         "$ref": "353"
         },
         "Value": "application/json"
        }
@@ -3628,7 +3668,7 @@
      ],
      "Responses": [
       {
-       "$id": "351",
+       "$id": "355",
        "StatusCodes": [
         204
        ],
@@ -3650,31 +3690,31 @@
     }
    ],
    "Protocol": {
-    "$id": "352"
+    "$id": "356"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "353",
+   "$id": "357",
    "Name": "DictionaryString",
    "Description": "",
    "Operations": [
     {
-     "$id": "354",
+     "$id": "358",
      "Name": "get",
      "ResourceName": "DictionaryString",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "355",
+       "$id": "359",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "356",
+        "$id": "360",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3689,9 +3729,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "357",
+        "$id": "361",
         "Type": {
-         "$ref": "356"
+         "$ref": "360"
         },
         "Value": "application/json"
        }
@@ -3699,12 +3739,12 @@
      ],
      "Responses": [
       {
-       "$id": "358",
+       "$id": "362",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "70"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3723,21 +3763,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "359",
+     "$id": "363",
      "Name": "put",
      "ResourceName": "DictionaryString",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "360",
+       "$id": "364",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "70"
+        "$ref": "72"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3750,11 +3790,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "361",
+       "$id": "365",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "362",
+        "$id": "366",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3769,19 +3809,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "363",
+        "$id": "367",
         "Type": {
-         "$ref": "362"
+         "$ref": "366"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "364",
+       "$id": "368",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "365",
+        "$id": "369",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3796,9 +3836,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "366",
+        "$id": "370",
         "Type": {
-         "$ref": "365"
+         "$ref": "369"
         },
         "Value": "application/json"
        }
@@ -3806,7 +3846,7 @@
      ],
      "Responses": [
       {
-       "$id": "367",
+       "$id": "371",
        "StatusCodes": [
         204
        ],
@@ -3828,31 +3868,31 @@
     }
    ],
    "Protocol": {
-    "$id": "368"
+    "$id": "372"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "369",
+   "$id": "373",
    "Name": "Never",
    "Description": "",
    "Operations": [
     {
-     "$id": "370",
+     "$id": "374",
      "Name": "get",
      "ResourceName": "Never",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "371",
+       "$id": "375",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "372",
+        "$id": "376",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3867,9 +3907,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "373",
+        "$id": "377",
         "Type": {
-         "$ref": "372"
+         "$ref": "376"
         },
         "Value": "application/json"
        }
@@ -3877,12 +3917,12 @@
      ],
      "Responses": [
       {
-       "$id": "374",
+       "$id": "378",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "75"
+        "$ref": "77"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3901,21 +3941,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "375",
+     "$id": "379",
      "Name": "put",
      "ResourceName": "Never",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "376",
+       "$id": "380",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "75"
+        "$ref": "77"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3928,11 +3968,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "377",
+       "$id": "381",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "378",
+        "$id": "382",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3947,19 +3987,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "379",
+        "$id": "383",
         "Type": {
-         "$ref": "378"
+         "$ref": "382"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "380",
+       "$id": "384",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "381",
+        "$id": "385",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3974,9 +4014,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "382",
+        "$id": "386",
         "Type": {
-         "$ref": "381"
+         "$ref": "385"
         },
         "Value": "application/json"
        }
@@ -3984,7 +4024,7 @@
      ],
      "Responses": [
       {
-       "$id": "383",
+       "$id": "387",
        "StatusCodes": [
         204
        ],
@@ -4006,31 +4046,31 @@
     }
    ],
    "Protocol": {
-    "$id": "384"
+    "$id": "388"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "385",
+   "$id": "389",
    "Name": "UnknownString",
    "Description": "",
    "Operations": [
     {
-     "$id": "386",
+     "$id": "390",
      "Name": "get",
      "ResourceName": "UnknownString",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "387",
+       "$id": "391",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "388",
+        "$id": "392",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4045,9 +4085,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "389",
+        "$id": "393",
         "Type": {
-         "$ref": "388"
+         "$ref": "392"
         },
         "Value": "application/json"
        }
@@ -4055,12 +4095,12 @@
      ],
      "Responses": [
       {
-       "$id": "390",
+       "$id": "394",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "76"
+        "$ref": "78"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4079,21 +4119,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "391",
+     "$id": "395",
      "Name": "put",
      "ResourceName": "UnknownString",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "392",
+       "$id": "396",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "76"
+        "$ref": "78"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4106,11 +4146,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "393",
+       "$id": "397",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "394",
+        "$id": "398",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4125,19 +4165,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "395",
+        "$id": "399",
         "Type": {
-         "$ref": "394"
+         "$ref": "398"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "396",
+       "$id": "400",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "397",
+        "$id": "401",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4152,9 +4192,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "398",
+        "$id": "402",
         "Type": {
-         "$ref": "397"
+         "$ref": "401"
         },
         "Value": "application/json"
        }
@@ -4162,7 +4202,7 @@
      ],
      "Responses": [
       {
-       "$id": "399",
+       "$id": "403",
        "StatusCodes": [
         204
        ],
@@ -4184,31 +4224,31 @@
     }
    ],
    "Protocol": {
-    "$id": "400"
+    "$id": "404"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "401",
+   "$id": "405",
    "Name": "UnknownInt",
    "Description": "",
    "Operations": [
     {
-     "$id": "402",
+     "$id": "406",
      "Name": "get",
      "ResourceName": "UnknownInt",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "403",
+       "$id": "407",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "404",
+        "$id": "408",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4223,9 +4263,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "405",
+        "$id": "409",
         "Type": {
-         "$ref": "404"
+         "$ref": "408"
         },
         "Value": "application/json"
        }
@@ -4233,12 +4273,12 @@
      ],
      "Responses": [
       {
-       "$id": "406",
+       "$id": "410",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "79"
+        "$ref": "81"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4257,21 +4297,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "407",
+     "$id": "411",
      "Name": "put",
      "ResourceName": "UnknownInt",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "408",
+       "$id": "412",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "79"
+        "$ref": "81"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4284,11 +4324,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "409",
+       "$id": "413",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "410",
+        "$id": "414",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4303,19 +4343,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "411",
+        "$id": "415",
         "Type": {
-         "$ref": "410"
+         "$ref": "414"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "412",
+       "$id": "416",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "413",
+        "$id": "417",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4330,9 +4370,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "414",
+        "$id": "418",
         "Type": {
-         "$ref": "413"
+         "$ref": "417"
         },
         "Value": "application/json"
        }
@@ -4340,7 +4380,7 @@
      ],
      "Responses": [
       {
-       "$id": "415",
+       "$id": "419",
        "StatusCodes": [
         204
        ],
@@ -4362,31 +4402,31 @@
     }
    ],
    "Protocol": {
-    "$id": "416"
+    "$id": "420"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "417",
+   "$id": "421",
    "Name": "UnknownDict",
    "Description": "",
    "Operations": [
     {
-     "$id": "418",
+     "$id": "422",
      "Name": "get",
      "ResourceName": "UnknownDict",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "419",
+       "$id": "423",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "420",
+        "$id": "424",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4401,9 +4441,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "421",
+        "$id": "425",
         "Type": {
-         "$ref": "420"
+         "$ref": "424"
         },
         "Value": "application/json"
        }
@@ -4411,12 +4451,12 @@
      ],
      "Responses": [
       {
-       "$id": "422",
+       "$id": "426",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "82"
+        "$ref": "84"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4435,21 +4475,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "423",
+     "$id": "427",
      "Name": "put",
      "ResourceName": "UnknownDict",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "424",
+       "$id": "428",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "82"
+        "$ref": "84"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4462,11 +4502,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "425",
+       "$id": "429",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "426",
+        "$id": "430",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4481,19 +4521,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "427",
+        "$id": "431",
         "Type": {
-         "$ref": "426"
+         "$ref": "430"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "428",
+       "$id": "432",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "429",
+        "$id": "433",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4508,9 +4548,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "430",
+        "$id": "434",
         "Type": {
-         "$ref": "429"
+         "$ref": "433"
         },
         "Value": "application/json"
        }
@@ -4518,7 +4558,7 @@
      ],
      "Responses": [
       {
-       "$id": "431",
+       "$id": "435",
        "StatusCodes": [
         204
        ],
@@ -4540,31 +4580,31 @@
     }
    ],
    "Protocol": {
-    "$id": "432"
+    "$id": "436"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "433",
+   "$id": "437",
    "Name": "UnknownArray",
    "Description": "",
    "Operations": [
     {
-     "$id": "434",
+     "$id": "438",
      "Name": "get",
      "ResourceName": "UnknownArray",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "435",
+       "$id": "439",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "436",
+        "$id": "440",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4579,9 +4619,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "437",
+        "$id": "441",
         "Type": {
-         "$ref": "436"
+         "$ref": "440"
         },
         "Value": "application/json"
        }
@@ -4589,12 +4629,12 @@
      ],
      "Responses": [
       {
-       "$id": "438",
+       "$id": "442",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "85"
+        "$ref": "87"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4613,21 +4653,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "439",
+     "$id": "443",
      "Name": "put",
      "ResourceName": "UnknownArray",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "440",
+       "$id": "444",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "85"
+        "$ref": "87"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4640,11 +4680,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "441",
+       "$id": "445",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "442",
+        "$id": "446",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4659,19 +4699,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "443",
+        "$id": "447",
         "Type": {
-         "$ref": "442"
+         "$ref": "446"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "444",
+       "$id": "448",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "445",
+        "$id": "449",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4686,9 +4726,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "446",
+        "$id": "450",
         "Type": {
-         "$ref": "445"
+         "$ref": "449"
         },
         "Value": "application/json"
        }
@@ -4696,7 +4736,7 @@
      ],
      "Responses": [
       {
-       "$id": "447",
+       "$id": "451",
        "StatusCodes": [
         204
        ],
@@ -4718,31 +4758,31 @@
     }
    ],
    "Protocol": {
-    "$id": "448"
+    "$id": "452"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "449",
+   "$id": "453",
    "Name": "StringLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "450",
+     "$id": "454",
      "Name": "get",
      "ResourceName": "StringLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "451",
+       "$id": "455",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "452",
+        "$id": "456",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4757,9 +4797,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "453",
+        "$id": "457",
         "Type": {
-         "$ref": "452"
+         "$ref": "456"
         },
         "Value": "application/json"
        }
@@ -4767,12 +4807,12 @@
      ],
      "Responses": [
       {
-       "$id": "454",
+       "$id": "458",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "88"
+        "$ref": "90"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4791,21 +4831,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "455",
+     "$id": "459",
      "Name": "put",
      "ResourceName": "StringLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "456",
+       "$id": "460",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "88"
+        "$ref": "90"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4818,11 +4858,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "457",
+       "$id": "461",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "458",
+        "$id": "462",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4837,19 +4877,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "459",
+        "$id": "463",
         "Type": {
-         "$ref": "458"
+         "$ref": "462"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "460",
+       "$id": "464",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "461",
+        "$id": "465",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4864,9 +4904,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "462",
+        "$id": "466",
         "Type": {
-         "$ref": "461"
+         "$ref": "465"
         },
         "Value": "application/json"
        }
@@ -4874,7 +4914,7 @@
      ],
      "Responses": [
       {
-       "$id": "463",
+       "$id": "467",
        "StatusCodes": [
         204
        ],
@@ -4896,31 +4936,31 @@
     }
    ],
    "Protocol": {
-    "$id": "464"
+    "$id": "468"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "465",
+   "$id": "469",
    "Name": "IntLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "466",
+     "$id": "470",
      "Name": "get",
      "ResourceName": "IntLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "467",
+       "$id": "471",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "468",
+        "$id": "472",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4935,9 +4975,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "469",
+        "$id": "473",
         "Type": {
-         "$ref": "468"
+         "$ref": "472"
         },
         "Value": "application/json"
        }
@@ -4945,12 +4985,12 @@
      ],
      "Responses": [
       {
-       "$id": "470",
+       "$id": "474",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "91"
+        "$ref": "93"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4969,21 +5009,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "471",
+     "$id": "475",
      "Name": "put",
      "ResourceName": "IntLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "472",
+       "$id": "476",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "91"
+        "$ref": "93"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4996,11 +5036,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "473",
+       "$id": "477",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "474",
+        "$id": "478",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5015,19 +5055,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "475",
+        "$id": "479",
         "Type": {
-         "$ref": "474"
+         "$ref": "478"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "476",
+       "$id": "480",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "477",
+        "$id": "481",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5042,9 +5082,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "478",
+        "$id": "482",
         "Type": {
-         "$ref": "477"
+         "$ref": "481"
         },
         "Value": "application/json"
        }
@@ -5052,7 +5092,7 @@
      ],
      "Responses": [
       {
-       "$id": "479",
+       "$id": "483",
        "StatusCodes": [
         204
        ],
@@ -5074,31 +5114,31 @@
     }
    ],
    "Protocol": {
-    "$id": "480"
+    "$id": "484"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "481",
+   "$id": "485",
    "Name": "FloatLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "482",
+     "$id": "486",
      "Name": "get",
      "ResourceName": "FloatLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "483",
+       "$id": "487",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "484",
+        "$id": "488",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5113,9 +5153,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "485",
+        "$id": "489",
         "Type": {
-         "$ref": "484"
+         "$ref": "488"
         },
         "Value": "application/json"
        }
@@ -5123,12 +5163,12 @@
      ],
      "Responses": [
       {
-       "$id": "486",
+       "$id": "490",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "94"
+        "$ref": "96"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5147,21 +5187,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "487",
+     "$id": "491",
      "Name": "put",
      "ResourceName": "FloatLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "488",
+       "$id": "492",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "94"
+        "$ref": "96"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5174,11 +5214,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "489",
+       "$id": "493",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "490",
+        "$id": "494",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5193,19 +5233,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "491",
+        "$id": "495",
         "Type": {
-         "$ref": "490"
+         "$ref": "494"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "492",
+       "$id": "496",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "493",
+        "$id": "497",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5220,9 +5260,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "494",
+        "$id": "498",
         "Type": {
-         "$ref": "493"
+         "$ref": "497"
         },
         "Value": "application/json"
        }
@@ -5230,7 +5270,7 @@
      ],
      "Responses": [
       {
-       "$id": "495",
+       "$id": "499",
        "StatusCodes": [
         204
        ],
@@ -5252,31 +5292,31 @@
     }
    ],
    "Protocol": {
-    "$id": "496"
+    "$id": "500"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "497",
+   "$id": "501",
    "Name": "BooleanLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "498",
+     "$id": "502",
      "Name": "get",
      "ResourceName": "BooleanLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "499",
+       "$id": "503",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "500",
+        "$id": "504",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5291,9 +5331,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "501",
+        "$id": "505",
         "Type": {
-         "$ref": "500"
+         "$ref": "504"
         },
         "Value": "application/json"
        }
@@ -5301,12 +5341,12 @@
      ],
      "Responses": [
       {
-       "$id": "502",
+       "$id": "506",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "97"
+        "$ref": "99"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5325,21 +5365,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "503",
+     "$id": "507",
      "Name": "put",
      "ResourceName": "BooleanLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "504",
+       "$id": "508",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "97"
+        "$ref": "99"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5352,11 +5392,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "505",
+       "$id": "509",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "506",
+        "$id": "510",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5371,19 +5411,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "507",
+        "$id": "511",
         "Type": {
-         "$ref": "506"
+         "$ref": "510"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "508",
+       "$id": "512",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "509",
+        "$id": "513",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5398,9 +5438,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "510",
+        "$id": "514",
         "Type": {
-         "$ref": "509"
+         "$ref": "513"
         },
         "Value": "application/json"
        }
@@ -5408,7 +5448,7 @@
      ],
      "Responses": [
       {
-       "$id": "511",
+       "$id": "515",
        "StatusCodes": [
         204
        ],
@@ -5430,31 +5470,31 @@
     }
    ],
    "Protocol": {
-    "$id": "512"
+    "$id": "516"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "513",
+   "$id": "517",
    "Name": "UnionStringLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "514",
+     "$id": "518",
      "Name": "get",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "515",
+       "$id": "519",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "516",
+        "$id": "520",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5469,9 +5509,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "517",
+        "$id": "521",
         "Type": {
-         "$ref": "516"
+         "$ref": "520"
         },
         "Value": "application/json"
        }
@@ -5479,12 +5519,12 @@
      ],
      "Responses": [
       {
-       "$id": "518",
+       "$id": "522",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "101"
+        "$ref": "103"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5503,21 +5543,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "519",
+     "$id": "523",
      "Name": "put",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "520",
+       "$id": "524",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "101"
+        "$ref": "103"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5530,11 +5570,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "521",
+       "$id": "525",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "522",
+        "$id": "526",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5549,19 +5589,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "523",
+        "$id": "527",
         "Type": {
-         "$ref": "522"
+         "$ref": "526"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "524",
+       "$id": "528",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "525",
+        "$id": "529",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5576,9 +5616,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "526",
+        "$id": "530",
         "Type": {
-         "$ref": "525"
+         "$ref": "529"
         },
         "Value": "application/json"
        }
@@ -5586,7 +5626,7 @@
      ],
      "Responses": [
       {
-       "$id": "527",
+       "$id": "531",
        "StatusCodes": [
         204
        ],
@@ -5608,31 +5648,31 @@
     }
    ],
    "Protocol": {
-    "$id": "528"
+    "$id": "532"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "529",
+   "$id": "533",
    "Name": "UnionIntLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "530",
+     "$id": "534",
      "Name": "get",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "531",
+       "$id": "535",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "532",
+        "$id": "536",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5647,9 +5687,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "533",
+        "$id": "537",
         "Type": {
-         "$ref": "532"
+         "$ref": "536"
         },
         "Value": "application/json"
        }
@@ -5657,12 +5697,12 @@
      ],
      "Responses": [
       {
-       "$id": "534",
+       "$id": "538",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "103"
+        "$ref": "105"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5681,21 +5721,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "535",
+     "$id": "539",
      "Name": "put",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "536",
+       "$id": "540",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "103"
+        "$ref": "105"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5708,11 +5748,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "537",
+       "$id": "541",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "538",
+        "$id": "542",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5727,19 +5767,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "539",
+        "$id": "543",
         "Type": {
-         "$ref": "538"
+         "$ref": "542"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "540",
+       "$id": "544",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "541",
+        "$id": "545",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5754,9 +5794,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "542",
+        "$id": "546",
         "Type": {
-         "$ref": "541"
+         "$ref": "545"
         },
         "Value": "application/json"
        }
@@ -5764,7 +5804,7 @@
      ],
      "Responses": [
       {
-       "$id": "543",
+       "$id": "547",
        "StatusCodes": [
         204
        ],
@@ -5786,31 +5826,31 @@
     }
    ],
    "Protocol": {
-    "$id": "544"
+    "$id": "548"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
   },
   {
-   "$id": "545",
+   "$id": "549",
    "Name": "UnionFloatLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "546",
+     "$id": "550",
      "Name": "get",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "547",
+       "$id": "551",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "548",
+        "$id": "552",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5825,9 +5865,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "549",
+        "$id": "553",
         "Type": {
-         "$ref": "548"
+         "$ref": "552"
         },
         "Value": "application/json"
        }
@@ -5835,12 +5875,12 @@
      ],
      "Responses": [
       {
-       "$id": "550",
+       "$id": "554",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "105"
+        "$ref": "107"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5859,21 +5899,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "551",
+     "$id": "555",
      "Name": "put",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "111"
+       "$ref": "115"
       },
       {
-       "$id": "552",
+       "$id": "556",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "105"
+        "$ref": "107"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5886,11 +5926,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "553",
+       "$id": "557",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "554",
+        "$id": "558",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5905,19 +5945,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "555",
+        "$id": "559",
         "Type": {
-         "$ref": "554"
+         "$ref": "558"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "556",
+       "$id": "560",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "557",
+        "$id": "561",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5932,9 +5972,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "558",
+        "$id": "562",
         "Type": {
-         "$ref": "557"
+         "$ref": "561"
         },
         "Value": "application/json"
        }
@@ -5942,7 +5982,7 @@
      ],
      "Responses": [
       {
-       "$id": "559",
+       "$id": "563",
        "StatusCodes": [
         204
        ],
@@ -5964,7 +6004,185 @@
     }
    ],
    "Protocol": {
-    "$id": "560"
+    "$id": "564"
+   },
+   "Creatable": false,
+   "Parent": "ValueTypesClient"
+  },
+  {
+   "$id": "565",
+   "Name": "UnionEnumValue",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "566",
+     "Name": "get",
+     "ResourceName": "UnionEnumValue",
+     "Description": "Get call",
+     "Parameters": [
+      {
+       "$ref": "115"
+      },
+      {
+       "$id": "567",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "568",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "569",
+        "Type": {
+         "$ref": "568"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "570",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "109"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/value-types/union-enum-value",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "571",
+     "Name": "put",
+     "ResourceName": "UnionEnumValue",
+     "Description": "Put operation",
+     "Parameters": [
+      {
+       "$ref": "115"
+      },
+      {
+       "$id": "572",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Description": "body",
+       "Type": {
+        "$ref": "109"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "573",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "574",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "575",
+        "Type": {
+         "$ref": "574"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "576",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "577",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "578",
+        "Type": {
+         "$ref": "577"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "579",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/value-types/union-enum-value",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "580"
    },
    "Creatable": false,
    "Parent": "ValueTypesClient"
