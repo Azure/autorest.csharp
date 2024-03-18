@@ -41,8 +41,6 @@
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" />
-
-    <Compile Include="../../test/TestProjects/FirstTest-TypeSpec/src/Generated/Internal/ModelSerializationExtensions.cs" LinkBase="Generated/Helpers" />
   </ItemGroup>
 
 </Project>
