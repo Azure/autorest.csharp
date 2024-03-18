@@ -20,6 +20,7 @@ namespace CustomizationsInTsp
     public partial class CustomizationsInTspClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,19 +28,30 @@ namespace CustomizationsInTsp
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        public CustomizationsInTspClient() : this(new CustomizationsInTspClientOptions())
+        /// <summary> Initializes a new instance of CustomizationsInTspClient for mocking. </summary>
+        protected CustomizationsInTspClient()
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public CustomizationsInTspClient(CustomizationsInTspClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CustomizationsInTspClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
@@ -372,6 +384,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -386,6 +399,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/foo", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -400,6 +414,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/bar", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

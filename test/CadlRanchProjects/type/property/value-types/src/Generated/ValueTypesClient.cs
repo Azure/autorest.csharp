@@ -72,6 +72,7 @@ namespace _Type.Property.ValueTypes
         private UnionStringLiteral _cachedUnionStringLiteral;
         private UnionIntLiteral _cachedUnionIntLiteral;
         private UnionFloatLiteral _cachedUnionFloatLiteral;
+        private UnionEnumValue _cachedUnionEnumValue;
 
         /// <summary> Initializes a new instance of Boolean. </summary>
         public virtual Boolean GetBooleanClient()
@@ -239,6 +240,12 @@ namespace _Type.Property.ValueTypes
         public virtual UnionFloatLiteral GetUnionFloatLiteralClient()
         {
             return Volatile.Read(ref _cachedUnionFloatLiteral) ?? Interlocked.CompareExchange(ref _cachedUnionFloatLiteral, new UnionFloatLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionFloatLiteral;
+        }
+
+        /// <summary> Initializes a new instance of UnionEnumValue. </summary>
+        public virtual UnionEnumValue GetUnionEnumValueClient()
+        {
+            return Volatile.Read(ref _cachedUnionEnumValue) ?? Interlocked.CompareExchange(ref _cachedUnionEnumValue, new UnionEnumValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionEnumValue;
         }
     }
 }

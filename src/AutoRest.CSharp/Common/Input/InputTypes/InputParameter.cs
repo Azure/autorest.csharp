@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input;
 
@@ -48,34 +46,7 @@ internal record InputParameter(
         HeaderCollectionPrefix: null)
     { }
 
-    private SerializationFormat? _serializationFormat;
-    public SerializationFormat SerializationFormat => _serializationFormat ??= GetSerializationFormat(Type, Location);
-
     public string Name { get; internal set; } = Name;
     public string NameInRequest { get; internal set; } = NameInRequest;
     public bool IsRequired { get; internal set; } = IsRequired;
-
-    private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
-    {
-        var affectType = parameterType switch
-        {
-            InputListType listType => listType.ElementType,
-            InputDictionaryType dictionaryType => dictionaryType.ValueType,
-            _ => parameterType
-        };
-        if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
-        {
-            if (requestLocation == RequestLocation.Header)
-            {
-                return SerializationFormat.DateTime_RFC7231;
-            }
-
-            if (requestLocation == RequestLocation.Body)
-            {
-                return SerializationFormat.DateTime_RFC3339;
-            }
-        }
-
-        return SerializationBuilder.GetSerializationFormat(affectType);
-    }
 }
