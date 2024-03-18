@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
                 { } when headerModelType == null => new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType),
-                { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
+                { } => new CSharpType(typeof(ResponseWithHeaders<,>), bodyType, headerModelType),
                 _ => new CSharpType(Configuration.ApiTypes.ResponseType),
             };
 
