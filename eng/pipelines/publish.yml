@@ -1,0 +1,67 @@
+resources:
+  repositories:
+    - repository: sdk-repository
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-for-net
+      ref: refs/heads/main
+    - repository: azure-sdk-tools
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-tools
+      ref: refs/heads/main
+
+pool:
+  name: azsdk-pool-mms-win-2022-general
+  vmImage: windows-2022
+
+# Temporarily suffix the version numbers with ".publish" to avoid conflicts with the preview pipeline
+name: $(Date:yyyyMMdd).$(Rev:r).publish
+
+extends:
+  template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
+  parameters:
+    RegenerationJobCount: 10
+    BuildPrereleaseVersion: true # produce prerelease versions while testing the pipeline
+    UseTypeSpecNext: false
+    PublishInternal: true # nuget packages are always published to the devops public (test) feed
+    EmitterPackageJsonPath: src/TypeSpec.Extension/Emitter.Csharp/package.json
+    Packages:
+    - name: generator
+      file: autorest-csharp-*.tgz
+      type: npm
+    - name: emitter
+      file: azure-tools-typespec-csharp-*.tgz
+      type: npm
+    - name: nuget package
+      file: 'Microsoft.Azure.AutoRest.CSharp.*.nupkg'
+      type: nuget
+    SdkInitializationSteps:
+    - pwsh: |
+        $packageVersions = Get-Content "$(buildArtifactsPath)/package-versions.json" -Raw | ConvertFrom-Json
+        $generatorVersion = $packageVersions.generator
+
+        $path = './eng/Packages.Data.props'
+
+        Write-Host "Updating Autorest.CSharp to $generatorVersion in $path"
+        
+        $content = Get-Content -Raw $path
+        $newContent = $content -replace `
+            '<PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version=".*?" />',
+            "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$generatorVersion`" PrivateAssets=`"All`" />"
+
+        $newContent | Set-Content $path -NoNewline
+      displayName: 'Update Packages.Data.props'
+      workingDirectory: $(sdkRepositoryPath)
+    TestMatrix:
+        Unit:
+          TestArguments: -UnitTests
+        A_B:
+          TestArguments: -GenerationChecks -Filter "^[a-b]"
+        C_L:
+          TestArguments: -GenerationChecks -Filter "^[c-l]"
+        M:
+          TestArguments: -GenerationChecks -Filter "^[m]"
+        N_Z:
+          TestArguments: -GenerationChecks -Filter "^[n-z]"
+    PublishDependsOnTest: true
