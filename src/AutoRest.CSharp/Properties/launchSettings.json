@@ -54,7 +54,7 @@
     },
     "Azure.AI.DocumentTranslation": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\src\\Generated -n"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
@@ -62,7 +62,7 @@
     },
     "Azure.Analytics.Purview.Account": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\src\\Generated -n"
     },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
@@ -72,17 +72,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\sdk\\newprojecttypespec\\Azure.NewProject.TypeSpec\\src\\Generated -n"
     },
-    "Azure.ResourceManager.Sample": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"
-    },
     "Azure.ResourceManager.Storage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Storage\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\src\\Generated -n"
+    },
+    "AzureSample.ResourceManager.Sample": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.ResourceManager.Sample\\src\\Generated -n"
     },
     "body-array": {
       "commandName": "Project",

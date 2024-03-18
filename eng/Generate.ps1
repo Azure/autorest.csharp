@@ -240,6 +240,14 @@ if (!($Exclude -contains "Samples")) {
     foreach ($directory in Get-ChildItem $sampleProjectsRoot -Directory) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
+
+        $srcProjectDirectory = Join-Path $projectDirectory "src"
+        $srcReadmeConfigurationPath = Join-Path $srcProjectDirectory "readme.md"
+        if (Test-Path $srcReadmeConfigurationPath) {
+            Add-Directory $sampleName $srcProjectDirectory
+            continue
+        }
+
         if (Test-Path "$projectDirectory/*.sln") {
             $projectDirectory = Join-Path $projectDirectory "src"
         }
