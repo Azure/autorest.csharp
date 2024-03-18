@@ -330,13 +330,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionEnumValue_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().GetUnionEnumValueAsync();
-            Assert.AreEqual(UnionEnumValuePropertyProperty.Value2, response.Value.Property);
+            Assert.AreEqual("value2", response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_ValueTypes_UnionEnumValue_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty());
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty("value2"));
             Assert.AreEqual(204, response.Status);
         });
     }
