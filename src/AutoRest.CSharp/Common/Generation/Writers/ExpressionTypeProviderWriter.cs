@@ -59,24 +59,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 WriteFields();
 
-                foreach (var implement in _provider.Implements)
-                {
-                    _writer.Append($"{implement:D},");
-                }
-                _writer.RemoveTrailingComma();
+                WriteConstructors();
 
-                using (_writer.Scope())
-                {
-                    WriteFields();
+                WriteProperties();
 
-                    WriteConstructors();
+                WriteMethods();
 
-                    WriteProperties();
-
-                    WriteMethods();
-
-                    WriteNestedTypes();
-                }
+                WriteNestedTypes();
             }
         }
 
