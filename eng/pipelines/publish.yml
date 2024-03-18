@@ -1,3 +1,6 @@
+trigger: none
+pr: none
+
 resources:
   repositories:
     - repository: sdk-repository
