@@ -7,9 +7,9 @@
 
 using Azure.Core.TestFramework;
 
-namespace Azure.Analytics.Purview.Account.Tests
+namespace AzureSample.Analytics.Purview.Account.Tests
 {
-    public partial class AnalyticsPurviewAccountTestEnvironment : TestEnvironment
+    public partial class AzureSampleAnalyticsPurviewAccountTestEnvironment : TestEnvironment
     {
     }
 }

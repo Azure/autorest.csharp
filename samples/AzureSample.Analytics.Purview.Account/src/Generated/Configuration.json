@@ -1,6 +1,6 @@
 {
   "output-folder": ".",
-  "namespace": "Azure.Analytics.Purview.Account",
+  "namespace": "AzureSample.Analytics.Purview.Account",
   "library-name": "PurviewAccount",
   "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Generator.Shared",
@@ -9,5 +9,6 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "flavor": "azure",
-  "helper-namespace": "Azure.Analytics.Purview.Account"
+  "generate-test-project": true,
+  "helper-namespace": "AzureSample.Analytics.Purview.Account"
 }

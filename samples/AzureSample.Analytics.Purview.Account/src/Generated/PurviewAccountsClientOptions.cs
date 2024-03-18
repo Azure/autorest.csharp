@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Azure.Analytics.Purview.Account
+namespace AzureSample.Analytics.Purview.Account
 {
     /// <summary> Client options for PurviewAccountsClient. </summary>
     public partial class PurviewAccountsClientOptions : ClientOptions

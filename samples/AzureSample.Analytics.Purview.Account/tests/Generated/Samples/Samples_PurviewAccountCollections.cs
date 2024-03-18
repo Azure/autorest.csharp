@@ -14,7 +14,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace Azure.Analytics.Purview.Account.Samples
+namespace AzureSample.Analytics.Purview.Account.Samples
 {
     public partial class Samples_PurviewAccountCollections
     {

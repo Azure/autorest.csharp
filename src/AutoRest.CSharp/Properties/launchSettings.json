@@ -52,17 +52,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\Generated"
     },
-    "Azure.AI.DocumentTranslation": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\src\\Generated -n"
-    },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Generated"
-    },
-    "Azure.Analytics.Purview.Account": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\src\\Generated -n"
     },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
@@ -72,9 +64,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\sdk\\newprojecttypespec\\Azure.NewProject.TypeSpec\\src\\Generated -n"
     },
-    "Azure.Storage.Tables": {
+    "AzureSample.AI.DocumentTranslation": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.AI.DocumentTranslation\\src\\Generated -n"
+    },
+    "AzureSample.Analytics.Purview.Account": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.Analytics.Purview.Account\\src\\Generated -n"
     },
     "AzureSample.ResourceManager.Sample": {
       "commandName": "Project",
@@ -83,6 +79,10 @@
     "AzureSample.ResourceManager.Storage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.ResourceManager.Storage\\src\\Generated -n"
+    },
+    "AzureSample.Storage.Tables": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.Storage.Tables\\src\\Generated -n"
     },
     "body-array": {
       "commandName": "Project",

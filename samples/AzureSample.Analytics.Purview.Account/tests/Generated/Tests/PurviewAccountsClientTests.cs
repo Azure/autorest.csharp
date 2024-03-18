@@ -13,9 +13,9 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
-namespace Azure.Analytics.Purview.Account.Tests
+namespace AzureSample.Analytics.Purview.Account.Tests
 {
-    public partial class PurviewAccountsClientTests : AnalyticsPurviewAccountTestBase
+    public partial class PurviewAccountsClientTests : AzureSampleAnalyticsPurviewAccountTestBase
     {
         public PurviewAccountsClientTests(bool isAsync) : base(isAsync)
         {

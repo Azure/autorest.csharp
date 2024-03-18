@@ -8,11 +8,12 @@
 using System;
 using Azure.Analytics.Purview.Account;
 using Azure.Core.Extensions;
+using AzureSample.Analytics.Purview.Account;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="PurviewAccountsClient"/> to client builder. </summary>
-    public static partial class AnalyticsPurviewAccountClientBuilderExtensions
+    public static partial class AzureSampleAnalyticsPurviewAccountClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="PurviewAccountsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

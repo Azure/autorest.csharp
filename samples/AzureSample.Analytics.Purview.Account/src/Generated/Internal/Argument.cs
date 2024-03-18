@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Azure.Analytics.Purview.Account
+namespace AzureSample.Analytics.Purview.Account
 {
     internal static class Argument
     {

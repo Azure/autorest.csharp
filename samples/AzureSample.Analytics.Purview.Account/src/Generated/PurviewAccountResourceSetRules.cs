@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using AzureSample.Analytics.Purview.Account;
 
 namespace Azure.Analytics.Purview.Account
 {

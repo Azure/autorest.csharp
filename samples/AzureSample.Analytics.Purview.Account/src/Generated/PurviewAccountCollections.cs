@@ -6,23 +6,24 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using AzureSample.Analytics.Purview.Account;
 
 namespace Azure.Analytics.Purview.Account
 {
-    // Data plane generated client.
-    /// <summary> The PurviewAccounts service client. </summary>
-    public partial class PurviewAccountsClient
+    // Data plane generated sub-client.
+    /// <summary> The PurviewAccountCollections sub-client. </summary>
+    public partial class PurviewAccountCollections
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _collectionName;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -31,39 +32,30 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of PurviewAccountsClient for mocking. </summary>
-        protected PurviewAccountsClient()
+        /// <summary> Initializes a new instance of PurviewAccountCollections for mocking. </summary>
+        protected PurviewAccountCollections()
         {
         }
 
-        /// <summary> Initializes a new instance of PurviewAccountsClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new PurviewAccountsClientOptions())
+        /// <param name="collectionName"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> Api Version. </param>
+        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion)
         {
-        }
-
-        /// <summary> Initializes a new instance of PurviewAccountsClient. </summary>
-        /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountsClientOptions options)
-        {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new PurviewAccountsClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _collectionName = collectionName;
+            _apiVersion = apiVersion;
         }
 
         /// <summary>
-        /// [Protocol Method] Get an account
+        /// [Protocol Method] Get a collection
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -75,14 +67,14 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetAccountPropertiesAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAccountPropertiesAsync(RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetCollectionAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccountPropertiesRequest(context);
+                using HttpMessage message = CreateGetCollectionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -93,7 +85,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Get an account
+        /// [Protocol Method] Get a collection
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -105,14 +97,14 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetAccountProperties(RequestContext)']/*" />
-        public virtual Response GetAccountProperties(RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollection(RequestContext)']/*" />
+        public virtual Response GetCollection(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccountPropertiesRequest(context);
+                using HttpMessage message = CreateGetCollectionRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -123,7 +115,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Updates an account
+        /// [Protocol Method] Creates or updates a collection entity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,16 +129,16 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='UpdateAccountPropertiesAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> UpdateAccountPropertiesAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='CreateOrUpdateCollectionAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content, context);
+                using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -157,7 +149,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Updates an account
+        /// [Protocol Method] Creates or updates a collection entity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -171,16 +163,16 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='UpdateAccountProperties(RequestContent,RequestContext)']/*" />
-        public virtual Response UpdateAccountProperties(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='CreateOrUpdateCollection(RequestContent,RequestContext)']/*" />
+        public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content, context);
+                using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -191,7 +183,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] List the authorization keys associated with this account.
+        /// [Protocol Method] Deletes a Collection entity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,14 +195,14 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetAccessKeysAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAccessKeysAsync(RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='DeleteCollectionAsync(RequestContext)']/*" />
+        public virtual async Task<Response> DeleteCollectionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccessKeysRequest(context);
+                using HttpMessage message = CreateDeleteCollectionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -221,7 +213,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] List the authorization keys associated with this account.
+        /// [Protocol Method] Deletes a Collection entity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -233,14 +225,14 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetAccessKeys(RequestContext)']/*" />
-        public virtual Response GetAccessKeys(RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='DeleteCollection(RequestContext)']/*" />
+        public virtual Response DeleteCollection(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccessKeysRequest(context);
+                using HttpMessage message = CreateDeleteCollectionRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -251,7 +243,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Regenerate the authorization keys associated with this data catalog.
+        /// [Protocol Method] Gets the parent name and parent friendly name chains that represent the collection path.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -260,21 +252,17 @@ namespace Azure.Analytics.Purview.Account
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='RegenerateAccessKeyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RegenerateAccessKeyAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPathAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetCollectionPathAsync(RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRegenerateAccessKeyRequest(content, context);
+                using HttpMessage message = CreateGetCollectionPathRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -285,7 +273,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Regenerate the authorization keys associated with this data catalog.
+        /// [Protocol Method] Gets the parent name and parent friendly name chains that represent the collection path.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -294,21 +282,17 @@ namespace Azure.Analytics.Purview.Account
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='RegenerateAccessKey(RequestContent,RequestContext)']/*" />
-        public virtual Response RegenerateAccessKey(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPath(RequestContext)']/*" />
+        public virtual Response GetCollectionPath(RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRegenerateAccessKeyRequest(content, context);
+                using HttpMessage message = CreateGetCollectionPathRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -319,7 +303,7 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary>
-        /// [Protocol Method] Get a resource set config service model.
+        /// [Protocol Method] List the collections in the account.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -332,16 +316,16 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetResourceSetRulesAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(string skipToken, RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionsAsync(string,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetResourceSetRulesRequest(skipToken, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetCollectionsRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetCollections", "value", "nextLink", context);
         }
 
         /// <summary>
-        /// [Protocol Method] Get a resource set config service model.
+        /// [Protocol Method] List the collections in the account.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -354,55 +338,82 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PurviewAccountsClient.xml" path="doc/members/member[@name='GetResourceSetRules(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetResourceSetRules(string skipToken, RequestContext context)
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollections(string,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetCollections(string skipToken, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetResourceSetRulesRequest(skipToken, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetCollectionsRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetCollections", "value", "nextLink", context);
         }
 
-        private PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
-
-        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
-        /// <param name="collectionName"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="collectionName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="collectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
+        /// <summary>
+        /// [Protocol Method] Lists the child collections names in the collection.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="skipToken"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNamesAsync(string,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(collectionName, nameof(collectionName));
-
-            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetChildCollectionNames", "value", "nextLink", context);
         }
 
-        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
-        public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
+        /// <summary>
+        /// [Protocol Method] Lists the child collections names in the collection.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="skipToken"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNames(string,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken, RequestContext context)
         {
-            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetChildCollectionNames", "value", "nextLink", context);
         }
 
-        internal HttpMessage CreateGetAccountPropertiesRequest(RequestContext context)
+        internal HttpMessage CreateGetCollectionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateUpdateAccountPropertiesRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateOrUpdateCollectionRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            request.Method = RequestMethod.Patch;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -411,44 +422,29 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetAccessKeysRequest(RequestContext context)
+        internal HttpMessage CreateDeleteCollectionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/listkeys", false);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateRegenerateAccessKeyRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/regeneratekeys", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateGetResourceSetRulesRequest(string skipToken, RequestContext context)
+        internal HttpMessage CreateGetCollectionsRequest(string skipToken, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/resourceSetRuleConfigs", false);
+            uri.AppendPath("/collections", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
             {
@@ -459,7 +455,56 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken, RequestContext context)
+        internal HttpMessage CreateGetChildCollectionNamesRequest(string skipToken, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendPath("/getChildCollectionNames", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
+            {
+                uri.AppendQuery("$skipToken", skipToken, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionPathRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendPath("/getCollectionPath", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetChildCollectionNamesNextPageRequest(string nextLink, string skipToken, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -474,5 +519,7 @@ namespace Azure.Analytics.Purview.Account
 
         private static ResponseClassifier _responseClassifier200;
         private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier204;
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
     }
 }

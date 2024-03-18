@@ -9,12 +9,13 @@ using System;
 using Azure.Analytics.Purview.Account;
 using Azure.Core;
 using Azure.Core.TestFramework;
+using AzureSample.Analytics.Purview.Account;
 
-namespace Azure.Analytics.Purview.Account.Tests
+namespace AzureSample.Analytics.Purview.Account.Tests
 {
-    public partial class AnalyticsPurviewAccountTestBase : RecordedTestBase<AnalyticsPurviewAccountTestEnvironment>
+    public partial class AzureSampleAnalyticsPurviewAccountTestBase : RecordedTestBase<AzureSampleAnalyticsPurviewAccountTestEnvironment>
     {
-        public AnalyticsPurviewAccountTestBase(bool isAsync) : base(isAsync)
+        public AzureSampleAnalyticsPurviewAccountTestBase(bool isAsync) : base(isAsync)
         {
         }
 
