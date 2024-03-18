@@ -79,5 +79,19 @@ namespace CadlRanchProjects.Tests
             var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(new CSModel(true));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Client_Naming_UnionEnum_unionEnumName() => Test(async (host) =>
+        {
+            var response = await new NamingClient(host, null).GetUnionEnumClient().UnionEnumNameAsync(ClientExtensibleEnum.EnumValue1);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Client_Naming_UnionEnum_unionEnumMemberName() => Test(async (host) =>
+        {
+            var response = await new NamingClient(host, null).GetUnionEnumClient().UnionEnumMemberNameAsync(ExtensibleEnum.ClientEnumValue1);
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
