@@ -367,6 +367,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 return $"{candidates.First().Type}.ResourceType";
             }
+
+            if (string.IsNullOrEmpty(resourceType.SerializedType))
+            {
+                throw new InvalidOperationException($"ResourceType is empty");
+            }
+
             return $"\"{resourceType.SerializedType}\"";
         }
 
