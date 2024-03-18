@@ -293,7 +293,7 @@ extends:
                 PackageTags = Configuration.Namespace,
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 IncludeOperationsSharedSource = true,
-                IncludeManagementSharedCode = Configuration.AzureArm,
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
             // only branded library will add these shared code compilation lines
             builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));

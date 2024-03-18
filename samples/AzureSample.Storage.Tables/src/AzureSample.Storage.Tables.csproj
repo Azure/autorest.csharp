@@ -6,7 +6,6 @@
     <PackageTags>AzureSample.Storage.Tables</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <IncludeManagementSharedCode>false</IncludeManagementSharedCode>
   </PropertyGroup>
 
   <ItemGroup>
