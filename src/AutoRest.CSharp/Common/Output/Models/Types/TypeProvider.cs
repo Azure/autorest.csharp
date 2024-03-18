@@ -42,6 +42,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<CSharpType>? _typeArguments;
         protected IReadOnlyList<CSharpType> TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
 
+        public TypeProvider? DeclaringTypeProvider { get; protected init; }
+
         public string? Deprecated => _deprecated;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
