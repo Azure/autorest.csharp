@@ -69,6 +69,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in inputEnums)
             {
+                // [TODO]: Consolidate default namespace choice between HLC and DPG
                 var ns = Configuration.Generation1ConvenienceClient ? inputEnum.Namespace : null;
                 enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
@@ -113,6 +114,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var model in inputModels)
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
+                // [TODO]: Consolidate default namespace choice between HLC and DPG
                 var ns = Configuration.Generation1ConvenienceClient ? model.Namespace : null;
                 var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);

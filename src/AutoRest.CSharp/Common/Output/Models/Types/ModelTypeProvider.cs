@@ -358,6 +358,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseInitializers = baseParameterInitializers;
             }
 
+            // [TODO]: Add derived types list to the property description in DPG
             if (Configuration.Generation1ConvenienceClient)
             {
                 parameterList.AddRange(parameters.Select(p => p with { Description = $"{p.Description}{BuilderHelpers.CreateDerivedTypesDescription(p.Type)}" }));
@@ -419,6 +420,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // only initialization ctor initializes the discriminator
             // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
+            // [TODO]: Consolidate property initializer generation between HLC and DPG
             if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
@@ -480,6 +482,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
                     }
                 }
+                // [TODO]: Consolidate property initializer generation between HLC and DPG
                 else if (property.InputModelProperty?.ConstantValue is { } constant && !propertyType.IsNullable && Configuration.Generation1ConvenienceClient)
                 {
                     initializationValue = BuilderHelpers.ParseConstant(constant.Value, propertyType);
@@ -491,6 +494,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
+            // [TODO]: Consolidate property initializer generation between HLC and DPG
             if (Configuration.Generation1ConvenienceClient && Discriminator is { } discriminator)
             {
                 if (defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
@@ -645,6 +649,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return method;
             }
 
+            // [TODO]: Generate FromOperationResponse and ToRequestContent in HLC
             if (Configuration.Generation1ConvenienceClient)
                 yield break;
 

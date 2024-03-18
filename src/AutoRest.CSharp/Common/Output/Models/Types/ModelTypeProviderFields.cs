@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in properties)
             {
+                // [TODO]: Resolve differences in HLC and DPG for ambiguous property names
                 var originalFieldName = Configuration.Generation1ConvenienceClient
                     ? inputModelProperty.Name == "null" ? "NullProperty" : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName())
                     : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
@@ -85,6 +86,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // for structs, all properties must be set in the public ctor
                 if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, ConstantValue: null })
                 {
+                    // [TODO]: Provide a flag to add read/write properties to the public model constructor
                     if (Configuration.Generation1ConvenienceClient || !inputModelProperty.IsReadOnly)
                     {
                         publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
@@ -366,7 +368,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
-            if (inputModelProperty.ConstantValue is null || !inputModelProperty.IsRequired || Configuration.Generation1ConvenienceClient)
+            if (inputModelProperty.ConstantValue is null || !inputModelProperty.IsRequired)
+            {
+                return null;
+            }
+
+            // [TODO]: Consolidate property initializer generation between HLC and DPG
+            if (Configuration.Generation1ConvenienceClient)
             {
                 return null;
             }
