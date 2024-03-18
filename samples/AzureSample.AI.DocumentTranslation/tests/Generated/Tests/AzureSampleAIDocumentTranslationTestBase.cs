@@ -6,14 +6,14 @@
 #nullable disable
 
 using Azure;
-using Azure.AI.DocumentTranslation;
 using Azure.Core.TestFramework;
+using AzureSample.AI.DocumentTranslation;
 
-namespace Azure.AI.DocumentTranslation.Tests
+namespace AzureSample.AI.DocumentTranslation.Tests
 {
-    public partial class AIDocumentTranslationTestBase : RecordedTestBase<AIDocumentTranslationTestEnvironment>
+    public partial class AzureSampleAIDocumentTranslationTestBase : RecordedTestBase<AzureSampleAIDocumentTranslationTestEnvironment>
     {
-        public AIDocumentTranslationTestBase(bool isAsync) : base(isAsync)
+        public AzureSampleAIDocumentTranslationTestBase(bool isAsync) : base(isAsync)
         {
         }
 

@@ -7,9 +7,9 @@
 
 using Azure.Core.TestFramework;
 
-namespace Azure.AI.DocumentTranslation.Tests
+namespace AzureSample.AI.DocumentTranslation.Tests
 {
-    public partial class AIDocumentTranslationTestEnvironment : TestEnvironment
+    public partial class AzureSampleAIDocumentTranslationTestEnvironment : TestEnvironment
     {
     }
 }

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Azure.AI.DocumentTranslation
+namespace AzureSample.AI.DocumentTranslation
 {
     /// <summary> Client options for DocumentTranslationClient. </summary>
     public partial class DocumentTranslationClientOptions : ClientOptions

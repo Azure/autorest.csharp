@@ -8,14 +8,14 @@
 using System;
 using System.Threading.Tasks;
 using Azure;
-using Azure.AI.DocumentTranslation;
 using Azure.Core;
 using Azure.Identity;
+using AzureSample.AI.DocumentTranslation;
 using NUnit.Framework;
 
-namespace Azure.AI.DocumentTranslation.Tests
+namespace AzureSample.AI.DocumentTranslation.Tests
 {
-    public partial class DocumentTranslationClientTests : AIDocumentTranslationTestBase
+    public partial class DocumentTranslationClientTests : AzureSampleAIDocumentTranslationTestBase
     {
         public DocumentTranslationClientTests(bool isAsync) : base(isAsync)
         {

@@ -9,12 +9,12 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.AI.DocumentTranslation;
 using Azure.Core;
 using Azure.Identity;
+using AzureSample.AI.DocumentTranslation;
 using NUnit.Framework;
 
-namespace Azure.AI.DocumentTranslation.Samples
+namespace AzureSample.AI.DocumentTranslation.Samples
 {
     public partial class Samples_DocumentTranslationClient
     {

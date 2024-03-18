@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Azure.AI.DocumentTranslation
+namespace AzureSample.AI.DocumentTranslation
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

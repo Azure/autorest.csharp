@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Azure.AI.DocumentTranslation
+namespace AzureSample.AI.DocumentTranslation
 {
     internal static class Argument
     {

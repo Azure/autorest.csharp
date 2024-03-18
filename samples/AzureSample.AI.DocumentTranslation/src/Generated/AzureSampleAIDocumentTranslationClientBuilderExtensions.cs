@@ -6,13 +6,13 @@
 #nullable disable
 
 using Azure;
-using Azure.AI.DocumentTranslation;
 using Azure.Core.Extensions;
+using AzureSample.AI.DocumentTranslation;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="DocumentTranslationClient"/> to client builder. </summary>
-    public static partial class AIDocumentTranslationClientBuilderExtensions
+    public static partial class AzureSampleAIDocumentTranslationClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="DocumentTranslationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

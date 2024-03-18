@@ -1,6 +1,6 @@
 {
   "output-folder": ".",
-  "namespace": "Azure.AI.DocumentTranslation",
+  "namespace": "AzureSample.AI.DocumentTranslation",
   "library-name": "AzureAIDocumentTranslation",
   "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Generator.Shared",
@@ -9,5 +9,6 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "flavor": "azure",
-  "helper-namespace": "Azure.AI.DocumentTranslation"
+  "generate-test-project": true,
+  "helper-namespace": "AzureSample.AI.DocumentTranslation"
 }

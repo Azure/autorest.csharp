@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.AI.DocumentTranslation
+namespace AzureSample.AI.DocumentTranslation
 {
     // Data plane generated client.
     /// <summary> The DocumentTranslation service client. </summary>
