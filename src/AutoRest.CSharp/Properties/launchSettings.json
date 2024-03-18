@@ -72,10 +72,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\sdk\\newprojecttypespec\\Azure.NewProject.TypeSpec\\src\\Generated -n"
     },
-    "Azure.ResourceManager.Storage": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Storage\\Generated"
-    },
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\src\\Generated -n"
@@ -83,6 +79,10 @@
     "AzureSample.ResourceManager.Sample": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.ResourceManager.Sample\\src\\Generated -n"
+    },
+    "AzureSample.ResourceManager.Storage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.ResourceManager.Storage\\src\\Generated -n"
     },
     "body-array": {
       "commandName": "Project",
