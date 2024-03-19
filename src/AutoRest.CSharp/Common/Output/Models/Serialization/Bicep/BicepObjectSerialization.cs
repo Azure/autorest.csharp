@@ -17,7 +17,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                              jsonObjectSerialization.Properties.Any(p => p.SerializedName == "id");
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
+            ObjectType = objectType;
         }
+
+        public SerializableObjectType ObjectType { get; }
 
         public IEnumerable<BicepPropertySerialization> Properties { get; }
 

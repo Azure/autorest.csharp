@@ -27,19 +27,87 @@ namespace AutoRest.CSharp.Common.Output.Builders
     internal static class BicepSerializationMethodsBuilder
     {
         private const string SerializeBicepMethodName = "SerializeBicep";
+        private const string TransformFlattenedOverridesMethodName = "TransformFlattenedOverrides";
+        private static Parameter BicepOptions = new Parameter("bicepOptions", null, typeof(BicepModelReaderWriterOptions), null, ValidationType.None, null);
+        private static Parameter PropertyOverrides = new Parameter("propertyOverrides", null, typeof(IDictionary<string, string>), null, ValidationType.None, null);
 
         public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
-            yield return new Method(
-                new MethodSignature(
-                    SerializeBicepMethodName,
-                    null,
-                    null,
-                    MethodSignatureModifiers.Private,
-                    typeof(BinaryData),
-                    null,
-                    new Parameter[] { KnownParameters.Serializations.Options }),
-                WriteSerializeBicep(objectSerialization).ToArray());
+            return new[]
+            {
+                new Method(
+                    new MethodSignature(
+                        SerializeBicepMethodName,
+                        null,
+                        null,
+                        MethodSignatureModifiers.Private,
+                        typeof(BinaryData),
+                        null,
+                        new Parameter[] { KnownParameters.Serializations.Options }),
+                    WriteSerializeBicep(objectSerialization).AsStatement()),
+                new Method(
+                    new MethodSignature(
+                        TransformFlattenedOverridesMethodName,
+                        null,
+                        null,
+                        MethodSignatureModifiers.Private,
+                        null,
+                        null,
+                        new Parameter[] { BicepOptions, PropertyOverrides }),
+                    WriteTransformFlattenedOverrides(objectSerialization))
+            };
+        }
+
+        private static MethodBodyStatement WriteTransformFlattenedOverrides(BicepObjectSerialization objectSerialization)
+        {
+            // does this actually only give safe flattened?
+            var flattenedProperties = objectSerialization.ObjectType.Properties
+                .Where(p => p.FlattenedProperty != null)
+                .Select(p => p.FlattenedProperty).ToList();
+            if (flattenedProperties.Count == 0)
+            {
+                return EmptyStatement;
+            }
+
+            var bicepOptions = new ParameterReference(BicepOptions);
+            var objectOverrides = bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides));
+            var propertyOverrides = new ParameterReference(PropertyOverrides);
+
+            var forLoop = new ForeachStatement(
+                "item",
+                new EnumerableExpression(
+                    typeof(IDictionary<string, string>),
+                    new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.ToList),
+                        new[] { propertyOverrides })),
+                out var item);
+            var switchStatement = new SwitchStatement(item.Property("Key"));
+            forLoop.Add(switchStatement);
+
+            foreach (var property in flattenedProperties)
+            {
+                var stack = property!.BuildHierarchyStack();
+                var instanceName = property!.BuildHierarchyStack().Last().Declaration.Name;
+                var childPropertyName = stack.Pop().Declaration.Name;
+                var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
+
+                switchStatement.Add(
+                    new SwitchCase(Literal(property.Declaration.Name), new MethodBodyStatement[]
+                    {
+                        Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
+                        propertyDictionary.Invoke(
+                            "Add",
+                            Literal(childPropertyName),
+                            item.Property("Value")).ToStatement(),
+                        objectOverrides.Invoke(
+                            "Add",
+                            This.Property(instanceName),
+                            propertyDictionary).ToStatement(),
+                        new KeywordStatement("break", null)
+                }));
+            }
+            switchStatement.Add(SwitchCase.Default(Continue));
+
+            return forLoop;
         }
 
         public static SwitchCase BuildBicepWriteSwitchCase(BicepObjectSerialization bicep, ModelReaderWriterOptionsExpression options)
@@ -92,11 +160,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new BoolExpression(NotEqual(bicepOptions, Null)),
                     new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides))
                         .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides)))));
-
             var hasPropertyOverride = new VariableReference(typeof(bool), "hasPropertyOverride");
             yield return Declare(hasPropertyOverride, BoolExpression.False);
             var propertyOverride = new VariableReference(typeof(string), "propertyOverride");
             yield return Declare(propertyOverride, Null);
+
+            yield return EmptyLine;
+
+            yield return new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
+            {
+                This.Invoke(TransformFlattenedOverridesMethodName, bicepOptions, propertyOverrides).ToStatement()
+            };
+            yield return EmptyLine;
 
             var propertyOverrideVariables = new PropertyOverrideVariables(propertyOverrides, hasObjectOverride,
                 hasPropertyOverride, propertyOverride);

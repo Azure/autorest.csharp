@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -262,6 +263,11 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSProfile), out propertyOverride);
@@ -428,6 +434,38 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "EncryptionAtHost":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("EncryptionAtHost", item.Value);
+                        bicepOptions.ParameterOverrides.Add(SecurityProfile, propertyDictionary);
+                        break;
+                    case "BootDiagnostics":
+                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
+                        propertyDictionary0.Add("BootDiagnostics", item.Value);
+                        bicepOptions.ParameterOverrides.Add(DiagnosticsProfile, propertyDictionary0);
+                        break;
+                    case "BillingMaxPrice":
+                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
+                        propertyDictionary1.Add("MaxPrice", item.Value);
+                        bicepOptions.ParameterOverrides.Add(BillingProfile, propertyDictionary1);
+                        break;
+                    case "ScheduledEventsTerminateNotificationProfile":
+                        Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
+                        propertyDictionary2.Add("TerminateNotificationProfile", item.Value);
+                        bicepOptions.ParameterOverrides.Add(ScheduledEventsProfile, propertyDictionary2);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmProfile>.Write(ModelReaderWriterOptions options)
