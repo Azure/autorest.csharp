@@ -18,15 +18,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                              jsonObjectSerialization.Properties.Any(p => p.SerializedName == "id");
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
-            ObjectType = objectType;
             FlattenedProperties = objectType.Properties
                 .Where(p => p.FlattenedProperty != null)
                 .Select(p => p.FlattenedProperty!).ToList();
         }
 
         public IList<FlattenedObjectTypeProperty> FlattenedProperties { get; }
-
-        public SerializableObjectType ObjectType { get; }
 
         public IEnumerable<BicepPropertySerialization> Properties { get; }
 
