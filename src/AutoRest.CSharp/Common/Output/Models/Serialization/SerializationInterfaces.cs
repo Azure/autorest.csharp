@@ -18,7 +18,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             {
                 if (hasJson)
                 {
-                    IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
+                    if (Configuration.IsBranded)
+                    {
+                        IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
+                    }
                     if (Configuration.UseModelReaderWriter)
                     {
                         IJsonModelTInterface = new CSharpType(typeof(IJsonModel<>), modelType);
