@@ -7,7 +7,7 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
+using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {
