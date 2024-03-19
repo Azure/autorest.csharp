@@ -28,13 +28,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
             }
 
-            foreach (var helper in ExpressionTypeProvider.GetTestHelperProviders())
-            {
-                var helperWriter = new CodeWriter();
-                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
-                project.AddGeneratedTestFile($"../../tests/Generated/Internal/{helper.Type.Name}.cs", helperWriter.ToString());
-            }
-
             foreach (var model in library.Models)
             {
                 var codeWriter = new CodeWriter();
