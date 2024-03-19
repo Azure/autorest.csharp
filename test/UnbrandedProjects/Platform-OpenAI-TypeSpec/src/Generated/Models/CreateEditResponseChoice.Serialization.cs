@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,10 +10,8 @@ using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CreateEditResponseChoice : IUtf8JsonWriteable, IJsonModel<CreateEditResponseChoice>
+    public partial class CreateEditResponseChoice : IJsonModel<CreateEditResponseChoice>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEditResponseChoice>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<CreateEditResponseChoice>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateEditResponseChoice>)this).GetFormatFromOptions(options) : options.Format;
