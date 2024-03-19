@@ -36,7 +36,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [OneTimeSetUp]
         public async Task Generate()
         {
-            Assert.Ignore("https://github.com/Azure/autorest.csharp/issues/4216");
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "src", "Generated");
 

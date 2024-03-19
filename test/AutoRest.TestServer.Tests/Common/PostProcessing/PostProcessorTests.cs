@@ -45,7 +45,6 @@ internal class PostProcessorTests
     [TestCase("TestSDK.NestedItem", true, false)]
     [TestCase("TestSDK.InternalUsageModel", true, true)]
     [TestCase("TestSDK.PageableItem", true, false)]
-    [Ignore("https://github.com/Azure/autorest.csharp/issues/4216")]
     public async Task ValidateTypeAccessibility(string typeFullName, bool exist, bool? isInternal)
     {
         var postProcessor = new TestPostProcessor(ImmutableHashSet<string>.Empty);
