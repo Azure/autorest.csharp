@@ -33,19 +33,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
-            return new[]
+
+            yield return new Method(
+                new MethodSignature(
+                    SerializeBicepMethodName,
+                    null,
+                    null,
+                    MethodSignatureModifiers.Private,
+                    typeof(BinaryData),
+                    null,
+                    new Parameter[] { KnownParameters.Serializations.Options }),
+                WriteSerializeBicep(objectSerialization).AsStatement());
+
+            if (objectSerialization.FlattenedProperties.Count > 0)
             {
-                new Method(
-                    new MethodSignature(
-                        SerializeBicepMethodName,
-                        null,
-                        null,
-                        MethodSignatureModifiers.Private,
-                        typeof(BinaryData),
-                        null,
-                        new Parameter[] { KnownParameters.Serializations.Options }),
-                    WriteSerializeBicep(objectSerialization).AsStatement()),
-                new Method(
+                yield return new Method(
                     new MethodSignature(
                         TransformFlattenedOverridesMethodName,
                         null,
@@ -54,17 +56,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         null,
                         null,
                         new Parameter[] { BicepOptions, PropertyOverrides }),
-                    WriteTransformFlattenedOverrides(objectSerialization))
-            };
+                    WriteTransformFlattenedOverrides(objectSerialization));
+            }
         }
 
         private static MethodBodyStatement WriteTransformFlattenedOverrides(BicepObjectSerialization objectSerialization)
         {
-            // does this actually only give safe flattened?
-            var flattenedProperties = objectSerialization.ObjectType.Properties
-                .Where(p => p.FlattenedProperty != null)
-                .Select(p => p.FlattenedProperty).ToList();
-            if (flattenedProperties.Count == 0)
+            if (objectSerialization.FlattenedProperties.Count == 0)
             {
                 return EmptyStatement;
             }
@@ -83,7 +81,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var switchStatement = new SwitchStatement(item.Property("Key"));
             forLoop.Add(switchStatement);
 
-            foreach (var property in flattenedProperties)
+            foreach (var property in objectSerialization.FlattenedProperties)
             {
                 var stack = property!.BuildHierarchyStack();
                 var instanceName = property!.BuildHierarchyStack().Last().Declaration.Name;
@@ -167,11 +165,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             yield return EmptyLine;
 
-            yield return new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
+            if (objectSerialization.FlattenedProperties.Count > 0)
             {
-                This.Invoke(TransformFlattenedOverridesMethodName, bicepOptions, propertyOverrides).ToStatement()
-            };
-            yield return EmptyLine;
+                yield return new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
+                {
+                    This.Invoke(TransformFlattenedOverridesMethodName, bicepOptions, propertyOverrides)
+                        .ToStatement()
+                };
+                yield return EmptyLine;
+            }
 
             var propertyOverrideVariables = new PropertyOverrideVariables(propertyOverrides, hasObjectOverride,
                 hasPropertyOverride, propertyOverride);
