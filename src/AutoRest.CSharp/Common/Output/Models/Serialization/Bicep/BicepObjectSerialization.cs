@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
@@ -18,7 +19,13 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
             ObjectType = objectType;
+            // does this actually only give safe flattened?
+            FlattenedProperties = objectType.Properties
+                .Where(p => p.FlattenedProperty != null)
+                .Select(p => p.FlattenedProperty!).ToList();
         }
+
+        public IList<FlattenedObjectTypeProperty> FlattenedProperties { get; }
 
         public SerializableObjectType ObjectType { get; }
 
