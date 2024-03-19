@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -35,7 +36,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<string>> privateRanges = default;
+            IList<string> privateRanges = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("privateRanges"u8))
@@ -53,7 +54,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicySnat(Optional.ToList(privateRanges));
+            return new FirewallPolicySnat(privateRanges ?? new ChangeTrackingList<string>());
         }
     }
 }

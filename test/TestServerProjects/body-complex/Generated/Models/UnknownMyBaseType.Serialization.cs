@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -68,7 +69,7 @@ namespace body_complex.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownMyBaseType(document.RootElement, options);
+            return DeserializeMyBaseType(document.RootElement, options);
         }
 
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelReaderWriterOptions options = null)
@@ -80,8 +81,8 @@ namespace body_complex.Models
                 return null;
             }
             MyKind kind = "Unknown";
-            Optional<string> propB1 = default;
-            Optional<string> propBH1 = default;
+            string propB1 = default;
+            string propBH1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -119,7 +120,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData);
+            return new UnknownMyBaseType(kind, propB1, propBH1, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MyBaseType>.Write(ModelReaderWriterOptions options)
@@ -144,7 +145,7 @@ namespace body_complex.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownMyBaseType(document.RootElement, options);
+                        return DeserializeMyBaseType(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(MyBaseType)} does not support '{options.Format}' format.");

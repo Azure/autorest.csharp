@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     /// <summary> The body of the Radiology Insights request. </summary>
     public partial class RadiologyInsightsData

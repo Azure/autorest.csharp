@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace CustomNamespace
 {

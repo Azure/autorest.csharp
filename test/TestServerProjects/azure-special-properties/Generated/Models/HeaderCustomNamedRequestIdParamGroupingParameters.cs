@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using azure_special_properties;
 
 namespace azure_special_properties.Models
 {

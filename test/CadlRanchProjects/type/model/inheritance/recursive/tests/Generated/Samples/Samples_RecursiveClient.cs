@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.Recursive.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = client.Put(content);
 
@@ -42,7 +42,7 @@ namespace _Type.Model.Inheritance.Recursive.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = await client.PutAsync(content);
 
@@ -55,7 +55,7 @@ namespace _Type.Model.Inheritance.Recursive.Samples
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.Put(input);
         }
 
@@ -65,7 +65,7 @@ namespace _Type.Model.Inheritance.Recursive.Samples
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.PutAsync(input);
         }
 
@@ -77,7 +77,7 @@ namespace _Type.Model.Inheritance.Recursive.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -96,7 +96,7 @@ null
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -113,7 +113,7 @@ null
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.Put(input);
         }
 
@@ -123,7 +123,7 @@ null
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.PutAsync(input);
         }
 

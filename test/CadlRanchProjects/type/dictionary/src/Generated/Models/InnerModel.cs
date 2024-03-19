@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Models
 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -183,21 +184,21 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> optionalString = default;
-            Optional<int> optionalInt = default;
-            Optional<IList<string>> optionalStringList = default;
-            Optional<IList<int>> optionalIntList = default;
-            Optional<IList<CollectionItem>> optionalModelList = default;
-            Optional<DerivedModel> optionalModel = default;
-            Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
-            Optional<FixedStringEnum> optionalFixedStringEnum = default;
-            Optional<ExtensibleEnum> optionalExtensibleEnum = default;
-            Optional<IDictionary<string, int>> optionalIntRecord = default;
-            Optional<IDictionary<string, string>> optionalStringRecord = default;
-            Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
-            Optional<DateTimeOffset> optionalPlainDate = default;
-            Optional<TimeSpan> optionalPlainTime = default;
-            Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
+            string optionalString = default;
+            int? optionalInt = default;
+            IList<string> optionalStringList = default;
+            IList<int> optionalIntList = default;
+            IList<CollectionItem> optionalModelList = default;
+            DerivedModel optionalModel = default;
+            DerivedModelWithProperties optionalModelWithPropertiesOnBase = default;
+            FixedStringEnum? optionalFixedStringEnum = default;
+            ExtensibleEnum? optionalExtensibleEnum = default;
+            IDictionary<string, int> optionalIntRecord = default;
+            IDictionary<string, string> optionalStringRecord = default;
+            IDictionary<string, RecordItem> optionalModelRecord = default;
+            DateTimeOffset? optionalPlainDate = default;
+            TimeSpan? optionalPlainTime = default;
+            IList<int?> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -253,7 +254,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalModelList = array;
                     continue;
@@ -264,7 +265,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
@@ -273,7 +274,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
+                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalFixedStringEnum"u8))
@@ -331,7 +332,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;
@@ -381,7 +382,23 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelList), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement), serializedAdditionalRawData);
+            return new RoundTripOptionalModel(
+                optionalString,
+                optionalInt,
+                optionalStringList ?? new ChangeTrackingList<string>(),
+                optionalIntList ?? new ChangeTrackingList<int>(),
+                optionalModelList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalModel,
+                optionalModelWithPropertiesOnBase,
+                optionalFixedStringEnum,
+                optionalExtensibleEnum,
+                optionalIntRecord ?? new ChangeTrackingDictionary<string, int>(),
+                optionalStringRecord ?? new ChangeTrackingDictionary<string, string>(),
+                optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                optionalPlainDate,
+                optionalPlainTime,
+                optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripOptionalModel>.Write(ModelReaderWriterOptions options)

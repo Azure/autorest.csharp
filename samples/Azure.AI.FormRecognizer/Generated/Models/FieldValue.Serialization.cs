@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.AI.FormRecognizer;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -21,19 +22,19 @@ namespace Azure.AI.FormRecognizer.Models
                 return null;
             }
             FieldValueType type = default;
-            Optional<string> valueString = default;
-            Optional<DateTimeOffset> valueDate = default;
-            Optional<TimeSpan> valueTime = default;
-            Optional<string> valuePhoneNumber = default;
-            Optional<float> valueNumber = default;
-            Optional<int> valueInteger = default;
-            Optional<IReadOnlyList<FieldValue>> valueArray = default;
-            Optional<IReadOnlyDictionary<string, FieldValue>> valueObject = default;
-            Optional<string> text = default;
-            Optional<IReadOnlyList<float>> boundingBox = default;
-            Optional<float> confidence = default;
-            Optional<IReadOnlyList<string>> elements = default;
-            Optional<int> page = default;
+            string valueString = default;
+            DateTimeOffset? valueDate = default;
+            TimeSpan? valueTime = default;
+            string valuePhoneNumber = default;
+            float? valueNumber = default;
+            int? valueInteger = default;
+            IReadOnlyList<FieldValue> valueArray = default;
+            IReadOnlyDictionary<string, FieldValue> valueObject = default;
+            string text = default;
+            IReadOnlyList<float> boundingBox = default;
+            float? confidence = default;
+            IReadOnlyList<string> elements = default;
+            int? page = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -167,7 +168,21 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page));
+            return new FieldValue(
+                type,
+                valueString,
+                valueDate,
+                valueTime,
+                valuePhoneNumber,
+                valueNumber,
+                valueInteger,
+                valueArray ?? new ChangeTrackingList<FieldValue>(),
+                valueObject ?? new ChangeTrackingDictionary<string, FieldValue>(),
+                text,
+                boundingBox ?? new ChangeTrackingList<float>(),
+                confidence,
+                elements ?? new ChangeTrackingList<string>(),
+                page);
         }
     }
 }

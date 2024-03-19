@@ -10,9 +10,11 @@ using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types.System;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
 using RequestBody = System.ClientModel.Primitives.RequestBody;
 
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
 
         public override Type HttpPipelineType => typeof(MessagePipeline);
-        public override Type PipelineExtensionsType => typeof(PipelineProtocolExtensions);
+        public override CSharpType PipelineExtensionsType => ClientPipelineExtensionsProvider.Instance.Type;
         public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(PipelineMessage);
@@ -40,9 +42,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ClientOptionsType => typeof(RequestOptions);
 
         public override Type RequestContextType => typeof(RequestOptions);
-
-        public override Type ChangeTrackingListType => typeof(OptionalList<>);
-        public override Type ChangeTrackingDictionaryType => typeof(OptionalDictionary<,>);
 
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(KeyCredential);
@@ -83,9 +82,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
         public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
-
-        public override Type OptionalType => typeof(OptionalProperty);
-        public override Type OptionalPropertyType => typeof(OptionalProperty<>);
 
         public override Type RequestFailedExceptionType => typeof(MessageFailedException);
 

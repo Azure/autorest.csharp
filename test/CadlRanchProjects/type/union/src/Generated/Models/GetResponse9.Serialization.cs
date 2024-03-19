@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -74,7 +75,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value);
+                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

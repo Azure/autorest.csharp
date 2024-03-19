@@ -80,13 +80,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Float32Value_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
-            Assert.AreEqual(42.42f, response.Value.First());
+            Assert.AreEqual(43.125f, response.Value.First());
         });
 
         [Test]
         public Task Type_Array_Float32Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 42.42f });
+            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 43.125f });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -154,7 +154,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new ArrayClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
             var result = response.Value.ToList();
-            Assert.AreEqual(1.2f, result[0]);
+            Assert.AreEqual(1.25f, result[0]);
             Assert.AreEqual(null, result[1]);
             Assert.AreEqual(3.0f, result[2]);
         });
@@ -162,7 +162,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Array_NullableFloatValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetNullableFloatValueClient().PutAsync(new List<float?> { 1.2f, null, 3.0f });
+            var response = await new ArrayClient(host, null).GetNullableFloatValueClient().PutAsync(new List<float?> { 1.25f, null, 3.0f });
             Assert.AreEqual(204, response.Status);
         });
     }

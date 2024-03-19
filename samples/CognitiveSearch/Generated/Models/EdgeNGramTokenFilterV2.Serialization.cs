@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -43,9 +44,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> minGram = default;
-            Optional<int> maxGram = default;
-            Optional<EdgeNGramTokenFilterSide> side = default;
+            int? minGram = default;
+            int? maxGram = default;
+            EdgeNGramTokenFilterSide? side = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -88,7 +89,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenFilterV2(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram), Optional.ToNullable(side));
+            return new EdgeNGramTokenFilterV2(odataType, name, minGram, maxGram, side);
         }
     }
 }

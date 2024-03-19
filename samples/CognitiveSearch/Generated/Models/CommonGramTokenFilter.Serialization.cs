@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -47,8 +48,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> commonWords = default;
-            Optional<bool> ignoreCase = default;
-            Optional<bool> queryMode = default;
+            bool? ignoreCase = default;
+            bool? queryMode = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -92,7 +93,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CommonGramTokenFilter(odataType, name, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode));
+            return new CommonGramTokenFilter(odataType, name, commonWords, ignoreCase, queryMode);
         }
     }
 }

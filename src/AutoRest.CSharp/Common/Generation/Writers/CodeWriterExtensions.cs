@@ -240,9 +240,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
-                foreach (var (argument, constraint) in constraints)
+                foreach (var constraint in constraints)
                 {
-                    writer.Append($"where {argument:I}: {constraint}");
+                    writer.WriteValueExpression(constraint);
+                    writer.AppendRaw(" ");
                 }
             }
 
@@ -326,6 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            writer.AppendRawIf("out ", clientParameter.IsOut);
             writer.AppendRawIf("ref ", clientParameter.IsRef);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
@@ -363,7 +365,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            var validationStatement = Snippets.Extensible.Argument.ValidateParameter(parameter);
+            var validationStatement = Snippets.Argument.ValidateParameter(parameter);
 
             writer.WriteMethodBodyStatement(validationStatement);
 
@@ -408,7 +410,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
-                            writer.Line($"Argument.AssertNull({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            using (writer.Scope($"if ({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]} is not null)"))
+                            {
+                                writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            }
                         }
                     }
                 }
@@ -486,7 +491,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression));
@@ -654,7 +659,8 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteMethod(this CodeWriter writer, Method method)
+        // TODO -- remove the writeEmptyLine optional flag here
+        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
         {
             if (method.Body is { } body)
             {
@@ -673,7 +679,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
+            // TODO -- temporary to minimize the code changes, will remove after the consolidation
+            if (writeEmptyLine)
+                writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
@@ -696,16 +704,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
                 .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
                 .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private))
+                .AppendRawIf("override ", modifiers.HasFlag(MethodSignatureModifiers.Override))
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            writer.Append($"{property.PropertyType} ");
+            if (property is IndexerDeclaration indexer)
+            {
+                writer.Append($"this[{indexer.IndexerParameter.Type} {indexer.IndexerParameter.Name}]");
+            }
+            else
+            {
+                if (property.ExplicitInterface is not null)
+                {
+                    writer.Append($"{property.ExplicitInterface}.");
+                }
+                writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            }
 
             switch (property.PropertyBody)
             {
                 case ExpressionPropertyBody(var expression):
                     writer.AppendRaw(" => ")
                         .WriteValueExpression(expression);
+                    writer.AppendRaw(";");
                     break;
                 case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
                     writer.AppendRaw("{ get; ");

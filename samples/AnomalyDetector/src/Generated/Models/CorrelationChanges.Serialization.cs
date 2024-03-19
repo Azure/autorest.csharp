@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -75,7 +76,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<string>> changedVariables = default;
+            IReadOnlyList<string> changedVariables = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +101,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CorrelationChanges(Optional.ToList(changedVariables), serializedAdditionalRawData);
+            return new CorrelationChanges(changedVariables ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CorrelationChanges>.Write(ModelReaderWriterOptions options)

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using PetStore;
 
 namespace PetStore.Models
 {
@@ -73,11 +74,11 @@ namespace PetStore.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "shark": return Shark.DeserializeShark(element);
-                    case "tuna": return Tuna.DeserializeTuna(element);
+                    case "shark": return Shark.DeserializeShark(element, options);
+                    case "tuna": return Tuna.DeserializeTuna(element, options);
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+            return UnknownFish.DeserializeUnknownFish(element, options);
         }
 
         BinaryData IPersistableModel<Fish>.Write(ModelReaderWriterOptions options)

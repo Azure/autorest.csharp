@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -73,13 +74,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "seagull": return SeaGull.DeserializeSeaGull(element);
-                    case "sparrow": return Sparrow.DeserializeSparrow(element);
-                    case "goose": return Goose.DeserializeGoose(element);
-                    case "eagle": return Eagle.DeserializeEagle(element);
+                    case "eagle": return Eagle.DeserializeEagle(element, options);
+                    case "goose": return Goose.DeserializeGoose(element, options);
+                    case "seagull": return SeaGull.DeserializeSeaGull(element, options);
+                    case "sparrow": return Sparrow.DeserializeSparrow(element, options);
                 }
             }
-            return UnknownBird.DeserializeUnknownBird(element);
+            return UnknownBird.DeserializeUnknownBird(element, options);
         }
 
         BinaryData IPersistableModel<Bird>.Write(ModelReaderWriterOptions options)

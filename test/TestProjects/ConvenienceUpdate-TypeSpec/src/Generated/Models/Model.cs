@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using ConvenienceInCadl;
 
 namespace ConvenienceInCadl.Models
 {

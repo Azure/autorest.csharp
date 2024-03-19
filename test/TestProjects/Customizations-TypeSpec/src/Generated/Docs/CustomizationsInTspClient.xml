@@ -5,14 +5,16 @@
       <example>
 This sample shows how to call RoundTripAsync.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RootModel input = new RootModel();
 Response<RootModel> response = await client.RoundTripAsync(input);
 ]]></code>
 This sample shows how to call RoundTripAsync with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RootModel input = new RootModel
 {
@@ -22,19 +24,33 @@ RootModel input = new RootModel
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+    1234,
+    1234,
+    1234,
+    (int)123.45F,
+    XmlConvert.ToTimeSpan("<propertyToMakeDuration>"),
+    "PT1H23M45S",
+    default,
+    "<propertyToField>",
+    new string[] { "<badListName>" },
+    new Dictionary<string, string>
     {
         ["key"] = "<badDictionaryName>"
-    }, new IList<string>[]
+    },
+    new IList<string>[]
     {
         new string[]{"<badListOfListName>"}
-    }, new IDictionary<string, string>[]
+    },
+    new IDictionary<string, string>[]
     {
         new Dictionary<string, string>
         {
             ["key"] = "<badListOfDictionaryName>"
         }
-    }, new float[] { 123.45F }, new float[] { 123.45F })
+    },
+    new float[] { 123.45F },
+    new float[] { 123.45F })
     {
         VectorOptional = new float[] { 123.45F },
         VectorOptionalNullable = new float[] { 123.45F },
@@ -56,14 +72,16 @@ Response<RootModel> response = await client.RoundTripAsync(input);
       <example>
 This sample shows how to call RoundTrip.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RootModel input = new RootModel();
 Response<RootModel> response = client.RoundTrip(input);
 ]]></code>
 This sample shows how to call RoundTrip with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RootModel input = new RootModel
 {
@@ -73,19 +91,33 @@ RootModel input = new RootModel
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+    1234,
+    1234,
+    1234,
+    (int)123.45F,
+    XmlConvert.ToTimeSpan("<propertyToMakeDuration>"),
+    "PT1H23M45S",
+    default,
+    "<propertyToField>",
+    new string[] { "<badListName>" },
+    new Dictionary<string, string>
     {
         ["key"] = "<badDictionaryName>"
-    }, new IList<string>[]
+    },
+    new IList<string>[]
     {
         new string[]{"<badListOfListName>"}
-    }, new IDictionary<string, string>[]
+    },
+    new IDictionary<string, string>[]
     {
         new Dictionary<string, string>
         {
             ["key"] = "<badListOfDictionaryName>"
         }
-    }, new float[] { 123.45F }, new float[] { 123.45F })
+    },
+    new float[] { 123.45F },
+    new float[] { 123.45F })
     {
         VectorOptional = new float[] { 123.45F },
         VectorOptionalNullable = new float[] { 123.45F },
@@ -107,7 +139,8 @@ Response<RootModel> response = client.RoundTrip(input);
       <example>
 This sample shows how to call RoundTripAsync and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RoundTripAsync(content);
@@ -117,7 +150,8 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTripAsync with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -245,7 +279,8 @@ Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optiona
       <example>
 This sample shows how to call RoundTrip and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.RoundTrip(content);
@@ -255,7 +290,8 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTrip with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -383,14 +419,16 @@ Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optiona
       <example>
 This sample shows how to call FooAsync.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel input = new RenamedModel(1234);
 Response<RenamedModel> response = await client.FooAsync(input);
 ]]></code>
 This sample shows how to call FooAsync with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel input = new RenamedModel(1234)
 {
@@ -403,14 +441,16 @@ Response<RenamedModel> response = await client.FooAsync(input);
       <example>
 This sample shows how to call Foo.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel input = new RenamedModel(1234);
 Response<RenamedModel> response = client.Foo(input);
 ]]></code>
 This sample shows how to call Foo with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel input = new RenamedModel(1234)
 {
@@ -423,7 +463,8 @@ Response<RenamedModel> response = client.Foo(input);
       <example>
 This sample shows how to call FooAsync and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -436,7 +477,8 @@ Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call FooAsync with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -454,7 +496,8 @@ Console.WriteLine(result.GetProperty("optionalInt").ToString());
       <example>
 This sample shows how to call Foo and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -467,7 +510,8 @@ Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Foo with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -485,14 +529,16 @@ Console.WriteLine(result.GetProperty("optionalInt").ToString());
       <example>
 This sample shows how to call BarAsync.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel renamedModel = new RenamedModel(1234);
 Response<RenamedModel> response = await client.BarAsync(renamedModel);
 ]]></code>
 This sample shows how to call BarAsync with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel renamedModel = new RenamedModel(1234)
 {
@@ -505,14 +551,16 @@ Response<RenamedModel> response = await client.BarAsync(renamedModel);
       <example>
 This sample shows how to call Bar.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel renamedModel = new RenamedModel(1234);
 Response<RenamedModel> response = client.Bar(renamedModel);
 ]]></code>
 This sample shows how to call Bar with all parameters.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 RenamedModel renamedModel = new RenamedModel(1234)
 {
@@ -525,7 +573,8 @@ Response<RenamedModel> response = client.Bar(renamedModel);
       <example>
 This sample shows how to call BarAsync and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -538,7 +587,8 @@ Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call BarAsync with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -556,7 +606,8 @@ Console.WriteLine(result.GetProperty("optionalInt").ToString());
       <example>
 This sample shows how to call Bar and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -569,7 +620,8 @@ Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Bar with all request content and parse the result.
 <code><![CDATA[
-CustomizationsInTspClient client = new CustomizationsInTspClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {

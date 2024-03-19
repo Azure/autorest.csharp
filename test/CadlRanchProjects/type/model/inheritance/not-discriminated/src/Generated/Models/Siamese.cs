@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Type.Model.Inheritance.NotDiscriminated;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {

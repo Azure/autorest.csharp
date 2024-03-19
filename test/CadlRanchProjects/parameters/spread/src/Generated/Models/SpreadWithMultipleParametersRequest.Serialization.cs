@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Parameters.Spread;
 
 namespace Parameters.Spread.Models
 {
@@ -123,7 +124,14 @@ namespace Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6, serializedAdditionalRawData);
+            return new SpreadWithMultipleParametersRequest(
+                prop1,
+                prop2,
+                prop3,
+                prop4,
+                prop5,
+                prop6,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)

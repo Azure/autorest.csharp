@@ -48,13 +48,19 @@ export async function typeSpecCompile(
     const needAzureCore = options?.IsAzureCoreNeeded ?? false;
     const needTCGC = options?.IsTCGCNeeded ?? false;
     const namespace = `
+    @versioned(Versions)
     @useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
     @service({
       title: "Azure Csharp emitter Testing",
-      version: "2023-01-01-preview",
     })
-    ${needAzureCore ? "@useDependency(Azure.Core.Versions.v1_0_Preview_1)" : ""}
+
     namespace Azure.Csharp.Testing;
+
+    enum Versions {
+    ${needAzureCore ? "@useDependency(Azure.Core.Versions.v1_0_Preview_1)" : ""}
+    "2023-01-01-preview"
+    }
+    
     `;
     const fileContent = `
     import "@typespec/rest";

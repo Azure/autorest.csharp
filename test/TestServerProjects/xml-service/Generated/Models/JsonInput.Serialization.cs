@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -69,7 +70,7 @@ namespace xml_service.Models
             {
                 return null;
             }
-            Optional<int> id = default;
+            int? id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace xml_service.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new JsonInput(Optional.ToNullable(id), serializedAdditionalRawData);
+            return new JsonInput(id, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<JsonInput>.Write(ModelReaderWriterOptions options)

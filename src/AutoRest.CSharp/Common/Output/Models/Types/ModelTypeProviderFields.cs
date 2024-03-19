@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -15,7 +14,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualBasic.FileIO;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -176,8 +174,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return ValidationType.None;
             }
 
-            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            // or it is readonly
+            if (inputModelProperty.IsReadOnly)
             {
                 return ValidationType.None;
             }
@@ -188,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return ValidationType.None;
             }
 
-            // or it it nullable
+            // or it is nullable
             if (field.Type.IsNullable)
             {
                 return ValidationType.None;

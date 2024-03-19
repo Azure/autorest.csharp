@@ -8,20 +8,21 @@ using Azure.Core;
 namespace Lro {
     /** Operation status */
     @lroStatus
-    enum OperationStatus {
+    union OperationStatus {
+        string,
         /** Background operation created but not started yet. */
-        NotStarted,
+        NotStarted: "NotStarted",
 
         /** Background operation is currently running. */
-        Running,
+        Running: "Running",
 
         /** Background operation finished with success. */
         @lroSucceeded
-        Succeeded,
+        Succeeded: "Succeeded",
 
         /** Background operation finished with failure. */
         @lroFailed
-        Failed,
+        Failed: "Failed",
     }
 
     model PollingOperationStatus {

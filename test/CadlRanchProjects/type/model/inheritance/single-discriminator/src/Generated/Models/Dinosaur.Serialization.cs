@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -73,10 +74,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "t-rex": return TRex.DeserializeTRex(element);
+                    case "t-rex": return TRex.DeserializeTRex(element, options);
                 }
             }
-            return UnknownDinosaur.DeserializeUnknownDinosaur(element);
+            return UnknownDinosaur.DeserializeUnknownDinosaur(element, options);
         }
 
         BinaryData IPersistableModel<Dinosaur>.Write(ModelReaderWriterOptions options)

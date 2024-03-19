@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -63,17 +64,17 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<IReadOnlyList<SubResource>> loadBalancingRules = default;
-            Optional<ProbeProtocol> protocol = default;
-            Optional<int> port = default;
-            Optional<int> intervalInSeconds = default;
-            Optional<int> numberOfProbes = default;
-            Optional<string> requestPath = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            IReadOnlyList<SubResource> loadBalancingRules = default;
+            ProbeProtocol? protocol = default;
+            int? port = default;
+            int? intervalInSeconds = default;
+            int? numberOfProbes = default;
+            string requestPath = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -173,7 +174,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+            return new Probe(
+                id,
+                name,
+                etag,
+                type,
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                protocol,
+                port,
+                intervalInSeconds,
+                numberOfProbes,
+                requestPath,
+                provisioningState);
         }
     }
 }

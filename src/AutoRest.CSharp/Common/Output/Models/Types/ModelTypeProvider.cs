@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -16,6 +17,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -38,7 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
-        public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
@@ -53,6 +54,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : null;
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => _inputModel.Usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -235,8 +238,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        customSerializationMethodName: serializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: serializationMapping?.DeserializationValueHook,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook),
                         enumerableExpression: enumerableExpression);
                 }
             }
@@ -483,8 +488,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, null);
         }
+
+        protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
@@ -551,6 +558,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
+            foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))
+            {
+                yield return method;
+            }
+
             if (IncludeDeserializer)
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
             if (IncludeSerializer)
@@ -605,7 +617,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedModels
+                    .Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child)))
+                    .OrderBy(i => i.Key)
+                    .ToArray();
                 // find the discriminator corresponding property in this type or its base type or more
                 property = GetPropertyForDiscriminator(discriminatorPropertyName);
             }

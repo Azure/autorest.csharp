@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AuthoringTypeSpec;
 using Azure;
 using Azure.Core;
 
@@ -140,7 +141,7 @@ namespace AuthoringTypeSpec.Models
                     List<JobWarning> array = new List<JobWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JobWarning.DeserializeJobWarning(item));
+                        array.Add(JobWarning.DeserializeJobWarning(item, options));
                     }
                     warnings = array;
                     continue;
@@ -161,7 +162,16 @@ namespace AuthoringTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
+            return new SwapDeploymentsJob(
+                jobId,
+                createdDateTime,
+                lastUpdatedDateTime,
+                expirationDateTime,
+                status,
+                warnings,
+                errors,
+                id,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SwapDeploymentsJob>.Write(ModelReaderWriterOptions options)

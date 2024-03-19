@@ -112,10 +112,11 @@ op CustomResourceList<
 // model LedgerUserRole is string {};
 
 @doc("User roles")
-enum LedgerUserRoleKV {
-  Administrator,
-  Contributor,
-  Reader,
+union LedgerUserRoleKV {
+  string,
+  Administrator: "Administrator",
+  Contributor: "Contributor",
+  Reader: "Reader",
 }
 
 // @resource("users")
@@ -217,16 +218,17 @@ model TextBlockItem {
 }
 
 @doc("The interval")
-enum Interval {
+union Interval {
+  string,
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
-  PT5S,
+  PT5S: "PT5S",
   @doc("10 seconds, available only if test run duration is less than 10 minutes")
-  PT10S,
-  @doc("1 minute") PT1M,
+  PT10S: "PT10S",
+  @doc("1 minute") PT1M: "PT1M",
   @doc("5 minutes, available only if test run duration is greater than 1 minute")
-  PT5M,
+  PT5M: "PT5M",
   @doc("1 hour, available only if test run duration is greater than 1 minute")
-  PT1H,
+  PT1H: "PT1H",
 }
 
 model MetricDimensions {

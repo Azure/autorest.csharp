@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -57,9 +58,9 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ConditionalSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs);
+            return new ConditionalSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs);
         }
     }
 }

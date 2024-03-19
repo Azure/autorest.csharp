@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -74,7 +75,7 @@ namespace _Type.Property.ValueTypes.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = InnerModel.DeserializeInnerModel(property0.Value);
+                    property = InnerModel.DeserializeInnerModel(property0.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

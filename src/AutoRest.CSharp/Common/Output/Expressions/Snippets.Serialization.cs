@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression WireFormat = Literal("W");
             public static StringExpression JsonFormat = Literal("J");
             public static StringExpression XmlFormat = Literal("X");
+            public static StringExpression BicepFormat = Literal("bicep");
 
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
             public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression? format, MethodBodyStatement statement)
@@ -77,16 +78,16 @@ namespace AutoRest.CSharp.Common.Output.Models
                 };
             }
 
-            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression? options, CSharpType iModelTInterface)
+            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression? options, CSharpType? iModelTInterface)
                 => ValidateFormat(options, JsonFormat, iModelTInterface).ToArray();
 
-            public static MethodBodyStatement ValidateXmlFormat(ModelReaderWriterOptionsExpression? options, CSharpType iModelTInterface)
+            public static MethodBodyStatement ValidateXmlFormat(ModelReaderWriterOptionsExpression? options, CSharpType? iModelTInterface)
                 => ValidateFormat(options, XmlFormat, iModelTInterface).ToArray();
 
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression? options, ValueExpression formatValue, CSharpType iModelTInterface)
+            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression? options, ValueExpression formatValue, CSharpType? iModelTInterface)
             {
-                if (options == null)
+                if (options == null || iModelTInterface == null)
                     yield break; // if options expression is null, we skip outputting the following statements
                 /*
                     var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;

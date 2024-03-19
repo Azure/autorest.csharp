@@ -401,7 +401,7 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/multi", false);
-            if (colors != null && Optional.IsCollectionDefined(colors))
+            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in colors)
                 {
@@ -421,7 +421,7 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/ssv", false);
-            if (colors != null && Optional.IsCollectionDefined(colors))
+            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("colors", colors, " ", true);
             }
@@ -438,7 +438,7 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/tsv", false);
-            if (colors != null && Optional.IsCollectionDefined(colors))
+            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("colors", colors, "\t", true);
             }
@@ -455,7 +455,7 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/pipes", false);
-            if (colors != null && Optional.IsCollectionDefined(colors))
+            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("colors", colors, "|", true);
             }
@@ -472,7 +472,7 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/csv", false);
-            if (colors != null && Optional.IsCollectionDefined(colors))
+            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("colors", colors, ",", true);
             }

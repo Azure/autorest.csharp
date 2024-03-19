@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -86,7 +87,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     data = array;
                     continue;

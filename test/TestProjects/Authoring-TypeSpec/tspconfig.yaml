@@ -1,4 +1,5 @@
 options:
   "@azure-tools/typespec-csharp":
+    flavor: "azure"
     generate-convenience-methods: false
     keep-non-overloadable-protocol-signature: true

@@ -1,15 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
@@ -18,6 +19,8 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
     {
+        private const int SingleLineParameterThreshold = 6;
+
         public static void WriteMethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)
@@ -123,7 +126,30 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethodBodyStatement(writer, foreachStatement.Body.AsStatement());
                         writer.LineRaw("}");
                     }
-
+                    break;
+                case ForStatement forStatement:
+                    using (writer.AmbientScope())
+                    {
+                        writer.AppendRaw("for (");
+                        writer.WriteValueExpression(
+                            new AssignmentExpression(
+                                forStatement.IndexerVariable,
+                                new ConstantExpression(new Constant(0, typeof(int)))));
+                        writer.AppendRaw("; ");
+                        writer.WriteValueExpression(
+                            new BoolExpression(
+                                new BinaryOperatorExpression(
+                                    "<",
+                                    forStatement.IndexerVariable,
+                                    forStatement.Enumerable.Property("Length"))));
+                        writer.AppendRaw("; ");
+                        writer.WriteValueExpression(new UnaryOperatorExpression("++", forStatement.IndexerVariable, true));
+                        writer.LineRaw(")");
+                        writer.LineRaw("{");
+                        writer.LineRaw("");
+                        WriteMethodBodyStatement(writer, forStatement.Body.AsStatement());
+                        writer.LineRaw("}");
+                    }
                     break;
                 case UsingScopeStatement usingStatement:
                     using (writer.AmbientScope())
@@ -207,6 +233,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
                     break;
 
+                case ThrowStatement throwStatement:
+                    writer.WriteValueExpression(throwStatement.ThrowExpression);
+                    writer.LineRaw(";");
+                    break;
+
                 case MethodBodyStatements(var statements):
                     foreach (var statement in statements)
                     {
@@ -225,27 +256,33 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" ??= ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareLocalFunctionStatement localFunction:
                     writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
@@ -255,15 +292,26 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.RemoveTrailingComma();
-                    writer.AppendRaw(") => ");
-                    writer.WriteValueExpression(localFunction.Body);
+                    writer.AppendRaw(")");
+                    if (localFunction.BodyExpression is not null)
+                    {
+                        writer.AppendRaw(" => ");
+                        writer.WriteValueExpression(localFunction.BodyExpression);
+                        writer.LineRaw(";");
+                    }
+                    else
+                    {
+                        using (writer.Scope())
+                        {
+                            writer.WriteMethodBodyStatement(localFunction.BodyStatement!);
+                        }
+                    }
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
                     writer.WriteValueExpression(unaryOperatorStatement.Expression);
+                    writer.LineRaw(";");
                     break;
             }
-
-            writer.LineRaw(";");
         }
 
         public static void WriteValueExpression(this CodeWriter writer, ValueExpression expression)
@@ -464,17 +512,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case ObjectInitializerExpression(var properties, var isInline):
-                    if (properties is not { Count: > 0 })
+                case ObjectInitializerExpression(var parameters, var useSingleLine):
+                    if (parameters is not { Count: > 0 })
                     {
                         writer.AppendRaw("{}");
                         break;
                     }
 
-                    if (isInline)
+                    if (useSingleLine)
                     {
                         writer.AppendRaw("{");
-                        foreach (var (name, value) in properties)
+                        foreach (var (name, value) in parameters)
                         {
                             writer.Append($"{name} = ");
                             writer.WriteValueExpression(value);
@@ -488,7 +536,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.Line();
                         writer.LineRaw("{");
-                        foreach (var (name, value) in properties)
+                        foreach (var (name, value) in parameters)
                         {
                             writer.Append($"{name} = ");
                             writer.WriteValueExpression(value);
@@ -501,16 +549,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case NewInstanceExpression(var type, var arguments, var properties):
+                case NewInstanceExpression(var type, var parameters, var initExpression):
                     writer.Append($"new {type}");
-                    if (arguments.Count > 0 || properties is not { Properties.Count: > 0 })
+                    if (parameters.Count > 0 || initExpression is not { Parameters.Count: > 0 })
                     {
-                        WriteArguments(writer, arguments);
+                        WriteArguments(writer, parameters, parameters.Count < SingleLineParameterThreshold);
                     }
 
-                    if (properties is { Properties.Count: > 0 })
+                    if (initExpression is { Parameters.Count: > 0 })
                     {
-                        writer.WriteValueExpression(properties);
+                        writer.WriteValueExpression(initExpression);
                     }
                     break;
 
@@ -615,6 +663,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
                     break;
+                case WhereExpression(var type, var constraints):
+                    writer.AppendRaw("where ")
+                        .Append($"{type} : ");
+                    foreach (var constraint in constraints)
+                    {
+                        writer.WriteValueExpression(constraint);
+                        writer.AppendRaw(",");
+                    }
+                    writer.RemoveTrailingComma();
+                    break;
                 case StringLiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");
                     break;
@@ -651,19 +709,39 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRawIf("out ", isOut);
                     writer.Append($"{variable.Type} {variable.Declaration:D}");
                     break;
+                case AssignmentExpression(var variable, var value):
+                    writer.Append($"{variable.Type} {variable.Declaration:D} = {value}");
+                    break;
             }
 
-            static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments)
+            static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments, bool useSingleLine = true)
             {
-                writer.AppendRaw("(");
-                foreach (var argument in arguments)
+                if (useSingleLine)
                 {
-                    writer.WriteValueExpression(argument);
-                    writer.AppendRaw(", ");
-                }
+                    writer.AppendRaw("(");
+                    foreach (var argument in arguments)
+                    {
+                        writer.WriteValueExpression(argument);
+                        writer.AppendRaw(", ");
+                    }
 
-                writer.RemoveTrailingComma();
-                writer.AppendRaw(")");
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(")");
+                }
+                else
+                {
+                    writer.LineRaw("(");
+                    foreach (var argument in arguments)
+                    {
+                        writer.AppendRaw("\t");
+                        writer.WriteValueExpression(argument);
+                        writer.LineRaw(",");
+                    }
+
+                    writer.RemoveTrailingCharacter();
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(")");
+                }
             }
 
             static void WriteTypeArguments(CodeWriter writer, IEnumerable<CSharpType>? typeArguments)

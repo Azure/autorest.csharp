@@ -134,12 +134,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 {
                     "Expression" => nameof(DataFactoryElement<string>.FromExpression),
                     "SecureString" => nameof(DataFactoryElement<string>.FromSecretString),
-                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecretReference),
+                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecret),
                     _ => throw new InvalidOperationException("Unknown DataFactoryElement type: " + dfeType)
                 };
 
                 writer.Append($"{type: L}.{createMethodName}(");
-                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecretReference));
+                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecret));
                 writer.AppendRaw(")");
             }
             else

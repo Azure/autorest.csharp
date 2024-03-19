@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
@@ -46,8 +45,8 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public OpenAIClient(Uri endpoint, KeyCredential credential, OpenAIClientOptions options)
         {
-            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
-            ClientUtilities.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new OpenAIClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);

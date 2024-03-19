@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -73,7 +74,7 @@ namespace Pagination.Models
                 return null;
             }
             string blocklistName = default;
-            Optional<string> description = default;
+            string description = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +95,7 @@ namespace Pagination.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TextBlocklist(blocklistName, description.Value, serializedAdditionalRawData);
+            return new TextBlocklist(blocklistName, description, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<TextBlocklist>.Write(ModelReaderWriterOptions options)

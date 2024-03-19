@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -71,11 +72,11 @@ namespace ModelsTypeSpec.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "first": return FirstDerivedOutputModel.DeserializeFirstDerivedOutputModel(element);
-                    case "second": return SecondDerivedOutputModel.DeserializeSecondDerivedOutputModel(element);
+                    case "first": return FirstDerivedOutputModel.DeserializeFirstDerivedOutputModel(element, options);
+                    case "second": return SecondDerivedOutputModel.DeserializeSecondDerivedOutputModel(element, options);
                 }
             }
-            return UnknownOutputBaseModelWithDiscriminator.DeserializeUnknownOutputBaseModelWithDiscriminator(element);
+            return UnknownOutputBaseModelWithDiscriminator.DeserializeUnknownOutputBaseModelWithDiscriminator(element, options);
         }
 
         BinaryData IPersistableModel<OutputBaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)

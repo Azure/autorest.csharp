@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -70,10 +71,10 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "derived": return IsUnknownAdditionalPropertiesDiscriminatedDerived.DeserializeIsUnknownAdditionalPropertiesDiscriminatedDerived(element);
+                    case "derived": return IsUnknownAdditionalPropertiesDiscriminatedDerived.DeserializeIsUnknownAdditionalPropertiesDiscriminatedDerived(element, options);
                 }
             }
-            return UnknownIsUnknownAdditionalPropertiesDiscriminated.DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(element);
+            return UnknownIsUnknownAdditionalPropertiesDiscriminated.DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(element, options);
         }
 
         BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDiscriminated>.Write(ModelReaderWriterOptions options)

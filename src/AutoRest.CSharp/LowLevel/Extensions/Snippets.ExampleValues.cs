@@ -142,6 +142,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             }
 
             if (frameworkType == typeof(char) ||
+                frameworkType == typeof(sbyte) ||
+                frameworkType == typeof(byte) ||
                 frameworkType == typeof(short) ||
                 frameworkType == typeof(int) ||
                 frameworkType == typeof(long) ||
@@ -149,7 +151,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 frameworkType == typeof(double) ||
                 frameworkType == typeof(decimal))
             {
-                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or int or long or float or double or decimal)
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or byte or sbyte or int or long or float or double or decimal)
                 {
                     if (frameworkType == rawValue.RawValue.GetType())
                         return Literal(rawValue.RawValue);

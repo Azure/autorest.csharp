@@ -24,25 +24,67 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.UseNamespace(@using);
             }
 
-            using (_writer.Namespace(_provider.Declaration.Namespace))
+            if (_provider.DeclaringTypeProvider == null)
             {
-                _writer.Append($"{_provider.Declaration.Accessibility} partial class {_provider.Type:D}")
-                    .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
-                    .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
-
-                foreach (var implement in _provider.Implements)
+                using (_writer.Namespace(_provider.Declaration.Namespace))
                 {
-                    _writer.Append($"{implement:D},");
-                }
-                _writer.RemoveTrailingComma();
-
-                using (_writer.Scope())
-                {
-                    WriteConstructors();
-
-                    WriteMethods();
+                    WriteType();
                 }
             }
+            else
+            {
+                WriteType();
+            }
+        }
+
+        private void WriteType()
+        {
+            _writer.WriteClassModifiers(_provider.DeclarationModifiers);
+            _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
+                .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
+                .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
+
+            foreach (var implement in _provider.Implements)
+            {
+                _writer.Append($"{implement:D},");
+            }
+            _writer.RemoveTrailingComma();
+
+            if (_provider.WhereClause is not null)
+            {
+                _writer.WriteValueExpression(_provider.WhereClause);
+            }
+
+            using (_writer.Scope())
+            {
+                WriteFields();
+
+                WriteConstructors();
+
+                WriteProperties();
+
+                WriteMethods();
+
+                WriteNestedTypes();
+            }
+        }
+
+        protected virtual void WriteProperties()
+        {
+            foreach (var property in _provider.Properties)
+            {
+                _writer.WriteProperty(property);
+                _writer.Line();
+            }
+        }
+
+        protected virtual void WriteFields()
+        {
+            foreach (var field in _provider.Fields)
+            {
+                _writer.WriteField(field, declareInCurrentScope: true);
+            }
+            _writer.Line();
         }
 
         protected virtual void WriteConstructors()
@@ -58,6 +100,18 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var method in _provider.Methods)
             {
                 _writer.WriteMethod(method);
+            }
+
+            _writer.Line();
+        }
+
+        protected virtual void WriteNestedTypes()
+        {
+            foreach (var nested in _provider.NestedTypes)
+            {
+                var nestedWriter = new ExpressionTypeProviderWriter(_writer, nested);
+                nestedWriter.Write();
+                _writer.Line();
             }
         }
     }

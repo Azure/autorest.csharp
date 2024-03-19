@@ -51,11 +51,15 @@ namespace AutoRest.CSharp.Generation.Types
             // here we ensure the framework type is always the open generic type, aka List<>, not List<int> or List<string> with concrete generic arguments
             type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
-            ValidateArguments(type, arguments);
-            _type = type;
+            _type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
+
+            ValidateArguments(_type, arguments);
 
             Namespace = type.Namespace;
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
+            // open generic parameter such as the `T` in `List<T>` is considered as declared inside the `List<T>` type as well, but we just want this to be the pure nested type, therefore here we exclude the open generic parameter scenario
+            // for a closed generic parameter such as the `string` in `List<string>`, it is just an ordinary type without a `DeclaringType`.
+            DeclaringType = type.DeclaringType is not null && !type.IsGenericParameter ? new CSharpType(type.DeclaringType) : null;
             IsNullable = isNullable;
             Arguments = arguments;
             IsValueType = type.IsValueType;
@@ -95,12 +99,15 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsGenericTypeDefinition)
             {
-                Debug.Assert(arguments.Count > 0, "arguments can be added only to the generic type definition.");
                 Debug.Assert(arguments.Count == type.GetGenericArguments().Length, $"the count of arguments given ({string.Join(", ", arguments.Select(a => a.ToString()))}) does not match the arguments in the definition {type}");
+            }
+            else
+            {
+                Debug.Assert(arguments.Count == 0, "arguments can be added only to the generic type definition.");
             }
         }
 
-        public CSharpType(TypeProvider implementation, bool isNullable = false)
+        public CSharpType(TypeProvider implementation, IReadOnlyList<CSharpType>? arguments = null, bool isNullable = false)
         {
             _implementation = implementation;
             Namespace = implementation.Declaration.Namespace;
@@ -108,13 +115,14 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = implementation.IsValueType;
             IsEnum = implementation.IsEnum;
             IsNullable = isNullable;
-            Arguments = Array.Empty<CSharpType>(); // currently we do not have generic TypeProviders
+            Arguments = arguments ?? Array.Empty<CSharpType>();
             SerializeAs = _implementation?.SerializeAs;
             IsPublic = implementation.Declaration.Accessibility == "public" && Arguments.All(t => t.IsPublic);
         }
 
         public virtual string Namespace { get; }
         public virtual string Name { get; }
+        public CSharpType? DeclaringType { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
         public bool IsLiteral => Literal is not null;
@@ -224,7 +232,7 @@ namespace AutoRest.CSharp.Generation.Types
         public virtual CSharpType WithNullable(bool isNullable) => // make it virtual to ensure this is mockable
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
-                : new CSharpType(Implementation, isNullable);
+                : new CSharpType(Implementation, Arguments, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 
@@ -239,6 +247,8 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 null => null,
                 var t when t.IsGenericParameter => t.Name,
+                //if we have an array type and the element is defined in the same assembly then its a generic param array.
+                var t when t.IsArray && t.Assembly.Equals(GetType().Assembly) => t.Name,
                 var t when t == typeof(bool) => "bool",
                 var t when t == typeof(byte) => "byte",
                 var t when t == typeof(sbyte) => "sbyte",
@@ -349,6 +359,18 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return true;
+        }
+
+        public CSharpType MakeGenericType(IReadOnlyList<CSharpType> arguments)
+        {
+            if (IsFrameworkType)
+            {
+                return new CSharpType(FrameworkType, IsNullable, arguments);
+            }
+            else
+            {
+                return new CSharpType(Implementation, arguments, IsNullable);
+            }
         }
     }
 }

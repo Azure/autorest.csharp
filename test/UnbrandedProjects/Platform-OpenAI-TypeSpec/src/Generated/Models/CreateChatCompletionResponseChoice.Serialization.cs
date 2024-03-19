@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -81,7 +82,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("message"u8))
                 {
-                    message = ChatCompletionResponseMessage.DeserializeChatCompletionResponseMessage(property.Value);
+                    message = ChatCompletionResponseMessage.DeserializeChatCompletionResponseMessage(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -20,7 +21,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             double searchScore = default;
-            Optional<IReadOnlyDictionary<string, IList<string>>> searchHighlights = default;
+            IReadOnlyDictionary<string, IList<string>> searchHighlights = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -59,7 +60,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SearchResult(searchScore, Optional.ToDictionary(searchHighlights), additionalProperties);
+            return new SearchResult(searchScore, searchHighlights ?? new ChangeTrackingDictionary<string, IList<string>>(), additionalProperties);
         }
     }
 }

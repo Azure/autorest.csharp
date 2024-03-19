@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -77,15 +78,15 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            int level = default;
-            Optional<IReadOnlyList<ThereLevelExtension>> extension = default;
+            sbyte level = default;
+            IReadOnlyList<ThereLevelExtension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (property.NameEquals("extension"u8))
@@ -97,7 +98,7 @@ namespace FirstTestTypeSpec.Models
                     List<ThereLevelExtension> array = new List<ThereLevelExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeThereLevelExtension(item));
+                        array.Add(DeserializeThereLevelExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -108,7 +109,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ThereLevelExtension(Optional.ToList(extension), serializedAdditionalRawData, level);
+            return new ThereLevelExtension(extension ?? new ChangeTrackingList<ThereLevelExtension>(), serializedAdditionalRawData, level);
         }
 
         BinaryData IPersistableModel<ThereLevelExtension>.Write(ModelReaderWriterOptions options)

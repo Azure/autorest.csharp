@@ -46,10 +46,10 @@ namespace AutoRest.CSharp.Output.Models
             _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
         {
-            _typeFactory = context.TypeFactory;
-            _library = context.BaseLibrary;
+            _typeFactory = typeFactory;
+            _library = library;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
             var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), kvp.Key.SerializationFormat))
+                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);

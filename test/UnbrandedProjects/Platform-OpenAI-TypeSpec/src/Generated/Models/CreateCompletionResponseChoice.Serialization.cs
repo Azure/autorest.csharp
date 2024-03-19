@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -101,7 +102,7 @@ namespace OpenAI.Models
                         logprobs = null;
                         continue;
                     }
-                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value);
+                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))

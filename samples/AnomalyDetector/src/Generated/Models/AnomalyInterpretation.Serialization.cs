@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -80,9 +81,9 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<string> variable = default;
-            Optional<float> contributionScore = default;
-            Optional<CorrelationChanges> correlationChanges = default;
+            string variable = default;
+            float? contributionScore = default;
+            CorrelationChanges correlationChanges = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -107,7 +108,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
+                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -116,7 +117,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value, serializedAdditionalRawData);
+            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AnomalyInterpretation>.Write(ModelReaderWriterOptions options)

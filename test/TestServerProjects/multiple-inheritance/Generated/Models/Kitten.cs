@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {

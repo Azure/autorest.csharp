@@ -52,7 +52,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual async Task<Result<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
+            Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = createChatCompletionRequest.ToRequestBody();
@@ -65,7 +65,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual Result<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
+            Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = createChatCompletionRequest.ToRequestBody();
@@ -95,7 +95,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("ChatCompletions.Create");
             scope.Start();
@@ -133,7 +133,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("ChatCompletions.Create");
             scope.Start();

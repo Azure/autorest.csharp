@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,
@@ -66,9 +67,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
-                branded: true,
+                flavor: "azure",
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
 

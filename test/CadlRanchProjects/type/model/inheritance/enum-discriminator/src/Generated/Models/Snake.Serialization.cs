@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.EnumDiscriminator;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
@@ -73,10 +74,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cobra": return Cobra.DeserializeCobra(element);
+                    case "cobra": return Cobra.DeserializeCobra(element, options);
                 }
             }
-            return UnknownSnake.DeserializeUnknownSnake(element);
+            return UnknownSnake.DeserializeUnknownSnake(element, options);
         }
 
         BinaryData IPersistableModel<Snake>.Write(ModelReaderWriterOptions options)

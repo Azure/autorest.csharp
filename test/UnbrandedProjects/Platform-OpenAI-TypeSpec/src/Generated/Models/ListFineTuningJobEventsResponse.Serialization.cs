@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -86,7 +87,7 @@ namespace OpenAI.Models
                     List<FineTuningJobEvent> array = new List<FineTuningJobEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuningJobEvent.DeserializeFineTuningJobEvent(item));
+                        array.Add(FineTuningJobEvent.DeserializeFineTuningJobEvent(item, options));
                     }
                     data = array;
                     continue;

@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -159,7 +160,19 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateModerationResponseResultCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData);
+            return new CreateModerationResponseResultCategoryScores(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateModerationResponseResultCategoryScores>.Write(ModelReaderWriterOptions options)

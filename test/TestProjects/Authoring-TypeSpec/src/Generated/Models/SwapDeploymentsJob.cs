@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AuthoringTypeSpec;
 using Azure;
-using Azure.Core;
 
 namespace AuthoringTypeSpec.Models
 {

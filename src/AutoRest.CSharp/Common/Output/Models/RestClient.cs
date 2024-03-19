@@ -5,19 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class RestClient : TypeProvider
     {
-        private readonly CachedDictionary<InputOperation, RestClientMethod> _requestMethods;
-        private readonly CachedDictionary<InputOperation, RestClientMethod> _nextPageRequestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _requestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
         private ConstructorSignature? _constructor;
 
@@ -26,22 +24,18 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
-        public string ClientPrefix { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "internal";
 
-        protected RestClient(InputClient inputClient, BuildContext context, string? clientName, IReadOnlyList<Parameter> parameters) : base(context)
+        protected RestClient(InputClient inputClient, string restClientName, IReadOnlyList<Parameter> parameters, SourceInputModel? sourceInputModel) : base(Configuration.Namespace, sourceInputModel)
         {
             InputClient = inputClient;
 
-            _requestMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureNormalMethods);
-            _nextPageRequestMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
-
-            var clientPrefix = ClientBuilder.GetClientPrefix(clientName ?? inputClient.Name, context);
-            ClientPrefix = clientPrefix;
-            DefaultName = clientPrefix + "Rest" + ClientBuilder.GetClientSuffix();
+            DefaultName = restClientName;
         }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
@@ -96,11 +90,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(InputOperation request)
         {
-            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
+            _nextPageRequestMethods.Value.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(InputOperation request)
-            => _requestMethods[request];
+            => _requestMethods.Value[request];
     }
 }

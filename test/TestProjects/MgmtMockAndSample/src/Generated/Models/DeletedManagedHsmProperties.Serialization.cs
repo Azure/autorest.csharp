@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -20,12 +21,12 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> mhsmId = default;
-            Optional<AzureLocation> location = default;
-            Optional<DateTimeOffset> deletionDate = default;
-            Optional<DateTimeOffset> scheduledPurgeDate = default;
-            Optional<bool> purgeProtectionEnabled = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            string mhsmId = default;
+            AzureLocation? location = default;
+            DateTimeOffset? deletionDate = default;
+            DateTimeOffset? scheduledPurgeDate = default;
+            bool? purgeProtectionEnabled = default;
+            IReadOnlyDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mhsmId"u8))
@@ -84,7 +85,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags));
+            return new DeletedManagedHsmProperties(
+                mhsmId,
+                location,
+                deletionDate,
+                scheduledPurgeDate,
+                purgeProtectionEnabled,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

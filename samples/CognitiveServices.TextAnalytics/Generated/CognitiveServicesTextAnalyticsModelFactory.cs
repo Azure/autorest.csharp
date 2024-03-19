@@ -52,7 +52,13 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <returns> A new <see cref="Models.Entity"/> instance for mocking. </returns>
         public static Entity Entity(string text = null, string category = null, string subcategory = null, int offset = default, int length = default, double confidenceScore = default)
         {
-            return new Entity(text, category, subcategory, offset, length, confidenceScore);
+            return new Entity(
+                text,
+                category,
+                subcategory,
+                offset,
+                length,
+                confidenceScore);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextAnalyticsWarning"/>. </summary>
@@ -172,7 +178,13 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             matches ??= new List<Match>();
 
-            return new LinkedEntity(name, matches?.ToList(), language, id, url, dataSource);
+            return new LinkedEntity(
+                name,
+                matches?.ToList(),
+                language,
+                id,
+                url,
+                dataSource);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Match"/>. </summary>
@@ -294,7 +306,13 @@ namespace CognitiveServices.TextAnalytics.Models
             sentences ??= new List<SentenceSentiment>();
             warnings ??= new List<TextAnalyticsWarning>();
 
-            return new DocumentSentiment(id, sentiment, statistics, confidenceScores, sentences?.ToList(), warnings?.ToList());
+            return new DocumentSentiment(
+                id,
+                sentiment,
+                statistics,
+                confidenceScores,
+                sentences?.ToList(),
+                warnings?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SentimentConfidenceScorePerLabel"/>. </summary>

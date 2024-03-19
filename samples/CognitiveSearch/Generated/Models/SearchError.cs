@@ -5,9 +5,8 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -16,11 +15,8 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="SearchError"/>. </summary>
         /// <param name="message"> A human-readable representation of the error. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal SearchError(string message)
         {
-            Argument.AssertNotNull(message, nameof(message));
-
             Message = message;
             Details = new ChangeTrackingList<SearchError>();
         }

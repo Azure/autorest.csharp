@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using PetStore;
 
 namespace PetStore.Models
 {
@@ -75,7 +76,7 @@ namespace PetStore.Models
                 return null;
             }
             string name = default;
-            Optional<string> tag = default;
+            string tag = default;
             int age = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -102,7 +103,7 @@ namespace PetStore.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Pet(name, tag.Value, age, serializedAdditionalRawData);
+            return new Pet(name, tag, age, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Pet>.Write(ModelReaderWriterOptions options)

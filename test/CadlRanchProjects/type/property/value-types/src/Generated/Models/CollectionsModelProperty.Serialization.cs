@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -82,7 +83,7 @@ namespace _Type.Property.ValueTypes.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(InnerModel.DeserializeInnerModel(item));
+                        array.Add(InnerModel.DeserializeInnerModel(item, options));
                     }
                     property = array;
                     continue;

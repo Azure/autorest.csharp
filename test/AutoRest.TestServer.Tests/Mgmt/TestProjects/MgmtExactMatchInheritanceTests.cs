@@ -107,6 +107,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(DataFactoryElement<DateTimeOffset>), typeof(ExactMatchModel1Data).GetProperty("Type14").PropertyType);
             Assert.AreEqual(typeof(DataFactoryElement<TimeSpan>), typeof(ExactMatchModel1Data).GetProperty("Type15").PropertyType);
             Assert.AreEqual(typeof(DataFactoryElement<Uri>), typeof(ExactMatchModel1Data).GetProperty("Type16").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryLinkedServiceReference), typeof(ExactMatchModel1Data).GetProperty("Type17").PropertyType);
+            Assert.AreEqual(typeof(DataFactorySecretString), typeof(ExactMatchModel1Data).GetProperty("Type18").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryKeyVaultSecret), typeof(ExactMatchModel1Data).GetProperty("Type19").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IDictionary<string, BinaryData>>), typeof(ExactMatchModel1Data).GetProperty("Type20").PropertyType);
             Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
 

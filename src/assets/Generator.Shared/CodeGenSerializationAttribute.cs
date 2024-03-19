@@ -30,6 +30,12 @@ namespace Azure.Core
         /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
         /// </summary>
         public string? DeserializationValueHook { get; set; }
+        /// <summary>
+        /// Gets or sets the method name to use when serializing the property value (property name excluded)
+        /// The signature of the serialization hook method must be or compatible with when invoking:
+        /// private void SerializeHook(StringBuilder builder);
+        /// </summary>
+        public string? BicepSerializationValueHook { get; set; }
 
         public CodeGenSerializationAttribute(string propertyName)
         {

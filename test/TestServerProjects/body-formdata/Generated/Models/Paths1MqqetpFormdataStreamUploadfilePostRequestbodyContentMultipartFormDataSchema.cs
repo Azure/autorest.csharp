@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Azure.Core;
+using body_formdata;
 
 namespace body_formdata.Models
 {

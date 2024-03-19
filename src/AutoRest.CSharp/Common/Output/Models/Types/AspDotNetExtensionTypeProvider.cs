@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -15,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Extensions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -83,9 +83,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     }
 
                     FormattableString summary = $"Registers a {client.Type:C} instance";
-                    var constrait = includeCredential
-                        ? (FormattableString)$"{typeof(IAzureClientFactoryBuilderWithCredential)}"
-                        : $"{typeof(IAzureClientFactoryBuilder)}";
+                    var constraint = includeCredential
+                        ? Where.Implements(TBuilderType, typeof(IAzureClientFactoryBuilderWithCredential))
+                        : Where.Implements(TBuilderType, typeof(IAzureClientFactoryBuilder));
                     var signature = new MethodSignature(
                         $"Add{client.Declaration.Name}",
                         summary,
@@ -95,10 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         null,
                         signatureParameters,
                         GenericArguments: new[] { TBuilderType },
-                        GenericParameterConstraints: new Dictionary<CSharpType, FormattableString>()
-                        {
-                            [TBuilderType] = constrait
-                        });
+                        GenericParameterConstraints: new[] { constraint });
                     result.Add(signature, (parameterDeclarations, parameterValues));
                 }
             }
@@ -125,9 +122,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     null,
                     new[] { FactoryBuilderParameter, ConfigurationParameter },
                     GenericArguments: new[] { TBuilderType, TConfigurationType },
-                    GenericParameterConstraints: new Dictionary<CSharpType, FormattableString>()
+                    GenericParameterConstraints: new[]
                     {
-                        [TBuilderType] = $"{typeof(IAzureClientFactoryBuilderWithConfiguration<>)}"
+                        Where.Implements(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
                     });
             }
         }

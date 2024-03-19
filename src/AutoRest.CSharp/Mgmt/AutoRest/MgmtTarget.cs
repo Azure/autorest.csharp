@@ -19,6 +19,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
+using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -76,6 +77,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
             }
 
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
+            }
+
             foreach (var model in MgmtContext.Library.Models)
             {
                 var name = model.Type.Name;
@@ -99,7 +107,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var schema = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
+                    var schema = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
                     var choices = schema switch
                     {
                         ChoiceSchema sc => sc.Choices,
@@ -170,7 +178,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 });
                 MgmtReport.Instance.ModelSection.Add(mi.FullName, mi);
 
-                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
+                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"{name}.Serialization.cs");
             }
 
             foreach (var resource in MgmtContext.Library.ArmResources)
@@ -183,6 +191,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
+
+            var wirePathWriter = new WirePathWriter();
+            wirePathWriter.Write();
+            AddGeneratedFile(project, $"Internal/WirePathAttribute.cs", wirePathWriter.ToString());
 
             // write extension class
             WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);

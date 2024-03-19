@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -48,7 +48,7 @@ namespace UnbrandedTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Friend(string name)
         {
-            ClientUtilities.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

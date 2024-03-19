@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -192,27 +193,10 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
-            return confidentLevel switch
+            return new()
             {
-                ConvenienceMethodConfidenceLevel.Confident => new()
-                {
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = false
-                },
-                ConvenienceMethodConfidenceLevel.Internal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.NotConfident,
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = true
-                },
-                ConvenienceMethodConfidenceLevel.Removal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.AnonymousModel,
-                    IsConvenienceMethodGenerated = false
-                },
-                _ => throw new InvalidOperationException($"unhandled case {confidentLevel} for operation {Operation}")
+                IsConvenienceMethodGenerated = true,
+                IsConvenienceMethodInternal = false
             };
         }
 
@@ -480,7 +464,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? operationParameter.SerializationFormat
+                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
                             : requestConditionSerializationFormat;
 
                         break;
@@ -627,7 +611,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
-            AddReference(name, inputParameter, protocolMethodParameter, inputParameter.SerializationFormat);
+            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;

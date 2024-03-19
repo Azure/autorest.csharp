@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using NoTestTypeSpec;
 
 namespace NoTestTypeSpec.Models
 {
@@ -42,29 +43,29 @@ namespace NoTestTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (OptionalProperty.IsDefined(OptionalLiteralString))
+            if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralInt))
+            if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralFloat))
+            if (Optional.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralBool))
+            if (Optional.IsDefined(OptionalLiteralBool))
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (OptionalProperty.IsCollectionDefined(OptionalNullableList))
+            if (Optional.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -81,7 +82,7 @@ namespace NoTestTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && OptionalProperty.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -139,12 +140,12 @@ namespace NoTestTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            OptionalProperty<ThingOptionalLiteralString> optionalLiteralString = default;
-            OptionalProperty<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            OptionalProperty<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            OptionalProperty<bool> optionalLiteralBool = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
-            OptionalProperty<IReadOnlyList<int>> optionalNullableList = default;
+            IReadOnlyList<int> optionalNullableList = default;
             IReadOnlyList<int> requiredNullableList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -257,7 +258,21 @@ namespace NoTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
+            return new Thing(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
+                requiredBadDescription,
+                optionalNullableList ?? new ChangeTrackingList<int>(),
+                requiredNullableList,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)

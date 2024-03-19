@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -58,7 +59,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownBird(document.RootElement, options);
+            return DeserializeBird(document.RootElement, options);
         }
 
         internal static UnknownBird DeserializeUnknownBird(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +117,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownBird(document.RootElement, options);
+                        return DeserializeBird(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Bird)} does not support '{options.Format}' format.");

@@ -149,7 +149,14 @@ namespace Azure.AI.FormRecognizer.Models
         {
             lines ??= new List<TextLine>();
 
-            return new ReadResult(page, angle, width, height, unit, language, lines?.ToList());
+            return new ReadResult(
+                page,
+                angle,
+                width,
+                height,
+                unit,
+                language,
+                lines?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TextLine"/>. </summary>
@@ -245,7 +252,17 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter);
+            return new DataTableCell(
+                rowIndex,
+                columnIndex,
+                rowSpan,
+                columnSpan,
+                text,
+                boundingBox?.ToList(),
+                confidence,
+                elements?.ToList(),
+                isHeader,
+                isFooter);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DocumentResult"/>. </summary>
@@ -284,7 +301,21 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page);
+            return new FieldValue(
+                type,
+                valueString,
+                valueDate,
+                valueTime,
+                valuePhoneNumber,
+                valueNumber,
+                valueInteger,
+                valueArray?.ToList(),
+                valueObject,
+                text,
+                boundingBox?.ToList(),
+                confidence,
+                elements?.ToList(),
+                page);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.CopyOperationResult"/>. </summary>

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.Recursive;
 
 namespace _Type.Model.Inheritance.Recursive.Models
 {
@@ -75,7 +76,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Extension>> extension = default;
+            IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.Extension.DeserializeExtension(item));
+                        array.Add(Models.Extension.DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -100,7 +101,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Element(Optional.ToList(extension), serializedAdditionalRawData);
+            return new Element(extension ?? new ChangeTrackingList<Extension>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Element>.Write(ModelReaderWriterOptions options)

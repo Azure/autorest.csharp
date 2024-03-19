@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -16,6 +17,8 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -29,6 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
+        private readonly OutputLibrary? _library;
         private readonly SchemaTypeUsage _usage;
 
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
@@ -36,18 +40,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        private BuildContext _context;
-
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : base(context)
+        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
-            _context = context;
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
             ObjectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
+            _typeFactory = typeFactory;
+            _library = library;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
@@ -113,6 +115,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage) _usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -319,7 +323,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType && property.SchemaProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -374,7 +378,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        private JsonConverterProvider? _jsonConverter;
+        public override JsonConverterProvider? JsonConverter
+            => _jsonConverter ??= _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -459,7 +465,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
                 _typeFactory.CreateType(implementation.Value, false)
-            )).ToArray();
+            )).OrderBy(i => i.Key).ToArray();
         }
 
         private HashSet<string?> GetParentPropertySerializedNames()
@@ -722,9 +728,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
         }
 
+        protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
+        {
+            if (json == null)
+                return null;
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization &&
+                   usage.HasFlag(InputModelTypeUsage.Output)
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
+        }
+
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
+        }
+
+        protected override IEnumerable<Method> BuildMethods()
+        {
+            foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))
+            {
+                yield return method;
+            }
         }
 
         private SerializableObjectType? BuildDefaultDerivedType()
@@ -733,14 +760,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            if (_context.BaseLibrary is null)
+            if (_library is null)
                 return null;
 
             var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
             if (defaultDerivedSchema is null)
                 return null;
 
-            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
+            return _library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

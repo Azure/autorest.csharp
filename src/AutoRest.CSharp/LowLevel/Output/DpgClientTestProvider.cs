@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.LowLevel.Output
     {
         public DpgClientTestProvider(string defaultNamespace, string defaultName, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
+            DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
             DefaultName = defaultName;
             _client = client;
         }
@@ -32,8 +33,6 @@ namespace AutoRest.CSharp.LowLevel.Output
         public bool IsEmpty => !Methods.Any();
 
         protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility => "public";
 
         protected abstract CSharpAttribute[] GetMethodAttributes();
 

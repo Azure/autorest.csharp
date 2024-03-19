@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -97,14 +98,14 @@ namespace OpenAI.Models
                     List<CreateEditResponseChoice> array = new List<CreateEditResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateEditResponseChoice.DeserializeCreateEditResponseChoice(item));
+                        array.Add(CreateEditResponseChoice.DeserializeCreateEditResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
                 }
                 if (property.NameEquals("usage"u8))
                 {
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

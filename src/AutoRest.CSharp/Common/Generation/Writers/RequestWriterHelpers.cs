@@ -4,10 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -16,6 +18,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -457,23 +460,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 return default;
 
             var type = value.Type;
+            string valueStr = GetValueExpression(writer, value);
+            ValueExpression valueExpression = new FormattableStringToExpression($"{valueStr}");
+            CodeWriterDeclaration changeTrackingList = new CodeWriterDeclaration("changeTrackingList");
             if (checkUndefinedCollection && type.IsCollection)
             {
                 writer.Append($"if (");
 
-                WriteValueExpression(writer, value);
+                writer.WriteValueExpression(valueExpression);
 
-                writer.Append($" != null && {Configuration.ApiTypes.OptionalType}.{Configuration.ApiTypes.OptionalIsCollectionDefinedName}(");
+                writer.Append($" != null && !(");
+                writer.WriteValueExpression(valueExpression);
+                writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
-                WriteValueExpression(writer, value);
-
-                return writer.LineRaw("))").Scope();
+                return writer.LineRaw(")").Scope();
             }
             else if (type.IsNullable)
             {
                 writer.Append($"if (");
 
-                WriteValueExpression(writer, value);
+                writer.WriteValueExpression(valueExpression);
 
                 return writer.Line($" != null)").Scope();
             }
@@ -481,20 +487,30 @@ namespace AutoRest.CSharp.Generation.Writers
             return default;
         }
 
-        private static void WriteValueExpression(CodeWriter writer, ReferenceOrConstant value)
+        private static string GetValueExpression(CodeWriter writer, ReferenceOrConstant value)
         {
             // turn "object.Property" into "object?.Property"
+            StringBuilder builder = new StringBuilder();
             var parts = value.Reference.Name.Split(".");
             bool first = true;
             foreach (var part in parts)
             {
                 if (first)
+                {
                     first = false;
+                }
                 else
-                    writer.AppendRaw("?.");
+                {
+                    builder.Append("?.");
+                }
 
-                writer.Identifier(part);
+                if (StringExtensions.IsCSharpKeyword(part))
+                {
+                    builder.Append("@");
+                }
+                builder.Append(part);
             }
+            return builder.ToString();
         }
     }
 }

@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -59,11 +59,11 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt)
         {
-            ClientUtilities.AssertNotNull(prompt, nameof(prompt));
+            Argument.AssertNotNull(prompt, nameof(prompt));
 
             Model = model;
             Prompt = prompt;
-            LogitBias = new OptionalDictionary<string, long>();
+            LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>

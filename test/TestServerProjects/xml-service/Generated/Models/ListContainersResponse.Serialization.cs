@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -91,7 +92,14 @@ namespace xml_service.Models
                 }
                 containers = array;
             }
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker, serializedAdditionalRawData: null);
+            return new ListContainersResponse(
+                serviceEndpoint,
+                prefix,
+                marker,
+                maxResults,
+                containers,
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ListContainersResponse>.Write(ModelReaderWriterOptions options)

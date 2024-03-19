@@ -139,7 +139,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public virtual async Task<Result<OpenAIFile>> CreateAsync(CreateFileRequest file, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(file, nameof(file));
+            Argument.AssertNotNull(file, nameof(file));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = file.ToRequestBody();
@@ -153,7 +153,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public virtual Result<OpenAIFile> Create(CreateFileRequest file, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(file, nameof(file));
+            Argument.AssertNotNull(file, nameof(file));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = file.ToRequestBody();
@@ -183,7 +183,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Create");
             scope.Start();
@@ -221,7 +221,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Create");
             scope.Start();
@@ -244,7 +244,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<OpenAIFile>> RetrieveAsync(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await RetrieveAsync(fileId, context).ConfigureAwait(false);
@@ -258,7 +258,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<OpenAIFile> Retrieve(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Retrieve(fileId, context);
@@ -288,7 +288,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Retrieve");
             scope.Start();
@@ -327,7 +327,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Retrieve");
             scope.Start();
@@ -350,7 +350,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<DeleteFileResponse>> DeleteAsync(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await DeleteAsync(fileId, context).ConfigureAwait(false);
@@ -364,7 +364,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<DeleteFileResponse> Delete(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Delete(fileId, context);
@@ -394,7 +394,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> DeleteAsync(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Delete");
             scope.Start();
@@ -433,7 +433,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Delete(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Delete");
             scope.Start();
@@ -456,7 +456,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<string>> DownloadAsync(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await DownloadAsync(fileId, context).ConfigureAwait(false);
@@ -470,7 +470,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<string> Download(string fileId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Download(fileId, context);
@@ -500,7 +500,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> DownloadAsync(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Download");
             scope.Start();
@@ -539,7 +539,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Download(string fileId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
+            Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             using var scope = ClientDiagnostics.CreateSpan("Files.Download");
             scope.Start();

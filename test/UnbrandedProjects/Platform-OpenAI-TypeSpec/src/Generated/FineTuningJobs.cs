@@ -60,7 +60,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual async Task<Result<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(job, nameof(job));
+            Argument.AssertNotNull(job, nameof(job));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = job.ToRequestBody();
@@ -81,7 +81,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual Result<FineTuningJob> Create(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(job, nameof(job));
+            Argument.AssertNotNull(job, nameof(job));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = job.ToRequestBody();
@@ -116,7 +116,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
             scope.Start();
@@ -159,7 +159,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
             scope.Start();
@@ -278,7 +278,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<FineTuningJob>> RetrieveAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await RetrieveAsync(fineTuningJobId, context).ConfigureAwait(false);
@@ -296,7 +296,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<FineTuningJob> Retrieve(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Retrieve(fineTuningJobId, context);
@@ -328,7 +328,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
             scope.Start();
@@ -369,7 +369,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
             scope.Start();
@@ -392,9 +392,9 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await GetEventsAsync(fineTuningJobId, after, limit, context).ConfigureAwait(false);
@@ -408,9 +408,9 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
+        public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = GetEvents(fineTuningJobId, after, limit, context);
@@ -427,7 +427,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEventsAsync(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEventsAsync(string,string,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -440,9 +440,9 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
             scope.Start();
@@ -468,7 +468,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEvents(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEvents(string,string,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -481,9 +481,9 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result GetEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        public virtual Result GetEvents(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
             scope.Start();
@@ -506,7 +506,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<FineTuningJob>> CancelAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await CancelAsync(fineTuningJobId, context).ConfigureAwait(false);
@@ -520,7 +520,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<FineTuningJob> Cancel(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Cancel(fineTuningJobId, context);
@@ -550,7 +550,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CancelAsync(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
             scope.Start();
@@ -589,7 +589,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Cancel(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
             scope.Start();
@@ -655,7 +655,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;

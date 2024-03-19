@@ -1,11 +1,10 @@
 {
   "output-folder": ".",
-  "namespace": "Authentication.Http.Custom",
-  "library-name": "Authentication.Http.Custom",
+  "namespace": "Scm.Authentication.Http.Custom",
+  "library-name": "Scm.Authentication.Http.Custom",
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
   ],
-  "branded": false,
   "use-model-reader-writer": true
 }

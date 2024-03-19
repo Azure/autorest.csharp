@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -67,7 +68,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 List<ModelForRecord> array = new List<ModelForRecord>();
                 foreach (var item in property.Value.EnumerateArray())
                 {
-                    array.Add(ModelForRecord.DeserializeModelForRecord(item));
+                    array.Add(ModelForRecord.DeserializeModelForRecord(item, options));
                 }
                 additionalPropertiesDictionary.Add(property.Name, array);
             }

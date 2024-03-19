@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {
@@ -77,7 +78,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<BinaryData> property = default;
+            BinaryData property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -97,7 +98,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnionFloatLiteralProperty(property.Value, serializedAdditionalRawData);
+            return new UnionFloatLiteralProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnionFloatLiteralProperty>.Write(ModelReaderWriterOptions options)

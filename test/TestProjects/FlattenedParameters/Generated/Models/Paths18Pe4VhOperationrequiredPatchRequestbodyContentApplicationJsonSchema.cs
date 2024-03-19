@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using FlattenedParameters;
 
 namespace FlattenedParameters.Models
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using AutoRest.TestServer.Tests.Infrastructure;
+﻿using System.Reflection;
 using constants;
 using constants.Models;
 using NUnit.Framework;

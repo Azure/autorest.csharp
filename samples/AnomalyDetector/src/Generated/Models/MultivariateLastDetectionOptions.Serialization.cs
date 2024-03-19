@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -85,7 +86,7 @@ namespace AnomalyDetector.Models
                     List<VariableValues> array = new List<VariableValues>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableValues.DeserializeVariableValues(item));
+                        array.Add(VariableValues.DeserializeVariableValues(item, options));
                     }
                     variables = array;
                     continue;

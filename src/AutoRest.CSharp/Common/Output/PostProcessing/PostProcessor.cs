@@ -70,7 +70,7 @@ internal class PostProcessor
                     var symbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
                     if (symbol == null)
                         continue;
-                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
+                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public && !document.Name.StartsWith("Internal/", StringComparison.Ordinal))
                         continue;
 
                     // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -19,9 +19,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> code = default;
+            string code = default;
             string message = default;
-            Optional<IReadOnlyList<SearchServiceError>> details = default;
+            IReadOnlyList<SearchServiceError> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchServiceError(code.Value, message, Optional.ToList(details));
+            return new SearchServiceError(code, message, details ?? new ChangeTrackingList<SearchServiceError>());
         }
     }
 }

@@ -11,8 +11,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     public partial class RadiologyInsightsInferenceResult : IUtf8JsonSerializable, IJsonModel<RadiologyInsightsInferenceResult>
     {

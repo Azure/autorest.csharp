@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -177,7 +178,18 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
+            return new RoundTripPrimitiveModel(
+                serializedAdditionalRawData,
+                requiredString,
+                requiredInt,
+                requiredInt64,
+                requiredSafeInt,
+                requiredFloat,
+                requiredDouble,
+                requiredBoolean,
+                requiredDateTimeOffset,
+                requiredTimeSpan,
+                requiredCollectionWithNullableFloatElement);
         }
 
         BinaryData IPersistableModel<RoundTripPrimitiveModel>.Write(ModelReaderWriterOptions options)

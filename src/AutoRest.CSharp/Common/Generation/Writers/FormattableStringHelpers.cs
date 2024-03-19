@@ -9,6 +9,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -18,6 +20,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static System.Net.Mime.MediaTypeNames;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -134,12 +137,29 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (parameter.Type.IsReadWriteDictionary)
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                var dictionary = (ValueExpression)parameter;
+                var expression = RequestContentHelperProvider.Instance.FromDictionary(dictionary);
+                if (parameter.IsOptionalInSignature)
+                {
+                    expression = new TernaryConditionalOperator(NotEqual(dictionary, Null), expression, Null);
+                }
+                return $"{expression}";
             }
 
             if (parameter.Type.IsList)
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                var enumerable = (ValueExpression)parameter;
+                var expression = RequestContentHelperProvider.Instance.FromEnumerable(enumerable);
+                if (parameter.IsOptionalInSignature)
+                {
+                    expression = new TernaryConditionalOperator(NotEqual(enumerable, Null), expression, Null);
+                }
+                return $"{expression}";
+            }
+
+            if (parameter.Type.IsFrameworkType == true && parameter.Type.FrameworkType == typeof(AzureLocation))
+            {
+                return $"{RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString())}";
             }
 
             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
@@ -153,14 +173,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{parameter.Name:I}";
             }
 
-            return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+            return $"{RequestContentHelperProvider.Instance.FromObject(parameter)}";
         }
 
         // TODO: This is a temporary solution. We will move this part to some common place.
         // This logic is a twist from https://github.com/Azure/autorest/blob/faf5c1168232ba8a1e8fe02fbc28667c00db8c96/packages/libs/codegen/src/media-types.ts#L53
         public static BodyMediaType ToMediaType(string contentType)
         {
-            string pattern = @"(application|audio|font|example|image|message|model|multipart|text|video|x-(?:[0-9A-Za-z!#$%&'*+.^_`|~-]+))\/([0-9A-Za-z!#$%&'*.^_`|~-]+)\s*(?:\+([0-9A-Za-z!#$%&'*.^_`|~-]+))?\s*(?:;.\s*(\S*))?";
+            const string pattern = @"(application|audio|font|example|image|message|model|multipart|text|video|x-(?:[0-9A-Za-z!#$%&'*+.^_`|~-]+))\/([0-9A-Za-z!#$%&'*.^_`|~-]+)\s*(?:\+([0-9A-Za-z!#$%&'*.^_`|~-]+))?\s*(?:;.\s*(\S*))?";
 
             var matches = Regex.Matches(contentType, pattern);
             if (matches.Count == 0)

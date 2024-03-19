@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,9 +51,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/> or <paramref name="results"/> is null. </exception>
         internal CreateModerationResponse(string id, string model, IEnumerable<CreateModerationResponseResult> results)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(results, nameof(results));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(results, nameof(results));
 
             Id = id;
             Model = model;

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -74,8 +75,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<bool> fieldTrue = default;
-            Optional<bool> fieldFalse = default;
+            bool? fieldTrue = default;
+            bool? fieldFalse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +105,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BooleanWrapper(Optional.ToNullable(fieldTrue), Optional.ToNullable(fieldFalse), serializedAdditionalRawData);
+            return new BooleanWrapper(fieldTrue, fieldFalse, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BooleanWrapper>.Write(ModelReaderWriterOptions options)

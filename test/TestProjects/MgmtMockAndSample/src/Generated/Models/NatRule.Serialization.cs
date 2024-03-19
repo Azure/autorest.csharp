@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -102,16 +103,16 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyRuleNetworkProtocol>> ipProtocols = default;
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<string>> destinationPorts = default;
-            Optional<string> translatedAddress = default;
-            Optional<string> translatedPort = default;
-            Optional<IList<string>> sourceIpGroups = default;
-            Optional<string> translatedFqdn = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            IList<FirewallPolicyRuleNetworkProtocol> ipProtocols = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<string> destinationPorts = default;
+            string translatedAddress = default;
+            string translatedPort = default;
+            IList<string> sourceIpGroups = default;
+            string translatedFqdn = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -216,7 +217,18 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NatRule(name.Value, description.Value, ruleType, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), translatedAddress.Value, translatedPort.Value, Optional.ToList(sourceIpGroups), translatedFqdn.Value);
+            return new NatRule(
+                name,
+                description,
+                ruleType,
+                ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                translatedAddress,
+                translatedPort,
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                translatedFqdn);
         }
     }
 }

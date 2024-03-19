@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -83,7 +84,7 @@ namespace SpreadTypeSpec.Models
                 return null;
             }
             IList<string> requiredStringList = default;
-            Optional<IList<string>> optionalStringList = default;
+            IList<string> optionalStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -118,7 +119,7 @@ namespace SpreadTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadAliasWithCollectionsRequest(requiredStringList, Optional.ToList(optionalStringList), serializedAdditionalRawData);
+            return new SpreadAliasWithCollectionsRequest(requiredStringList, optionalStringList ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadAliasWithCollectionsRequest>.Write(ModelReaderWriterOptions options)

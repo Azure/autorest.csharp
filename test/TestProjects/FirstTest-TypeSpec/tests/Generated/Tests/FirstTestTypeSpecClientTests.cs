@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -587,7 +588,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -599,7 +600,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -610,7 +611,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -622,7 +623,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -723,7 +724,7 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveExtensionAsync(content);
         }
@@ -736,7 +737,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -750,7 +751,7 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -767,7 +768,7 @@ null
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -809,7 +810,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -830,7 +831,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
@@ -849,10 +850,10 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
         }
@@ -865,9 +866,9 @@ level = 1234,
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -886,10 +887,10 @@ new BaseModel(1234)
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
         }
@@ -902,9 +903,9 @@ level = 1234,
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -1053,6 +1054,108 @@ new BaseModel(1234)
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
             Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = null;
+            Response response = await client.OptionalDictionaryAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.OptionalDictionaryAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = await client.OptionalDictionaryAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = null;
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.AzureLocationOpAsync(default, default);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
     }
 }

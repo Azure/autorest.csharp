@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -94,11 +95,11 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> breed = default;
-            Optional<string> color = default;
-            Optional<IList<Dog>> hates = default;
-            Optional<int> id = default;
-            Optional<string> name = default;
+            string breed = default;
+            string color = default;
+            IList<Dog> hates = default;
+            int? id = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -122,7 +123,7 @@ namespace body_complex.Models
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Dog.DeserializeDog(item));
+                        array.Add(Dog.DeserializeDog(item, options));
                     }
                     hates = array;
                     continue;
@@ -147,7 +148,13 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, Optional.ToList(hates), breed.Value);
+            return new Siamese(
+                id,
+                name,
+                serializedAdditionalRawData,
+                color,
+                hates ?? new ChangeTrackingList<Dog>(),
+                breed);
         }
 
         BinaryData IPersistableModel<Siamese>.Write(ModelReaderWriterOptions options)

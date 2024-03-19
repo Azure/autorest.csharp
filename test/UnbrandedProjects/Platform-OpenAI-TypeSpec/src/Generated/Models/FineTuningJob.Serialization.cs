@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -199,7 +200,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("hyperparameters"u8))
                 {
-                    hyperparameters = FineTuningJobHyperparameters.DeserializeFineTuningJobHyperparameters(property.Value);
+                    hyperparameters = FineTuningJobHyperparameters.DeserializeFineTuningJobHyperparameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("training_file"u8))
@@ -244,7 +245,7 @@ namespace OpenAI.Models
                         error = null;
                         continue;
                     }
-                    error = FineTuningJobError.DeserializeFineTuningJobError(property.Value);
+                    error = FineTuningJobError.DeserializeFineTuningJobError(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -253,7 +254,22 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles, trainedTokens, error, serializedAdditionalRawData);
+            return new FineTuningJob(
+                id,
+                @object,
+                createdAt,
+                finishedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparameters,
+                trainingFile,
+                validationFile,
+                resultFiles,
+                trainedTokens,
+                error,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJob>.Write(ModelReaderWriterOptions options)

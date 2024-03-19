@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -69,7 +70,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsCollectionDefined(Events))
+            if (Optional.IsCollectionDefined(Events))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();
@@ -129,7 +130,7 @@ namespace OpenAI.Models
             IReadOnlyList<OpenAIFile> trainingFiles = default;
             IReadOnlyList<OpenAIFile> validationFiles = default;
             IReadOnlyList<OpenAIFile> resultFiles = default;
-            OptionalProperty<IReadOnlyList<FineTuneEvent>> events = default;
+            IReadOnlyList<FineTuneEvent> events = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -181,7 +182,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("hyperparams"u8))
                 {
-                    hyperparams = FineTuneHyperparams.DeserializeFineTuneHyperparams(property.Value);
+                    hyperparams = FineTuneHyperparams.DeserializeFineTuneHyperparams(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("training_files"u8))
@@ -189,7 +190,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     trainingFiles = array;
                     continue;
@@ -199,7 +200,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     validationFiles = array;
                     continue;
@@ -209,7 +210,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     resultFiles = array;
                     continue;
@@ -223,7 +224,7 @@ namespace OpenAI.Models
                     List<FineTuneEvent> array = new List<FineTuneEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item, options));
                     }
                     events = array;
                     continue;
@@ -234,7 +235,21 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles, validationFiles, resultFiles, OptionalProperty.ToList(events), serializedAdditionalRawData);
+            return new FineTune(
+                id,
+                @object,
+                createdAt,
+                updatedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparams,
+                trainingFiles,
+                validationFiles,
+                resultFiles,
+                events ?? new ChangeTrackingList<FineTuneEvent>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTune>.Write(ModelReaderWriterOptions options)

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -78,8 +79,8 @@ namespace CustomizationsInTsp.Models
             options ??= new ModelReaderWriterOptions("W");
 
             int requiredInt = default;
-            Optional<int> optionalInt = default;
-            Optional<string> optionalString = default;
+            int? optionalInt = default;
+            string optionalString = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -109,7 +110,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelStruct(requiredInt, Optional.ToNullable(optionalInt), optionalString.Value, serializedAdditionalRawData);
+            return new ModelStruct(requiredInt, optionalInt, optionalString, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelStruct>.Write(ModelReaderWriterOptions options)

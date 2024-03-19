@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Azure.Lro.Standard;
 
 namespace _Azure.Lro.Standard.Models
 {

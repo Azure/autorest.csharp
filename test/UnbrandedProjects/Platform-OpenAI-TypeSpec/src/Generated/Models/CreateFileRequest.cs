@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -57,8 +57,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> or <paramref name="purpose"/> is null. </exception>
         public CreateFileRequest(BinaryData file, string purpose)
         {
-            ClientUtilities.AssertNotNull(file, nameof(file));
-            ClientUtilities.AssertNotNull(purpose, nameof(purpose));
+            Argument.AssertNotNull(file, nameof(file));
+            Argument.AssertNotNull(purpose, nameof(purpose));
 
             File = file;
             Purpose = purpose;

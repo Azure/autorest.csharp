@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -12,7 +14,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -55,6 +56,47 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     WriteObject(serialization, xmlWriter, nameHint, null).ToArray()
                 );
             }
+        }
+
+        public static SwitchCase BuildXmlWriteSwitchCase(XmlObjectSerialization xml, ModelReaderWriterOptionsExpression options)
+        {
+            /*  using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                ((IXmlSerializable)this).Write(writer, null);
+                writer.Flush();
+                // in the implementation of MemoryStream, `stream.Position` could never exceed `int.MaxValue`, therefore this if is redundant, we just need to keep the else branch
+                //if (stream.Position > int.MaxValue)
+                //{
+                //    return BinaryData.FromStream(stream);
+                //}
+                //else
+                //{
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                //}
+            */
+            return new SwitchCase(Serializations.XmlFormat,
+                new MethodBodyStatement[]
+                {
+                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
+                            UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
+                            new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
+                            xmlWriter.Invoke(nameof(XmlWriter.Flush)).ToStatement(),
+                            // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                            Return(New.Instance(typeof(BinaryData),
+                                InvokeStaticMethodExpression.Extension(
+                                    typeof(MemoryExtensions),
+                                    nameof(MemoryExtensions.AsMemory),
+                                    stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                                    new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                    )))
+                }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+        }
+
+        public static SwitchCase BuildXmlCreateSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        {
+            // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
+            return new SwitchCase(Serializations.XmlFormat,
+                    Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options)));
         }
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
@@ -196,7 +238,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             return xmlWriter.WriteValue(value, frameworkType, valueSerialization.Format);
-
         }
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)

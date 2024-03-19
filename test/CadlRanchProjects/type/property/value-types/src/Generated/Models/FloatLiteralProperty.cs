@@ -60,6 +60,6 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Property. </summary>
-        public FloatLiteralPropertyProperty Property { get; } = FloatLiteralPropertyProperty._4242;
+        public FloatLiteralPropertyProperty Property { get; } = FloatLiteralPropertyProperty._43125;
     }
 }

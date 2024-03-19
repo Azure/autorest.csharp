@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -55,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
+            return DeserializeIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
         }
 
         internal static UnknownIsUnknownAdditionalPropertiesDiscriminated DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(JsonElement element, ModelReaderWriterOptions options = null)
@@ -110,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
+                        return DeserializeIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{options.Format}' format.");

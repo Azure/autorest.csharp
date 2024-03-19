@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -56,7 +57,7 @@ namespace ModelsTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
+            return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         internal static UnknownOutputBaseModelWithDiscriminator DeserializeUnknownOutputBaseModelWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
@@ -108,7 +109,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, options);
+                        return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support '{options.Format}' format.");

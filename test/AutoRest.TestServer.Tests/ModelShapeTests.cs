@@ -267,9 +267,9 @@ namespace AutoRest.TestServer.Tests
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":null, \"RequiredNullableStringList\": null}").RootElement);
             Assert.IsNotNull(model.RequiredNullableIntList);
-            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableIntList));
+            Assert.IsFalse(!(model.RequiredNullableIntList is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined));
             Assert.IsNotNull(model.RequiredNullableStringList);
-            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableStringList));
+            Assert.IsFalse(!(model.RequiredNullableStringList is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined));
         }
 
         [Test]

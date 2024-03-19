@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -59,18 +60,18 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<SecurityRule>> securityRules = default;
-            Optional<IReadOnlyList<SecurityRule>> defaultSecurityRules = default;
-            Optional<IReadOnlyList<NetworkInterface>> networkInterfaces = default;
-            Optional<IReadOnlyList<Subnet>> subnets = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IList<SecurityRule> securityRules = default;
+            IReadOnlyList<SecurityRule> defaultSecurityRules = default;
+            IReadOnlyList<NetworkInterface> networkInterfaces = default;
+            IReadOnlyList<Subnet> subnets = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -195,7 +196,19 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkSecurityGroup(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(securityRules), Optional.ToList(defaultSecurityRules), Optional.ToList(networkInterfaces), Optional.ToList(subnets), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkSecurityGroup(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag,
+                securityRules ?? new ChangeTrackingList<SecurityRule>(),
+                defaultSecurityRules ?? new ChangeTrackingList<SecurityRule>(),
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                subnets ?? new ChangeTrackingList<Subnet>(),
+                resourceGuid,
+                provisioningState);
         }
     }
 }

@@ -8,6 +8,8 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -30,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
-        public CSharpType Type => new(this);
+        public CSharpType Type => new(this, TypeArguments);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         protected abstract string DefaultName { get; }
@@ -39,6 +41,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsValueType => TypeKind is TypeKind.Struct or TypeKind.Enum;
         public bool IsEnum { get; protected init; } = false;
+
+        private IReadOnlyList<CSharpType>? _typeArguments;
+        protected IReadOnlyList<CSharpType> TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
+
+        public TypeProvider? DeclaringTypeProvider { get; protected init; }
+
         public string? Deprecated => _deprecated;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
@@ -46,6 +54,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public virtual SignatureType? SignatureType => null;
 
         internal virtual Type? SerializeAs => null;
+
+        protected virtual IEnumerable<CSharpType> BuildTypeArguments()
+        {
+            yield break;
+        }
 
         private TypeDeclarationOptions BuildType()
         {

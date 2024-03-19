@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -74,7 +75,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             int index = default;
-            Optional<float> age = default;
+            float? age = default;
             string name = default;
             string kind = default;
             IDictionary<string, BinaryData> additionalProperties = default;
@@ -108,7 +109,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, Optional.ToNullable(age));
+            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, age);
         }
 
         BinaryData IPersistableModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(ModelReaderWriterOptions options)

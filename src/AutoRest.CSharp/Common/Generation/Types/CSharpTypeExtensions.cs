@@ -39,8 +39,8 @@ namespace AutoRest.CSharp.Generation.Types
             => type switch
             {
                 { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments),
-                { IsList: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments),
-                { IsDictionary: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments),
+                { IsList: true } => new CSharpType(ChangeTrackingListProvider.Instance, type.Arguments),
+                { IsDictionary: true } => new CSharpType(ChangeTrackingDictionaryProvider.Instance, type.Arguments),
                 _ => type
             };
 

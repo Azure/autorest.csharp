@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -84,7 +85,7 @@ namespace AnomalyDetector.Models
             bool isAnomaly = default;
             float severity = default;
             float score = default;
-            Optional<IReadOnlyList<AnomalyInterpretation>> interpretation = default;
+            IReadOnlyList<AnomalyInterpretation> interpretation = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -113,7 +114,7 @@ namespace AnomalyDetector.Models
                     List<AnomalyInterpretation> array = new List<AnomalyInterpretation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item));
+                        array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item, options));
                     }
                     interpretation = array;
                     continue;
@@ -124,7 +125,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnomalyValue(isAnomaly, severity, score, Optional.ToList(interpretation), serializedAdditionalRawData);
+            return new AnomalyValue(isAnomaly, severity, score, interpretation ?? new ChangeTrackingList<AnomalyInterpretation>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AnomalyValue>.Write(ModelReaderWriterOptions options)

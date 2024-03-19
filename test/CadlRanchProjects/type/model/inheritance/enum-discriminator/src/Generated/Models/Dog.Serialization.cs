@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.EnumDiscriminator;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
@@ -73,10 +74,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "golden": return Golden.DeserializeGolden(element);
+                    case "golden": return Golden.DeserializeGolden(element, options);
                 }
             }
-            return UnknownDog.DeserializeUnknownDog(element);
+            return UnknownDog.DeserializeUnknownDog(element, options);
         }
 
         BinaryData IPersistableModel<Dog>.Write(ModelReaderWriterOptions options)

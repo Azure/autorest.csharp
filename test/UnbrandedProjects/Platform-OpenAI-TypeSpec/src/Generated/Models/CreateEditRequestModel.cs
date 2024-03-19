@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace OpenAI.Models
 {
-    /// <summary> Enum for model in CreateEditRequest. </summary>
+    /// <summary> The CreateEditRequestModel. </summary>
     public readonly partial struct CreateEditRequestModel : IEquatable<CreateEditRequestModel>
     {
         private readonly string _value;

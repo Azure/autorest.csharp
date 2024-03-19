@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -67,14 +68,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            SendRequest1Prop prop = default;
+            GetResponseProp1 prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = new SendRequest1Prop(property.Value.GetString());
+                    prop = new GetResponseProp1(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")

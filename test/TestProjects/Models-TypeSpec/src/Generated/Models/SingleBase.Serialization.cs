@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -69,7 +70,7 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            return UnknownSingleBase.DeserializeUnknownSingleBase(element);
+            return UnknownSingleBase.DeserializeUnknownSingleBase(element, options);
         }
 
         BinaryData IPersistableModel<SingleBase>.Write(ModelReaderWriterOptions options)
