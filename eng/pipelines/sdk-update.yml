@@ -11,7 +11,7 @@ parameters:
 
 
 extends:
-- template: /eng/pipelines/1es-redirect.yml@self
+- template: /eng/pipelines/1es-redirect.yml
   parameters:
     variables:
       nugetMultiFeedWarnLevel: 'none'

@@ -9,7 +9,7 @@ pr:
     - feature/*
 
 extends:
-- template: /eng/pipelines/1es-redirect.yml@self
+- template: /eng/pipelines/1es-redirect.yml
 parameters:
   variables:
     BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
