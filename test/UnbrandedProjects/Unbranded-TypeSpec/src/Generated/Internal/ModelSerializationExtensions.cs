@@ -81,7 +81,7 @@ namespace UnbrandedTypeSpec
 
         public static char GetChar(this JsonElement element)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if (element.ValueKind == JsonValueKind.String)
             {
                 var text = element.GetString();
                 if (text == null || text.Length != 1)

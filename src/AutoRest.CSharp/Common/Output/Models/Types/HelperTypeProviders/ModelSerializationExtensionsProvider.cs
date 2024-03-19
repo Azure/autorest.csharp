@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Summary: null, Description: null, ReturnDescription: null);
             var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
             var body = new IfElseStatement(
-                element.ValueKindEqualsNull(),
+                element.ValueKindEqualsString(),
                 new MethodBodyStatement[]
                 {
                     Var("text", element.GetString(), out var text),
