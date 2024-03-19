@@ -48,8 +48,6 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType(Type type, bool isNullable, IReadOnlyList<CSharpType> arguments)
         {
-            // here we ensure the framework type is always the open generic type, aka List<>, not List<int> or List<string> with concrete generic arguments
-            type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             _type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
 
@@ -112,6 +110,7 @@ namespace AutoRest.CSharp.Generation.Types
             _implementation = implementation;
             Namespace = implementation.Declaration.Namespace;
             Name = implementation.Declaration.Name;
+            DeclaringType = implementation.DeclaringTypeProvider?.Type;
             IsValueType = implementation.IsValueType;
             IsEnum = implementation.IsEnum;
             IsNullable = isNullable;
