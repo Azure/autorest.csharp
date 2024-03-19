@@ -23,8 +23,13 @@ namespace AutoRest.CSharp.Common.Output.Models
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
             public static ValueExpression ArgumentOutOfRangeException(ValueExpression valueParameter, string message, bool wrapInNameOf = true)
                 => Instance(typeof(ArgumentOutOfRangeException), wrapInNameOf ? Nameof(valueParameter) : valueParameter, Literal(message));
-            public static ValueExpression NotImplementedException(string name)
-                => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
+
+            public static ValueExpression NotImplementedException(ValueExpression message)
+                => Instance(typeof(NotImplementedException), message);
+
+            public static ValueExpression NotSupportedException(ValueExpression message)
+                => Instance(typeof(NotSupportedException), message);
+
             public static ValueExpression InvalidOperationException(ValueExpression message)
                 => Instance(typeof(InvalidOperationException), message);
 
@@ -36,6 +41,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression ArgumentException(ValueExpression parameter, ValueExpression message, bool wrapInNameOf = true)
                 => Instance(typeof(ArgumentException), message, wrapInNameOf ? Nameof(parameter) : parameter);
+
+            public static ValueExpression JsonException(ValueExpression message)
+                => Instance(typeof(JsonException), message);
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));

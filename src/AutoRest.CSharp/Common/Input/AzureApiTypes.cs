@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions;
@@ -67,8 +67,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
 
         public override Type IXmlSerializableType => typeof(IXmlSerializable);
-
-        public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
 
         public override Type RequestFailedExceptionType => typeof(RequestFailedException);
 
