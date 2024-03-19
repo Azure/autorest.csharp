@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../CadlRanchProjectsNonAzure/**/*.cs" LinkBase="CadlRanchProjectsNonAzure" />
+    <Compile Include="../CadlRanchProjectsNonAzure/**/*.cs" Exclude="../CadlRanchProjectsNonAzure/**/Properties/**/*.cs" LinkBase="CadlRanchProjectsNonAzure" />
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" Exclude="../AutoRest.TestServer.Tests/Infrastructure/JsonAsserts.cs" LinkBase="Shared/Test" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" LinkBase="Shared/Test" />
     <!--We cannot use the same infrastructure for testing for both branded and unbranded-->

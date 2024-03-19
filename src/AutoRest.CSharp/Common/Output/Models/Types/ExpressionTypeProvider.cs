@@ -23,11 +23,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
+            yield return ChangeTrackingDictionaryProvider.Instance;
             if (Configuration.EnableBicepSerialization)
             {
                 yield return BicepSerializationTypeProvider.Instance;
             }
-            yield return ChangeTrackingDictionaryProvider.Instance;
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;
@@ -73,6 +73,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<FieldDeclaration>? _fields;
         public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
 
+        private IReadOnlyList<ExpressionTypeProvider>? _nestedTypes;
+        public IReadOnlyList<ExpressionTypeProvider> NestedTypes => _nestedTypes ??= BuildNestedTypes().ToArray();
+
         protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
         {
             yield break;
@@ -94,6 +97,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected virtual IEnumerable<Method> BuildConstructors()
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerable<ExpressionTypeProvider> BuildNestedTypes()
         {
             yield break;
         }

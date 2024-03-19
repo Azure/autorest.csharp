@@ -27,12 +27,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
-        private string? _subFolder;
 
-        public OutputLibraryTestBase(string projectName, string subFolder = null)
+        public OutputLibraryTestBase(string projectName)
         {
             _projectName = projectName;
-            _subFolder = subFolder;
         }
 
         [OneTimeSetUp]
@@ -40,14 +38,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             Assert.Ignore("https://github.com/Azure/autorest.csharp/issues/4216");
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (_subFolder is null)
-            {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "Generated");
-            }
-            else
-            {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, _subFolder, "Generated");
-            }
+            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "src", "Generated");
 
             StandaloneGeneratorRunner.LoadConfiguration(null, basePath, null, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
