@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ClientModel" Version="1.0.0-beta.4" />
+    <PackageReference Include="System.ClientModel" Version="1.0.0" />
     <PackageReference Include="Azure.Identity" />
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter" />
