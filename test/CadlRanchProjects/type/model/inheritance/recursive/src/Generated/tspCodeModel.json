@@ -37,8 +37,7 @@
        "IsNullable": false
       },
       "IsRequired": false,
-      "IsReadOnly": false,
-      "IsDiscriminator": false
+      "IsReadOnly": false
      }
     ]
    },
@@ -55,8 +54,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },

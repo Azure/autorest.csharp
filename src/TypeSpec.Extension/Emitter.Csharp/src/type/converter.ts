@@ -564,7 +564,7 @@ function fromSdkModelPropertyType(
         ),
         IsRequired: isRequired,
         IsReadOnly: isReadOnly,
-        IsDiscriminator: isDiscriminator
+        IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
     };
 
     return modelProperty;

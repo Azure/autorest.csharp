@@ -47,8 +47,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "7",
@@ -62,8 +61,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "9",
@@ -77,8 +75,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -120,8 +117,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "17",
@@ -135,8 +131,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "19",
@@ -150,16 +145,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "21",
@@ -173,8 +166,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -202,8 +194,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "26",
@@ -217,8 +208,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -249,8 +239,7 @@
       "$ref": "4"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   }

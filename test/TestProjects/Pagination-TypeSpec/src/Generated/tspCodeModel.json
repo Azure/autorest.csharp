@@ -164,8 +164,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "22",
@@ -179,8 +178,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -222,8 +220,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "30",
@@ -237,8 +234,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "32",
@@ -252,16 +248,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "34",
@@ -275,8 +269,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -327,16 +320,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "43",
@@ -350,8 +341,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -382,8 +372,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "48",
@@ -397,8 +386,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -441,8 +429,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "56",
@@ -456,16 +443,14 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "58",
@@ -479,8 +464,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -526,8 +510,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "66",
@@ -541,8 +524,7 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "68",
@@ -556,16 +538,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "70",
@@ -579,8 +559,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -626,8 +605,7 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "78",
@@ -641,8 +619,7 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "80",
@@ -656,16 +633,14 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "82",
@@ -679,8 +654,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -704,8 +678,7 @@
       "$ref": "8"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "86",
@@ -723,8 +696,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "88",
@@ -742,8 +714,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "90",
@@ -757,8 +728,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -780,8 +750,7 @@
       "$ref": "19"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -854,8 +823,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   }
