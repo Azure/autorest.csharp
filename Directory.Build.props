@@ -50,12 +50,15 @@
     <CodeAnalysisRuleSet>$(RepoEngPath)\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(IsUnbranded)' != 'true'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(RepoEngPath)/AzureSDKClient.snk</AssemblyOriginatorKeyFile>
     <AssemblyOriginatorKeyFile Condition="$(IsTestProject) == 'true'">$(RepoEngPath)/AzSdkTestLibKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PublicSign>false</PublicSign>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ImportDefaultReferences>false</ImportDefaultReferences>
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>
