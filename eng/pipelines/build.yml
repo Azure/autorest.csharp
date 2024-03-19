@@ -176,13 +176,24 @@ parameters:
           image: $(LINUXVMIMAGE)
           os: linux
         jobs:
-          job:
-          - task: NuGetCommand@2
+        - deployment: Publish
+          environment: net-release
+          variables:
+            Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
+          steps:
+          - task: DownloadPipelineArtifact@2
+            displayName: Download Packages
+            inputs:
+              artifact: packages
+              path: $(Artifacts)
+          - task: 1ES.PublishNuget@1
             displayName: 'Publish to DevOps Feed'
             inputs:
-              command: push
+              useDotNetTask: false
+              publishPackageMetadata: true
+              packageParentPath: '$(Artifacts)'
               packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
-              # Publish to https://dev.azure.com/azure-sdk/public/_packaging?_a=feed&feed=azure-sdk-for-net
+              nuGetFeedType: 'internal'
               publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
   - stage: 'Update_azure_sdk_for_net'
     pool:

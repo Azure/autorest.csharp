@@ -95,10 +95,12 @@ extends:
                   displayName: 'Unit Test'
                   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
                   continueOnError: ${{ parameters.UseTypeSpecNext }}
-              - task: NuGetCommand@2
+              - task: 1ES.PublishNuget@1
                 displayName: 'Publish NugetPackage'
                 inputs:
-                  command: 'push'
+                  useDotNetTask: false
+                  publishPackageMetadata: true
+                  packageParentPath: '$(Build.ArtifactStagingDirectory)/packages'
                   packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/packages/**/*.symbols.nupkg'
                   nuGetFeedType: 'internal'
                   publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
