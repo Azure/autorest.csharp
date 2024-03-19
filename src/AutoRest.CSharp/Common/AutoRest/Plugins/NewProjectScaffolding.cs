@@ -355,6 +355,7 @@ extends:
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
+            new("System.ClientModel", "1.0.0-beta.4"),
             new("Azure.Identity"),
             new("NUnit"),
             new("NUnit3TestAdapter"),
