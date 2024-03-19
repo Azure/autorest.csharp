@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,10 +10,8 @@ using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CreateFineTuningJobRequestHyperparameters : IUtf8JsonWriteable, IJsonModel<CreateFineTuningJobRequestHyperparameters>
+    public partial class CreateFineTuningJobRequestHyperparameters : IJsonModel<CreateFineTuningJobRequestHyperparameters>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuningJobRequestHyperparameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<CreateFineTuningJobRequestHyperparameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateFineTuningJobRequestHyperparameters>)this).GetFormatFromOptions(options) : options.Format;

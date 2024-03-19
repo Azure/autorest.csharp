@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,10 +10,8 @@ using NoTestTypeSpec;
 
 namespace NoTestTypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonWriteable, IJsonModel<Thing>
+    public partial class Thing : IJsonModel<Thing>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
