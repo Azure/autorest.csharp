@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,10 +10,8 @@ using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class RoundTripModel : IUtf8JsonWriteable, IJsonModel<RoundTripModel>
+    public partial class RoundTripModel : IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
