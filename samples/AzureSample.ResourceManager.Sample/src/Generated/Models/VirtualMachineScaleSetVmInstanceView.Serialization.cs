@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
@@ -294,165 +295,232 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(PlatformUpdateDomain))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PlatformUpdateDomain), out propertyOverride);
+            if (Optional.IsDefined(PlatformUpdateDomain) || hasPropertyOverride)
             {
-                builder.Append("  platformUpdateDomain:");
-                builder.AppendLine($" {PlatformUpdateDomain.Value}");
-            }
-
-            if (Optional.IsDefined(PlatformFaultDomain))
-            {
-                builder.Append("  platformFaultDomain:");
-                builder.AppendLine($" {PlatformFaultDomain.Value}");
-            }
-
-            if (Optional.IsDefined(RdpThumbPrint))
-            {
-                builder.Append("  rdpThumbPrint:");
-                if (RdpThumbPrint.Contains(Environment.NewLine))
+                builder.Append("  platformUpdateDomain: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{RdpThumbPrint}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{RdpThumbPrint}'");
+                    builder.AppendLine($"{PlatformUpdateDomain.Value}");
                 }
             }
 
-            if (Optional.IsDefined(VmAgent))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PlatformFaultDomain), out propertyOverride);
+            if (Optional.IsDefined(PlatformFaultDomain) || hasPropertyOverride)
             {
-                builder.Append("  vmAgent:");
-                AppendChildObject(builder, VmAgent, options, 2, false);
-            }
-
-            if (Optional.IsDefined(MaintenanceRedeployStatus))
-            {
-                builder.Append("  maintenanceRedeployStatus:");
-                AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Disks))
-            {
-                if (Disks.Any())
+                builder.Append("  platformFaultDomain: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  disks:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Disks)
-                    {
-                        AppendChildObject(builder, item, options, 4, true);
-                    }
-                    builder.AppendLine("  ]");
-                }
-            }
-
-            if (Optional.IsCollectionDefined(Extensions))
-            {
-                if (Extensions.Any())
-                {
-                    builder.Append("  extensions:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Extensions)
-                    {
-                        AppendChildObject(builder, item, options, 4, true);
-                    }
-                    builder.AppendLine("  ]");
-                }
-            }
-
-            if (Optional.IsDefined(VmHealth))
-            {
-                builder.Append("  vmHealth:");
-                AppendChildObject(builder, VmHealth, options, 2, false);
-            }
-
-            if (Optional.IsDefined(BootDiagnostics))
-            {
-                builder.Append("  bootDiagnostics:");
-                AppendChildObject(builder, BootDiagnostics, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Statuses))
-            {
-                if (Statuses.Any())
-                {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
-                    {
-                        AppendChildObject(builder, item, options, 4, true);
-                    }
-                    builder.AppendLine("  ]");
-                }
-            }
-
-            if (Optional.IsDefined(AssignedHost))
-            {
-                builder.Append("  assignedHost:");
-                if (AssignedHost.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AssignedHost}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{AssignedHost}'");
+                    builder.AppendLine($"{PlatformFaultDomain.Value}");
                 }
             }
 
-            if (Optional.IsDefined(PlacementGroupId))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RdpThumbPrint), out propertyOverride);
+            if (Optional.IsDefined(RdpThumbPrint) || hasPropertyOverride)
             {
-                builder.Append("  placementGroupId:");
-                if (PlacementGroupId.Contains(Environment.NewLine))
+                builder.Append("  rdpThumbPrint: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{PlacementGroupId}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{PlacementGroupId}'");
+                    if (RdpThumbPrint.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{RdpThumbPrint}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{RdpThumbPrint}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmAgent), out propertyOverride);
+            if (Optional.IsDefined(VmAgent) || hasPropertyOverride)
+            {
+                builder.Append("  vmAgent: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, VmAgent, options, 2, false, "  vmAgent: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaintenanceRedeployStatus), out propertyOverride);
+            if (Optional.IsDefined(MaintenanceRedeployStatus) || hasPropertyOverride)
+            {
+                builder.Append("  maintenanceRedeployStatus: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false, "  maintenanceRedeployStatus: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Disks), out propertyOverride);
+            if (Optional.IsCollectionDefined(Disks) || hasPropertyOverride)
+            {
+                if (Disks.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  disks: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Disks)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  disks: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Extensions), out propertyOverride);
+            if (Optional.IsCollectionDefined(Extensions) || hasPropertyOverride)
+            {
+                if (Extensions.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  extensions: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Extensions)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  extensions: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmHealth), out propertyOverride);
+            if (Optional.IsDefined(VmHealth) || hasPropertyOverride)
+            {
+                builder.Append("  vmHealth: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, VmHealth, options, 2, false, "  vmHealth: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BootDiagnostics), out propertyOverride);
+            if (Optional.IsDefined(BootDiagnostics) || hasPropertyOverride)
+            {
+                builder.Append("  bootDiagnostics: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, BootDiagnostics, options, 2, false, "  bootDiagnostics: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            {
+                if (Statuses.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  statuses: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AssignedHost), out propertyOverride);
+            if (Optional.IsDefined(AssignedHost) || hasPropertyOverride)
+            {
+                builder.Append("  assignedHost: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AssignedHost.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AssignedHost}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AssignedHost}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PlacementGroupId), out propertyOverride);
+            if (Optional.IsDefined(PlacementGroupId) || hasPropertyOverride)
+            {
+                builder.Append("  placementGroupId: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (PlacementGroupId.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{PlacementGroupId}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{PlacementGroupId}'");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmInstanceView>.Write(ModelReaderWriterOptions options)

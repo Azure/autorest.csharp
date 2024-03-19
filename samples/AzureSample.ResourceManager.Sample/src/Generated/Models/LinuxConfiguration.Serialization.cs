@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
@@ -127,65 +128,60 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DisablePasswordAuthentication))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisablePasswordAuthentication), out propertyOverride);
+            if (Optional.IsDefined(DisablePasswordAuthentication) || hasPropertyOverride)
             {
-                builder.Append("  disablePasswordAuthentication:");
-                var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  disablePasswordAuthentication: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
-            if (Optional.IsDefined(Ssh))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Ssh), out propertyOverride);
+            if (Optional.IsDefined(Ssh) || hasPropertyOverride)
             {
-                builder.Append("  ssh:");
-                AppendChildObject(builder, Ssh, options, 2, false);
+                builder.Append("  ssh: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, Ssh, options, 2, false, "  ssh: ");
+                }
             }
 
-            if (Optional.IsDefined(ProvisionVmAgent))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
+            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
             {
-                builder.Append("  provisionVMAgent:");
-                var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  provisionVMAgent: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<LinuxConfiguration>.Write(ModelReaderWriterOptions options)

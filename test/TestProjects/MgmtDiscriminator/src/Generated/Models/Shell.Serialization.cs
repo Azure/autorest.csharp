@@ -12,32 +12,32 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
+using MgmtDiscriminator;
 
-namespace AzureSample.ResourceManager.Sample.Models
+namespace MgmtDiscriminator.Models
 {
-    public partial class VirtualMachineScaleSetIPTag : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetIPTag>
+    public partial class Shell : IUtf8JsonSerializable, IJsonModel<Shell>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetIPTag>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shell>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<VirtualMachineScaleSetIPTag>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Shell>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetIPTag>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetIPTag)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IPTagType))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("ipTagType"u8);
-                writer.WriteStringValue(IPTagType);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Tag))
+            if (Optional.IsDefined(ShellType))
             {
-                writer.WritePropertyName("tag"u8);
-                writer.WriteStringValue(Tag);
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ShellType);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -57,19 +57,19 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetIPTag IJsonModel<VirtualMachineScaleSetIPTag>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Shell IJsonModel<Shell>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetIPTag>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetIPTag)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetIPTag(document.RootElement, options);
+            return DeserializeShell(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetIPTag DeserializeVirtualMachineScaleSetIPTag(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Shell DeserializeShell(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -77,20 +77,20 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 return null;
             }
-            string ipTagType = default;
-            string tag = default;
+            string name = default;
+            string type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ipTagType"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    ipTagType = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("tag"u8))
+                if (property.NameEquals("type"u8))
                 {
-                    tag = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -99,7 +99,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetIPTag(ipTagType, tag, serializedAdditionalRawData);
+            return new Shell(name, type, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,46 +113,46 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTagType), out propertyOverride);
-            if (Optional.IsDefined(IPTagType) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  ipTagType: ");
+                builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    if (IPTagType.Contains(Environment.NewLine))
+                    if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{IPTagType}'''");
+                        builder.AppendLine($"{Name}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{IPTagType}'");
+                        builder.AppendLine($"'{Name}'");
                     }
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tag), out propertyOverride);
-            if (Optional.IsDefined(Tag) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ShellType), out propertyOverride);
+            if (Optional.IsDefined(ShellType) || hasPropertyOverride)
             {
-                builder.Append("  tag: ");
+                builder.Append("  type: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    if (Tag.Contains(Environment.NewLine))
+                    if (ShellType.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{Tag}'''");
+                        builder.AppendLine($"{ShellType}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{Tag}'");
+                        builder.AppendLine($"'{ShellType}'");
                     }
                 }
             }
@@ -161,9 +161,9 @@ namespace AzureSample.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        BinaryData IPersistableModel<VirtualMachineScaleSetIPTag>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Shell>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetIPTag>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -172,28 +172,28 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetIPTag)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        VirtualMachineScaleSetIPTag IPersistableModel<VirtualMachineScaleSetIPTag>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Shell IPersistableModel<Shell>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetIPTag>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeVirtualMachineScaleSetIPTag(document.RootElement, options);
+                        return DeserializeShell(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetIPTag)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<VirtualMachineScaleSetIPTag>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Shell>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
