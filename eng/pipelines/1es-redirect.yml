@@ -55,7 +55,7 @@ extends:
           ${{ if ne(pair.key, 'variables') }}:
             ${{ pair.key }}: ${{ pair.value }}
         variables:
-        - template: /variables/image.yml@self
+        - template: /eng/pipelines/variables/image.yml@self
         - ${{ each variable in parameters.variables }}:
           - ${{ if eq(variable.key, 'template') }}:
             - template: ${{ variable.value }}
