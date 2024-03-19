@@ -40,6 +40,12 @@ extends:
         name: azsdk-pool-mms-win-2022-general
         image: azsdk-pool-mms-win-2022-1espt
         os: windows
+      sourceRepositoriesToScan:
+        exclude:
+          - repository: azure-sdk-build-tools
+          # TODO: Decide on including or excluding
+          - repository: azure-sdk-tools
+          - repository: azure-sdk-for-net
       psscriptanalyzer:
         compiled: true
         break: true
