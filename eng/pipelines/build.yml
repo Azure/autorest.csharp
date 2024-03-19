@@ -125,8 +125,9 @@ extends:
                   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               
               - task: 1ES.PublishPipelineArtifact@1
-                path: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage
-                artifact: CoverageReport
+                inputs: 
+                  path: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage
+                  artifact: CoverageReport
               
               - ${{if eq(variables['System.TeamProject'], 'internal')}}:
                 - pwsh: Write-Host "Upload reports"
@@ -160,16 +161,18 @@ extends:
                     UseInternalFeed: false
               
               - task: 1ES.PublishPipelineArtifact@1
-                path: $(Build.ArtifactStagingDirectory)
-                artifact: build_artifacts
-                condition: succeededOrFailed()
-                displayName: "Publish build artifacts"
+                inputs: 
+                  path: $(Build.ArtifactStagingDirectory)
+                  artifact: build_artifacts
+                  condition: succeededOrFailed()
+                  displayName: "Publish build artifacts"
               
               - task: 1ES.PublishPipelineArtifact@1
-                path: $(Build.ArtifactStagingDirectory)/packages
-                artifact: packages
-                condition: succeededOrFailed()
-                displayName: "Publish packages artifact"
+                inputs: 
+                  path: $(Build.ArtifactStagingDirectory)/packages
+                  artifact: packages
+                  condition: succeededOrFailed()
+                  displayName: "Publish packages artifact"
           
           - template: /eng/pipelines/check-code-generation.yml
             parameters:
