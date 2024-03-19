@@ -30,9 +30,10 @@ namespace MgmtDiscriminator.Models
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
         /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
+        /// <param name="nestedName"> A model that will be safe flattened. </param>
         /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, string nestedName = null, DeliveryRuleProperties properties = null)
         {
             return new DeliveryRuleData(
                 id,
@@ -47,6 +48,7 @@ namespace MgmtDiscriminator.Models
                 number,
                 uri,
                 shellProperty,
+                nestedName != null ? new Sku1(new Sku2(nestedName, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null,
                 properties,
                 serializedAdditionalRawData: null);
         }

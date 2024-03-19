@@ -8,31 +8,32 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
+using MgmtDiscriminator;
 
-namespace AzureSample.ResourceManager.Sample.Models
+namespace MgmtDiscriminator.Models
 {
-    internal partial class ScheduledEventsProfile : IUtf8JsonSerializable, IJsonModel<ScheduledEventsProfile>
+    internal partial class Sku1 : IUtf8JsonSerializable, IJsonModel<Sku1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScheduledEventsProfile>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku1>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<ScheduledEventsProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Sku1>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ScheduledEventsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku1)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TerminateNotificationProfile))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile);
+                writer.WritePropertyName("name"u8);
+                writer.WriteObjectValue(Name);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -52,19 +53,19 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        ScheduledEventsProfile IJsonModel<ScheduledEventsProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Sku1 IJsonModel<Sku1>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ScheduledEventsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku1)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeScheduledEventsProfile(document.RootElement, options);
+            return DeserializeSku1(document.RootElement, options);
         }
 
-        internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Sku1 DeserializeSku1(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -72,18 +73,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 return null;
             }
-            TerminateNotificationProfile terminateNotificationProfile = default;
+            Sku2 name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("terminateNotificationProfile"u8))
+                if (property.NameEquals("name"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    terminateNotificationProfile = TerminateNotificationProfile.DeserializeTerminateNotificationProfile(property.Value, options);
+                    name = Sku2.DeserializeSku2(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -92,7 +93,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ScheduledEventsProfile(terminateNotificationProfile, serializedAdditionalRawData);
+            return new Sku1(name, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -111,17 +112,17 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TerminateNotificationProfile), out propertyOverride);
-            if (Optional.IsDefined(TerminateNotificationProfile) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  terminateNotificationProfile: ");
+                builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    BicepSerializationHelpers.AppendChildObject(builder, TerminateNotificationProfile, options, 2, false, "  terminateNotificationProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Name, options, 2, false, "  name: ");
                 }
             }
 
@@ -131,11 +132,24 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
         {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "NestedName":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("NestedName", item.Value);
+                        bicepOptions.ParameterOverrides.Add(Name, propertyDictionary);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
-        BinaryData IPersistableModel<ScheduledEventsProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Sku1>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ScheduledEventsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -144,28 +158,28 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku1)} does not support '{options.Format}' format.");
             }
         }
 
-        ScheduledEventsProfile IPersistableModel<ScheduledEventsProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Sku1 IPersistableModel<Sku1>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ScheduledEventsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeScheduledEventsProfile(document.RootElement, options);
+                        return DeserializeSku1(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku1)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<ScheduledEventsProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Sku1>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

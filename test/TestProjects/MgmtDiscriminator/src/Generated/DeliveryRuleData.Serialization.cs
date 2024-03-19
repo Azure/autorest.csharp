@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -69,6 +70,11 @@ namespace MgmtDiscriminator
             {
                 writer.WritePropertyName("shellProperty"u8);
                 writer.WriteObjectValue(ShellProperty);
+            }
+            if (Optional.IsDefined(Sku))
+            {
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Properties))
             {
@@ -141,6 +147,7 @@ namespace MgmtDiscriminator
             int? number = default;
             Uri uri = default;
             Shell shellProperty = default;
+            Sku1 sku = default;
             DeliveryRuleProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -222,6 +229,15 @@ namespace MgmtDiscriminator
                     shellProperty = Shell.DeserializeShell(property.Value, options);
                     continue;
                 }
+                if (property.NameEquals("sku"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sku = Sku1.DeserializeSku1(property.Value, options);
+                    continue;
+                }
                 if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -274,6 +290,7 @@ namespace MgmtDiscriminator
                 number,
                 uri,
                 shellProperty,
+                sku,
                 properties,
                 serializedAdditionalRawData);
         }
@@ -286,6 +303,11 @@ namespace MgmtDiscriminator
             bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
+
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
 
             builder.AppendLine("{");
 
@@ -426,6 +448,20 @@ namespace MgmtDiscriminator
                 }
             }
 
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Sku), out propertyOverride);
+            if (Optional.IsDefined(Sku) || hasPropertyOverride)
+            {
+                builder.Append("  sku: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
+                }
+            }
+
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride);
             if (Optional.IsDefined(Properties) || hasPropertyOverride)
             {
@@ -470,6 +506,23 @@ namespace MgmtDiscriminator
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "NestedName":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("NestedName", item.Value);
+                        bicepOptions.ParameterOverrides.Add(Sku, propertyDictionary);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<DeliveryRuleData>.Write(ModelReaderWriterOptions options)
