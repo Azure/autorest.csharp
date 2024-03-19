@@ -127,23 +127,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.LineRaw("}");
                     }
                     break;
-                case ForStatement forStatement:
+                case ForStatement(var assignment, var condition, var increment) forStatement:
                     using (writer.AmbientScope())
                     {
                         writer.AppendRaw("for (");
-                        writer.WriteValueExpression(
-                            new AssignmentExpression(
-                                forStatement.IndexerVariable,
-                                new ConstantExpression(new Constant(0, typeof(int)))));
+                        if (assignment != null)
+                            writer.WriteValueExpression(assignment);
                         writer.AppendRaw("; ");
-                        writer.WriteValueExpression(
-                            new BoolExpression(
-                                new BinaryOperatorExpression(
-                                    "<",
-                                    forStatement.IndexerVariable,
-                                    forStatement.Enumerable.Property("Length"))));
+                        if (condition != null)
+                            writer.WriteValueExpression(condition);
                         writer.AppendRaw("; ");
-                        writer.WriteValueExpression(new UnaryOperatorExpression("++", forStatement.IndexerVariable, true));
+                        if (increment != null)
+                            writer.WriteValueExpression(increment);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
                         writer.LineRaw("");
@@ -452,6 +447,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw("}");
                     }
 
+                    break;
+
+                case SwitchCaseWhenExpression(var matchExpression, var conditionExpression):
+                    writer.WriteValueExpression(matchExpression);
+                    writer.AppendRaw(" when ");
+                    writer.WriteValueExpression(conditionExpression);
                     break;
 
                 case DictionaryInitializerExpression(var values):

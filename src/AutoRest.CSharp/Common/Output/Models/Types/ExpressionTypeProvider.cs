@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
+            yield return ModelSerializationExtensionsProvider.Instance;
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;

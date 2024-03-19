@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                                     typeof(MemoryExtensions),
                                     nameof(MemoryExtensions.AsMemory),
                                     stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                    new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                    new ValueExpression[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
                                     )))
                 }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
         }

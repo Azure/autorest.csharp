@@ -239,9 +239,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var line = new VariableReference(typeof(string), "line");
             var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
             yield return Declare(inMultilineString, BoolExpression.False);
-            yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
+            var i = new VariableReference(typeof(int), "i");
+            yield return new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, lines.Property("Length")), new UnaryOperatorExpression("++", i, true))
             {
-                Declare(line, new IndexerExpression(lines, indexer)),
+                Declare(line, new IndexerExpression(lines, i)),
                 // if this is a multiline string, we do not apply the indentation, except for the first line containing only the ''' which is handled
                 // in the subsequent if statement
                 new IfStatement(new BoolExpression(inMultilineString))
@@ -260,7 +261,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Continue
                 },
                 new IfElseStatement(
-                    And(Equal(indexer, new ConstantExpression(new Constant(0, typeof(int)))),
+                    And(Equal(i, Int(0)),
                         Not(new BoolExpression(IndentFirstLine))),
                     stringBuilder.AppendLine(new FormattableStringExpression(" {0}", line)),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
