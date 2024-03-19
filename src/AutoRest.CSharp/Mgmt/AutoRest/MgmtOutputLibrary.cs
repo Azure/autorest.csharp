@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "internal",
                     null,
                     // [TODO]: Condition is added to minimize change
-                    $"The {defaultDerivedName}",
+                    $"Unknown version of {actualBase.Name}",
                     actualBase.Usage,
                     Array.Empty<InputModelProperty>(),
                     actualBase,
