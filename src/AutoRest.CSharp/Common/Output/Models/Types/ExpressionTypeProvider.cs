@@ -34,9 +34,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal static IEnumerable<ExpressionTypeProvider> GetTestHelperProviders()
         {
-            if (Configuration.AzureArm)
+            if (Configuration.GenerateTestProject)
             {
-                yield return JsonHelperProvider.Instance;
+                if (Configuration.AzureArm)
+                {
+                    yield return JsonHelperProvider.Instance;
+                }
             }
         }
 

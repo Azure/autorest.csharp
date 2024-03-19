@@ -7,11 +7,7 @@
 ``` yaml
 azure-arm: true
 require: $(this-folder)/../../../readme.md
-<<<<<<<< HEAD:samples/AzureSample.ResourceManager.Sample/src/src/readme.md
-input-file: $(this-folder)/sample.json
-========
 input-file: $(this-folder)/../sample.json
->>>>>>>> 879233de12000f68916609e00f4431c604b7c1c5:samples/AzureSample.ResourceManager.Sample/src/readme.md
 namespace: Azure.ResourceManager.Sample
 model-namespace: false
 public-clients: false

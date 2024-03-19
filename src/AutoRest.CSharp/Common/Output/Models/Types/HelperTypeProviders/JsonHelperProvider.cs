@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private VariableReference _writerVariable;
         private Utf8JsonWriterExpression _writer;
 
-        public JsonHelperProvider()
+        private JsonHelperProvider()
             : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
@@ -54,7 +54,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new FieldDeclaration(
                 FieldModifiers.Private | FieldModifiers.ReadOnly | FieldModifiers.Static,
                 typeof(JsonWriterOptions),
-                "PrettyJsonOptions");
+                "CompactJsonOptions",
+                New.Instance(typeof(JsonWriterOptions)),
+                SerializationFormat.Default);
         }
 
         private FieldDeclaration BuildPrettyJsonOptions()
