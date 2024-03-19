@@ -31,30 +31,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        // TODO: remove this intermediate state once we generate it before output types
         private IReadOnlyList<Method>? _methods;
+        public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
 
-        // This method should only be called from OutputMethods as intermediate state.
-        private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
+        private IEnumerable<Method> BuildMethods()
         {
-            Debug.Assert(caller == nameof(Methods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
-            return _methods ??= _models.Select(CreateMethod).ToList();
-        }
-
-        // TODO: remove this intermediate state once we generate it before output types
-        private IReadOnlyList<Method>? _outputMethods;
-        public IReadOnlyList<Method> Methods
-        {
-            get
+            var generatedMethods = _models.Select(CreateMethod);
+            if (BreakingChangeResolver is null)
             {
-                if (SignatureType is null)
-                {
-                    // The overloading feature is not enabled, we jsut return the original methods
-                    return ShouldNotBeUsedForOutput();
-                }
-                // filter out duplicate methods in custom code and combine overload methods
-                return _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).Concat(SignatureType.OverloadMethods).ToList();
+                // The overloading feature is not enabled, we jsut return the original methods
+                return generatedMethods;
             }
+
+            return BreakingChangeResolver.Resolve(generatedMethods);
         }
 
         public FormattableString Description => $"Model factory for models.";
@@ -114,20 +103,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        private SignatureType? _signatureType;
-        public override SignatureType? SignatureType
-        {
-            get
-            {
-                // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
-                // TODO: enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
-                if (!Configuration.AzureArm)
-                {
-                    return null;
-                }
-                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, Declaration.Namespace, Declaration.Name);
-            }
-        }
+        private BreakingChangeResolver? _breakingChangeResolver;
+        protected override BreakingChangeResolver? BreakingChangeResolver => _breakingChangeResolver ??= new BreakingChangeResolver(_typeFactory, SourceTypeMapping, ContractTypeMapping);
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {

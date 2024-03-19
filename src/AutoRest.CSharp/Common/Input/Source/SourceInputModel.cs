@@ -57,12 +57,12 @@ namespace AutoRest.CSharp.Input.Source
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
         }
 
-        public ModelTypeMapping? CreateForModel(INamedTypeSymbol? symbol)
+        public SourceTypeMapping? CreateForType(INamedTypeSymbol? symbol)
         {
             if (symbol == null)
                 return null;
 
-            return new ModelTypeMapping(_codeGenAttributes, symbol);
+            return new SourceTypeMapping(_codeGenAttributes, symbol);
         }
 
         internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
@@ -80,6 +80,11 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return type;
+        }
+
+        public INamedTypeSymbol? FindForTypeInContract(string ns, string name)
+        {
+            return PreviousContract?.GetTypeByMetadataName($"{ns}.{name}");
         }
 
         internal bool TryGetClientSourceInput(INamedTypeSymbol type, [NotNullWhen(true)] out ClientSourceInput? clientSourceInput)
@@ -139,6 +144,7 @@ namespace AutoRest.CSharp.Input.Source
 
         private async Task<Compilation?> LoadBaselineContract()
         {
+            // TODO -- enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
             // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
             if (!Configuration.AzureArm)
                 return null;
