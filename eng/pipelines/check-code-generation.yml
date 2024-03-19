@@ -12,12 +12,28 @@ parameters:
   - name: dependsOn
     type: object
     default: []
+  - name: poolName
+    type: string
+    default: azsdk-pool-mms-win-2022-general
+  - name: imageKey
+    type: string
+    default: vmImage
+  - name: imageName
+    type: string
+    default: windows-2022
+  - name: osKey
+    type: string
+    default: ''
+
+    # name: azsdk-pool-mms-win-2022-general
+    # vmImage: windows-2022
 
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: windows-2022
+    name: ${{ parameters.poolName }}
+    ${{ parameters.imageKey }}: ${{ parameters.imageName }}
+    os: ${{ parameters.osKey }}
   dependsOn: ${{ parameters.dependsOn }}
   steps:
     - task: NodeTool@0
