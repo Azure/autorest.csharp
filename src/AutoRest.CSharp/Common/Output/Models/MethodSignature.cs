@@ -34,12 +34,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodSignature MakeAsync()
         {
-            if (Modifiers.HasFlag(Async) || ReturnType != null && TypeFactory.IsAsyncPageable(ReturnType))
+            if (Modifiers.HasFlag(Async) || ReturnType is { IsAsyncPageable: true })
             {
                 return this;
             }
 
-            if (ReturnType != null && TypeFactory.IsPageable(ReturnType))
+            if (ReturnType is { IsPageable: true })
             {
                 return this with
                 {
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (ReturnType != null && TypeFactory.IsIEnumerableOfT(ReturnType))
+            if (ReturnType is { IsIEnumerableOfT: true })
             {
                 return this with
                 {
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
                 Name = Name + "Async",
                 Modifiers = Modifiers | Async,
                 ReturnType = ReturnType != null
-                    ? TypeFactory.IsOperationOfPageable(ReturnType)
+                    ? ReturnType.IsOperationOfPageable
                         ? new CSharpType(typeof(Task<>), new CSharpType(typeof(Operation<>), new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments[0].Arguments[0])))
                         : new CSharpType(typeof(Task<>), ReturnType)
                     : typeof(Task)
@@ -73,12 +73,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodSignature MakeSync()
         {
-            if (!Modifiers.HasFlag(Async) && (ReturnType == null || !TypeFactory.IsAsyncPageable(ReturnType)))
+            if (!Modifiers.HasFlag(Async) && (ReturnType == null || !ReturnType.IsAsyncPageable))
             {
                 return this;
             }
 
-            if (ReturnType != null && TypeFactory.IsAsyncPageable(ReturnType))
+            if (ReturnType is { IsAsyncPageable: true })
             {
                 return this with
                 {
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (ReturnType != null && TypeFactory.IsIAsyncEnumerableOfT(ReturnType))
+            if (ReturnType is { IsIAsyncEnumerableOfT: true })
             {
                 return this with
                 {
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models
                 Name = Name[..^5],
                 Modifiers = Modifiers ^ Async,
                 ReturnType = ReturnType?.Arguments.Count == 1
-                    ? TypeFactory.IsOperationOfAsyncPageable(ReturnType.Arguments[0])
+                    ? ReturnType.Arguments[0].IsOperationOfAsyncPageable
                         ? new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), ReturnType.Arguments[0].Arguments[0].Arguments[0]))
                         : ReturnType.Arguments[0]
                     : null

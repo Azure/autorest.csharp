@@ -3,14 +3,18 @@
 
 using System;
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -59,6 +63,33 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
             IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
+
+            #region Assign the attributes of this type
+            IsIEnumerable = type == typeof(IEnumerable);
+            IsIEnumerableOfT = type == typeof(IEnumerable<>);
+            IsIAsyncEnumerableOfT = type == typeof(IAsyncEnumerable<>);
+            IsReadOnlyDictionary = type == typeof(IReadOnlyDictionary<,>);
+            IsReadWriteDictionary = type == typeof(IDictionary<,>);
+            IsDictionary = IsReadOnlyDictionary || IsReadWriteDictionary;
+            IsReadOnlyMemory = type == typeof(ReadOnlyMemory<>);
+            IsReadWriteList = type == typeof(IList<>) || type == typeof(ICollection<>) || type == typeof(List<>);
+            IsReadOnlyList = type == typeof(IEnumerable<>) || type == typeof(IReadOnlyList<>);
+            IsList = IsReadOnlyList || IsReadWriteList || IsReadOnlyMemory;
+            IsCollection = IsDictionary || IsList;
+            IsArray = type.IsArray;
+
+            IsTask = type == typeof(Task);
+            IsTaskOfT = type == typeof(Task<>);
+            // TODO -- these are azure-specific. We might need to generalize these using ApiTypes
+            IsResponse = type == typeof(Response);
+            IsResponseOfT = type == typeof(Response<>);
+            IsPageable = type == typeof(Pageable<>);
+            IsAsyncPageable = type == typeof(AsyncPageable<>);
+            IsOperation = type == typeof(Operation);
+            IsOperationOfT = type == typeof(Operation<>);
+            IsOperationOfAsyncPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsAsyncPageable;
+            IsOperationOfPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsPageable;
+            #endregion
         }
 
         [Conditional("DEBUG")]
@@ -74,29 +105,22 @@ namespace AutoRest.CSharp.Generation.Types
             }
         }
 
-        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, IReadOnlyList<CSharpType>? arguments = null)
-            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
-        {
-        }
-
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, IReadOnlyList<CSharpType>? arguments = null)
+        public CSharpType(TypeProvider implementation, IReadOnlyList<CSharpType>? arguments = null, bool isNullable = false)
         {
             _implementation = implementation;
-            Namespace = ns;
-            Name = name;
+            Namespace = implementation.Declaration.Namespace;
+            Name = implementation.Declaration.Name;
             DeclaringType = implementation.DeclaringTypeProvider?.Type;
-            IsValueType = isValueType;
-            IsEnum = isEnum;
+            IsValueType = implementation.IsValueType;
+            IsEnum = implementation.IsEnum;
             IsNullable = isNullable;
-            if (arguments != null)
-                Arguments = arguments;
+            Arguments = arguments ?? Array.Empty<CSharpType>();
             SerializeAs = _implementation?.SerializeAs;
-            IsPublic = implementation.Declaration.Accessibility == "public"
-                && Arguments.All(t => t.IsPublic);
+            IsPublic = implementation.Declaration.Accessibility == "public" && Arguments.All(t => t.IsPublic);
         }
 
-        public string Namespace { get; }
-        public string Name { get; }
+        public virtual string Namespace { get; }
+        public virtual string Name { get; }
         public CSharpType? DeclaringType { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
@@ -113,7 +137,33 @@ namespace AutoRest.CSharp.Generation.Types
 
         public Type? SerializeAs { get; init; }
 
-        public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
+        #region Attributes of the type
+        public bool IsArray { get; }
+        public bool IsCollection { get; }
+        public bool IsIEnumerable { get; }
+        public bool IsIEnumerableOfT { get; }
+        public bool IsIAsyncEnumerableOfT { get; }
+
+        public bool IsDictionary { get; }
+        public bool IsReadOnlyDictionary { get; }
+        public bool IsReadWriteDictionary { get; }
+
+        public bool IsList { get; }
+        public bool IsReadOnlyMemory { get; }
+        public bool IsReadOnlyList { get; }
+        public bool IsReadWriteList { get; }
+
+        public bool IsTask { get; }
+        public bool IsTaskOfT { get; }
+        public bool IsResponse { get; }
+        public bool IsResponseOfT { get; }
+        public bool IsPageable { get; }
+        public bool IsAsyncPageable { get; }
+        public bool IsOperation { get; }
+        public bool IsOperationOfT { get; }
+        public bool IsOperationOfAsyncPageable { get; }
+        public bool IsOperationOfPageable { get; }
+        #endregion
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&
@@ -178,10 +228,10 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool IsGenericType => Arguments.Count > 0;
 
-        public CSharpType WithNullable(bool isNullable) =>
+        public virtual CSharpType WithNullable(bool isNullable) => // make it virtual to ensure this is mockable
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable);
+                : new CSharpType(Implementation, Arguments, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 
@@ -221,17 +271,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties = null)
         {
-            var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
             var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel, backingProperties);
-            // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
-            return new CSharpType(
-                systemObjectType,
-                type.Namespace ?? defaultNamespace,
-                systemObjectType.Declaration.Name,
-                type.IsValueType,
-                type.IsEnum,
-                false,
-                genericTypes.ToArray());
+            return systemObjectType.Type;
         }
 
         /// <summary>
@@ -327,7 +368,7 @@ namespace AutoRest.CSharp.Generation.Types
             }
             else
             {
-                return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, IsNullable, arguments.ToArray());
+                return new CSharpType(Implementation, arguments, IsNullable);
             }
         }
     }

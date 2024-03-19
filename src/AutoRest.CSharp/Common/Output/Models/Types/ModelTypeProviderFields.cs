@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
                 var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
-                                             !TypeFactory.IsCollectionType(propertyType);
+                                             !propertyType.IsCollection;
 
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
 
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // for structs, all properties must be set in the public ctor
                 if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, Type: not InputLiteralType })
                 {
-                    publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                    publicParameters.Add(parameter with { Type = parameter.Type.GetInputType() });
                 }
             }
 
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var type = typeFactory.CreateType(additionalPropertiesType);
                 if (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input))
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    type = type.GetOutputType();
                 }
 
                 var name = existingMember is null ? "AdditionalProperties" : existingMember.Name;
@@ -153,12 +153,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static InputType GetInputTypeFromExistingMemberType(CSharpType type)
         {
-            if (TypeFactory.IsList(type))
+            if (type.IsList)
             {
                 return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), false);
             }
 
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
             {
                 return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromExistingMemberType(type.Arguments[1]), false);
             }
@@ -235,7 +235,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type))
+            if (type.IsCollection)
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.
@@ -341,10 +341,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
-            if (!usage.HasFlag(InputModelTypeUsage.Input) ||
-                property.IsReadOnly)
+            if (!usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly)
             {
-                propertyType = TypeFactory.GetOutputType(propertyType);
+                propertyType = propertyType.GetOutputType();
             }
 
             return propertyType;

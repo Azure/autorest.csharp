@@ -98,10 +98,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
-            if (TypeFactory.IsList(type))
+            if (type.IsList)
                 return writer.AppendListValue(type, exampleValue, includeCollectionInitialization);
 
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
                 return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
@@ -440,7 +440,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
-                    if (TypeFactory.IsCollectionType(property.Declaration.Type))
+                    if (property.Declaration.Type.IsCollection)
                     {
                         exampleValue = new ExampleValue()
                         {
@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
+            => property.Declaration.Accessibility == "public" && (property.Declaration.Type.IsReadWriteDictionary || property.Declaration.Type.IsReadWriteList || !property.IsReadOnly);
 
         private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {

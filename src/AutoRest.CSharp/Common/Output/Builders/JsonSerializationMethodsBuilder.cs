@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = property is { IsRequired: true, SerializedType: { IsCollection: true, IsReadOnlyMemory: false } }
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(array.Type.GetElementType(), expression)),
                 JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
                 _ => throw new NotSupportedException()
@@ -592,7 +592,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value)
                 };
 
-                AssignValueStatement assignStatement = TypeFactory.IsReadOnlyMemory(jsonPropertySerialization.SerializedType!)
+                AssignValueStatement assignStatement = jsonPropertySerialization.SerializedType!.IsReadOnlyMemory
                     ? Assign(propertyVariables[jsonPropertySerialization], New.Instance(jsonPropertySerialization.SerializedType!, value))
                     : Assign(propertyVariables[jsonPropertySerialization], value);
                 statements.Add(assignStatement);
@@ -631,7 +631,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
-                if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
+                if (!serializedType.IsCollection || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
@@ -640,11 +640,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired && !TypeFactory.IsReadOnlyMemory(serializedType))
+                if (jsonPropertySerialization.IsRequired && !serializedType.IsReadOnlyMemory)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))),
+                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(serializedType.GetPropertyImplementationType())),
                         Continue
                     };
                 }
@@ -656,7 +656,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
-            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && TypeFactory.IsReadOnlyMemory(serializedType))) &&
+            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && serializedType.IsReadOnlyMemory)) &&
                 serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                 serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
@@ -707,7 +707,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (jsonProperty.ValueSerialization is { } valueSerialization)
                 {
-                    var type = jsonProperty.SerializedType is not null && TypeFactory.IsCollectionType(jsonProperty.SerializedType)
+                    var type = jsonProperty.SerializedType is { IsCollection: true }
                         ? jsonProperty.SerializedType
                         : valueSerialization.Type;
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
@@ -754,7 +754,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.Type):
+                case JsonArraySerialization jsonReadOnlyMemory when jsonReadOnlyMemory.Type.IsArray:
                     var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.Type, "array");
                     value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
@@ -762,7 +762,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return new MethodBodyStatement[]
                     {
                         Declare(index, Int(0)),
-                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.Type), element.GetArrayLength())),
+                        Declare(readOnlyMemory, New.Array(jsonReadOnlyMemory.Type.GetElementType(), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
                             DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), options, index),

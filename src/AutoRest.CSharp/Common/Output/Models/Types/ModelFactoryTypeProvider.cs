@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
-                inputType = TypeFactory.GetInputType(inputType);
+                inputType = inputType.GetInputType();
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            if (!properties.Any(p => p.IsReadOnly && !p.ValueType.IsReadWriteDictionary && !p.ValueType.IsReadWriteList))
             {
                 return false;
             }

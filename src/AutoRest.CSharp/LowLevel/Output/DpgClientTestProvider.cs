@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.LowLevel.Output
                  * Operation<T> operation = <invocation>;
                  * BinaryData responseData = operation.Value;
                  */
-                if (sample.IsLongRunning && TypeFactory.IsOperationOfT(returnType))
+                if (sample.IsLongRunning && returnType.IsOperationOfT)
                 {
                     returnType = GetOperationValueType(returnType);
                     invocation = resultVar.Property("Value");
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.LowLevel.Output
 
             returnType = GetReturnType(returnType);
 
-            Debug.Assert(TypeFactory.IsOperationOfT(returnType));
+            Debug.Assert(returnType.IsOperationOfT);
 
             return returnType.Arguments.Single();
         }
@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.LowLevel.Output
             if (returnType == null)
                 throw new InvalidOperationException("The return type of a client operation should never be null");
 
-            Debug.Assert(TypeFactory.IsPageable(returnType) || TypeFactory.IsAsyncPageable(returnType));
+            Debug.Assert(returnType.IsPageable || returnType.IsAsyncPageable);
 
             return returnType.Arguments.Single();
         }

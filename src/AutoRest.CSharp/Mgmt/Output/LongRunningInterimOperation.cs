@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     }
                 }
             };
-            InterimType = new CSharpType(new MgmtObjectType(targetSchema), MgmtContext.Context.DefaultNamespace, TypeName);
+            InterimType = new CSharpType(new MgmtObjectType(targetSchema, TypeName, MgmtContext.DefaultNamespace));
         }
 
         public CSharpType ReturnType { get; }
