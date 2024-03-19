@@ -57,13 +57,13 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Fish(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Fish(int size, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
             Size = size;
+            Kind = kind;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -72,9 +72,9 @@ namespace PetStore.Models
         {
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
         /// <summary> The size of the fish. </summary>
         public int Size { get; }
+        /// <summary> Discriminator. </summary>
+        internal string Kind { get; set; }
     }
 }

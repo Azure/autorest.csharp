@@ -14,10 +14,10 @@ namespace _Type.Property.AdditionalProperties.Models
     internal partial class UnknownIsUnknownAdditionalPropertiesDiscriminated : IsUnknownAdditionalPropertiesDiscriminated
     {
         /// <summary> Initializes a new instance of <see cref="UnknownIsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="kind"> The discriminator. </param>
         /// <param name="name"> The name property. </param>
+        /// <param name="kind"> The discriminator. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal UnknownIsUnknownAdditionalPropertiesDiscriminated(string kind, string name, IDictionary<string, BinaryData> additionalProperties) : base(kind, name, additionalProperties)
+        internal UnknownIsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties) : base(name, kind, additionalProperties)
         {
         }
 

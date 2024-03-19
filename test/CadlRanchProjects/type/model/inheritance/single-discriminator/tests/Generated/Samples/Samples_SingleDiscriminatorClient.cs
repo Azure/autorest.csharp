@@ -588,8 +588,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
             Response response = client.GetLegacyModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -601,8 +601,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
             Response response = await client.GetLegacyModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -632,8 +632,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
             Response response = client.GetLegacyModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -645,8 +645,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
             Response response = await client.GetLegacyModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]

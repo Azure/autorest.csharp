@@ -28,8 +28,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsUnknownDiscriminated(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -41,8 +41,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -72,8 +72,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsUnknownDiscriminated(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -85,8 +85,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -116,8 +116,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 index = 1234,
-                kind = "derived",
                 name = "<name>",
+                kind = "derived",
             });
             Response response = client.Put(content);
 
@@ -133,8 +133,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 index = 1234,
-                kind = "derived",
                 name = "<name>",
+                kind = "derived",
             });
             Response response = await client.PutAsync(content);
 
@@ -171,8 +171,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             {
                 index = 1234,
                 age = 123.45F,
-                kind = "derived",
                 name = "<name>",
+                kind = "derived",
             });
             Response response = client.Put(content);
 
@@ -189,8 +189,8 @@ namespace _Type.Property.AdditionalProperties.Samples
             {
                 index = 1234,
                 age = 123.45F,
-                kind = "derived",
                 name = "<name>",
+                kind = "derived",
             });
             Response response = await client.PutAsync(content);
 

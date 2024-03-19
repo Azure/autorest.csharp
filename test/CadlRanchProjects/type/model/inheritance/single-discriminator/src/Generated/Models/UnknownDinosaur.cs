@@ -14,10 +14,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     internal partial class UnknownDinosaur : Dinosaur
     {
         /// <summary> Initializes a new instance of <see cref="UnknownDinosaur"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDinosaur(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
+        internal UnknownDinosaur(int size, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(size, kind, serializedAdditionalRawData)
         {
         }
 

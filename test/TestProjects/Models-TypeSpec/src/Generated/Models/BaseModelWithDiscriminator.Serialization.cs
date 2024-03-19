@@ -28,8 +28,6 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
             if (Optional.IsDefined(OptionalPropertyOnBase))
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
@@ -37,6 +35,8 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

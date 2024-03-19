@@ -11,12 +11,12 @@ namespace PetStore.Models
     public static partial class PetStoreModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Fish"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
+        /// <param name="kind"> Discriminator. </param>
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
-        public static Fish Fish(string kind = null, int size = default)
+        public static Fish Fish(int size = default, string kind = null)
         {
-            return new UnknownFish(kind, size, serializedAdditionalRawData: null);
+            return new UnknownFish(size, kind, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Shark"/>. </summary>
@@ -25,7 +25,7 @@ namespace PetStore.Models
         /// <returns> A new <see cref="Models.Shark"/> instance for mocking. </returns>
         public static Shark Shark(int size = default, string bite = null)
         {
-            return new Shark("shark", size, serializedAdditionalRawData: null, bite);
+            return new Shark(size, "shark", serializedAdditionalRawData: null, bite);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Tuna"/>. </summary>
@@ -34,7 +34,7 @@ namespace PetStore.Models
         /// <returns> A new <see cref="Models.Tuna"/> instance for mocking. </returns>
         public static Tuna Tuna(int size = default, int fat = default)
         {
-            return new Tuna("tuna", size, serializedAdditionalRawData: null, fat);
+            return new Tuna(size, "tuna", serializedAdditionalRawData: null, fat);
         }
     }
 }

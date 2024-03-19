@@ -227,26 +227,11 @@
    "Properties": [
     {
      "$id": "30",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Discriminator",
-     "Type": {
-      "$id": "31",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "32",
      "Name": "optionalString",
      "SerializedName": "optionalString",
      "Description": "Optional string.",
      "Type": {
-      "$id": "33",
+      "$id": "31",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -254,6 +239,21 @@
      "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "32",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "Type": {
+      "$id": "33",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": true
     }
    ]
   },
@@ -987,26 +987,11 @@
       "Properties": [
        {
         "$id": "125",
-        "Name": "discriminatorProperty",
-        "SerializedName": "discriminatorProperty",
-        "Description": "Discriminator",
-        "Type": {
-         "$id": "126",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": true
-       },
-       {
-        "$id": "127",
         "Name": "optionalPropertyOnBase",
         "SerializedName": "optionalPropertyOnBase",
         "Description": "Optional property on base",
         "Type": {
-         "$id": "128",
+         "$id": "126",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1016,12 +1001,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "129",
+        "$id": "127",
         "Name": "requiredPropertyOnBase",
         "SerializedName": "requiredPropertyOnBase",
         "Description": "Required property on base",
         "Type": {
-         "$id": "130",
+         "$id": "128",
          "Kind": "Primitive",
          "Name": "Int32",
          "IsNullable": false
@@ -1029,6 +1014,21 @@
         "IsRequired": true,
         "IsReadOnly": false,
         "IsDiscriminator": false
+       },
+       {
+        "$id": "129",
+        "Name": "discriminatorProperty",
+        "SerializedName": "discriminatorProperty",
+        "Description": "Discriminator",
+        "Type": {
+         "$id": "130",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": true
        }
       ]
      },
@@ -2732,26 +2732,11 @@
    "Properties": [
     {
      "$id": "341",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Discriminator",
-     "Type": {
-      "$id": "342",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "343",
      "Name": "size",
      "SerializedName": "size",
      "Description": "",
      "Type": {
-      "$id": "344",
+      "$id": "342",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -2759,6 +2744,21 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "343",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "Type": {
+      "$id": "344",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": true
     }
    ]
   },

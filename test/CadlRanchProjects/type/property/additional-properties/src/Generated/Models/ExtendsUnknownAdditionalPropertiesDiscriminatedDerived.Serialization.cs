@@ -35,10 +35,10 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -76,8 +76,8 @@ namespace _Type.Property.AdditionalProperties.Models
             }
             int index = default;
             float? age = default;
-            string kind = default;
             string name = default;
+            string kind = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,20 +96,20 @@ namespace _Type.Property.AdditionalProperties.Models
                     age = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(kind, name, additionalProperties, index, age);
+            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, age);
         }
 
         BinaryData IPersistableModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(ModelReaderWriterOptions options)

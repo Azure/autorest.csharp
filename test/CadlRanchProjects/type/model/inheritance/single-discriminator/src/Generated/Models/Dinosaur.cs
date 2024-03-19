@@ -57,13 +57,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dinosaur(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Dinosaur(int size, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
             Size = size;
+            Kind = kind;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -72,9 +72,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         {
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
         /// <summary> Gets the size. </summary>
         public int Size { get; }
+        /// <summary> Discriminator. </summary>
+        internal string Kind { get; set; }
     }
 }

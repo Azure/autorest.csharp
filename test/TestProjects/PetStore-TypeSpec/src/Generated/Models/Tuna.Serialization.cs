@@ -30,10 +30,10 @@ namespace PetStore.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fat"u8);
             writer.WriteNumberValue(Fat);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -73,8 +73,8 @@ namespace PetStore.Models
                 return null;
             }
             int fat = default;
-            string kind = default;
             int size = default;
+            string kind = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -84,14 +84,14 @@ namespace PetStore.Models
                     fat = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("size"u8))
                 {
                     size = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -100,7 +100,7 @@ namespace PetStore.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Tuna(kind, size, serializedAdditionalRawData, fat);
+            return new Tuna(size, kind, serializedAdditionalRawData, fat);
         }
 
         BinaryData IPersistableModel<Tuna>.Write(ModelReaderWriterOptions options)

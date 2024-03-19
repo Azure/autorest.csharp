@@ -501,8 +501,8 @@ namespace PetStore.Samples
             Response response = client.GetFish(null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -515,8 +515,8 @@ namespace PetStore.Samples
             Response response = await client.GetFishAsync(null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -549,8 +549,8 @@ namespace PetStore.Samples
             Response response = client.GetFish("<kind>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -563,8 +563,8 @@ namespace PetStore.Samples
             Response response = await client.GetFishAsync("<kind>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]

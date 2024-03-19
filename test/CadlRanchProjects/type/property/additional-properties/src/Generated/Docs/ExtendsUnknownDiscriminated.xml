@@ -40,8 +40,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 Response response = await client.GetExtendsUnknownDiscriminatedAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetExtendsUnknownDiscriminatedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -50,8 +50,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 Response response = await client.GetExtendsUnknownDiscriminatedAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtendsUnknownDiscriminated(RequestContext)">
@@ -63,8 +63,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 Response response = client.GetExtendsUnknownDiscriminated(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetExtendsUnknownDiscriminated with all parameters and parse the result.
 <code><![CDATA[
@@ -73,8 +73,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 Response response = client.GetExtendsUnknownDiscriminated(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(ExtendsUnknownAdditionalPropertiesDiscriminated,CancellationToken)">
@@ -126,8 +126,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 using RequestContent content = RequestContent.Create(new
 {
     index = 1234,
-    kind = "derived",
     name = "<name>",
+    kind = "derived",
 });
 Response response = await client.PutAsync(content);
 
@@ -141,8 +141,8 @@ using RequestContent content = RequestContent.Create(new
 {
     index = 1234,
     age = 123.45F,
-    kind = "derived",
     name = "<name>",
+    kind = "derived",
 });
 Response response = await client.PutAsync(content);
 
@@ -158,8 +158,8 @@ ExtendsUnknownDiscriminated client = new AdditionalPropertiesClient().GetExtends
 using RequestContent content = RequestContent.Create(new
 {
     index = 1234,
-    kind = "derived",
     name = "<name>",
+    kind = "derived",
 });
 Response response = client.Put(content);
 
@@ -173,8 +173,8 @@ using RequestContent content = RequestContent.Create(new
 {
     index = 1234,
     age = 123.45F,
-    kind = "derived",
     name = "<name>",
+    kind = "derived",
 });
 Response response = client.Put(content);
 

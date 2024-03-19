@@ -123,9 +123,9 @@
    "Properties": [
     {
      "$id": "17",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "The discriminator",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property",
      "Type": {
       "$id": "18",
       "Kind": "Primitive",
@@ -134,13 +134,13 @@
      },
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsDiscriminator": true
+     "IsDiscriminator": false
     },
     {
      "$id": "19",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "The discriminator",
      "Type": {
       "$id": "20",
       "Kind": "Primitive",
@@ -149,7 +149,7 @@
      },
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsDiscriminator": true
     }
    ]
   },
@@ -271,9 +271,9 @@
    "Properties": [
     {
      "$id": "36",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "The discriminator",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property",
      "Type": {
       "$id": "37",
       "Kind": "Primitive",
@@ -282,13 +282,13 @@
      },
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsDiscriminator": true
+     "IsDiscriminator": false
     },
     {
      "$id": "38",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "The discriminator",
      "Type": {
       "$id": "39",
       "Kind": "Primitive",
@@ -297,7 +297,7 @@
      },
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsDiscriminator": true
     }
    ]
   },

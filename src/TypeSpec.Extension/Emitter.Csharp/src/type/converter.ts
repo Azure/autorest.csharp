@@ -166,14 +166,6 @@ export function fromSdkModelType(
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
             );
-
-        const index = inputModelType.Properties.findIndex(
-            (p) => p.IsDiscriminator
-        );
-        if (index !== 0 && index !== -1) {
-            const discriminator = inputModelType.Properties.splice(index, 1)[0];
-            inputModelType.Properties.unshift(discriminator);
-        }
     }
 
     return inputModelType;
