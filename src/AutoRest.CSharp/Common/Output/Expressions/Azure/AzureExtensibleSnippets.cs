@@ -5,7 +5,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
     internal partial class AzureExtensibleSnippets : ExtensibleSnippets
     {
-        public override JsonElementSnippets JsonElement { get; } = new AzureJsonElementSnippets();
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
         public override RestOperationsSnippets RestOperations { get; } = new AzureRestOperationsSnippets();

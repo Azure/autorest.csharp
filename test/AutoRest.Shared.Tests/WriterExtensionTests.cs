@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using FirstTestTypeSpec;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests
