@@ -48,14 +48,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, KeyCredential credential, UnbrandedTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new UnbrandedTypeSpecClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
@@ -83,14 +77,8 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
-            if (headParameter == null)
-            {
-                throw new ArgumentNullException(nameof(headParameter));
-            }
-            if (queryParameter == null)
-            {
-                throw new ArgumentNullException(nameof(queryParameter));
-            }
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
             scope.Start();
@@ -125,14 +113,8 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
-            if (headParameter == null)
-            {
-                throw new ArgumentNullException(nameof(headParameter));
-            }
-            if (queryParameter == null)
-            {
-                throw new ArgumentNullException(nameof(queryParameter));
-            }
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
             scope.Start();
@@ -157,22 +139,9 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
@@ -189,22 +158,9 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
@@ -237,22 +193,9 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
             scope.Start();
@@ -293,22 +236,9 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloAgain(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
             scope.Start();
@@ -344,22 +274,9 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
             scope.Start();
@@ -395,22 +312,9 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result NoContentType(string p2, string p1, RequestBody content, RequestOptions context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
             scope.Start();
@@ -518,10 +422,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -535,10 +436,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -568,10 +466,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateLiteralAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
             scope.Start();
@@ -609,10 +504,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result CreateLiteral(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
             scope.Start();
@@ -879,10 +771,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> PatchActionAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
             scope.Start();
@@ -915,10 +804,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result PatchAction(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
             scope.Start();
@@ -940,10 +826,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         public virtual async Task<Result<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = thing.ToRequestBody();
@@ -957,10 +840,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         public virtual Result<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = thing.ToRequestBody();
@@ -990,10 +870,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> AnonymousBodyAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -1031,10 +908,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result AnonymousBody(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -1056,10 +930,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            if (friend == null)
-            {
-                throw new ArgumentNullException(nameof(friend));
-            }
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = friend.ToRequestBody();
@@ -1073,10 +944,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
         public virtual Result<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            if (friend == null)
-            {
-                throw new ArgumentNullException(nameof(friend));
-            }
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = friend.ToRequestBody();
@@ -1106,10 +974,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> FriendlyModelAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -1147,10 +1012,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result FriendlyModel(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -1231,10 +1093,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -1249,10 +1108,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -1283,10 +1139,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
             scope.Start();
@@ -1325,10 +1178,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result StringFormat(Guid subscriptionId, RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
             scope.Start();
@@ -1350,10 +1200,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            if (projectedModel == null)
-            {
-                throw new ArgumentNullException(nameof(projectedModel));
-            }
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = projectedModel.ToRequestBody();
@@ -1367,10 +1214,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
         public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            if (projectedModel == null)
-            {
-                throw new ArgumentNullException(nameof(projectedModel));
-            }
+            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = projectedModel.ToRequestBody();
@@ -1400,10 +1244,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> ProjectedNameModelAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -1441,10 +1282,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result ProjectedNameModel(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -1610,10 +1448,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -1627,10 +1462,7 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = body.ToRequestBody();
@@ -1655,10 +1487,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Result> InternalProtocolAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
             scope.Start();
@@ -1691,10 +1520,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual Result InternalProtocol(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
             scope.Start();
@@ -1825,21 +1651,14 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, RequestOptions context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
             scope.Start();
             try
             {
                 using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, context).ConfigureAwait(false);
                 return Result.FromValue(result.Value, result.GetRawResponse());
             }
             catch (Exception e)
@@ -1868,21 +1687,14 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result<bool> HeadAsBoolean(string id, RequestOptions context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
             scope.Start();
             try
             {
                 using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
+                var result = _pipeline.ProcessHeadAsBoolMessage(message, context);
                 return Result.FromValue(result.Value, result.GetRawResponse());
             }
             catch (Exception e)

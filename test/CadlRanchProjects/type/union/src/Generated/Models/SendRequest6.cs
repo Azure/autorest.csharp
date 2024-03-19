@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         public SendRequest6(EnumsOnlyCases prop)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             Prop = prop;
         }

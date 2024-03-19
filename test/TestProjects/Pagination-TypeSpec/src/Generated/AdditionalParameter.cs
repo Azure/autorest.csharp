@@ -67,26 +67,9 @@ namespace Pagination
         /// <include file="Docs/AdditionalParameter.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,Interval?,string,string,CancellationToken)']/*" />
         public virtual AsyncPageable<DimensionValueListItem> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
-            if (testRunId == null)
-            {
-                throw new ArgumentNullException(nameof(testRunId));
-            }
-            if (testRunId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(testRunId));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (metricNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(metricNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
@@ -110,26 +93,9 @@ namespace Pagination
         /// <include file="Docs/AdditionalParameter.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,Interval?,string,string,CancellationToken)']/*" />
         public virtual Pageable<DimensionValueListItem> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
-            if (testRunId == null)
-            {
-                throw new ArgumentNullException(nameof(testRunId));
-            }
-            if (testRunId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(testRunId));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (metricNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(metricNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
@@ -169,26 +135,9 @@ namespace Pagination
         /// <include file="Docs/AdditionalParameter.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,string,string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
         {
-            if (testRunId == null)
-            {
-                throw new ArgumentNullException(nameof(testRunId));
-            }
-            if (testRunId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(testRunId));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (metricNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(metricNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval, metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval, metricName, timespan, context);
@@ -227,26 +176,9 @@ namespace Pagination
         /// <include file="Docs/AdditionalParameter.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,string,string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, string interval, string metricName, string timespan, RequestContext context)
         {
-            if (testRunId == null)
-            {
-                throw new ArgumentNullException(nameof(testRunId));
-            }
-            if (testRunId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(testRunId));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (metricNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(metricNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(testRunId, nameof(testRunId));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(metricNamespace, nameof(metricNamespace));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval, metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval, metricName, timespan, context);

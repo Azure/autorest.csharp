@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Specs_.Azure.ClientGenerator.Core.Access;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
@@ -19,14 +20,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="inner"/> is null. </exception>
         internal OuterModel(string name, InnerModel inner) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (inner == null)
-            {
-                throw new ArgumentNullException(nameof(inner));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(inner, nameof(inner));
 
             Inner = inner;
         }

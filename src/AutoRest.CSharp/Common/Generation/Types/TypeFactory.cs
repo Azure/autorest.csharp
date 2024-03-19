@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Types
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
+                    return ChangeTrackingDictionaryProvider.Instance.Type.MakeGenericType(type.Arguments);
                 }
             }
 

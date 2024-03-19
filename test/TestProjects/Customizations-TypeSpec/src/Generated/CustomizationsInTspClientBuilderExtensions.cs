@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using CustomizationsInTsp;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="CustomizationsInTspClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<CustomizationsInTspClient, CustomizationsInTspClientOptions> AddCustomizationsInTspClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> Service endpoint. </param>
+        public static IAzureClientBuilder<CustomizationsInTspClient, CustomizationsInTspClientOptions> AddCustomizationsInTspClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<CustomizationsInTspClient, CustomizationsInTspClientOptions>((options) => new CustomizationsInTspClient(options));
+            return builder.RegisterClientFactory<CustomizationsInTspClient, CustomizationsInTspClientOptions>((options) => new CustomizationsInTspClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="CustomizationsInTspClient"/> instance. </summary>

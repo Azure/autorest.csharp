@@ -143,7 +143,8 @@ enum FixedFloatEnum {
 
 @doc("Extensible enum")
 @deprecated("deprecated for test")
-enum ExtensibleEnum {
+union ExtensibleEnum {
+    string,
     One: "1",
     Two: "2",
     Four: "4"
@@ -151,7 +152,8 @@ enum ExtensibleEnum {
 
 @doc("Extensible int enum")
 @deprecated("should be replaced by cadl-ranch")
-enum ExtensibleIntEnum {
+union ExtensibleIntEnum {
+    int32,
     One: 1,
     Two: 2,
     Four: 4

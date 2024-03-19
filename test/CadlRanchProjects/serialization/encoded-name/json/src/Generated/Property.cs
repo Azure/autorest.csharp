@@ -50,10 +50,7 @@ namespace Serialization.EncodedName.Json
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='SendAsync(JsonEncodedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
         {
-            if (jsonEncodedNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(jsonEncodedNameModel));
-            }
+            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonEncodedNameModel.ToRequestContent();
@@ -67,10 +64,7 @@ namespace Serialization.EncodedName.Json
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Send(JsonEncodedNameModel,CancellationToken)']/*" />
         public virtual Response Send(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
         {
-            if (jsonEncodedNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(jsonEncodedNameModel));
-            }
+            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonEncodedNameModel.ToRequestContent();
@@ -101,10 +95,7 @@ namespace Serialization.EncodedName.Json
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Property.Send");
             scope.Start();
@@ -143,10 +134,7 @@ namespace Serialization.EncodedName.Json
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Property.Send");
             scope.Start();

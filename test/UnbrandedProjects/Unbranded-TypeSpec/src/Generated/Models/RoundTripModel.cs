@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 using UnbrandedTypeSpec;
@@ -57,34 +56,13 @@ namespace UnbrandedTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/> or <paramref name="modelWithRequiredNullable"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum?> requiredCollection, IDictionary<string, StringExtensibleEnum?> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable)
         {
-            if (requiredString == null)
-            {
-                throw new ArgumentNullException(nameof(requiredString));
-            }
-            if (requiredCollection == null)
-            {
-                throw new ArgumentNullException(nameof(requiredCollection));
-            }
-            if (requiredDictionary == null)
-            {
-                throw new ArgumentNullException(nameof(requiredDictionary));
-            }
-            if (requiredModel == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModel));
-            }
-            if (requiredUnknown == null)
-            {
-                throw new ArgumentNullException(nameof(requiredUnknown));
-            }
-            if (requiredRecordUnknown == null)
-            {
-                throw new ArgumentNullException(nameof(requiredRecordUnknown));
-            }
-            if (modelWithRequiredNullable == null)
-            {
-                throw new ArgumentNullException(nameof(modelWithRequiredNullable));
-            }
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
+            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
+            Argument.AssertNotNull(requiredUnknown, nameof(requiredUnknown));
+            Argument.AssertNotNull(requiredRecordUnknown, nameof(requiredRecordUnknown));
+            Argument.AssertNotNull(modelWithRequiredNullable, nameof(modelWithRequiredNullable));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -97,9 +75,9 @@ namespace UnbrandedTypeSpec.Models
             IntFixedEnumCollection = new ChangeTrackingList<IntFixedEnum>();
             RequiredUnknown = requiredUnknown;
             RequiredRecordUnknown = requiredRecordUnknown;
-            OptionalRecordUnknown = new OptionalDictionary<string, BinaryData>();
-            ReadOnlyRequiredRecordUnknown = new OptionalDictionary<string, BinaryData>();
-            ReadOnlyOptionalRecordUnknown = new OptionalDictionary<string, BinaryData>();
+            OptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
+            ReadOnlyRequiredRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
+            ReadOnlyOptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
             ModelWithRequiredNullable = modelWithRequiredNullable;
         }
 

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -50,10 +51,7 @@ namespace Pagination.Models
         /// <exception cref="ArgumentNullException"> <paramref name="contents"/> is null. </exception>
         internal LedgerEntry(string contents)
         {
-            if (contents == null)
-            {
-                throw new ArgumentNullException(nameof(contents));
-            }
+            Argument.AssertNotNull(contents, nameof(contents));
 
             Contents = contents;
         }

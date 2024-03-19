@@ -39,10 +39,7 @@ namespace _Type.Model.Inheritance.Recursive
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RecursiveClient(Uri endpoint, RecursiveClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RecursiveClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -56,10 +53,7 @@ namespace _Type.Model.Inheritance.Recursive
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='PutAsync(Extension,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(Extension input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -73,10 +67,7 @@ namespace _Type.Model.Inheritance.Recursive
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='Put(Extension,CancellationToken)']/*" />
         public virtual Response Put(Extension input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -107,10 +98,7 @@ namespace _Type.Model.Inheritance.Recursive
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RecursiveClient.Put");
             scope.Start();
@@ -149,10 +137,7 @@ namespace _Type.Model.Inheritance.Recursive
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RecursiveClient.Put");
             scope.Start();

@@ -1337,7 +1337,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = client.DateTimeBody(content);
 
             Console.WriteLine(response.Status);
@@ -1350,7 +1350,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1363,7 +1363,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1373,7 +1373,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1383,7 +1383,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = client.DateTimeBody(content);
 
             Console.WriteLine(response.Status);
@@ -1396,7 +1396,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1409,7 +1409,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1419,7 +1419,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -2392,6 +2392,106 @@ new BaseModel(123)
             {
                 ["key"] = 1234
             });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.AzureLocationOp(default, default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.AzureLocationOp(default, default);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.AzureLocationOpAsync(default, default);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = client.AzureLocationOp(default, default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = client.AzureLocationOp(default, default, body: body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
     }
 }

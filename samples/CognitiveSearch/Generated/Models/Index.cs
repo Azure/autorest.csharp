@@ -21,14 +21,8 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="fields"/> is null. </exception>
         public Index(string name, IEnumerable<Field> fields)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (fields == null)
-            {
-                throw new ArgumentNullException(nameof(fields));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(fields, nameof(fields));
 
             Name = name;
             Fields = fields.ToList();

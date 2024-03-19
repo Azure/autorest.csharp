@@ -48,14 +48,8 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public DPGClient(Uri endpoint, AzureKeyCredential credential, DPGClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new DPGClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -82,10 +76,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModelAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModel");
             scope.Start();
@@ -119,10 +110,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModel(string,RequestContext)']/*" />
         public virtual Response GetModel(string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModel");
             scope.Start();
@@ -157,14 +145,8 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModelAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostModelAsync(string mode, RequestContent content, RequestContext context = null)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
             scope.Start();
@@ -199,14 +181,8 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='PostModel(string,RequestContent,RequestContext)']/*" />
         public virtual Response PostModel(string mode, RequestContent content, RequestContext context = null)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
             scope.Start();
@@ -240,10 +216,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPagesAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
@@ -268,10 +241,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPages(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
@@ -297,10 +267,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='LroAsync(WaitUntil,string,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> LroAsync(WaitUntil waitUntil, string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();
@@ -335,10 +302,7 @@ namespace dpg_customization_LowLevel
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='Lro(WaitUntil,string,RequestContext)']/*" />
         public virtual Operation<BinaryData> Lro(WaitUntil waitUntil, string mode, RequestContext context)
         {
-            if (mode == null)
-            {
-                throw new ArgumentNullException(nameof(mode));
-            }
+            Argument.AssertNotNull(mode, nameof(mode));
 
             using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();

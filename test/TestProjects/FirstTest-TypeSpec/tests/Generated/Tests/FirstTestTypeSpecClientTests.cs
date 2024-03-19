@@ -588,7 +588,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -600,7 +600,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -611,7 +611,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -623,7 +623,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1106,6 +1106,56 @@ new BaseModel(123)
             {
                 ["key"] = 1234
             });
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = null;
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.AzureLocationOpAsync(default, default);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = await client.AzureLocationOpAsync(default, default, content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
     }
 }

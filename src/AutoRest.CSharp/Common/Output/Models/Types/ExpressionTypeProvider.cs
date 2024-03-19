@@ -4,9 +4,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Types.System;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -17,6 +20,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return ChangeTrackingListProvider.Instance;
             yield return OptionalTypeProvider.Instance;
+            yield return RequestContentHelperProvider.Instance;
+            yield return Utf8JsonRequestContentProvider.Instance;
+            yield return ArgumentProvider.Instance;
+            yield return ChangeTrackingDictionaryProvider.Instance;
+            if (!Configuration.IsBranded)
+            {
+                yield return ErrorResultProvider.Instance;
+                yield return ClientPipelineExtensionsProvider.Instance;
+            }
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
@@ -40,11 +52,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public virtual CSharpType? Inherits { get; protected init; }
 
+        public virtual WhereExpression? WhereClause { get; protected init; }
+
         private IReadOnlyList<CSharpType>? _implements;
-        public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
+        public IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
 
         private IReadOnlyList<PropertyDeclaration>? _properties;
-        public virtual IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
+        public IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
 
         private IReadOnlyList<Method>? _methods;
         public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
@@ -54,6 +68,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IReadOnlyList<FieldDeclaration>? _fields;
         public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
+
+        private IReadOnlyList<ExpressionTypeProvider>? _nestedTypes;
+        public IReadOnlyList<ExpressionTypeProvider> NestedTypes => _nestedTypes ??= BuildNestedTypes().ToArray();
 
         protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
         {
@@ -76,6 +93,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected virtual IEnumerable<Method> BuildConstructors()
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerable<ExpressionTypeProvider> BuildNestedTypes()
         {
             yield break;
         }

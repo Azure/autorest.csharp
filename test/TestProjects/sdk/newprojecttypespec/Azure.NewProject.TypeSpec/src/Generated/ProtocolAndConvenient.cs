@@ -58,10 +58,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -75,10 +72,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -103,10 +97,7 @@ namespace Azure.NewProject.TypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.InternalProtocol");
             scope.Start();
@@ -139,10 +130,7 @@ namespace Azure.NewProject.TypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.InternalProtocol");
             scope.Start();

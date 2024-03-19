@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -50,10 +51,7 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Friend(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

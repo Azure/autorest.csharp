@@ -20,6 +20,7 @@ namespace CustomizationsInTsp
     public partial class CustomizationsInTspClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,19 +28,30 @@ namespace CustomizationsInTsp
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        public CustomizationsInTspClient() : this(new CustomizationsInTspClientOptions())
+        /// <summary> Initializes a new instance of CustomizationsInTspClient for mocking. </summary>
+        protected CustomizationsInTspClient()
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public CustomizationsInTspClient(CustomizationsInTspClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CustomizationsInTspClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
@@ -49,10 +61,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
         public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -67,10 +76,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />
         public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -101,10 +107,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.RoundTrip");
             scope.Start();
@@ -143,10 +146,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTrip(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.RoundTrip");
             scope.Start();
@@ -169,10 +169,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='FooAsync(RenamedModel,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> FooAsync(RenamedModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -187,10 +184,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Foo(RenamedModel,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Foo(RenamedModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -221,10 +215,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='FooAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FooAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.Foo");
             scope.Start();
@@ -263,10 +254,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Foo(RequestContent,RequestContext)']/*" />
         public virtual Response Foo(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.Foo");
             scope.Start();
@@ -289,10 +277,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RenamedModel,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel renamedModel, CancellationToken cancellationToken = default)
         {
-            if (renamedModel == null)
-            {
-                throw new ArgumentNullException(nameof(renamedModel));
-            }
+            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
@@ -307,10 +292,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RenamedModel,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Bar(RenamedModel renamedModel, CancellationToken cancellationToken = default)
         {
-            if (renamedModel == null)
-            {
-                throw new ArgumentNullException(nameof(renamedModel));
-            }
+            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
@@ -341,10 +323,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BarAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.Bar");
             scope.Start();
@@ -383,10 +362,7 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RequestContent,RequestContext)']/*" />
         public virtual Response Bar(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CustomizationsInTspClient.Bar");
             scope.Start();
@@ -408,6 +384,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -422,6 +399,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/foo", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -436,6 +414,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/bar", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

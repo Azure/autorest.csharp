@@ -36,10 +36,7 @@ namespace Payload.MediaType
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MediaTypeClient(Uri endpoint, MediaTypeClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new MediaTypeClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

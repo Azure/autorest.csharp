@@ -1,13 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Nullable>annotations</Nullable>
-    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+    <Description>This is the Accessibility_LowLevel_TokenAuth client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation Accessibility_LowLevel_TokenAuth for Azure Data Plane</AssemblyTitle>
+    <Version>1.0.0-beta.1</Version>
+    <PackageTags>Accessibility_LowLevel_TokenAuth</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared/Core" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Core" />
-    <PackageReference Include="Azure.Core.Experimental" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 </Project>

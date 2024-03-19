@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
-                var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
+                var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
                 var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
+            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.JsonConverter);
         }
 
         private class SerializationPropertyBag

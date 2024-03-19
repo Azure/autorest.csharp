@@ -55,18 +55,9 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         public Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (requiredUnion == null)
-            {
-                throw new ArgumentNullException(nameof(requiredUnion));
-            }
-            if (requiredBadDescription == null)
-            {
-                throw new ArgumentNullException(nameof(requiredBadDescription));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
             Name = name;
             RequiredUnion = requiredUnion;

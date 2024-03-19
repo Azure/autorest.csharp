@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,10 +51,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public CreateImageVariationRequest(BinaryData image)
         {
-            if (image == null)
-            {
-                throw new ArgumentNullException(nameof(image));
-            }
+            Argument.AssertNotNull(image, nameof(image));
 
             Image = image;
         }

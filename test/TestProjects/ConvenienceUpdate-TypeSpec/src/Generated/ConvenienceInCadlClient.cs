@@ -20,6 +20,7 @@ namespace ConvenienceInCadl
     public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,19 +28,30 @@ namespace ConvenienceInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        public ConvenienceInCadlClient() : this(new ConvenienceInCadlClientOptions())
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient for mocking. </summary>
+        protected ConvenienceInCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public ConvenienceInCadlClient(ConvenienceInCadlClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint) : this(endpoint, new ConvenienceInCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint, ConvenienceInCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ConvenienceInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
@@ -140,10 +152,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -159,10 +168,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -194,10 +200,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
             scope.Start();
@@ -237,10 +240,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
             scope.Start();
@@ -334,10 +334,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoConvenienceRequiredBodyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
             scope.Start();
@@ -371,10 +368,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBody(RequestContent,RequestContext)']/*" />
         public virtual Response NoConvenienceRequiredBody(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
             scope.Start();
@@ -1217,10 +1211,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1235,10 +1226,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(Model,CancellationToken)']/*" />
         public virtual Response ProtocolRequiredModel(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1269,10 +1257,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredModel");
             scope.Start();
@@ -1311,10 +1296,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProtocolRequiredModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredModel");
             scope.Start();
@@ -1849,10 +1831,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1867,10 +1846,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(Model,CancellationToken)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1901,10 +1877,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredModelWithOptional");
             scope.Start();
@@ -1943,10 +1916,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredModelWithOptional");
             scope.Start();
@@ -2066,10 +2036,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -2085,10 +2052,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -2120,10 +2084,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
             scope.Start();
@@ -2163,10 +2124,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
             scope.Start();
@@ -2188,6 +2146,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/updateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2200,6 +2159,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalBeforeRequired", false);
             if (optional != null)
             {
@@ -2218,6 +2178,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2230,6 +2191,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceRequiredBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2244,6 +2206,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceOptionalBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2258,6 +2221,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocol", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2270,6 +2234,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2282,6 +2247,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2294,6 +2260,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceShouldNotGenerate", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2306,6 +2273,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolShouldNotGenerateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2318,6 +2286,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalQuery", false);
             if (optional != null)
             {
@@ -2334,6 +2303,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredQuery", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2347,6 +2317,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2361,6 +2332,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2375,6 +2347,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithOptional", false);
             if (optional != null)
             {
@@ -2391,6 +2364,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithOptional", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2404,6 +2378,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithRequired", false);
             if (optional != null)
             {
@@ -2420,6 +2395,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithRequired", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2433,6 +2409,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2447,6 +2424,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2461,6 +2439,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2475,6 +2454,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalBeforeRequired", false);
             if (optional != null)
             {

@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
 using System;
 using System.Collections;
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ChangeTrackingListProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.Namespace, null));
+        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider());
 
         private class ChangeTrackingListTemplate<T> { }
 
@@ -39,8 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ChangeTrackingListProvider Instance => _instance.Value;
 
-        private ChangeTrackingListProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private ChangeTrackingListProvider() : base(Configuration.HelperNamespace, null)
         {
             _t = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0];
             _iListOfT = new CSharpType(typeof(IList<>), _t);
@@ -131,7 +130,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private PropertyDeclaration BuildIndexer()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, _t, "this", new MethodPropertyBody(
+            var indexParam = new Parameter("index", null, typeof(int), null, ValidationType.None, null);
+            return new IndexerDeclaration(null, MethodSignatureModifiers.Public, _t, "this", indexParam, new MethodPropertyBody(
                 new MethodBodyStatement[]
                 {
                     new IfStatement(IsUndefined)

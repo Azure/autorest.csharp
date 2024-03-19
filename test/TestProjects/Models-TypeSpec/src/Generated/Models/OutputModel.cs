@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
@@ -57,22 +56,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/> or <paramref name="requiredModelRecord"/> is null. </exception>
         internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
         {
-            if (requiredString == null)
-            {
-                throw new ArgumentNullException(nameof(requiredString));
-            }
-            if (requiredModel == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModel));
-            }
-            if (requiredList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredList));
-            }
-            if (requiredModelRecord == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModelRecord));
-            }
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

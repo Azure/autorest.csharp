@@ -21,16 +21,21 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             public static ValueExpression ArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
+            public static ValueExpression ArgumentOutOfRangeException(ValueExpression valueParameter, string message, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentOutOfRangeException), wrapInNameOf ? Nameof(valueParameter) : valueParameter, Literal(message));
             public static ValueExpression NotImplementedException(string name)
                 => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
             public static ValueExpression InvalidOperationException(ValueExpression message)
                 => Instance(typeof(InvalidOperationException), message);
 
-            public static ValueExpression ArgumentNullException(ValueExpression parameter)
-                => Instance(typeof(ArgumentNullException), Nameof(parameter));
+            public static ValueExpression ArgumentNullException(ValueExpression parameter, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentNullException), wrapInNameOf ? Nameof(parameter) : parameter);
 
-            public static ValueExpression ArgumentException(ValueExpression parameter)
-                => Instance(typeof(ArgumentException), Literal("Value cannot be an empty string."), Nameof(parameter));
+            public static ValueExpression ArgumentException(ValueExpression parameter, string message, bool wrapInNameOf = true)
+                => ArgumentException(parameter, Literal(message), wrapInNameOf);
+
+            public static ValueExpression ArgumentException(ValueExpression parameter, ValueExpression message, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentException), message, wrapInNameOf ? Nameof(parameter) : parameter);
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));

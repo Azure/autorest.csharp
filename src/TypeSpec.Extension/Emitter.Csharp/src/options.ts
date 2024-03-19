@@ -30,7 +30,7 @@ export type NetEmitterOptions = {
     logLevel?: string;
     "package-dir"?: string;
     "head-as-boolean"?: boolean;
-    branded?: boolean;
+    flavor?: string;
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
@@ -102,7 +102,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
-        branded: { type: "boolean", nullable: true, default: true },
+        flavor: { type: "string", nullable: true },
         "generate-sample-project": {
             type: "boolean",
             nullable: true,
@@ -135,7 +135,7 @@ const defaultOptions = {
     "methods-to-keep-client-default-value": undefined,
     "deserialize-null-collection-as-null-value": undefined,
     logLevel: LoggerLevel.INFO,
-    branded: true,
+    flavor: undefined,
     "generate-test-project": false
 };
 
@@ -143,6 +143,7 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+
     const outputFolder = resolveOutputFolder(context);
     return {
         ...resolvedOptions,

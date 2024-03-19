@@ -45,10 +45,7 @@ namespace Server.Path.Multiple
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleClient(Uri endpoint, MultipleClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new MultipleClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -139,14 +136,7 @@ namespace Server.Path.Multiple
         /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithOperationPathParamAsync(string keyword, RequestContext context = null)
         {
-            if (keyword == null)
-            {
-                throw new ArgumentNullException(nameof(keyword));
-            }
-            if (keyword.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(keyword));
-            }
+            Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.WithOperationPathParam");
             scope.Start();
@@ -182,14 +172,7 @@ namespace Server.Path.Multiple
         /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,RequestContext)']/*" />
         public virtual Response WithOperationPathParam(string keyword, RequestContext context = null)
         {
-            if (keyword == null)
-            {
-                throw new ArgumentNullException(nameof(keyword));
-            }
-            if (keyword.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(keyword));
-            }
+            Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.WithOperationPathParam");
             scope.Start();

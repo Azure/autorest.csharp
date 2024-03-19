@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -47,10 +48,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ChatCompletionFunctionCallOption(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

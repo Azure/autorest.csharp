@@ -39,10 +39,7 @@ namespace Client.Naming
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NamingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -131,10 +128,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ParameterAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParameterAsync(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Parameter");
             scope.Start();
@@ -169,10 +163,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Parameter(string,RequestContext)']/*" />
         public virtual Response Parameter(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Parameter");
             scope.Start();
@@ -194,10 +185,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ClientAsync(ClientNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> ClientAsync(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
         {
-            if (clientNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientNameModel));
-            }
+            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameModel.ToRequestContent();
@@ -211,10 +199,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Client(ClientNameModel,CancellationToken)']/*" />
         public virtual Response Client(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
         {
-            if (clientNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientNameModel));
-            }
+            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameModel.ToRequestContent();
@@ -245,10 +230,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Client");
             scope.Start();
@@ -287,10 +269,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Client");
             scope.Start();
@@ -312,10 +291,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='LanguageAsync(LanguageClientNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
         {
-            if (languageClientNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(languageClientNameModel));
-            }
+            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageClientNameModel.ToRequestContent();
@@ -329,10 +305,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Language(LanguageClientNameModel,CancellationToken)']/*" />
         public virtual Response Language(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
         {
-            if (languageClientNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(languageClientNameModel));
-            }
+            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageClientNameModel.ToRequestContent();
@@ -363,10 +336,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Language");
             scope.Start();
@@ -405,10 +375,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Language");
             scope.Start();
@@ -430,10 +397,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
         {
-            if (clientNameAndJsonEncodedNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientNameAndJsonEncodedNameModel));
-            }
+            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
@@ -447,10 +411,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
         public virtual Response CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
         {
-            if (clientNameAndJsonEncodedNameModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientNameAndJsonEncodedNameModel));
-            }
+            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
@@ -481,10 +442,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedNameAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CompatibleWithEncodedNameAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.CompatibleWithEncodedName");
             scope.Start();
@@ -523,10 +481,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedName(RequestContent,RequestContext)']/*" />
         public virtual Response CompatibleWithEncodedName(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.CompatibleWithEncodedName");
             scope.Start();
@@ -561,10 +516,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='RequestAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> RequestAsync(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Request");
             scope.Start();
@@ -599,10 +551,7 @@ namespace Client.Naming
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Request(string,RequestContext)']/*" />
         public virtual Response Request(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("NamingClient.Request");
             scope.Start();
@@ -681,11 +630,18 @@ namespace Client.Naming
         }
 
         private ClientModel _cachedClientModel;
+        private UnionEnum _cachedUnionEnum;
 
         /// <summary> Initializes a new instance of ClientModel. </summary>
         public virtual ClientModel GetClientModelClient()
         {
             return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClientModel;
+        }
+
+        /// <summary> Initializes a new instance of UnionEnum. </summary>
+        public virtual UnionEnum GetUnionEnumClient()
+        {
+            return Volatile.Read(ref _cachedUnionEnum) ?? Interlocked.CompareExchange(ref _cachedUnionEnum, new UnionEnum(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionEnum;
         }
 
         internal HttpMessage CreateClientNameRequest(RequestContext context)

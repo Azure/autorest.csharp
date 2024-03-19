@@ -47,14 +47,8 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PolymorphismClient(Uri endpoint, AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -141,10 +135,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
@@ -178,10 +169,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
@@ -455,10 +443,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicatedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
@@ -492,10 +477,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicated(RequestContent,RequestContext)']/*" />
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
@@ -529,10 +511,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminatorAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
@@ -566,10 +545,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminator(RequestContent,RequestContext)']/*" />
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
@@ -603,10 +579,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequiredAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
@@ -640,10 +613,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequired(RequestContent,RequestContext)']/*" />
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();

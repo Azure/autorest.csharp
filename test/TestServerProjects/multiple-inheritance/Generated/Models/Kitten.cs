@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -18,10 +19,7 @@ namespace multiple_inheritance.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Kitten(string name) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
         }
 
         /// <summary> Initializes a new instance of <see cref="Kitten"/>. </summary>

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -22,10 +23,7 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         protected BaseModelWithDiscriminatorDefinedOnBase(string kind) : base(kind)
         {
-            if (kind == null)
-            {
-                throw new ArgumentNullException(nameof(kind));
-            }
+            Argument.AssertNotNull(kind, nameof(kind));
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>

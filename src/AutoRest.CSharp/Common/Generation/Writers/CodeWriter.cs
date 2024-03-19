@@ -432,6 +432,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
         {
+            if (type.IsFrameworkType && type.FrameworkType.IsArray && type.FrameworkType.GetGenericArguments().Any())
+            {
+                AppendType(type.FrameworkType.GetElementType()!, isDeclaration, writeTypeNameOnly);
+                AppendRaw("[]");
+                return;
+            }
+
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
@@ -446,6 +453,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (writeTypeNameOnly)
             {
+                AppendRaw(type.Name);
+            }
+            else if (type.DeclaringType != null)
+            {
+                AppendType(type.DeclaringType, isDeclaration, writeTypeNameOnly);
+                AppendRaw(".");
                 AppendRaw(type.Name);
             }
             else
@@ -810,9 +823,9 @@ namespace AutoRest.CSharp.Generation.Writers
             this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
                 .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))
                 .AppendRawIf("private ", modifiers.HasFlag(TypeSignatureModifiers.Private))
-                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial))
                 .AppendRawIf("static ", modifiers.HasFlag(TypeSignatureModifiers.Static))
-                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed));
+                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed))
+                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial)); // partial must be the last to write otherwise compiler will complain
         }
     }
 }
