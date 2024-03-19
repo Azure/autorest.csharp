@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
@@ -17,10 +18,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                              jsonObjectSerialization.Properties.Any(p => p.SerializedName == "id");
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
-            ObjectType = objectType;
+            FlattenedProperties = objectType.Properties
+                .Where(p => p.FlattenedProperty != null)
+                .Select(p => p.FlattenedProperty!).ToList();
         }
 
-        public SerializableObjectType ObjectType { get; }
+        public IList<FlattenedObjectTypeProperty> FlattenedProperties { get; }
 
         public IEnumerable<BicepPropertySerialization> Properties { get; }
 
