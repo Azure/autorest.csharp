@@ -133,14 +133,18 @@ if (!($Exclude -contains "TestServerLowLevel")) {
 function Add-Directory ([string]$testName, [string]$directory) {
     $readmeConfigurationPath = Join-Path $directory "readme.md"
     $testArguments = $null
+    $launchSettings = ""
     if (Test-Path $readmeConfigurationPath) {
         $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true --generate-test-project=true"
+        if ($directory.EndsWith("\src")) {
+            $launchSettings = "-n"
+        }
     }
     if ($testName.EndsWith("TypeSpec")) {
         Add-TypeSpec $testName $directory "" "--option @azure-tools/typespec-csharp.new-project=true" "-n"
     }
     else {
-        Add-Swagger $testName $directory $testArguments
+        Add-Swagger $testName $directory $testArguments $launchSettings
     }
 }
 
@@ -168,6 +172,7 @@ function Add-TestProjects-Directory($directory) {
     $testArguments = $null
     $srcFolder = Join-Path $directory "src"
     $testsFolder = Join-Path $directory "tests"
+    $srcReadmeConfigurationPath = Join-Path $srcFolder "readme.md"
 
     # if we have both src and test directories, we treat it as a swagger directory project
     if ((Test-Path -Path $srcFolder) -And (Test-Path -Path $testsFolder)) {
@@ -198,6 +203,9 @@ function Add-TestProjects-Directory($directory) {
     elseif (Test-Path $readmeConfigurationPath) {
         $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
         Add-Swagger $testName $directory $testArguments
+    }
+    elseif (Test-Path $srcReadmeConfigurationPath) {
+        Add-Directory $testName $srcFolder
     }
     elseif (Test-Path $possibleInputJsonFilePath) {
         $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client --clear-output-folder=true"
@@ -232,6 +240,14 @@ if (!($Exclude -contains "Samples")) {
     foreach ($directory in Get-ChildItem $sampleProjectsRoot -Directory) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
+
+        $srcProjectDirectory = Join-Path $projectDirectory "src"
+        $srcReadmeConfigurationPath = Join-Path $srcProjectDirectory "readme.md"
+        if (Test-Path $srcReadmeConfigurationPath) {
+            Add-Directory $sampleName $srcProjectDirectory
+            continue
+        }
+
         if (Test-Path "$projectDirectory/*.sln") {
             $projectDirectory = Join-Path $projectDirectory "src"
         }

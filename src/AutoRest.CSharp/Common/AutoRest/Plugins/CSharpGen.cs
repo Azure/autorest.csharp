@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
@@ -143,7 +144,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
                     bool includeDfe = codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
-                    new CSharpProj(needAzureKeyAuth, includeDfe).Execute(autoRest);
+                    if (Configuration.OutputFolder.EndsWith("/src/Generated"))
+                    {
+                        await new NewProjectScaffolding(needAzureKeyAuth, includeDfe).Execute();
+                    }
+                    else
+                    {
+                        new CSharpProj(needAzureKeyAuth, includeDfe).Execute(autoRest);
+                    }
                 }
             }
             catch (ErrorHelpers.ErrorException e)
