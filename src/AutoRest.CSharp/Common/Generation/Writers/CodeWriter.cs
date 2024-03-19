@@ -455,6 +455,12 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 AppendRaw(type.Name);
             }
+            else if (type.DeclaringType != null)
+            {
+                AppendType(type.DeclaringType, isDeclaration, writeTypeNameOnly);
+                AppendRaw(".");
+                AppendRaw(type.Name);
+            }
             else
             {
                 UseNamespace(type.Namespace);

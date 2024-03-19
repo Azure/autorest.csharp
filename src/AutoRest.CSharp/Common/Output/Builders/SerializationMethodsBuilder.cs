@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (serialization.Bicep is { } bicep)
             {
-                foreach (var method in BicepSerializationMethodsBuilder.BuildPerTypeBicepSerializationMethods(bicep))
+                foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(bicep))
                 {
                     yield return method;
                 }

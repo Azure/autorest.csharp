@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../UnbrandedProjects/**/*.cs" LinkBase="UnbrandedProjects" />
+    <Compile Include="../UnbrandedProjects/**/*.cs" Exclude="../UnbrandedProjects/**/Properties/**/*.cs" LinkBase="UnbrandedProjects" />
   </ItemGroup>
 
 </Project>

@@ -371,12 +371,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (valueSerialization.Format is SerializationFormat.Duration_Seconds)
                 {
-                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).ToString(format)));
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).InvokeToString(format)));
                 }
 
                 if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float)
                 {
-                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).ToString(format)));
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).InvokeToString(format)));
                 }
 
                 if (valueSerialization.Format is SerializationFormat.DateTime_Unix)
