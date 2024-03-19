@@ -2,15 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-<<<<<<<< HEAD:test/CadlRanchProjectsNonAzure/authentication/http/custom/Scm.Authentication.Http.Custom.sln
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scm.Authentication.Http.Custom", "src\Scm.Authentication.Http.Custom.csproj", "{28FF4005-4467-4E36-92E7-DEA27DEB1519}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scm.Authentication.Http.Custom.Tests", "tests\Scm.Authentication.Http.Custom.Tests.csproj", "{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}"
-========
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgmtMultipleParentResource", "src\MgmtMultipleParentResource.csproj", "{28FF4005-4467-4E36-92E7-DEA27DEB1519}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgmtMultipleParentResource.Tests", "tests\MgmtMultipleParentResource.Tests.csproj", "{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}"
->>>>>>>> 879233de12000f68916609e00f4431c604b7c1c5:test/TestProjects/MgmtMultipleParentResource/MgmtMultipleParentResource.sln
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

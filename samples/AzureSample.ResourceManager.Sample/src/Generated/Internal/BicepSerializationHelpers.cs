@@ -9,7 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text;
 
-namespace Azure.ResourceManager.Sample
+namespace AzureSample.ResourceManager.Sample
 {
     internal static class BicepSerializationHelpers
     {
