@@ -131,7 +131,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void ToBicepWithParameters()
+        public void ToBicepWithOverrides()
         {
             var now = DateTime.UtcNow;
             var queryParams = new QueryStringMatchConditionParameters(
@@ -161,6 +161,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 DateTimeProperty = now,
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
+                NestedName = "someSku"
             };
             var options = new BicepModelReaderWriterOptions
             {
@@ -171,6 +172,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                             {
                                 { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
                                 { nameof(DeliveryRuleData.Location), "locationParameter" },
+                                { nameof(DeliveryRuleData.NestedName), "'overridenSku'" },
                             }
                         },
                         {
@@ -196,6 +198,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                              dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
                              duration: 'P1D'
                              number: 4
+                             sku: {
+                               name: {
+                                 nestedName: 'overridenSku'
+                               }
+                             }
                              properties: {
                                order: 3
                                conditions: {

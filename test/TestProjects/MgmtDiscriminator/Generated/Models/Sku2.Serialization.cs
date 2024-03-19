@@ -12,27 +12,27 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Sample;
+using MgmtDiscriminator;
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtDiscriminator.Models
 {
-    internal partial class AdditionalCapabilities : IUtf8JsonSerializable, IJsonModel<AdditionalCapabilities>
+    internal partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AdditionalCapabilities>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<AdditionalCapabilities>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Sku2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AdditionalCapabilities>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku2>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AdditionalCapabilities)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku2)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(UltraSSDEnabled))
+            if (Optional.IsDefined(NestedName))
             {
-                writer.WritePropertyName("ultraSSDEnabled"u8);
-                writer.WriteBooleanValue(UltraSSDEnabled.Value);
+                writer.WritePropertyName("nestedName"u8);
+                writer.WriteStringValue(NestedName);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -52,19 +52,19 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        AdditionalCapabilities IJsonModel<AdditionalCapabilities>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Sku2 IJsonModel<Sku2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AdditionalCapabilities>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku2>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AdditionalCapabilities)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku2)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAdditionalCapabilities(document.RootElement, options);
+            return DeserializeSku2(document.RootElement, options);
         }
 
-        internal static AdditionalCapabilities DeserializeAdditionalCapabilities(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Sku2 DeserializeSku2(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -72,18 +72,14 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            bool? ultraSSDEnabled = default;
+            string nestedName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ultraSSDEnabled"u8))
+                if (property.NameEquals("nestedName"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    ultraSSDEnabled = property.Value.GetBoolean();
+                    nestedName = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -92,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData);
+            return new Sku2(nestedName, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -111,18 +107,25 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UltraSSDEnabled), out propertyOverride);
-            if (Optional.IsDefined(UltraSSDEnabled) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NestedName), out propertyOverride);
+            if (Optional.IsDefined(NestedName) || hasPropertyOverride)
             {
-                builder.Append("  ultraSSDEnabled: ");
+                builder.Append("  nestedName: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    var boolValue = UltraSSDEnabled.Value == true ? "true" : "false";
-                    builder.AppendLine($"{boolValue}");
+                    if (NestedName.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{NestedName}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{NestedName}'");
+                    }
                 }
             }
 
@@ -134,9 +137,9 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        BinaryData IPersistableModel<AdditionalCapabilities>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Sku2>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AdditionalCapabilities>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku2>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -145,28 +148,28 @@ namespace Azure.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(AdditionalCapabilities)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku2)} does not support '{options.Format}' format.");
             }
         }
 
-        AdditionalCapabilities IPersistableModel<AdditionalCapabilities>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Sku2 IPersistableModel<Sku2>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AdditionalCapabilities>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Sku2>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeAdditionalCapabilities(document.RootElement, options);
+                        return DeserializeSku2(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(AdditionalCapabilities)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku2)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<AdditionalCapabilities>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Sku2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

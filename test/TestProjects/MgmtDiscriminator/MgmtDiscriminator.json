@@ -440,6 +440,11 @@
                     "type": "object",
                     "$ref": "#/definitions/Shell"
                 },
+                "sku": {
+                    "description": "A model that will be safe flattened.",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku1"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
@@ -568,6 +573,27 @@
                 },
                 "type": {
                     "description": "The type of the shell",
+                    "type": "string"
+                }
+            }
+        },
+        "Sku1": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the sku",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku2"
+                }
+            }
+        },
+        "Sku2": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "nestedName": {
+                    "description": "The name of the sku",
                     "type": "string"
                 }
             }

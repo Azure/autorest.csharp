@@ -532,6 +532,11 @@ namespace Azure.ResourceManager.Sample
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -1000,6 +1005,53 @@ namespace Azure.ResourceManager.Sample
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "HardwareVmSize":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("VmSize", item.Value);
+                        bicepOptions.ParameterOverrides.Add(HardwareProfile, propertyDictionary);
+                        break;
+                    case "UltraSSDEnabled":
+                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
+                        propertyDictionary0.Add("UltraSSDEnabled", item.Value);
+                        bicepOptions.ParameterOverrides.Add(AdditionalCapabilities, propertyDictionary0);
+                        break;
+                    case "EncryptionAtHost":
+                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
+                        propertyDictionary1.Add("EncryptionAtHost", item.Value);
+                        bicepOptions.ParameterOverrides.Add(SecurityProfile, propertyDictionary1);
+                        break;
+                    case "NetworkInterfaces":
+                        Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
+                        propertyDictionary2.Add("NetworkInterfaces", item.Value);
+                        bicepOptions.ParameterOverrides.Add(NetworkProfile, propertyDictionary2);
+                        break;
+                    case "NetworkInterfaceConfigurations":
+                        Dictionary<string, string> propertyDictionary3 = new Dictionary<string, string>();
+                        propertyDictionary3.Add("NetworkInterfaceConfigurations", item.Value);
+                        bicepOptions.ParameterOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
+                        break;
+                    case "BootDiagnostics":
+                        Dictionary<string, string> propertyDictionary4 = new Dictionary<string, string>();
+                        propertyDictionary4.Add("BootDiagnostics", item.Value);
+                        bicepOptions.ParameterOverrides.Add(DiagnosticsProfile, propertyDictionary4);
+                        break;
+                    case "AvailabilitySetId":
+                        Dictionary<string, string> propertyDictionary5 = new Dictionary<string, string>();
+                        propertyDictionary5.Add("Id", item.Value);
+                        bicepOptions.ParameterOverrides.Add(AvailabilitySet, propertyDictionary5);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmData>.Write(ModelReaderWriterOptions options)
