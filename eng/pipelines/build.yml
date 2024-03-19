@@ -145,7 +145,7 @@ extends:
                     inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-standard.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode standard
                     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-                - template: new-emitter-package-files.yml
+                - template: /eng/pipelines/new-emitter-package-files.yml
                   parameters:
                     EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
                     AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
@@ -162,7 +162,7 @@ extends:
                 condition: succeededOrFailed()
                 displayName: "Publish packages artifact"
           
-          - template: check-code-generation.yml
+          - template: /eng/pipelines/check-code-generation.yml
             parameters:
               name: Check_Code_Generation_A_B
               filter: "^[a-b]"
@@ -171,7 +171,7 @@ extends:
               imageName: $(WINDOWSVMIMAGE)
               osKey: windows               
           
-          - template: check-code-generation.yml
+          - template: /eng/pipelines/check-code-generation.yml
             parameters:
               name: Check_Code_Generation_C_L
               filter: "^[c-l]"
@@ -180,7 +180,7 @@ extends:
               imageName: $(WINDOWSVMIMAGE)
               osKey: windows               
           
-          - template: check-code-generation.yml
+          - template: /eng/pipelines/check-code-generation.yml
             parameters:
               name: Check_Code_Generation_M
               filter: "^m"
@@ -189,7 +189,7 @@ extends:
               imageName: $(WINDOWSVMIMAGE)
               osKey: windows               
           
-          - template: check-code-generation.yml
+          - template: /eng/pipelines/check-code-generation.yml
             parameters:
               name: Check_Code_Generation_N_Z
               filter: "^[n-z]"
