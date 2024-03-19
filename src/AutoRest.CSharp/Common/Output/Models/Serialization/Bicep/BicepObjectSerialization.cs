@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
             ObjectType = objectType;
-            // does this actually only give safe flattened?
             FlattenedProperties = objectType.Properties
                 .Where(p => p.FlattenedProperty != null)
                 .Select(p => p.FlattenedProperty!).ToList();
