@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using YamlDotNet.Core.Tokens;
 
 namespace Payload.JsonMergePatch.Models
 {
@@ -107,98 +108,125 @@ namespace Payload.JsonMergePatch.Models
                     writer.WriteNullValue();
                 }
             }
-            // Checks for
-            // 1. _baseDictChanged
-            // 2. _baseDict.IsChanged()
-            // 3. _baseDict.Values.Any(item => item.IsChanged())
-            if (base.IsChanged(nameof(BaseDict)))
+
+            // We don't call `IsChanged(nameof(BaseDict))` any more
+            // Case 1: _baseDict = null;
+            // Case 2: _baseDict.Clear();
+            if (BaseDict == null || ((ChangeTrackingDictionary<string, DummyModel>)BaseDict).WasCleared())
             {
                 writer.WritePropertyName("baseDict"u8);
-                if (BaseDict != null && !((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsRemoved())
+                writer.WriteNullValue();
+            }
+            else
+            {
+                bool baseDictChanged = false;
+                foreach (var item in BaseDict)
                 {
-                    foreach (var item in BaseDict) // Consider the loop twice here, use boolean to track
+                    // Case 1: _baseDict["a"] = null;
+                    // Case 2: _baseDict["a"] = <dummyModel>;
+                    // Case 3: model.BaseDict = new Dictionary<string, DummyModel>(){{"a", <dummyModel>}};
+                    // Case 4: _baseDict["a"].Property = "a";
+                    if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsChanged(item.Key) || (item.Value != null && item.Value.IsChanged()))
                     {
-                        // Case 1: _baseDict["a"] = null;
-                        // Case 2: _baseDict["a"] = <dummyModel>;
-                        // Case 3: _baseDict["b"] = model; model = null;
-                        if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsChanged(item.Key))
+                        if (!baseDictChanged)
                         {
-                            writer.WritePropertyName(item.Key);
-                            if (item.Value != null)
-                            {
-                                ((IJsonModel<DummyModel>)BaseDict[item.Key]).Write(writer, new ModelReaderWriterOptions("JMP"));
-                            }
-                            else
-                            {
-                                writer.WriteNullValue();
-                            }
+                            writer.WritePropertyName("baseDict"u8);
+                            writer.WriteStartObject();
+                            baseDictChanged = true;
                         }
-                        // _baseDict["a"].Property = "a";
-                        else if (item.Value != null && item.Value.IsChanged())
+
+                        writer.WritePropertyName(item.Key);
+                        if (item.Value != null)
                         {
-                            writer.WritePropertyName(item.Key);
                             ((IJsonModel<DummyModel>)BaseDict[item.Key]).Write(writer, new ModelReaderWriterOptions("JMP"));
                         }
-                    }
-                    // _baseDict.Remove("a");
-                    foreach (var key in ((ChangeTrackingDictionary<string, DummyModel>)BaseDict).ChangedKeys ?? new List<string>())
-                    {
-                        if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsRemoved(key))
+                        else
                         {
-                            writer.WritePropertyName(key);
                             writer.WriteNullValue();
                         }
                     }
                 }
-                // Case 1: _baseDict = null;
-                // Case 2: _baseDict.Clear();
-                else
+                // _baseDict.Remove("a");
+                foreach (var key in ((ChangeTrackingDictionary<string, DummyModel>)BaseDict).ChangedKeys ?? new List<string>())
                 {
-                    writer.WriteNullValue();
+                    if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsChanged(key) && !BaseDict.ContainsKey(key))
+                    {
+                        if (!baseDictChanged)
+                        {
+                            writer.WritePropertyName("baseDict"u8);
+                            writer.WriteStartObject();
+                            baseDictChanged = true;
+                        }
+
+                        writer.WritePropertyName(key);
+                        writer.WriteNullValue();
+                    }
+                }
+
+                if (baseDictChanged)
+                {
+                    writer.WriteEndObject();
                 }
             }
-            // Checks for
-            // 1. _baseIntDictChanged
-            // 2. _baseIntDict.IsChanged()
-            if (base.IsChanged("baseIntDict"))
+            // We don't call `IsChanged(nameof(BaseIntDict))` any more
+            // Case 1: _baseIntDict = null;
+            // Case 2: _baseIntDict.Clear();
+            if (BaseIntDict == null || ((ChangeTrackingDictionary<string, DummyModel>)BaseIntDict).WasCleared())
             {
                 writer.WritePropertyName("baseIntDict"u8);
-                if (BaseIntDict != null && !((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsRemoved())
+                writer.WriteNullValue();
+            }
+            else
+            {
+                bool baseIntDictChanged = false;
+                foreach (var item in BaseIntDict)
                 {
-                    foreach (var item in BaseIntDict)
+                    // Case 1: _baseIntDict["a"] = null;
+                    // Case 2: _baseIntDict["a"] = 5;
+                    // Case 3: model.BaseIntDict = new Dictionary<string, int>() {{"a", 1}}
+                    if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsChanged(item.Key))
                     {
-                        // Case 1: _baseIntDict["a"] = null;
-                        // Case 2: _baseIntDict["a"] = 5;
-                        if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsChanged(item.Key))
+                        if (!baseIntDictChanged)
                         {
-                            writer.WritePropertyName(item.Key);
-                            if (item.Value != null)
-                            {
-                                writer.WriteNumberValue(item.Value.Value);
-                            }
-                            else
-                            {
-                                writer.WriteNullValue();
-                            }
+                            writer.WritePropertyName("baseIntDict"u8);
+                            writer.WriteStartObject();
+                            baseIntDictChanged = true;
+                        }
+
+                        writer.WritePropertyName(item.Key);
+                        if (item.Value != null)
+                        {
+                            writer.WriteNumberValue(item.Value.Value);
+                        }
+                        else
+                        {
+                            writer.WriteNullValue();
                         }
                     }
                     // _baseIntDict.Remove("a");
                     foreach (var key in ((ChangeTrackingDictionary<string, int?>)BaseIntDict).ChangedKeys ?? new List<string>())
                     {
-                        if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsRemoved(key))
+                        if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsChanged(key) && !BaseIntDict.ContainsKey(key))
                         {
+                            if (!baseIntDictChanged)
+                            {
+                                writer.WritePropertyName("baseIntDict"u8);
+                                writer.WriteStartObject();
+                                baseIntDictChanged = true;
+                            }
+
                             writer.WritePropertyName(key);
                             writer.WriteNullValue();
                         }
                     }
                 }
-                // Case 1: _baseIntDict = null;
-                // Case 2: _baseIntDict.Clear();
-                else
+
+                if (baseIntDictChanged)
                 {
-                    writer.WriteNullValue();
+                    writer.WriteEndObject();
                 }
             }
+            
             writer.WriteEndObject();
         }
 

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Azure.Core;
 
@@ -121,28 +122,24 @@ namespace Payload.JsonMergePatch.Models
             }
         }
 
+        public IList<int> BaseArray { get; set; } // Is there any case array has a set?
+
         private bool _isChanged = false;
-        protected bool IsChanged(string name = null) // If base model and extended model are in the same library, we could still consider keep the method but change it to private protected
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public virtual bool IsChanged(string name = null) // If base model and extended model are in the same library, we could still consider keep the method but change it to private protected
         {
             if (name == null)
             {
-                return _isChanged; // Three level: add evnever
+                return _isChanged;
             }
 
             switch (name)
             {
-                case "BaseValue": // string comparison perf improve
+                case nameof(BaseValue): // string comparison perf improve
                     return _baseValueChanged;
-                case "BaseDict": // This is a dirty read, but it is a tradeoff we need to consider.
-                    // Consider this case:
-                    // _baseDict get value from service {"a": {some model}}
-                    // var model = _baseDict["a"];
-                    // var ref a = _baseArray[0];
-                    // a = new DummyModel(); // consider struct
-                    // model = new DummyModel();
-                    // The dictionary will not be considered as touched
+                case nameof(BaseDict): // This is a dirty read, but it is a tradeoff we need to consider.
                     return _baseDictChanged || _baseDict.IsChanged() || _baseDict.Values.Any(item => item != null && item.IsChanged());
-                case "BaseIntDict":
+                case nameof(BaseIntDict):
                     return _baseIntDictChanged || _baseIntDict.IsChanged();
                 default:
                     return false;

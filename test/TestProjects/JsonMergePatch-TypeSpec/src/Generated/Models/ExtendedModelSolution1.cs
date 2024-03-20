@@ -38,6 +38,24 @@ namespace Payload.JsonMergePatch.Models
             {
                 _extendedValue = value;
                 _extendedValueChanged = true;
+                _isChanged = true;
+            }
+        }
+
+        private bool _isChanged = false;
+        public override bool IsChanged(string name = null)
+        {
+            if (name == null)
+            {
+                return _isChanged && base.IsChanged();
+            }
+
+            switch (name)
+            {
+                case nameof(ExtendedValue):
+                    return _extendedValueChanged;
+                default:
+                    return base.IsChanged(name);
             }
         }
     }

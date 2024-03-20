@@ -13,7 +13,7 @@ namespace Azure.Core
     {
         private IDictionary<TKey, TValue>? _innerDictionary;
         private List<TKey>? _changedKeys;
-        private bool _isRemoved = false;
+        private bool _wasCleared = false;
 
         public ChangeTrackingDictionary()
         {
@@ -68,13 +68,9 @@ namespace Azure.Core
             return _changedKeys?.Count > 0;
         }
 
-        public bool IsRemoved(TKey key)
+        public bool WasCleared()
         {
-            return !ContainsKey(key) && IsChanged(key);
-        }
-        public bool IsRemoved()// WasCleared()
-        {
-            return _isRemoved && this.Count == 0; // Consider this case: call `Clear()` first and then call `Add()`
+            return _wasCleared && Count == 0; // Consider this case: call `Clear()` first and then call `Add()`
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
@@ -104,7 +100,7 @@ namespace Azure.Core
         public void Clear()
         {
             EnsureDictionary().Clear();
-            _isRemoved = true;
+            _wasCleared = true;
             _changedKeys = null;
         }
 
