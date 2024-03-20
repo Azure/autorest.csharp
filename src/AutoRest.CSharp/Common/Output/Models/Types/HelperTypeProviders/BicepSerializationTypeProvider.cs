@@ -66,13 +66,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                         IndentFirstLine,
                         FormattedPropertyName
                     }),
-                WriteAppendChildObject().ToArray());
+                WriteAppendChildObject());
         }
 
-        private IEnumerable<MethodBodyStatement> WriteAppendChildObject()
+        private List<MethodBodyStatement> WriteAppendChildObject()
         {
+            var statements = new List<MethodBodyStatement>();
             VariableReference indent = new VariableReference(typeof(string), "indent");
-            yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
+            statements.Add(Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces)));
 
             VariableReference data = new VariableReference(typeof(BinaryData), "data");
 
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var length = new VariableReference(typeof(int), "length");
             var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
 
-            yield return Declare(
+            statements.Add(Declare(
                 emptyObjectLength,
                 new BinaryOperatorExpression("+",
                     new BinaryOperatorExpression("+",
@@ -90,24 +91,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                             Spaces),
                         // 2 new lines
                         EnvironmentExpression.NewLine().Property(nameof(string.Length))),
-                    EnvironmentExpression.NewLine().Property(nameof(string.Length))));
+                    EnvironmentExpression.NewLine().Property(nameof(string.Length)))));
 
-            yield return Declare(length, stringBuilder.Property(nameof(StringBuilder.Length)));
+            statements.Add(Declare(length, stringBuilder.Property(nameof(StringBuilder.Length))));
 
             var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
-            yield return Declare(inMultilineString, BoolExpression.False);
-            yield return EmptyLine;
+            statements.Add(Declare(inMultilineString, BoolExpression.False));
+            statements.Add(EmptyLine);
 
-            yield return Declare(
+            statements.Add(Declare(
                 data,
                 new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
                     new[]
                     {
                         new ParameterReference(ChildObject),
                         new ParameterReference(KnownParameters.Serializations.Options)
-                    }));
+                    })));
             VariableReference lines = new VariableReference(typeof(string[]), "lines");
-            yield return Declare(
+            statements.Add(Declare(
                 lines,
                 new InvokeInstanceMethodExpression(
                     new InvokeInstanceMethodExpression(data, nameof(ToString), Array.Empty<ValueExpression>(), null,
@@ -122,10 +123,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     },
                     null,
                     false)
-            );
+            ));
+
             var line = new VariableReference(typeof(string), "line");
             var i = new VariableReference(typeof(int), "i");
-            yield return new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, lines.Property("Length")), new UnaryOperatorExpression("++", i, true))
+            statements.Add(new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, lines.Property("Length")), new UnaryOperatorExpression("++", i, true))
             {
                 Declare(line, new IndexerExpression(lines, i)),
                 // if this is a multiline string, we do not apply the indentation, except for the first line containing only the ''' which is handled
@@ -150,9 +152,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         Not(new BoolExpression(IndentFirstLine))),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}", line)),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
-            };
+            });
 
-            yield return new IfStatement(
+            statements.Add(new IfStatement(
                 new BoolExpression(
                     Equal(
                         stringBuilder.Property(nameof(StringBuilder.Length)),
@@ -167,7 +169,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                             stringBuilder.Property(nameof(StringBuilder.Length)),
                             emptyObjectLength),
                         Literal(new StringExpression(FormattedPropertyName)).Property(nameof(string.Length))))
-            };
+            });
+
+            return statements;
         }
 
         internal InvokeStaticMethodStatement AppendChildObject(

@@ -140,57 +140,57 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     New.InvalidOperationException(Literal("Bicep deserialization is not supported for this type."))));
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
+        private static List<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
         {
+            var statements = new List<MethodBodyStatement>();
             VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
-            yield return Declare(stringBuilder, New.Instance(typeof(StringBuilder)));
+            statements.Add(Declare(stringBuilder, New.Instance(typeof(StringBuilder))));
 
             VariableReference bicepOptions = new VariableReference(typeof(BicepModelReaderWriterOptions), "bicepOptions");
-            yield return Declare(bicepOptions, new AsExpression(KnownParameters.Serializations.Options, typeof(BicepModelReaderWriterOptions)));
+            statements.Add(Declare(bicepOptions, new AsExpression(KnownParameters.Serializations.Options, typeof(BicepModelReaderWriterOptions))));
 
             VariableReference hasObjectOverride = new VariableReference(typeof(bool), "hasObjectOverride");
             VariableReference propertyOverrides = new VariableReference(typeof(IDictionary<string, string>), "propertyOverrides");
-            yield return Declare(propertyOverrides, Null);
-            yield return Declare(
+            statements.Add(Declare(propertyOverrides, Null));
+            statements.Add(Declare(
                 hasObjectOverride,
                 And(
                     new BoolExpression(NotEqual(bicepOptions, Null)),
                     new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides))
-                        .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides)))));
+                        .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides))))));
             var hasPropertyOverride = new VariableReference(typeof(bool), "hasPropertyOverride");
-            yield return Declare(hasPropertyOverride, BoolExpression.False);
+            statements.Add(Declare(hasPropertyOverride, BoolExpression.False));
             var propertyOverride = new VariableReference(typeof(string), "propertyOverride");
-            yield return Declare(propertyOverride, Null);
+            statements.Add(Declare(propertyOverride, Null));
 
-            yield return EmptyLine;
+            statements.Add(EmptyLine);
 
             if (objectSerialization.FlattenedProperties.Count > 0)
             {
-                yield return new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
+                statements.Add(new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
                 {
                     This.Invoke(TransformFlattenedOverridesMethodName, bicepOptions, propertyOverrides)
                         .ToStatement()
-                };
-                yield return EmptyLine;
+                });
+                statements.Add(EmptyLine);
             }
 
             var propertyOverrideVariables = new PropertyOverrideVariables(propertyOverrides, hasObjectOverride,
                 hasPropertyOverride, propertyOverride);
 
-            yield return EmptyLine;
+            statements.Add(EmptyLine);
 
             var stringBuilderExpression = new StringBuilderExpression(stringBuilder);
-
-            yield return stringBuilderExpression.AppendLine("{");
-            yield return EmptyLine;
-
+            statements.Add(stringBuilderExpression.AppendLine("{"));
+            statements.Add(EmptyLine);
             foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData, propertyOverrideVariables))
             {
-                yield return methodBodyStatement;
+                statements.Add(methodBodyStatement);
             }
+            statements.Add(stringBuilderExpression.AppendLine("}"));
+            statements.Add(Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilder.ToString)))));
 
-            yield return stringBuilderExpression.AppendLine("}");
-            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilder.ToString))));
+            return statements;
         }
 
         private static IEnumerable<MethodBodyStatement> WriteProperties(
