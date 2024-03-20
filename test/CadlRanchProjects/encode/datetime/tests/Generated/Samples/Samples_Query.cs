@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Encode.Datetime;
 using NUnit.Framework;
 
 namespace Encode.Datetime.Samples

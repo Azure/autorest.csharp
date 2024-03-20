@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using body_string_LowLevel;
 
 namespace body_string_LowLevel.Samples
 {

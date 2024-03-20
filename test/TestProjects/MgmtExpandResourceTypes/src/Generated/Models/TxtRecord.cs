@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {

@@ -11,7 +11,6 @@ using System.Xml;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using header_LowLevel;
 
 namespace header_LowLevel.Samples
 {

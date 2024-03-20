@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array;
 using _Type._Array.Models;
 
 namespace _Type._Array.Samples

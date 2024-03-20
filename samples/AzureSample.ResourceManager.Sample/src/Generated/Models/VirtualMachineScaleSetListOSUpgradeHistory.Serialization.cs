@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {

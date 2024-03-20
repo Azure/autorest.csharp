@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 using AzureSample.ResourceManager.Sample.Models;
 
 namespace AzureSample.ResourceManager.Sample.Mocking

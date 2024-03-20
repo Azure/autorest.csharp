@@ -8,7 +8,6 @@
 using System;
 using Azure.Core;
 using Azure.Core.TestFramework;
-using PaginationParams_LowLevel;
 
 namespace PaginationParams_LowLevel.Tests
 {

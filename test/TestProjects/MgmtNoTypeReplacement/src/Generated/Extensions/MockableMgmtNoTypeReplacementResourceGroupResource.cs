@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtNoTypeReplacement;
 
 namespace MgmtNoTypeReplacement.Mocking
 {

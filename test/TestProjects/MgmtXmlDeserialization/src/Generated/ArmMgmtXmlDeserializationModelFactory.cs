@@ -7,7 +7,6 @@
 
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
 {
