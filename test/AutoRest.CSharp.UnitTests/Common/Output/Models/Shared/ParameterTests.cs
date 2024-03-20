@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         public void TestSetup()
         {
             library = new Mock<OutputLibrary>();
-            typeFactory = new TypeFactory(library.Object);
+            typeFactory = new TypeFactory(library.Object, typeof(BinaryData));
             typeProvider = new Mock<TypeProvider>("test", null);
         }
 
@@ -52,8 +52,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Type: inputModel,
                 Location: new RequestLocation(),
                 DefaultValue: null,
-                VirtualParameter: null,
                 GroupedBy: null,
+                FlattenedBodyProperty: null,
                 Kind: InputOperationParameterKind.Method,
                 IsRequired: false,
                 IsApiVersion: false,
@@ -103,8 +103,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Type: inputModel,
                 Location: new RequestLocation(),
                 DefaultValue: null,
-                VirtualParameter: null,
                 GroupedBy: null,
+                FlattenedBodyProperty: null,
                 Kind: InputOperationParameterKind.Method,
                 IsRequired: false,
                 IsApiVersion: false,
@@ -143,8 +143,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Type: literalType,
                 Location: new RequestLocation(),
                 DefaultValue: null,
-                VirtualParameter: null,
                 GroupedBy: null,
+                FlattenedBodyProperty: null,
                 Kind: InputOperationParameterKind.Method,
                 IsRequired: false,
                 IsApiVersion: false,
@@ -194,8 +194,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Type: inputModel,
                 Location: new RequestLocation(),
                 DefaultValue: null,
-                VirtualParameter: null,
                 GroupedBy: null,
+                FlattenedBodyProperty: null,
                 Kind: InputOperationParameterKind.Method,
                 IsRequired: false,
                 IsApiVersion: false,
@@ -234,8 +234,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Type: literalType,
                 Location: new RequestLocation(),
                 DefaultValue: null,
-                VirtualParameter: null,
                 GroupedBy: null,
+                FlattenedBodyProperty: null,
                 Kind: InputOperationParameterKind.Method,
                 IsRequired: false,
                 IsApiVersion: false,

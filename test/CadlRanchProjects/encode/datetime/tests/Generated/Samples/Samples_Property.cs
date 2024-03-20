@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using Encode.Datetime;
 using Encode.Datetime.Models;
 using NUnit.Framework;
 

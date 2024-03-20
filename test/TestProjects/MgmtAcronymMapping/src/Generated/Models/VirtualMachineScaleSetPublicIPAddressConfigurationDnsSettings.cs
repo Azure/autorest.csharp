@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {

@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -176,108 +174,89 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (Optional.IsDefined(Name))
             {
-                builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.Append("  name:");
+                if (Name.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Name}'''");
                 }
                 else
                 {
-                    if (Name.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Name}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Name}'");
-                    }
+                    builder.AppendLine($" '{Name}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NumberOfCores), out propertyOverride);
-            if (Optional.IsDefined(NumberOfCores) || hasPropertyOverride)
+            if (Optional.IsDefined(NumberOfCores))
             {
-                builder.Append("  numberOfCores: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{NumberOfCores.Value}");
-                }
+                builder.Append("  numberOfCores:");
+                builder.AppendLine($" {NumberOfCores.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDiskSizeInMB), out propertyOverride);
-            if (Optional.IsDefined(OSDiskSizeInMB) || hasPropertyOverride)
+            if (Optional.IsDefined(OSDiskSizeInMB))
             {
-                builder.Append("  osDiskSizeInMB: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{OSDiskSizeInMB.Value}");
-                }
+                builder.Append("  osDiskSizeInMB:");
+                builder.AppendLine($" {OSDiskSizeInMB.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ResourceDiskSizeInMB), out propertyOverride);
-            if (Optional.IsDefined(ResourceDiskSizeInMB) || hasPropertyOverride)
+            if (Optional.IsDefined(ResourceDiskSizeInMB))
             {
-                builder.Append("  resourceDiskSizeInMB: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{ResourceDiskSizeInMB.Value}");
-                }
+                builder.Append("  resourceDiskSizeInMB:");
+                builder.AppendLine($" {ResourceDiskSizeInMB.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MemoryInMB), out propertyOverride);
-            if (Optional.IsDefined(MemoryInMB) || hasPropertyOverride)
+            if (Optional.IsDefined(MemoryInMB))
             {
-                builder.Append("  memoryInMB: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{MemoryInMB.Value}");
-                }
+                builder.Append("  memoryInMB:");
+                builder.AppendLine($" {MemoryInMB.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxDataDiskCount), out propertyOverride);
-            if (Optional.IsDefined(MaxDataDiskCount) || hasPropertyOverride)
+            if (Optional.IsDefined(MaxDataDiskCount))
             {
-                builder.Append("  maxDataDiskCount: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{MaxDataDiskCount.Value}");
-                }
+                builder.Append("  maxDataDiskCount:");
+                builder.AppendLine($" {MaxDataDiskCount.Value}");
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
+            }
         }
 
         BinaryData IPersistableModel<VirtualMachineSize>.Write(ModelReaderWriterOptions options)

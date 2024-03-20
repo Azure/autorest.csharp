@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {

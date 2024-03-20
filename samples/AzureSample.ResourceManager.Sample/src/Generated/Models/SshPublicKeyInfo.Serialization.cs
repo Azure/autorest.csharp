@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -105,60 +103,73 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Path), out propertyOverride);
-            if (Optional.IsDefined(Path) || hasPropertyOverride)
+            if (Optional.IsDefined(Path))
             {
-                builder.Append("  path: ");
-                if (hasPropertyOverride)
+                builder.Append("  path:");
+                if (Path.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Path}'''");
                 }
                 else
                 {
-                    if (Path.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Path}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Path}'");
-                    }
+                    builder.AppendLine($" '{Path}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyData), out propertyOverride);
-            if (Optional.IsDefined(KeyData) || hasPropertyOverride)
+            if (Optional.IsDefined(KeyData))
             {
-                builder.Append("  keyData: ");
-                if (hasPropertyOverride)
+                builder.Append("  keyData:");
+                if (KeyData.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{KeyData}'''");
                 }
                 else
                 {
-                    if (KeyData.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{KeyData}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{KeyData}'");
-                    }
+                    builder.AppendLine($" '{KeyData}'");
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
+            }
         }
 
         BinaryData IPersistableModel<SshPublicKeyInfo>.Write(ModelReaderWriterOptions options)

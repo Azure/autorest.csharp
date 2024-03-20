@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -143,72 +141,69 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SuccessfulInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(SuccessfulInstanceCount) || hasPropertyOverride)
+            if (Optional.IsDefined(SuccessfulInstanceCount))
             {
-                builder.Append("  successfulInstanceCount: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{SuccessfulInstanceCount.Value}");
-                }
+                builder.Append("  successfulInstanceCount:");
+                builder.AppendLine($" {SuccessfulInstanceCount.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FailedInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(FailedInstanceCount) || hasPropertyOverride)
+            if (Optional.IsDefined(FailedInstanceCount))
             {
-                builder.Append("  failedInstanceCount: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{FailedInstanceCount.Value}");
-                }
+                builder.Append("  failedInstanceCount:");
+                builder.AppendLine($" {FailedInstanceCount.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(InProgressInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(InProgressInstanceCount) || hasPropertyOverride)
+            if (Optional.IsDefined(InProgressInstanceCount))
             {
-                builder.Append("  inProgressInstanceCount: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{InProgressInstanceCount.Value}");
-                }
+                builder.Append("  inProgressInstanceCount:");
+                builder.AppendLine($" {InProgressInstanceCount.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PendingInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(PendingInstanceCount) || hasPropertyOverride)
+            if (Optional.IsDefined(PendingInstanceCount))
             {
-                builder.Append("  pendingInstanceCount: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{PendingInstanceCount.Value}");
-                }
+                builder.Append("  pendingInstanceCount:");
+                builder.AppendLine($" {PendingInstanceCount.Value}");
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
+            }
         }
 
         BinaryData IPersistableModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)

@@ -12,8 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -174,96 +172,53 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachine), out propertyOverride);
-            if (Optional.IsDefined(VirtualMachine) || hasPropertyOverride)
+            if (Optional.IsDefined(VirtualMachine))
             {
-                builder.Append("  virtualMachine: ");
-                if (hasPropertyOverride)
+                builder.Append("  virtualMachine:");
+                AppendChildObject(builder, VirtualMachine, options, 2, false);
+            }
+
+            if (Optional.IsCollectionDefined(Extensions))
+            {
+                if (Extensions.Any())
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    BicepSerializationHelpers.AppendChildObject(builder, VirtualMachine, options, 2, false, "  virtualMachine: ");
+                    builder.Append("  extensions:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Extensions)
+                    {
+                        AppendChildObject(builder, item, options, 4, true);
+                    }
+                    builder.AppendLine("  ]");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Extensions), out propertyOverride);
-            if (Optional.IsCollectionDefined(Extensions) || hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Statuses))
             {
-                if (Extensions.Any() || hasPropertyOverride)
+                if (Statuses.Any())
                 {
-                    builder.Append("  extensions: ");
-                    if (hasPropertyOverride)
+                    builder.Append("  statuses:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Statuses)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        AppendChildObject(builder, item, options, 4, true);
                     }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in Extensions)
-                        {
-                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  extensions: ");
-                        }
-                        builder.AppendLine("  ]");
-                    }
+                    builder.AppendLine("  ]");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
-            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            if (Optional.IsCollectionDefined(OrchestrationServices))
             {
-                if (Statuses.Any() || hasPropertyOverride)
+                if (OrchestrationServices.Any())
                 {
-                    builder.Append("  statuses: ");
-                    if (hasPropertyOverride)
+                    builder.Append("  orchestrationServices:");
+                    builder.AppendLine(" [");
+                    foreach (var item in OrchestrationServices)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        AppendChildObject(builder, item, options, 4, true);
                     }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in Statuses)
-                        {
-                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  statuses: ");
-                        }
-                        builder.AppendLine("  ]");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OrchestrationServices), out propertyOverride);
-            if (Optional.IsCollectionDefined(OrchestrationServices) || hasPropertyOverride)
-            {
-                if (OrchestrationServices.Any() || hasPropertyOverride)
-                {
-                    builder.Append("  orchestrationServices: ");
-                    if (hasPropertyOverride)
-                    {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in OrchestrationServices)
-                        {
-                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  orchestrationServices: ");
-                        }
-                        builder.AppendLine("  ]");
-                    }
+                    builder.AppendLine("  ]");
                 }
             }
 
@@ -271,19 +226,37 @@ namespace AzureSample.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
-            foreach (var item in propertyOverrides.ToList())
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
             {
-                switch (item.Key)
+                string line = lines[i];
+                if (inMultilineString)
                 {
-                    case "VirtualMachineStatusesSummary":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("StatusesSummary", item.Value);
-                        bicepOptions.ParameterOverrides.Add(VirtualMachine, propertyDictionary);
-                        break;
-                    default:
-                        continue;
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
                 }
             }
         }

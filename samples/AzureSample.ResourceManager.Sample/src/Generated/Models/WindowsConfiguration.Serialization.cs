@@ -12,8 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -187,143 +185,97 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
-            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
-                builder.Append("  provisionVMAgent: ");
-                if (hasPropertyOverride)
+                builder.Append("  provisionVMAgent:");
+                var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(EnableAutomaticUpdates))
+            {
+                builder.Append("  enableAutomaticUpdates:");
+                var boolValue = EnableAutomaticUpdates.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(TimeZone))
+            {
+                builder.Append("  timeZone:");
+                if (TimeZone.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{TimeZone}'''");
                 }
                 else
                 {
-                    var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
-                    builder.AppendLine($"{boolValue}");
+                    builder.AppendLine($" '{TimeZone}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticUpdates), out propertyOverride);
-            if (Optional.IsDefined(EnableAutomaticUpdates) || hasPropertyOverride)
+            if (Optional.IsCollectionDefined(AdditionalUnattendContent))
             {
-                builder.Append("  enableAutomaticUpdates: ");
-                if (hasPropertyOverride)
+                if (AdditionalUnattendContent.Any())
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    var boolValue = EnableAutomaticUpdates.Value == true ? "true" : "false";
-                    builder.AppendLine($"{boolValue}");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TimeZone), out propertyOverride);
-            if (Optional.IsDefined(TimeZone) || hasPropertyOverride)
-            {
-                builder.Append("  timeZone: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (TimeZone.Contains(Environment.NewLine))
+                    builder.Append("  additionalUnattendContent:");
+                    builder.AppendLine(" [");
+                    foreach (var item in AdditionalUnattendContent)
                     {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{TimeZone}'''");
+                        AppendChildObject(builder, item, options, 4, true);
                     }
-                    else
-                    {
-                        builder.AppendLine($"'{TimeZone}'");
-                    }
+                    builder.AppendLine("  ]");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdditionalUnattendContent), out propertyOverride);
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent) || hasPropertyOverride)
+            if (Optional.IsDefined(PatchSettings))
             {
-                if (AdditionalUnattendContent.Any() || hasPropertyOverride)
-                {
-                    builder.Append("  additionalUnattendContent: ");
-                    if (hasPropertyOverride)
-                    {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in AdditionalUnattendContent)
-                        {
-                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  additionalUnattendContent: ");
-                        }
-                        builder.AppendLine("  ]");
-                    }
-                }
+                builder.Append("  patchSettings:");
+                AppendChildObject(builder, PatchSettings, options, 2, false);
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PatchSettings), out propertyOverride);
-            if (Optional.IsDefined(PatchSettings) || hasPropertyOverride)
+            if (Optional.IsDefined(WinRM))
             {
-                builder.Append("  patchSettings: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    BicepSerializationHelpers.AppendChildObject(builder, PatchSettings, options, 2, false, "  patchSettings: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WinRM), out propertyOverride);
-            if (Optional.IsDefined(WinRM) || hasPropertyOverride)
-            {
-                builder.Append("  winRM: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    BicepSerializationHelpers.AppendChildObject(builder, WinRM, options, 2, false, "  winRM: ");
-                }
+                builder.Append("  winRM:");
+                AppendChildObject(builder, WinRM, options, 2, false);
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
-            foreach (var item in propertyOverrides.ToList())
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
             {
-                switch (item.Key)
+                string line = lines[i];
+                if (inMultilineString)
                 {
-                    case "PatchMode":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("PatchMode", item.Value);
-                        bicepOptions.ParameterOverrides.Add(PatchSettings, propertyDictionary);
-                        break;
-                    case "WinRMListeners":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Listeners", item.Value);
-                        bicepOptions.ParameterOverrides.Add(WinRM, propertyDictionary0);
-                        break;
-                    default:
-                        continue;
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
                 }
             }
         }

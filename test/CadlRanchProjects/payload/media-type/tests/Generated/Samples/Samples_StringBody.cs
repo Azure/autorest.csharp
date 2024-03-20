@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Payload.MediaType;
 
 namespace Payload.MediaType.Samples
 {

@@ -13,7 +13,6 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
 {

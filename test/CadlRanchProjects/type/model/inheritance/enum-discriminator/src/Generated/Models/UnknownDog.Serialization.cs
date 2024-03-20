@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.EnumDiscriminator;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Payload.Pageable;
 
 namespace Payload.Pageable.Models
 {
