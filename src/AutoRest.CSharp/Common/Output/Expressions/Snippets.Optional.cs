@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return statement;
                 }
 
-                if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
+                if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
                 {
                     if (!serialization.Value.Type.Equals(typeof(JsonElement)))
                     {

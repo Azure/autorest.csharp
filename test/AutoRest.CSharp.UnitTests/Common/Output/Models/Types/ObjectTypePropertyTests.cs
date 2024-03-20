@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [SetUp]
         public void TestSetup()
         {
-            typeFactory = new TypeFactory(null);
+            typeFactory = new TypeFactory(null, typeof(BinaryData));
         }
 
         // Validates that the type string is constructed correctly for a given primitive type
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isNullable = false;
             bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputListType type = new InputListType("InputListType", elementType, isNullable);
+            InputListType type = new InputListType("InputListType", elementType, false, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -61,8 +61,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isNullable = false;
             bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputType listElementType = new InputListType("InputListType1", elementType, isNullable);
-            InputListType type = new InputListType("InputListType2", listElementType, isNullable);
+            InputType listElementType = new InputListType("InputListType1", elementType, false, isNullable);
+            InputListType type = new InputListType("InputListType2", listElementType, false, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
             InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
             InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
-            InputType listElementType = new InputListType("InputListType1", dictionaryType, isNullable);
+            InputType listElementType = new InputListType("InputListType1", dictionaryType, false, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(listElementType);
 

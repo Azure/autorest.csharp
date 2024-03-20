@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -25,42 +24,49 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>> _clients;
         private Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>> _operations;
         private Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>> _headerModels;
-        private Lazy<IReadOnlyDictionary<InputEnumType, EnumType>> _enums;
-        private Lazy<IReadOnlyDictionary<Schema, TypeProvider>> _models;
+        private IReadOnlyDictionary<InputEnumType, EnumType> _enums;
+        private IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
         private Lazy<IReadOnlyDictionary<string, List<string>>> _protocolMethodsDictionary;
 
         private readonly InputNamespace _input;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly Lazy<ModelFactoryTypeProvider?> _modelFactory;
-        private readonly string _defaultNamespace;
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
-        private readonly SchemaUsageProvider _schemaUsageProvider;
 
         public DataPlaneOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            _schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
 
-            _typeFactory = new TypeFactory(this);
+            _typeFactory = new TypeFactory(this, typeof(object));
             _sourceInputModel = sourceInputModel;
 
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
 
-            _input = new CodeModelConverter().CreateNamespace(codeModel, _schemaUsageProvider);
+            _input = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
 
-            _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
+
+            var enums = new Dictionary<InputEnumType, EnumType>();
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+
+            DpgOutputLibraryBuilder.CreateModels(_input.Models, models, _typeFactory, sourceInputModel);
+            DpgOutputLibraryBuilder.CreateEnums(_input.Enums, enums, models, _typeFactory, sourceInputModel);
+
+            _enums = enums;
+            _models = models;
+
+            var allModels = new List<TypeProvider>(_enums.Values);
+            allModels.AddRange(_models.Values);
+            Models = allModels;
 
             _restClients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneRestClient>>(EnsureRestClients);
             _clients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>>(EnsureClients);
             _operations = new Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>>(EnsureLongRunningOperations);
             _headerModels = new Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>>(EnsureHeaderModels);
-            _enums = new Lazy<IReadOnlyDictionary<InputEnumType, EnumType>>(BuildEnums);
-            _models = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(Models, _typeFactory, _sourceInputModel));
             _protocolMethodsDictionary = new Lazy<IReadOnlyDictionary<string, List<string>>>(GetProtocolMethodsDictionary);
 
@@ -85,66 +91,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<DataPlaneClient> Clients => _clients.Value.Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Value.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Value.Values;
-        public IEnumerable<TypeProvider> Models => _models.Value.Values;
+        public IEnumerable<TypeProvider> Models { get; }
         public IReadOnlyDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary.Value;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums.Value[enumType].Type;
-        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
+        public override CSharpType ResolveEnum(InputEnumType enumType)
+            => _enums.TryGetValue(enumType with { IsNullable = false }, out var typeProvider)
+                ? typeProvider.Type.WithNullable(enumType.IsNullable)
+                : throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
 
-        public override CSharpType FindTypeForSchema(Schema schema) => _models.Value[schema].Type;
+        public override CSharpType ResolveModel(InputModelType model)
+            => _models.TryGetValue(model with { IsNullable = false }, out var modelTypeProvider)
+                ? modelTypeProvider.Type.WithNullable(model.IsNullable)
+                : new CSharpType(typeof(object), model.IsNullable);
 
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => _models.Value[schema];
+        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for HLC!");
 
-        public override CSharpType? FindTypeByName(string originalName)
-        {
-            foreach (var model in Models)
-            {
-                if (originalName == model.Type.Name)
-                {
-                    return model.Type;
-                }
-            }
-            return null;
-        }
+        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeProviderForSchema)} shouldn't be called for HLC!");
 
-        private Dictionary<InputEnumType, EnumType> BuildEnums()
-        {
-            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            foreach (var (schema, typeProvider) in _models.Value)
-            {
-                switch (schema)
-                {
-                    case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema), (EnumType)typeProvider);
-                        break;
-                    case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema), (EnumType)typeProvider);
-                        break;
-                }
-            }
-
-            return dictionary;
-        }
-
-        private Dictionary<Schema, TypeProvider> BuildModels(CodeModel codeModel)
-            => codeModel.AllSchemas.ToDictionary(schema => schema, BuildModel);
-
-        private TypeProvider BuildModel(Schema schema)
-        {
-            return schema switch
-            {
-                SealedChoiceSchema sealedChoiceSchema => CreateEnumType(CodeModelConverter.CreateEnumType(sealedChoiceSchema)),
-                ChoiceSchema choiceSchema => CreateEnumType(CodeModelConverter.CreateEnumType(choiceSchema)),
-                ObjectSchema objectSchema => new SchemaObjectType(objectSchema, Configuration.Namespace, _typeFactory, _schemaUsageProvider, this, _sourceInputModel),
-                _ => throw new NotImplementedException()
-            };
-
-            EnumType CreateEnumType(InputEnumType inputEnumType)
-            {
-                var accessibility = _schemaUsageProvider.GetUsage(schema).HasFlag(SchemaTypeUsage.Model) ? "public" : "internal";
-                return new EnumType(inputEnumType, TypeProvider.GetDefaultModelNamespace(inputEnumType.Namespace, Configuration.Namespace), accessibility, _typeFactory, _sourceInputModel);
-            }
-        }
+        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
 
         public LongRunningOperation FindLongRunningOperation(InputOperation operation)
         {
@@ -223,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                             continue;
                         }
 
-                        var existingType = _sourceInputModel?.FindForType(_defaultNamespace, clientName);
+                        var existingType = _sourceInputModel?.FindForType(Configuration.Namespace, clientName);
                         var accessibility = existingType is not null
                             ? SyntaxFacts.GetText(existingType.DeclaredAccessibility)
                             : "public";
@@ -313,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private string GetClientDeclarationName(InputClient inputClient)
         {
             var defaultName = GetClientDefaultName(inputClient);
-            var existingType = _sourceInputModel?.FindForType(_defaultNamespace, defaultName);
+            var existingType = _sourceInputModel?.FindForType(Configuration.Namespace, defaultName);
             return existingType != null ? existingType.Name : defaultName;
         }
 
