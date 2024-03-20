@@ -25,5 +25,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static StringExpression Join(ValueExpression separator, ValueExpression values)
             => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Join), new[] { separator, values }));
+
+        public StringExpression Substring(ValueExpression startIndex)
+            => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
     }
 }

@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Throw(New.InvalidOperationException(Literal("Failed to receive Result.")))
                 },
                 EmptyLine,
-                new IfStatement(Not(new BoolExpression(new MemberExpression(_messageResponse, "IsError"))).Or(Equal(new MemberExpression(_requestContext, "ErrorBehavior"), FrameworkEnumValue(ErrorBehavior.NoThrow))))
+                new IfStatement(Not(new BoolExpression(_messageResponse.Property("IsError"))).Or(Equal(_requestContext.Property("ErrorBehavior", true), FrameworkEnumValue(ErrorBehavior.NoThrow))))
                 {
                     Return(_messageResponse)
                 },
