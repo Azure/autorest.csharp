@@ -22,15 +22,6 @@ namespace ModelsTypeSpec.Models
             return new BaseModelWithARequiredProperty(kind, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
-        /// <param name="kind"> Required kind. </param>
-        /// <param name="optionalString"> Optional string. </param>
-        /// <returns> A new <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
-        public static BaseModelWithDiscriminatorDefinedOnBase BaseModelWithDiscriminatorDefinedOnBase(string kind = null, string optionalString = null)
-        {
-            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData: null, optionalString);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -371,16 +362,6 @@ namespace ModelsTypeSpec.Models
             values ??= new List<int>();
 
             return new Int32ValuesFacet(field, serializedAdditionalRawData: null, values?.ToList(), value, kind);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DerivedWithDiscriminatorDefinedOnBase"/>. </summary>
-        /// <param name="optionalString"> Optional string. </param>
-        /// <param name="requiredString"> Required string. </param>
-        /// <param name="optionalInt"> Optional int. </param>
-        /// <returns> A new <see cref="Models.DerivedWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
-        public static DerivedWithDiscriminatorDefinedOnBase DerivedWithDiscriminatorDefinedOnBase(string optionalString = null, string requiredString = null, int? optionalInt = null)
-        {
-            return new DerivedWithDiscriminatorDefinedOnBase("A", serializedAdditionalRawData: null, optionalString, requiredString, optionalInt);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>

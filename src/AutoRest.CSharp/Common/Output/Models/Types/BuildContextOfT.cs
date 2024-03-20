@@ -43,6 +43,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputNamespace = inputNamespace;
         }
 
-        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
+        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library, typeof(BinaryData));
     }
 }

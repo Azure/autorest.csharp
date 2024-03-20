@@ -13,7 +13,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {

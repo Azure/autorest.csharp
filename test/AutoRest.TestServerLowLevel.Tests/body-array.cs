@@ -15,6 +15,7 @@ using Azure;
 using Azure.Identity;
 using body_array_LowLevel;
 using NUnit.Framework;
+using FirstTestTypeSpec;
 
 namespace AutoRest.TestServer.Tests
 {

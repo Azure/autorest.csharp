@@ -21,6 +21,11 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
 
+        /// <summary>
+        /// Types provided as immediate parents in spec that aren't base model
+        /// </summary>
+        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
          * during descerializing, we need to create the model and add it to the referernce map before load base model, otherwise, the deserialization crash.
@@ -33,11 +38,6 @@ namespace AutoRest.CSharp.Common.Input
             Debug.Assert(caller == nameof(TypeSpecInputModelTypeConverter.CreateModelType), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.CreateModelType`");
             BaseModel = baseModel;
         }
-
-        /// <summary>
-        /// Types provided as immediate parents in spec that aren't base model
-        /// </summary>
-        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
@@ -102,6 +102,7 @@ namespace AutoRest.CSharp.Common.Input
                         myProperty.SerializedName,
                         myProperty.Description,
                         myProperty.Type.GetCollectionEquivalent(inputType),
+                        myProperty.ConstantValue,
                         myProperty.IsRequired,
                         myProperty.IsReadOnly,
                         myProperty.IsDiscriminator,

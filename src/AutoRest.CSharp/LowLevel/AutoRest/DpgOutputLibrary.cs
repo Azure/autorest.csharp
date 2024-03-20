@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
-            TypeFactory = new TypeFactory(this);
+            TypeFactory = new TypeFactory(this, typeof(BinaryData));
             _libraryName = libraryName;
             _enums = enums;
             _models = models;

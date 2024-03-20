@@ -307,6 +307,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
+
+            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
             return _schemaOrNameToModels;
         }
 

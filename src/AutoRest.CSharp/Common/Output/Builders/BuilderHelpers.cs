@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
-        public static string CreateDerivedTypesDescription(CSharpType type)
+        public static FormattableString CreateDerivedTypesDescription(CSharpType type)
         {
             if (TypeFactory.IsCollectionType(type))
             {
@@ -285,10 +285,10 @@ namespace AutoRest.CSharp.Output.Builders
 
             if (type is { IsFrameworkType: false, Implementation: ObjectType objectType })
             {
-                return objectType.CreateExtraDescriptionWithDiscriminator().ToString();
+                return objectType.CreateExtraDescriptionWithDiscriminator();
             }
 
-            return string.Empty;
+            return $"";
         }
 
         public static string CreateDescription(this Schema schema)
@@ -296,6 +296,16 @@ namespace AutoRest.CSharp.Output.Builders
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 string.Empty :
                 EscapeXmlDocDescription(schema.Language.Default.Description);
+        }
+
+        public static string DisambiguateName(string typeName, string name, string suffix = "Value")
+        {
+            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
+            {
+                return name + suffix;
+            }
+
+            return name;
         }
 
         public static string DisambiguateName(CSharpType type, string name, string suffix = "Value")

@@ -28,7 +28,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaObjectType : SerializableObjectType
+    internal abstract class SchemaObjectType : SerializableObjectType
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly InputModelTypeUsage _usage;
@@ -37,11 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        // TODO: remove this constructor once HLC consolidation is done
-        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, CodeModelConverter converter)
-            : this(converter.GetOrCreateModel(objectSchema), defaultNamespace, typeFactory, sourceInputModel){ }
-
-        public SchemaObjectType(InputModelType inputModel, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, SerializableObjectType? defaultDerivedType = null)
+        protected SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
@@ -69,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // TODO: handle this later
             IsInheritableCommonType = false;
             //IsInheritableCommonType = InputModel is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
-        }
+            }
 
         internal InputModelType InputModel { get; }
 
@@ -678,8 +674,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
         }
 
-        // TODO: implement this if needed
-        protected override XmlObjectSerialization? BuildXmlSerialization() => null;
+        protected override XmlObjectSerialization? BuildXmlSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml)
+                ? SerializationBuilder.BuildXmlObjectSerialization(ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name, this, _typeFactory)
+                : null;
+        }
 
         protected override IEnumerable<Method> BuildMethods()
         {

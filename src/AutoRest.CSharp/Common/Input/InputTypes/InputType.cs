@@ -7,6 +7,8 @@ namespace AutoRest.CSharp.Common.Input;
 
 internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = default)
 {
+    public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
+
     internal InputType GetCollectionEquivalent(InputType inputType)
     {
         switch (this)
@@ -15,6 +17,7 @@ internal abstract record InputType(string Name, bool IsNullable, string? Origina
                 return new InputListType(
                     listType.Name,
                     listType.ElementType.GetCollectionEquivalent(inputType),
+                    listType.IsEmbeddingsVector,
                     listType.IsNullable);
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(

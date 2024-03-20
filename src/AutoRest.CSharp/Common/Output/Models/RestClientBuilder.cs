@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -318,29 +320,38 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type,
                             null);
 
-                        // TODO: This method has a flattened body
-                        //if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
-                        //{
-                        //    var objectType = (SchemaObjectType)library.ResolveModel((InputModelType)bodyRequestParameter.Type).Implementation;
+                        // This method has a flattened body
+                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
+                        {
+                            var objectType = bodyRequestParameter.Type switch
+                            {
+                                InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
+                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
+                                _ => null
+                            };
 
-                        //    var initializationMap = new List<ObjectPropertyInitializer>();
-                        //    foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
-                        //    {
-                        //        var virtualParameter = inputParameter?.VirtualParameter;
-                        //        if (virtualParameter is not null)
-                        //        {
-                        //            initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
-                        //        }
-                        //    }
+                            if (objectType == null)
+                            {
+                                throw new InvalidOperationException("Unexpected flattened type");
+                            }
 
-                        //    body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
-                        //}
-                        //else
-                        //{
-                        //    body = new SchemaRequestBody(bodyParameterValue, serialization);
-                        //}
+                            var properties = objectType.EnumerateHierarchy().SelectMany(o => o.Properties).ToList();
+                            var initializationMap = new List<ObjectPropertyInitializer>();
+                            foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
+                            {
+                                if (inputParameter is { FlattenedBodyProperty: { } flattenedProperty })
+                                {
+                                    var property = properties.First(p => p.InputModelProperty?.SerializedName == flattenedProperty.SerializedName);
+                                    initializationMap.Add(new ObjectPropertyInitializer(property, references[inputParameter.NameInRequest].Reference));
+                                }
+                            }
 
-                        body = new SchemaRequestBody(bodyParameterValue, serialization);
+                            body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        }
+                        else
+                        {
+                            body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        }
                     }
                 }
             }
@@ -366,10 +377,15 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
+            var groupedByParameterType = _typeFactory.CreateType(groupedByParameter.Type);
+            var (propertyName, propertyType) = groupedByParameterType.Implementation switch
+            {
+                ModelTypeProvider modelType when modelType.Fields.GetFieldByParameterName(parameter.Name) is { } field => (field.Name, field.Type),
+                SchemaObjectType schemaObjectType when schemaObjectType.GetPropertyForGroupedParameter(operationParameter.Name).Declaration is { } declaration => (declaration.Name, declaration.Type),
+                _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {parameter.Name} in {groupedByParameterType.Name}")
+            };
 
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{propertyName}", propertyType);
         }
 
         private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)
