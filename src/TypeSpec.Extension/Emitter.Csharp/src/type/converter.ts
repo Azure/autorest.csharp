@@ -154,11 +154,12 @@ export function fromSdkModelType(
                   IsNullable: false
               } as InputDictionaryType)
             : undefined;
+        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType.Properties = modelType.properties
             .filter(
                 (p) =>
                     !(p as SdkBodyModelPropertyType).discriminator ||
-                    !hasDiscriminator(modelType.baseModel)
+                    !baseModelHasDiscriminator
             )
             .map((p) =>
                 fromSdkModelPropertyType(p, context, models, enums, {
