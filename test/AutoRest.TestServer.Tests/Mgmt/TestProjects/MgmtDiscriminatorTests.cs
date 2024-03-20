@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 // validate explicit null is still excluded
                 Location = null,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 ShellProperty = new Shell { Name = "shell" }
@@ -104,7 +104,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 NestedName = "someSku"
@@ -165,7 +165,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 ShellProperty = new Shell()
