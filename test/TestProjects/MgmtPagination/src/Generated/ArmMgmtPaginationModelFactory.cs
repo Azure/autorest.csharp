@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using MgmtPagination;
-
 namespace MgmtPagination.Models
 {
     /// <summary> Model factory for models. </summary>

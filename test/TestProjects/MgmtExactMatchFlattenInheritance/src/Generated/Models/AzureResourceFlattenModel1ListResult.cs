@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using MgmtExactMatchFlattenInheritance;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {

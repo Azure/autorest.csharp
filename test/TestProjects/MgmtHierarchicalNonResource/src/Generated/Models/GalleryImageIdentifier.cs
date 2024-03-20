@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using MgmtHierarchicalNonResource;
 
 namespace MgmtHierarchicalNonResource.Models
 {

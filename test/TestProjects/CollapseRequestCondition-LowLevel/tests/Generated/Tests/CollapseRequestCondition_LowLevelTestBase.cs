@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using CollapseRequestCondition_LowLevel;
 
 namespace CollapseRequestCondition_LowLevel.Tests
 {

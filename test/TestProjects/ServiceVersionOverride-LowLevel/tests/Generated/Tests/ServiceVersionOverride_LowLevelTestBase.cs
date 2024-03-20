@@ -7,7 +7,6 @@
 
 using System;
 using Azure.Core.TestFramework;
-using ServiceVersionOverride_LowLevel;
 
 namespace ServiceVersionOverride_LowLevel.Tests
 {

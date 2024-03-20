@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using _Type.Property.Nullable;
 
 namespace _Type.Property.Nullable.Models
 {

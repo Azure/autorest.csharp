@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Accessibility_LowLevel_NoAuth;
 using Azure.Core.TestFramework;
 
 namespace Accessibility_LowLevel_NoAuth.Tests

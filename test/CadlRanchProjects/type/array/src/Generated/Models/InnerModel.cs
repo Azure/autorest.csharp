@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using _Type._Array;
 
 namespace _Type._Array.Models
 {

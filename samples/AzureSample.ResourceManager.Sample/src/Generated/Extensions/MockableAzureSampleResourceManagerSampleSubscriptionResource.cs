@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample;
 using AzureSample.ResourceManager.Sample.Models;
 
 namespace AzureSample.ResourceManager.Sample.Mocking

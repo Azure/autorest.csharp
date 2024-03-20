@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.ResourceManager.Models;
-using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
 {

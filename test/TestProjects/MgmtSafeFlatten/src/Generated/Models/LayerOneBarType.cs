@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {

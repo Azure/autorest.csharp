@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {

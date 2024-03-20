@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using SecurityDefinition_LowLevel;
 
 namespace SecurityDefinition_LowLevel.Tests
 {

@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {

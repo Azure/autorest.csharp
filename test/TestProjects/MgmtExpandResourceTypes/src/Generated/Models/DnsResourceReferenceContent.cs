@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.ResourceManager.Resources.Models;
-using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
