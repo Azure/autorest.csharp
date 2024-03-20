@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Payload.ContentNegotiation;
 
 namespace Payload.ContentNegotiation.Models
 {

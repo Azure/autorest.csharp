@@ -7,7 +7,6 @@
 
 using System;
 using Azure.Core.TestFramework;
-using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Tests
 {

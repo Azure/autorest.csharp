@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.ResourceManager.Resources.Models;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {

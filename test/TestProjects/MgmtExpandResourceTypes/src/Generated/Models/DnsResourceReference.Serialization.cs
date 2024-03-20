@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.ResourceManager.Resources.Models;
-using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {

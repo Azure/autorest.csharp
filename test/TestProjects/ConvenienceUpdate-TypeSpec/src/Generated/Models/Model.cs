@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using ConvenienceInCadl;
 
 namespace ConvenienceInCadl.Models
 {

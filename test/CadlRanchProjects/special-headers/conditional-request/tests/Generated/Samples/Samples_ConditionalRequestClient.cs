@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using SpecialHeaders.ConditionalRequest;
 
 namespace SpecialHeaders.ConditionalRequest.Samples
 {

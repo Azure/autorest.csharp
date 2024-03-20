@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Storage;
 using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage.Mocking
