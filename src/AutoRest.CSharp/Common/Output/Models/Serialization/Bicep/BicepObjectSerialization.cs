@@ -13,14 +13,42 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
     {
         public BicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
         {
-            IsResourceData = jsonObjectSerialization.Properties.Any(p => p.SerializedName == "name") &&
-                             jsonObjectSerialization.Properties.Any(p => p.SerializedName == "type") &&
-                             jsonObjectSerialization.Properties.Any(p => p.SerializedName == "id");
+            IsResourceData = EvaluateIsResourceData(jsonObjectSerialization);;
+
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
+
             FlattenedProperties = objectType.Properties
                 .Where(p => p.FlattenedProperty != null)
                 .Select(p => p.FlattenedProperty!).ToList();
+        }
+
+        private static bool EvaluateIsResourceData(JsonObjectSerialization jsonObjectSerialization)
+        {
+            bool hasName = false;
+            bool hasType = false;
+            bool hasId = false;
+            foreach (var property in jsonObjectSerialization.Properties)
+            {
+                switch (property.SerializedName)
+                {
+                    case "name":
+                        hasName = true;
+                        break;
+                    case "type":
+                        hasType = true;
+                        break;
+                    case "id":
+                        hasId = true;
+                        break;
+                }
+                if (hasId && hasName && hasType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public IList<FlattenedObjectTypeProperty> FlattenedProperties { get; }

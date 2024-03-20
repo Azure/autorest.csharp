@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BicepSerializationTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<BicepSerializationTypeProvider> _instance = new(() => new BicepSerializationTypeProvider(Configuration.HelperNamespace, null));
+        private static readonly Lazy<BicepSerializationTypeProvider> _instance = new(() => new BicepSerializationTypeProvider());
         public static BicepSerializationTypeProvider Instance => _instance.Value;
         private const string AppendChildObjectMethodName = "AppendChildObject";
 
@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
             null, ValidationType.None, null);
 
-        private BicepSerializationTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private BicepSerializationTypeProvider()
+            : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
         }
@@ -89,10 +89,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                             new ConstantExpression(new Constant(2, typeof(int))),
                             Spaces),
                         // 2 new lines
-                        new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
-                            .Property(nameof(string.Length))),
-                    new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
-                        .Property(nameof(string.Length))));
+                        EnvironmentExpression.NewLine().Property(nameof(string.Length))),
+                    EnvironmentExpression.NewLine().Property(nameof(string.Length))));
 
             yield return Declare(length, stringBuilder.Property(nameof(StringBuilder.Length)));
 
@@ -118,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new ValueExpression[]
                     {
                         new InvokeInstanceMethodExpression(
-                            new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)), nameof(string.ToCharArray),
+                            EnvironmentExpression.NewLine(), nameof(string.ToCharArray),
                             Array.Empty<ValueExpression>(), null, false),
                         new TypeReference(typeof(StringSplitOptions)).Property(nameof(StringSplitOptions.RemoveEmptyEntries))
                     },

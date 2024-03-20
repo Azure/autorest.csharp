@@ -83,8 +83,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             foreach (var property in objectSerialization.FlattenedProperties)
             {
-                var stack = property!.BuildHierarchyStack();
-                var instanceName = property!.BuildHierarchyStack().Last().Declaration.Name;
+                var stack = property.BuildHierarchyStack();
+                var instanceName = stack.Last().Declaration.Name;
                 var childPropertyName = stack.Pop().Declaration.Name;
                 var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
 
@@ -137,8 +137,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new SwitchCase(
                 Serializations.BicepFormat,
                 Throw(
-                    New.Instance(typeof(InvalidOperationException),
-                        Literal("Bicep deserialization is not supported for this type."))));
+                    New.InvalidOperationException(Literal("Bicep deserialization is not supported for this type."))));
         }
 
         private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
