@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
