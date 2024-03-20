@@ -63,7 +63,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
                 BoolProperty = false,
-                Location = AzureLocation.AustraliaCentral,
+                // validate explicit null is still excluded
+                Location = null,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
                 DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
                 Duration = TimeSpan.FromDays(1),

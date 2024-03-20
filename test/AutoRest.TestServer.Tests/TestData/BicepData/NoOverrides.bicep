@@ -1,5 +1,4 @@
 {
-  location: 'australiacentral'
   boolProperty: false
   locationWithCustomSerialization: 'brazilsouth'
   dateTimeProperty: '2024-03-20T07:00:00.0000000Z'
