@@ -4,6 +4,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -42,7 +43,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ToBicep()
         {
-            var now = DateTime.UtcNow;
             var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
@@ -65,75 +65,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = now,
+                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 ShellProperty = new Shell { Name = "shell" }
             };
 
             var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();
-            var expected = $$"""
-                           {
-                             location: 'australiacentral'
-                             boolProperty: false
-                             locationWithCustomSerialization: 'brazilsouth'
-                             dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
-                             duration: 'P1D'
-                             number: 4
-                             shellProperty: {
-                               name: 'shell'
-                             }
-                             properties: {
-                               order: 3
-                               conditions: {
-                                 parameters: {
-                                   typeName: 'DeliveryRuleQueryStringConditionParameters'
-                                   operator: 'Any'
-                                   matchValues: [
-                                     '''
-                           firstline
-                           secondline'''
-                                     'val2'
-                                   ]
-                                 }
-                                 name: 'QueryString'
-                                 foo: 'query'
-                               }
-                               actions: [
-                                 {
-                                   name: 'CacheExpiration'
-                                   foo: 'foo1'
-                                 }
-                                 {
-                                   name: 'UrlSigning'
-                                   foo: 'foo2'
-                                 }
-                               ]
-                               extraMappingInfo: {
-                                 'dictionaryKey': {
-                                   name: 'CacheExpiration'
-                                   foo: 'foo1'
-                                 }
-                               }
-                               pet: {
-                                 dogKind: 'german Shepherd'
-                                 kind: 'Dog'
-                                 type: 'dog'
-                               }
-                               foo: '''
-                           Foo
-                           bar'''
-                             }
-                           }
-                           
-                           """;
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/NoOverrides.bicep"));
             Assert.AreEqual(expected, bicep);
         }
 
         [Test]
         public void ToBicepWithOverrides()
         {
-            var now = DateTime.UtcNow;
             var queryParams = new QueryStringMatchConditionParameters(
                 QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
                 QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
@@ -158,7 +103,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = now,
+                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 NestedName = "someSku"
@@ -190,69 +135,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     }
             };
             var bicep = ModelReaderWriter.Write(data, options).ToString();
-            var expected = $$"""
-                           {
-                             location: locationParameter
-                             boolProperty: boolParameter
-                             locationWithCustomSerialization: 'brazilsouth'
-                             dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
-                             duration: 'P1D'
-                             number: 4
-                             sku: {
-                               name: {
-                                 nestedName: 'overridenSku'
-                               }
-                             }
-                             properties: {
-                               order: 3
-                               conditions: {
-                                 parameters: {
-                                   typeName: 'DeliveryRuleQueryStringConditionParameters'
-                                   operator: 'Any'
-                                   matchValues: [
-                                     '''
-                           firstline
-                           secondline'''
-                                     'val2'
-                                   ]
-                                 }
-                                 name: 'QueryString'
-                                 foo: 'query'
-                               }
-                               actions: [
-                                 {
-                                   name: 'CacheExpiration'
-                                   foo: fooParameter
-                                 }
-                                 {
-                                   name: 'UrlSigning'
-                                   foo: 'foo2'
-                                 }
-                               ]
-                               extraMappingInfo: {
-                                 'dictionaryKey': {
-                                   name: 'CacheExpiration'
-                                   foo: 'foo1'
-                                 }
-                               }
-                               pet: {
-                                 dogKind: 'german Shepherd'
-                                 kind: 'Dog'
-                               }
-                               foo: '''
-                           Foo
-                           bar'''
-                             }
-                           }
-                           
-                           """;
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/Overrides.bicep"));
             Assert.AreEqual(expected, bicep);
         }
 
         [Test]
         public void ToBicepEmptyChildObject()
         {
-            var now = DateTime.UtcNow;
             var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
@@ -275,64 +164,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
                 LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
-                DateTimeProperty = now,
+                DateTimeProperty = DateTimeOffset.Parse("3/20/24"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
                 ShellProperty = new Shell()
             };
 
             var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();
-            var expected = $$"""
-                           {
-                             location: 'australiacentral'
-                             boolProperty: false
-                             locationWithCustomSerialization: 'brazilsouth'
-                             dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
-                             duration: 'P1D'
-                             number: 4
-                             properties: {
-                               order: 3
-                               conditions: {
-                                 parameters: {
-                                   typeName: 'DeliveryRuleQueryStringConditionParameters'
-                                   operator: 'Any'
-                                   matchValues: [
-                                     '''
-                           firstline
-                           secondline'''
-                                     'val2'
-                                   ]
-                                 }
-                                 name: 'QueryString'
-                                 foo: 'query'
-                               }
-                               actions: [
-                                 {
-                                   name: 'CacheExpiration'
-                                   foo: 'foo1'
-                                 }
-                                 {
-                                   name: 'UrlSigning'
-                                   foo: 'foo2'
-                                 }
-                               ]
-                               extraMappingInfo: {
-                                 'dictionaryKey': {
-                                   name: 'CacheExpiration'
-                                   foo: 'foo1'
-                                 }
-                               }
-                               pet: {
-                                 dogKind: 'german Shepherd'
-                                 kind: 'Dog'
-                               }
-                               foo: '''
-                           Foo
-                           bar'''
-                             }
-                           }
-                           
-                           """;
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/EmptyChildObject.bicep"));
             Assert.AreEqual(expected, bicep);
         }
     }
