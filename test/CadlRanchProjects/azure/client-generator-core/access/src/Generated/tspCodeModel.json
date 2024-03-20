@@ -252,9 +252,9 @@
    "Properties": [
     {
      "$id": "29",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
      "Type": {
       "$id": "30",
       "Kind": "Primitive",
@@ -262,13 +262,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": true
     },
     {
      "$id": "31",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Discriminator",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
      "Type": {
       "$id": "32",
       "Kind": "Primitive",
@@ -276,8 +277,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
+     "IsReadOnly": false
     }
    ]
   },

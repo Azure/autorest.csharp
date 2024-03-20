@@ -14,10 +14,10 @@ namespace PetStore.Models
     internal partial class UnknownFish : Fish
     {
         /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
-        /// <param name="size"> The size of the fish. </param>
         /// <param name="kind"> Discriminator. </param>
+        /// <param name="size"> The size of the fish. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownFish(int size, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(size, kind, serializedAdditionalRawData)
+        internal UnknownFish(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
         {
         }
 

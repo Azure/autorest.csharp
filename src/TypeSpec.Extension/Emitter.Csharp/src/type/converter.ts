@@ -167,6 +167,21 @@ export function fromSdkModelType(
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
             );
+
+        // TODO: remove workaround for backward compatible with previous emitter behavior: https://github.com/Azure/autorest.csharp/blob/879233de12000f68916609e00f4431c604b7c1c5/src/TypeSpec.Extension/Emitter.Csharp/src/lib/model.ts#L717-L739
+        // Previously emitter will insert discriminator property at the beginning if it's implicitly defined
+        // Now TCGC will append implicit discriminator property at the end, so we need to tune the sequence
+        // Will follow up with TCGC team to see if they can change the logic to insert discriminator property at the beginning, which seems more reasonable
+        // Then we can remove the following codes
+        if (inputModelType.DiscriminatorPropertyName && !(modelType.__raw! as Model).properties.has(inputModelType?.DiscriminatorPropertyName)) {
+            const index = inputModelType.Properties.findIndex(
+            (p) => p.IsDiscriminator
+            );
+            if (index !== 0 && index !== -1) {
+                const discriminator = inputModelType.Properties.splice(index, 1)[0];
+                inputModelType.Properties.unshift(discriminator);
+            }
+        }
     }
 
     return inputModelType;

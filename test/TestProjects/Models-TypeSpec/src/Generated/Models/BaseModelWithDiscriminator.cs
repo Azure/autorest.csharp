@@ -57,15 +57,15 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/>. </summary>
+        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModelWithDiscriminator(string optionalPropertyOnBase, int requiredPropertyOnBase, string discriminatorProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
+            DiscriminatorProperty = discriminatorProperty;
             OptionalPropertyOnBase = optionalPropertyOnBase;
             RequiredPropertyOnBase = requiredPropertyOnBase;
-            DiscriminatorProperty = discriminatorProperty;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -74,11 +74,11 @@ namespace ModelsTypeSpec.Models
         {
         }
 
+        /// <summary> Discriminator. </summary>
+        internal string DiscriminatorProperty { get; set; }
         /// <summary> Optional property on base. </summary>
         public string OptionalPropertyOnBase { get; set; }
         /// <summary> Required property on base. </summary>
         public int RequiredPropertyOnBase { get; set; }
-        /// <summary> Discriminator. </summary>
-        internal string DiscriminatorProperty { get; set; }
     }
 }

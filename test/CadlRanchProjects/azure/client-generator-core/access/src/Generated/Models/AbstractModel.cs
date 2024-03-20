@@ -61,13 +61,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
-        /// <param name="name"></param>
         /// <param name="kind"> Discriminator. </param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal AbstractModel(string name, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal AbstractModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
             Kind = kind;
+            Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -76,9 +76,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
-        public string Name { get; }
         /// <summary> Discriminator. </summary>
         internal string Kind { get; set; }
+        /// <summary> Gets the name. </summary>
+        public string Name { get; }
     }
 }

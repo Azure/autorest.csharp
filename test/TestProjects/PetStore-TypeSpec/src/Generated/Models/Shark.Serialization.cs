@@ -30,10 +30,10 @@ namespace PetStore.Models
             writer.WriteStartObject();
             writer.WritePropertyName("bite"u8);
             writer.WriteStringValue(Bite);
-            writer.WritePropertyName("size"u8);
-            writer.WriteNumberValue(Size);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -73,8 +73,8 @@ namespace PetStore.Models
                 return null;
             }
             string bite = default;
-            int size = default;
             string kind = default;
+            int size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -84,14 +84,14 @@ namespace PetStore.Models
                     bite = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("size"u8))
-                {
-                    size = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("size"u8))
+                {
+                    size = property.Value.GetInt32();
                     continue;
                 }
                 if (options.Format != "W")
@@ -100,7 +100,7 @@ namespace PetStore.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Shark(size, kind, serializedAdditionalRawData, bite);
+            return new Shark(kind, size, serializedAdditionalRawData, bite);
         }
 
         BinaryData IPersistableModel<Shark>.Write(ModelReaderWriterOptions options)

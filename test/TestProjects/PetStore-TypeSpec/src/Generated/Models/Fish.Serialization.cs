@@ -28,10 +28,10 @@ namespace PetStore.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("size"u8);
-            writer.WriteNumberValue(Size);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

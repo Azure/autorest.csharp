@@ -97,14 +97,14 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                optionalString = "<optionalString>",
                 kind = "A",
+                optionalString = "<optionalString>",
             });
             Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
@@ -119,14 +119,14 @@ namespace ModelsTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                optionalString = "<optionalString>",
                 kind = "A",
+                optionalString = "<optionalString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
@@ -322,8 +322,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -405,8 +405,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -601,9 +601,9 @@ null
             Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
             Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -722,9 +722,9 @@ null
             Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
             Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
             Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -1722,8 +1722,8 @@ default
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
-                    requiredPropertyOnBase = 1234,
                     discriminatorProperty = "A",
+                    requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
@@ -1795,8 +1795,8 @@ null
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
-                    requiredPropertyOnBase = 1234,
                     discriminatorProperty = "A",
+                    requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
@@ -1966,9 +1966,9 @@ default
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
-                    discriminatorProperty = "A",
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
@@ -2062,9 +2062,9 @@ null
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
-                    discriminatorProperty = "A",
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
@@ -3004,8 +3004,8 @@ default
             Response response = client.AnalyzeConversation(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -3018,8 +3018,8 @@ default
             Response response = await client.AnalyzeConversationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -3052,9 +3052,9 @@ default
             Response response = client.AnalyzeConversation(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
         }
 
         [Test]
@@ -3067,9 +3067,9 @@ default
             Response response = await client.AnalyzeConversationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
         }
 
         [Test]
@@ -3102,8 +3102,8 @@ default
             Response response = client.GetSingleBase(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("size").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -3116,8 +3116,8 @@ default
             Response response = await client.GetSingleBaseAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("size").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -3150,8 +3150,8 @@ default
             Response response = client.GetSingleBase(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("size").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -3164,8 +3164,8 @@ default
             Response response = await client.GetSingleBaseAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("size").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]

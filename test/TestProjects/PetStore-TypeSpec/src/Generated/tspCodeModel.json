@@ -93,25 +93,11 @@
    "Properties": [
     {
      "$id": "13",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "The size of the fish",
-     "Type": {
-      "$id": "14",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "15",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
      "Type": {
-      "$id": "16",
+      "$id": "14",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -119,6 +105,20 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": true
+    },
+    {
+     "$id": "15",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "The size of the fish",
+     "Type": {
+      "$id": "16",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
     }
    ]
   },

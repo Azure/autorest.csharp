@@ -58,25 +58,11 @@
    "Properties": [
     {
      "$id": "8",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "",
-     "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "10",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
      "Type": {
-      "$id": "11",
+      "$id": "9",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -84,6 +70,20 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": true
+    },
+    {
+     "$id": "10",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
     }
    ]
   },

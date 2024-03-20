@@ -23,12 +23,12 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorB"/>. </summary>
+        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredInt"> Required int. </param>
-        internal DerivedModelWithDiscriminatorB(string optionalPropertyOnBase, int requiredPropertyOnBase, string discriminatorProperty, IDictionary<string, BinaryData> serializedAdditionalRawData, int requiredInt) : base(optionalPropertyOnBase, requiredPropertyOnBase, discriminatorProperty, serializedAdditionalRawData)
+        internal DerivedModelWithDiscriminatorB(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData, int requiredInt) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
         }

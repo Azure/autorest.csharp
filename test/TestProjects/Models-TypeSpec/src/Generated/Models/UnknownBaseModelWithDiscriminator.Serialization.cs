@@ -28,6 +28,8 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
             if (Optional.IsDefined(OptionalPropertyOnBase))
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
@@ -35,8 +37,6 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
-            writer.WritePropertyName("discriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,13 +75,18 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
+            string discriminatorProperty = "Unknown";
             string optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
-            string discriminatorProperty = "Unknown";
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("discriminatorProperty"u8))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("optionalPropertyOnBase"u8))
                 {
                     optionalPropertyOnBase = property.Value.GetString();
@@ -92,18 +97,13 @@ namespace ModelsTypeSpec.Models
                     requiredPropertyOnBase = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("discriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownBaseModelWithDiscriminator(optionalPropertyOnBase, requiredPropertyOnBase, discriminatorProperty, serializedAdditionalRawData);
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)

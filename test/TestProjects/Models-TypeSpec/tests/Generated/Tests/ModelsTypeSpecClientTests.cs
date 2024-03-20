@@ -63,8 +63,8 @@ namespace ModelsTypeSpec.Tests
             {
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                optionalString = "<optionalString>",
                 kind = "A",
+                optionalString = "<optionalString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
         }
@@ -774,8 +774,8 @@ default
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
-                    requiredPropertyOnBase = 1234,
                     discriminatorProperty = "A",
+                    requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
@@ -894,9 +894,9 @@ default
                 requiredModel = new
                 {
                     requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
-                    discriminatorProperty = "A",
                 },
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,

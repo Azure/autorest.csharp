@@ -28,10 +28,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -70,20 +70,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 return null;
             }
-            string name = default;
             string kind = "Unknown";
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -92,7 +92,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownAbstractModel(name, kind, serializedAdditionalRawData);
+            return new UnknownAbstractModel(kind, name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AbstractModel>.Write(ModelReaderWriterOptions options)

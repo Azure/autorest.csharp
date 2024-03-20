@@ -23,11 +23,11 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Tuna"/>. </summary>
-        /// <param name="size"> The size of the fish. </param>
         /// <param name="kind"> Discriminator. </param>
+        /// <param name="size"> The size of the fish. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
-        internal Tuna(int size, string kind, IDictionary<string, BinaryData> serializedAdditionalRawData, int fat) : base(size, kind, serializedAdditionalRawData)
+        internal Tuna(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData, int fat) : base(kind, size, serializedAdditionalRawData)
         {
             Fat = fat;
         }

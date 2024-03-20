@@ -528,8 +528,8 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 Response response = await client.GetLegacyModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("size").ToString());
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
 This sample shows how to call GetLegacyModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -538,8 +538,8 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 Response response = await client.GetLegacyModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("size").ToString());
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="GetLegacyModel(RequestContext)">
@@ -551,8 +551,8 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 Response response = client.GetLegacyModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("size").ToString());
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
 This sample shows how to call GetLegacyModel with all parameters and parse the result.
 <code><![CDATA[
@@ -561,8 +561,8 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 Response response = client.GetLegacyModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("size").ToString());
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
     </member>
   </members>
