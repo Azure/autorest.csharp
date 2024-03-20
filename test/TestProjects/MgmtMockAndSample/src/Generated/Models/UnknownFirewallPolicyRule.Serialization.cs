@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -16,6 +17,8 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("ruleType"u8);
+            writer.WriteStringValue(RuleType.ToString());
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
@@ -26,8 +29,20 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToString());
+            writer.WritePropertyName("newStringSerializeProperty"u8);
+            writer.WriteStringValue(NewStringSerializeProperty);
+            writer.WritePropertyName("newArraySerializedProperty"u8);
+            writer.WriteStartArray();
+            foreach (var item in NewArraySerializedProperty)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("fakeParent"u8);
+            writer.WriteStartObject();
+            writer.WritePropertyName("newDictionarySerializedProperty"u8);
+            SerializeNameValue(writer);
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -37,11 +52,19 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
+            FirewallPolicyRuleType ruleType = "Unknown";
             string name = default;
             string description = default;
-            FirewallPolicyRuleType ruleType = "Unknown";
+            string newStringSerializeProperty = default;
+            IList<string> newArraySerializedProperty = default;
+            Dictionary<string, string> newDictionarySerializedProperty = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("ruleType"u8))
+                {
+                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
@@ -52,13 +75,46 @@ namespace MgmtMockAndSample.Models
                     description = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ruleType"u8))
+                if (property.NameEquals("newStringSerializeProperty"u8))
                 {
-                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
+                    newStringSerializeProperty = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("newArraySerializedProperty"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    newArraySerializedProperty = array;
+                    continue;
+                }
+                if (property.NameEquals("fakeParent"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("newDictionarySerializedProperty"u8))
+                        {
+                            DeserializeNameValue(property0, ref newDictionarySerializedProperty);
+                            continue;
+                        }
+                    }
                     continue;
                 }
             }
-            return new UnknownFirewallPolicyRule(name, description, ruleType);
+            return new UnknownFirewallPolicyRule(
+                name,
+                description,
+                ruleType,
+                newStringSerializeProperty,
+                newArraySerializedProperty,
+                newDictionarySerializedProperty);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -218,6 +219,21 @@ namespace AutoRest.CSharp.Output.Builders
             };
 
             return PromoteNullabilityInformation(newType, defaultType);
+        }
+
+        public static InputType GetInputTypeFromCSharpType(CSharpType type)
+        {
+            if (TypeFactory.IsList(type))
+            {
+                return new InputListType("Array", GetInputTypeFromCSharpType(type.Arguments[0]), false);
+            }
+
+            if (TypeFactory.IsDictionary(type))
+            {
+                return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromCSharpType(type.Arguments[1]), false);
+            }
+
+            return InputPrimitiveType.Object;
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)

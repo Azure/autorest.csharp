@@ -15,6 +15,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -219,6 +220,46 @@ namespace AutoRest.CSharp.Output.Models.Types
                 };
                 serializationConstructorParameters.Add(deserializationParameter);
                 serializationInitializers.Add(new ObjectPropertyInitializer(RawDataField, deserializationParameter, null));
+            }
+
+            if (ModelTypeMapping != null)
+            {
+                foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
+                {
+                    if (serializationConstructorParameters.Exists(p => p.Name == propertyWithSerialization.Name))
+                        continue;
+                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
+                    var isReadOnly = ModelTypeMapping.IsPropertyWithSerializationReadOnly(propertyWithSerialization);
+                    var xml = propertyWithSerialization.GetDocumentationCommentXml();
+                    string comment = "";
+                    if (!string.IsNullOrEmpty(xml))
+                    {
+                        var xd = new global::System.Xml.XmlDocument();
+                        xd.LoadXml(xml);
+                        comment = xd.SelectSingleNode("/member/summary")?.InnerText.Trim() ?? "";
+                    }
+                    var otp = new ObjectTypeProperty(
+                        new MemberDeclarationOptions(propertyWithSerialization.DeclaredAccessibility.ToString(), propertyWithSerialization.Name, csharpType),
+                        comment,
+                        isReadOnly,
+                        new Property()
+                        {
+                            Required = true,
+                            ReadOnly = isReadOnly,
+                            IsDiscriminator = false,
+                            SerializedName = propertyWithSerialization.Name,
+                        });
+                    var addedParameter = new Parameter(
+                        otp.Declaration.Name.ToVariableName(),
+                        $"{otp.Description}",
+                        otp.Declaration.Type,
+                        null,
+                        ValidationType.None,
+                        null);
+
+                    serializationConstructorParameters.Add(addedParameter);
+                    serializationInitializers.Add(new ObjectPropertyInitializer(otp, addedParameter, GetPropertyDefaultValue(otp)));
+                }
             }
 
             if (InitializationConstructor.Signature.Parameters

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
@@ -79,6 +80,13 @@ namespace AutoRest.CSharp.Input.Source
                     yield return symbol;
             }
         }
+
+        public static bool IsPropertyWithSerializationReadOnly(ISymbol member) => member switch
+        {
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            _ => throw new NotSupportedException($"'{member.ContainingType.Name}.{member.Name}' must be either field or property.")
+        };
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
         {

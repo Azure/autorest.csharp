@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -25,6 +26,8 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("keyUrl"u8);
             writer.WriteStringValue(KeyUri.AbsoluteUri);
+            writer.WritePropertyName("newKeyUrl"u8);
+            writer.WriteStringValue(NewKeyUri.AbsoluteUri);
             writer.WriteEndObject();
         }
 
@@ -36,6 +39,8 @@ namespace MgmtMockAndSample.Models
             }
             WritableSubResource sourceVault = default;
             Uri keyUrl = default;
+            Uri newKeyUrl = default;
+            IList<string> newReadOnlyArrayProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -52,8 +57,23 @@ namespace MgmtMockAndSample.Models
                     keyUrl = new Uri(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("newKeyUrl"u8))
+                {
+                    newKeyUrl = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("newReadOnlyArrayProperty"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    newReadOnlyArrayProperty = array;
+                    continue;
+                }
             }
-            return new KeyForDiskEncryptionSet(sourceVault, keyUrl);
+            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newReadOnlyArrayProperty);
         }
     }
 }

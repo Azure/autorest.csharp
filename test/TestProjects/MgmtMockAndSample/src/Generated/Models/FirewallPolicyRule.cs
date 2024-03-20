@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary>
@@ -23,11 +25,17 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType)
+        /// <param name="newStringSerializeProperty"> Add string property to FirewallPolicyRule. </param>
+        /// <param name="newArraySerializedProperty"> Add list property to FirewallPolicyRule. </param>
+        /// <param name="newDictionarySerializedProperty"> Add dictionary property to FirewallPolicyRule. </param>
+        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, Dictionary<string, string> newDictionarySerializedProperty)
         {
             Name = name;
             Description = description;
             RuleType = ruleType;
+            NewStringSerializeProperty = newStringSerializeProperty;
+            NewArraySerializedProperty = newArraySerializedProperty;
+            NewDictionarySerializedProperty = newDictionarySerializedProperty;
         }
 
         /// <summary> Name of the rule. </summary>

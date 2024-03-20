@@ -129,8 +129,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
                     var existingCSharpType = BuilderHelpers.GetTypeFromExisting(existingMember, typeof(object), typeFactory);
-                    var isReadOnly = IsReadOnly(existingMember);
-                    var inputModelProperty = new InputModelProperty(existingMember.Name, existingMember.Name, "to be removed by post process", GetInputTypeFromExistingMemberType(existingCSharpType), false, isReadOnly, false);
+                    var isReadOnly = ModelTypeMapping.IsPropertyWithSerializationReadOnly(existingMember);
+                    var inputModelProperty = new InputModelProperty(existingMember.Name, existingMember.Name, "to be removed by post process", BuilderHelpers.GetInputTypeFromCSharpType(existingCSharpType), false, isReadOnly, false);
                     // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
                     // therefore the top type here is reasonable
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
@@ -149,21 +149,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
-        }
-
-        private static InputType GetInputTypeFromExistingMemberType(CSharpType type)
-        {
-            if (TypeFactory.IsList(type))
-            {
-                return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), false);
-            }
-
-            if (TypeFactory.IsDictionary(type))
-            {
-                return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromExistingMemberType(type.Arguments[1]), false);
-            }
-
-            return InputPrimitiveType.Object;
         }
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
@@ -328,13 +313,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             Accessibility.Internal => Internal,
             Accessibility.Private => Private,
             _ => throw new ArgumentOutOfRangeException()
-        };
-
-        private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
-        {
-            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
-            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)

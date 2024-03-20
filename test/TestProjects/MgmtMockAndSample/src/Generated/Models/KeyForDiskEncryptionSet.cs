@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using MgmtMockAndSample;
@@ -28,10 +29,14 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="sourceVault"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
-        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri)
+        /// <param name="newKeyUri"> add a new property in serialization. </param>
+        /// <param name="newReadOnlyArrayProperty"> add a new property in serialization. </param>
+        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Uri newKeyUri, IList<string> newReadOnlyArrayProperty)
         {
             SourceVault = sourceVault;
             KeyUri = keyUri;
+            NewKeyUri = newKeyUri;
+            NewReadOnlyArrayProperty = newReadOnlyArrayProperty;
         }
 
         /// <summary> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </summary>

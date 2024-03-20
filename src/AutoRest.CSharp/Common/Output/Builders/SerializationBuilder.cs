@@ -13,12 +13,15 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -277,7 +280,9 @@ namespace AutoRest.CSharp.Output.Builders
                 var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
                 var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
-                var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+                var serialization = schemaProperty.Schema.GetType() == typeof(Schema)
+                    ? BuildJsonSerialization(BuilderHelpers.GetInputTypeFromCSharpType(property.Declaration.Type), property.Declaration.Type, false, property.SerializationFormat)
+                    : BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                 TypedMemberExpression? enumerableExpression = null;
@@ -314,11 +319,18 @@ namespace AutoRest.CSharp.Output.Builders
             var propertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
-                foreach (var objectTypeProperty in objectTypeLevel.Properties)
+                foreach (var objectTypeProperty in objectTypeLevel.SerializationConstructor.Initializers.Select(i => i.Property))
                 {
+                    if (propertyBag.Properties.ContainsKey(objectTypeProperty))
+                        continue;
                     if (objectTypeProperty.SchemaProperty != null)
                     {
-                        propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
+                        var ms = objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name);
+                        if (ms == null && objectTypeLevel is SchemaObjectType sot)
+                        {
+                            ms = sot.GetForMemberSerialization(objectTypeProperty.Declaration.Name);
+                        }
+                        propertyBag.Properties.Add(objectTypeProperty, ms);
                     }
                 }
             }

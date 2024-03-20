@@ -28,6 +28,20 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("ruleType"u8);
             writer.WriteStringValue(RuleType.ToString());
+            writer.WritePropertyName("newStringSerializeProperty"u8);
+            writer.WriteStringValue(NewStringSerializeProperty);
+            writer.WritePropertyName("newArraySerializedProperty"u8);
+            writer.WriteStartArray();
+            foreach (var item in NewArraySerializedProperty)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("fakeParent"u8);
+            writer.WriteStartObject();
+            writer.WritePropertyName("newDictionarySerializedProperty"u8);
+            SerializeNameValue(writer);
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
