@@ -324,6 +324,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new ArgumentOutOfRangeException()
         };
 
+        public static bool IsReadOnly(ISymbol existingMember) => existingMember switch
+        {
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+        };
+
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)
         {
             var propertyType = typeFactory.CreateType(property.Type);

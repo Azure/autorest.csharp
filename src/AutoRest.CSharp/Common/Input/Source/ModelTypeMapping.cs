@@ -81,13 +81,6 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        public static bool IsPropertyWithSerializationReadOnly(ISymbol member) => member switch
-        {
-            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
-            _ => throw new NotSupportedException($"'{member.ContainingType.Name}.{member.Name}' must be either field or property.")
-        };
-
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
         {
             while (typeSymbol != null)
