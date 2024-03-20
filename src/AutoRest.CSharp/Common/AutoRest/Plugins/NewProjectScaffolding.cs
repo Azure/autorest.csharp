@@ -303,11 +303,6 @@ extends:
             {
                 builder.PackageReferences.Add(packages);
             }
-            // TODO -- add this to _brandedDependencyPackages when we remove this flag
-            if (Configuration.UseModelReaderWriter)
-            {
-                builder.PackageReferences.Add(new("System.ClientModel"));
-            }
             if (Configuration.AzureArm)
             {
                 builder.PackageReferences.Add(new("Azure.ResourceManager"));

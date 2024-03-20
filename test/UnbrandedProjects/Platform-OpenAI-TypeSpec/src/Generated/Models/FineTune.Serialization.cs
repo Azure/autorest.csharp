@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -11,10 +10,8 @@ using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class FineTune : IUtf8JsonWriteable, IJsonModel<FineTune>
+    public partial class FineTune : IJsonModel<FineTune>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTune>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<FineTune>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<FineTune>)this).GetFormatFromOptions(options) : options.Format;

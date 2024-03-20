@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
+            yield return ModelSerializationExtensionsProvider.Instance;
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override string DefaultAccessibility { get; } = "public";
 
-        public virtual CSharpType? Inherits { get; protected init; }
+        public CSharpType? Inherits { get; protected init; }
 
         public virtual WhereExpression? WhereClause { get; protected init; }
 
