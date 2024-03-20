@@ -81,8 +81,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
-        public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
-
         public override Type RequestFailedExceptionType => typeof(MessageFailedException);
 
         public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);

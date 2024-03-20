@@ -19,8 +19,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _serviceDirectory;
         private bool _isAzureSdk;
         private bool _needAzureKeyAuth;
+        private bool _includeDfe;
 
-        public NewProjectScaffolding(bool needAzureKeyAuth)
+        public NewProjectScaffolding(bool needAzureKeyAuth, bool includeDfe)
         {
             _serviceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
             _projectDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..");
@@ -28,6 +29,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
             _needAzureKeyAuth = needAzureKeyAuth;
+            _includeDfe = includeDfe;
         }
 
         public async Task<bool> Execute()
@@ -83,11 +85,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private async Task WriteProjectFiles()
         {
             await File.WriteAllBytesAsync(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"), Encoding.ASCII.GetBytes(GetSrcCSProj()));
-            if (_isAzureSdk)
-            {
-                Directory.CreateDirectory(Path.Combine(Configuration.AbsoluteProjectFolder, "Properties"));
-                await File.WriteAllBytesAsync(Path.Combine(Configuration.AbsoluteProjectFolder, "Properties", "AssemblyInfo.cs"), Encoding.ASCII.GetBytes(GetAssemblyInfo()));
-            }
+            Directory.CreateDirectory(Path.Combine(Configuration.AbsoluteProjectFolder, "Properties"));
+            await File.WriteAllBytesAsync(Path.Combine(Configuration.AbsoluteProjectFolder, "Properties", "AssemblyInfo.cs"), Encoding.ASCII.GetBytes(GetAssemblyInfo()));
         }
 
         private async Task WriteSolutionFiles()
@@ -103,19 +102,22 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetAssemblyInfo()
         {
+            const string publicKey = ", PublicKey = 0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4";
             const string assemblyInfoContent = @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo(""{0}.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4"")]
+[assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
+{2}";
+            const string azureResourceProvider = @"
 
 // Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
 // See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 // for the list of possible values.
 [assembly: Azure.Core.AzureResourceProviderNamespace(""Microsoft.Template"")]
 ";
-            return string.Format(assemblyInfoContent, Configuration.Namespace);
+            return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
 
         private string GetChangeLog()
@@ -291,6 +293,7 @@ extends:
                 PackageTags = Configuration.Namespace,
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 IncludeOperationsSharedSource = true,
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
             // only branded library will add these shared code compilation lines
             builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));
@@ -300,10 +303,13 @@ extends:
             {
                 builder.PackageReferences.Add(packages);
             }
-            // TODO -- add this to _brandedDependencyPackages when we remove this flag
-            if (Configuration.UseModelReaderWriter)
+            if (Configuration.AzureArm)
             {
-                builder.PackageReferences.Add(new("System.ClientModel"));
+                builder.PackageReferences.Add(new("Azure.ResourceManager"));
+            }
+            if (_includeDfe)
+            {
+                builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
             return builder.Write();

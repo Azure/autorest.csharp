@@ -13,18 +13,12 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
         private ObjectTypeProperty[]? _myProperties;
-
-        public MgmtObjectType(ObjectSchema objectSchema)
-            : this(objectSchema, default)
-        {
-        }
 
         public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
             : base(objectSchema, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.TypeFactory, MgmtContext.Context.SchemaUsageProvider, MgmtContext.Context.BaseLibrary, MgmtContext.Context.SourceInputModel)

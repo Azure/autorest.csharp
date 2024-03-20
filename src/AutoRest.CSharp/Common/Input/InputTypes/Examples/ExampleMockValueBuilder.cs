@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -198,6 +199,10 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     if (property.IsDiscriminator)
                     {
                         exampleValue = InputExampleValue.Value(property.Type, model.DiscriminatorValue!);
+                    }
+                    else if (property.ConstantValue is {Value: {} constantValue} )
+                    {
+                        exampleValue = InputExampleValue.Value(property.Type, constantValue);
                     }
                     else
                     {

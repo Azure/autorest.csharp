@@ -8,6 +8,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal class MgmtMockAndSampleTests : OutputLibraryTestBase
     {
-        public MgmtMockAndSampleTests() : base("MgmtMockAndSample", "src") { }
+        public MgmtMockAndSampleTests() : base("MgmtMockAndSample") { }
     }
 }

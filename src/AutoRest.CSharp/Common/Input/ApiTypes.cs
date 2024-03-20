@@ -86,12 +86,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type IXmlSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
 
-        public abstract Type Utf8JsonWriterExtensionsType { get; }
-        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
-        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
-        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
-        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
-
         public abstract Type RequestFailedExceptionType { get; }
 
         public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);

@@ -81,7 +81,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Lazy<IReadOnlyDictionary<RequestPath, HashSet<Operation>>> ChildOperations { get; }
 
+        private IReadOnlyDictionary<ServiceRequest, InputOperation>? _serviceRequestToInputOperations;
+
         private Dictionary<string, string> _mergedOperations;
+
+        private readonly IReadOnlyDictionary<Schema, InputEnumType> _schemaToInputEnumMap;
 
         private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
@@ -103,6 +107,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
+            _schemaToInputEnumMap = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider).CreateEnums();
 
             // others are populated later
             OperationsToOperationGroups = new Lazy<IReadOnlyDictionary<Operation, OperationGroup>>(PopulateOperationsToOperationGroups);
@@ -327,6 +332,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
+
+            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
             return _schemaOrNameToModels;
         }
 
@@ -336,6 +344,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups.Value[operation];
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
+
+        public InputOperation GetInputOperationByServiceRequest(ServiceRequest serviceRequest) =>
+            _serviceRequestToInputOperations?[serviceRequest] ??
+            throw new InvalidOperationException("Models aren't initialized yet");
 
         public RestClientMethod GetRestClientMethod(Operation operation)
         {
@@ -451,7 +463,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Value.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in AllSchemaMap.Value)
@@ -459,10 +471,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[sealedChoiceSchema], (EnumType)typeProvider);
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[choiceSchema], (EnumType)typeProvider);
                         break;
                 }
             }
@@ -813,8 +825,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
+            SealedChoiceSchema or ChoiceSchema => new EnumType(_schemaToInputEnumMap[schema], schema, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
                 ? new MgmtReferenceType(objectSchema)
                 : new MgmtObjectType(objectSchema),

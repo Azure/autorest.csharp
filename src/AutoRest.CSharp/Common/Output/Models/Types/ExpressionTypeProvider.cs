@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
+            yield return ModelSerializationExtensionsProvider.Instance;
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override string DefaultAccessibility { get; } = "public";
 
-        public virtual CSharpType? Inherits { get; protected init; }
+        public CSharpType? Inherits { get; protected init; }
 
         public virtual WhereExpression? WhereClause { get; protected init; }
 
@@ -68,6 +69,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IReadOnlyList<FieldDeclaration>? _fields;
         public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
+
+        private IReadOnlyList<ExpressionTypeProvider>? _nestedTypes;
+        public IReadOnlyList<ExpressionTypeProvider> NestedTypes => _nestedTypes ??= BuildNestedTypes().ToArray();
 
         protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
         {
@@ -90,6 +94,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected virtual IEnumerable<Method> BuildConstructors()
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerable<ExpressionTypeProvider> BuildNestedTypes()
         {
             yield break;
         }
