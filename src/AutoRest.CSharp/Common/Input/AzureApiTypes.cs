@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
-        public override Type RequestUriType => typeof(RawRequestUriBuilder);
+        public override CSharpType RequestUriType => typeof(RawRequestUriBuilder);
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);

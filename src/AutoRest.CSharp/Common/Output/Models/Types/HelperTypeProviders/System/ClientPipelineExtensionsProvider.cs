@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var response = new PipelineResponseExpression(responseVariable);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Assign<ValueExpression>(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessage, new[] { _message, _requestContext }, false)),
+                Assign(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessage, new[] { _message, _requestContext }, false)),
                 GetProcessHeadAsBoolMessageBody(response)
             });
         }
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var response = new PipelineResponseExpression(responseVariable);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Assign<ValueExpression>(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessageAsync, new[] { _message, _requestContext }, true)),
+                Assign(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessageAsync, new[] { _message, _requestContext }, true)),
                 GetProcessHeadAsBoolMessageBody(response)
             });
         }

@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
@@ -1709,7 +1708,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
@@ -1728,7 +1727,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
@@ -1745,7 +1744,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
@@ -1762,7 +1761,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
@@ -1775,7 +1774,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
             request.Uri = uri.ToUri();
@@ -1790,7 +1789,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
             uri.AppendPath(123.ToString(), true);
@@ -1806,7 +1805,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action.ToString("O"), true);
@@ -1820,7 +1819,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
@@ -1833,7 +1832,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("PATCH");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
             request.Uri = uri.ToUri();
@@ -1848,7 +1847,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
             request.Uri = uri.ToUri();
@@ -1863,7 +1862,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
             request.Uri = uri.ToUri();
@@ -1878,7 +1877,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
@@ -1892,7 +1891,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
             uri.AppendPath(subscriptionId.ToString(), true);
@@ -1908,7 +1907,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
             request.Uri = uri.ToUri();
@@ -1923,7 +1922,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
@@ -1936,7 +1935,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
@@ -1949,7 +1948,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
             request.Uri = uri.ToUri();
@@ -1964,7 +1963,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
@@ -1977,7 +1976,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200To300400To500);
             var request = message.Request;
             request.SetMethod("HEAD");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);

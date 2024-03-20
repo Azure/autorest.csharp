@@ -23,6 +23,11 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return ArgumentProvider.Instance.AssertNotNullOrEmpty(variable);
             }
 
+            public static MethodBodyStatement AssertNotNullOrWhiteSpace(ValueExpression variable)
+            {
+                return ArgumentProvider.Instance.AssertNotNullOrWhiteSpace(variable);
+            }
+
             public static MethodBodyStatement ValidateParameter(Parameter parameter)
             {
                 return parameter.Validation switch
