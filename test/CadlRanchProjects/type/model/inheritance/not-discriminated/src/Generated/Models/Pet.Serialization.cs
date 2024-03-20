@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.NotDiscriminated;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {

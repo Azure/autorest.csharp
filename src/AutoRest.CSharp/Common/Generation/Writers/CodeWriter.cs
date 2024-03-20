@@ -216,11 +216,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            // [TODO] Uncomment to remove unused namespaces
-            //if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
-            //{
-            //    return;
-            //}
+            if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
+            {
+                return;
+            }
 
             _usingNamespaces.Add(@namespace);
         }

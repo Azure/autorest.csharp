@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ApiVersionInTsp;
 using ApiVersionInTsp.Models;
 using Azure;
 using Azure.Identity;

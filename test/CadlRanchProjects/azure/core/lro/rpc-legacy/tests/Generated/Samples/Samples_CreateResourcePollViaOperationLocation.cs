@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Azure.Lro.RpcLegacy;
 using _Azure.Lro.RpcLegacy.Models;
 
 namespace _Azure.Lro.RpcLegacy.Samples

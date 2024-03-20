@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using model_flattening;
 
 namespace model_flattening.Models
 {

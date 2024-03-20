@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtCollectionParent;
 
 namespace MgmtCollectionParent.Models
 {

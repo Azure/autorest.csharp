@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Net;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {

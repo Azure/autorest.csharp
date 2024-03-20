@@ -7,7 +7,6 @@
 
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtExtensionCommonRestOperation;
 
 namespace MgmtExtensionCommonRestOperation.Mocking
 {

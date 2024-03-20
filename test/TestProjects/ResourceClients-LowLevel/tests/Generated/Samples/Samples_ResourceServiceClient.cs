@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {

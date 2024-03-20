@@ -12,7 +12,6 @@ using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using Encode.Duration;
 using Encode.Duration.Models;
 using NUnit.Framework;
 

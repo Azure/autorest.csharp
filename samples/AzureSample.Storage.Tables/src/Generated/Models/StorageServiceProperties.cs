@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using AzureSample.Storage.Tables;
 
 namespace AzureSample.Storage.Tables.Models
 {
