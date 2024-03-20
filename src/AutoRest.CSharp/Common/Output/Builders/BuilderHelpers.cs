@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             if (TypeFactory.IsList(type))
             {
-                return new InputListType("Array", GetInputTypeFromCSharpType(type.Arguments[0]), false);
+                return new InputListType("Array", GetInputTypeFromCSharpType(type.Arguments[0]), TypeFactory.IsReadOnlyMemory(type), false);
             }
 
             if (TypeFactory.IsDictionary(type))

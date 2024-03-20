@@ -231,7 +231,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (serializationConstructorParameters.Exists(p => p.Name == propertyWithSerialization.Name))
                         continue;
                     var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
-                    var isReadOnly = ModelTypeMapping.IsPropertyWithSerializationReadOnly(propertyWithSerialization);
+                    var isReadOnly = propertyWithSerialization switch
+                    {
+                        IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+                        IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+                        _ => throw new NotSupportedException($"'{propertyWithSerialization.ContainingType.Name}.{propertyWithSerialization.Name}' must be either field or property.")
+                    };
                     var xml = propertyWithSerialization.GetDocumentationCommentXml();
                     string comment = "";
                     if (!string.IsNullOrEmpty(xml))
