@@ -353,22 +353,5 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : new[] { value };
             return new(new InvokeStaticMethodExpression(Type, _convertToStringMethodName, arguments));
         }
-        /*
-        public static string ConvertToString(object? value, string? format = null)
-            => value switch
-            {
-                null => "null",
-                string s => s,
-                bool b => ToString(b),
-                int or float or double or long or decimal => ((IFormattable)value).ToString(DefaultNumberFormat, CultureInfo.InvariantCulture),
-                byte[] b when format != null => ToString(b, format),
-                IEnumerable<string> s => string.Join(",", s),
-                DateTimeOffset dateTime when format != null => ToString(dateTime, format),
-                TimeSpan timeSpan when format != null => ToString(timeSpan, format),
-                TimeSpan timeSpan => XmlConvert.ToString(timeSpan),
-                Guid guid => guid.ToString(),
-                BinaryData binaryData => TypeFormatters.ConvertToString(binaryData.ToArray(), format),
-                _ => value.ToString()!
-            };*/
     }
 }
