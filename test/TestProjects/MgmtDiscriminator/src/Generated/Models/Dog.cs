@@ -22,10 +22,11 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="petType"> Verify that type is included for non-ResourceData models. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="dogKind"> The kind of the dog. </param>
-        internal Dog(PetKind kind, string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string bark, DogKind? dogKind) : base(kind, id, serializedAdditionalRawData)
+        internal Dog(PetKind kind, string id, string petType, IDictionary<string, BinaryData> serializedAdditionalRawData, string bark, DogKind? dogKind) : base(kind, id, petType, serializedAdditionalRawData)
         {
             Bark = bark;
             DogKind = dogKind;

@@ -30,6 +30,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
             }
+            if (Configuration.EnableBicepSerialization)
+            {
+                yield return BicepSerializationTypeProvider.Instance;
+            }
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
