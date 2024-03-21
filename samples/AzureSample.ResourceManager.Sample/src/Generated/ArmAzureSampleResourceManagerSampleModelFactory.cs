@@ -11,7 +11,6 @@ using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {

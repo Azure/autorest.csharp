@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -172,101 +172,126 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(TypeHandlerVersion))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachineExtensionInstanceViewType), out propertyOverride);
+            if (Optional.IsDefined(VirtualMachineExtensionInstanceViewType) || hasPropertyOverride)
             {
-                builder.Append("  typeHandlerVersion:");
-                if (TypeHandlerVersion.Contains(Environment.NewLine))
+                builder.Append("  type: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{TypeHandlerVersion}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{TypeHandlerVersion}'");
+                    if (VirtualMachineExtensionInstanceViewType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{VirtualMachineExtensionInstanceViewType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{VirtualMachineExtensionInstanceViewType}'");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(Substatuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeHandlerVersion), out propertyOverride);
+            if (Optional.IsDefined(TypeHandlerVersion) || hasPropertyOverride)
             {
-                if (Substatuses.Any())
+                builder.Append("  typeHandlerVersion: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  substatuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Substatuses)
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (TypeHandlerVersion.Contains(Environment.NewLine))
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{TypeHandlerVersion}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{TypeHandlerVersion}'");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Substatuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Substatuses) || hasPropertyOverride)
             {
-                if (Statuses.Any())
+                if (Substatuses.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    builder.Append("  substatuses: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Substatuses)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  substatuses: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            {
+                if (Statuses.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  statuses: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineExtensionInstanceView>.Write(ModelReaderWriterOptions options)

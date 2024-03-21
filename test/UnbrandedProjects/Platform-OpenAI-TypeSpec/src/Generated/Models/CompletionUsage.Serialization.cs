@@ -3,18 +3,14 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CompletionUsage : IUtf8JsonWriteable, IJsonModel<CompletionUsage>
+    public partial class CompletionUsage : IJsonModel<CompletionUsage>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CompletionUsage>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<CompletionUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CompletionUsage>)this).GetFormatFromOptions(options) : options.Format;

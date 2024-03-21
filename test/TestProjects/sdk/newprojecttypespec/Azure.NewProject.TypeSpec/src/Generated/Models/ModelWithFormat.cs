@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.NewProject.TypeSpec;
 
 namespace Azure.NewProject.TypeSpec.Models
 {

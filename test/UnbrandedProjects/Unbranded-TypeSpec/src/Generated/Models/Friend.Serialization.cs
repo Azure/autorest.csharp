@@ -3,18 +3,14 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonWriteable, IJsonModel<Friend>
+    public partial class Friend : IJsonModel<Friend>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Specs_.Azure.Core.Traits;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {

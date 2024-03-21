@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using url_multi_collectionFormat;
 
 namespace url_multi_collectionFormat.Models
 {

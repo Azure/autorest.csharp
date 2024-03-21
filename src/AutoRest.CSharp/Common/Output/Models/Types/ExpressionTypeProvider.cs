@@ -30,6 +30,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
             }
+            if (Configuration.EnableBicepSerialization)
+            {
+                yield return BicepSerializationTypeProvider.Instance;
+            }
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
@@ -51,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override string DefaultAccessibility { get; } = "public";
 
-        public virtual CSharpType? Inherits { get; protected init; }
+        public CSharpType? Inherits { get; protected init; }
 
         public virtual WhereExpression? WhereClause { get; protected init; }
 

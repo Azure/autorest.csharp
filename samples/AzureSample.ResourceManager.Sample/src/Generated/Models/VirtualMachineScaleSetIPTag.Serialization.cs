@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -104,73 +104,60 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(IPTagType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTagType), out propertyOverride);
+            if (Optional.IsDefined(IPTagType) || hasPropertyOverride)
             {
-                builder.Append("  ipTagType:");
-                if (IPTagType.Contains(Environment.NewLine))
+                builder.Append("  ipTagType: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{IPTagType}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{IPTagType}'");
+                    if (IPTagType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{IPTagType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{IPTagType}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Tag))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tag), out propertyOverride);
+            if (Optional.IsDefined(Tag) || hasPropertyOverride)
             {
-                builder.Append("  tag:");
-                if (Tag.Contains(Environment.NewLine))
+                builder.Append("  tag: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Tag}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Tag}'");
+                    if (Tag.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Tag}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Tag}'");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetIPTag>.Write(ModelReaderWriterOptions options)

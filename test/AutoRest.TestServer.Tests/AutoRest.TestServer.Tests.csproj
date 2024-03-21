@@ -24,6 +24,7 @@
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="System.ClientModel" Version="1.0.0-beta.4" NoWarn="NU1605" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
   </ItemGroup>
@@ -73,6 +74,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="TestData\ResourceProviderData\ResourceProviderData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\EmptyChildObject.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\Overrides.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\NoOverrides.bicep">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

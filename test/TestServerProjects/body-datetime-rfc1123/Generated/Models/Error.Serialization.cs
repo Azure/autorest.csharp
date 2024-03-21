@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using body_datetime_rfc1123;
 
 namespace body_datetime_rfc1123.Models
 {

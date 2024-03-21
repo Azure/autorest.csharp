@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,34 +16,24 @@ using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
+using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class BicepSerializationMethodsBuilder
     {
         private const string SerializeBicepMethodName = "SerializeBicep";
-        private const string AppendChildObjectMethodName = "AppendChildObject";
+        private const string TransformFlattenedOverridesMethodName = "TransformFlattenedOverrides";
+        private static Parameter BicepOptions = new Parameter("bicepOptions", null, typeof(BicepModelReaderWriterOptions), null, ValidationType.None, null);
+        private static Parameter PropertyOverrides = new Parameter("propertyOverrides", null, typeof(IDictionary<string, string>), null, ValidationType.None, null);
 
-        private static readonly Parameter Spaces =
-            new Parameter("spaces", null, typeof(int), null, ValidationType.None, null);
-
-        private static readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
-            null, ValidationType.None, null);
-
-        private static readonly Parameter StringBuilderParameter =
-            new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
-
-        private static readonly Parameter IndentFirstLine =
-            new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
-
-        private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
-
-        public static IEnumerable<Method> BuildBicepSerializationMethods(BicepObjectSerialization objectSerialization)
+        public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
+
             yield return new Method(
                 new MethodSignature(
                     SerializeBicepMethodName,
@@ -54,22 +43,69 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     typeof(BinaryData),
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                WriteSerializeBicep(objectSerialization).ToArray());
+                WriteSerializeBicep(objectSerialization).AsStatement());
 
-            yield return new Method(
-                new MethodSignature(
-                    AppendChildObjectMethodName,
-                    null,
-                    null,
-                    MethodSignatureModifiers.Private,
-                    null,
-                    null,
-                    new Parameter[]
+            if (objectSerialization.FlattenedProperties.Count > 0)
+            {
+                yield return new Method(
+                    new MethodSignature(
+                        TransformFlattenedOverridesMethodName,
+                        null,
+                        null,
+                        MethodSignatureModifiers.Private,
+                        null,
+                        null,
+                        new Parameter[] { BicepOptions, PropertyOverrides }),
+                    WriteTransformFlattenedOverrides(objectSerialization));
+            }
+        }
+
+        private static MethodBodyStatement WriteTransformFlattenedOverrides(BicepObjectSerialization objectSerialization)
+        {
+            if (objectSerialization.FlattenedProperties.Count == 0)
+            {
+                return EmptyStatement;
+            }
+
+            var bicepOptions = new ParameterReference(BicepOptions);
+            var objectOverrides = bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides));
+            var propertyOverrides = new ParameterReference(PropertyOverrides);
+
+            var forLoop = new ForeachStatement(
+                "item",
+                new EnumerableExpression(
+                    typeof(IDictionary<string, string>),
+                    new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.ToList),
+                        new[] { propertyOverrides })),
+                out var item);
+            var switchStatement = new SwitchStatement(item.Property("Key"));
+            forLoop.Add(switchStatement);
+
+            foreach (var property in objectSerialization.FlattenedProperties)
+            {
+                var stack = property.BuildHierarchyStack();
+                var instanceName = stack.Last().Declaration.Name;
+                var childPropertyName = stack.Pop().Declaration.Name;
+                var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
+
+                switchStatement.Add(
+                    new SwitchCase(Literal(property.Declaration.Name), new MethodBodyStatement[]
                     {
-                        StringBuilderParameter,
-                        ChildObject, KnownParameters.Serializations.Options, Spaces, IndentFirstLine
-                    }),
-                WriteAppendChildObject().ToArray());
+                        Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
+                        propertyDictionary.Invoke(
+                            "Add",
+                            Literal(childPropertyName),
+                            item.Property("Value")).ToStatement(),
+                        objectOverrides.Invoke(
+                            "Add",
+                            This.Property(instanceName),
+                            propertyDictionary).ToStatement(),
+                        new KeywordStatement("break", null)
+                }));
+            }
+            switchStatement.Add(SwitchCase.Default(Continue));
+
+            return forLoop;
         }
 
         public static SwitchCase BuildBicepWriteSwitchCase(BicepObjectSerialization bicep, ModelReaderWriterOptionsExpression options)
@@ -96,26 +132,73 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
+        public static SwitchCase BuildBicepReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
         {
-            VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
-            yield return Declare(stringBuilder, New.Instance(typeof(StringBuilder)));
-
-            var stringBuilderExpression = new StringBuilderExpression(stringBuilder);
-
-            yield return stringBuilderExpression.AppendLine("{");
-            yield return EmptyLine;
-
-            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData))
-            {
-                yield return methodBodyStatement;
-            }
-
-            yield return stringBuilderExpression.AppendLine("}");
-            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilderParameter.ToString))));
+            return new SwitchCase(
+                Serializations.BicepFormat,
+                Throw(
+                    New.InvalidOperationException(Literal("Bicep deserialization is not supported for this type."))));
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteProperties(IEnumerable<BicepPropertySerialization> properties, StringBuilderExpression stringBuilder, int spaces, bool isResourceData)
+        private static List<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
+        {
+            var statements = new List<MethodBodyStatement>();
+            VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
+            statements.Add(Declare(stringBuilder, New.Instance(typeof(StringBuilder))));
+
+            VariableReference bicepOptions = new VariableReference(typeof(BicepModelReaderWriterOptions), "bicepOptions");
+            statements.Add(Declare(bicepOptions, new AsExpression(KnownParameters.Serializations.Options, typeof(BicepModelReaderWriterOptions))));
+
+            VariableReference hasObjectOverride = new VariableReference(typeof(bool), "hasObjectOverride");
+            VariableReference propertyOverrides = new VariableReference(typeof(IDictionary<string, string>), "propertyOverrides");
+            statements.Add(Declare(propertyOverrides, Null));
+            statements.Add(Declare(
+                hasObjectOverride,
+                And(
+                    new BoolExpression(NotEqual(bicepOptions, Null)),
+                    new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides))
+                        .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides))))));
+            var hasPropertyOverride = new VariableReference(typeof(bool), "hasPropertyOverride");
+            statements.Add(Declare(hasPropertyOverride, BoolExpression.False));
+            var propertyOverride = new VariableReference(typeof(string), "propertyOverride");
+            statements.Add(Declare(propertyOverride, Null));
+
+            statements.Add(EmptyLine);
+
+            if (objectSerialization.FlattenedProperties.Count > 0)
+            {
+                statements.Add(new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
+                {
+                    This.Invoke(TransformFlattenedOverridesMethodName, bicepOptions, propertyOverrides)
+                        .ToStatement()
+                });
+                statements.Add(EmptyLine);
+            }
+
+            var propertyOverrideVariables = new PropertyOverrideVariables(propertyOverrides, hasObjectOverride,
+                hasPropertyOverride, propertyOverride);
+
+            statements.Add(EmptyLine);
+
+            var stringBuilderExpression = new StringBuilderExpression(stringBuilder);
+            statements.Add(stringBuilderExpression.AppendLine("{"));
+            statements.Add(EmptyLine);
+            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData, propertyOverrideVariables))
+            {
+                statements.Add(methodBodyStatement);
+            }
+            statements.Add(stringBuilderExpression.AppendLine("}"));
+            statements.Add(Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilder.ToString)))));
+
+            return statements;
+        }
+
+        private static IEnumerable<MethodBodyStatement> WriteProperties(
+            IEnumerable<BicepPropertySerialization> properties,
+            StringBuilderExpression stringBuilder,
+            int spaces,
+            bool isResourceData,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
             var propertyList = properties.ToList();
@@ -136,7 +219,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // as it will be put in the outer envelope.
             if (name != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -144,7 +227,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (location != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -152,7 +235,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (tags != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -164,15 +247,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     continue;
                 }
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 }
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteProperty(StringBuilderExpression stringBuilder, int spaces,
-            BicepPropertySerialization property, string indent)
+        private static IEnumerable<MethodBodyStatement> WriteProperty(
+            StringBuilderExpression stringBuilder,
+            int spaces,
+            BicepPropertySerialization property,
+            string indent,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             if (property.ValueSerialization == null)
             {
@@ -181,124 +268,81 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     stringBuilder.Append($"{indent}{property.SerializedName}:"),
                     stringBuilder.AppendLine(" {"),
-                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false).ToArray(),
+                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false, propertyOverrideVariables).ToArray(),
                     stringBuilder.AppendLine($"{indent}}}")
                 };
             }
             else
             {
-                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces))
+                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces, propertyOverrideVariables))
                 {
                     yield return statement;
                 }
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteAppendChildObject()
-        {
-            VariableReference indent = new VariableReference(typeof(string), "indent");
-            yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
-
-            VariableReference data = new VariableReference(typeof(BinaryData), "data");
-
-            yield return Declare(
-                data,
-                new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
-                    new[]
-                    {
-                        new ParameterReference(ChildObject),
-                        new ParameterReference(KnownParameters.Serializations.Options)
-                    }));
-            VariableReference lines = new VariableReference(typeof(string[]), "lines");
-            yield return Declare(
-                lines,
-                new InvokeInstanceMethodExpression(
-                    new InvokeInstanceMethodExpression(data, nameof(ToString), Array.Empty<ValueExpression>(), null,
-                        false),
-                    nameof(string.Split),
-                    new ValueExpression[]
-                    {
-                        new InvokeInstanceMethodExpression(
-                            new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)), nameof(string.ToCharArray),
-                            Array.Empty<ValueExpression>(), null, false),
-                        new TypeReference(typeof(StringSplitOptions)).Property(nameof(StringSplitOptions.RemoveEmptyEntries))
-                    },
-                    null,
-                    false)
-            );
-            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
-            var line = new VariableReference(typeof(string), "line");
-            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
-            yield return Declare(inMultilineString, BoolExpression.False);
-            var i = new VariableReference(typeof(int), "i");
-            yield return new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, lines.Property("Length")), new UnaryOperatorExpression("++", i, true))
-            {
-                Declare(line, new IndexerExpression(lines, i)),
-                // if this is a multiline string, we do not apply the indentation, except for the first line containing only the ''' which is handled
-                // in the subsequent if statement
-                new IfStatement(new BoolExpression(inMultilineString))
-                    {
-                        new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
-                        {
-                            Assign(new BoolExpression(inMultilineString), BoolExpression.False)
-                        },
-                        stringBuilder.AppendLine(line),
-                        Continue
-                    },
-                new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
-                {
-                    Assign(new BoolExpression(inMultilineString), BoolExpression.True),
-                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}",indent, line)),
-                    Continue
-                },
-                new IfElseStatement(
-                    And(Equal(i, Int(0)),
-                        Not(new BoolExpression(IndentFirstLine))),
-                    stringBuilder.AppendLine(new FormattableStringExpression(" {0}", line)),
-                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
-            };
-        }
-
-        private static IEnumerable<MethodBodyStatement> SerializeProperty(StringBuilderExpression stringBuilder, BicepPropertySerialization property, int spaces)
+        private static IEnumerable<MethodBodyStatement> SerializeProperty(
+            StringBuilderExpression stringBuilder,
+            BicepPropertySerialization property,
+            int spaces,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
-            yield return InvokeOptional.WrapInIsDefined(
+            yield return Assign(
+                propertyOverrideVariables.HasPropertyOverride,
+                new BoolExpression(
+                    And(
+                        new BoolExpression(propertyOverrideVariables.HasObjectOverride),
+                        new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Nameof(property.Value),
+                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
+
+            var formattedPropertyName = $"{indent}{property.SerializedName}: ";
+            // we write the properties if there is a value or an override for that property
+            yield return WrapInIsDefinedOrPropertyOverride(
                 property,
-                InvokeOptional.WrapInIsNotEmpty(
+                propertyOverrideVariables.HasPropertyOverride,
+                WrapInIsNotEmptyOrPropertyOverride(
                     property,
-                    new[]
+                    propertyOverrideVariables.HasPropertyOverride,
+                new[]
                     {
-                        stringBuilder.Append($"{indent}{property.SerializedName}:"),
-                        property.CustomSerializationMethodName is {} serializationMethodName
-                            ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
-                            : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces)
-                    }),
-                true);
+                        stringBuilder.Append(formattedPropertyName),
+                        new IfElseStatement(
+                            new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
+                            stringBuilder.AppendLine(new FormattableStringExpression($"{{0}}",propertyOverrideVariables.PropertyOverride)),
+                            property.CustomSerializationMethodName is {} serializationMethodName
+                                ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
+                                : SerializeExpression(stringBuilder, formattedPropertyName, property.ValueSerialization!, property.Value, spaces))
+                    }));
 
             yield return EmptyLine;
         }
 
         private static MethodBodyStatement SerializeExpression(
             StringBuilderExpression stringBuilder,
-            BicepSerialization propertyValueSerialization,
+            string formattedPropertyName,
+            BicepSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
         {
-            return propertyValueSerialization switch
+            return valueSerialization switch
             {
                 BicepArraySerialization array => SerializeArray(
                     stringBuilder,
+                    formattedPropertyName,
                     array,
                     new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression),
                     spaces),
                 BicepDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,
+                    formattedPropertyName,
                     dictionary,
                     new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression),
                     spaces),
                 BicepValueSerialization value => SerializeValue(
                     stringBuilder,
+                    formattedPropertyName,
                     value,
                     expression,
                     spaces,
@@ -309,6 +353,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeArray(
             StringBuilderExpression stringBuilder,
+            string propertyName,
             BicepArraySerialization arraySerialization,
             EnumerableExpression array,
             int spaces)
@@ -316,11 +361,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             string indent = new string(' ', spaces);
             return new[]
             {
-                stringBuilder.AppendLine(" ["),
+                stringBuilder.AppendLine("["),
                 new ForeachStatement("item", array, out var item)
                 {
                     CheckCollectionItemForNull(stringBuilder, arraySerialization.ValueSerialization, item),
-                    SerializeExpression(stringBuilder, arraySerialization.ValueSerialization, item, spaces, true)
+                    SerializeExpression(stringBuilder, propertyName, arraySerialization.ValueSerialization, item, spaces, true)
                 },
                 stringBuilder.AppendLine($"{indent}]"),
             };
@@ -328,6 +373,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeDictionary(
             StringBuilderExpression stringBuilder,
+            string propertyName,
             BicepDictionarySerialization dictionarySerialization,
             DictionaryExpression dictionary,
             int spaces)
@@ -336,14 +382,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new[]
             {
-                stringBuilder.AppendLine(" {"),
+                stringBuilder.AppendLine("{"),
                 new ForeachStatement("item", dictionary, out KeyValuePairExpression keyValuePair)
                 {
                     stringBuilder.Append(
                         new FormattableStringExpression(
-                            $"{indent}{indent}{{0}}:", keyValuePair.Key)),
+                            $"{indent}{indent}'{{0}}': ", keyValuePair.Key)),
                     CheckCollectionItemForNull(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value),
-                    SerializeExpression(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
+                    SerializeExpression(stringBuilder, propertyName, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
                 },
                 stringBuilder.AppendLine($"{indent}}}")
             };
@@ -351,13 +397,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(
             StringBuilderExpression stringBuilder,
+            string formattedPropertyName,
             BicepValueSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
         {
 
-            var indent = isArrayElement ? new string(' ', spaces + 2) : new string(' ', 1);
+            var indent = isArrayElement ? new string(' ', spaces + 2) : new string(' ', 0);
 
             if (valueSerialization.Type.IsFrameworkType)
             {
@@ -388,17 +435,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            return new[]
+            return new MethodBodyStatement[]
             {
-                new InvokeStaticMethodStatement(
-                    null,
-                    AppendChildObjectMethodName,
-                    new[]
-                    {
-                        stringBuilder, expression, KnownParameters.Serializations.Options,
-                        new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
-                        isArrayElement ? BoolExpression.True : BoolExpression.False
-                    })
+                BicepSerializationTypeProvider.Instance.AppendChildObject(
+                    stringBuilder,
+                    expression,
+                    new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
+                        isArrayElement ? BoolExpression.True : BoolExpression.False,
+                        Literal(formattedPropertyName))
             };
         }
 
@@ -504,5 +548,33 @@ namespace AutoRest.CSharp.Common.Output.Builders
             serialization is BicepArraySerialization or BicepDictionarySerialization ||
             // framework reference type, e.g. byte[]
             serialization is BicepValueSerialization { Type: { IsValueType: false, IsFrameworkType: true } };
+
+        public static MethodBodyStatement WrapInIsDefinedOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        {
+            if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
+            {
+                    return statement;
+            }
+
+            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                ? new IfStatement(Or(InvokeOptional.IsCollectionDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement }
+                : new IfStatement(Or(OptionalTypeProvider.Instance.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
+        }
+
+        public static MethodBodyStatement WrapInIsNotEmptyOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        {
+            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                ? new IfStatement(Or(
+                    new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value)),
+                    new BoolExpression(propertyOverride)))
+                {
+                    statement
+                }
+                : statement;
+        }
+
+        private record struct PropertyOverrideVariables(ValueExpression PropertyOverrides, ValueExpression HasObjectOverride, ValueExpression HasPropertyOverride, ValueExpression PropertyOverride)
+        {
+        }
     }
 }

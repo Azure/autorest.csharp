@@ -16,27 +16,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(ObjectSchema objectSchema)
-            : base(objectSchema)
-        {
-        }
-
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
         {
+            JsonConverter = (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true
+                ? new JsonConverterProvider(this, _sourceInputModel)
+                : null;
         }
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Extensions?.MgmtReferenceType is true;
-
-        private JsonConverterProvider? _jsonConverter;
-        public override JsonConverterProvider? JsonConverter => _jsonConverter ??= BuildJsonConverter();
-
-        private JsonConverterProvider? BuildJsonConverter()
-        {
-            if (base.JsonConverter != null)
-                return base.JsonConverter;
-
-            return (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true ? new JsonConverterProvider(this, _sourceInputModel) : null;
-        }
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {

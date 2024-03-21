@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
-using body_complex;
 
 namespace body_complex.Models
 {

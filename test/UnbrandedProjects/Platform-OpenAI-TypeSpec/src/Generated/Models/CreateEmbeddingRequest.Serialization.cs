@@ -3,18 +3,14 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CreateEmbeddingRequest : IUtf8JsonWriteable, IJsonModel<CreateEmbeddingRequest>
+    public partial class CreateEmbeddingRequest : IJsonModel<CreateEmbeddingRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEmbeddingRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<CreateEmbeddingRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateEmbeddingRequest>)this).GetFormatFromOptions(options) : options.Format;

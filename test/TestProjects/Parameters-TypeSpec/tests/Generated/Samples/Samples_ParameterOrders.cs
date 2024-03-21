@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using ParametersCadl;
 using ParametersCadl.Models;
 
 namespace ParametersCadl.Samples

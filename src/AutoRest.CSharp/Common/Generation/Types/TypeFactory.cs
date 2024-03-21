@@ -26,10 +26,12 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
+        private readonly Type _unknownType;
 
-        public TypeFactory(OutputLibrary library)
+        public TypeFactory(OutputLibrary library, Type unknownType)
         {
             _library = library;
+            _unknownType = unknownType;
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
@@ -43,6 +45,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
+            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -90,7 +93,8 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
+            InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => _unknownType,
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -237,6 +241,20 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
 
+        internal static bool IsDictionary(CSharpType type, [MaybeNullWhen(false)] out CSharpType keyType, [MaybeNullWhen(false)] out CSharpType valueType)
+        {
+            if (IsDictionary(type))
+            {
+                keyType = type.Arguments[0];
+                valueType = type.Arguments[1];
+                return true;
+            }
+
+            keyType = null;
+            valueType = null;
+            return false;
+        }
+
         internal static bool IsReadOnlyDictionary(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
 
@@ -245,6 +263,18 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsList(CSharpType type)
             => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
+
+        internal static bool IsList(CSharpType type, [MaybeNullWhen(false)] out CSharpType elementType)
+        {
+            if (IsList(type))
+            {
+                elementType = type.Arguments[0];
+                return true;
+            }
+
+            elementType = null;
+            return false;
+        }
 
         internal static bool IsReadOnlyMemory(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(ReadOnlyMemory<>);
@@ -282,9 +312,7 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperationOfPageable(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
-        internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
-
-        internal static Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
+        internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
         {
             AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Boolean => typeof(bool),
@@ -300,8 +328,8 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
-            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? (Configuration.AzureArm ? typeof(BinaryData) : typeof(object)),
+            AllSchemaTypes.Any => _unknownType,
+            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? _unknownType,
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };

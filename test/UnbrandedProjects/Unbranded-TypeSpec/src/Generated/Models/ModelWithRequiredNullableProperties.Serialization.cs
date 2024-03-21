@@ -3,18 +3,14 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class ModelWithRequiredNullableProperties : IUtf8JsonWriteable, IJsonModel<ModelWithRequiredNullableProperties>
+    public partial class ModelWithRequiredNullableProperties : IJsonModel<ModelWithRequiredNullableProperties>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<ModelWithRequiredNullableProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;

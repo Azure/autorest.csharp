@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using extensible_enums_swagger;
 
 namespace extensible_enums_swagger.Models
 {

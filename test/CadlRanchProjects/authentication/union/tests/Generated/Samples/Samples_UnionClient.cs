@@ -7,7 +7,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Authentication.Union;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;

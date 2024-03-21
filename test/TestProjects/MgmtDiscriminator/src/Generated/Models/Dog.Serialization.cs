@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using MgmtDiscriminator;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -44,6 +44,11 @@ namespace MgmtDiscriminator.Models
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
+            }
+            if (Optional.IsDefined(PetType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(PetType);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -87,6 +92,7 @@ namespace MgmtDiscriminator.Models
             DogKind? dogKind = default;
             PetKind kind = default;
             string id = default;
+            string type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -115,94 +121,130 @@ namespace MgmtDiscriminator.Models
                     id = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("type"u8))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Dog(kind, id, serializedAdditionalRawData, bark, dogKind);
+            return new Dog(
+                kind,
+                id,
+                type,
+                serializedAdditionalRawData,
+                bark,
+                dogKind);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Bark))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Bark), out propertyOverride);
+            if (Optional.IsDefined(Bark) || hasPropertyOverride)
             {
-                builder.Append("  bark:");
-                if (Bark.Contains(Environment.NewLine))
+                builder.Append("  bark: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Bark}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Bark}'");
+                    if (Bark.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Bark}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Bark}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(DogKind))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DogKind), out propertyOverride);
+            if (Optional.IsDefined(DogKind) || hasPropertyOverride)
             {
-                builder.Append("  dogKind:");
-                builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
-            }
-
-            builder.Append("  kind:");
-            builder.AppendLine($" '{Kind.ToSerialString()}'");
-
-            if (Optional.IsDefined(Id))
-            {
-                builder.Append("  id:");
-                if (Id.Contains(Environment.NewLine))
+                builder.Append("  dogKind: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Id}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Id}'");
+                    builder.AppendLine($"'{DogKind.Value.ToSerialString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
+            builder.Append("  kind: ");
+            if (hasPropertyOverride)
+            {
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{Kind.ToSerialString()}'");
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            {
+                builder.Append("  id: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (Id.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Id}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Id}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PetType), out propertyOverride);
+            if (Optional.IsDefined(PetType) || hasPropertyOverride)
+            {
+                builder.Append("  type: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (PetType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{PetType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{PetType}'");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<Dog>.Write(ModelReaderWriterOptions options)

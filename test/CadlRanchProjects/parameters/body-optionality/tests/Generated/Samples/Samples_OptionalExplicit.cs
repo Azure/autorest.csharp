@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Parameters.BodyOptionality;
 using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality.Samples

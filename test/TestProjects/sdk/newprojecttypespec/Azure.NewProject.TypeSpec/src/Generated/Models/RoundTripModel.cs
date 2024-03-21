@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.NewProject.TypeSpec;
 
 namespace Azure.NewProject.TypeSpec.Models
 {

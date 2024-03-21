@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtParent;
 using MgmtParent.Models;
 
 namespace MgmtParent.Mocking

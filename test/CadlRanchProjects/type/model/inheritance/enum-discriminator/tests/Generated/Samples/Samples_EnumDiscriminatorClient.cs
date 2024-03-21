@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Inheritance.EnumDiscriminator;
 using _Type.Model.Inheritance.EnumDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Samples

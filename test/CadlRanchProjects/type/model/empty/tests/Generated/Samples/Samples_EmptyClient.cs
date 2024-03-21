@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Empty;
 using _Type.Model.Empty.Models;
 
 namespace _Type.Model.Empty.Samples
