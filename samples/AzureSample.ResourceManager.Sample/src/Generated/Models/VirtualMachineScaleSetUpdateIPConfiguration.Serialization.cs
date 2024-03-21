@@ -294,7 +294,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -510,7 +510,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SubnetId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(Subnet, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(Subnet, propertyDictionary);
                         break;
                     default:
                         continue;

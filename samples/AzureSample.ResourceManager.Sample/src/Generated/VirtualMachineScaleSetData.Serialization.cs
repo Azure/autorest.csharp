@@ -482,7 +482,7 @@ namespace AzureSample.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -899,22 +899,22 @@ namespace AzureSample.ResourceManager.Sample
                     case "ProximityPlacementGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(ProximityPlacementGroup, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(ProximityPlacementGroup, propertyDictionary);
                         break;
                     case "HostGroupId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(HostGroup, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(HostGroup, propertyDictionary0);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("UltraSSDEnabled", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AdditionalCapabilities, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary1);
                         break;
                     case "ScaleInRules":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("Rules", item.Value);
-                        bicepOptions.ParameterOverrides.Add(ScaleInPolicy, propertyDictionary2);
+                        bicepOptions.PropertyOverrides.Add(ScaleInPolicy, propertyDictionary2);
                         break;
                     default:
                         continue;

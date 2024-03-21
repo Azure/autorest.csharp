@@ -229,7 +229,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -395,12 +395,12 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "NetworkSecurityGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(NetworkSecurityGroup, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(NetworkSecurityGroup, propertyDictionary);
                         break;
                     case "DnsServers":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("DnsServers", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DnsSettings, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary0);
                         break;
                     default:
                         continue;

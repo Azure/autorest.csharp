@@ -528,7 +528,7 @@ namespace AzureSample.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -1016,37 +1016,37 @@ namespace AzureSample.ResourceManager.Sample
                     case "HardwareVmSize":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("VmSize", item.Value);
-                        bicepOptions.ParameterOverrides.Add(HardwareProfile, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(HardwareProfile, propertyDictionary);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("UltraSSDEnabled", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AdditionalCapabilities, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary0);
                         break;
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("EncryptionAtHost", item.Value);
-                        bicepOptions.ParameterOverrides.Add(SecurityProfile, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary1);
                         break;
                     case "NetworkInterfaces":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("NetworkInterfaces", item.Value);
-                        bicepOptions.ParameterOverrides.Add(NetworkProfile, propertyDictionary2);
+                        bicepOptions.PropertyOverrides.Add(NetworkProfile, propertyDictionary2);
                         break;
                     case "NetworkInterfaceConfigurations":
                         Dictionary<string, string> propertyDictionary3 = new Dictionary<string, string>();
                         propertyDictionary3.Add("NetworkInterfaceConfigurations", item.Value);
-                        bicepOptions.ParameterOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
+                        bicepOptions.PropertyOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary4 = new Dictionary<string, string>();
                         propertyDictionary4.Add("BootDiagnostics", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DiagnosticsProfile, propertyDictionary4);
+                        bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary4);
                         break;
                     case "AvailabilitySetId":
                         Dictionary<string, string> propertyDictionary5 = new Dictionary<string, string>();
                         propertyDictionary5.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AvailabilitySet, propertyDictionary5);
+                        bicepOptions.PropertyOverrides.Add(AvailabilitySet, propertyDictionary5);
                         break;
                     default:
                         continue;

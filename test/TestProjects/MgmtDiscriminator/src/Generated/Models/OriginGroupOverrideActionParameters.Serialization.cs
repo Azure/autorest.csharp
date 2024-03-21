@@ -102,7 +102,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -151,7 +151,7 @@ namespace MgmtDiscriminator.Models
                     case "OriginGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(OriginGroup, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(OriginGroup, propertyDictionary);
                         break;
                     default:
                         continue;
