@@ -124,9 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
             {
-                string? wrapper = property.SchemaProperty?.FlattenedNames?.FirstOrDefault();
-                wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
-                writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
+                writer.Line($"[WirePath(\"{property.GetWirePath()}\")]");
             }
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
 
@@ -158,9 +156,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
             {
-                string? wrapper = property.UnderlyingProperty.SchemaProperty?.FlattenedNames?.FirstOrDefault();
-                wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
-                writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
+                writer.Line($"[WirePath(\"{property.GetWirePath()}\")]");
             }
             using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {
