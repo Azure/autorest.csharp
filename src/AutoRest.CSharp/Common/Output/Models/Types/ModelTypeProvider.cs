@@ -358,16 +358,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseInitializers = baseParameterInitializers;
             }
 
-            // [TODO]: Add derived types list to the property description in DPG
-            if (Configuration.Generation1ConvenienceClient)
-            {
-                parameterList.AddRange(parameters.Select(p => p with { Description = $"{p.Description}{BuilderHelpers.CreateDerivedTypesDescription(p.Type)}" }));
-            }
-            else
-            {
-                parameterList.AddRange(parameters);
-            }
-
+            parameterList.AddRange(parameters.Select(p => p with { Description = $"{p.Description}{BuilderHelpers.CreateDerivedTypesDescription(p.Type)}" }));
             fullParameterList = parameterList.DistinctBy(p => p.Name).ToArray(); // we filter out the parameters with the same name since we might have the same property both in myself and my base.
         }
 
