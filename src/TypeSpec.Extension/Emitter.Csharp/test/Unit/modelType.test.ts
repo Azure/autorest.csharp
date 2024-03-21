@@ -189,7 +189,7 @@ op test(@body input: Pet): Pet;
                         Description: "The pet kind",
                         Accessibility: undefined,
                         Deprecated: undefined,
-                        EnumValueType: "string",
+                        EnumValueType: "String",
                         AllowedValues: [
                             {
                                 Name: "Cat",
@@ -323,7 +323,7 @@ op test(@body input: Pet): Pet;
                         Accessibility: undefined,
                         Deprecated: undefined,
                         Description: "The pet kind",
-                        EnumValueType: "string",
+                        EnumValueType: "String",
                         AllowedValues: [
                             {
                                 Name: "Cat",

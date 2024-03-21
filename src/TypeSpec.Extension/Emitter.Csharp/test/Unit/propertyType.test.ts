@@ -123,7 +123,7 @@ describe("Test GetInputType for enum", () => {
                     Accessibility: undefined,
                     Deprecated: undefined,
                     Description: "fixed string enum",
-                    EnumValueType: "string",
+                    EnumValueType: "String",
                     AllowedValues: [
                         {
                             Name: "One",
@@ -190,7 +190,7 @@ describe("Test GetInputType for enum", () => {
                     Accessibility: undefined,
                     Deprecated: undefined,
                     Description: "Fixed int enum",
-                    EnumValueType: "int32",
+                    EnumValueType: "Int32",
                     AllowedValues: [
                         {
                             Name: "One",
@@ -250,7 +250,7 @@ describe("Test GetInputType for enum", () => {
                     Accessibility: undefined,
                     Deprecated: undefined,
                     Description: "Extensible enum",
-                    EnumValueType: "string",
+                    EnumValueType: "String",
                     AllowedValues: [
                         { Name: "One", Value: "1", Description: undefined },
                         { Name: "Two", Value: "2", Description: undefined },
