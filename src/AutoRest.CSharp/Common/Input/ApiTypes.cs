@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract FormattableString GetSetContentString(string requestName, string contentName);
 
-        public abstract Type RequestUriType { get; }
+        public abstract CSharpType RequestUriType { get; }
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }

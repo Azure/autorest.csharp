@@ -21,6 +21,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Format), args.Prepend(format).ToArray()));
 
         public static BoolExpression IsNullOrWhiteSpace(StringExpression value, params ValueExpression[] args)
-            => new(new InvokeStaticMethodExpression(typeof(string), "IsNullOrWhiteSpace", args.Prepend(value).ToArray()));
+            => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.IsNullOrWhiteSpace), args.Prepend(value).ToArray()));
+
+        public static StringExpression Join(ValueExpression separator, ValueExpression values)
+            => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Join), new[] { separator, values }));
+
+        public StringExpression Substring(ValueExpression startIndex)
+            => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
     }
 }

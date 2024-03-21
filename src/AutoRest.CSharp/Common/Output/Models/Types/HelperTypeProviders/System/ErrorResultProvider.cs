@@ -72,8 +72,8 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var signature = new ConstructorSignature(Type, null, null, MethodSignatureModifiers.Public, new[] { responseParam, exceptionParam }, Initializer: baseInitializer);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Assign<ValueExpression>(_response, response),
-                Assign<ValueExpression>(_exception, exception),
+                Assign(_response, response),
+                Assign(_exception, exception),
             });
         }
 
