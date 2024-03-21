@@ -23,7 +23,7 @@ namespace _Type.Property.Optionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BooleanLiteralProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +55,7 @@ namespace _Type.Property.Optionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BooleanLiteralProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -102,7 +102,7 @@ namespace _Type.Property.Optionality.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -118,7 +118,7 @@ namespace _Type.Property.Optionality.Models
                         return DeserializeBooleanLiteralProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BooleanLiteralProperty)} does not support reading '{options.Format}' format.");
             }
         }
 

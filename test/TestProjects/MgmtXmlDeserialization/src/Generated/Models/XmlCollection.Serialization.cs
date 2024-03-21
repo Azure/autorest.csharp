@@ -76,7 +76,7 @@ namespace MgmtXmlDeserialization.Models
             var format = options.Format == "W" ? ((IPersistableModel<XmlCollection>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(XmlCollection)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(XmlCollection)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -123,7 +123,7 @@ namespace MgmtXmlDeserialization.Models
             var format = options.Format == "W" ? ((IPersistableModel<XmlCollection>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(XmlCollection)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(XmlCollection)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -199,7 +199,7 @@ namespace MgmtXmlDeserialization.Models
                         return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new FormatException($"The model {nameof(XmlCollection)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(XmlCollection)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -217,7 +217,7 @@ namespace MgmtXmlDeserialization.Models
                 case "X":
                     return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new FormatException($"The model {nameof(XmlCollection)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(XmlCollection)} does not support reading '{options.Format}' format.");
             }
         }
 

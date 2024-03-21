@@ -24,7 +24,7 @@ namespace ModelWithConverterUsage.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputModel)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(InputModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -56,7 +56,7 @@ namespace ModelWithConverterUsage.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputModel)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(InputModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -99,7 +99,7 @@ namespace ModelWithConverterUsage.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InputModel)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -115,7 +115,7 @@ namespace ModelWithConverterUsage.Models
                         return DeserializeInputModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InputModel)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputModel)} does not support reading '{options.Format}' format.");
             }
         }
 

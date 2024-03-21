@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT, ValidationType validationType)
                 => Throw(New.Instance(
                     typeof(FormatException),
-                    new FormattableStringExpression($"The model {{{0}}} does not support {(validationType == ValidationType.Write ? "writing" : "reading")} in '{{{1}}}' format.", new[]
+                    new FormattableStringExpression($"The model {{{0}}} does not support {(validationType == ValidationType.Write ? "writing" : "reading")} '{{{1}}}' format.", new[]
                     {
                         Nameof(typeOfT),
                         format

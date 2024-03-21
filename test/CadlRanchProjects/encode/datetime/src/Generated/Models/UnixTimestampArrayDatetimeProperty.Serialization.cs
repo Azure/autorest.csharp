@@ -23,7 +23,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnixTimestampArrayDatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnixTimestampArrayDatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -105,7 +105,7 @@ namespace Encode.Datetime.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -121,7 +121,7 @@ namespace Encode.Datetime.Models
                         return DeserializeUnixTimestampArrayDatetimeProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnixTimestampArrayDatetimeProperty)} does not support reading '{options.Format}' format.");
             }
         }
 

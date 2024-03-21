@@ -23,7 +23,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -50,7 +50,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -87,7 +87,7 @@ namespace FirstTestTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -103,7 +103,7 @@ namespace FirstTestTypeSpec.Models
                         return DeserializeReturnsAnonymousModelResponse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support reading '{options.Format}' format.");
             }
         }
 

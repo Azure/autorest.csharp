@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelForRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +52,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelForRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -95,7 +95,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -111,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeModelForRecord(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -27,7 +27,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -432,7 +432,7 @@ namespace AzureSample.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -448,7 +448,7 @@ namespace AzureSample.ResourceManager.Sample
                         return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support reading '{options.Format}' format.");
             }
         }
 

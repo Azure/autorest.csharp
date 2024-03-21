@@ -16,7 +16,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ListModelsResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ListModelsResponse)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(ListModelsResponse)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +52,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ListModelsResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ListModelsResponse)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(ListModelsResponse)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +106,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ListModelsResponse)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ListModelsResponse)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -122,7 +122,7 @@ namespace OpenAI.Models
                         return DeserializeListModelsResponse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ListModelsResponse)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ListModelsResponse)} does not support reading '{options.Format}' format.");
             }
         }
 

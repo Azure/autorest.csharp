@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithDiscriminatorA>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithDiscriminatorA>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -122,7 +122,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -138,7 +138,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeDerivedModelWithDiscriminatorA(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support reading '{options.Format}' format.");
             }
         }
 

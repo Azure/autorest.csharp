@@ -23,7 +23,7 @@ namespace Encode.Bytes.Models
             var format = options.Format == "W" ? ((IPersistableModel<Base64urlArrayBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing in '{format}' format.");
+                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -62,7 +62,7 @@ namespace Encode.Bytes.Models
             var format = options.Format == "W" ? ((IPersistableModel<Base64urlArrayBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading in '{format}' format.");
+                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -117,7 +117,7 @@ namespace Encode.Bytes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -133,7 +133,7 @@ namespace Encode.Bytes.Models
                         return DeserializeBase64urlArrayBytesProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading in '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
