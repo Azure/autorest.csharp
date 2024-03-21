@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        protected SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+        protected SchemaObjectType(InputModelType inputModel, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
@@ -65,7 +65,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             // TODO: handle this later
             IsInheritableCommonType = false;
             //IsInheritableCommonType = InputModel is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
-            }
+
+            JsonConverter = _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
+        }
 
         internal InputModelType InputModel { get; }
 
@@ -363,10 +365,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        private JsonConverterProvider? _jsonConverter;
-        public override JsonConverterProvider? JsonConverter
-            => _jsonConverter ??= _usage.HasFlag(InputModelTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
-
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -425,6 +423,32 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _defaultDerivedType!
             );
         }
+
+        // TODO
+        //private static IReadOnlyList<KnownMediaType> GetSupportedSerializationFormats(InputModelType inputModel, ModelTypeMapping? sourceTypeMapping)
+        //{
+        //    var formats = inputModel.SerializationFormats;
+        //    if (Configuration.SkipSerializationFormatXml)
+        //        formats.Remove(KnownMediaType.Xml);
+
+        //    if (inputModel.Extensions != null)
+        //    {
+        //        foreach (var format in inputModel.Extensions.Formats)
+        //        {
+        //            formats.Add(Enum.Parse<KnownMediaType>(format, true));
+        //        }
+        //    }
+
+        //    if (sourceTypeMapping?.Formats is { } formatsDefinedInSource)
+        //    {
+        //        foreach (var format in formatsDefinedInSource)
+        //        {
+        //            formats.Add(Enum.Parse<KnownMediaType>(format, true));
+        //        }
+        //    }
+
+        //    return formats.Distinct().ToArray();
+        //}
 
         private HashSet<string?> GetParentPropertySerializedNames()
         {
@@ -674,12 +698,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
         }
 
-        protected override XmlObjectSerialization? BuildXmlSerialization()
-        {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml)
-                ? SerializationBuilder.BuildXmlObjectSerialization(ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name, this, _typeFactory)
-                : null;
-        }
+        // TODO: implement this
+        protected override XmlObjectSerialization? BuildXmlSerialization() => null;
 
         protected override IEnumerable<Method> BuildMethods()
         {

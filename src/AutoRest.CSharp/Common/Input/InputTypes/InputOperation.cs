@@ -31,7 +31,8 @@ internal record InputOperation(
     bool GenerateProtocolMethod,
     bool GenerateConvenienceMethod,
     bool KeepClientDefaultValue,
-    string? OperationId)
+    string? OperationId,
+    string? OriginalName)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -54,7 +55,8 @@ internal record InputOperation(
         GenerateProtocolMethod: true,
         GenerateConvenienceMethod: false,
         KeepClientDefaultValue: false,
-        OperationId: null)
+        OperationId: null,
+        OriginalName: null)
     { }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
@@ -80,7 +82,8 @@ internal record InputOperation(
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
             operation.KeepClientDefaultValue,
-            operation.OperationId);
+            operation.OperationId,
+            operation.OriginalName);
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();

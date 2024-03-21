@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Common.Input
     internal class CodeModelConverter
     {
         private readonly CodeModel _codeModel;
-        private readonly SchemaUsageProvider _schemaUsages;
+        private readonly SchemaUsageProvider _schemaUsageProvider;
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
@@ -27,10 +27,10 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
         private readonly ICollection<ExampleGroup>? _exampleGroups;
 
-        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
+        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
         {
             _codeModel = codeModel;
-            _schemaUsages = schemaUsages;
+            _schemaUsageProvider = schemaUsageProvider;
             _enumsCache = new Dictionary<Schema, InputEnumType>();
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
@@ -41,11 +41,21 @@ namespace AutoRest.CSharp.Common.Input
             _exampleGroups = codeModel.TestModel?.MockTest.ExampleGroups;
         }
 
-        public InputNamespace CreateNamespace()
+        public InputNamespace CreateNamespace() => CreateNamespace(null, null);
+
+        public (InputNamespace Namespace, IReadOnlyDictionary<ServiceRequest, InputOperation> ServiceRequestToInputOperation, IReadOnlyDictionary<InputOperation, Operation> InputOperationToOperation) CreateNamespaceWithMaps()
+        {
+            var serviceRequestToInputOperation = new Dictionary<ServiceRequest, InputOperation>();
+            var inputOperationToOperation = new Dictionary<InputOperation, Operation>();
+            var inputNamespace = CreateNamespace(serviceRequestToInputOperation, inputOperationToOperation);
+            return (inputNamespace, serviceRequestToInputOperation, inputOperationToOperation);
+        }
+
+        private InputNamespace CreateNamespace(Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var enums = CreateEnums().Values.ToList();
             var models = CreateModels();
-            var clients = CreateClients(_codeModel.OperationGroups);
+            var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
             return new(Name: _codeModel.Language.Default.Name,
                 Description: _codeModel.Language.Default.Description,
@@ -56,23 +66,24 @@ namespace AutoRest.CSharp.Common.Input
                 Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
-        private IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
-            => operationGroups.Select(CreateClient).ToList();
+        private IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
+            => operationGroups.Select(operationGroup => CreateClient(operationGroup, serviceRequestToInputOperation, inputOperationToOperation)).ToList();
 
-        private InputClient CreateClient(OperationGroup operationGroup)
+        private InputClient CreateClient(OperationGroup operationGroup, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
             => new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations),
+                Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: Array.Empty<InputParameter>(),
                 Parent: null)
             {
                 Key = operationGroup.Key,
             };
 
-        private IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
+        private IReadOnlyList<InputOperation> CreateOperations(IEnumerable<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var serviceRequests = new List<ServiceRequest>();
+            var inputOperations = new List<InputOperation>();
             foreach (var operation in operations)
             {
                 foreach (var serviceRequest in operation.Requests)
@@ -92,7 +103,31 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return serviceRequests.ToDictionary(sr => sr, sr => _operationsCache[sr]());
+            foreach (var serviceRequest in serviceRequests)
+            {
+                var inputOperation = _operationsCache[serviceRequest]();
+                inputOperations.Add(inputOperation);
+                if (serviceRequestToInputOperation is not null)
+                {
+                    serviceRequestToInputOperation[serviceRequest] = inputOperation;
+                }
+            }
+
+            if (serviceRequestToInputOperation is not null && inputOperationToOperation is not null)
+            {
+                foreach (var operation in operations)
+                {
+                    foreach (var serviceRequest in operation.Requests)
+                    {
+                        if (serviceRequestToInputOperation.TryGetValue(serviceRequest, out var inputOperation))
+                        {
+                            inputOperationToOperation[inputOperation] = operation;
+                        }
+                    }
+                }
+            }
+
+            return inputOperations;
         }
 
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
@@ -118,11 +153,9 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
+                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
                 OperationId: operation.OperationId,
-                OriginalName: operation.Language.Default.SerializedName)
-            {
-                KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
-            };
+                OriginalName: operation.Language.Default.SerializedName);
             inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
 
             _inputOperationToOperationMap[inputOperation] = operation;
@@ -149,7 +182,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
         {
-            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache, false);
+            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache);
             if (exampleValue.RawValue != null)
             {
                 return new InputExampleRawValue(inputType, exampleValue.RawValue);
@@ -298,7 +331,7 @@ namespace AutoRest.CSharp.Common.Input
                 return model;
             }
 
-            var usage = _schemaUsages.GetUsage(schema);
+            var usage = _schemaUsageProvider.GetUsage(schema);
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
@@ -590,7 +623,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
         {
-            var usage = _schemaUsages.GetUsage(schema);
+            var usage = _schemaUsageProvider.GetUsage(schema);
 
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,

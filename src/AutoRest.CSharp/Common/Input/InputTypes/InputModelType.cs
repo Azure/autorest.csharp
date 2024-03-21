@@ -105,8 +105,7 @@ namespace AutoRest.CSharp.Common.Input
                         myProperty.ConstantValue,
                         myProperty.IsRequired,
                         myProperty.IsReadOnly,
-                        myProperty.IsDiscriminator,
-                        myProperty.ConstantValue));
+                        myProperty.IsDiscriminator));
                 }
                 else
                 {

@@ -30,9 +30,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel);
             ApplyGlobalConfigurations();
             CodeModelTransformer.Transform(codeModel);
-            var inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
+            var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
             if (Configuration.Generation1ConvenienceClient)
             {
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
