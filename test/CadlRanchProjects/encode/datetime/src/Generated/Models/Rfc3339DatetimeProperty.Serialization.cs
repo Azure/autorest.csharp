@@ -24,7 +24,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<Rfc3339DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +53,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<Rfc3339DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +96,7 @@ namespace Encode.Datetime.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -112,7 +112,7 @@ namespace Encode.Datetime.Models
                         return DeserializeRfc3339DatetimeProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support reading in '{options.Format}' format.");
             }
         }
 

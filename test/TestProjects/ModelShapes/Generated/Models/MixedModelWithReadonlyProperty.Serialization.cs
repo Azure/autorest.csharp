@@ -23,7 +23,7 @@ namespace ModelShapes.Models
             var format = options.Format == "W" ? ((IPersistableModel<MixedModelWithReadonlyProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -65,7 +65,7 @@ namespace ModelShapes.Models
             var format = options.Format == "W" ? ((IPersistableModel<MixedModelWithReadonlyProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -127,7 +127,7 @@ namespace ModelShapes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -143,7 +143,7 @@ namespace ModelShapes.Models
                         return DeserializeMixedModelWithReadonlyProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support reading in '{options.Format}' format.");
             }
         }
 

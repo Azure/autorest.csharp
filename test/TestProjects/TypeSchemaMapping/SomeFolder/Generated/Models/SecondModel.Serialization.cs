@@ -24,7 +24,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SecondModel)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -69,7 +69,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SecondModel)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -141,7 +141,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SecondModel)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -157,7 +157,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeSecondModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SecondModel)} does not support reading in '{options.Format}' format.");
             }
         }
 

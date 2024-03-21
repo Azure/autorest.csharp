@@ -20,7 +20,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChatCompletionRequestMessageFunctionCall>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +51,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChatCompletionRequestMessageFunctionCall>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -100,7 +100,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -116,7 +116,7 @@ namespace OpenAI.Models
                         return DeserializeChatCompletionRequestMessageFunctionCall(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChatCompletionRequestMessageFunctionCall)} does not support reading in '{options.Format}' format.");
             }
         }
 

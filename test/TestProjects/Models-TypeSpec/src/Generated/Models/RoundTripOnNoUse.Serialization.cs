@@ -24,7 +24,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripOnNoUse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +60,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripOnNoUse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -114,7 +114,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -130,7 +130,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeRoundTripOnNoUse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support reading in '{options.Format}' format.");
             }
         }
 

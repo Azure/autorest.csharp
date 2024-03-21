@@ -23,7 +23,7 @@ namespace SpecialWords
             var format = options.Format == "W" ? ((IPersistableModel<Try>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Try)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Try)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +52,7 @@ namespace SpecialWords
             var format = options.Format == "W" ? ((IPersistableModel<Try>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Try)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Try)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -95,7 +95,7 @@ namespace SpecialWords
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Try)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Try)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -111,7 +111,7 @@ namespace SpecialWords
                         return DeserializeTry(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Try)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Try)} does not support reading in '{options.Format}' format.");
             }
         }
 

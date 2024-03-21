@@ -24,7 +24,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobWarning>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobWarning)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobWarning)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +55,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobWarning>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobWarning)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobWarning)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -104,7 +104,7 @@ namespace AuthoringTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobWarning)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -120,7 +120,7 @@ namespace AuthoringTypeSpec.Models
                         return DeserializeJobWarning(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobWarning)} does not support reading in '{options.Format}' format.");
             }
         }
 

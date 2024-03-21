@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Dog)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Dog)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -68,7 +68,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Dog)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Dog)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -216,7 +216,7 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(Dog)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Dog)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -231,10 +231,8 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDog(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(Dog)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Dog)} does not support reading in '{options.Format}' format.");
             }
         }
 

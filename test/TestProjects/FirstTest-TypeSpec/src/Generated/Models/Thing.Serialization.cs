@@ -24,7 +24,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -123,7 +123,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -288,7 +288,7 @@ namespace FirstTestTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -304,7 +304,7 @@ namespace FirstTestTypeSpec.Models
                         return DeserializeThing(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support reading in '{options.Format}' format.");
             }
         }
 

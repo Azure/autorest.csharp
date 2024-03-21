@@ -24,7 +24,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelArrayAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -46,7 +46,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelArrayAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +85,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -101,7 +101,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeExtendsModelArrayAdditionalProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support reading in '{options.Format}' format.");
             }
         }
 

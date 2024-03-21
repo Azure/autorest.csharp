@@ -23,7 +23,7 @@ namespace custom_baseUrl_paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProductResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductResult)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -65,7 +65,7 @@ namespace custom_baseUrl_paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProductResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductResult)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -123,7 +123,7 @@ namespace custom_baseUrl_paging.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ProductResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductResult)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -139,7 +139,7 @@ namespace custom_baseUrl_paging.Models
                         return DeserializeProductResult(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ProductResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductResult)} does not support reading in '{options.Format}' format.");
             }
         }
 

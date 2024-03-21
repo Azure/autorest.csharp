@@ -24,7 +24,7 @@ namespace MgmtDiscriminator
             var format = options.Format == "W" ? ((IPersistableModel<ArtifactData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ArtifactData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ArtifactData)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -73,7 +73,7 @@ namespace MgmtDiscriminator
             var format = options.Format == "W" ? ((IPersistableModel<ArtifactData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ArtifactData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ArtifactData)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -183,7 +183,7 @@ namespace MgmtDiscriminator
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(ArtifactData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ArtifactData)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -198,10 +198,8 @@ namespace MgmtDiscriminator
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeArtifactData(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(ArtifactData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ArtifactData)} does not support reading in '{options.Format}' format.");
             }
         }
 

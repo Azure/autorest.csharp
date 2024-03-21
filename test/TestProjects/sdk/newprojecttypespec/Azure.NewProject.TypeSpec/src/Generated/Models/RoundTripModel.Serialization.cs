@@ -24,7 +24,7 @@ namespace Azure.NewProject.TypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -247,7 +247,7 @@ namespace Azure.NewProject.TypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -551,7 +551,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -567,7 +567,7 @@ namespace Azure.NewProject.TypeSpec.Models
                         return DeserializeRoundTripModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading in '{options.Format}' format.");
             }
         }
 

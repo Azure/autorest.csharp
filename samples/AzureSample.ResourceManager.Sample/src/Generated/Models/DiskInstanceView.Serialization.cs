@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DiskInstanceView>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DiskInstanceView)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -77,7 +77,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DiskInstanceView>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DiskInstanceView)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -238,7 +238,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DiskInstanceView)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -253,10 +253,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDiskInstanceView(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DiskInstanceView)} does not support reading in '{options.Format}' format.");
             }
         }
 

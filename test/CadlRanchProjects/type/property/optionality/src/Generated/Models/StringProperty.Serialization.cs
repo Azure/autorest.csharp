@@ -24,7 +24,7 @@ namespace _Type.Property.Optionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<StringProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(StringProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(StringProperty)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -56,7 +56,7 @@ namespace _Type.Property.Optionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<StringProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(StringProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(StringProperty)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -99,7 +99,7 @@ namespace _Type.Property.Optionality.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(StringProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(StringProperty)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -115,7 +115,7 @@ namespace _Type.Property.Optionality.Models
                         return DeserializeStringProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(StringProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(StringProperty)} does not support reading in '{options.Format}' format.");
             }
         }
 

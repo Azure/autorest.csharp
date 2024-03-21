@@ -24,7 +24,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -74,7 +74,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -155,7 +155,7 @@ namespace CustomNamespace
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -171,7 +171,7 @@ namespace CustomNamespace
                         return DeserializeRenamedModelStruct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support reading in '{options.Format}' format.");
             }
         }
 

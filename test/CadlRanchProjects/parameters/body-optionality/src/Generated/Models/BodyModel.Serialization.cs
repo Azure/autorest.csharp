@@ -24,7 +24,7 @@ namespace Parameters.BodyOptionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyModel)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +53,7 @@ namespace Parameters.BodyOptionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyModel)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +96,7 @@ namespace Parameters.BodyOptionality.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyModel)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -112,7 +112,7 @@ namespace Parameters.BodyOptionality.Models
                         return DeserializeBodyModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyModel)} does not support reading in '{options.Format}' format.");
             }
         }
 

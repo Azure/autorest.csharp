@@ -24,7 +24,7 @@ namespace Parameters.Spread.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadAsRequestBodyRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +53,7 @@ namespace Parameters.Spread.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadAsRequestBodyRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +96,7 @@ namespace Parameters.Spread.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -112,7 +112,7 @@ namespace Parameters.Spread.Models
                         return DeserializeSpreadAsRequestBodyRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAsRequestBodyRequest)} does not support reading in '{options.Format}' format.");
             }
         }
 

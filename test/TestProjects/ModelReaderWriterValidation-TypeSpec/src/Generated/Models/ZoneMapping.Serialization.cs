@@ -24,7 +24,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ZoneMapping>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ZoneMapping)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ZoneMapping)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -66,7 +66,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ZoneMapping>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ZoneMapping)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ZoneMapping)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -124,7 +124,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ZoneMapping)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ZoneMapping)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -140,7 +140,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                         return DeserializeZoneMapping(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ZoneMapping)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ZoneMapping)} does not support reading in '{options.Format}' format.");
             }
         }
 

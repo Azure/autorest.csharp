@@ -24,7 +24,7 @@ namespace Encode.Duration.Models
             var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationArrayProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -58,7 +58,7 @@ namespace Encode.Duration.Models
             var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationArrayProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +106,7 @@ namespace Encode.Duration.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -122,7 +122,7 @@ namespace Encode.Duration.Models
                         return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support reading in '{options.Format}' format.");
             }
         }
 

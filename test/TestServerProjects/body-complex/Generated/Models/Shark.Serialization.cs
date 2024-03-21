@@ -23,7 +23,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Shark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Shark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shark)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -76,7 +76,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Shark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Shark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shark)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -178,7 +178,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Shark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shark)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -194,7 +194,7 @@ namespace body_complex.Models
                         return DeserializeShark(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Shark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shark)} does not support reading in '{options.Format}' format.");
             }
         }
 

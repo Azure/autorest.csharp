@@ -23,7 +23,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Horse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Horse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Horse)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Horse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Horse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Horse)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -110,7 +110,7 @@ namespace multiple_inheritance.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Horse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Horse)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -126,7 +126,7 @@ namespace multiple_inheritance.Models
                         return DeserializeHorse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Horse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Horse)} does not support reading in '{options.Format}' format.");
             }
         }
 

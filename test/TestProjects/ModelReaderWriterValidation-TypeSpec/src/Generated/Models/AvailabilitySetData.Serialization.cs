@@ -24,7 +24,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -89,7 +89,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -193,7 +193,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -209,7 +209,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                         return DeserializeAvailabilitySetData(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support reading in '{options.Format}' format.");
             }
         }
 

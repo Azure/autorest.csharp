@@ -24,7 +24,7 @@ namespace _Azure.Lro.Standard.Models
             var format = options.Format == "W" ? ((IPersistableModel<User>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(User)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(User)} does not support writing in '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -58,7 +58,7 @@ namespace _Azure.Lro.Standard.Models
             var format = options.Format == "W" ? ((IPersistableModel<User>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(User)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(User)} does not support reading in '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -107,7 +107,7 @@ namespace _Azure.Lro.Standard.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(User)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(User)} does not support writing in '{options.Format}' format.");
             }
         }
 
@@ -123,7 +123,7 @@ namespace _Azure.Lro.Standard.Models
                         return DeserializeUser(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(User)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(User)} does not support reading in '{options.Format}' format.");
             }
         }
 

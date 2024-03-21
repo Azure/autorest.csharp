@@ -96,15 +96,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        public static SwitchCase BuildBicepReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
-        {
-            return new SwitchCase(
-                Serializations.BicepFormat,
-                Throw(
-                    New.Instance(typeof(InvalidOperationException),
-                    Literal("Bicep deserialization is not supported for this type."))));
-        }
-
         private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
         {
             VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
