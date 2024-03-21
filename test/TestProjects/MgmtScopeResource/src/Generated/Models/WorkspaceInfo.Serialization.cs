@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {

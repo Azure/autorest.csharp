@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AnomalyDetector;
 using AnomalyDetector.Models;
 using Azure;
 using Azure.Core;

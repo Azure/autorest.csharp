@@ -435,6 +435,16 @@
                     "type": "string",
                     "format": "url"
                 },
+                "shellProperty": {
+                    "description": "A shell property to verify bicep generation for empty objects.",
+                    "type": "object",
+                    "$ref": "#/definitions/Shell"
+                },
+                "sku": {
+                    "description": "A model that will be safe flattened.",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku1"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
@@ -507,6 +517,10 @@
                     "description": "The Id of the pet",
                     "type": "string",
                     "readOnly": true
+                },
+                "type": {
+                    "description": "Verify that type is included for non-ResourceData models",
+                    "type": "string"
                 }
             }
         },
@@ -546,6 +560,41 @@
                         "name": "DogKind",
                         "modelAsString": false
                     }
+                }
+            }
+        },
+        "Shell": {
+            "description": "A shell type that can be used to validate bicep generation when no child properties are set",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the shell",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the shell",
+                    "type": "string"
+                }
+            }
+        },
+        "Sku1": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the sku",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku2"
+                }
+            }
+        },
+        "Sku2": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "nestedName": {
+                    "description": "The name of the sku",
+                    "type": "string"
                 }
             }
         },

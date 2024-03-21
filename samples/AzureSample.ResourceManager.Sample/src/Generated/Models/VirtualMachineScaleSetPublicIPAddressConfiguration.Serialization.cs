@@ -12,8 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -199,60 +199,119 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IdleTimeoutInMinutes), out propertyOverride);
+            if (Optional.IsDefined(IdleTimeoutInMinutes) || hasPropertyOverride)
             {
-                builder.Append("    idleTimeoutInMinutes:");
-                builder.AppendLine($" {IdleTimeoutInMinutes.Value}");
-            }
-
-            if (Optional.IsDefined(DnsSettings))
-            {
-                builder.Append("    dnsSettings:");
-                AppendChildObject(builder, DnsSettings, options, 4, false);
-            }
-
-            if (Optional.IsCollectionDefined(IPTags))
-            {
-                if (IPTags.Any())
+                builder.Append("    idleTimeoutInMinutes: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("    ipTags:");
-                    builder.AppendLine(" [");
-                    foreach (var item in IPTags)
-                    {
-                        AppendChildObject(builder, item, options, 6, true);
-                    }
-                    builder.AppendLine("    ]");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{IdleTimeoutInMinutes.Value}");
                 }
             }
 
-            if (Optional.IsDefined(PublicIPPrefix))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsSettings), out propertyOverride);
+            if (Optional.IsDefined(DnsSettings) || hasPropertyOverride)
             {
-                builder.Append("    publicIPPrefix:");
-                AppendChildObject(builder, PublicIPPrefix, options, 4, false);
+                builder.Append("    dnsSettings: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, DnsSettings, options, 4, false, "    dnsSettings: ");
+                }
             }
 
-            if (Optional.IsDefined(PublicIPAddressVersion))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTags), out propertyOverride);
+            if (Optional.IsCollectionDefined(IPTags) || hasPropertyOverride)
             {
-                builder.Append("    publicIPAddressVersion:");
-                builder.AppendLine($" '{PublicIPAddressVersion.Value.ToString()}'");
+                if (IPTags.Any() || hasPropertyOverride)
+                {
+                    builder.Append("    ipTags: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in IPTags)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 6, true, "    ipTags: ");
+                        }
+                        builder.AppendLine("    ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicIPPrefix), out propertyOverride);
+            if (Optional.IsDefined(PublicIPPrefix) || hasPropertyOverride)
+            {
+                builder.Append("    publicIPPrefix: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, PublicIPPrefix, options, 4, false, "    publicIPPrefix: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicIPAddressVersion), out propertyOverride);
+            if (Optional.IsDefined(PublicIPAddressVersion) || hasPropertyOverride)
+            {
+                builder.Append("    publicIPAddressVersion: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{PublicIPAddressVersion.Value.ToString()}'");
+                }
             }
 
             builder.AppendLine("  }");
@@ -260,37 +319,24 @@ namespace AzureSample.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
         {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var item in propertyOverrides.ToList())
             {
-                string line = lines[i];
-                if (inMultilineString)
+                switch (item.Key)
                 {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
+                    case "DnsDomainNameLabel":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("DomainNameLabel", item.Value);
+                        bicepOptions.ParameterOverrides.Add(DnsSettings, propertyDictionary);
+                        break;
+                    case "PublicIPPrefixId":
+                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
+                        propertyDictionary0.Add("Id", item.Value);
+                        bicepOptions.ParameterOverrides.Add(PublicIPPrefix, propertyDictionary0);
+                        break;
+                    default:
+                        continue;
                 }
             }
         }

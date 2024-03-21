@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {

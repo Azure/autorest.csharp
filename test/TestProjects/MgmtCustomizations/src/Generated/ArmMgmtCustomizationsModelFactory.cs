@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {

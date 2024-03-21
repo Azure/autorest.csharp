@@ -9,7 +9,6 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {

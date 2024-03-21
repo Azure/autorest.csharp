@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure;
-using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
 {

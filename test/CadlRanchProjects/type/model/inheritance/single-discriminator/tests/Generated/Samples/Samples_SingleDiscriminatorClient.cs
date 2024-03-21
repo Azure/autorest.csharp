@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Inheritance.SingleDiscriminator;
 using _Type.Model.Inheritance.SingleDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Samples

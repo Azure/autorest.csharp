@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {

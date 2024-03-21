@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using MultipleMediaTypes;
 using MultipleMediaTypes.Models;
 using NUnit.Framework;
 

@@ -7,7 +7,6 @@
 
 using System;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {

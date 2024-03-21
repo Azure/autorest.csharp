@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Union;
 using _Type.Union.Models;
 
 namespace _Type.Union.Samples

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Accessibility_LowLevel_TokenAuth;
 using Azure.Core;
 using Azure.Core.TestFramework;
 

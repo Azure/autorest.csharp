@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using ApiVersionInTsp;
 using Azure;
 using Azure.Core;
 
