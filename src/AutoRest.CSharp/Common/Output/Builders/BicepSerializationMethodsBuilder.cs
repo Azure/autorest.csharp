@@ -132,14 +132,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        public static SwitchCase BuildBicepReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
-        {
-            return new SwitchCase(
-                Serializations.BicepFormat,
-                Throw(
-                    New.InvalidOperationException(Literal("Bicep deserialization is not supported for this type."))));
-        }
-
         private static List<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
         {
             var statements = new List<MethodBodyStatement>();
