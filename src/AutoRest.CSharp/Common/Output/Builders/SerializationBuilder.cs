@@ -421,21 +421,30 @@ namespace AutoRest.CSharp.Output.Builders
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
+            var addToPropertyBag = (ObjectType curObj, ObjectTypeProperty curProp) =>
+            {
+                if (curProp.SchemaProperty != null && !propertyBag.Properties.ContainsKey(curProp))
+                {
+                    var ms = objectType.GetForMemberSerialization(curProp.Declaration.Name);
+                    if (ms == null && curObj is SchemaObjectType sot)
+                    {
+                        ms = sot.GetForMemberSerialization(curProp.Declaration.Name);
+                    }
+                    propertyBag.Properties.Add(curProp, ms);
+                }
+            };
+            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
+            {
+                foreach (var objectTypeProperty in objectTypeLevel.Properties)
+                {
+                    addToPropertyBag(objectTypeLevel, objectTypeProperty);
+                }
+            }
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.SerializationConstructor.Initializers.Select(i => i.Property))
                 {
-                    if (propertyBag.Properties.ContainsKey(objectTypeProperty))
-                        continue;
-                    if (objectTypeProperty.SchemaProperty != null)
-                    {
-                        var ms = objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name);
-                        if (ms == null && objectTypeLevel is SchemaObjectType sot)
-                        {
-                            ms = sot.GetForMemberSerialization(objectTypeProperty.Declaration.Name);
-                        }
-                        propertyBag.Properties.Add(objectTypeProperty, ms);
-                    }
+                    addToPropertyBag(objectTypeLevel, objectTypeProperty);
                 }
             }
 
