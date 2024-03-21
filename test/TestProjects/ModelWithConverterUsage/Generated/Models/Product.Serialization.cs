@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {

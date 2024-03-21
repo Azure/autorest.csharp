@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using _Type.Model.Inheritance.Recursive;
 
 namespace _Type.Model.Inheritance.Recursive.Models
 {

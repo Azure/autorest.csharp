@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using NUnit.Framework;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Tests
 {

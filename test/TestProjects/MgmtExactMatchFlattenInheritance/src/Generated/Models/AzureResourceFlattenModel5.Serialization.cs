@@ -8,7 +8,6 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtExactMatchFlattenInheritance;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {

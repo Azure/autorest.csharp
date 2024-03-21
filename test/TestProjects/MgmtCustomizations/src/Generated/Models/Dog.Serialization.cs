@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
-using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {

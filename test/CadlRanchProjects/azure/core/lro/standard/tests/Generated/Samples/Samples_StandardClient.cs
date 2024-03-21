@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Azure.Lro.Standard;
 using _Azure.Lro.Standard.Models;
 
 namespace _Azure.Lro.Standard.Samples

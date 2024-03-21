@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {

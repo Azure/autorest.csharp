@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MultipleInputFiles;
 
 namespace MultipleInputFiles.Models
 {

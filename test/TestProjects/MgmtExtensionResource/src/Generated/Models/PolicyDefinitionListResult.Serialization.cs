@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
 {

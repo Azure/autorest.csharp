@@ -8,7 +8,6 @@
 using System;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
 {

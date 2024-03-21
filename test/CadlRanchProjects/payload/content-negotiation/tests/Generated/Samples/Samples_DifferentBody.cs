@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using Payload.ContentNegotiation;
 using Payload.ContentNegotiation.Models;
 
 namespace Payload.ContentNegotiation.Samples
