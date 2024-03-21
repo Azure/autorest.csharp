@@ -16,8 +16,6 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToString());
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
@@ -28,6 +26,8 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
+            writer.WritePropertyName("ruleType"u8);
+            writer.WriteStringValue(RuleType.ToString());
             writer.WritePropertyName("newStringSerializeProperty"u8);
             writer.WriteStringValue(NewStringSerializeProperty);
             writer.WritePropertyName("newArraySerializedProperty"u8);
@@ -51,19 +51,14 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            FirewallPolicyRuleType ruleType = "Unknown";
             string name = default;
             string description = default;
+            FirewallPolicyRuleType ruleType = "Unknown";
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
             Dictionary<string, string> newDictionarySerializedProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ruleType"u8))
-                {
-                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
-                    continue;
-                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
@@ -72,6 +67,11 @@ namespace MgmtMockAndSample.Models
                 if (property.NameEquals("description"u8))
                 {
                     description = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("ruleType"u8))
+                {
+                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("newStringSerializeProperty"u8))

@@ -101,6 +101,18 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            writer.WritePropertyName("ruleType"u8);
+            writer.WriteStringValue(RuleType.ToString());
             if (NewIntSerializeProperty != null)
             {
                 writer.WritePropertyName("newIntSerializeProperty"u8);
@@ -112,18 +124,6 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
             writer.WriteObjectValue(NewGeneratedTypeSerializeProperty);
-            writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToString());
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
             writer.WritePropertyName("newStringSerializeProperty"u8);
             writer.WriteStringValue(NewStringSerializeProperty);
             writer.WritePropertyName("newArraySerializedProperty"u8);
@@ -156,11 +156,11 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceIpGroups = default;
             bool? terminateTLS = default;
             IList<string> webCategories = default;
-            int? newIntSerializeProperty = default;
-            VaultKey newGeneratedTypeSerializeProperty = default;
-            FirewallPolicyRuleType ruleType = default;
             string name = default;
             string description = default;
+            FirewallPolicyRuleType ruleType = default;
+            int? newIntSerializeProperty = default;
+            VaultKey newGeneratedTypeSerializeProperty = default;
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
             Dictionary<string, string> newDictionarySerializedProperty = default;
@@ -287,6 +287,21 @@ namespace MgmtMockAndSample.Models
                     webCategories = array;
                     continue;
                 }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("description"u8))
+                {
+                    description = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("ruleType"u8))
+                {
+                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("newIntSerializeProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -300,21 +315,6 @@ namespace MgmtMockAndSample.Models
                 if (property.NameEquals("newGeneratedTypeSerializeProperty"u8))
                 {
                     newGeneratedTypeSerializeProperty = VaultKey.DeserializeVaultKey(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("ruleType"u8))
-                {
-                    ruleType = new FirewallPolicyRuleType(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("description"u8))
-                {
-                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("newStringSerializeProperty"u8))
