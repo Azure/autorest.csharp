@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
                     new[]
                     {
-                        Serializations.ValidateJsonFormat(options, iPersistableModelTInterface),
+                        Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Read),
                         // using var document = JsonDocument.ParseValue(ref reader);
                         UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
                         // return DeserializeXXX(doc.RootElement, options);
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options, CSharpType? iPersistableModelTInterface)
             => new[]
             {
-                Serializations.ValidateJsonFormat(options, iPersistableModelTInterface),
+                Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
