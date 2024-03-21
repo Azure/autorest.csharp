@@ -26,7 +26,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateNetworkConfiguration>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -101,7 +101,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateNetworkConfiguration>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -422,7 +422,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -437,10 +437,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineScaleSetUpdateNetworkConfiguration(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateNetworkConfiguration)} does not support reading '{options.Format}' format.");
             }
         }
 

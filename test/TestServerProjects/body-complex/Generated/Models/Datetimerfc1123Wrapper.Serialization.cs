@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -116,7 +116,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -132,7 +132,7 @@ namespace body_complex.Models
                         return DeserializeDatetimerfc1123Wrapper(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Datetimerfc1123Wrapper)} does not support reading '{options.Format}' format.");
             }
         }
 

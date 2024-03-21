@@ -16,7 +16,7 @@ namespace UnbrandedTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -70,7 +70,7 @@ namespace UnbrandedTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -140,7 +140,7 @@ namespace UnbrandedTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -156,7 +156,7 @@ namespace UnbrandedTypeSpec.Models
                         return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{options.Format}' format.");
             }
         }
 

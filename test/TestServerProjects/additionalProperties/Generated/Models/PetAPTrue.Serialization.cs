@@ -22,7 +22,7 @@ namespace additionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAPTrue)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +51,7 @@ namespace additionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAPTrue)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -107,7 +107,7 @@ namespace additionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAPTrue)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -123,7 +123,7 @@ namespace additionalProperties.Models
                         return DeserializePetAPTrue(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAPTrue)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -23,7 +23,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DeploymentJob>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeploymentJob)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -83,7 +83,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DeploymentJob>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeploymentJob)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -182,7 +182,7 @@ namespace AuthoringTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeploymentJob)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -198,7 +198,7 @@ namespace AuthoringTypeSpec.Models
                         return DeserializeDeploymentJob(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeploymentJob)} does not support reading '{options.Format}' format.");
             }
         }
 
