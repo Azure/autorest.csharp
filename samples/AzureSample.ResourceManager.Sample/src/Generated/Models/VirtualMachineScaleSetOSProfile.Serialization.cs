@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -189,127 +190,154 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ComputerNamePrefix))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ComputerNamePrefix), out propertyOverride);
+            if (Optional.IsDefined(ComputerNamePrefix) || hasPropertyOverride)
             {
-                builder.Append("  computerNamePrefix:");
-                if (ComputerNamePrefix.Contains(Environment.NewLine))
+                builder.Append("  computerNamePrefix: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ComputerNamePrefix}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ComputerNamePrefix}'");
-                }
-            }
-
-            if (Optional.IsDefined(AdminUsername))
-            {
-                builder.Append("  adminUsername:");
-                if (AdminUsername.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AdminUsername}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{AdminUsername}'");
-                }
-            }
-
-            if (Optional.IsDefined(AdminPassword))
-            {
-                builder.Append("  adminPassword:");
-                if (AdminPassword.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AdminPassword}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{AdminPassword}'");
-                }
-            }
-
-            if (Optional.IsDefined(CustomData))
-            {
-                builder.Append("  customData:");
-                if (CustomData.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomData}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{CustomData}'");
-                }
-            }
-
-            if (Optional.IsDefined(WindowsConfiguration))
-            {
-                builder.Append("  windowsConfiguration:");
-                AppendChildObject(builder, WindowsConfiguration, options, 2, false);
-            }
-
-            if (Optional.IsDefined(LinuxConfiguration))
-            {
-                builder.Append("  linuxConfiguration:");
-                AppendChildObject(builder, LinuxConfiguration, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Secrets))
-            {
-                if (Secrets.Any())
-                {
-                    builder.Append("  secrets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Secrets)
+                    if (ComputerNamePrefix.Contains(Environment.NewLine))
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ComputerNamePrefix}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{ComputerNamePrefix}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminUsername), out propertyOverride);
+            if (Optional.IsDefined(AdminUsername) || hasPropertyOverride)
+            {
+                builder.Append("  adminUsername: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AdminUsername.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AdminUsername}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AdminUsername}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminPassword), out propertyOverride);
+            if (Optional.IsDefined(AdminPassword) || hasPropertyOverride)
+            {
+                builder.Append("  adminPassword: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AdminPassword.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AdminPassword}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AdminPassword}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomData), out propertyOverride);
+            if (Optional.IsDefined(CustomData) || hasPropertyOverride)
+            {
+                builder.Append("  customData: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (CustomData.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomData}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomData}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WindowsConfiguration), out propertyOverride);
+            if (Optional.IsDefined(WindowsConfiguration) || hasPropertyOverride)
+            {
+                builder.Append("  windowsConfiguration: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, WindowsConfiguration, options, 2, false, "  windowsConfiguration: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LinuxConfiguration), out propertyOverride);
+            if (Optional.IsDefined(LinuxConfiguration) || hasPropertyOverride)
+            {
+                builder.Append("  linuxConfiguration: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, LinuxConfiguration, options, 2, false, "  linuxConfiguration: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Secrets), out propertyOverride);
+            if (Optional.IsCollectionDefined(Secrets) || hasPropertyOverride)
+            {
+                if (Secrets.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  secrets: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Secrets)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  secrets: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetOSProfile>.Write(ModelReaderWriterOptions options)

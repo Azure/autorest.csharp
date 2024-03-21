@@ -320,6 +320,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(cast.Inner);
                     writer.AppendRaw(")");
                     break;
+                case AsExpression asExpression:
+                    writer.WriteValueExpression(asExpression.Inner);
+                    writer.Append($" as {asExpression.Type}");
+                    break;
                 case CollectionInitializerExpression(var items):
                     writer.AppendRaw("{ ");
                     foreach (var item in items)
