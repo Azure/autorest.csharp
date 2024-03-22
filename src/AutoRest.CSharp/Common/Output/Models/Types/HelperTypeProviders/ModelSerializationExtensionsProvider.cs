@@ -57,6 +57,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             yield return BuildWriteBase64StringValueMethod();
             yield return BuildWriteNumberValueMethod();
+            yield return BuildWriteObjectValueMethodGeneric();
             yield return BuildWriteObjectValueMethod();
             #endregion
         }
@@ -402,23 +403,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildWriteObjectValueMethod()
         {
-            var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
-            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(new CSharpType(typeof(ModelReaderWriterOptions)).WithNullable(true)), ValidationType.None, null);
-            var parameters = Configuration.UseModelReaderWriter
-                ? new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, optionsParameter }
-                : new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter };
-            var signature = new MethodSignature(
-                Name: _writeObjectValueMethodName,
-                Summary: null,
-                Description: null,
-                Modifiers: _methodModifiers,
-                ReturnType: null,
-                ReturnDescription: null,
-                Parameters: parameters,
-                GenericArguments: new CSharpType[] { _t });
-            var value = (ValueExpression)valueParameter;
-            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            var options = new ParameterReference(optionsParameter);
+            ValueExpression value;
+            Utf8JsonWriterExpression writer;
+            ParameterReference options;
+            MethodSignature signature = GetWriteObjectValueMethodSignature(null, out value, out writer, out options);
+            return new Method(signature, new MethodBodyStatement[]
+            {
+                writer.WriteObjectValue(new TypedValueExpression(typeof(object), value), options)
+            });
+        }
+
+        private Method BuildWriteObjectValueMethodGeneric()
+        {
+            ValueExpression value;
+            Utf8JsonWriterExpression writer;
+            ParameterReference options;
+            MethodSignature signature = GetWriteObjectValueMethodSignature(new[] { _t }, out value, out writer, out options);
             List<SwitchCase> cases = new List<SwitchCase>
             {
                 new(Null, new MethodBodyStatement[]
@@ -570,6 +570,28 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 return new(declaration, body);
             }
+        }
+
+        private MethodSignature GetWriteObjectValueMethodSignature(CSharpType[]? genericArguments, out ValueExpression value, out Utf8JsonWriterExpression writer, out ParameterReference options)
+        {
+            var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(new CSharpType(typeof(ModelReaderWriterOptions)).WithNullable(true)), ValidationType.None, null);
+            var parameters = Configuration.UseModelReaderWriter
+                ? new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, optionsParameter }
+                : new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter };
+            var signature = new MethodSignature(
+                Name: _writeObjectValueMethodName,
+                Summary: null,
+                Description: null,
+                Modifiers: _methodModifiers,
+                ReturnType: null,
+                ReturnDescription: null,
+                Parameters: parameters,
+                GenericArguments: genericArguments);
+            value = (ValueExpression)valueParameter;
+            writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            options = new ParameterReference(optionsParameter);
+            return signature;
         }
 
         public MethodBodyStatement WriteObjectValue(Utf8JsonWriterExpression writer, TypedValueExpression value, ValueExpression? options = null)
