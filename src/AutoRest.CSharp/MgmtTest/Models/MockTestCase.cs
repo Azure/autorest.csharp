@@ -54,12 +54,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return parents.FirstOrDefault();
         }
 
-        private static string GetRequestParameterName(RequestParameter requestParameter)
-        {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
-        }
-
         private MappingObject? _parameterValueMapping;
         public MappingObject ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping().Item1;
 
@@ -97,7 +91,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // if this parameter is a body parameter, we might have changed it to required, and we cannot tell if we have changed it on the codemodel right now. In this case we just fake an empty body.
                 if (parameter.DefaultValue == null && parameter.RequestLocation == RequestLocation.Body)
                 {
-                    exampleParameter ??= new(new InputParameter(), new InputExampleRawValue(InputPrimitiveType.Boolean, null));
+                    exampleParameter ??= new(new InputParameter(), new InputExampleObjectValue(InputPrimitiveType.Boolean, new Dictionary<string, InputExampleValue>()));
                 }
                 if (exampleParameter == null)
                 {
