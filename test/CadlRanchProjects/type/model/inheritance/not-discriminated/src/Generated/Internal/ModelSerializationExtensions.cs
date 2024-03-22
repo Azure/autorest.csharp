@@ -229,7 +229,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
                     foreach (var pair in enumerable)
                     {
                         writer.WritePropertyName(pair.Key);
-                        writer.WriteObjectValue<object>(pair.Value);
+                        writer.WriteObjectValue<object>(pair.Value, options);
                     }
                     writer.WriteEndObject();
                     break;
@@ -237,7 +237,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
                     writer.WriteStartArray();
                     foreach (var item in objectEnumerable)
                     {
-                        writer.WriteObjectValue<object>(item);
+                        writer.WriteObjectValue<object>(item, options);
                     }
                     writer.WriteEndArray();
                     break;
