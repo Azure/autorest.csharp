@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
                 {
-                    if (serializationConstructorParameters.Exists(p => p.Name == propertyWithSerialization.Name))
+                    if (serializationInitializers.Exists(i => i.Property.Declaration.Name == propertyWithSerialization.Name))
                         continue;
                     var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
                     var isReadOnly = propertyWithSerialization switch
