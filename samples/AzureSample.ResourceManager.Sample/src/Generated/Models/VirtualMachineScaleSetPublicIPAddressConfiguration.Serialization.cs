@@ -201,7 +201,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -328,12 +328,12 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "DnsDomainNameLabel":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("DomainNameLabel", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DnsSettings, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary);
                         break;
                     case "PublicIPPrefixId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(PublicIPPrefix, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(PublicIPPrefix, propertyDictionary0);
                         break;
                     default:
                         continue;

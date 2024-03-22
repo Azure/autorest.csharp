@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -314,12 +314,12 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "PatchMode":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("PatchMode", item.Value);
-                        bicepOptions.ParameterOverrides.Add(PatchSettings, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(PatchSettings, propertyDictionary);
                         break;
                     case "WinRMListeners":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Listeners", item.Value);
-                        bicepOptions.ParameterOverrides.Add(WinRM, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(WinRM, propertyDictionary0);
                         break;
                     default:
                         continue;
