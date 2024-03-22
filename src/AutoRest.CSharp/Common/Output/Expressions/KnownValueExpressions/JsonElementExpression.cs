@@ -4,12 +4,18 @@
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Writers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record JsonElementExpression(ValueExpression Untyped) : TypedValueExpression<JsonElement>(Untyped)
     {
+        public override void Write(CodeWriter writer)
+        {
+            Untyped.Write(writer);
+        }
+
         public JsonValueKindExpression ValueKind => new(Property(nameof(JsonElement.ValueKind)));
         public EnumerableExpression EnumerateArray() => new(typeof(JsonElement), Invoke(nameof(JsonElement.EnumerateArray)));
         public EnumerableExpression EnumerateObject() => new(typeof(JsonProperty), Invoke(nameof(JsonElement.EnumerateObject)));

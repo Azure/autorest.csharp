@@ -718,53 +718,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{variable.Type} {variable.Declaration:D} = {value}");
                     break;
             }
-
-            static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments, bool useSingleLine = true)
-            {
-                if (useSingleLine)
-                {
-                    writer.AppendRaw("(");
-                    foreach (var argument in arguments)
-                    {
-                        writer.WriteValueExpression(argument);
-                        writer.AppendRaw(", ");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.AppendRaw(")");
-                }
-                else
-                {
-                    writer.LineRaw("(");
-                    foreach (var argument in arguments)
-                    {
-                        writer.AppendRaw("\t");
-                        writer.WriteValueExpression(argument);
-                        writer.LineRaw(",");
-                    }
-
-                    writer.RemoveTrailingCharacter();
-                    writer.RemoveTrailingComma();
-                    writer.AppendRaw(")");
-                }
-            }
-
-            static void WriteTypeArguments(CodeWriter writer, IEnumerable<CSharpType>? typeArguments)
-            {
-                if (typeArguments is null)
-                {
-                    return;
-                }
-
-                writer.AppendRaw("<");
-                foreach (var argument in typeArguments)
-                {
-                    writer.Append($"{argument}, ");
-                }
-
-                writer.RemoveTrailingComma();
-                writer.AppendRaw(">");
-            }
         }
     }
 }

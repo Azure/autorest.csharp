@@ -6,5 +6,11 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record ConstantExpression(Constant Constant) : TypedValueExpression(Constant.Type, new FormattableStringToExpression(Constant.GetConstantFormattable()));
+    internal record ConstantExpression(Constant Constant) : TypedValueExpression(Constant.Type, new FormattableStringToExpression(Constant.GetConstantFormattable()))
+    {
+        public override void Write(CodeWriter writer)
+        {
+            Untyped.Write(writer);
+        }
+    }
 }
