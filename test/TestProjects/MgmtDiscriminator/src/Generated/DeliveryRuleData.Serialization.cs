@@ -27,7 +27,7 @@ namespace MgmtDiscriminator
             var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -124,7 +124,7 @@ namespace MgmtDiscriminator
             var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -300,7 +300,7 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -517,7 +517,7 @@ namespace MgmtDiscriminator
                     case "NestedName":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("NestedName", item.Value);
-                        bicepOptions.ParameterOverrides.Add(Sku, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(Sku, propertyDictionary);
                         break;
                     default:
                         continue;
@@ -536,7 +536,7 @@ namespace MgmtDiscriminator
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -551,10 +551,8 @@ namespace MgmtDiscriminator
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDeliveryRuleData(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeliveryRuleData)} does not support reading '{options.Format}' format.");
             }
         }
 

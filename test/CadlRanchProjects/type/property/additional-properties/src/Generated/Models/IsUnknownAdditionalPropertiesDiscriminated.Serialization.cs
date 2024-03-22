@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDiscriminated>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +51,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDiscriminated>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +85,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -101,7 +101,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support reading '{options.Format}' format.");
             }
         }
 

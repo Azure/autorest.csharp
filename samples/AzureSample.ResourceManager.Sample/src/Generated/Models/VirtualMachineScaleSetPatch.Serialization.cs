@@ -24,7 +24,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -125,7 +125,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -323,7 +323,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -339,7 +339,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                         return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support reading '{options.Format}' format.");
             }
         }
 

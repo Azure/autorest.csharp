@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
@@ -154,7 +153,7 @@ namespace OpenAI
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("POST");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/chat/completions", false);
             request.Uri = uri.ToUri();

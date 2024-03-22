@@ -25,7 +25,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Sku1)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku1)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Sku1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Sku1)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sku1)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -100,7 +100,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -138,7 +138,7 @@ namespace MgmtDiscriminator.Models
                     case "NestedName":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("NestedName", item.Value);
-                        bicepOptions.ParameterOverrides.Add(Name, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(Name, propertyDictionary);
                         break;
                     default:
                         continue;
@@ -157,7 +157,7 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(Sku1)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku1)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -172,10 +172,8 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeSku1(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(Sku1)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sku1)} does not support reading '{options.Format}' format.");
             }
         }
 

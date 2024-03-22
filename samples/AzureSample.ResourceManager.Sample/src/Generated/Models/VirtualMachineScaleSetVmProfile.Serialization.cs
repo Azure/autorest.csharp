@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmProfile>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -107,7 +107,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmProfile>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -258,7 +258,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -444,22 +444,22 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("EncryptionAtHost", item.Value);
-                        bicepOptions.ParameterOverrides.Add(SecurityProfile, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("BootDiagnostics", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DiagnosticsProfile, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary0);
                         break;
                     case "BillingMaxPrice":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("MaxPrice", item.Value);
-                        bicepOptions.ParameterOverrides.Add(BillingProfile, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(BillingProfile, propertyDictionary1);
                         break;
                     case "ScheduledEventsTerminateNotificationProfile":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("TerminateNotificationProfile", item.Value);
-                        bicepOptions.ParameterOverrides.Add(ScheduledEventsProfile, propertyDictionary2);
+                        bicepOptions.PropertyOverrides.Add(ScheduledEventsProfile, propertyDictionary2);
                         break;
                     default:
                         continue;
@@ -478,7 +478,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -493,10 +493,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineScaleSetVmProfile(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmProfile)} does not support reading '{options.Format}' format.");
             }
         }
 

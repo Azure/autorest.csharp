@@ -22,7 +22,7 @@ namespace UnbrandedTypeSpec
                 throw new InvalidOperationException("Failed to receive Result.");
             }
 
-            if (!message.Response.IsError || requestContext.ErrorBehavior == ErrorBehavior.NoThrow)
+            if (!message.Response.IsError || requestContext?.ErrorBehavior == ErrorBehavior.NoThrow)
             {
                 return message.Response;
             }
@@ -39,7 +39,7 @@ namespace UnbrandedTypeSpec
                 throw new InvalidOperationException("Failed to receive Result.");
             }
 
-            if (!message.Response.IsError || requestContext.ErrorBehavior == ErrorBehavior.NoThrow)
+            if (!message.Response.IsError || requestContext?.ErrorBehavior == ErrorBehavior.NoThrow)
             {
                 return message.Response;
             }

@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
              */
             var typeOfT = iModelTInterface.Arguments[0];
             var defaultCase = SwitchCase.Default(
-                Serializations.ThrowValidationFailException(options.Format, typeOfT)
+                Serializations.ThrowValidationFailException(options.Format, typeOfT, Serializations.ValidationType.Write)
             );
             switchStatement.Add(defaultCase);
 
@@ -197,18 +197,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 switchStatement.Add(XmlSerializationMethodsBuilder.BuildXmlCreateSwitchCase(model, data, options));
             }
 
-            if (serialization.Bicep is not null)
-            {
-                switchStatement.Add(BicepSerializationMethodsBuilder.BuildBicepReadSwitchCase(model, data, options));
-            }
-
             // default case
             /*
-             * throw new InvalidOperationException($"The model {nameof(T)} does not support '{options.Format}' format.");
+             * throw new FormatException($"The model {nameof(T)} does not support reading in '{options.Format}' format.");
              */
             var typeOfT = iModelTInterface.Arguments[0];
             var defaultCase = SwitchCase.Default(
-                Serializations.ThrowValidationFailException(options.Format, typeOfT)
+                Serializations.ThrowValidationFailException(options.Format, typeOfT, Serializations.ValidationType.Read)
             );
             switchStatement.Add(defaultCase);
 

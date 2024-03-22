@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var bicepOptions = new ParameterReference(BicepOptions);
-            var objectOverrides = bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides));
+            var objectOverrides = bicepOptions.Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides));
             var propertyOverrides = new ParameterReference(PropertyOverrides);
 
             var forLoop = new ForeachStatement(
@@ -132,14 +132,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        public static SwitchCase BuildBicepReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
-        {
-            return new SwitchCase(
-                Serializations.BicepFormat,
-                Throw(
-                    New.InvalidOperationException(Literal("Bicep deserialization is not supported for this type."))));
-        }
-
         private static List<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
         {
             var statements = new List<MethodBodyStatement>();
@@ -156,7 +148,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 hasObjectOverride,
                 And(
                     new BoolExpression(NotEqual(bicepOptions, Null)),
-                    new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides))
+                    new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides))
                         .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides))))));
             var hasPropertyOverride = new VariableReference(typeof(bool), "hasPropertyOverride");
             statements.Add(Declare(hasPropertyOverride, BoolExpression.False));

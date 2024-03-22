@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record StringBuilderExpression(ValueExpression Untyped) : TypedValueExpression<StringBuilder>(Untyped)
     {
+        public StringExpression Length => new(Property(nameof(StringBuilder.Length)));
+
         public MethodBodyStatement Append(StringExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.Append), value);
 
         public MethodBodyStatement AppendLine(StringExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.AppendLine), value);
