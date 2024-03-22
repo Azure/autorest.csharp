@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     yield return new
                     (
-                        new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
+                        new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
                         This.CastTo(iJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, ModelReaderWriterOptionsExpression.Wire)
                     );
                 }
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     yield return new
                     (
-                        new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
+                        new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
                         WriteObject(json, writer, null, null)
                     );
                 }
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         InvokeOptional.WrapInIsDefined(
                             property,
                             new IfElseStatement(checkPropertyIsInitialized,
-                                WritePropertySerialization(utf8JsonWriter, property),
+                                WritePropertySerialization(utf8JsonWriter, property, options),
                                 utf8JsonWriter.WriteNull(property.SerializedName)
                             ))
                     );
@@ -192,19 +192,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     yield return Serializations.WrapInCheckNotWire(
                         property,
                         options?.Format,
-                        InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property)));
+                        InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property, options)));
                 }
             }
         }
 
-        private static MethodBodyStatement WritePropertySerialization(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization)
+        private static MethodBodyStatement WritePropertySerialization(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization, ModelReaderWriterOptionsExpression? options)
         {
             return new[]
             {
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
                     ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
-                    : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value)
+                    : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value, options)
             };
         }
 
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
                 utf8JsonWriter.WritePropertyName(item.Key),
-                SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value)
+                SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value, options)
             };
 
             // if it should be excluded in wire serialization, it is a raw data field and we need to check if it is null
@@ -237,12 +237,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 statement);
         }
 
-        public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
+        public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, TypedValueExpression expression, ModelReaderWriterOptionsExpression? options)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, GetEnumerableExpression(expression, array)),
-                JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
-                JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, GetEnumerableExpression(expression, array), options),
+                JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression), options),
+                JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression, options),
                 _ => throw new NotSupportedException()
             };
 
@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression);
         }
 
-        private static MethodBodyStatement SerializeArray(Utf8JsonWriterExpression utf8JsonWriter, JsonArraySerialization arraySerialization, EnumerableExpression array)
+        private static MethodBodyStatement SerializeArray(Utf8JsonWriterExpression utf8JsonWriter, JsonArraySerialization arraySerialization, EnumerableExpression array, ModelReaderWriterOptionsExpression? options)
         {
             return new[]
             {
@@ -266,13 +266,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new ForeachStatement("item", array, out var item)
                 {
                     CheckCollectionItemForNull(utf8JsonWriter, arraySerialization.ValueSerialization, item),
-                    SerializeExpression(utf8JsonWriter, arraySerialization.ValueSerialization, item)
+                    SerializeExpression(utf8JsonWriter, arraySerialization.ValueSerialization, item, options)
                 },
                 utf8JsonWriter.WriteEndArray()
             };
         }
 
-        private static MethodBodyStatement SerializeDictionary(Utf8JsonWriterExpression utf8JsonWriter, JsonDictionarySerialization dictionarySerialization, DictionaryExpression dictionary)
+        private static MethodBodyStatement SerializeDictionary(Utf8JsonWriterExpression utf8JsonWriter, JsonDictionarySerialization dictionarySerialization, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression? options)
         {
             return new[]
             {
@@ -281,13 +281,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     utf8JsonWriter.WritePropertyName(keyValuePair.Key),
                     CheckCollectionItemForNull(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value),
-                    SerializeExpression(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value)
+                    SerializeExpression(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value, options)
                 },
                 utf8JsonWriter.WriteEndObject()
             };
         }
 
-        private static MethodBodyStatement SerializeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value)
+        private static MethodBodyStatement SerializeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, TypedValueExpression value, ModelReaderWriterOptionsExpression? options)
         {
             if (valueSerialization.Type.SerializeAs is not null)
             {
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
 
                 case ObjectType:
-                    return utf8JsonWriter.WriteObjectValue(value);
+                    return utf8JsonWriter.WriteObjectValue(value, options: options);
 
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(object))
             {
-                return utf8JsonWriter.WriteObjectValue(value);
+                return utf8JsonWriter.WriteObjectValue(new TypedValueExpression(valueType, value));
             }
 
             // These are string-like types that could implicitly convert to string type

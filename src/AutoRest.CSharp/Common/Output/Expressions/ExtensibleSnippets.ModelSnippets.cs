@@ -3,9 +3,11 @@
 
 using System;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -17,7 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
     {
         internal abstract class ModelSnippets
         {
-            public virtual Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers)
+            public virtual Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers, CSharpType type)
             {
                 var utf8RequestContent = Utf8JsonRequestContentProvider.Instance;
                 return new Method
@@ -26,7 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                     new[]
                     {
                         Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var requestContent, out var writer),
-                        writer.WriteObjectValue(This),
+                        writer.WriteObjectValue(new TypedValueExpression(type, This), ModelReaderWriterOptionsExpression.Wire),
                         Return(requestContent)
                     }
                 );

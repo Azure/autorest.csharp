@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 writer.WriteStartArray(),
                 new ForeachStatement("item", enumerable, out var item)
                 {
-                    writer.WriteObjectValue(item)
+                    writer.WriteObjectValue(item, ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndArray(),
                 EmptyLine,
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 new ForeachStatement("item", dictionary, out var item)
                 {
                     writer.WritePropertyName(item.Key),
-                    writer.WriteObjectValue(item.Value)
+                    writer.WriteObjectValue(item.Value, ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndObject(),
                 EmptyLine,
@@ -224,10 +224,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
             var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
-            var value = (ValueExpression)valueParameter;
+            var value = (TypedValueExpression)valueParameter;
             body.Add(new MethodBodyStatement[]
             {
-                writer.WriteObjectValue(value),
+                writer.WriteObjectValue(value, ModelReaderWriterOptionsExpression.Wire),
                 Return(content)
             });
 

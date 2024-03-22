@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -22,6 +23,9 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private static readonly Lazy<ModelSerializationExtensionsProvider> _instance = new Lazy<ModelSerializationExtensionsProvider>(() => new ModelSerializationExtensionsProvider());
         public static ModelSerializationExtensionsProvider Instance => _instance.Value;
+        private class WriteObjectValueTemplate<T> { }
+
+        private readonly CSharpType _t = typeof(WriteObjectValueTemplate<>).GetGenericArguments()[0];
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
         private readonly TypeFormattersProvider _typeFormattersProvider;
@@ -399,6 +403,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildWriteObjectValueMethod()
         {
             var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(new CSharpType(typeof(ModelReaderWriterOptions)).WithNullable(true)), ValidationType.None, null);
+            var parameters = Configuration.UseModelReaderWriter
+                ? new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, optionsParameter }
+                : new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter };
             var signature = new MethodSignature(
                 Name: _writeObjectValueMethodName,
                 Summary: null,
@@ -406,23 +414,39 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Modifiers: _methodModifiers,
                 ReturnType: null,
                 ReturnDescription: null,
-                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter });
+                Parameters: parameters,
+                GenericArguments: new CSharpType[] { _t });
             var value = (ValueExpression)valueParameter;
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            var body = new SwitchStatement(value)
+            var options = new ParameterReference(optionsParameter);
+            List<SwitchCase> cases = new List<SwitchCase>
             {
-                // null case
                 new(Null, new MethodBodyStatement[]
                 {
                     writer.WriteNullValue(),
                     Break
-                }),
-                // serializable case
-                BuildWriteObjectValueSwitchCase(Configuration.ApiTypes.IUtf8JsonSerializableType, "serializable", serializableVariable => new MethodBodyStatement[]
-                {
-                    new InvokeInstanceMethodStatement(serializableVariable, Configuration.ApiTypes.IUtf8JsonSerializableWriteName, writer),
-                    Break
-                }),
+                })
+            };
+            if (Configuration.UseModelReaderWriter)
+            {
+                cases.Add(
+                  BuildWriteObjectValueSwitchCase(new CSharpType(typeof(IJsonModel<>), _t), "jsonModel", jsonModel => new MethodBodyStatement[]
+                  {
+                        new InvokeInstanceMethodStatement(jsonModel, nameof(IJsonModel<object>.Write), writer, options),
+                        Break
+                  }));
+            }
+            if (Configuration.IsBranded)
+            {
+                cases.Add(
+                    BuildWriteObjectValueSwitchCase(typeof(IUtf8JsonSerializable), "serializable", serializable => new MethodBodyStatement[]
+                    {
+                        new InvokeInstanceMethodStatement(serializable, nameof(IUtf8JsonSerializable.Write), writer),
+                        Break
+                    }));
+            }
+            cases.AddRange(new[]
+            {
                 // byte[] case
                 BuildWriteObjectValueSwitchCase(typeof(byte[]), "bytes", bytes => new MethodBodyStatement[]
                 {
@@ -511,7 +535,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new ForeachStatement("pair", new EnumerableExpression(typeof(KeyValuePair<string, object>), enumerable), out var pair)
                     {
                         writer.WritePropertyName(pair.Property(nameof(KeyValuePair<string, object>.Key))),
-                        writer.WriteObjectValue(pair.Property(nameof(KeyValuePair<string, object>.Value)))
+                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), pair.Property(nameof(KeyValuePair<string, object>.Value))))
                     },
                     writer.WriteEndObject(),
                     Break
@@ -522,7 +546,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     writer.WriteStartArray(),
                     new ForeachStatement("item", new EnumerableExpression(typeof(object), objectEnumerable), out var item)
                     {
-                        writer.WriteObjectValue(item)
+                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), item))
                     },
                     writer.WriteEndArray(),
                     Break
@@ -535,9 +559,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }),
                 // default
                 SwitchCase.Default(Throw(New.NotSupportedException(new FormattableStringExpression("Not supported type {0}", value.InvokeGetType()))))
-            };
+            });
 
-            return new Method(signature, body);
+            return new Method(signature, new SwitchStatement(value, cases));
 
             static SwitchCase BuildWriteObjectValueSwitchCase(CSharpType type, string varName, Func<VariableReference, MethodBodyStatement> bodyFunc)
             {
@@ -548,8 +572,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        public MethodBodyStatement WriteObjectValue(Utf8JsonWriterExpression writer, ValueExpression value)
-            => new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, new[] { writer, value }, CallAsExtension: true);
+        public MethodBodyStatement WriteObjectValue(Utf8JsonWriterExpression writer, TypedValueExpression value, ValueExpression? options = null)
+        {
+            var parameters = options is null
+                ? new ValueExpression[] { writer, value }
+                : new ValueExpression[] { writer, value, options };
+            return new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, parameters, CallAsExtension: true, TypeArguments: new[] { value.Type });
+        }
         #endregion
 
         protected override IEnumerable<ExpressionTypeProvider> BuildNestedTypes()

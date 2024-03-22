@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -266,7 +266,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 JsonSerialization jsonSerialization => new[]
                 {
                     Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var utf8JsonContent, out var writer),
-                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, valueExpression),
+                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, new TypedValueExpression(jsonSerialization.Type, valueExpression), ModelReaderWriterOptionsExpression.Wire),
                     Assign(requestExpression.Property(nameof(Request.Content)), utf8JsonContent)
                 },
 

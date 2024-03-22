@@ -64,8 +64,6 @@ namespace AutoRest.CSharp.Common.Input
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
-        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
-
         public override Type IXmlSerializableType => typeof(IXmlSerializable);
 
         public override Type RequestFailedExceptionType => typeof(RequestFailedException);
