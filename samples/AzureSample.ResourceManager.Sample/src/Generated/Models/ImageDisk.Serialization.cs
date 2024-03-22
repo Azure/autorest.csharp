@@ -199,7 +199,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -321,17 +321,17 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SnapshotId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(Snapshot, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(Snapshot, propertyDictionary);
                         break;
                     case "ManagedDiskId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(ManagedDisk, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(ManagedDisk, propertyDictionary0);
                         break;
                     case "DiskEncryptionSetId":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DiskEncryptionSet, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(DiskEncryptionSet, propertyDictionary1);
                         break;
                     default:
                         continue;
