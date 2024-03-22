@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Azure.Lro.RpcLegacy;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
@@ -24,7 +23,7 @@ namespace _Azure.Lro.RpcLegacy.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobResult)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -86,7 +85,7 @@ namespace _Azure.Lro.RpcLegacy.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobResult)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -177,7 +176,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobResult)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -193,7 +192,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                         return DeserializeJobResult(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobResult)} does not support reading '{options.Format}' format.");
             }
         }
 

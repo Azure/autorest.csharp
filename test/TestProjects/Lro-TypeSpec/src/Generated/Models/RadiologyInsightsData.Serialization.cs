@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using lrotsp;
 
 namespace lrotsp.Models
 {
@@ -24,7 +23,7 @@ namespace lrotsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<RadiologyInsightsData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -63,7 +62,7 @@ namespace lrotsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<RadiologyInsightsData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -117,7 +116,7 @@ namespace lrotsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -133,7 +132,7 @@ namespace lrotsp.Models
                         return DeserializeRadiologyInsightsData(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RadiologyInsightsData)} does not support reading '{options.Format}' format.");
             }
         }
 

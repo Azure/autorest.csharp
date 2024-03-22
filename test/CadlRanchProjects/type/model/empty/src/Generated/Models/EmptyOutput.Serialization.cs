@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Empty;
 
 namespace _Type.Model.Empty.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Empty.Models
             var format = options.Format == "W" ? ((IPersistableModel<EmptyOutput>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(EmptyOutput)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(EmptyOutput)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +50,7 @@ namespace _Type.Model.Empty.Models
             var format = options.Format == "W" ? ((IPersistableModel<EmptyOutput>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(EmptyOutput)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(EmptyOutput)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -88,7 +87,7 @@ namespace _Type.Model.Empty.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(EmptyOutput)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(EmptyOutput)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -104,7 +103,7 @@ namespace _Type.Model.Empty.Models
                         return DeserializeEmptyOutput(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(EmptyOutput)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(EmptyOutput)} does not support reading '{options.Format}' format.");
             }
         }
 

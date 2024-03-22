@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelInfo>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelInfo)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelInfo)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -97,7 +96,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelInfo>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelInfo)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelInfo)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -234,7 +233,7 @@ namespace AnomalyDetector.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelInfo)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelInfo)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -250,7 +249,7 @@ namespace AnomalyDetector.Models
                         return DeserializeModelInfo(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelInfo)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelInfo)} does not support reading '{options.Format}' format.");
             }
         }
 

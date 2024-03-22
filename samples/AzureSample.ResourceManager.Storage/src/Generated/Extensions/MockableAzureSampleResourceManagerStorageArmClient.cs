@@ -7,7 +7,6 @@
 
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Mocking
 {

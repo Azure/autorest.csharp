@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -24,7 +23,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -105,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -247,7 +246,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -263,7 +262,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                         return DeserializeAvailabilitySetPatch(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support reading '{options.Format}' format.");
             }
         }
 

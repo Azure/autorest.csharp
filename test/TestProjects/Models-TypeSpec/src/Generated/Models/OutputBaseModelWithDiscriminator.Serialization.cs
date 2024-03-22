@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<OutputBaseModelWithDiscriminator>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<OutputBaseModelWithDiscriminator>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -88,7 +87,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -104,7 +103,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OutputBaseModelWithDiscriminator)} does not support reading '{options.Format}' format.");
             }
         }
 

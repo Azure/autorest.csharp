@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using CognitiveServices.TextAnalytics;
 
 namespace CognitiveServices.TextAnalytics.Models
 {

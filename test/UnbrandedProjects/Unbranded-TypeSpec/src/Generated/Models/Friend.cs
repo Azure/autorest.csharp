@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {

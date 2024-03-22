@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private const string AssertNotNullMethodName = "AssertNotNull";
         private const string AssertNotNullOrEmptyMethodName = "AssertNotNullOrEmpty";
+        private const string AssertNotNullOrWhiteSpaceMethodName = "AssertNotNullOrWhiteSpace";
 
         private readonly CSharpType _t = typeof(Template<>).GetGenericArguments()[0];
         private readonly Parameter _nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
@@ -176,7 +177,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNotNullOrWhiteSpace()
         {
             var valueParam = new Parameter("value", null, typeof(string), null, ValidationType.None, null);
-            var signature = GetSignature("AssertNotNullOrWhiteSpace", new[] { valueParam, _nameParam });
+            var signature = GetSignature(AssertNotNullOrWhiteSpaceMethodName, new[] { valueParam, _nameParam });
             var value = new StringExpression(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -279,6 +280,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal MethodBodyStatement AssertNotNullOrEmpty(ValueExpression variable, ValueExpression? name = null)
         {
             return new InvokeStaticMethodStatement(Type, AssertNotNullOrEmptyMethodName, variable, name ?? Nameof(variable));
+        }
+
+        internal MethodBodyStatement AssertNotNullOrWhiteSpace(ValueExpression variable, ValueExpression? name = null)
+        {
+            return new InvokeStaticMethodStatement(Type, AssertNotNullOrWhiteSpaceMethodName, variable, name ?? Nameof(variable));
         }
     }
 }

@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using NUnit.Framework;
-using OpenAI;
 
 namespace OpenAI.Tests
 {

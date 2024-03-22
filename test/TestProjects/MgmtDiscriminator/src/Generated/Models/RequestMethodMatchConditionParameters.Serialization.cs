@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using MgmtDiscriminator;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -25,7 +25,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<RequestMethodMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -81,7 +81,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<RequestMethodMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -170,86 +170,97 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
-
-            builder.Append("  operator:");
-            builder.AppendLine($" '{Operator.ToString()}'");
-
-            if (Optional.IsDefined(NegateCondition))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
+            if (hasPropertyOverride)
             {
-                builder.Append("  negateCondition:");
-                var boolValue = NegateCondition.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            if (Optional.IsCollectionDefined(Transforms))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride);
+            builder.Append("  operator: ");
+            if (hasPropertyOverride)
             {
-                if (Transforms.Any())
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{Operator.ToString()}'");
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride);
+            if (Optional.IsDefined(NegateCondition) || hasPropertyOverride)
+            {
+                builder.Append("  negateCondition: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  transforms:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Transforms)
-                    {
-                        builder.AppendLine($"    '{item.ToString()}'");
-                    }
-                    builder.AppendLine("  ]");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = NegateCondition.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
                 }
             }
 
-            if (Optional.IsCollectionDefined(MatchValues))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride);
+            if (Optional.IsCollectionDefined(Transforms) || hasPropertyOverride)
             {
-                if (MatchValues.Any())
+                if (Transforms.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  matchValues:");
-                    builder.AppendLine(" [");
-                    foreach (var item in MatchValues)
+                    builder.Append("  transforms: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"    '{item.ToString()}'");
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Transforms)
+                        {
+                            builder.AppendLine($"    '{item.ToString()}'");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride);
+            if (Optional.IsCollectionDefined(MatchValues) || hasPropertyOverride)
+            {
+                if (MatchValues.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  matchValues: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in MatchValues)
+                        {
+                            builder.AppendLine($"    '{item.ToString()}'");
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<RequestMethodMatchConditionParameters>.Write(ModelReaderWriterOptions options)
@@ -263,7 +274,7 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -278,10 +289,8 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeRequestMethodMatchConditionParameters(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RequestMethodMatchConditionParameters)} does not support reading '{options.Format}' format.");
             }
         }
 

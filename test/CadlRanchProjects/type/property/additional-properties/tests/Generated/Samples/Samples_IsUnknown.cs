@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.AdditionalProperties;
 using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples

@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostInstanceViewWithName>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -77,7 +77,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostInstanceViewWithName>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -145,93 +145,96 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
-                }
-            }
-
-            if (Optional.IsDefined(AssetId))
-            {
-                builder.Append("  assetId:");
-                if (AssetId.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AssetId}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{AssetId}'");
-                }
-            }
-
-            if (Optional.IsDefined(AvailableCapacity))
-            {
-                builder.Append("  availableCapacity:");
-                AppendChildObject(builder, AvailableCapacity, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Statuses))
-            {
-                if (Statuses.Any())
-                {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    if (Name.Contains(Environment.NewLine))
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AssetId), out propertyOverride);
+            if (Optional.IsDefined(AssetId) || hasPropertyOverride)
+            {
+                builder.Append("  assetId: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AssetId.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AssetId}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AssetId}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailableCapacity), out propertyOverride);
+            if (Optional.IsDefined(AvailableCapacity) || hasPropertyOverride)
+            {
+                builder.Append("  availableCapacity: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, AvailableCapacity, options, 2, false, "  availableCapacity: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            {
+                if (Statuses.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  statuses: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<DedicatedHostInstanceViewWithName>.Write(ModelReaderWriterOptions options)
@@ -245,7 +248,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -260,10 +263,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDedicatedHostInstanceViewWithName(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostInstanceViewWithName)} does not support reading '{options.Format}' format.");
             }
         }
 

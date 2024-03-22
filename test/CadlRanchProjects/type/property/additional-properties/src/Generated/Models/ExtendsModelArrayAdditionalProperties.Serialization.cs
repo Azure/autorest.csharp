@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelArrayAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -46,7 +45,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelArrayAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +84,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -101,7 +100,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeExtendsModelArrayAdditionalProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelArrayAdditionalProperties)} does not support reading '{options.Format}' format.");
             }
         }
 

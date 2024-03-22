@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using body_complex;
 
 namespace body_complex.Models
 {
@@ -23,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cookiecuttershark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -76,7 +75,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cookiecuttershark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -169,7 +168,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -185,7 +184,7 @@ namespace body_complex.Models
                         return DeserializeCookiecuttershark(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support reading '{options.Format}' format.");
             }
         }
 

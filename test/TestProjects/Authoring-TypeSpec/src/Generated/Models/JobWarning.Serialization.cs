@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using AuthoringTypeSpec;
 using Azure;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobWarning>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobWarning)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobWarning)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +54,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<JobWarning>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JobWarning)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JobWarning)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -104,7 +103,7 @@ namespace AuthoringTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobWarning)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -120,7 +119,7 @@ namespace AuthoringTypeSpec.Models
                         return DeserializeJobWarning(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JobWarning)} does not support reading '{options.Format}' format.");
             }
         }
 

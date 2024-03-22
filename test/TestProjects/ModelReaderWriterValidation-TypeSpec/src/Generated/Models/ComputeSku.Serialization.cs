@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ComputeSku>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ComputeSku)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ComputeSku)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -66,7 +65,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ComputeSku>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ComputeSku)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ComputeSku)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -125,7 +124,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ComputeSku)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ComputeSku)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -141,7 +140,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                         return DeserializeComputeSku(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ComputeSku)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ComputeSku)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
@@ -177,7 +176,7 @@ namespace NoTestTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
             request.SetMethod("GET");
-            var uri = new RequestUri();
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);

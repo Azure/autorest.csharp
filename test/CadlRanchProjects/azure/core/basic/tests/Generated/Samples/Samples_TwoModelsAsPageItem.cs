@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples

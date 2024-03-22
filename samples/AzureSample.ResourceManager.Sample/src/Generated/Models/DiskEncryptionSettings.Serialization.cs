@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -24,7 +24,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSettings>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSettings>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -127,64 +127,59 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DiskEncryptionKey))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionKey), out propertyOverride);
+            if (Optional.IsDefined(DiskEncryptionKey) || hasPropertyOverride)
             {
-                builder.Append("  diskEncryptionKey:");
-                AppendChildObject(builder, DiskEncryptionKey, options, 2, false);
+                builder.Append("  diskEncryptionKey: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, DiskEncryptionKey, options, 2, false, "  diskEncryptionKey: ");
+                }
             }
 
-            if (Optional.IsDefined(KeyEncryptionKey))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyEncryptionKey), out propertyOverride);
+            if (Optional.IsDefined(KeyEncryptionKey) || hasPropertyOverride)
             {
-                builder.Append("  keyEncryptionKey:");
-                AppendChildObject(builder, KeyEncryptionKey, options, 2, false);
+                builder.Append("  keyEncryptionKey: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, KeyEncryptionKey, options, 2, false, "  keyEncryptionKey: ");
+                }
             }
 
-            if (Optional.IsDefined(Enabled))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
+            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
             {
-                builder.Append("  enabled:");
-                var boolValue = Enabled.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  enabled: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = Enabled.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<DiskEncryptionSettings>.Write(ModelReaderWriterOptions options)
@@ -198,7 +193,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -213,10 +208,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDiskEncryptionSettings(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DiskEncryptionSettings)} does not support reading '{options.Format}' format.");
             }
         }
 

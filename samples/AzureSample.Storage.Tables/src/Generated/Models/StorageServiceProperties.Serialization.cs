@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using AzureSample.Storage.Tables;
 
 namespace AzureSample.Storage.Tables.Models
 {

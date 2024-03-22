@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using ParameterSequence_LowLevel;
 
 namespace ParameterSequence_LowLevel.Samples
 {

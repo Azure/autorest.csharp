@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using lrotsp;
 using lrotsp.Models;
 
 namespace lrotsp.Samples

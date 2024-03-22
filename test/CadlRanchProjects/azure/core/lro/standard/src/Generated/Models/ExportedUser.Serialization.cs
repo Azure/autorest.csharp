@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Azure.Lro.Standard;
 
 namespace _Azure.Lro.Standard.Models
 {
@@ -24,7 +23,7 @@ namespace _Azure.Lro.Standard.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExportedUser>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExportedUser)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExportedUser)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +54,7 @@ namespace _Azure.Lro.Standard.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExportedUser>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExportedUser)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExportedUser)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -104,7 +103,7 @@ namespace _Azure.Lro.Standard.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ExportedUser)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExportedUser)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -120,7 +119,7 @@ namespace _Azure.Lro.Standard.Models
                         return DeserializeExportedUser(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ExportedUser)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExportedUser)} does not support reading '{options.Format}' format.");
             }
         }
 

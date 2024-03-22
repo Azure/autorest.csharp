@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Specs_.Azure.ClientGenerator.Core.Access;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
@@ -24,7 +23,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +95,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                         return DeserializeInternalDecoratorModelInInternal(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support reading '{options.Format}' format.");
             }
         }
 

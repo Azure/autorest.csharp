@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Dinosaur>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Dinosaur)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Dinosaur)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +54,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Dinosaur>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Dinosaur)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Dinosaur)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,7 +88,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Dinosaur)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Dinosaur)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -105,7 +104,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                         return DeserializeDinosaur(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Dinosaur)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Dinosaur)} does not support reading '{options.Format}' format.");
             }
         }
 
