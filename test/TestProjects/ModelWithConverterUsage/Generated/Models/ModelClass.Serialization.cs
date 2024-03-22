@@ -148,7 +148,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, ModelClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<ModelClass>(model);
+                writer.WriteObjectValue<ModelClass>(model, new ModelReaderWriterOptions("W"));
             }
             public override ModelClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
