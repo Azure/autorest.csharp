@@ -608,7 +608,7 @@ namespace media_types
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<object>(message);
+            content.JsonWriter.WriteObjectValue<object>(message, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message0;
         }

@@ -63,7 +63,7 @@ namespace body_complex.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<object>(item.Value);
+                writer.WriteObjectValue<object>(item.Value, options);
             }
             writer.WriteEndObject();
         }
