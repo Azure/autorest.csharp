@@ -432,7 +432,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 cases.Add(
                   BuildWriteObjectValueSwitchCase(new CSharpType(typeof(IJsonModel<>), _t), "jsonModel", jsonModel => new MethodBodyStatement[]
                   {
-                        new InvokeInstanceMethodStatement(jsonModel, nameof(IJsonModel<object>.Write), writer, options),
+                        new InvokeInstanceMethodStatement(jsonModel, nameof(IJsonModel<object>.Write), writer, NullCoalescing(options, ModelReaderWriterOptionsExpression.Wire)),
                         Break
                   }));
             }
