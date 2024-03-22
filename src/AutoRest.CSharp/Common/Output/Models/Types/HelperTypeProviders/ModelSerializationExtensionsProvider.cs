@@ -535,7 +535,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new ForeachStatement("pair", new EnumerableExpression(typeof(KeyValuePair<string, object>), enumerable), out var pair)
                     {
                         writer.WritePropertyName(pair.Property(nameof(KeyValuePair<string, object>.Key))),
-                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), pair.Property(nameof(KeyValuePair<string, object>.Value))))
+                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), pair.Property(nameof(KeyValuePair<string, object>.Value))), options)
                     },
                     writer.WriteEndObject(),
                     Break
@@ -546,7 +546,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     writer.WriteStartArray(),
                     new ForeachStatement("item", new EnumerableExpression(typeof(object), objectEnumerable), out var item)
                     {
-                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), item))
+                        writer.WriteObjectValue(new TypedValueExpression(typeof(object), item), options)
                     },
                     writer.WriteEndArray(),
                     Break
