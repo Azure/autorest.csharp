@@ -169,7 +169,7 @@ namespace Scm.Authentication.Http.Custom
                     writer.WriteNullValue();
                     break;
                 case IJsonModel<T> jsonModel:
-                    jsonModel.Write(writer, options);
+                    jsonModel.Write(writer, options ?? new ModelReaderWriterOptions("W"));
                     break;
                 case byte[] bytes:
                     writer.WriteBase64StringValue(bytes);
