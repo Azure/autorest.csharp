@@ -4,12 +4,11 @@
 using System;
 using System.Threading.Tasks;
 using System.Xml;
+using _Type.Property.Optionality;
+using _Type.Property.Optionality.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using _Type.Property.Optionality;
-using _Type.Property.Optionality.Models;
-using System.IO;
 
 namespace CadlRanchProjects.Tests
 {
