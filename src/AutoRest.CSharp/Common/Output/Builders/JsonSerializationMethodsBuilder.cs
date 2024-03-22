@@ -291,12 +291,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (valueSerialization.Type.SerializeAs is not null)
             {
-                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.SerializeAs);
+                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.SerializeAs, options);
             }
 
             if (valueSerialization.Type.IsFrameworkType)
             {
-                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.FrameworkType);
+                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.FrameworkType, options);
             }
 
             switch (valueSerialization.Type.Implementation)
@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement SerializeFrameworkTypeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, Type valueType)
+        private static MethodBodyStatement SerializeFrameworkTypeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, Type valueType, ModelReaderWriterOptionsExpression? options)
         {
             if (valueType == typeof(JsonElement))
             {
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(object))
             {
-                return utf8JsonWriter.WriteObjectValue(new TypedValueExpression(valueType, value));
+                return utf8JsonWriter.WriteObjectValue(new TypedValueExpression(valueType, value), options);
             }
 
             // These are string-like types that could implicitly convert to string type
