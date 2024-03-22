@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -120,10 +119,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
 
-        private IEnumerable<InputType> UpdateBodyParameters()
+        private void UpdateBodyParameters()
         {
-            Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>();
-            List<InputType> updatedModels = new List<InputType>();
+            Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>(ReferenceEqualityComparer.Instance);
 
             // run one pass to get the schema usage count
             foreach (var client in _input.Clients)
@@ -132,10 +130,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var parameter in operation.Parameters)
                     {
-                        //var httpRequest = parameter.Protocol.Http as HttpRequest;
-                        //if (httpRequest is null)
-                        //    continue;
-
                         if (parameter.Location != RequestLocation.Body)
                             continue;
 
@@ -157,9 +151,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operation in client.Operations)
                 {
-                    //if (request.Protocol.Http is not HttpRequest httpRequest)
-                    //    continue;
-
                     if (operation.HttpMethod != RequestMethod.Patch && operation.HttpMethod != RequestMethod.Put && operation.HttpMethod != RequestMethod.Post)
                         continue;
 
@@ -193,7 +184,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (requestPath.IsExpandable)
                             throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {client.Key}.{operation.CSharpName()} : {requestPath}");
                         var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
-                        updatedModels.Add(bodyParam.Type);
                         BodyParameterNormalizer.Update(operation.HttpMethod, bodyParam, name, operation);
                     }
                     else
@@ -227,8 +217,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
-
-            return updatedModels;
         }
 
         private static void IncrementCount(Dictionary<InputType, int> usageCounts, InputType schema)
@@ -262,11 +250,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             //this is where we update
-            var updatedModels = UpdateBodyParameters();
-            //foreach (var schema in updatedModels)
-            //{
-            //    _schemaOrNameToModels[schema] = BuildModel(schema);
-            //}
+            UpdateBodyParameters();
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new Dictionary<InputModelType, TypeProvider>();

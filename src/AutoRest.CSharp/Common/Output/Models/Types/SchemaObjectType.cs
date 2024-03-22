@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsInheritableCommonType = false;
             //IsInheritableCommonType = InputModel is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
 
-            JsonConverter = _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter = _usage.HasFlag(InputModelTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal InputModelType InputModel { get; }

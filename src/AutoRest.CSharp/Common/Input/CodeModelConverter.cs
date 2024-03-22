@@ -511,9 +511,16 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType GetOrCreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
         {
-            if (schema is ObjectSchema objectSchema && !Configuration.AzureArm && modelsCache != null)
+            if (schema is ObjectSchema objectSchema && modelsCache != null)
             {
-                return modelsCache[objectSchema] with { IsNullable = isNullable };
+                if (!Configuration.AzureArm)
+                {
+                    return modelsCache[objectSchema] with { IsNullable = isNullable };
+                }
+                else
+                {
+                    return modelsCache[objectSchema];
+                }
             }
 
             if (_enumsCache.TryGetValue(schema, out var enumType))
@@ -589,10 +596,10 @@ namespace AutoRest.CSharp.Common.Input
 
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, false),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
-            ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
+            ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
 
-            AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
-            AnyObjectSchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
+            AnySchema => InputIntrinsicType.Unknown,
+            AnyObjectSchema => InputIntrinsicType.Unknown,
 
             _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };

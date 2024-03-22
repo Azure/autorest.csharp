@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "FirewallPolicyFilterRuleCollection": return FirewallPolicyFilterRuleCollection.DeserializeFirewallPolicyFilterRuleCollection(element);
                     case "FirewallPolicyNatRuleCollection": return FirewallPolicyNatRuleCollection.DeserializeFirewallPolicyNatRuleCollection(element);
+                    case "FirewallPolicyFilterRuleCollection": return FirewallPolicyFilterRuleCollection.DeserializeFirewallPolicyFilterRuleCollection(element);
                 }
             }
             return UnknownFirewallPolicyRuleCollection.DeserializeUnknownFirewallPolicyRuleCollection(element);

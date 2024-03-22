@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
@@ -74,12 +73,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Name);
 
             string oriSchemaName = parameter.Type.Name;
-            parameter.Type.Name = schemaName;
-            parameter.Type.OriginalName = oriSchemaName;
-            fullSerializedName = parameter.Type.GetFullSerializedName();
-            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
+            if (oriSchemaName != schemaName)
+            {
+                parameter.Type.Name = schemaName;
+                parameter.Type.OriginalName = oriSchemaName;
+                fullSerializedName = parameter.Type.GetFullSerializedName();
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
+                    fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
+            }
 
             if (parameter.Type is InputEnumType || parameter.Type is InputModelType)
                 SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Type);
