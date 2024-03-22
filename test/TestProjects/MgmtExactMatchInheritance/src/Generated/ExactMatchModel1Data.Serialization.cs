@@ -59,7 +59,7 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type4))
             {
                 writer.WritePropertyName("type4"u8);
-                writer.WriteObjectValue(Type4);
+                writer.WriteObjectValue<object>(Type4);
             }
             if (Optional.IsDefined(Type5))
             {

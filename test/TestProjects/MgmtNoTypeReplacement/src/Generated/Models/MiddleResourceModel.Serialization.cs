@@ -18,7 +18,7 @@ namespace MgmtNoTypeReplacement.Models
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                writer.WriteObjectValue(Foo);
+                writer.WriteObjectValue<NoSubResourceModel2>(Foo);
             }
             writer.WriteEndObject();
         }

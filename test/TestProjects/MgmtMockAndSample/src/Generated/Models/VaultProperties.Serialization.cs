@@ -30,14 +30,14 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            writer.WriteObjectValue<MgmtMockAndSampleSku>(Sku);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<AccessPolicyEntry>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +94,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls);
+                writer.WriteObjectValue<NetworkRuleSet>(NetworkAcls);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -109,17 +109,17 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                writer.WriteObjectValue(ReadWriteSingleStringProperty);
+                writer.WriteObjectValue<SinglePropertyModel>(ReadWriteSingleStringProperty);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                writer.WriteObjectValue(ReadOnlySingleStringProperty);
+                writer.WriteObjectValue<ReadOnlySinglePropertyModel>(ReadOnlySingleStringProperty);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                writer.WriteObjectValue(ExtremelyDeepStringProperty);
+                writer.WriteObjectValue<ExtremelyDeepSinglePropertyModel>(ExtremelyDeepStringProperty);
             }
             writer.WriteEndObject();
         }

@@ -135,7 +135,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelAsStruct>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

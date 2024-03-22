@@ -119,7 +119,7 @@ namespace MgmtExactMatchInheritance
         {
             public override void Write(Utf8JsonWriter writer, ExactMatchModel5Data model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<ExactMatchModel5Data>(model);
             }
             public override ExactMatchModel5Data Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

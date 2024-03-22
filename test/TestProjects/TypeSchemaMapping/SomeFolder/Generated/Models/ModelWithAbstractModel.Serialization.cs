@@ -29,7 +29,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
-                writer.WriteObjectValue(AbstractModelProperty);
+                writer.WriteObjectValue<AbstractModel>(AbstractModelProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -103,7 +103,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InstanceViewStatus>(item, options);
                 }
                 writer.WriteEndArray();
             }

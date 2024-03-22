@@ -34,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkTaps)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualNetworkTap>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +44,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ApplicationGatewayBackendAddressPool>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<BackendAddressPool>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InboundNatRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -86,7 +86,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue<Subnet>(Subnet);
             }
             if (Optional.IsDefined(Primary))
             {
@@ -96,7 +96,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                writer.WriteObjectValue(PublicIPAddress);
+                writer.WriteObjectValue<PublicIPAddress>(PublicIPAddress);
             }
             if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
@@ -104,7 +104,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ApplicationSecurityGroup>(item);
                 }
                 writer.WriteEndArray();
             }

@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<NetworkInterfaceReference>(item, options);
                 }
                 writer.WriteEndArray();
             }

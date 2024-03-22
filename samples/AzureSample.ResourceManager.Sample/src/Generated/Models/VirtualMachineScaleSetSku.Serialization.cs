@@ -36,12 +36,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("capacity"u8);
-                writer.WriteObjectValue(Capacity);
+                writer.WriteObjectValue<VirtualMachineScaleSetSkuCapacity>(Capacity, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

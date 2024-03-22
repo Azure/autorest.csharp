@@ -31,7 +31,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Parent)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<BaseModel>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("level"u8);
@@ -147,7 +147,7 @@ namespace FirstTestTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ChildModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

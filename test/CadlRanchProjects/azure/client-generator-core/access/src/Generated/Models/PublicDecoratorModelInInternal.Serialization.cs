@@ -129,7 +129,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<PublicDecoratorModelInInternal>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

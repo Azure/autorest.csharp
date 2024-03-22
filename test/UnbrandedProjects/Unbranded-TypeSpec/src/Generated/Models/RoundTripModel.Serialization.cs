@@ -50,7 +50,7 @@ namespace UnbrandedTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<Thing>(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -234,7 +234,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            writer.WriteObjectValue(ModelWithRequiredNullable);
+            writer.WriteObjectValue<ModelWithRequiredNullableProperties>(ModelWithRequiredNullable, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -618,7 +618,7 @@ namespace UnbrandedTypeSpec.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

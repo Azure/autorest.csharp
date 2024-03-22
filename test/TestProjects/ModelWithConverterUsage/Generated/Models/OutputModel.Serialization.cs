@@ -125,7 +125,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<OutputModel>(model);
             }
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

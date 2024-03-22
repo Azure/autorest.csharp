@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                writer.WriteObjectValue<AzureSampleResourceManagerSamplePlan>(Plan, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in Resources)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineExtensionData>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -100,37 +100,37 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                writer.WriteObjectValue(HardwareProfile);
+                writer.WriteObjectValue<HardwareProfile>(HardwareProfile, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                writer.WriteObjectValue<StorageProfile>(StorageProfile, options);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OSProfile);
+                writer.WriteObjectValue<OSProfile>(OSProfile, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue(NetworkProfile);
+                writer.WriteObjectValue<NetworkProfile>(NetworkProfile, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue(SecurityProfile);
+                writer.WriteObjectValue<SecurityProfile>(SecurityProfile, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue(DiagnosticsProfile);
+                writer.WriteObjectValue<DiagnosticsProfile>(DiagnosticsProfile, options);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -160,7 +160,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                writer.WriteObjectValue(BillingProfile);
+                writer.WriteObjectValue<BillingProfile>(BillingProfile, options);
             }
             if (Optional.IsDefined(Host))
             {
@@ -180,7 +180,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                writer.WriteObjectValue<VirtualMachineInstanceView>(InstanceView, options);
             }
             if (Optional.IsDefined(LicenseType))
             {

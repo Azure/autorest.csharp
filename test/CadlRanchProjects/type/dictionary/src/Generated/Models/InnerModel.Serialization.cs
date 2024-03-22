@@ -36,7 +36,7 @@ namespace _Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<InnerModel>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -155,7 +155,7 @@ namespace _Type._Dictionary.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InnerModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

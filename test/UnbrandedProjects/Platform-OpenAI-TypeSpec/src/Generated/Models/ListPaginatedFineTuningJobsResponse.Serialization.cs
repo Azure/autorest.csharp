@@ -26,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<FineTuningJob>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("has_more"u8);
@@ -148,7 +148,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ListPaginatedFineTuningJobsResponse>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

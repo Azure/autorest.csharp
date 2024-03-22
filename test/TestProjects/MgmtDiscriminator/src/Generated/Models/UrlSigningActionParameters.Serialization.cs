@@ -42,7 +42,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in ParameterNameOverride)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<UrlSigningParamIdentifier>(item, options);
                 }
                 writer.WriteEndArray();
             }

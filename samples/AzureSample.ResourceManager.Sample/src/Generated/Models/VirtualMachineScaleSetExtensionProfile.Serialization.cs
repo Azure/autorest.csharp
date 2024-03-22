@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineScaleSetExtensionData>(item, options);
                 }
                 writer.WriteEndArray();
             }

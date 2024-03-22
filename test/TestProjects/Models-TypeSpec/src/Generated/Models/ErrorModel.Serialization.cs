@@ -35,7 +35,7 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W" && Optional.IsDefined(InnerError))
             {
                 writer.WritePropertyName("innerError"u8);
-                writer.WriteObjectValue(InnerError);
+                writer.WriteObjectValue<ErrorModel>(InnerError, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -147,7 +147,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ErrorModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

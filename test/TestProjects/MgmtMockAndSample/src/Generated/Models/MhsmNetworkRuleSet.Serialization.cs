@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<MhsmipRule>(item);
                 }
                 writer.WriteEndArray();
             }

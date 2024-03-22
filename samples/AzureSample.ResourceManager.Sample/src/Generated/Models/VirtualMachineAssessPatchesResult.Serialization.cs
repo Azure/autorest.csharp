@@ -65,14 +65,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Patches)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineSoftwarePatchProperties>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                writer.WriteObjectValue<ApiError>(Error, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -34,7 +34,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<UpgradeOperationHistoricalStatusInfo>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Etag))

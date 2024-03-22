@@ -52,7 +52,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                writer.WriteObjectValue(PublicIPAddressConfiguration);
+                writer.WriteObjectValue<VirtualMachineScaleSetPublicIPAddressConfiguration>(PublicIPAddressConfiguration, options);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

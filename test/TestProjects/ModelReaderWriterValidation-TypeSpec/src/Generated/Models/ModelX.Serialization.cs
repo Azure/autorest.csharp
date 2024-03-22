@@ -224,7 +224,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelX>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

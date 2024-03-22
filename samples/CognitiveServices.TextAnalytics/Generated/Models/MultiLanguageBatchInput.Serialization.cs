@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Documents)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<MultiLanguageInput>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

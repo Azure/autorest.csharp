@@ -30,12 +30,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<ComputeSku>(Sku, options);
             }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                writer.WriteObjectValue<AvailabilitySetProperties>(Properties, options);
             }
             if (options.Format != "W")
             {
@@ -226,7 +226,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<AvailabilitySetData>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

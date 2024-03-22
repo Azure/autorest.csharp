@@ -24,7 +24,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in Rules)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<BlobInventoryPolicyRule>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<TimeSeriesPoint>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("granularity"u8);
@@ -214,7 +214,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnivariateChangePointDetectionOptions>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

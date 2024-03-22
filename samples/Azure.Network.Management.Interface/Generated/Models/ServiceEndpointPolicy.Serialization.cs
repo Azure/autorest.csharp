@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicyDefinitions)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ServiceEndpointPolicyDefinition>(item);
                 }
                 writer.WriteEndArray();
             }

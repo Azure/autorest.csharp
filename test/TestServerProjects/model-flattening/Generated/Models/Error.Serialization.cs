@@ -39,7 +39,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(ParentError))
             {
                 writer.WritePropertyName("parentError"u8);
-                writer.WriteObjectValue(ParentError);
+                writer.WriteObjectValue<Error>(ParentError, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp"u8);
@@ -147,7 +147,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripOnNoUse>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

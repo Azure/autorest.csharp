@@ -33,7 +33,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VariableState>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +43,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Results)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<AnomalyState>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -171,7 +171,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<MultivariateLastDetectionResult>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

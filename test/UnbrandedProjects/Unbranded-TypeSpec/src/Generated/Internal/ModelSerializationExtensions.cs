@@ -3,7 +3,7 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -161,15 +161,15 @@ namespace UnbrandedTypeSpec
             writer.WriteNumberValue(value.ToUnixTimeSeconds());
         }
 
-        public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
+        public static void WriteObjectValue<T>(this Utf8JsonWriter writer, object value, ModelReaderWriterOptions options = null)
         {
             switch (value)
             {
                 case null:
                     writer.WriteNullValue();
                     break;
-                case IUtf8JsonWriteable serializable:
-                    serializable.Write(writer);
+                case IJsonModel<T> jsonModel:
+                    jsonModel.Write(writer, options);
                     break;
                 case byte[] bytes:
                     writer.WriteBase64StringValue(bytes);
@@ -222,7 +222,7 @@ namespace UnbrandedTypeSpec
                     foreach (var pair in enumerable)
                     {
                         writer.WritePropertyName(pair.Key);
-                        writer.WriteObjectValue(pair.Value);
+                        writer.WriteObjectValue<object>(pair.Value);
                     }
                     writer.WriteEndObject();
                     break;
@@ -230,7 +230,7 @@ namespace UnbrandedTypeSpec
                     writer.WriteStartArray();
                     foreach (var item in objectEnumerable)
                     {
-                        writer.WriteObjectValue(item);
+                        writer.WriteObjectValue<object>(item);
                     }
                     writer.WriteEndArray();
                     break;

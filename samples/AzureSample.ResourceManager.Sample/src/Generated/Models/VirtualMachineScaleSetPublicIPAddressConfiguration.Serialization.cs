@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>(DnsSettings, options);
             }
             if (Optional.IsCollectionDefined(IPTags))
             {
@@ -50,7 +50,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in IPTags)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineScaleSetIPTag>(item, options);
                 }
                 writer.WriteEndArray();
             }

@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AllocatableVms)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DedicatedHostAllocatableVm>(item, options);
                 }
                 writer.WriteEndArray();
             }

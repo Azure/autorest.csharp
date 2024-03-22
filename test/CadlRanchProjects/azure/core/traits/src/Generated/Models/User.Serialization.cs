@@ -143,7 +143,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<User>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

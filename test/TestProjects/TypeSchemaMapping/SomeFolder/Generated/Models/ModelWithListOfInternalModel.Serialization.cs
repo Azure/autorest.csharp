@@ -37,7 +37,7 @@ namespace TypeSchemaMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in InternalListProperty)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InternalModel>(item, options);
                 }
                 writer.WriteEndArray();
             }

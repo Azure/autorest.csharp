@@ -129,7 +129,7 @@ namespace Payload.Pageable.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<User>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

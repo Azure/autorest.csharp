@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Sample
 
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -112,7 +112,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                writer.WriteObjectValue<DedicatedHostInstanceView>(InstanceView, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

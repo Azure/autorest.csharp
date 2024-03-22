@@ -19,7 +19,7 @@ namespace MgmtParamOrdering
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            writer.WriteObjectValue<EnvironmentContainer>(Properties);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

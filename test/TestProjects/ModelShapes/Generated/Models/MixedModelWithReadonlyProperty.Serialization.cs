@@ -29,7 +29,7 @@ namespace ModelShapes.Models
             if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
-                writer.WriteObjectValue(ReadonlyProperty);
+                writer.WriteObjectValue<ReadonlyModel>(ReadonlyProperty, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
@@ -37,7 +37,7 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ReadonlyModel>(item, options);
                 }
                 writer.WriteEndArray();
             }

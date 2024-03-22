@@ -35,22 +35,22 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                writer.WriteObjectValue(PropertyModelToMakeInternal);
+                writer.WriteObjectValue<ModelToMakeInternal>(PropertyModelToMakeInternal, options);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                writer.WriteObjectValue(PropertyModelToRename);
+                writer.WriteObjectValue<RenamedModel>(PropertyModelToRename, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                writer.WriteObjectValue(PropertyModelToChangeNamespace);
+                writer.WriteObjectValue<ModelToChangeNamespace>(PropertyModelToChangeNamespace, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
+                writer.WriteObjectValue<ModelWithCustomizedProperties>(PropertyModelWithCustomizedProperties, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -70,7 +70,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
+                writer.WriteObjectValue<ModelToAddAdditionalSerializableProperty>(PropertyModelToAddAdditionalSerializableProperty, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
@@ -80,7 +80,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelStruct))
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
-                writer.WriteObjectValue(PropertyModelStruct);
+                writer.WriteObjectValue<ModelStruct?>(PropertyModelStruct, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -298,7 +298,7 @@ namespace CustomizationsInTsp.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RootModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

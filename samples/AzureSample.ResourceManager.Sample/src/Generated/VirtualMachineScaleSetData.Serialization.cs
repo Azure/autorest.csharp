@@ -35,12 +35,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                writer.WriteObjectValue<AzureSampleResourceManagerSamplePlan>(Plan, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -95,17 +95,17 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue(UpgradePolicy);
+                writer.WriteObjectValue<UpgradePolicy>(UpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue(AutomaticRepairsPolicy);
+                writer.WriteObjectValue<AutomaticRepairsPolicy>(AutomaticRepairsPolicy, options);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue(VirtualMachineProfile);
+                writer.WriteObjectValue<VirtualMachineScaleSetVmProfile>(VirtualMachineProfile, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -155,12 +155,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue(ScaleInPolicy);
+                writer.WriteObjectValue<ScaleInPolicy>(ScaleInPolicy, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

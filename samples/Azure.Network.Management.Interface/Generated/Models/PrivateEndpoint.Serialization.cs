@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue<Subnet>(Subnet);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
                 }
                 writer.WriteEndArray();
             }

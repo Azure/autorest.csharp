@@ -38,7 +38,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                writer.WriteObjectValue(ObjProperty);
+                writer.WriteObjectValue<Product>(ObjProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -148,7 +148,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, ModelClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<ModelClass>(model);
             }
             public override ModelClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

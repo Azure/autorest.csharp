@@ -33,7 +33,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<WritableSubResource>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -176,7 +176,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<AvailabilitySetProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

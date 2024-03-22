@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in PublicKeys)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<SshPublicKeyInfo>(item, options);
                 }
                 writer.WriteEndArray();
             }
