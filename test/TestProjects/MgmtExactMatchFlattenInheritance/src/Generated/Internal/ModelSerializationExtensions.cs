@@ -245,6 +245,11 @@ namespace MgmtExactMatchFlattenInheritance
             }
         }
 
+        public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
+        {
+            writer.WriteObjectValue<object>(value);
+        }
+
         internal static class TypeFormatters
         {
             private const string RoundtripZFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ";

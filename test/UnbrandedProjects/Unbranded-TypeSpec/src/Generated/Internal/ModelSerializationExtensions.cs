@@ -242,6 +242,11 @@ namespace UnbrandedTypeSpec
             }
         }
 
+        public static void WriteObjectValue(this Utf8JsonWriter writer, object value, ModelReaderWriterOptions options = null)
+        {
+            writer.WriteObjectValue<object>(value, options);
+        }
+
         internal static class TypeFormatters
         {
             private const string RoundtripZFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ";
