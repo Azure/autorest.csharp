@@ -20,4 +20,8 @@
     <Compile Include="../UnbrandedProjects/**/*.cs" LinkBase="UnbrandedProjects" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutoRest.TestServer.Tests\AutoRest.TestServer.Tests.csproj" />
+  </ItemGroup>
+
 </Project>

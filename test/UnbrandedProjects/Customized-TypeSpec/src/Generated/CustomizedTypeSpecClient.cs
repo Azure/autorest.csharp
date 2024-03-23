@@ -9,13 +9,13 @@ using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
-using UnbrandedTypeSpec.Models;
+using CustomizedTypeSpec.Models;
 
-namespace UnbrandedTypeSpec
+namespace CustomizedTypeSpec
 {
     // Data plane generated client.
     /// <summary> This is a sample typespec project. </summary>
-    public partial class UnbrandedTypeSpecClient
+    public partial class CustomizedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
         private readonly KeyCredential _keyCredential;
@@ -28,29 +28,29 @@ namespace UnbrandedTypeSpec
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual MessagePipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of UnbrandedTypeSpecClient for mocking. </summary>
-        protected UnbrandedTypeSpecClient()
+        /// <summary> Initializes a new instance of CustomizedTypeSpecClient for mocking. </summary>
+        protected CustomizedTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
+        /// <summary> Initializes a new instance of CustomizedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(Uri endpoint, KeyCredential credential) : this(endpoint, credential, new UnbrandedTypeSpecClientOptions())
+        public CustomizedTypeSpecClient(Uri endpoint, KeyCredential credential) : this(endpoint, credential, new CustomizedTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
+        /// <summary> Initializes a new instance of CustomizedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(Uri endpoint, KeyCredential credential, UnbrandedTypeSpecClientOptions options)
+        public CustomizedTypeSpecClient(Uri endpoint, KeyCredential credential, CustomizedTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new UnbrandedTypeSpecClientOptions();
+            options ??= new CustomizedTypeSpecClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
@@ -80,7 +80,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.SayHi");
             scope.Start();
             try
             {
@@ -116,7 +116,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.SayHi");
             scope.Start();
             try
             {
@@ -133,11 +133,11 @@ namespace UnbrandedTypeSpec
         /// <summary> Return hi again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
-        /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual async Task<Result<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -146,17 +146,17 @@ namespace UnbrandedTypeSpec
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
             Result result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
-            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
-        /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual Result<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -165,7 +165,7 @@ namespace UnbrandedTypeSpec
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
             Result result = HelloAgain(p2, p1, content, context);
-            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgainAsync(string,string,SuperRoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -197,7 +197,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloAgain");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgain(string,string,SuperRoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -240,7 +240,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloAgain");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.NoContentType");
             scope.Start();
             try
             {
@@ -316,7 +316,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.NoContentType");
             scope.Start();
             try
             {
@@ -368,7 +368,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloDemo2Async(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -402,7 +402,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloDemo2(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -468,7 +468,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -506,7 +506,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -558,7 +558,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> HelloLiteralAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -592,7 +592,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result HelloLiteral(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -647,7 +647,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> TopActionAsync(DateTimeOffset action, RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction");
             scope.Start();
             try
             {
@@ -682,7 +682,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result TopAction(DateTimeOffset action, RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction");
             scope.Start();
             try
             {
@@ -711,7 +711,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> TopAction2Async(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction2");
             scope.Start();
             try
             {
@@ -740,7 +740,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result TopAction2(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction2");
             scope.Start();
             try
             {
@@ -773,7 +773,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.PatchAction");
             scope.Start();
             try
             {
@@ -806,7 +806,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.PatchAction");
             scope.Start();
             try
             {
@@ -872,7 +872,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -910,7 +910,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -925,31 +925,31 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual async Task<Result<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(superFriend, nameof(superFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = superFriend.ToRequestBody();
+            using RequestBody content = friend.ToRequestBody();
             Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual Result<SuperFriend> FriendlyModel(SuperFriend superFriend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        public virtual Result<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(superFriend, nameof(superFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = superFriend.ToRequestBody();
+            using RequestBody content = friend.ToRequestBody();
             Result result = FriendlyModel(content, context);
-            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -962,7 +962,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(SuperFriend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -976,7 +976,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -1000,7 +1000,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(SuperFriend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1014,7 +1014,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -1043,7 +1043,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> AddTimeHeaderAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -1072,7 +1072,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result AddTimeHeader(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -1141,7 +1141,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StringFormat");
             scope.Start();
             try
             {
@@ -1180,7 +1180,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StringFormat");
             scope.Start();
             try
             {
@@ -1246,7 +1246,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ProjectedNameModel");
             scope.Start();
             try
             {
@@ -1284,7 +1284,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ProjectedNameModel");
             scope.Start();
             try
             {
@@ -1336,7 +1336,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> ReturnsAnonymousModelAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ReturnsAnonymousModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ReturnsAnonymousModel");
             scope.Start();
             try
             {
@@ -1370,7 +1370,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result ReturnsAnonymousModel(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ReturnsAnonymousModel");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ReturnsAnonymousModel");
             scope.Start();
             try
             {
@@ -1399,7 +1399,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetUnknownValueAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -1428,7 +1428,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetUnknownValue(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -1489,7 +1489,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1522,7 +1522,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1540,7 +1540,7 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Result> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenientValue");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenientValue");
             scope.Start();
             try
             {
@@ -1559,7 +1559,7 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Result StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenientValue");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenientValue");
             scope.Start();
             try
             {
@@ -1589,7 +1589,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Result> StillConvenientAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenient");
             scope.Start();
             try
             {
@@ -1618,7 +1618,7 @@ namespace UnbrandedTypeSpec
         /// <returns> The response returned from the service. </returns>
         internal virtual Result StillConvenient(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenient");
             scope.Start();
             try
             {
@@ -1653,7 +1653,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HeadAsBoolean");
             scope.Start();
             try
             {
@@ -1689,7 +1689,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
+            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HeadAsBoolean");
             scope.Start();
             try
             {

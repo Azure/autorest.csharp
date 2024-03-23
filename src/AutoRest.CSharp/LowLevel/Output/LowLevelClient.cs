@@ -309,9 +309,9 @@ namespace AutoRest.CSharp.Output.Models
 
             if (ExistingType is not null)
             {
-                //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
-                //remove suppressed ctors from the candidates
-                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+                // [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+                // remove suppressed ctors from the candidates
+                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == CodeGenAttributes.CodeGenSuppressAttributeName))
                 {
                     if (attribute.ConstructorArguments.Length != 2)
                         continue;

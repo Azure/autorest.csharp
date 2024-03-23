@@ -7,9 +7,9 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using UnbrandedTypeSpec;
+using CustomizedTypeSpec;
 
-namespace UnbrandedTypeSpec.Models
+namespace CustomizedTypeSpec.Models
 {
     public partial class RoundTripModel : IUtf8JsonWriteable, IJsonModel<RoundTripModel>
     {
@@ -25,7 +25,7 @@ namespace UnbrandedTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
-            writer.WriteStringValue(RequiredSuperString);
+            writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredCollection"u8);

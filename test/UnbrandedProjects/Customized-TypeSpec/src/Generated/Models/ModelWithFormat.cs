@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.Generic;
-using UnbrandedTypeSpec;
+using CustomizedTypeSpec;
 
-namespace UnbrandedTypeSpec.Models
+namespace CustomizedTypeSpec.Models
 {
-    /// <summary> this is not a friendly model but with a friendly name. </summary>
-    public partial class Friend
+    /// <summary> The ModelWithFormat. </summary>
+    public partial class ModelWithFormat
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,31 +43,37 @@ namespace UnbrandedTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Friend(string name)
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
+        public ModelWithFormat(Uri sourceUrl, Guid guid)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
 
-            Name = name;
+            SourceUrl = sourceUrl;
+            Guid = guid;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Friend(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            SourceUrl = sourceUrl;
+            Guid = guid;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/> for deserialization. </summary>
-        internal Friend()
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>
+        internal ModelWithFormat()
         {
         }
 
-        /// <summary> name of the NotFriend. </summary>
-        public string Name { get; set; }
+        /// <summary> url format. </summary>
+        public Uri SourceUrl { get; }
+        /// <summary> uuid format. </summary>
+        public Guid Guid { get; }
     }
 }

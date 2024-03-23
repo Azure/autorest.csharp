@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Input.Source
                 var attributeType = attribute.AttributeClass;
                 while (attributeType != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(attributeType, _codeGenAttributes.CodeGenClientAttribute))
+                    if (attributeType.ToDisplayString() == _codeGenAttributes.CodeGenClientAttributeName)
                     {
                         INamedTypeSymbol? parentClientType = null;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
@@ -118,10 +118,10 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (var attribute in symbol.GetAttributes())
             {
-                var type = attribute.AttributeClass;
+                INamedTypeSymbol? type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(type, _codeGenAttributes.CodeGenTypeAttribute))
+                    if (type.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) == _codeGenAttributes.CodeGenTypeAttributeName)
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {

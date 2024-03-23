@@ -7,25 +7,23 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using UnbrandedTypeSpec;
+using CustomizedTypeSpec;
 
-namespace UnbrandedTypeSpec.Models
+namespace CustomizedTypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonWriteable, IJsonModel<Friend>
+    public partial class ReturnsAnonymousModelResponse : IUtf8JsonWriteable, IJsonModel<ReturnsAnonymousModelResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReturnsAnonymousModelResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ReturnsAnonymousModelResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Friend)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -44,19 +42,19 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Friend IJsonModel<Friend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ReturnsAnonymousModelResponse IJsonModel<ReturnsAnonymousModelResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Friend)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFriend(document.RootElement, options);
+            return DeserializeReturnsAnonymousModelResponse(document.RootElement, options);
         }
 
-        internal static Friend DeserializeFriend(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ReturnsAnonymousModelResponse DeserializeReturnsAnonymousModelResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -64,62 +62,56 @@ namespace UnbrandedTypeSpec.Models
             {
                 return null;
             }
-            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Friend(name, serializedAdditionalRawData);
+            return new ReturnsAnonymousModelResponse(serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<Friend>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ReturnsAnonymousModelResponse>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support '{options.Format}' format.");
             }
         }
 
-        Friend IPersistableModel<Friend>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ReturnsAnonymousModelResponse IPersistableModel<ReturnsAnonymousModelResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ReturnsAnonymousModelResponse>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFriend(document.RootElement, options);
+                        return DeserializeReturnsAnonymousModelResponse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ReturnsAnonymousModelResponse)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Friend>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ReturnsAnonymousModelResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static Friend FromResponse(PipelineResponse response)
+        internal static ReturnsAnonymousModelResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement);
+            return DeserializeReturnsAnonymousModelResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
