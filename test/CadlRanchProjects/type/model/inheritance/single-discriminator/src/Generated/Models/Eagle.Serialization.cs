@@ -33,7 +33,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Bird>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,14 +44,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<Bird>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                writer.WriteObjectValue(Partner);
+                writer.WriteObjectValue<Bird>(Partner, options);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
@@ -209,7 +209,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Eagle>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

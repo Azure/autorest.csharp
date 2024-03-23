@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Cobra>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

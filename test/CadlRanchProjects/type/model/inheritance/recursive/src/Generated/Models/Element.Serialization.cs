@@ -33,7 +33,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Extension>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -146,7 +146,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Element>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -24,7 +24,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                writer.WriteObjectValue<EncryptionKey>(EncryptionKey);
             }
             if (Optional.IsDefined(ETag))
             {

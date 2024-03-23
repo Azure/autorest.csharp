@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace ModelWithConverterUsage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<ModelClass>(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -119,7 +120,7 @@ namespace ModelWithConverterUsage
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<ModelStruct?>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;

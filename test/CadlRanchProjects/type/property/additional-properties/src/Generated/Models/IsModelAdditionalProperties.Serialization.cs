@@ -30,7 +30,7 @@ namespace _Type.Property.AdditionalProperties.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<ModelForRecord>(item.Value, options);
             }
             writer.WriteEndObject();
         }
@@ -108,7 +108,7 @@ namespace _Type.Property.AdditionalProperties.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<IsModelAdditionalProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

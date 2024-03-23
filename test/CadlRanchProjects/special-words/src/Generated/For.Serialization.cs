@@ -129,7 +129,7 @@ namespace SpecialWords
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<For>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -58,7 +58,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Fish>(item, options);
                 }
                 writer.WriteEndArray();
             }

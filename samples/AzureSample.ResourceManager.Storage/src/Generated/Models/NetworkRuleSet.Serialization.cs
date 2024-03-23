@@ -27,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceAccessRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ResourceAccessRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -37,7 +37,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualNetworkRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -47,7 +47,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<IPRule>(item);
                 }
                 writer.WriteEndArray();
             }

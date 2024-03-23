@@ -23,7 +23,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             writer.WritePropertyName("message"u8);
-            writer.WriteObjectValue(Message);
+            writer.WriteObjectValue<ChatCompletionResponseMessage>(Message, options);
             writer.WritePropertyName("finish_reason"u8);
             writer.WriteStringValue(FinishReason.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -138,7 +138,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateChatCompletionResponseChoice>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

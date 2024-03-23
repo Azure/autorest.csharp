@@ -77,8 +77,6 @@ namespace AutoRest.CSharp.Common.Input
         public override string ToRequestContentName => "ToRequestBody";
         public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
 
-        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonWriteable);
-
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
         public override Type RequestFailedExceptionType => typeof(MessageFailedException);

@@ -32,7 +32,7 @@ namespace ModelsTypeSpec.Models
             if (Optional.IsDefined(Inner))
             {
                 writer.WritePropertyName("inner"u8);
-                writer.WriteObjectValue(Inner);
+                writer.WriteObjectValue<InputRecursiveModel>(Inner, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -144,7 +144,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InputRecursiveModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

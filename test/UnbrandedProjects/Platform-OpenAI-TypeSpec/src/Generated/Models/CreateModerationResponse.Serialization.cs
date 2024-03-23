@@ -28,7 +28,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CreateModerationResponseResult>(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -148,7 +148,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateModerationResponse>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -145,7 +145,7 @@ namespace PetStore.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Tuna>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

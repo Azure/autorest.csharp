@@ -86,7 +86,7 @@ namespace MgmtXmlDeserialization.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<XmlInstanceData>(item, options);
                 }
                 writer.WriteEndArray();
             }

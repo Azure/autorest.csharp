@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy);
+                writer.WriteObjectValue<BlobInventoryPolicySchema>(Policy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

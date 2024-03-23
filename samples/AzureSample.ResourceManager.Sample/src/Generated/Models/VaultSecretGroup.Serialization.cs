@@ -41,7 +41,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in VaultCertificates)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VaultCertificate>(item, options);
                 }
                 writer.WriteEndArray();
             }

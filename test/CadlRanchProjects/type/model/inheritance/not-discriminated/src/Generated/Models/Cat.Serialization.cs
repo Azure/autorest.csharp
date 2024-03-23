@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Cat>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

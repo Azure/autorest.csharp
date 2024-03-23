@@ -473,7 +473,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateCompletionRequest>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

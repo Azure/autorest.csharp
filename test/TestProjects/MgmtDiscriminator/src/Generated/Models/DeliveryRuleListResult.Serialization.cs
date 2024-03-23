@@ -35,7 +35,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DeliveryRuleData>(item, options);
                 }
                 writer.WriteEndArray();
             }

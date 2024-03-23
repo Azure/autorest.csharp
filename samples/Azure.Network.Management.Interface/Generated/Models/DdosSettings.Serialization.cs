@@ -18,7 +18,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
-                writer.WriteObjectValue(DdosCustomPolicy);
+                writer.WriteObjectValue<SubResource>(DdosCustomPolicy);
             }
             if (Optional.IsDefined(ProtectionCoverage))
             {

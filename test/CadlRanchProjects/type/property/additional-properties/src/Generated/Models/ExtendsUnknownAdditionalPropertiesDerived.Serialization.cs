@@ -146,7 +146,7 @@ namespace _Type.Property.AdditionalProperties.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ExtendsUnknownAdditionalPropertiesDerived>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

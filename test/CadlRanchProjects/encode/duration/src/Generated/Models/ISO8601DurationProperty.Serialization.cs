@@ -129,7 +129,7 @@ namespace Encode.Duration.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ISO8601DurationProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

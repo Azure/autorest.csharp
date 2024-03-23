@@ -29,7 +29,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue(SampleSalmon);
+                writer.WriteObjectValue<DotSalmon>(SampleSalmon, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -37,14 +37,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DotSalmon>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue(SampleFish);
+                writer.WriteObjectValue<DotFish>(SampleFish, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -52,7 +52,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DotFish>(item, options);
                 }
                 writer.WriteEndArray();
             }

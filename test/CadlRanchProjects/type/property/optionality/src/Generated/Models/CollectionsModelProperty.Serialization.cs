@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<StringProperty>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -146,7 +146,7 @@ namespace _Type.Property.Optionality.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CollectionsModelProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

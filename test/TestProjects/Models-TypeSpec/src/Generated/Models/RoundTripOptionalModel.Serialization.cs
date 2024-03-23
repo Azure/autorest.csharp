@@ -63,19 +63,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                writer.WriteObjectValue(OptionalModel);
+                writer.WriteObjectValue<DerivedModel>(OptionalModel, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
+                writer.WriteObjectValue<DerivedModelWithProperties>(OptionalModelWithPropertiesOnBase, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<RecordItem>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -443,7 +443,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripOptionalModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

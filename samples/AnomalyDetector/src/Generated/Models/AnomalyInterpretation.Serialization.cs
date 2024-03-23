@@ -40,7 +40,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(CorrelationChanges))
             {
                 writer.WritePropertyName("correlationChanges"u8);
-                writer.WriteObjectValue(CorrelationChanges);
+                writer.WriteObjectValue<CorrelationChanges>(CorrelationChanges, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -162,7 +162,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<AnomalyInterpretation>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

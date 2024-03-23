@@ -125,7 +125,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Bird>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

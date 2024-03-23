@@ -28,7 +28,7 @@ namespace OpenAI.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters);
+            writer.WriteObjectValue<ChatCompletionFunctionParameters>(Parameters, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -141,7 +141,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ChatCompletionFunctions>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
-                writer.WriteObjectValue(LogAnalyticsResources);
+                writer.WriteObjectValue<FirewallPolicyLogAnalyticsResources>(LogAnalyticsResources);
             }
             writer.WriteEndObject();
         }

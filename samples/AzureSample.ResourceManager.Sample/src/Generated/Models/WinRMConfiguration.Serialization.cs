@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Listeners)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<WinRMListener>(item, options);
                 }
                 writer.WriteEndArray();
             }

@@ -40,7 +40,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 writer.WriteStartArray();
                 foreach (var item in Orders)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<UserOrder>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -176,7 +176,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<User>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

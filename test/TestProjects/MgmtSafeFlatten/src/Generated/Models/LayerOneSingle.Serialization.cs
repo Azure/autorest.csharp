@@ -18,7 +18,7 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                writer.WriteObjectValue(LayerTwo);
+                writer.WriteObjectValue<LayerTwoSingle>(LayerTwo);
             }
             writer.WriteEndObject();
         }

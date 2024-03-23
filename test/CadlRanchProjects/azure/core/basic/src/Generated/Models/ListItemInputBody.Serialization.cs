@@ -129,7 +129,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ListItemInputBody>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

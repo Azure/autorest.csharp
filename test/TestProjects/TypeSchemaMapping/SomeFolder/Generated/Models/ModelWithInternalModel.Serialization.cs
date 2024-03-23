@@ -29,7 +29,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(InternalProperty))
             {
                 writer.WritePropertyName("InternalProperty"u8);
-                writer.WriteObjectValue(InternalProperty);
+                writer.WriteObjectValue<InternalModel>(InternalProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

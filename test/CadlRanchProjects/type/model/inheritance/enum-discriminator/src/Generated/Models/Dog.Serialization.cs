@@ -122,7 +122,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Dog>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }
