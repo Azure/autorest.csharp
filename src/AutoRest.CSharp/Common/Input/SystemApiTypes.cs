@@ -92,5 +92,7 @@ namespace AutoRest.CSharp.Common.Input
         public override ExtensibleSnippets ExtensibleSnippets { get; } = new SystemExtensibleSnippets();
 
         public override string LicenseString => string.Empty;
+
+        public override string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
     }
 }

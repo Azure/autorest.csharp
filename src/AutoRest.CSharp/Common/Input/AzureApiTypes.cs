@@ -86,5 +86,7 @@ namespace AutoRest.CSharp.Common.Input
 
 
 """;
+
+        public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
     }
 }

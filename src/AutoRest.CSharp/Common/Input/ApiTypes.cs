@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type RequestFailedExceptionType { get; }
 
-        public string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
+        public abstract string ResponseClassifierIsErrorResponseName { get; }
 
         public abstract string EndPointSampleValue { get; }
 
