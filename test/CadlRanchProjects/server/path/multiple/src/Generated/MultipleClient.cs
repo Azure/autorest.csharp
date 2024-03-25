@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Server.Path.Multiple.Models;
 
 namespace Server.Path.Multiple
 {
@@ -19,7 +20,7 @@ namespace Server.Path.Multiple
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
+        private readonly Versions? _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -196,7 +197,7 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(_apiVersion.Value.ToString(), true);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -211,7 +212,7 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(_apiVersion.Value.ToString(), true);
             uri.AppendPath("/", false);
             uri.AppendPath(keyword, true);
             request.Uri = uri;
