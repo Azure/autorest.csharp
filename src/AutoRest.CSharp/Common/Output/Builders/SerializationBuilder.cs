@@ -468,7 +468,9 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
-                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
+                if (property.SchemaProperty == null)
+                    continue; // skip properties not from specification
+                Property schemaProperty = property.SchemaProperty;
                 ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
