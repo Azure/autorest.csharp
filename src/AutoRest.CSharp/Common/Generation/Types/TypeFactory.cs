@@ -48,10 +48,10 @@ namespace AutoRest.CSharp.Generation.Types
             InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputEnumType enumType => _library.ResolveEnum(enumType).IsNullable == inputType.IsNullable ? _library.ResolveEnum(enumType) : _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
-            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            InputModelType model => _library.ResolveModel(model).IsNullable == inputType.IsNullable ? _library.ResolveModel(model) : _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),

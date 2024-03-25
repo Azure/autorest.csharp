@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -76,7 +75,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private readonly InputNamespace _input;
 
-        private readonly LookupDictionary<InputType, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
+        private readonly Dictionary<InputType, TypeProvider> _schemaToModels = new Dictionary<InputType, TypeProvider>(ReferenceEqualityComparer.Instance);
+        private readonly Lazy<Dictionary<string, TypeProvider>> _nameToModels;
 
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
@@ -87,6 +87,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// This is a map from <see cref="InputClient"/> to the list of raw request path of its operations
         /// </summary>
         private readonly Dictionary<InputClient, IEnumerable<string>> _operationGroupToRequestPaths = new();
+
+        private Dictionary<string, TypeProvider> EnsureNameToModelsMap() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
 
         public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
@@ -108,13 +110,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureResourceSchemaMap);
             SchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureSchemaMap);
             ChildOperations = new Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>>(EnsureResourceChildOperations);
+            _nameToModels = new Lazy<Dictionary<string, TypeProvider>>(EnsureNameToModelsMap);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
         }
 
-        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
+        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>(ReferenceEqualityComparer.Instance);
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
@@ -240,13 +243,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var defaultDerivedType = GetDefaultDerivedType(inputModel, defaultDerivedTypes);
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(inputModel.Name) ? BuildResourceData(inputModel, defaultDerivedType) : BuildModel(inputModel, defaultDerivedType);
-                _schemaOrNameToModels.Add(inputModel, model);
+                _schemaToModels.Add(inputModel, model);
             }
 
             foreach (var inputEnum in _input.Enums)
             {
                 var model = BuildModel(inputEnum);
-                _schemaOrNameToModels.Add(inputEnum, model);
+                _schemaToModels.Add(inputEnum, model);
             }
 
             //this is where we update
@@ -256,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var replacedTypes = new Dictionary<InputModelType, TypeProvider>();
             foreach (var schema in _input.Models)
             {
-                if (_schemaOrNameToModels.TryGetValue(schema, out var type))
+                if (_schemaToModels.TryGetValue(schema, out var type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
@@ -283,14 +286,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // third, update the entries in cache maps with the new model instances
             foreach (var (schema, replacedType) in replacedTypes)
             {
-                var originalModel = _schemaOrNameToModels[schema];
-                _schemaOrNameToModels[schema] = replacedType;
+                var originalModel = _schemaToModels[schema];
+                _schemaToModels[schema] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
                     schema.GetFullSerializedName(),
                     "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
-            return _schemaOrNameToModels;
+            return _schemaToModels;
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
@@ -342,7 +345,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                 defaultDerivedType = new MgmtObjectType(unknownDerivedType);
                 defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
-                _schemaOrNameToModels.Add(unknownDerivedType, defaultDerivedType);
+                _schemaToModels.Add(unknownDerivedType, defaultDerivedType);
             }
 
             return defaultDerivedType;
@@ -769,28 +772,26 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType ResolveModel(InputModelType model)
         {
-            if (_schemaOrNameToModels.TryGetValue(model, out var value))
+            if (_schemaToModels.TryGetValue(model, out var value))
             {
                 return value.Type;
             }
-
-            // TODO: model has been turned in to a new instance somewhere, need to fix it later
-            return FindTypeByName(model.OriginalName ?? model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+            throw new InvalidOperationException($"Cannot find model {model.Name}");
         }
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
+            _nameToModels.Value.TryGetValue(originalName, out TypeProvider? provider);
 
             // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
-            provider ??= _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
+            provider ??= _schemaToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
 
             return provider?.Type;
         }
 
         public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
         {
-            if (_schemaOrNameToModels.TryGetValue(originalName, out provider))
+            if (_nameToModels.Value.TryGetValue(originalName, out provider))
                 return true;
 
             provider = ResourceSchemaMap.Value.Values.FirstOrDefault(m => m.Type.Name == originalName);

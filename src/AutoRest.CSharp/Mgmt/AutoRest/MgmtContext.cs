@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static TypeFactory TypeFactory => Context.TypeFactory;
 
-        public static InputNamespace? InputNamespace => Context.InputNamespace;
+        public static InputNamespace InputNamespace => Context.InputNamespace;
 
         public static string DefaultNamespace => Configuration.Namespace;
 

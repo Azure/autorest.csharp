@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
-        private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
         private readonly ICollection<ExampleGroup>? _exampleGroups;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
@@ -37,7 +36,6 @@ namespace AutoRest.CSharp.Common.Input
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
-            _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
             _exampleGroups = codeModel.TestModel?.MockTest.ExampleGroups;
         }
 
@@ -80,7 +78,7 @@ namespace AutoRest.CSharp.Common.Input
                 Key = operationGroup.Key,
             };
 
-        private IReadOnlyList<InputOperation> CreateOperations(IEnumerable<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
+        private IReadOnlyList<InputOperation> CreateOperations(ICollection<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var serviceRequests = new List<ServiceRequest>();
             var inputOperations = new List<InputOperation>();
@@ -157,8 +155,6 @@ namespace AutoRest.CSharp.Common.Input
                 OperationId: operation.OperationId,
                 OriginalName: operation.Language.Default.SerializedName);
             inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
-
-            _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
         }
 
