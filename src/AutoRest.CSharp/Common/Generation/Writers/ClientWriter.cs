@@ -5,6 +5,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Common.Generation.Writers
 {
@@ -16,7 +17,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string PipelineField = "_" + PipelineVariable;
         protected const string DiagnosticsProperty = "Diagnostics";
 
-        protected static readonly Reference ClientDiagnosticsField = new Reference("_" + ClientDiagnosticsVariable, Configuration.ApiTypes.ClientDiagnosticsType);
+        protected static readonly Reference ClientDiagnosticsField = new Reference("_" + ClientDiagnosticsVariable, typeof(ClientDiagnostics));
 
         protected virtual string RestClientAccessibility => "internal";
 
@@ -26,9 +27,14 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
-            writer.Line($"private readonly {Configuration.ApiTypes.ClientDiagnosticsType} {ClientDiagnosticsField.GetReferenceFormattable()};");
+            if (Configuration.IsBranded)
+            {
+                writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField.GetReferenceFormattable()};");
+            }
             if (writePipelineField)
+            {
                 writer.Line($"private readonly {Configuration.ApiTypes.HttpPipelineType} {PipelineField};");
+            }
             writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
     }

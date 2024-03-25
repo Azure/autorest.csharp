@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static IDisposable WriteDiagnosticScope(this CodeWriter writer, Diagnostic diagnostic, Reference clientDiagnostics)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
-            writer.Line($"using var {scopeVariable:D} = {clientDiagnostics.GetReferenceFormattable()}.{Configuration.ApiTypes.ClientDiagnosticsCreateScopeName}({diagnostic.ScopeName:L});");
+            writer.Line($"using var {scopeVariable:D} = {clientDiagnostics.GetReferenceFormattable()}.{nameof(ClientDiagnostics.CreateScope)}({diagnostic.ScopeName:L});");
             foreach (DiagnosticAttribute diagnosticScopeAttributes in diagnostic.Attributes)
             {
                 writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");

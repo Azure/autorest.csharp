@@ -11,9 +11,10 @@ namespace OpenAI.Tests
     public partial class AudioTranscriptionsTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             AudioTranscriptions client = new OpenAIClient(credential).GetAudioClient().GetAudioTranscriptionsClient();
             Assert.IsNotNull(client);
         }

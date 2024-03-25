@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -11,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -28,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
+            _requestBodyType = Configuration.ApiTypes.RequestContentType;
             _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
 

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -127,14 +128,14 @@ namespace AutoRest.CSharp.Generation.Writers
             if (pagingResponse != null)
             {
                 writer.Line($"private readonly {Configuration.ApiTypes.GetNextPageFuncType()} _nextPageFunc;");
-                writer.Line($"private readonly {Configuration.ApiTypes.ClientDiagnosticsType} _clientDiagnostics;");
+                writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
                 writer.Line($"private readonly {Configuration.ApiTypes.HttpPipelineType} _pipeline;");
             }
         }
 
         private void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
         {
-            writer.Append($"internal {lroType.Name}({Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}");
+            writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}");
 
             if (pagingResponse != null)
             {
