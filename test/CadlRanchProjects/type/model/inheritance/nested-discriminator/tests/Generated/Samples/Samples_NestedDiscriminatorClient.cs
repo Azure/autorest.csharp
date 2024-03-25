@@ -12,9 +12,9 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Type.Model.Inheritance.NestedDiscriminator.Models;
+using _Type.Model.Inheritance.NestedDiscriminator.Models;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Samples
+namespace _Type.Model.Inheritance.NestedDiscriminator.Samples
 {
     public partial class Samples_NestedDiscriminatorClient
     {

@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Models
+namespace _Type.Model.Inheritance.NestedDiscriminator.Models
 {
     public partial class SawShark : IUtf8JsonSerializable, IJsonModel<SawShark>
     {

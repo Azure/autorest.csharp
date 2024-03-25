@@ -11,7 +11,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Models
+namespace _Type.Model.Inheritance.NestedDiscriminator.Models
 {
     [PersistableModelProxy(typeof(UnknownFish))]
     public partial class Fish : IUtf8JsonSerializable, IJsonModel<Fish>

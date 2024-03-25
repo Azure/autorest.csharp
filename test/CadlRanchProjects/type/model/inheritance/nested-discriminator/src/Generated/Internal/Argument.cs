@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.NestedDiscriminator
+namespace _Type.Model.Inheritance.NestedDiscriminator
 {
     internal static class Argument
     {
@@ -97,7 +97,7 @@ namespace Type.Model.Inheritance.NestedDiscriminator
             }
         }
 
-        public static void AssertEnumDefined(System.Type enumType, object value, string name)
+        public static void AssertEnumDefined(Type enumType, object value, string name)
         {
             if (!Enum.IsDefined(enumType, value))
             {

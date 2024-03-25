@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Model.Inheritance.NestedDiscriminator.Models;
+using _Type.Model.Inheritance.NestedDiscriminator.Models;
 
-namespace Type.Model.Inheritance.NestedDiscriminator
+namespace _Type.Model.Inheritance.NestedDiscriminator
 {
     // Data plane generated client.
     /// <summary> Illustrates multiple level inheritance with multiple discriminators. </summary>

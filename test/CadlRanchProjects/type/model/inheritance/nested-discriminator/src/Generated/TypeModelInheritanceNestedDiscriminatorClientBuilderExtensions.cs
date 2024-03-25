@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Type.Model.Inheritance.NestedDiscriminator;
+using _Type.Model.Inheritance.NestedDiscriminator;
 
 namespace Microsoft.Extensions.Azure
 {

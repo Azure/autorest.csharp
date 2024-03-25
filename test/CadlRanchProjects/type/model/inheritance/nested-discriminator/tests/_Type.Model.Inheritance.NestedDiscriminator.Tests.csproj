@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Type.Model.Inheritance.NestedDiscriminator.csproj" />
+    <ProjectReference Include="..\src\_Type.Model.Inheritance.NestedDiscriminator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

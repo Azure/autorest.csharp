@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Models
+namespace _Type.Model.Inheritance.NestedDiscriminator.Models
 {
     /// <summary> The third level model GoblinShark in polymorphic multiple levels inheritance. </summary>
     public partial class GoblinShark : Shark

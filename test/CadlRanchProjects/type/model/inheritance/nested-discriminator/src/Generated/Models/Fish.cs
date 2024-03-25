@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Models
+namespace _Type.Model.Inheritance.NestedDiscriminator.Models
 {
     /// <summary>
     /// This is base model for polymorphic multiple levels inheritance with a discriminator.

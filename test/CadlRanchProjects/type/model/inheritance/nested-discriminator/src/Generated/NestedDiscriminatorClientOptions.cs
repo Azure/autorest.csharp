@@ -7,7 +7,7 @@
 
 using Azure.Core;
 
-namespace Type.Model.Inheritance.NestedDiscriminator
+namespace _Type.Model.Inheritance.NestedDiscriminator
 {
     /// <summary> Client options for NestedDiscriminatorClient. </summary>
     public partial class NestedDiscriminatorClientOptions : ClientOptions

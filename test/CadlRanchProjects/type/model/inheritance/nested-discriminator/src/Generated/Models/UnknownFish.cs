@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.NestedDiscriminator.Models
+namespace _Type.Model.Inheritance.NestedDiscriminator.Models
 {
     /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish
