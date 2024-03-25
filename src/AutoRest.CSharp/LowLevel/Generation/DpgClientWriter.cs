@@ -588,8 +588,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line();
                         using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message, {typeof(Exception)} exception, out bool isRetriable)"))
                         {
-                            writer.Line($"isRetriable = true;");
-                            writer.Line($"return true;");
+                            writer.Line($"isRetriable = false;");
+                            writer.Line($"return false;");
                         }
                     }
                 }

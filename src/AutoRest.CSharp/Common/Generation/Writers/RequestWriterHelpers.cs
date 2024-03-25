@@ -68,7 +68,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {message:D} = _pipeline.CreateMessage();");
                     if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                     {
-                        writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                        using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
+                        {
+                            writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                        }
                     }
                     writer.Line($"{message}.ResponseClassifier = {responseClassifierType};");
                 }
