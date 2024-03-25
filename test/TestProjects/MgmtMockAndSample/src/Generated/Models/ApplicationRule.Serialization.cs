@@ -116,7 +116,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NewGeneratedTypeSerializeProperty))
             {
                 writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
-                writer.WriteObjectValue(NewGeneratedTypeSerializeProperty);
+                writer.WriteObjectValue<VaultKey>(NewGeneratedTypeSerializeProperty);
             }
             if (Optional.IsDefined(Name))
             {

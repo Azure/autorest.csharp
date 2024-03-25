@@ -40,6 +40,25 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                SerializeColorProperty(writer);
+            }
+            writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

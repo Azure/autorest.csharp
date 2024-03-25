@@ -445,6 +445,8 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
+                    if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
+                        continue;
                     propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
@@ -468,10 +470,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
-                if (property.SchemaProperty == null)
-                    continue; // skip properties not from specification
-                Property schemaProperty = property.SchemaProperty;
-                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
+                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? property.SchemaProperty?.FlattenedNames ?? new List<string>();
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;
