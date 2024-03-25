@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            var ctor = Configuration.IsBranded ? $"new {Configuration.ApiTypes.KeyCredentialPolicyType}" : $"{Configuration.ApiTypes.KeyCredentialPolicyType}.CreateBearerAuthorizationPolicy";
+                            var ctor = Configuration.IsBranded ? $"new {Configuration.ApiTypes.BearerAuthenticationPolicyType}" : $"{Configuration.ApiTypes.BearerAuthenticationPolicyType}.CreateBearerAuthorizationPolicy";
                             perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{{ctor}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
