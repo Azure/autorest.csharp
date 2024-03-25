@@ -13,7 +13,7 @@ namespace OpenAI.Tests
         [Test]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             Moderations client = new OpenAIClient(credential).GetModerationsClient();
             Assert.IsNotNull(client);
         }

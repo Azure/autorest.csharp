@@ -1301,7 +1301,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1322,7 +1325,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1341,7 +1347,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1360,7 +1369,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHelloDemo2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1375,7 +1387,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1392,7 +1407,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHelloLiteralRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1410,7 +1428,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1426,7 +1447,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateTopAction2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1441,7 +1465,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "PATCH";
@@ -1458,7 +1485,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1475,7 +1505,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1492,7 +1525,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1508,7 +1544,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "POST";
@@ -1526,7 +1565,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1543,7 +1585,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1558,7 +1603,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1573,7 +1621,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1590,7 +1641,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateStillConvenientRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1605,7 +1659,10 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            message.Apply(context);
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             message.ResponseClassifier = PipelineMessageClassifier200To300400To500;
             var request = message.Request;
             request.Method = "HEAD";
@@ -1653,8 +1710,8 @@ namespace UnbrandedTypeSpec
 
             public override bool TryClassify(PipelineMessage message, Exception exception, out bool isRetriable)
             {
-                isRetriable = true;
-                return true;
+                isRetriable = false;
+                return false;
             }
         }
 
