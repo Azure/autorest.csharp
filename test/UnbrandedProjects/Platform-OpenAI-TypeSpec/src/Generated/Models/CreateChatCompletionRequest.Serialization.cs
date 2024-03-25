@@ -26,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Messages)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<ChatCompletionRequestMessage>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Functions))
@@ -35,7 +35,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ChatCompletionFunctions>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -429,7 +429,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateChatCompletionRequest>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

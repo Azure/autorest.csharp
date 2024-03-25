@@ -53,7 +53,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceTypes)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ProviderResourceType>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -212,7 +212,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ResourceProviderData>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

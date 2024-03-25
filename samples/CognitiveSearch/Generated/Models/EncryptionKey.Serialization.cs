@@ -24,7 +24,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                writer.WriteObjectValue(AccessCredentials);
+                writer.WriteObjectValue<AzureActiveDirectoryApplicationCredentials>(AccessCredentials);
             }
             writer.WriteEndObject();
         }

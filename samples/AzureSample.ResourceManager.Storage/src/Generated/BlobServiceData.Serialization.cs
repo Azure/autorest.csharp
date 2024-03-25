@@ -22,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                writer.WriteObjectValue<CorsRules>(Cors);
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -32,7 +32,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                writer.WriteObjectValue(DeleteRetentionPolicy);
+                writer.WriteObjectValue<DeleteRetentionPolicy>(DeleteRetentionPolicy);
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -47,22 +47,22 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                writer.WriteObjectValue(ChangeFeed);
+                writer.WriteObjectValue<ChangeFeed>(ChangeFeed);
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                writer.WriteObjectValue(RestorePolicy);
+                writer.WriteObjectValue<RestorePolicyProperties>(RestorePolicy);
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
+                writer.WriteObjectValue<DeleteRetentionPolicy>(ContainerDeleteRetentionPolicy);
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
+                writer.WriteObjectValue<LastAccessTimeTrackingPolicy>(LastAccessTimeTrackingPolicy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

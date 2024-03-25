@@ -26,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<FineTune>(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -140,7 +140,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ListFineTunesResponse>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

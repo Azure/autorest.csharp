@@ -51,7 +51,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparameters"u8);
-            writer.WriteObjectValue(Hyperparameters);
+            writer.WriteObjectValue<FineTuningJobHyperparameters>(Hyperparameters, options);
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
             if (ValidationFile != null)
@@ -82,7 +82,7 @@ namespace OpenAI.Models
             if (Error != null)
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                writer.WriteObjectValue<FineTuningJobError>(Error, options);
             }
             else
             {
@@ -311,7 +311,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<FineTuningJob>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

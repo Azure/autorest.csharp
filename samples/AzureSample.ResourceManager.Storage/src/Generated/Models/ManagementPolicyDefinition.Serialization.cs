@@ -16,11 +16,11 @@ namespace AzureSample.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("actions"u8);
-            writer.WriteObjectValue(Actions);
+            writer.WriteObjectValue<ManagementPolicyAction>(Actions);
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                writer.WriteObjectValue(Filters);
+                writer.WriteObjectValue<ManagementPolicyFilter>(Filters);
             }
             writer.WriteEndObject();
         }

@@ -82,9 +82,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
 
-        public abstract Type IUtf8JsonSerializableType { get; }
         public abstract Type IXmlSerializableType { get; }
-        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
 
         public abstract Type RequestFailedExceptionType { get; }
 

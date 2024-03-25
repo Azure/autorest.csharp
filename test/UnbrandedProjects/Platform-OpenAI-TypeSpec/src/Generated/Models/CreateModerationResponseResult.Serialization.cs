@@ -23,9 +23,9 @@ namespace OpenAI.Models
             writer.WritePropertyName("flagged"u8);
             writer.WriteBooleanValue(Flagged);
             writer.WritePropertyName("categories"u8);
-            writer.WriteObjectValue(Categories);
+            writer.WriteObjectValue<CreateModerationResponseResultCategories>(Categories, options);
             writer.WritePropertyName("category_scores"u8);
-            writer.WriteObjectValue(CategoryScores);
+            writer.WriteObjectValue<CreateModerationResponseResultCategoryScores>(CategoryScores, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -138,7 +138,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateModerationResponseResult>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

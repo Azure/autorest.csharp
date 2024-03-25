@@ -43,12 +43,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                writer.WriteObjectValue(StartupProbe);
+                writer.WriteObjectValue<Probe>(StartupProbe);
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                writer.WriteObjectValue(ReadinessProbe);
+                writer.WriteObjectValue<Probe>(ReadinessProbe);
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
@@ -63,37 +63,37 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                writer.WriteObjectValue(ThreatIntelWhitelist);
+                writer.WriteObjectValue<FirewallPolicyThreatIntelWhitelist>(ThreatIntelWhitelist);
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                writer.WriteObjectValue(Insights);
+                writer.WriteObjectValue<FirewallPolicyInsights>(Insights);
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                writer.WriteObjectValue(Snat);
+                writer.WriteObjectValue<FirewallPolicySnat>(Snat);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue<DnsSettings>(DnsSettings);
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                writer.WriteObjectValue(IntrusionDetection);
+                writer.WriteObjectValue<FirewallPolicyIntrusionDetection>(IntrusionDetection);
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                writer.WriteObjectValue(TransportSecurity);
+                writer.WriteObjectValue<FirewallPolicyTransportSecurity>(TransportSecurity);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<FirewallPolicySku>(Sku);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

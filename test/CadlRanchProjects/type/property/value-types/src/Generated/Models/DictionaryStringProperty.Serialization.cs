@@ -140,7 +140,7 @@ namespace _Type.Property.ValueTypes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<DictionaryStringProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -26,7 +26,7 @@ namespace MgmtExactMatchInheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue(ModelProperty);
+                writer.WriteObjectValue<ExactMatchModel10>(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -63,7 +63,7 @@ namespace MgmtExactMatchInheritance.Models
         {
             public override void Write(Utf8JsonWriter writer, SeparateClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<SeparateClass>(model);
             }
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

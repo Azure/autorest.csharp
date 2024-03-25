@@ -39,7 +39,7 @@ namespace OpenAI.Models
             if (Optional.IsDefined(Hyperparameters))
             {
                 writer.WritePropertyName("hyperparameters"u8);
-                writer.WriteObjectValue(Hyperparameters);
+                writer.WriteObjectValue<CreateFineTuningJobRequestHyperparameters>(Hyperparameters, options);
             }
             if (Optional.IsDefined(Suffix))
             {
@@ -197,7 +197,7 @@ namespace OpenAI.Models
         internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CreateFineTuningJobRequest>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

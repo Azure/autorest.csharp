@@ -23,7 +23,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue(Pet);
+                writer.WriteObjectValue<Pet>(Pet);
             }
             writer.WriteEndObject();
         }

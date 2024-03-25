@@ -164,7 +164,7 @@ namespace Azure.Network.Management.Interface
             writer.WriteNumberValue(value.ToUnixTimeSeconds());
         }
 
-        public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
+        public static void WriteObjectValue<T>(this Utf8JsonWriter writer, object value)
         {
             switch (value)
             {
@@ -225,7 +225,7 @@ namespace Azure.Network.Management.Interface
                     foreach (var pair in enumerable)
                     {
                         writer.WritePropertyName(pair.Key);
-                        writer.WriteObjectValue(pair.Value);
+                        writer.WriteObjectValue<object>(pair.Value);
                     }
                     writer.WriteEndObject();
                     break;
@@ -233,7 +233,7 @@ namespace Azure.Network.Management.Interface
                     writer.WriteStartArray();
                     foreach (var item in objectEnumerable)
                     {
-                        writer.WriteObjectValue(item);
+                        writer.WriteObjectValue<object>(item);
                     }
                     writer.WriteEndArray();
                     break;
@@ -243,6 +243,11 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new NotSupportedException($"Not supported type {value.GetType()}");
             }
+        }
+
+        public static void WriteObjectValue(this Utf8JsonWriter writer, object value)
+        {
+            writer.WriteObjectValue<object>(value);
         }
 
         internal static class TypeFormatters

@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in VmssSkus)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<VirtualMachineScaleSetSku>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

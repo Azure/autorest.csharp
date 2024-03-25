@@ -32,7 +32,7 @@ namespace custom_baseUrl_paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Values)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Product>(item, options);
                 }
                 writer.WriteEndArray();
             }

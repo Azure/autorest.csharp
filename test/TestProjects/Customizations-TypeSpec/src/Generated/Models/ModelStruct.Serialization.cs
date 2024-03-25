@@ -161,7 +161,7 @@ namespace CustomizationsInTsp.Models
         internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelStruct>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

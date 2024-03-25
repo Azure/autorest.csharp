@@ -39,7 +39,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
-                writer.WriteObjectValue(ModelInfo);
+                writer.WriteObjectValue<ModelInfo>(ModelInfo, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -163,7 +163,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<AnomalyDetectionModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

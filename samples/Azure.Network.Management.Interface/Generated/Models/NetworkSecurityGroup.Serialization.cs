@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in SecurityRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<SecurityRule>(item);
                 }
                 writer.WriteEndArray();
             }

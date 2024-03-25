@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                writer.WriteObjectValue(PublicIPAddressConfiguration);
+                writer.WriteObjectValue<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>(PublicIPAddressConfiguration);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

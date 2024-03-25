@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Variables)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<VariableValues>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("topContributorCount"u8);
@@ -147,7 +147,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<MultivariateLastDetectionOptions>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

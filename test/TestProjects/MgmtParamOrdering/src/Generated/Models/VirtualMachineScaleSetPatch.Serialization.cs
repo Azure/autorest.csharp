@@ -18,7 +18,7 @@ namespace MgmtParamOrdering.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<MgmtParamOrderingSku>(Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

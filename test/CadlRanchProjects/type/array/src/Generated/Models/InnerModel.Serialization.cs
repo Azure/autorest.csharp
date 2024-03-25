@@ -35,7 +35,7 @@ namespace _Type._Array.Models
                 writer.WriteStartArray();
                 foreach (var item in Children)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InnerModel>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -154,7 +154,7 @@ namespace _Type._Array.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InnerModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

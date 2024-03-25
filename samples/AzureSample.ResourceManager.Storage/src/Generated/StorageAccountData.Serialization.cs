@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
+                writer.WriteObjectValue<AzureFilesIdentityBasedAuthentication>(AzureFilesIdentityBasedAuthentication);
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
@@ -69,7 +69,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                writer.WriteObjectValue(RoutingPreference);
+                writer.WriteObjectValue<RoutingPreference>(RoutingPreference);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -109,7 +109,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                writer.WriteObjectValue<ImmutableStorageAccount>(ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

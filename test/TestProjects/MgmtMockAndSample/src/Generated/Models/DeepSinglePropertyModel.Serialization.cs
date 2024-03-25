@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Deep))
             {
                 writer.WritePropertyName("deep"u8);
-                writer.WriteObjectValue(Deep);
+                writer.WriteObjectValue<SinglePropertyModel>(Deep);
             }
             writer.WriteEndObject();
         }
