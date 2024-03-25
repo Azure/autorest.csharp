@@ -16,10 +16,10 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        /// <param name="newStringSerializeProperty"> Add string property to FirewallPolicyRule. </param>
-        /// <param name="newArraySerializedProperty"> Add list property to FirewallPolicyRule. </param>
-        /// <param name="newDictionarySerializedProperty"> Add dictionary property to FirewallPolicyRule. </param>
-        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, Dictionary<string, string> newDictionarySerializedProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
+        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             RuleType = ruleType;
         }

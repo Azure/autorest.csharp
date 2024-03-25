@@ -25,8 +25,11 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("keyUrl"u8);
             writer.WriteStringValue(KeyUri.AbsoluteUri);
-            writer.WritePropertyName("newKeyUrl"u8);
-            writer.WriteStringValue(NewKeyUri.AbsoluteUri);
+            if (Optional.IsDefined(NewKeyUri))
+            {
+                writer.WritePropertyName("newKeyUrl"u8);
+                writer.WriteStringValue(NewKeyUri.AbsoluteUri);
+            }
             writer.WriteEndObject();
         }
 
@@ -58,11 +61,19 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("newKeyUrl"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     newKeyUrl = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("newReadOnlyArrayProperty"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -72,7 +83,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newReadOnlyArrayProperty);
+            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newReadOnlyArrayProperty ?? new ChangeTrackingList<string>());
         }
     }
 }

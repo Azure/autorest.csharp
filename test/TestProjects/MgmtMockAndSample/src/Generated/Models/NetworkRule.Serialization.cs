@@ -98,19 +98,28 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("ruleType"u8);
             writer.WriteStringValue(RuleType.ToString());
-            writer.WritePropertyName("newStringSerializeProperty"u8);
-            writer.WriteStringValue(NewStringSerializeProperty);
-            writer.WritePropertyName("newArraySerializedProperty"u8);
-            writer.WriteStartArray();
-            foreach (var item in NewArraySerializedProperty)
+            if (Optional.IsDefined(NewStringSerializeProperty))
             {
-                writer.WriteStringValue(item);
+                writer.WritePropertyName("newStringSerializeProperty"u8);
+                writer.WriteStringValue(NewStringSerializeProperty);
             }
-            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(NewArraySerializedProperty))
+            {
+                writer.WritePropertyName("newArraySerializedProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NewArraySerializedProperty)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WritePropertyName("fakeParent"u8);
             writer.WriteStartObject();
-            writer.WritePropertyName("newDictionarySerializedProperty"u8);
-            SerializeNameValue(writer);
+            if (Optional.IsCollectionDefined(NewDictionarySerializedProperty))
+            {
+                writer.WritePropertyName("newDictionarySerializedProperty"u8);
+                SerializeNameValue(writer);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -133,7 +142,7 @@ namespace MgmtMockAndSample.Models
             FirewallPolicyRuleType ruleType = default;
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
-            Dictionary<string, string> newDictionarySerializedProperty = default;
+            IDictionary<string, string> newDictionarySerializedProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipProtocols"u8))
@@ -256,6 +265,10 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("newArraySerializedProperty"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -287,8 +300,8 @@ namespace MgmtMockAndSample.Models
                 description,
                 ruleType,
                 newStringSerializeProperty,
-                newArraySerializedProperty,
-                newDictionarySerializedProperty,
+                newArraySerializedProperty ?? new ChangeTrackingList<string>(),
+                newDictionarySerializedProperty ?? new ChangeTrackingDictionary<string, string>(),
                 ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),

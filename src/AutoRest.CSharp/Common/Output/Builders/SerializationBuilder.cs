@@ -374,41 +374,61 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties)
             {
-                var schemaProperty = property.SchemaProperty!; // we ensured this is never null when constructing the list
-                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
-                if (parameter is null)
+                if (property.SchemaProperty == null)
                 {
-                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    // Property is not part of specification,
+                    var declaredName = property.Declaration.Name;
+                    var propertyType = property.Declaration.Type;
+                    var varName = declaredName.ToVariableName();
+                    yield return new JsonPropertySerialization(
+                        varName,
+                        new TypedMemberExpression(null, property.Declaration.Name, propertyType),
+                        serializationMapping?.SerializationPath?[^1] ?? varName,
+                        propertyType,
+                        BuildJsonSerializationFromValue(propertyType, false),
+                        property.IsRequired,
+                        property.IsReadOnly,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook));
                 }
-
-                var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
-                var isRequired = schemaProperty.IsRequired;
-                var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
-                var serialization = schemaProperty.Schema.GetType() == typeof(Schema)
-                    ? BuildJsonSerialization(BuilderHelpers.GetInputTypeFromCSharpType(property.Declaration.Type), property.Declaration.Type, false, property.SerializationFormat)
-                    : BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
-
-                var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
-                TypedMemberExpression? enumerableExpression = null;
-                if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                else
                 {
-                    enumerableExpression = property.Declaration.Type.IsNullable
-                        ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                        : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    var schemaProperty = property.SchemaProperty;
+                    var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+                    if (parameter is null)
+                    {
+                        throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    }
+
+                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
+                    var isRequired = schemaProperty.IsRequired;
+                    var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
+                    var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+
+                    var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    }
+                    yield return new JsonPropertySerialization(
+                        parameter.Name,
+                        memberValueExpression,
+                        serializedName,
+                        property.ValueType,
+                        serialization,
+                        isRequired,
+                        shouldExcludeInWireSerialization,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook),
+                        enumerableExpression: enumerableExpression);
                 }
-                yield return new JsonPropertySerialization(
-                    parameter.Name,
-                    memberValueExpression,
-                    serializedName,
-                    property.ValueType,
-                    serialization,
-                    isRequired,
-                    shouldExcludeInWireSerialization,
-                    serializationHooks: new CustomSerializationHooks(
-                        serializationMapping?.JsonSerializationValueHook,
-                        serializationMapping?.JsonDeserializationValueHook,
-                        serializationMapping?.BicepSerializationValueHook),
-                    enumerableExpression: enumerableExpression);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
@@ -421,30 +441,11 @@ namespace AutoRest.CSharp.Output.Builders
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
-            var addToPropertyBag = (ObjectType curObj, ObjectTypeProperty curProp) =>
-            {
-                if (curProp.SchemaProperty != null && !propertyBag.Properties.ContainsKey(curProp))
-                {
-                    var ms = objectType.GetForMemberSerialization(curProp.Declaration.Name);
-                    if (ms == null && curObj is SchemaObjectType sot)
-                    {
-                        ms = sot.GetForMemberSerialization(curProp.Declaration.Name);
-                    }
-                    propertyBag.Properties.Add(curProp, ms);
-                }
-            };
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    addToPropertyBag(objectTypeLevel, objectTypeProperty);
-                }
-            }
-            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
-            {
-                foreach (var objectTypeProperty in objectTypeLevel.SerializationConstructor.Initializers.Select(i => i.Property))
-                {
-                    addToPropertyBag(objectTypeLevel, objectTypeProperty);
+                    propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
 

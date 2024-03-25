@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
         /// <summary>
         /// Add dictionary property to FirewallPolicyRule.
         /// </summary>
-        public Dictionary<string, string> NewDictionarySerializedProperty { get; set; }
+        public IDictionary<string, string> NewDictionarySerializedProperty { get; set; }
 
         /// <summary>
         /// Serialize the value of NewStringSerializeProperty.
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="property"></param>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void DeserializeNameValue(JsonProperty property, ref Dictionary<string, string> value) // the type here is string since name is required
+        internal static void DeserializeNameValue(JsonProperty property, ref IDictionary<string, string> value) // the type here is string since name is required
         {
             throw new System.NotImplementedException();
         }

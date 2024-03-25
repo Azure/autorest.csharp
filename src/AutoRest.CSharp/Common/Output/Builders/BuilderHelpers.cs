@@ -221,20 +221,12 @@ namespace AutoRest.CSharp.Output.Builders
             return PromoteNullabilityInformation(newType, defaultType);
         }
 
-        public static InputType GetInputTypeFromCSharpType(CSharpType type)
+        public static bool IsTypeFromExistingReadOnly(ISymbol existingMember) => existingMember switch
         {
-            if (TypeFactory.IsList(type))
-            {
-                return new InputListType("Array", GetInputTypeFromCSharpType(type.Arguments[0]), TypeFactory.IsReadOnlyMemory(type), false);
-            }
-
-            if (TypeFactory.IsDictionary(type))
-            {
-                return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromCSharpType(type.Arguments[1]), false);
-            }
-
-            return InputPrimitiveType.Object;
-        }
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+        };
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
         {

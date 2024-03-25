@@ -224,51 +224,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationInitializers.Add(new ObjectPropertyInitializer(RawDataField, deserializationParameter, null));
             }
 
-            if (ModelTypeMapping != null)
-            {
-                foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
-                {
-                    if (serializationInitializers.Exists(i => i.Property.Declaration.Name == propertyWithSerialization.Name))
-                        continue;
-                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
-                    var isReadOnly = propertyWithSerialization switch
-                    {
-                        IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-                        IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
-                        _ => throw new NotSupportedException($"'{propertyWithSerialization.ContainingType.Name}.{propertyWithSerialization.Name}' must be either field or property.")
-                    };
-                    var xml = propertyWithSerialization.GetDocumentationCommentXml();
-                    string comment = "";
-                    if (!string.IsNullOrEmpty(xml))
-                    {
-                        var xd = new global::System.Xml.XmlDocument();
-                        xd.LoadXml(xml);
-                        comment = xd.SelectSingleNode("/member/summary")?.InnerText.Trim() ?? "";
-                    }
-                    var otp = new ObjectTypeProperty(
-                        new MemberDeclarationOptions(propertyWithSerialization.DeclaredAccessibility.ToString(), propertyWithSerialization.Name, csharpType),
-                        comment,
-                        isReadOnly,
-                        new Property()
-                        {
-                            Required = true,
-                            ReadOnly = isReadOnly,
-                            IsDiscriminator = false,
-                            SerializedName = propertyWithSerialization.Name,
-                        });
-                    var addedParameter = new Parameter(
-                        otp.Declaration.Name.ToVariableName(),
-                        $"{otp.Description}",
-                        otp.Declaration.Type,
-                        null,
-                        ValidationType.None,
-                        null);
-
-                    serializationConstructorParameters.Add(addedParameter);
-                    serializationInitializers.Add(new ObjectPropertyInitializer(otp, addedParameter, GetPropertyDefaultValue(otp)));
-                }
-            }
-
             if (InitializationConstructor.Signature.Parameters
                 .Select(p => p.Type)
                 .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
@@ -524,8 +479,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .ToHashSet();
         }
 
+        private HashSet<string> GetParentPropertyDeclarationNames()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
             foreach (var objectSchema in GetCombinedSchemas())
@@ -536,14 +501,34 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-
-                    yield return CreateProperty(property);
+                    var prop = CreateProperty(property);
+                    propertiesFromSpec.Add(prop.Declaration.Name);
+                    yield return prop;
                 }
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
             {
+                propertiesFromSpec.Add(additionalPropertiesProperty.Declaration.Name);
                 yield return additionalPropertiesProperty;
+            }
+
+            if (ModelTypeMapping != null)
+            {
+                foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
+                {
+                    if (propertiesFromSpec.Contains(propertyWithSerialization.Name))
+                        continue;
+
+                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
+                    var isReadOnly = BuilderHelpers.IsTypeFromExistingReadOnly(propertyWithSerialization);
+                    var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
+                    yield return new ObjectTypeProperty(
+                        new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
+                        string.Empty,
+                        isReadOnly,
+                        null);
+                }
             }
         }
 

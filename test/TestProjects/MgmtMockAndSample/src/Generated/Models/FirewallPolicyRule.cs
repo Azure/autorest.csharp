@@ -19,16 +19,18 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         protected FirewallPolicyRule()
         {
+            NewArraySerializedProperty = new ChangeTrackingList<string>();
+            NewDictionarySerializedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        /// <param name="newStringSerializeProperty"> Add string property to FirewallPolicyRule. </param>
-        /// <param name="newArraySerializedProperty"> Add list property to FirewallPolicyRule. </param>
-        /// <param name="newDictionarySerializedProperty"> Add dictionary property to FirewallPolicyRule. </param>
-        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, Dictionary<string, string> newDictionarySerializedProperty)
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
+        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty)
         {
             Name = name;
             Description = description;

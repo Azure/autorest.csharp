@@ -30,9 +30,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        /// <param name="newStringSerializeProperty"> Add string property to FirewallPolicyRule. </param>
-        /// <param name="newArraySerializedProperty"> Add list property to FirewallPolicyRule. </param>
-        /// <param name="newDictionarySerializedProperty"> Add dictionary property to FirewallPolicyRule. </param>
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
         /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
         /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
         /// <param name="protocols"> Array of Application Protocols. </param>
@@ -42,9 +42,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="terminateTLS"> Terminate TLS connections for this rule. </param>
         /// <param name="webCategories"> List of destination azure web categories. </param>
-        /// <param name="newIntSerializeProperty"> add int? serialize property to ApplicationRule. </param>
-        /// <param name="newGeneratedTypeSerializeProperty"> add generated type serialize property to ApplicationRule. </param>
-        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, Dictionary<string, string> newDictionarySerializedProperty, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories, int? newIntSerializeProperty, VaultKey newGeneratedTypeSerializeProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
+        /// <param name="newIntSerializeProperty"></param>
+        /// <param name="newGeneratedTypeSerializeProperty"></param>
+        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories, int? newIntSerializeProperty, VaultKey newGeneratedTypeSerializeProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             SourceAddresses = sourceAddresses;
             DestinationAddresses = destinationAddresses;

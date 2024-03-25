@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var field = CreateFieldFromExisting(existingMember, existingCSharpType, null, SerializationFormat.Default, typeFactory, false, false);
-                    var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
+                    var parameter = new Parameter(field.Name.ToVariableName(), $"", field.Type, null, ValidationType.None, null);
 
                     fields.Add(field);
                     serializationParameters.Add(parameter);
@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var fieldModifiers = GetAccessModifiers(existingMember);
-            if (IsReadOnly(existingMember))
+            if (BuilderHelpers.IsTypeFromExistingReadOnly(existingMember))
             {
                 fieldModifiers |= ReadOnly;
             }
@@ -322,13 +322,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             Accessibility.Internal => Internal,
             Accessibility.Private => Private,
             _ => throw new ArgumentOutOfRangeException()
-        };
-
-        private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
-        {
-            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
-            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)
