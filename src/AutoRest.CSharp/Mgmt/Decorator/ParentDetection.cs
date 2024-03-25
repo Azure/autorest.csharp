@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static RequestPath GetParentRequestPath(InputOperation operation, InputNamespace inputNamespace)
         {
             // escape the calculation if this is configured in the configuration
-            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.Uri, out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.Path, out var rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
             var currentRequestPath = operation.GetRequestPath();

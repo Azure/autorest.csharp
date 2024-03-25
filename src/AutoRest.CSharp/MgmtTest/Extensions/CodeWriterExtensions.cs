@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
-                return writer.AppendBinaryData(exampleValue);
+                return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
 
             if (type.FrameworkType == typeof(DataFactoryElement<>))
                 return writer.AppendDataFactoryElementValue(type, exampleValue);
@@ -203,13 +203,21 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleValue exampleValue)
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleRawValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue?.RawValue != null && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
-            writer.Append($"{typeof(BinaryData)}.{method}(");
-            writer.AppendAnonymousObject(exampleValue);
-            return writer.AppendRaw(")");
+            if (exampleValue.RawValue != null && exampleValue.RawValue is string strValue)
+            {
+                var method = "FromString";
+                return writer.Append($"{typeof(BinaryData)}.{method}({"\"" + strValue + "\"":L})");
+            }
+            else
+            {
+                var method = "FromObjectAsJson";
+                writer.Append($"{typeof(BinaryData)}.{method}(");
+                writer.AppendAnonymousObject(exampleValue);
+                return writer.AppendRaw(")");
+            }
         }
 
         private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, Type type, InputExampleValue exampleValue)
