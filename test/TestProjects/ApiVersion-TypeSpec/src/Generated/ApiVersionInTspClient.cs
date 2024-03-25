@@ -23,7 +23,7 @@ namespace ApiVersionInTsp
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
+        private readonly APIVersion? _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -178,7 +178,7 @@ namespace ApiVersionInTsp
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/anomalydetector/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(_apiVersion.Value.ToString(), true);
             uri.AppendPath("/multivariate/detect-batch/", false);
             uri.AppendPath(resultId, true);
             request.Uri = uri;
