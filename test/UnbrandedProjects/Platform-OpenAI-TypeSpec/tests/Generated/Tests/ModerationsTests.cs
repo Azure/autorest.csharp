@@ -11,6 +11,7 @@ namespace OpenAI.Tests
     public partial class ModerationsTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
             ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));

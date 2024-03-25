@@ -11,6 +11,7 @@ namespace UnbrandedTypeSpec.Tests
     public partial class UnbrandedTypeSpecClientTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
             Uri endpoint = new Uri("https://my-service.com");
