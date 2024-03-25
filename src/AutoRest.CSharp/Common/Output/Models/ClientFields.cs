@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -126,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 "credential" when _keyAuthField != null && parameterType.EqualsIgnoreNullable(_keyAuthField.Type) => _keyAuthField,
                 "credential" when _tokenAuthField != null && parameterType.EqualsIgnoreNullable(_tokenAuthField.Type) => _tokenAuthField,
-                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) ? field : null : null
+                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) || (field.Type.IsEnum && (field.Type.Implementation as EnumType)!.ValueType.Equals(parameterType))  ? field : null : null
             };
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)

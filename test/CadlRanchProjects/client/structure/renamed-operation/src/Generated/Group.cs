@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Client.Structure.Service.rename.operation.Models;
 
 namespace Client.Structure.Service.rename.operation
 {
@@ -19,7 +20,7 @@ namespace Client.Structure.Service.rename.operation
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _client;
+        private readonly ClientType _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,8 +37,8 @@ namespace Client.Structure.Service.rename.operation
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        internal Group(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        internal Group(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, ClientType client)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -239,7 +240,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToString(), true);
             uri.AppendPath("/two", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -254,7 +255,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToString(), true);
             uri.AppendPath("/four", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -269,7 +270,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToString(), true);
             uri.AppendPath("/six", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
