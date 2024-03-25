@@ -32,9 +32,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type HttpMessageType => typeof(HttpMessage);
         public override string HttpMessageResponseName => nameof(HttpMessage.Response);
 
-        public override Type ClientDiagnosticsType => typeof(ClientDiagnostics);
-        public override string ClientDiagnosticsCreateScopeName => nameof(ClientDiagnostics.CreateScope);
-
         public override Type ClientOptionsType => typeof(ClientOptions);
 
         public override Type RequestContextType => typeof(RequestContext);
@@ -43,7 +40,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
         public override Type KeyCredentialPolicyType => typeof(AzureKeyCredentialPolicy);
-        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
+        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, new {Configuration.ApiTypes.ResponseClassifierType}());";
 
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);

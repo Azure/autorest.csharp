@@ -4,7 +4,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _pipelineParam = new Parameter("pipeline", null, typeof(Pipeline<PipelineMessage>), null, ValidationType.None, null);
+            _pipelineParam = new Parameter("pipeline", null, typeof(ClientPipeline), null, ValidationType.None, null);
             _messageParam = new Parameter("message", null, typeof(PipelineMessage), null, ValidationType.None, null);
             _requestContextParam = new Parameter("requestContext", null, typeof(RequestOptions), null, ValidationType.None, null);
             _pipeline = new ParameterReference(_pipelineParam);
@@ -94,15 +93,15 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 {
                     new SwitchCase(new BinaryOperatorExpression("<", new UnaryOperatorExpression("and", new UnaryOperatorExpression(">=", Literal(200), false), true), Literal(300)), new MethodBodyStatement[]
                     {
-                        Return(ResultExpression.FromValue(True, response))
+                        Return(ClientResultExpression.FromValue(typeof(bool), True, response))
                     }),
                     new SwitchCase(new BinaryOperatorExpression("<", new UnaryOperatorExpression("and", new UnaryOperatorExpression(">=", Literal(400), false), true), Literal(500)), new MethodBodyStatement[]
                     {
-                        Return(ResultExpression.FromValue(False, response))
+                        Return(ClientResultExpression.FromValue(typeof(bool), False, response))
                     }),
                     new SwitchCase(Array.Empty<ValueExpression>(), new MethodBodyStatement[]
                     {
-                        Return(new NewInstanceExpression(ErrorResultProvider.Instance.Type.MakeGenericType(new CSharpType[]{ typeof(bool) }), new ValueExpression[]{ response, new NewInstanceExpression(typeof(MessageFailedException), new[] { response })}))
+                        Return(new NewInstanceExpression(ErrorResultProvider.Instance.Type.MakeGenericType(new CSharpType[]{ typeof(bool) }), new ValueExpression[]{ response, new NewInstanceExpression(typeof(ClientResultException), new[] { response })}))
                     })
                 }),
             };
@@ -120,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 null,
                 null,
                 modifiers,
-                isAsync ? typeof(ValueTask<NullableResult<bool>>) : typeof(NullableResult<bool>),
+                isAsync ? typeof(ValueTask<ClientResult<bool>>) : typeof(ClientResult<bool>),
                 null,
                 new[] { _pipelineParam, _messageParam, _requestContextParam });
         }
@@ -131,7 +130,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var cancellationToken = new ParameterReference(cancellationTokenParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(_pipeline, nameof(Pipeline<PipelineMessage>.Send), new[]{ _message }, false),
+                new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.Send), new[]{ _message }, false),
                 GetProcessMessageBody()
             });
         }
@@ -146,12 +145,12 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Throw(New.InvalidOperationException(Literal("Failed to receive Result.")))
                 },
                 EmptyLine,
-                new IfStatement(Not(new BoolExpression(_messageResponse.Property("IsError"))).Or(Equal(_requestContext.Property("ErrorBehavior", true), FrameworkEnumValue(ErrorBehavior.NoThrow))))
+                new IfStatement(Not(new BoolExpression(_messageResponse.Property("IsError"))).Or(Equal(_requestContext.Property("ErrorOptions", true), FrameworkEnumValue(ClientErrorBehaviors.NoThrow))))
                 {
                     Return(_messageResponse)
                 },
                 EmptyLine,
-                Throw(new NewInstanceExpression(typeof(MessageFailedException), new[] { _messageResponse }))
+                Throw(new NewInstanceExpression(typeof(ClientResultException), new[] { _messageResponse }))
             };
         }
 
@@ -179,7 +178,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var cancellationToken = new ParameterReference(cancellationTokenParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(_pipeline, nameof(Pipeline<PipelineMessage>.SendAsync), new[]{ _message }, true),
+                new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.SendAsync), new[]{ _message }, true),
                 GetProcessMessageBody()
             });
         }
@@ -189,7 +188,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             return new(new InvokeStaticMethodExpression(Type, isAsync ? _processMessageAsync : _processMessage, arguments, CallAsExtension: true, CallAsAsync: isAsync));
         }
 
-        internal ResultExpression ProcessHeadAsBoolMessage(IReadOnlyList<ValueExpression> arguments, bool isAsync)
+        internal ClientResultExpression ProcessHeadAsBoolMessage(IReadOnlyList<ValueExpression> arguments, bool isAsync)
         {
             return new(new InvokeStaticMethodExpression(Type, isAsync ? _processHeadAsBoolMessageAsync : _processHeadAsBoolMessage, arguments, CallAsExtension: true, CallAsAsync: isAsync));
         }

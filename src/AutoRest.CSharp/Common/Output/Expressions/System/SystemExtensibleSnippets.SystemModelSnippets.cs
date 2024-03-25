@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 );
             }
 
-            public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestBodyExpression(model.Invoke("ToRequestBody"));
+            public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new BinaryContentExpression(model.Invoke("ToRequestBody"));
         }
     }
 }
