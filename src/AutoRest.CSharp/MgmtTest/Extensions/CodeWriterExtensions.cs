@@ -482,8 +482,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             foreach (var property in properties)
             {
                 var propertyToDeal = property;
-                var schemaProperty = propertyToDeal.InputModelProperty;
-                if (!valueDict.TryGetValue(schemaProperty!.SerializedName, out var exampleValue))
+                var inputModelProperty = propertyToDeal.InputModelProperty;
+                if (inputModelProperty == null)
+                    continue; // now we explicitly ignore all the AdditionalProperties
+
+                if (!valueDict.TryGetValue(inputModelProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
                 // check if this property is safe-flattened

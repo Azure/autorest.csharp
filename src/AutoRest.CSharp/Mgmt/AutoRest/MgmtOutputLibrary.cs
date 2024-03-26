@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>> ChildOperations { get; }
 
         private readonly InputNamespace _input;
-        private Dictionary<InputType, TypeProvider> _schemaToModels = new();
+        private Dictionary<InputType, TypeProvider> _schemaToModels = new(ReferenceEqualityComparer.Instance);
         private Lazy<IReadOnlyDictionary<string, TypeProvider>> _schemaNameToModels;
 
         /// <summary>
@@ -86,8 +86,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// This is a map from <see cref="InputClient"/> to the list of raw request path of its operations
         /// </summary>
         private readonly Dictionary<InputClient, IEnumerable<string>> _operationGroupToRequestPaths = new();
-
-        private Dictionary<string, TypeProvider> EnsureNameToModelsMap() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
 
         public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
