@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using MgmtCollectionParent;
 
 namespace MgmtCollectionParent.Models
 {

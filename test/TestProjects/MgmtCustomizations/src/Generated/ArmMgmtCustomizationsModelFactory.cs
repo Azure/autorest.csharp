@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -27,7 +26,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
         public static PetStoreData PetStoreData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PetStoreProperties properties = null)
         {
-            return new PetStoreData(id, name, resourceType, systemData, properties);
+            return new PetStoreData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
@@ -40,7 +45,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null)
         {
-            return new UnknownPet(default, name, size, dateOfBirth);
+            return new UnknownPet(default, name, size, dateOfBirth, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -61,6 +66,7 @@ namespace MgmtCustomizations.Models
                 name,
                 size,
                 dateOfBirth,
+                serializedAdditionalRawData: null,
                 sleep,
                 jump,
                 meow);
@@ -83,6 +89,7 @@ namespace MgmtCustomizations.Models
                 name,
                 size,
                 dateOfBirth,
+                serializedAdditionalRawData: null,
                 bark,
                 jump);
         }

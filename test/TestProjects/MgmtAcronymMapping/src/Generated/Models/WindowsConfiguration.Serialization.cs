@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -38,19 +37,19 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<AdditionalUnattendContent>(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                writer.WriteObjectValue(PatchSettings);
+                writer.WriteObjectValue<PatchSettings>(PatchSettings);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                writer.WriteObjectValue(WinRM);
+                writer.WriteObjectValue<WinRMConfiguration>(WinRM);
             }
             writer.WriteEndObject();
         }

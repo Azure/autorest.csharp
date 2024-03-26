@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -24,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue(WindowsConfiguration);
+                writer.WriteObjectValue<WindowsConfiguration>(WindowsConfiguration);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue(LinuxConfiguration);
+                writer.WriteObjectValue<LinuxConfiguration>(LinuxConfiguration);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -37,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VaultSecretGroup>(item);
                 }
                 writer.WriteEndArray();
             }

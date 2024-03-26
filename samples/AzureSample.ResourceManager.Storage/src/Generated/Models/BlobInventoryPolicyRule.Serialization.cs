@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -23,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue(Definition);
+            writer.WriteObjectValue<BlobInventoryPolicyDefinition>(Definition);
             writer.WriteEndObject();
         }
 

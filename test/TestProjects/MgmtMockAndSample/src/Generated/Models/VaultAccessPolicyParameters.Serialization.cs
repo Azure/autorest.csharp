@@ -8,7 +8,6 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtMockAndSample.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            writer.WriteObjectValue<VaultAccessPolicyProperties>(Properties);
             writer.WriteEndObject();
         }
 

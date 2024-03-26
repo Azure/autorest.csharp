@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -19,8 +19,8 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Humanizer.Localisation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var nameSet = GetRestDiagNames(set);
                 yield return new FieldDeclaration(
                     FieldModifiers,
-                    Configuration.ApiTypes.ClientDiagnosticsType,
+                    typeof(ClientDiagnostics),
                     nameSet.DiagnosticField);
                 yield return new FieldDeclaration(
                     FieldModifiers,

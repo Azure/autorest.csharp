@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -24,7 +23,7 @@ namespace CognitiveSearch.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<object>(item.Value);
             }
             writer.WriteEndObject();
         }

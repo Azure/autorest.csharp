@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in SignedIdentifiers)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<SignedIdentifier>(item);
                 }
                 writer.WriteEndArray();
             }

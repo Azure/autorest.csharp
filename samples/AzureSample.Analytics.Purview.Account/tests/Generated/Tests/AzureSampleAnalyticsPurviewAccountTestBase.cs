@@ -9,7 +9,6 @@ using System;
 using Azure.Analytics.Purview.Account;
 using Azure.Core;
 using Azure.Core.TestFramework;
-using AzureSample.Analytics.Purview.Account;
 
 namespace AzureSample.Analytics.Purview.Account.Tests
 {

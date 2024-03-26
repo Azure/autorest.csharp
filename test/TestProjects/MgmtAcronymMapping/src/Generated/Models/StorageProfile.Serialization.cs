@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -20,12 +19,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference);
+                writer.WriteObjectValue<ImageReference>(ImageReference);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                writer.WriteObjectValue<OSDisk>(OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -33,7 +32,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DataDisk>(item);
                 }
                 writer.WriteEndArray();
             }

@@ -21,12 +21,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                writer.WriteObjectValue<ManagedHsmProperties>(Properties);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<ManagedHsmSku>(Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

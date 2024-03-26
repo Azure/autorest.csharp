@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.Storage.Tables;
 
 namespace AzureSample.Storage.Tables.Models
 {

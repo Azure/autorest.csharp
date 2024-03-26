@@ -51,7 +51,7 @@ namespace MgmtExtensionResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(content);
+            content0.JsonWriter.WriteObjectValue<ValidateSomethingContent>(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

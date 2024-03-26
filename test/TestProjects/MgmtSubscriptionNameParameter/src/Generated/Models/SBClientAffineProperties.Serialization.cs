@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
 {

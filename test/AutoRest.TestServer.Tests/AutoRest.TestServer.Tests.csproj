@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -74,6 +74,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="TestData\ResourceProviderData\ResourceProviderData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\EmptyChildObject.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\Overrides.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\NoOverrides.bicep">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

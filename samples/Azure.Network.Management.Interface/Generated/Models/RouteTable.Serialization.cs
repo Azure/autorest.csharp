@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -46,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Routes)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Route>(item);
                 }
                 writer.WriteEndArray();
             }

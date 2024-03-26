@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {

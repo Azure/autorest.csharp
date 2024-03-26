@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -27,9 +26,18 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="friends"></param>
-        /// <param name="hate"></param>
-        /// <param name="partner"></param>
+        /// <param name="friends">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Eagle"/>, <see cref="Goose"/>, <see cref="SeaGull"/> and <see cref="Sparrow"/>.
+        /// </param>
+        /// <param name="hate">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Eagle"/>, <see cref="Goose"/>, <see cref="SeaGull"/> and <see cref="Sparrow"/>.
+        /// </param>
+        /// <param name="partner">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Eagle"/>, <see cref="Goose"/>, <see cref="SeaGull"/> and <see cref="Sparrow"/>.
+        /// </param>
         internal Eagle(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner) : base(kind, wingspan, serializedAdditionalRawData)
         {
             Friends = friends;

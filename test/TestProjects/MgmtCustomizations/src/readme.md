@@ -13,6 +13,7 @@ model-namespace: false
 public-clients: false
 head-as-boolean: false
 skip-csproj: true
+use-model-reader-writer: true
 
 rename-mapping:
   Pet.dateOfBirth: -|date-time

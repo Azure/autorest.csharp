@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -43,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyRuleApplicationProtocol>(item);
                 }
                 writer.WriteEndArray();
             }

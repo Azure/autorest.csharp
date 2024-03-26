@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using AppConfiguration;
 using Azure.Core;
 
 namespace AppConfiguration.Models

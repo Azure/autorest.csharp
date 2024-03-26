@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -30,7 +29,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                writer.WriteObjectValue<VaultPatchProperties>(Properties);
             }
             writer.WriteEndObject();
         }

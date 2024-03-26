@@ -10,7 +10,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples

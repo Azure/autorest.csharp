@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override CSharpAttribute[] GetMethodAttributes() => _attributes;
 
-        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)) };
+        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Compilation test only")) };
 
         protected override IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
         {

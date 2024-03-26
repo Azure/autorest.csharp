@@ -51,7 +51,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                writer.WriteObjectValue<ImmutableStorageWithVersioning>(ImmutableStorageWithVersioning);
             }
             if (Optional.IsDefined(EnableNfsV3RootSquash))
             {

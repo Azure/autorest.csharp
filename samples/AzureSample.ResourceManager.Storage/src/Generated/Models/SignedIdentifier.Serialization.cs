@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -24,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                writer.WriteObjectValue(AccessPolicy);
+                writer.WriteObjectValue<AccessPolicy>(AccessPolicy);
             }
             writer.WriteEndObject();
         }

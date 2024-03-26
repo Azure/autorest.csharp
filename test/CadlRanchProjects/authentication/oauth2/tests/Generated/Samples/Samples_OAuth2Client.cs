@@ -7,7 +7,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Authentication.OAuth2;
 using Azure;
 using Azure.Core;
 using Azure.Identity;

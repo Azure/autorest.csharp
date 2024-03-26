@@ -12,7 +12,6 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using AzureSample.ResourceManager.Sample;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -25,19 +24,19 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                writer.WriteObjectValue<AzureSampleResourceManagerSamplePlan>(Plan, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -60,17 +59,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue(UpgradePolicy);
+                writer.WriteObjectValue<UpgradePolicy>(UpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue(AutomaticRepairsPolicy);
+                writer.WriteObjectValue<AutomaticRepairsPolicy>(AutomaticRepairsPolicy, options);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue(VirtualMachineProfile);
+                writer.WriteObjectValue<VirtualMachineScaleSetUpdateVmProfile>(VirtualMachineProfile, options);
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -90,12 +89,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue(ScaleInPolicy);
+                writer.WriteObjectValue<ScaleInPolicy>(ScaleInPolicy, options);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
@@ -126,7 +125,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -324,7 +323,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -340,7 +339,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                         return DeserializeVirtualMachineScaleSetPatch(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetPatch)} does not support reading '{options.Format}' format.");
             }
         }
 

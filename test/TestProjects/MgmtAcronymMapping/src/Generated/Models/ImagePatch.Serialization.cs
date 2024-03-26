@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -37,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                writer.WriteObjectValue<ImageStorageProfile>(StorageProfile);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

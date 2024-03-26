@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -24,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue(RollingUpgradePolicy);
+                writer.WriteObjectValue<RollingUpgradePolicy>(RollingUpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradePolicy);
+                writer.WriteObjectValue<AutomaticOSUpgradePolicy>(AutomaticOSUpgradePolicy);
             }
             writer.WriteEndObject();
         }
