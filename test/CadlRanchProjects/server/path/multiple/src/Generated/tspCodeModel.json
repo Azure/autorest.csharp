@@ -20,7 +20,7 @@
    ],
    "Namespace": "Server.Path.Multiple",
    "Description": "Service versions",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
