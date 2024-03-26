@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -52,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {typeof(ClientDiagnostics)} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
                         _writer.Line($"_operation = new {_interimOperation.OperationType}(source, clientDiagnostics, pipeline, request, {Configuration.ApiTypes.ResponseParameterName}, finalStateVia);");
                         _writer.Line($"_operationSource = source;");

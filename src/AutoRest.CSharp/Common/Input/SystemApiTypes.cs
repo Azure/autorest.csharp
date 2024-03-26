@@ -3,9 +3,7 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
@@ -16,47 +14,44 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types.System;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
-using RequestBody = System.ClientModel.Primitives.RequestBody;
+using BinaryContent = System.ClientModel.BinaryContent;
 
 namespace AutoRest.CSharp.Common.Input
 {
     internal class SystemApiTypes : ApiTypes
     {
-        public override Type ResponseType => typeof(Result);
-        public override Type ResponseOfTType => typeof(Result<>);
+        public override Type ResponseType => typeof(ClientResult);
+        public override Type ResponseOfTType => typeof(ClientResult<>);
         public override string ResponseParameterName => "result";
         public override string ContentStreamName => $"{GetRawResponseName}().{nameof(PipelineResponse.ContentStream)}";
         public override string StatusName => $"{GetRawResponseName}().{nameof(PipelineResponse.Status)}";
-        public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
+        public override string GetRawResponseName => nameof(ClientResult<object>.GetRawResponse);
 
-        public override Type HttpPipelineType => typeof(MessagePipeline);
+        public override Type HttpPipelineType => typeof(ClientPipeline);
         public override CSharpType PipelineExtensionsType => ClientPipelineExtensionsProvider.Instance.Type;
-        public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
+        public override string HttpPipelineCreateMessageName => nameof(ClientPipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(PipelineMessage);
         public override string HttpMessageResponseName => nameof(PipelineMessage.Response);
 
-        public override Type ClientDiagnosticsType => typeof(TelemetrySource);
-        public override string ClientDiagnosticsCreateScopeName => nameof(TelemetrySource.CreateSpan);
-
-        public override Type ClientOptionsType => typeof(RequestOptions);
+        public override Type ClientOptionsType => typeof(ClientPipelineOptions);
 
         public override Type RequestContextType => typeof(RequestOptions);
 
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
-        public override Type KeyCredentialType => typeof(KeyCredential);
-        public override Type HttpPipelineBuilderType => typeof(MessagePipeline);
-        public override Type KeyCredentialPolicyType => typeof(KeyCredentialPolicy);
-        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
-            => $"{pipelineField:I} = {typeof(MessagePipeline)}.{nameof(MessagePipeline.Create)}({optionsVariable:I}, {perRetryPolicies}, {perCallPolicies});";
+        public override Type KeyCredentialType => typeof(ApiKeyCredential);
+        public override Type HttpPipelineBuilderType => typeof(ClientPipeline);
+        public override Type KeyCredentialPolicyType => typeof(ApiKeyAuthenticationPolicy);
+        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
+            => $"{pipelineField:I} = {typeof(ClientPipeline)}.{nameof(ClientPipeline.Create)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, {beforeTransportPolicies});";
 
-        public override Type HttpPipelinePolicyType => typeof(IPipelinePolicy<PipelineMessage>);
+        public override Type HttpPipelinePolicyType => typeof(PipelinePolicy);
 
         public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
 
         public override FormattableString GetSetMethodString(string requestName, string method)
         {
-            return $"{requestName}.{nameof(PipelineRequest.SetMethod)}(\"{method}\");";
+            return $"{requestName}.{nameof(PipelineRequest.Method)} = \"{method}\";";
         }
 
         private string GetHttpMethodName(string method)
@@ -65,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override FormattableString GetSetUriString(string requestName, string uriName)
-            => $"{requestName}.Uri = {uriName}.{nameof(RequestUri.ToUri)}();";
+            => $"{requestName}.Uri = {uriName}.ToUri();";
 
         public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
 
@@ -73,16 +68,16 @@ namespace AutoRest.CSharp.Common.Input
             => $"{requestName}.Content = {contentName};";
 
         public override CSharpType RequestUriType => ClientUriBuilderProvider.Instance.Type;
-        public override Type RequestContentType => typeof(RequestBody);
-        public override string ToRequestContentName => "ToRequestBody";
-        public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
+        public override Type RequestContentType => typeof(BinaryContent);
+        public override string ToRequestContentName => "ToBinaryBody";
+        public override string RequestContentCreateName => nameof(BinaryContent.Create);
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
-        public override Type RequestFailedExceptionType => typeof(MessageFailedException);
+        public override Type RequestFailedExceptionType => typeof(ClientResultException);
 
-        public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);
-        public override Type StatusCodeClassifierType => typeof(StatusResponseClassifier);
+        public override Type ResponseClassifierType => typeof(PipelineMessageClassifier);
+        public override Type StatusCodeClassifierType => typeof(PipelineMessageClassifier);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
             => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{ BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
@@ -97,5 +92,7 @@ namespace AutoRest.CSharp.Common.Input
         public override ExtensibleSnippets ExtensibleSnippets { get; } = new SystemExtensibleSnippets();
 
         public override string LicenseString => string.Empty;
+
+        public override string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
     }
 }

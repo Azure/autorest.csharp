@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             _responseField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(PipelineResponse), "_response");
-            _exceptionField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(MessageFailedException), "_exception");
+            _exceptionField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ClientResultException), "_exception");
             _response = new VariableReference(_responseField.Type, _responseField.Declaration);
             _exception = new VariableReference(_exceptionField.Type, _exceptionField.Declaration);
         }
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
 
         protected override IEnumerable<CSharpType> BuildImplements()
         {
-            yield return new CSharpType(typeof(Result<>), _t);
+            yield return new CSharpType(typeof(ClientResult<>), _t);
         }
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private Method BuildCtor()
         {
             var responseParam = new Parameter("response", null, typeof(PipelineResponse), null, ValidationType.None, null);
-            var exceptionParam = new Parameter("exception", null, typeof(MessageFailedException), null, ValidationType.None, null);
+            var exceptionParam = new Parameter("exception", null, typeof(ClientResultException), null, ValidationType.None, null);
             var response = new ParameterReference(responseParam);
             var exception = new ParameterReference(exceptionParam);
             var baseInitializer = new ConstructorInitializer(true, new List<ValueExpression> { Default, response });
@@ -80,14 +80,6 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         protected override IEnumerable<PropertyDeclaration> BuildProperties()
         {
             yield return BuildValue();
-            yield return HasValue();
-        }
-
-        private PropertyDeclaration HasValue()
-        {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.Public | MethodSignatureModifiers.Override, typeof(bool), "HasValue", new ExpressionPropertyBody(
-                False
-            ));
         }
 
         private PropertyDeclaration BuildValue()
@@ -95,20 +87,6 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             return new PropertyDeclaration(null, MethodSignatureModifiers.Public | MethodSignatureModifiers.Override, _t, "Value", new ExpressionPropertyBody(
                 ThrowExpression(_exception)
             ));
-        }
-
-        protected override IEnumerable<Method> BuildMethods()
-        {
-            yield return BuildGetRawResponse();
-        }
-
-        private Method BuildGetRawResponse()
-        {
-            var signature = new MethodSignature("GetRawResponse", null, null, MethodSignatureModifiers.Public | MethodSignatureModifiers.Override, new CSharpType(typeof(PipelineResponse)), null, Array.Empty<Parameter>());
-            return new Method(signature, new MethodBodyStatement[]
-            {
-                Return(_response)
-            });
         }
     }
 }

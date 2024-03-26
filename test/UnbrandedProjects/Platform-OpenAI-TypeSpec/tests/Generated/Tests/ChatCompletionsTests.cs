@@ -11,9 +11,10 @@ namespace OpenAI.Tests
     public partial class ChatCompletionsTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             ChatCompletions client = new OpenAIClient(credential).GetChatClient().GetChatCompletionsClient();
             Assert.IsNotNull(client);
         }
