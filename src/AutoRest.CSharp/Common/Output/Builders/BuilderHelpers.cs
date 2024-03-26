@@ -296,9 +296,9 @@ namespace AutoRest.CSharp.Output.Builders
                 EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 
-        public static string DisambiguateName(string typeName, string name, string suffix = "Value")
+        public static string DisambiguateName(string typeName, string name, string suffix)
         {
-            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
+            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString) or "Null")
             {
                 return name + suffix;
             }

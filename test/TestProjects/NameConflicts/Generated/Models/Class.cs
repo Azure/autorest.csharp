@@ -33,7 +33,7 @@ namespace NameConflicts.Models
         /// <param name="checked"></param>
         /// <param name="const"></param>
         /// <param name="continue"></param>
-        /// <param name="classValue"></param>
+        /// <param name="classProperty"></param>
         /// <param name="decimal"></param>
         /// <param name="default"></param>
         /// <param name="delegate"></param>
@@ -121,10 +121,10 @@ namespace NameConflicts.Models
         /// <param name="while"></param>
         /// <param name="yield"></param>
         /// <param name="system"></param>
-        /// <param name="toStringValue"></param>
-        /// <param name="equalsValue"></param>
-        /// <param name="getHashCodeValue"></param>
-        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classValue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringValue, string equalsValue, string getHashCodeValue)
+        /// <param name="toStringProperty"></param>
+        /// <param name="equalsProperty"></param>
+        /// <param name="getHashCodeProperty"></param>
+        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classProperty, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringProperty, string equalsProperty, string getHashCodeProperty)
         {
             Abstract = @abstract;
             Add = @add;
@@ -143,7 +143,7 @@ namespace NameConflicts.Models
             Checked = @checked;
             Const = @const;
             Continue = @continue;
-            ClassValue = classValue;
+            ClassProperty = classProperty;
             Decimal = @decimal;
             Default = @default;
             Delegate = @delegate;
@@ -231,9 +231,9 @@ namespace NameConflicts.Models
             While = @while;
             Yield = @yield;
             System = system;
-            ToStringValue = toStringValue;
-            EqualsValue = equalsValue;
-            GetHashCodeValue = getHashCodeValue;
+            ToStringProperty = toStringProperty;
+            EqualsProperty = equalsProperty;
+            GetHashCodeProperty = getHashCodeProperty;
         }
 
         /// <summary> Gets or sets the abstract. </summary>
@@ -270,8 +270,8 @@ namespace NameConflicts.Models
         public string Const { get; set; }
         /// <summary> Gets or sets the continue. </summary>
         public string Continue { get; set; }
-        /// <summary> Gets or sets the class value. </summary>
-        public string ClassValue { get; set; }
+        /// <summary> Gets or sets the class property. </summary>
+        public string ClassProperty { get; set; }
         /// <summary> Gets or sets the decimal. </summary>
         public string Decimal { get; set; }
         /// <summary> Gets or sets the default. </summary>
@@ -446,11 +446,11 @@ namespace NameConflicts.Models
         public string Yield { get; set; }
         /// <summary> Gets or sets the system. </summary>
         public SystemEnum? System { get; set; }
-        /// <summary> Gets or sets the to string value. </summary>
-        public string ToStringValue { get; set; }
-        /// <summary> Gets or sets the equals value. </summary>
-        public string EqualsValue { get; set; }
-        /// <summary> Gets or sets the get hash code value. </summary>
-        public string GetHashCodeValue { get; set; }
+        /// <summary> Gets or sets the to string property. </summary>
+        public string ToStringProperty { get; set; }
+        /// <summary> Gets or sets the equals property. </summary>
+        public string EqualsProperty { get; set; }
+        /// <summary> Gets or sets the get hash code property. </summary>
+        public string GetHashCodeProperty { get; set; }
     }
 }
