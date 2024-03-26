@@ -11,7 +11,6 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
-using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -58,7 +57,7 @@ namespace TypeSchemaMapping.Models
                         return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithGuidProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithGuidProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -71,7 +70,7 @@ namespace TypeSchemaMapping.Models
                 case "X":
                     return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithGuidProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithGuidProperty)} does not support reading '{options.Format}' format.");
             }
         }
 

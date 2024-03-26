@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using body_string;
 
 namespace body_string.Models
 {
@@ -23,7 +22,7 @@ namespace body_string.Models
             var format = options.Format == "W" ? ((IPersistableModel<RefColorConstant>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RefColorConstant)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RefColorConstant)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +56,7 @@ namespace body_string.Models
             var format = options.Format == "W" ? ((IPersistableModel<RefColorConstant>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RefColorConstant)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RefColorConstant)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +105,7 @@ namespace body_string.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RefColorConstant)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RefColorConstant)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -122,7 +121,7 @@ namespace body_string.Models
                         return DeserializeRefColorConstant(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RefColorConstant)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RefColorConstant)} does not support reading '{options.Format}' format.");
             }
         }
 

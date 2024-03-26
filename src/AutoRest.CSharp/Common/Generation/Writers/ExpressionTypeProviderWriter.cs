@@ -24,34 +24,91 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.UseNamespace(@using);
             }
 
-            using (_writer.Namespace(_provider.Declaration.Namespace))
+            if (_provider.DeclaringTypeProvider == null)
             {
-                _writer.WriteClassModifiers(_provider.DeclarationModifiers);
-                _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
-                    .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
-                    .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
-
-                foreach (var implement in _provider.Implements)
+                using (_writer.Namespace(_provider.Declaration.Namespace))
                 {
-                    _writer.Append($"{implement:D},");
+                    WriteType();
+                }
+            }
+            else
+            {
+                WriteType();
+            }
+        }
+
+        private void WriteType()
+        {
+            if (_provider.IsEnum)
+            {
+                WriteEnum();
+            }
+            else
+            {
+                WriteClassOrStruct();
+            }
+        }
+
+        private void WriteClassOrStruct()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            if (_provider.IsStruct)
+            {
+                _writer.AppendRaw(" struct ");
+            }
+            else
+            {
+                _writer.AppendRaw(" class ");
+            }
+            _writer.Append($"{_provider.Type:D}")
+                .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
+                .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
+
+            foreach (var implement in _provider.Implements)
+            {
+                _writer.Append($"{implement:D},");
+            }
+            _writer.RemoveTrailingComma();
+
+            if (_provider.WhereClause is not null)
+            {
+                _writer.WriteValueExpression(_provider.WhereClause);
+            }
+
+            using (_writer.Scope())
+            {
+                WriteFields();
+
+                WriteConstructors();
+
+                WriteProperties();
+
+                WriteMethods();
+
+                WriteNestedTypes();
+            }
+        }
+
+        private void WriteEnum()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            _writer.Append($" enum {_provider.Type:D}")
+                .AppendRawIf(" : ", _provider.Inherits != null)
+                .AppendIf($"{_provider.Inherits}", _provider.Inherits != null);
+
+            using (_writer.Scope())
+            {
+                foreach (var field in _provider.Fields)
+                {
+                    _writer.Append($"{field.Declaration:D}");
+                    if (field.InitializationValue != null)
+                    {
+                        _writer.AppendRaw(" = ")
+                            .WriteValueExpression(field.InitializationValue);
+                    }
+                    _writer.LineRaw(",");
                 }
                 _writer.RemoveTrailingComma();
-
-                if (_provider.WhereClause is not null)
-                {
-                    _writer.WriteValueExpression(_provider.WhereClause);
-                }
-
-                using (_writer.Scope())
-                {
-                    WriteFields();
-
-                    WriteConstructors();
-
-                    WriteProperties();
-
-                    WriteMethods();
-                }
             }
         }
 
@@ -89,6 +146,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             _writer.Line();
+        }
+
+        protected virtual void WriteNestedTypes()
+        {
+            foreach (var nested in _provider.NestedTypes)
+            {
+                var nestedWriter = new ExpressionTypeProviderWriter(_writer, nested);
+                nestedWriter.Write();
+                _writer.Line();
+            }
         }
     }
 }

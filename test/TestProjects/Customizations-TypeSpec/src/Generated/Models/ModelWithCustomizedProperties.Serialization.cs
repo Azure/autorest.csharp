@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -24,7 +23,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomizedProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -103,20 +102,13 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(VectorOptional))
             {
-                if (VectorOptional != null)
+                writer.WritePropertyName("vectorOptional"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptional.Value.Span)
                 {
-                    writer.WritePropertyName("vectorOptional"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VectorOptional.Value.Span)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("vectorOptional");
-                }
+                writer.WriteEndArray();
             }
             if (VectorNullable != null)
             {
@@ -161,20 +153,13 @@ namespace CustomizationsInTsp.Models
             }
             if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
             {
-                if (VectorOptionalReadOnly != null)
+                writer.WritePropertyName("vectorOptionalReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptionalReadOnly.Value.Span)
                 {
-                    writer.WritePropertyName("vectorOptionalReadOnly"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VectorOptionalReadOnly.Value.Span)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("vectorOptionalReadOnly");
-                }
+                writer.WriteEndArray();
             }
             if (options.Format != "W")
             {
@@ -233,7 +218,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomizedProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -543,7 +528,7 @@ namespace CustomizationsInTsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -559,7 +544,7 @@ namespace CustomizationsInTsp.Models
                         return DeserializeModelWithCustomizedProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -577,7 +562,7 @@ namespace CustomizationsInTsp.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelWithCustomizedProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

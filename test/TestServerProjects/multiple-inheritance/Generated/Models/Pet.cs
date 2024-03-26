@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {

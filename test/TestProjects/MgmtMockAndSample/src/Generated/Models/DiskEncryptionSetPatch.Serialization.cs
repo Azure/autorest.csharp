@@ -8,7 +8,6 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -44,7 +43,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                writer.WriteObjectValue(ActiveKey);
+                writer.WriteObjectValue<KeyForDiskEncryptionSet>(ActiveKey);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {

@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Serialization.EncodedName.Json;
 using Serialization.EncodedName.Json.Models;
 
 namespace Serialization.EncodedName.Json.Samples

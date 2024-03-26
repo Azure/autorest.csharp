@@ -8,9 +8,7 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Identity;
-using Azure.NewProject.TypeSpec;
 using NUnit.Framework;
 
 namespace Azure.NewProject.TypeSpec.Samples

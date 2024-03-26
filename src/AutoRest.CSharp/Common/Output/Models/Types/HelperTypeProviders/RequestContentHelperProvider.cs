@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -11,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -28,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
+            _requestBodyType = Configuration.ApiTypes.RequestContentType;
             _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
 
@@ -81,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 writer.WriteStartArray(),
                 new ForeachStatement("item", enumerable, out var item)
                 {
-                    writer.WriteObjectValue(item)
+                    writer.WriteObjectValue(item, ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndArray(),
                 EmptyLine,
@@ -159,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 new ForeachStatement("item", dictionary, out var item)
                 {
                     writer.WritePropertyName(item.Key),
-                    writer.WriteObjectValue(item.Value)
+                    writer.WriteObjectValue(item.Value, ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndObject(),
                 EmptyLine,
@@ -224,10 +222,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
             var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
-            var value = (ValueExpression)valueParameter;
+            var value = (TypedValueExpression)valueParameter;
             body.Add(new MethodBodyStatement[]
             {
-                writer.WriteObjectValue(value),
+                writer.WriteObjectValue(value, ModelReaderWriterOptionsExpression.Wire),
                 Return(content)
             });
 

@@ -5,7 +5,6 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -30,6 +29,7 @@ namespace AutoRest.CSharp.Common.Input
             string? serializedName = null;
             string? description = null;
             InputType? propertyType = null;
+            InputConstant? defaultValue = null;
             bool isReadOnly = false;
             bool isRequired = false;
             bool isDiscriminator = false;
@@ -56,7 +56,13 @@ namespace AutoRest.CSharp.Common.Input
             description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
+            if (propertyType is InputLiteralType lt)
+            {
+                defaultValue = new InputConstant(lt.Value, lt.LiteralValueType);
+                propertyType = lt.LiteralValueType;
+            }
+
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator);
             if (id != null)
             {
                 resolver.AddReference(id, property);

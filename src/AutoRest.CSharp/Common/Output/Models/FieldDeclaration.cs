@@ -61,11 +61,15 @@ namespace AutoRest.CSharp.Output.Models
                   IsField: false,
                   WriteAsProperty: writeAsProperty)
         { }
+
+        private VariableReference? _reference;
+        public VariableReference Reference => _reference ??= new VariableReference(Type, Declaration);
     }
 
     [Flags]
     internal enum FieldModifiers
     {
+        None = 0,
         Public = 1 << 0,
         Internal = 1 << 1,
         Protected = 1 << 2,

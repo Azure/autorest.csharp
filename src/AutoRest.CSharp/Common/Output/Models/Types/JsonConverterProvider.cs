@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             MethodBodyStatement writeMethodBody;
             if (_includeSerializer)
             {
-                writeMethodBody = writer.WriteObjectValue(modelParameter);
+                writeMethodBody = writer.WriteObjectValue(modelParameter, ModelReaderWriterOptionsExpression.Wire);
             }
             else
             {

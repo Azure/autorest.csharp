@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -24,7 +23,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Workspaces)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyLogAnalyticsWorkspace>(item);
                 }
                 writer.WriteEndArray();
             }

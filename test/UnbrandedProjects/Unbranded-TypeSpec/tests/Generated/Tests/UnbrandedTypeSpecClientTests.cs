@@ -5,17 +5,17 @@
 using System;
 using System.ClientModel;
 using NUnit.Framework;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Tests
 {
     public partial class UnbrandedTypeSpecClientTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
             Uri endpoint = new Uri("https://my-service.com");
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("UnbrandedTypeSpecClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("UnbrandedTypeSpecClient_KEY"));
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
             Assert.IsNotNull(client);
         }

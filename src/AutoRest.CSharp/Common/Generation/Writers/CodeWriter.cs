@@ -216,11 +216,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            // [TODO] Uncomment to remove unused namespaces
-            //if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
-            //{
-            //    return;
-            //}
+            if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
+            {
+                return;
+            }
 
             _usingNamespaces.Add(@namespace);
         }
@@ -453,6 +452,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (writeTypeNameOnly)
             {
+                AppendRaw(type.Name);
+            }
+            else if (type.DeclaringType != null)
+            {
+                AppendType(type.DeclaringType, isDeclaration, writeTypeNameOnly);
+                AppendRaw(".");
                 AppendRaw(type.Name);
             }
             else
@@ -812,7 +817,7 @@ namespace AutoRest.CSharp.Generation.Writers
             Identifier(declaration.ActualName);
         }
 
-        internal void WriteClassModifiers(TypeSignatureModifiers modifiers)
+        internal void WriteTypeModifiers(TypeSignatureModifiers modifiers)
         {
             this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
                 .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))

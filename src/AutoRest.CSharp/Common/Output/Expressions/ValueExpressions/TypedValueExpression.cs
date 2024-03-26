@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     /// </summary>
     /// <param name="Type">Type expected to be returned by value expression</param>
     /// <param name="Untyped"></param>
-    internal abstract record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
+    internal record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
     {
         public static implicit operator TypedValueExpression(FieldDeclaration name) => new VariableReference(name.Type, name.Declaration);
         public static implicit operator TypedValueExpression(Parameter parameter) => new ParameterReference(parameter);

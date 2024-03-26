@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Output.Models;
@@ -20,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {Configuration.ApiTypes.ClientDiagnosticsType}(\"{This.DiagnosticNamespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {typeof(ClientDiagnostics)}(\"{This.DiagnosticNamespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), Configuration.ApiTypes.ClientDiagnosticsType);
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -367,6 +367,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 return $"{candidates.First().Type}.ResourceType";
             }
+
+            if (string.IsNullOrEmpty(resourceType.SerializedType))
+            {
+                throw new InvalidOperationException($"ResourceType is empty");
+            }
+
             return $"\"{resourceType.SerializedType}\"";
         }
 

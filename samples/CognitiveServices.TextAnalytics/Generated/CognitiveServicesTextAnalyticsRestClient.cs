@@ -57,7 +57,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<MultiLanguageBatchInput>(input);
             request.Content = content;
             return message;
         }
@@ -143,7 +143,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<MultiLanguageBatchInput>(input);
             request.Content = content;
             return message;
         }
@@ -229,7 +229,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<MultiLanguageBatchInput>(input);
             request.Content = content;
             return message;
         }
@@ -315,7 +315,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<LanguageBatchInput>(input);
             request.Content = content;
             return message;
         }
@@ -401,7 +401,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<MultiLanguageBatchInput>(input);
             request.Content = content;
             return message;
         }

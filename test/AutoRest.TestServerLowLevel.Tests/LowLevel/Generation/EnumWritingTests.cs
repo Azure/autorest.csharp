@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L67-L75
             var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Round-trip model with enum properties", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
@@ -44,8 +44,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L47-L55
             var modelType = new InputModelType("InputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Input model with enum properties", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L57-L65
             var modelType = new InputModelType("OutputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Output model with enum properties", InputModelTypeUsage.Output,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),

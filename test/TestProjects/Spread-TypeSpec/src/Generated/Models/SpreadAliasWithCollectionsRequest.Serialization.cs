@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace SpreadTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithCollectionsRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -68,7 +67,7 @@ namespace SpreadTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithCollectionsRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -131,7 +130,7 @@ namespace SpreadTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -147,7 +146,7 @@ namespace SpreadTypeSpec.Models
                         return DeserializeSpreadAliasWithCollectionsRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAliasWithCollectionsRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -165,7 +164,7 @@ namespace SpreadTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<SpreadAliasWithCollectionsRequest>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

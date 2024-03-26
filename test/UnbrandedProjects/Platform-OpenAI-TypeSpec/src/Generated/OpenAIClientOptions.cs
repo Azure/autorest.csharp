@@ -2,12 +2,12 @@
 
 #nullable disable
 
-using System.ClientModel;
+using System.ClientModel.Primitives;
 
 namespace OpenAI
 {
     /// <summary> Client options for OpenAIClient. </summary>
-    public partial class OpenAIClientOptions : RequestOptions
+    public partial class OpenAIClientOptions : ClientPipelineOptions
     {
     }
 }

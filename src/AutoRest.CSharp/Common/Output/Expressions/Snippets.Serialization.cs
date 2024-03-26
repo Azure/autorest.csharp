@@ -79,14 +79,11 @@ namespace AutoRest.CSharp.Common.Output.Models
                 };
             }
 
-            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression? options, CSharpType? iModelTInterface)
-                => ValidateFormat(options, JsonFormat, iModelTInterface).ToArray();
-
-            public static MethodBodyStatement ValidateXmlFormat(ModelReaderWriterOptionsExpression? options, CSharpType? iModelTInterface)
-                => ValidateFormat(options, XmlFormat, iModelTInterface).ToArray();
+            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression? options, CSharpType? iModelTInterface, ValidationType validationType)
+                => ValidateFormat(options, JsonFormat, iModelTInterface, validationType).ToArray();
 
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression? options, ValueExpression formatValue, CSharpType? iModelTInterface)
+            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression? options, ValueExpression formatValue, CSharpType? iModelTInterface, ValidationType validationType)
             {
                 if (options == null || iModelTInterface == null)
                     yield break; // if options expression is null, we skip outputting the following statements
@@ -101,7 +98,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
                 yield return new IfStatement(NotEqual(format, formatValue))
                 {
-                    ThrowValidationFailException(format, iModelTInterface.Arguments[0])
+                    ThrowValidationFailException(format, iModelTInterface.Arguments[0], validationType)
                 };
 
                 yield return EmptyLine; // always outputs an empty line here because we will always have other statements after this
@@ -113,14 +110,20 @@ namespace AutoRest.CSharp.Common.Output.Models
                     new StringExpression(This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)),
                     options.Format), out format);
 
-            public static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT)
+            public static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT, ValidationType validationType)
                 => Throw(New.Instance(
                     typeof(FormatException),
-                    new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
+                    new FormattableStringExpression($"The model {{{0}}} does not support {(validationType == ValidationType.Write ? "writing" : "reading")} '{{{1}}}' format.", new[]
                     {
                         Nameof(typeOfT),
                         format
                     })));
+
+            public enum ValidationType
+            {
+                Write,
+                Read
+            }
         }
     }
 }

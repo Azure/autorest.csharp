@@ -19,13 +19,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
-        {
-        }
-
-        public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, Schema schema, BuildContext context)
+            : this(enumType, GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 

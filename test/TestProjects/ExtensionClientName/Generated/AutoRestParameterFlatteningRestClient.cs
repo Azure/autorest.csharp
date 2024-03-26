@@ -50,7 +50,7 @@ namespace ExtensionClientName
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(renamedBodyParameter);
+            content.JsonWriter.WriteObjectValue<RenamedSchema>(renamedBodyParameter);
             request.Content = content;
             return message;
         }

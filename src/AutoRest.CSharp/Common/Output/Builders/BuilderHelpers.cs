@@ -266,11 +266,36 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
+        public static FormattableString CreateDerivedTypesDescription(CSharpType type)
+        {
+            if (TypeFactory.IsCollectionType(type))
+            {
+                type = TypeFactory.GetElementType(type);
+            }
+
+            if (type is { IsFrameworkType: false, Implementation: ObjectType objectType })
+            {
+                return objectType.CreateExtraDescriptionWithDiscriminator();
+            }
+
+            return $"";
+        }
+
         public static string CreateDescription(this Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 $"The {schema.Name}." :
                 EscapeXmlDocDescription(schema.Language.Default.Description);
+        }
+
+        public static string DisambiguateName(string typeName, string name, string suffix = "Value")
+        {
+            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
+            {
+                return name + suffix;
+            }
+
+            return name;
         }
 
         public static string DisambiguateName(CSharpType type, string name, string suffix = "Value")

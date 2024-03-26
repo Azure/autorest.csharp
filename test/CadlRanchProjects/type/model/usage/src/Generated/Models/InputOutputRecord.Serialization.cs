@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Usage;
 
 namespace _Type.Model.Usage.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Usage.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputOutputRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputOutputRecord)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputOutputRecord)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace _Type.Model.Usage.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputOutputRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputOutputRecord)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputOutputRecord)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +95,7 @@ namespace _Type.Model.Usage.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InputOutputRecord)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputOutputRecord)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace _Type.Model.Usage.Models
                         return DeserializeInputOutputRecord(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InputOutputRecord)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputOutputRecord)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace _Type.Model.Usage.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InputOutputRecord>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

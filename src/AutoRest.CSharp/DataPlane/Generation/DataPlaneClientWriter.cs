@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -157,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                     writer.Line(Configuration.ApiTypes.GetHttpPipelineKeyCredentialString(PipelineField, OptionsVariable, CredentialVariable, library.Authentication.ApiKey.Name));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
@@ -208,7 +209,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
                     writer.Append($"string[] {scopesParam:D} = ");
                     writer.Append($"{{ ");

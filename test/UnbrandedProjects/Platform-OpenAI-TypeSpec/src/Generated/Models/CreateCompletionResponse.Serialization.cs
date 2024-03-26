@@ -3,24 +3,21 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCompletionResponse : IUtf8JsonWriteable, IJsonModel<CreateCompletionResponse>
+    public partial class CreateCompletionResponse : IJsonModel<CreateCompletionResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<CreateCompletionResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -36,13 +33,13 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Choices)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CreateCompletionResponseChoice>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
-                writer.WriteObjectValue(Usage);
+                writer.WriteObjectValue<CompletionUsage>(Usage, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -67,7 +64,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponse>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -156,7 +153,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -172,7 +169,7 @@ namespace OpenAI.Models
                         return DeserializeCreateCompletionResponse(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateCompletionResponse)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -187,11 +184,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

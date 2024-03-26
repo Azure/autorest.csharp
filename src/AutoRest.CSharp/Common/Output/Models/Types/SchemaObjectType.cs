@@ -29,7 +29,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaObjectType : SerializableObjectType
+    internal abstract class SchemaObjectType : SerializableObjectType
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+        protected SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = objectSchema.CSharpName();
@@ -76,6 +76,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
             IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
+
+            JsonConverter = _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -378,10 +380,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 defaultCtorInitializers,
                 baseCtor);
         }
-
-        private JsonConverterProvider? _jsonConverter;
-        public override JsonConverterProvider? JsonConverter
-            => _jsonConverter ??= _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -744,7 +742,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml)
+                ? SerializationBuilder.BuildXmlObjectSerialization(ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name, this, _typeFactory)
+                : null;
         }
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()

@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal abstract class SerializableObjectType : ObjectType
     {
-        protected readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
+        private readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
         protected SerializableObjectType(BuildContext context) : base(context)
         {
             _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
 
-        public virtual JsonConverterProvider? JsonConverter { get; }
+        public JsonConverterProvider? JsonConverter { get; protected init; }
         protected internal abstract InputModelTypeUsage GetUsage();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method

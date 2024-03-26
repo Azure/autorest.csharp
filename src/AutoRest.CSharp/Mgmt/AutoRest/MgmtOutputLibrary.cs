@@ -81,9 +81,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Lazy<IReadOnlyDictionary<RequestPath, HashSet<Operation>>> ChildOperations { get; }
 
+        private IReadOnlyDictionary<ServiceRequest, InputOperation>? _serviceRequestToInputOperations;
+
         private Dictionary<string, string> _mergedOperations;
 
-        private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
+        private readonly IReadOnlyDictionary<Schema, InputEnumType> _schemaToInputEnumMap;
+
+        private Dictionary<Schema, TypeProvider> _schemaToModels = new();
+        private Lazy<IReadOnlyDictionary<string, TypeProvider>> _schemaNameToModels;
 
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
@@ -103,6 +108,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
+            _schemaToInputEnumMap = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider).CreateEnums();
 
             // others are populated later
             OperationsToOperationGroups = new Lazy<IReadOnlyDictionary<Operation, OperationGroup>>(PopulateOperationsToOperationGroups);
@@ -117,6 +123,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             SchemaMap = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(EnsureSchemaMap);
             AllEnumMap = new Lazy<IReadOnlyDictionary<InputEnumType, EnumType>>(EnsureAllEnumMap);
             ChildOperations = new Lazy<IReadOnlyDictionary<RequestPath, HashSet<Operation>>>(EnsureResourceChildOperations);
+            _schemaNameToModels = new Lazy<IReadOnlyDictionary<string, TypeProvider>>(EnsureSchemaNameToModels);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
@@ -127,6 +134,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
         }
+
+        private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
 
         private static void ApplyGlobalConfigurations()
         {
@@ -278,21 +287,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
-                _schemaOrNameToModels.Add(schema, model);
+                _schemaToModels.Add(schema, model);
             }
 
             //this is where we update
             var updatedModels = UpdateBodyParameters();
             foreach (var schema in updatedModels)
             {
-                _schemaOrNameToModels[schema] = BuildModel(schema);
+                _schemaToModels[schema] = BuildModel(schema);
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new Dictionary<ObjectSchema, TypeProvider>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
-                if (_schemaOrNameToModels.TryGetValue(schema, out var type))
+                if (_schemaToModels.TryGetValue(schema, out var type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
@@ -319,15 +328,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // third, update the entries in cache maps with the new model instances
             foreach (var (schema, replacedType) in replacedTypes)
             {
-                var originalModel = _schemaOrNameToModels[schema];
-                _schemaOrNameToModels[schema] = replacedType;
+                var originalModel = _schemaToModels[schema];
+                _schemaToModels[schema] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
                     schema.GetFullSerializedName(),
                     "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
-            return _schemaOrNameToModels;
+
+            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
+            return _schemaToModels;
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
@@ -336,6 +348,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups.Value[operation];
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
+
+        public InputOperation GetInputOperationByServiceRequest(ServiceRequest serviceRequest) =>
+            _serviceRequestToInputOperations?[serviceRequest] ??
+            throw new InvalidOperationException("Models aren't initialized yet");
 
         public RestClientMethod GetRestClientMethod(Operation operation)
         {
@@ -451,7 +467,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Value.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in AllSchemaMap.Value)
@@ -459,10 +475,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[sealedChoiceSchema], (EnumType)typeProvider);
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[choiceSchema], (EnumType)typeProvider);
                         break;
                 }
             }
@@ -789,17 +805,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
+            _schemaNameToModels.Value.TryGetValue(originalName, out TypeProvider? provider);
 
             // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
-            provider ??= _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
+            provider ??= _schemaToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
 
             return provider?.Type;
         }
 
         public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
         {
-            if (_schemaOrNameToModels.TryGetValue(originalName, out provider))
+            if (_schemaNameToModels.Value.TryGetValue(originalName, out provider))
                 return true;
 
             provider = ResourceSchemaMap.Value.Values.FirstOrDefault(m => m.Type.Name == originalName);
@@ -813,8 +829,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
+            SealedChoiceSchema or ChoiceSchema => new EnumType(_schemaToInputEnumMap[schema], schema, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
                 ? new MgmtReferenceType(objectSchema)
                 : new MgmtObjectType(objectSchema),
