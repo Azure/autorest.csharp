@@ -467,10 +467,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
                 writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
@@ -479,7 +479,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 return writer.Line($" != null)").Scope();
             }

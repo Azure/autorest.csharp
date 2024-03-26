@@ -118,8 +118,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (field.InitializationValue != null &&
                 (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
-                writer.AppendRaw(" = ")
-                    .WriteValueExpression(field.InitializationValue);
+                field.InitializationValue.Write(writer.AppendRaw(" = "));
                 return writer.Line($";");
             }
 
@@ -159,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"[{attribute.Type}(");
                         foreach (var argument in attribute.Arguments)
                         {
-                            writer.WriteValueExpression(argument);
+                            argument.Write(writer);
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");
@@ -242,7 +241,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 foreach (var constraint in constraints)
                 {
-                    writer.WriteValueExpression(constraint);
+                    constraint.Write(writer);
                     writer.AppendRaw(" ");
                 }
             }
@@ -256,7 +255,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.WriteValueExpression(argument);
+                        argument.Write(writer);
                         writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
@@ -503,7 +502,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            writer.WriteValueExpression(new EnumExpression(enumType, new ValueExpression()).ToSerial());
+            new EnumExpression(enumType, new ValueExpression()).ToSerial().Write(writer);
             return writer;
         }
 
@@ -674,7 +673,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.WriteMethodDeclarationNoScope(method.Signature))
                 {
                     writer.AppendRaw(" => ");
-                    writer.WriteValueExpression(expression);
+                    expression.Write(writer);
                     writer.LineRaw(";");
                 }
             }
@@ -725,8 +724,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (property.PropertyBody)
             {
                 case ExpressionPropertyBody(var expression):
-                    writer.AppendRaw(" => ")
-                        .WriteValueExpression(expression);
+                    expression.Write(writer.AppendRaw(" => "));
                     writer.AppendRaw(";");
                     break;
                 case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
@@ -739,8 +737,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw("}");
                     if (initialization is not null)
                     {
-                        writer.AppendRaw(" = ")
-                            .WriteValueExpression(initialization);
+                        initialization.Write(writer.AppendRaw(" = "));
                     }
                     break;
                 case MethodPropertyBody(var getter, var setter, var setterModifiers):
@@ -804,7 +801,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("(");
                 foreach (var argument in arguments)
                 {
-                    writer.WriteValueExpression(argument);
+                    argument.Write(writer);
                     writer.AppendRaw(", ");
                 }
 
@@ -817,7 +814,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var argument in arguments)
                 {
                     writer.AppendRaw("\t");
-                    writer.WriteValueExpression(argument);
+                    argument.Write(writer);
                     writer.LineRaw(",");
                 }
 

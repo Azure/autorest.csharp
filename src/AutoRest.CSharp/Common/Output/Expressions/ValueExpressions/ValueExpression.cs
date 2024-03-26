@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
-            writer.WriteValueExpression(this);
+            Write(writer);
             return writer.ToString();
         }
     }

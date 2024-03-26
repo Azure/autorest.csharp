@@ -19,18 +19,17 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
     {
-        private const int SingleLineParameterThreshold = 6;
 
         public static void WriteMethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)
             {
                 case InvokeInstanceMethodStatement(var instance, var methodName, var arguments, var callAsAsync):
-                    writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, null, callAsAsync));
+                    new InvokeInstanceMethodExpression(instance, methodName, arguments, null, callAsAsync).Write(writer);
                     writer.LineRaw(";");
                     break;
                 case InvokeStaticMethodStatement(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
-                    writer.WriteValueExpression(new InvokeStaticMethodExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
+                    new InvokeStaticMethodExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync).Write(writer);
                     writer.LineRaw(";");
                     break;
                 case ParameterValidationBlock(var parameters, var isLegacy):
@@ -51,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case IfStatement ifStatement:
                     writer.AppendRaw("if (");
-                    writer.WriteValueExpression(ifStatement.Condition);
+                    ifStatement.Condition.Write(writer);
 
                     if (ifStatement.Inline)
                     {
@@ -119,7 +118,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         else
                             writer.Append($"{foreachStatement.ItemType} ");
                         writer.Append($"{foreachStatement.Item:D} in ");
-                        writer.WriteValueExpression(foreachStatement.Enumerable);
+                        foreachStatement.Enumerable.Write(writer);
                         //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
@@ -132,13 +131,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRaw("for (");
                         if (assignment != null)
-                            writer.WriteValueExpression(assignment);
+                            assignment.Write(writer);
                         writer.AppendRaw("; ");
                         if (condition != null)
-                            writer.WriteValueExpression(condition);
+                            condition.Write(writer);
                         writer.AppendRaw("; ");
                         if (increment != null)
-                            writer.WriteValueExpression(increment);
+                            increment.Write(writer);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
                         writer.LineRaw("");
@@ -155,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         else
                             writer.Append($"{usingStatement.Type} ");
                         writer.Append($"{usingStatement.Variable:D} = ");
-                        writer.WriteValueExpression(usingStatement.Value);
+                        usingStatement.Value.Write(writer);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
                         WriteMethodBodyStatement(writer, usingStatement.Body.AsStatement());
@@ -170,7 +169,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.Append($"switch (");
-                        writer.WriteValueExpression(switchStatement.MatchExpression);
+                        switchStatement.MatchExpression.Write(writer);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
                         foreach (var switchCase in switchStatement.Cases)
@@ -181,7 +180,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 {
                                     ValueExpression? match = switchCase.Match[i];
                                     writer.AppendRaw("case ");
-                                    writer.WriteValueExpression(match);
+                                    match.Write(writer);
                                     if (i < switchCase.Match.Count - 1)
                                     {
                                         writer.LineRaw(":");
@@ -219,7 +218,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(keyword);
                     if (expression is not null)
                     {
-                        writer.AppendRaw(" ").WriteValueExpression(expression);
+                        expression.Write(writer.AppendRaw(" "));
                     }
                     writer.LineRaw(";");
                     break;
@@ -229,7 +228,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
 
                 case ThrowStatement throwStatement:
-                    writer.WriteValueExpression(throwStatement.ThrowExpression);
+                    throwStatement.ThrowExpression.Write(writer);
                     writer.LineRaw(";");
                     break;
 
@@ -248,35 +247,35 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (declaration)
             {
                 case AssignValueIfNullStatement setValue:
-                    writer.WriteValueExpression(setValue.To);
+                    setValue.To.Write(writer);
                     writer.AppendRaw(" ??= ");
-                    writer.WriteValueExpression(setValue.From);
+                    setValue.From.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case AssignValueStatement setValue:
-                    writer.WriteValueExpression(setValue.To);
+                    setValue.To.Write(writer);
                     writer.AppendRaw(" = ");
-                    writer.WriteValueExpression(setValue.From);
+                    setValue.From.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
-                    writer.WriteValueExpression(declareVariable.Value);
+                    declareVariable.Value.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
-                    writer.WriteValueExpression(declareVariable.Value);
+                    declareVariable.Value.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
-                    writer.WriteValueExpression(declareVariable.Value);
+                    declareVariable.Value.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
-                    writer.WriteValueExpression(declareVariable.Value);
+                    declareVariable.Value.Write(writer);
                     writer.LineRaw(";");
                     break;
                 case DeclareLocalFunctionStatement localFunction:
@@ -291,7 +290,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (localFunction.BodyExpression is not null)
                     {
                         writer.AppendRaw(" => ");
-                        writer.WriteValueExpression(localFunction.BodyExpression);
+                        localFunction.BodyExpression.Write(writer);
                         writer.LineRaw(";");
                     }
                     else
@@ -303,419 +302,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
-                    writer.WriteValueExpression(unaryOperatorStatement.Expression);
+                    unaryOperatorStatement.Expression.Write(writer);
                     writer.LineRaw(";");
-                    break;
-            }
-        }
-
-        public static void WriteValueExpression(this CodeWriter writer, ValueExpression expression)
-        {
-            switch (expression)
-            {
-                case CastExpression cast:
-                    // wrap the cast expression with parenthesis, so that it would not cause ambiguity for leading recursive calls
-                    // if the parenthesis are not needed, the roslyn reducer will remove it.
-                    writer.AppendRaw("(");
-                    writer.Append($"({cast.Type})");
-                    writer.WriteValueExpression(cast.Inner);
-                    writer.AppendRaw(")");
-                    break;
-                case AsExpression asExpression:
-                    writer.WriteValueExpression(asExpression.Inner);
-                    writer.Append($" as {asExpression.Type}");
-                    break;
-                case CollectionInitializerExpression(var items):
-                    writer.AppendRaw("{ ");
-                    foreach (var item in items)
-                    {
-                        writer.WriteValueExpression(item);
-                        writer.AppendRaw(",");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.AppendRaw(" }");
-                    break;
-                case MemberExpression(var inner, var memberName):
-                    if (inner is not null)
-                    {
-                        writer.WriteValueExpression(inner);
-                        writer.AppendRaw(".");
-                    }
-                    writer.AppendRaw(memberName);
-                    break;
-                case IndexerExpression(var inner, var indexer):
-                    if (inner is not null)
-                    {
-                        writer.WriteValueExpression(inner);
-                    }
-                    writer.AppendRaw("[");
-                    writer.WriteValueExpression(indexer);
-                    writer.AppendRaw("]");
-                    break;
-                case InvokeStaticMethodExpression { CallAsExtension: true } methodCall:
-                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
-                    if (methodCall.MethodType != null)
-                    {
-                        writer.UseNamespace(methodCall.MethodType.Namespace);
-                    }
-
-                    writer.WriteValueExpression(methodCall.Arguments[0]);
-                    writer.AppendRaw(".");
-                    writer.AppendRaw(methodCall.MethodName);
-                    WriteTypeArguments(writer, methodCall.TypeArguments);
-                    WriteArguments(writer, methodCall.Arguments.Skip(1));
-                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
-                    break;
-                case InvokeStaticMethodExpression { CallAsExtension: false } methodCall:
-                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
-                    if (methodCall.MethodType != null)
-                    {
-                        writer.Append($"{methodCall.MethodType}.");
-                    }
-
-                    writer.AppendRaw(methodCall.MethodName);
-                    WriteTypeArguments(writer, methodCall.TypeArguments);
-                    WriteArguments(writer, methodCall.Arguments);
-                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
-                    break;
-                case InvokeInstanceMethodExpression methodCall:
-                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
-                    if (methodCall.InstanceReference != null)
-                    {
-                        writer.WriteValueExpression(methodCall.InstanceReference);
-                        writer.AppendRaw(".");
-                    }
-
-                    writer.AppendRaw(methodCall.MethodName);
-                    WriteTypeArguments(writer, methodCall.TypeArguments);
-                    WriteArguments(writer, methodCall.Arguments);
-                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync && methodCall.AddConfigureAwaitFalse);
-                    break;
-                case FuncExpression { Parameters: var parameters, Inner: var inner }:
-                    using (writer.AmbientScope())
-                    {
-                        if (parameters.Count == 1)
-                        {
-                            var parameter = parameters[0];
-                            if (parameter is not null)
-                            {
-                                writer.Declaration(parameter);
-                            }
-                            else
-                            {
-                                writer.AppendRaw("_");
-                            }
-                        }
-                        else
-                        {
-                            writer.AppendRaw("(");
-                            foreach (var parameter in parameters)
-                            {
-                                if (parameter is not null)
-                                {
-                                    writer.Declaration(parameter);
-                                }
-                                else
-                                {
-                                    writer.AppendRaw("_");
-                                }
-                                writer.AppendRaw(", ");
-                            }
-
-                            writer.RemoveTrailingComma();
-                            writer.AppendRaw(")");
-                        }
-
-                        writer.AppendRaw(" => ");
-                        writer.WriteValueExpression(inner);
-                    }
-
-                    break;
-
-                case SwitchExpression(var matchExpression, var cases):
-                    using (writer.AmbientScope())
-                    {
-                        writer.WriteValueExpression(matchExpression);
-                        writer.LineRaw(" switch");
-                        writer.LineRaw("{");
-                        foreach (var switchCase in cases)
-                        {
-                            writer.WriteValueExpression(switchCase.Case);
-                            writer.AppendRaw(" => ");
-                            writer.WriteValueExpression(switchCase.Expression);
-                            writer.LineRaw(",");
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Line();
-                        writer.AppendRaw("}");
-                    }
-
-                    break;
-
-                case SwitchCaseWhenExpression(var matchExpression, var conditionExpression):
-                    writer.WriteValueExpression(matchExpression);
-                    writer.AppendRaw(" when ");
-                    writer.WriteValueExpression(conditionExpression);
-                    break;
-
-                case DictionaryInitializerExpression(var values):
-                    if (values is not { Count: > 0 })
-                    {
-                        writer.AppendRaw("{}");
-                        break;
-                    }
-
-                    writer.Line();
-                    writer.LineRaw("{");
-                    foreach (var (key, value) in values)
-                    {
-                        writer.AppendRaw("[");
-                        writer.WriteValueExpression(key);
-                        writer.AppendRaw("] = ");
-                        writer.WriteValueExpression(value);
-                        writer.LineRaw(",");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.Line();
-                    writer.AppendRaw("}");
-                    break;
-
-                case ArrayInitializerExpression(var items, var isInline):
-                    if (items is not { Count: > 0 })
-                    {
-                        writer.AppendRaw("{}");
-                        break;
-                    }
-
-                    if (isInline)
-                    {
-                        writer.AppendRaw("{");
-                        foreach (var item in items)
-                        {
-                            writer.WriteValueExpression(item);
-                            writer.AppendRaw(", ");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.AppendRaw("}");
-                    }
-                    else
-                    {
-                        writer.Line();
-                        writer.LineRaw("{");
-                        foreach (var item in items)
-                        {
-                            writer.WriteValueExpression(item);
-                            writer.LineRaw(",");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.Line();
-                        writer.AppendRaw("}");
-                    }
-                    break;
-
-                case ObjectInitializerExpression(var parameters, var useSingleLine):
-                    if (parameters is not { Count: > 0 })
-                    {
-                        writer.AppendRaw("{}");
-                        break;
-                    }
-
-                    if (useSingleLine)
-                    {
-                        writer.AppendRaw("{");
-                        foreach (var (name, value) in parameters)
-                        {
-                            writer.Append($"{name} = ");
-                            writer.WriteValueExpression(value);
-                            writer.AppendRaw(", ");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.AppendRaw("}");
-                    }
-                    else
-                    {
-                        writer.Line();
-                        writer.LineRaw("{");
-                        foreach (var (name, value) in parameters)
-                        {
-                            writer.Append($"{name} = ");
-                            writer.WriteValueExpression(value);
-                            writer.LineRaw(",");
-                        }
-                        // Commented to minimize changes in generated code
-                        //writer.RemoveTrailingComma();
-                        //writer.Line();
-                        writer.AppendRaw("}");
-                    }
-                    break;
-
-                case NewInstanceExpression(var type, var parameters, var initExpression):
-                    writer.Append($"new {type}");
-                    if (parameters.Count > 0 || initExpression is not { Parameters.Count: > 0 })
-                    {
-                        WriteArguments(writer, parameters, parameters.Count < SingleLineParameterThreshold);
-                    }
-
-                    if (initExpression is { Parameters.Count: > 0 })
-                    {
-                        writer.WriteValueExpression(initExpression);
-                    }
-                    break;
-
-                case NewDictionaryExpression(var type, var values):
-                    writer.Append($"new {type}");
-                    if (values is { Values.Count: > 0 })
-                    {
-                        writer.WriteValueExpression(values);
-                    }
-                    else
-                    {
-                        writer.AppendRaw("()");
-                    }
-                    break;
-
-                case NewArrayExpression(var type, var items, var size):
-                    if (size is not null)
-                    {
-                        writer.Append($"new {type?.FrameworkType}");
-                        writer.AppendRaw("[");
-                        writer.WriteValueExpression(size);
-                        writer.AppendRaw("]");
-                        break;
-                    }
-
-                    if (items is { Elements.Count: > 0 })
-                    {
-                        if (type is null)
-                        {
-                            writer.AppendRaw("new[]");
-                        }
-                        else
-                        {
-                            writer.Append($"new {type}[]");
-                        }
-
-                        writer.WriteValueExpression(items);
-                    }
-                    else if (type is null)
-                    {
-                        writer.AppendRaw("new[]{}");
-                    }
-                    else
-                    {
-                        writer.Append($"Array.Empty<{type}>()");
-                    }
-                    break;
-
-                case NewJsonSerializerOptionsExpression:
-                    writer.UseNamespace("Azure.ResourceManager.Models");
-                    writer.Append($"new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }}");
-                    break;
-
-                case NullConditionalExpression nullConditional:
-                    writer.WriteValueExpression(nullConditional.Inner);
-                    writer.AppendRaw("?");
-                    break;
-                case UnaryOperatorExpression(var op, var operand, var operandOnTheLeft):
-                    writer.AppendRawIf(op, !operandOnTheLeft);
-                    writer.WriteValueExpression(operand);
-                    writer.AppendRawIf(op, operandOnTheLeft);
-                    break;
-                case BinaryOperatorExpression(var op, var left, var right):
-                    // we should always write parenthesis around this expression since some or the logic operator has lower priority, and we might get trouble when there is a chain of binary operator expression, for instance (a || b) && c.
-                    writer.AppendRaw("(");
-                    writer.WriteValueExpression(left);
-                    writer.AppendRaw(" ").AppendRaw(op).AppendRaw(" ");
-                    writer.WriteValueExpression(right);
-                    writer.AppendRaw(")");
-                    break;
-                case TernaryConditionalOperator ternary:
-                    writer.WriteValueExpression(ternary.Condition);
-                    writer.AppendRaw(" ? ");
-                    writer.WriteValueExpression(ternary.Consequent);
-                    writer.AppendRaw(" : ");
-                    writer.WriteValueExpression(ternary.Alternative);
-                    break;
-                case PositionalParameterReference(var parameterName, var value):
-                    writer.Append($"{parameterName}: ");
-                    writer.WriteValueExpression(value);
-                    break;
-                case ParameterReference(var parameter):
-                    writer.AppendRawIf("ref ", parameter.IsRef);
-                    writer.Append($"{parameter.Name:I}");
-                    break;
-                case FormattableStringToExpression formattableString:
-                    writer.Append(formattableString.Value);
-                    break;
-                case TypeReference typeReference:
-                    writer.Append($"{typeReference.Type}");
-                    break;
-                case VariableReference variable:
-                    writer.Append($"{variable.Declaration:I}");
-                    break;
-                case TypedValueExpression typed:
-                    writer.WriteValueExpression(typed.Untyped);
-                    break;
-                case KeywordExpression(var keyword, var inner):
-                    writer.AppendRaw(keyword);
-                    if (inner is not null)
-                    {
-                        writer.AppendRaw(" ").WriteValueExpression(inner);
-                    }
-                    break;
-                case WhereExpression(var type, var constraints):
-                    writer.AppendRaw("where ")
-                        .Append($"{type} : ");
-                    foreach (var constraint in constraints)
-                    {
-                        writer.WriteValueExpression(constraint);
-                        writer.AppendRaw(",");
-                    }
-                    writer.RemoveTrailingComma();
-                    break;
-                case StringLiteralExpression(var literal, true):
-                    writer.Literal(literal).AppendRaw("u8");
-                    break;
-                case StringLiteralExpression(var literal, false):
-                    writer.Literal(literal);
-                    break;
-                case FormattableStringExpression(var format, var args):
-                    writer.AppendRaw("$\"");
-                    var argumentCount = 0;
-                    foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(format))
-                    {
-                        if (isLiteral)
-                        {
-                            writer.AppendRaw(span.ToString());
-                            continue;
-                        }
-
-                        var arg = args[argumentCount];
-                        argumentCount++;
-                        // append the argument
-                        writer.AppendRaw("{");
-                        writer.WriteValueExpression(arg);
-                        writer.AppendRaw("}");
-                    }
-                    writer.AppendRaw("\"");
-                    break;
-                case ArrayElementExpression(var array, var index):
-                    writer.WriteValueExpression(array);
-                    writer.AppendRaw("[");
-                    writer.WriteValueExpression(index);
-                    writer.AppendRaw("]");
-                    break;
-                case DeclarationExpression(var variable, var isOut):
-                    writer.AppendRawIf("out ", isOut);
-                    writer.Append($"{variable.Type} {variable.Declaration:D}");
-                    break;
-                case AssignmentExpression(var variable, var value):
-                    writer.Append($"{variable.Type} {variable.Declaration:D} = {value}");
                     break;
             }
         }

@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
     internal record FuncExpression(IReadOnlyList<CodeWriterDeclaration?> Parameters, ValueExpression Inner) : ValueExpression
     {
-        public override void Write(CodeWriter writer)
+        public sealed override void Write(CodeWriter writer)
         {
             using (writer.AmbientScope())
             {
