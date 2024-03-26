@@ -11,7 +11,6 @@
         "type/model/inheritance/enum-discriminator",
         "type/model/inheritance/nested-discriminator",
         "type/model/inheritance/recursive",
-        "type/model/visibility",
         "type/property/additional-properties",
         "type/property/nullable",
         "type/property/optionality",
