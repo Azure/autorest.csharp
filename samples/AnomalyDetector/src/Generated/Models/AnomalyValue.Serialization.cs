@@ -23,7 +23,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<AnomalyValue>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AnomalyValue)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AnomalyValue)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -39,7 +39,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Interpretation)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<AnomalyInterpretation>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -66,7 +66,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<AnomalyValue>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AnomalyValue)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AnomalyValue)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -136,7 +136,7 @@ namespace AnomalyDetector.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AnomalyValue)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AnomalyValue)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -152,7 +152,7 @@ namespace AnomalyDetector.Models
                         return DeserializeAnomalyValue(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AnomalyValue)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AnomalyValue)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -170,7 +170,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<AnomalyValue>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

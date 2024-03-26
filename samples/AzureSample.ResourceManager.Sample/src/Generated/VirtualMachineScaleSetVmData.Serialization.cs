@@ -28,7 +28,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -40,12 +40,12 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                writer.WriteObjectValue<AzureSampleResourceManagerSamplePlan>(Plan, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
@@ -53,7 +53,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in Resources)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineExtensionData>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -115,47 +115,47 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                writer.WriteObjectValue<VirtualMachineScaleSetVmInstanceView>(InstanceView, options);
             }
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                writer.WriteObjectValue(HardwareProfile);
+                writer.WriteObjectValue<HardwareProfile>(HardwareProfile, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                writer.WriteObjectValue<StorageProfile>(StorageProfile, options);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OSProfile);
+                writer.WriteObjectValue<OSProfile>(OSProfile, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue(SecurityProfile);
+                writer.WriteObjectValue<SecurityProfile>(SecurityProfile, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue(NetworkProfile);
+                writer.WriteObjectValue<NetworkProfile>(NetworkProfile, options);
             }
             if (Optional.IsDefined(NetworkProfileConfiguration))
             {
                 writer.WritePropertyName("networkProfileConfiguration"u8);
-                writer.WriteObjectValue(NetworkProfileConfiguration);
+                writer.WriteObjectValue<VirtualMachineScaleSetVmNetworkProfileConfiguration>(NetworkProfileConfiguration, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue(DiagnosticsProfile);
+                writer.WriteObjectValue<DiagnosticsProfile>(DiagnosticsProfile, options);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -180,7 +180,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(ProtectionPolicy))
             {
                 writer.WritePropertyName("protectionPolicy"u8);
-                writer.WriteObjectValue(ProtectionPolicy);
+                writer.WriteObjectValue<VirtualMachineScaleSetVmProtectionPolicy>(ProtectionPolicy, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -206,7 +206,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -528,7 +528,7 @@ namespace AzureSample.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -1016,37 +1016,37 @@ namespace AzureSample.ResourceManager.Sample
                     case "HardwareVmSize":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("VmSize", item.Value);
-                        bicepOptions.ParameterOverrides.Add(HardwareProfile, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(HardwareProfile, propertyDictionary);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("UltraSSDEnabled", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AdditionalCapabilities, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary0);
                         break;
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("EncryptionAtHost", item.Value);
-                        bicepOptions.ParameterOverrides.Add(SecurityProfile, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary1);
                         break;
                     case "NetworkInterfaces":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("NetworkInterfaces", item.Value);
-                        bicepOptions.ParameterOverrides.Add(NetworkProfile, propertyDictionary2);
+                        bicepOptions.PropertyOverrides.Add(NetworkProfile, propertyDictionary2);
                         break;
                     case "NetworkInterfaceConfigurations":
                         Dictionary<string, string> propertyDictionary3 = new Dictionary<string, string>();
                         propertyDictionary3.Add("NetworkInterfaceConfigurations", item.Value);
-                        bicepOptions.ParameterOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
+                        bicepOptions.PropertyOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary4 = new Dictionary<string, string>();
                         propertyDictionary4.Add("BootDiagnostics", item.Value);
-                        bicepOptions.ParameterOverrides.Add(DiagnosticsProfile, propertyDictionary4);
+                        bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary4);
                         break;
                     case "AvailabilitySetId":
                         Dictionary<string, string> propertyDictionary5 = new Dictionary<string, string>();
                         propertyDictionary5.Add("Id", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AvailabilitySet, propertyDictionary5);
+                        bicepOptions.PropertyOverrides.Add(AvailabilitySet, propertyDictionary5);
                         break;
                     default:
                         continue;
@@ -1065,7 +1065,7 @@ namespace AzureSample.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -1080,10 +1080,8 @@ namespace AzureSample.ResourceManager.Sample
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineScaleSetVmData(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetVmData)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -31,12 +31,12 @@ namespace MgmtConstants.Models
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue(Listener);
+                writer.WriteObjectValue<ModelWithRequiredConstant>(Listener);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue(Content);
+                writer.WriteObjectValue<ModelWithOptionalConstant>(Content);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

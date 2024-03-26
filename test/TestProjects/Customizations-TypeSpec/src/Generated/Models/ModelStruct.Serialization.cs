@@ -23,7 +23,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelStruct)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -62,7 +62,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelStruct)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -121,7 +121,7 @@ namespace CustomizationsInTsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelStruct)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -137,7 +137,7 @@ namespace CustomizationsInTsp.Models
                         return DeserializeModelStruct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelStruct)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -161,7 +161,7 @@ namespace CustomizationsInTsp.Models
         internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelStruct>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

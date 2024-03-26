@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                writer.WriteObjectValue<DiffDiskSettings>(DiffDiskSettings);
             }
             if (Optional.IsDefined(DiskSizeGB))
             {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                writer.WriteObjectValue<VirtualHardDisk>(Image);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -66,7 +66,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk);
             }
             if (Optional.IsDefined(SecurityType))
             {

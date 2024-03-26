@@ -44,7 +44,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue<VirtualMachineScaleSetNetworkConfigurationDnsSettings>(DnsSettings);
             }
             if (Optional.IsCollectionDefined(IPConfigurations))
             {
@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in IPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineScaleSetIPConfiguration>(item);
                 }
                 writer.WriteEndArray();
             }

@@ -2,12 +2,12 @@
 
 #nullable disable
 
-using System.ClientModel;
+using System.ClientModel.Primitives;
 
 namespace UnbrandedTypeSpec
 {
     /// <summary> Client options for UnbrandedTypeSpecClient. </summary>
-    public partial class UnbrandedTypeSpecClientOptions : RequestOptions
+    public partial class UnbrandedTypeSpecClientOptions : ClientPipelineOptions
     {
     }
 }

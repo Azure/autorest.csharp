@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<IPRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualNetworkRule>(item);
                 }
                 writer.WriteEndArray();
             }

@@ -226,7 +226,7 @@ namespace Azure.Network.Management.Interface
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue<NetworkInterface>(parameters);
             request.Content = content;
             return message;
         }
@@ -315,7 +315,7 @@ namespace Azure.Network.Management.Interface
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue<TagsObject>(parameters);
             request.Content = content;
             return message;
         }

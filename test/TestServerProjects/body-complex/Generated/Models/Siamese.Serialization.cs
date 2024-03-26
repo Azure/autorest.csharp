@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Siamese>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Siamese)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Siamese)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -42,7 +42,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Hates)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Dog>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -79,7 +79,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Siamese>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Siamese)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Siamese)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -165,7 +165,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Siamese)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Siamese)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -181,7 +181,7 @@ namespace body_complex.Models
                         return DeserializeSiamese(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Siamese)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Siamese)} does not support reading '{options.Format}' format.");
             }
         }
 

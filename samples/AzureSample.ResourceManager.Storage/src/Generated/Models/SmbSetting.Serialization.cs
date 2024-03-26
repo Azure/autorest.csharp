@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Multichannel))
             {
                 writer.WritePropertyName("multichannel"u8);
-                writer.WriteObjectValue(Multichannel);
+                writer.WriteObjectValue<Multichannel>(Multichannel);
             }
             if (Optional.IsDefined(Versions))
             {

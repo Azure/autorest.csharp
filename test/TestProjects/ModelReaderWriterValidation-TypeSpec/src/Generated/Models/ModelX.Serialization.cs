@@ -23,7 +23,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelX)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelX)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -88,7 +88,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelX)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelX)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -190,7 +190,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelX)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelX)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -206,7 +206,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                         return DeserializeModelX(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelX)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelX)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -224,7 +224,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelX>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

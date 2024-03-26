@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(data);
+            content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetExtensionData>(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -141,7 +141,7 @@ namespace MgmtAcronymMapping
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(patch);
+            content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetExtensionPatch>(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

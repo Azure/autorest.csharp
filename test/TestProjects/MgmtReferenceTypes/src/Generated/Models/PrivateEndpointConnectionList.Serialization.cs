@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, PrivateEndpointConnectionList model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<PrivateEndpointConnectionList>(model);
             }
             public override PrivateEndpointConnectionList Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

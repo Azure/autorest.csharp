@@ -27,6 +27,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
         /// <param name="ipProtocols"> Array of FirewallPolicyRuleNetworkProtocols. </param>
         /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
         /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
@@ -35,7 +38,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="translatedPort"> The translated port for this NAT rule. </param>
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="translatedFqdn"> The translated FQDN for this NAT rule. </param>
-        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIpGroups, string translatedFqdn) : base(name, description, ruleType)
+        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIpGroups, string translatedFqdn) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             IpProtocols = ipProtocols;
             SourceAddresses = sourceAddresses;

@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(OptionalPropertyOnBase))
@@ -62,7 +62,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -132,7 +132,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeDerivedModelWithProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<DerivedModelWithProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

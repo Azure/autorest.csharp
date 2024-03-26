@@ -22,7 +22,7 @@ namespace AdditionalPropertiesEx.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +31,7 @@ namespace AdditionalPropertiesEx.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<object>(item.Value, options);
             }
             writer.WriteEndObject();
         }
@@ -41,7 +41,7 @@ namespace AdditionalPropertiesEx.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -81,7 +81,7 @@ namespace AdditionalPropertiesEx.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -97,7 +97,7 @@ namespace AdditionalPropertiesEx.Models
                         return DeserializeInputAdditionalPropertiesModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModel)} does not support reading '{options.Format}' format.");
             }
         }
 

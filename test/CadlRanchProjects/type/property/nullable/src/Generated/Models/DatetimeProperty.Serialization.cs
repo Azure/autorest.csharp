@@ -23,7 +23,7 @@ namespace _Type.Property.Nullable.Models
             var format = options.Format == "W" ? ((IPersistableModel<DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DatetimeProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -61,7 +61,7 @@ namespace _Type.Property.Nullable.Models
             var format = options.Format == "W" ? ((IPersistableModel<DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DatetimeProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -115,7 +115,7 @@ namespace _Type.Property.Nullable.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DatetimeProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -131,7 +131,7 @@ namespace _Type.Property.Nullable.Models
                         return DeserializeDatetimeProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DatetimeProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -149,7 +149,7 @@ namespace _Type.Property.Nullable.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<DatetimeProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

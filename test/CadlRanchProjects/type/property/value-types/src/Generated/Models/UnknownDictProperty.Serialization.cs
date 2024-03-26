@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace _Type.Property.ValueTypes.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -102,7 +102,7 @@ namespace _Type.Property.ValueTypes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -118,7 +118,7 @@ namespace _Type.Property.ValueTypes.Models
                         return DeserializeUnknownDictProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -136,7 +136,7 @@ namespace _Type.Property.ValueTypes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnknownDictProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -23,7 +23,7 @@ namespace Client.Naming.Models
             var format = options.Format == "W" ? ((IPersistableModel<LanguageClientNameModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +52,7 @@ namespace Client.Naming.Models
             var format = options.Format == "W" ? ((IPersistableModel<LanguageClientNameModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -95,7 +95,7 @@ namespace Client.Naming.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -111,7 +111,7 @@ namespace Client.Naming.Models
                         return DeserializeLanguageClientNameModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -129,7 +129,7 @@ namespace Client.Naming.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<LanguageClientNameModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

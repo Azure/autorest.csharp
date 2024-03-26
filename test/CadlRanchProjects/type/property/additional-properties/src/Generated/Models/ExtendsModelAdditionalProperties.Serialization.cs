@@ -23,14 +23,14 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<ModelForRecord>(item.Value, options);
             }
             writer.WriteEndObject();
         }
@@ -40,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -74,7 +74,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeExtendsModelAdditionalProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExtendsModelAdditionalProperties)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -108,7 +108,7 @@ namespace _Type.Property.AdditionalProperties.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ExtendsModelAdditionalProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            writer.WriteObjectValue<VaultProperties>(Properties);
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);

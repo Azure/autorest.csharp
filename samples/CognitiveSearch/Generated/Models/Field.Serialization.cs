@@ -81,7 +81,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Fields)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Field>(item);
                 }
                 writer.WriteEndArray();
             }

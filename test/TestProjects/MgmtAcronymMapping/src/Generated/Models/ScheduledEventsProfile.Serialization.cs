@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile);
+                writer.WriteObjectValue<TerminateNotificationProfile>(TerminateNotificationProfile);
             }
             writer.WriteEndObject();
         }

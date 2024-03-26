@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -129,7 +129,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -145,7 +145,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeInt32ValuesFacet(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -163,7 +163,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Int32ValuesFacet>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

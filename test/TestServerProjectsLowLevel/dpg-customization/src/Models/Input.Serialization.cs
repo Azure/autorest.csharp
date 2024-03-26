@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -21,7 +22,7 @@ namespace dpg_customization_LowLevel.Models
         internal static RequestContent ToRequestContent(Input input)
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
+            content.JsonWriter.WriteObjectValue<Input>(input, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

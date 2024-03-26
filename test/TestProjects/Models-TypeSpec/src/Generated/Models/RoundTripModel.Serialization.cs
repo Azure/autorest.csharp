@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<BaseModelWithDiscriminator>(RequiredModel, options);
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -105,7 +105,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -129,7 +129,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<RecordItem>(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
@@ -279,7 +279,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -649,7 +649,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -665,7 +665,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeRoundTripModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -683,7 +683,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -23,7 +23,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -50,7 +50,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<JobWarning>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
@@ -83,7 +83,7 @@ namespace AuthoringTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -182,7 +182,7 @@ namespace AuthoringTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -198,7 +198,7 @@ namespace AuthoringTypeSpec.Models
                         return DeserializeSwapDeploymentsJob(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SwapDeploymentsJob)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -216,7 +216,7 @@ namespace AuthoringTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<SwapDeploymentsJob>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

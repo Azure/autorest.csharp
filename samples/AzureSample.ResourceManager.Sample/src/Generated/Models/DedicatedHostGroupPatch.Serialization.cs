@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                writer.WriteObjectValue<DedicatedHostGroupInstanceView>(InstanceView, options);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -99,7 +99,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -230,7 +230,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -246,7 +246,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                         return DeserializeDedicatedHostGroupPatch(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostGroupPatch)} does not support reading '{options.Format}' format.");
             }
         }
 

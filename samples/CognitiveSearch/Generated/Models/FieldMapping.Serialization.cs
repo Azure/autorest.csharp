@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                writer.WriteObjectValue(MappingFunction);
+                writer.WriteObjectValue<FieldMappingFunction>(MappingFunction);
             }
             writer.WriteEndObject();
         }

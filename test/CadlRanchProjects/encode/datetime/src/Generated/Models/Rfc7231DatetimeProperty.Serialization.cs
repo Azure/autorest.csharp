@@ -23,7 +23,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +52,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -95,7 +95,7 @@ namespace Encode.Datetime.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -111,7 +111,7 @@ namespace Encode.Datetime.Models
                         return DeserializeRfc7231DatetimeProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -129,7 +129,7 @@ namespace Encode.Datetime.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Rfc7231DatetimeProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

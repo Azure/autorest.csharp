@@ -55,7 +55,7 @@ namespace MgmtParent
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(data);
+            content.JsonWriter.WriteObjectValue<DedicatedHostGroupData>(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -143,7 +143,7 @@ namespace MgmtParent
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(patch);
+            content.JsonWriter.WriteObjectValue<DedicatedHostGroupPatch>(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

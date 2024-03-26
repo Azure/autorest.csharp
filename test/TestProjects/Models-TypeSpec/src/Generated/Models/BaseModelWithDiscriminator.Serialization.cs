@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminator>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminator>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -110,7 +110,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -128,7 +128,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<BaseModelWithDiscriminator>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

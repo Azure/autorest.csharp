@@ -27,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                writer.WriteObjectValue(Filters);
+                writer.WriteObjectValue<ObjectReplicationPolicyFilter>(Filters);
             }
             writer.WriteEndObject();
         }

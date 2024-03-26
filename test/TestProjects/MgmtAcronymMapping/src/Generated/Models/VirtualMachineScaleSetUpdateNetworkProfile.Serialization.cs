@@ -26,7 +26,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaceConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineScaleSetUpdateNetworkConfiguration>(item);
                 }
                 writer.WriteEndArray();
             }

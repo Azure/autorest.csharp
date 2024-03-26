@@ -391,7 +391,9 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility |= Internal; // add internal
             }
             var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
-            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
+            var diagnostic = Configuration.IsBranded
+                ? name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null
+                : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, GetReturnedResponseContentType(), diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
 

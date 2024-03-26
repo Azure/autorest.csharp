@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                writer.WriteObjectValue(PublicIPAddressConfiguration);
+                writer.WriteObjectValue<VirtualMachineScaleSetPublicIPAddressConfiguration>(PublicIPAddressConfiguration);
             }
             if (Optional.IsCollectionDefined(IPAddresses))
             {

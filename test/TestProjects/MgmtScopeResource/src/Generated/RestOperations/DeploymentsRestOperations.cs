@@ -195,7 +195,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deployment);
+            content.JsonWriter.WriteObjectValue<Deployment>(deployment);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -407,7 +407,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deployment);
+            content.JsonWriter.WriteObjectValue<Deployment>(deployment);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -630,7 +630,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deploymentWhatIf);
+            content.JsonWriter.WriteObjectValue<DeploymentWhatIf>(deploymentWhatIf);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -699,7 +699,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deploymentWhatIf);
+            content.JsonWriter.WriteObjectValue<DeploymentWhatIf>(deploymentWhatIf);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -772,7 +772,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deploymentWhatIf);
+            content.JsonWriter.WriteObjectValue<DeploymentWhatIf>(deploymentWhatIf);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -847,7 +847,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(deploymentWhatIf);
+            content.JsonWriter.WriteObjectValue<DeploymentWhatIf>(deploymentWhatIf);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

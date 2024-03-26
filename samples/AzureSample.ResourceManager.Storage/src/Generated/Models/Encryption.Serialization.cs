@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services"u8);
-                writer.WriteObjectValue(Services);
+                writer.WriteObjectValue<EncryptionServices>(Services);
             }
             writer.WritePropertyName("keySource"u8);
             writer.WriteStringValue(KeySource.ToString());
@@ -30,12 +30,12 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties);
+                writer.WriteObjectValue<KeyVaultProperties>(KeyVaultProperties);
             }
             if (Optional.IsDefined(EncryptionIdentity))
             {
                 writer.WritePropertyName("identity"u8);
-                writer.WriteObjectValue(EncryptionIdentity);
+                writer.WriteObjectValue<EncryptionIdentity>(EncryptionIdentity);
             }
             writer.WriteEndObject();
         }

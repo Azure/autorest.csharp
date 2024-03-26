@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DictionaryWrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -67,7 +67,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DictionaryWrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -119,7 +119,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -135,7 +135,7 @@ namespace body_complex.Models
                         return DeserializeDictionaryWrapper(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DictionaryWrapper)} does not support reading '{options.Format}' format.");
             }
         }
 
