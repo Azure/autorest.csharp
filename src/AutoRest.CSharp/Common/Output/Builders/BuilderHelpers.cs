@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Output.Builders
             return PromoteNullabilityInformation(newType, defaultType);
         }
 
-        public static bool IsTypeFromExistingReadOnly(ISymbol existingMember) => existingMember switch
+        public static bool IsReadOnlyFromExisting(ISymbol existingMember) => existingMember switch
         {
             IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
             IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,

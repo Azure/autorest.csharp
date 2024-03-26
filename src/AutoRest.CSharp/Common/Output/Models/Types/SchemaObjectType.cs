@@ -521,7 +521,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
-                    var isReadOnly = BuilderHelpers.IsTypeFromExistingReadOnly(propertyWithSerialization);
+                    var isReadOnly = BuilderHelpers.IsReadOnlyFromExisting(propertyWithSerialization);
                     var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
                     yield return new ObjectTypeProperty(
                         new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
