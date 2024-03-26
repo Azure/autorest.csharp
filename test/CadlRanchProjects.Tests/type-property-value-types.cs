@@ -385,7 +385,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionEnumValue_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().GetUnionEnumValueAsync();
-            Assert.AreEqual("value2", response.Value.Property);
+            Assert.AreEqual(ExtendedEnum.EnumValue2, response.Value.Property);
         });
 
         [Test]
@@ -407,7 +407,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnionFloatLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().PutAsync(new UnionFloatLiteralProperty(BinaryData.FromString("46.875")));
+            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().PutAsync(new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty._46875));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -421,7 +421,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnionIntLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().PutAsync(new UnionIntLiteralProperty(BinaryData.FromString("42")));
+            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().PutAsync(new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42));
             Assert.AreEqual(204, response.Status);
         });
         [Test]
@@ -434,7 +434,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnionStringLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().PutAsync(new UnionStringLiteralProperty(new UnionStringLiteralPropertyProperty("world")));
+            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().PutAsync(new UnionStringLiteralProperty(UnionStringLiteralPropertyProperty.World));
             Assert.AreEqual(204, response.Status);
         });
     }
