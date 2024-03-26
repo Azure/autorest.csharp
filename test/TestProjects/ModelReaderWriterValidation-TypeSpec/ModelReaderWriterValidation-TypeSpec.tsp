@@ -297,7 +297,6 @@ model ResourceTypeAliasPath {
 }
 
 @doc("The type of the alias.")
-@fixed
 enum ResourceTypeAliasType {
     @doc("Alias type is unknown (same as not providing alias type).")
     NotSpecified,
@@ -331,7 +330,6 @@ model ResourceTypeAliasPathMetadata {
 }
 
 @doc("The type of alias pattern.")
-@fixed
 enum ResourceTypeAliasPatternType {
     @doc("NotSpecified is not allowed.")
     NotSpecified,

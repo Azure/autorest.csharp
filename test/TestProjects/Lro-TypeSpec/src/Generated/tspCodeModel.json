@@ -75,7 +75,7 @@
    ],
    "Namespace": "TypeSpec.Http",
    "Description": "Describes the OAuth2 flow type",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   },

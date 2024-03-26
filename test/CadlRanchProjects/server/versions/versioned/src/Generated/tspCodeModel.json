@@ -21,7 +21,7 @@
    ],
    "Namespace": "Server.Versions.Versioned",
    "Description": "The version of the API.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

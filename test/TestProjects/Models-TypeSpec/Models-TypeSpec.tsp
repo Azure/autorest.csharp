@@ -116,7 +116,6 @@ model RecordItem extends DerivedModel {
 }
 
 @doc("Fixed string enum")
-@fixed
 enum FixedStringEnum {
     One: "1",
     Two: "2",
@@ -124,7 +123,6 @@ enum FixedStringEnum {
 }
 
 @doc("Fixed int enum")
-@fixed
 @deprecated("deprecated for test")
 enum FixedIntEnum {
     One: 1,
@@ -133,7 +131,6 @@ enum FixedIntEnum {
 }
 
 @doc("Fixed float enum")
-@fixed
 @deprecated("should be replaced by cadl-ranch")
 enum FixedFloatEnum {
     One: 1.1,
