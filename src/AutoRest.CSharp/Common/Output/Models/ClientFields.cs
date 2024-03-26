@@ -127,11 +127,14 @@ namespace AutoRest.CSharp.Output.Models
             {
                 "credential" when _keyAuthField != null && parameterType.EqualsIgnoreNullable(_keyAuthField.Type) => _keyAuthField,
                 "credential" when _tokenAuthField != null && parameterType.EqualsIgnoreNullable(_tokenAuthField.Type) => _tokenAuthField,
-                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) || (field.Type.IsEnum && (field.Type.Implementation as EnumType)!.ValueType.Equals(parameterType))  ? field : null : null
+                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) ? field : null : null
             };
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)
             => GetFieldByParameter(parameter.Name, parameter.Type);
+
+        public FieldDeclaration? GetFieldByName(string name)
+            => _parameterNamesToFields.TryGetValue(name, out FieldDeclaration? field) ? field : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _fields.GetEnumerator();
