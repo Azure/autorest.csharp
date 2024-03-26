@@ -23,6 +23,7 @@
         "azure/core/basic",
         "azure/core/lro/rpc-legacy",
         "azure/core/lro/standard",
+        "azure/core/scalar",
         "azure/core/traits",
         "azure/client-generator-core/access",
         "azure/client-generator-core/usage",
