@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -21,7 +20,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<ManagedHsmSku>(Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

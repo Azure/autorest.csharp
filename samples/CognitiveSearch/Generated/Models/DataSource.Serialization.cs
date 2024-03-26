@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -26,18 +25,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue(Credentials);
+            writer.WriteObjectValue<DataSourceCredentials>(Credentials);
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue(Container);
+            writer.WriteObjectValue<DataContainer>(Container);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                writer.WriteObjectValue(DataChangeDetectionPolicy);
+                writer.WriteObjectValue<DataChangeDetectionPolicy>(DataChangeDetectionPolicy);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                writer.WriteObjectValue(DataDeletionDetectionPolicy);
+                writer.WriteObjectValue<DataDeletionDetectionPolicy>(DataDeletionDetectionPolicy);
             }
             if (Optional.IsDefined(ETag))
             {

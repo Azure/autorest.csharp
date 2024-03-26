@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Accessibility_LowLevel;
 using Azure;
 using Azure.Core.TestFramework;
 

@@ -13,6 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -20,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -405,12 +407,13 @@ namespace AutoRest.CSharp.Output.Builders
                 var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
                 var shouldExcludeInWireSerialization = !schemaProperty.IsDiscriminator && property.InitializationValue is null && schemaProperty.IsReadOnly;
-                var serialization = BuildJsonSerialization(schemaProperty.Type, property.Declaration.Type, false, GetSerializationFormat(schemaProperty.Type, property.Declaration.Type));
+                var serialization = BuildJsonSerialization(schemaProperty.Type, property.Declaration.Type, false);
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                 TypedMemberExpression? enumerableExpression = null;
+
                 // TODO: handle this later
-                //if (property.InputModelProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                //if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
                 //{
                 //    enumerableExpression = property.Declaration.Type.IsNullable
                 //        ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
@@ -445,10 +448,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    if (objectTypeProperty.InputModelProperty != null)
-                    {
-                        propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
-                    }
+                    if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
+                        continue;
+                    propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
 
@@ -471,8 +473,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
-                var schemaProperty = property.InputModelProperty!; // we ensure this is not null when we build the array
-                IReadOnlyList<string>? flattenedNames = serializationMapping?.SerializationPath ?? schemaProperty.FlattenedNames;
+                IReadOnlyList<string>? flattenedNames = serializationMapping?.SerializationPath ?? property.InputModelProperty!.FlattenedNames;
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;

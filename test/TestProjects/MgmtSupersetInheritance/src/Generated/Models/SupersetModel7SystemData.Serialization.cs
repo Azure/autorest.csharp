@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {

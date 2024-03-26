@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -21,7 +20,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                writer.WriteObjectValue(ActiveDirectoryProperties);
+                writer.WriteObjectValue<ActiveDirectoryProperties>(ActiveDirectoryProperties);
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {

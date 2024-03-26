@@ -21,7 +21,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<PublicIPAddressSku>(Sku);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -58,7 +58,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(ServicePublicIPAddress))
             {
                 writer.WritePropertyName("servicePublicIPAddress"u8);
-                writer.WriteObjectValue(ServicePublicIPAddress);
+                writer.WriteObjectValue<PublicIPAddressData>(ServicePublicIPAddress);
             }
             if (Optional.IsDefined(MigrationPhase))
             {
@@ -68,7 +68,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(LinkedPublicIPAddress))
             {
                 writer.WritePropertyName("linkedPublicIPAddress"u8);
-                writer.WriteObjectValue(LinkedPublicIPAddress);
+                writer.WriteObjectValue<PublicIPAddressData>(LinkedPublicIPAddress);
             }
             if (Optional.IsDefined(DeleteOption))
             {

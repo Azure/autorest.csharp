@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using BodyAndPath_LowLevel;
 using NUnit.Framework;
 
 namespace BodyAndPath_LowLevel.Samples

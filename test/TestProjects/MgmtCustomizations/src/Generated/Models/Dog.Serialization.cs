@@ -6,16 +6,25 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
-    public partial class Dog : IUtf8JsonSerializable
+    public partial class Dog : IUtf8JsonSerializable, IJsonModel<Dog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dog>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Dog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Dog)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Jump))
             {
@@ -24,6 +33,11 @@ namespace MgmtCustomizations.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (options.Format != "W" && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             writer.WritePropertyName("size"u8);
             SerializeSizeProperty(writer);
             if (Optional.IsDefined(DateOfBirth))
@@ -31,8 +45,24 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                SerializeColorProperty(writer);
+            }
             writer.WritePropertyName("dog"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Bark))
@@ -40,13 +70,47 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("bark"u8);
                 SerializeBarkProperty(writer);
             }
+            if (Optional.IsDefined(Friend))
+            {
+                writer.WritePropertyName("friend"u8);
+                writer.WriteObjectValue<Pet>(Friend, options);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Dog DeserializeDog(JsonElement element)
+        Dog IJsonModel<Dog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Dog)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDog(document.RootElement, options);
+        }
+
+        internal static Dog DeserializeDog(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -56,7 +120,12 @@ namespace MgmtCustomizations.Models
             string name = default;
             int size = default;
             DateTimeOffset? dateOfBirth = default;
+            IDictionary<string, string> tags = default;
+            string color = default;
             string bark = default;
+            Pet friend = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jump"u8))
@@ -88,6 +157,20 @@ namespace MgmtCustomizations.Models
                     dateOfBirth = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
                 if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -97,6 +180,11 @@ namespace MgmtCustomizations.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("color"u8))
+                        {
+                            DeserializeColorProperty(property0, ref color);
+                            continue;
+                        }
                         if (property0.NameEquals("dog"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
@@ -111,20 +199,69 @@ namespace MgmtCustomizations.Models
                                     bark = property1.Value.GetString();
                                     continue;
                                 }
+                                if (property1.NameEquals("friend"u8))
+                                {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        continue;
+                                    }
+                                    friend = DeserializePet(property1.Value, options);
+                                    continue;
+                                }
                             }
                             continue;
                         }
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Dog(
                 kind,
                 name,
                 size,
                 dateOfBirth,
+                color,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
                 bark,
-                jump);
+                jump,
+                friend);
         }
+
+        BinaryData IPersistableModel<Dog>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(Dog)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Dog IPersistableModel<Dog>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Dog>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDog(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Dog)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Dog>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

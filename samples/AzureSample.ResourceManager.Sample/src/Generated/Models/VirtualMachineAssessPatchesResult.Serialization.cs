@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Sample;
+using Azure.ResourceManager;
 
 namespace AzureSample.ResourceManager.Sample.Models
 {
@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineAssessPatchesResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -65,14 +65,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Patches)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VirtualMachineSoftwarePatchProperties>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                writer.WriteObjectValue<ApiError>(Error, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -97,7 +97,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineAssessPatchesResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -218,111 +218,146 @@ namespace AzureSample.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Status))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Status), out propertyOverride);
+            if (Optional.IsDefined(Status) || hasPropertyOverride)
             {
-                builder.Append("  status:");
-                builder.AppendLine($" '{Status.Value.ToString()}'");
-            }
-
-            if (Optional.IsDefined(AssessmentActivityId))
-            {
-                builder.Append("  assessmentActivityId:");
-                if (AssessmentActivityId.Contains(Environment.NewLine))
+                builder.Append("  status: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AssessmentActivityId}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{AssessmentActivityId}'");
+                    builder.AppendLine($"'{Status.Value.ToString()}'");
                 }
             }
 
-            if (Optional.IsDefined(RebootPending))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AssessmentActivityId), out propertyOverride);
+            if (Optional.IsDefined(AssessmentActivityId) || hasPropertyOverride)
             {
-                builder.Append("  rebootPending:");
-                var boolValue = RebootPending.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(CriticalAndSecurityPatchCount))
-            {
-                builder.Append("  criticalAndSecurityPatchCount:");
-                builder.AppendLine($" {CriticalAndSecurityPatchCount.Value}");
-            }
-
-            if (Optional.IsDefined(OtherPatchCount))
-            {
-                builder.Append("  otherPatchCount:");
-                builder.AppendLine($" {OtherPatchCount.Value}");
-            }
-
-            if (Optional.IsDefined(StartOn))
-            {
-                builder.Append("  startDateTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
-            }
-
-            if (Optional.IsCollectionDefined(Patches))
-            {
-                if (Patches.Any())
+                builder.Append("  assessmentActivityId: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  patches:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Patches)
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AssessmentActivityId.Contains(Environment.NewLine))
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AssessmentActivityId}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{AssessmentActivityId}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Error))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RebootPending), out propertyOverride);
+            if (Optional.IsDefined(RebootPending) || hasPropertyOverride)
             {
-                builder.Append("  error:");
-                AppendChildObject(builder, Error, options, 2, false);
+                builder.Append("  rebootPending: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = RebootPending.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CriticalAndSecurityPatchCount), out propertyOverride);
+            if (Optional.IsDefined(CriticalAndSecurityPatchCount) || hasPropertyOverride)
+            {
+                builder.Append("  criticalAndSecurityPatchCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{CriticalAndSecurityPatchCount.Value}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OtherPatchCount), out propertyOverride);
+            if (Optional.IsDefined(OtherPatchCount) || hasPropertyOverride)
+            {
+                builder.Append("  otherPatchCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{OtherPatchCount.Value}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartOn), out propertyOverride);
+            if (Optional.IsDefined(StartOn) || hasPropertyOverride)
+            {
+                builder.Append("  startDateTime: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                    builder.AppendLine($"'{formattedDateTimeString}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Patches), out propertyOverride);
+            if (Optional.IsCollectionDefined(Patches) || hasPropertyOverride)
+            {
+                if (Patches.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  patches: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Patches)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  patches: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Error), out propertyOverride);
+            if (Optional.IsDefined(Error) || hasPropertyOverride)
+            {
+                builder.Append("  error: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, Error, options, 2, false, "  error: ");
+                }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineAssessPatchesResult>.Write(ModelReaderWriterOptions options)
@@ -336,7 +371,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -351,10 +386,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineAssessPatchesResult(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineAssessPatchesResult)} does not support reading '{options.Format}' format.");
             }
         }
 

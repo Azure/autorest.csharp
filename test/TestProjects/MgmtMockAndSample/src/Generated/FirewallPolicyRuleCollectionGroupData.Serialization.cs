@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
                 writer.WriteStartArray();
                 foreach (var item in RuleCollections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyRuleCollection>(item);
                 }
                 writer.WriteEndArray();
             }

@@ -4,12 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -25,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         // TODO -- this type provider is temprorarily an inner class therefore it is not singleton yet. We need to change this to singleton when we decide to emit the entire TypeFormatters class.
         internal TypeFormattersProvider(ExpressionTypeProvider declaringTypeProvider) : base(Configuration.HelperNamespace, null)
         {
-            DeclarationModifiers = TypeSignatureModifiers.Private | TypeSignatureModifiers.Static;
+            DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             DeclaringTypeProvider = declaringTypeProvider;
         }
 
@@ -53,8 +55,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildFromBase64UrlString();
             yield return BuildParseDateTimeOffsetMethod();
             yield return BuildParseTimeSpanMethod();
+            yield return BuildConvertToStringMethod();
         }
 
+        private readonly ValueExpression _invariantCultureExpression = new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture));
         private const string _toStringMethodName = "ToString";
 
         private IEnumerable<Method> BuildToStringMethods()
@@ -93,16 +97,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             };
             var dateTimeOffsetValue = new DateTimeOffsetExpression(dateTimeOffsetParameter);
             var roundtripZFormat = new StringExpression(_roundtripZFormatField);
-            var invariantCultureExpression = new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture));
             yield return new Method(dateTimeOffsetSignature,
                 new SwitchExpression(format, new SwitchCaseExpression[]
                 {
-                    new(Literal("D"), dateTimeOffsetValue.InvokeToString(Literal("yyyy-MM-dd"), invariantCultureExpression)),
-                    new(Literal("U"), dateTimeOffsetValue.ToUnixTimeSeconds().InvokeToString(invariantCultureExpression)),
-                    new(Literal("O"), dateTimeOffsetValue.ToUniversalTime().InvokeToString(roundtripZFormat, invariantCultureExpression)),
-                    new(Literal("o"), dateTimeOffsetValue.ToUniversalTime().InvokeToString(roundtripZFormat, invariantCultureExpression)),
-                    new(Literal("R"), dateTimeOffsetValue.InvokeToString(Literal("r"), invariantCultureExpression)),
-                    SwitchCaseExpression.Default(dateTimeOffsetValue.InvokeToString(format, invariantCultureExpression))
+                    new(Literal("D"), dateTimeOffsetValue.InvokeToString(Literal("yyyy-MM-dd"), _invariantCultureExpression)),
+                    new(Literal("U"), dateTimeOffsetValue.ToUnixTimeSeconds().InvokeToString(_invariantCultureExpression)),
+                    new(Literal("O"), dateTimeOffsetValue.ToUniversalTime().InvokeToString(roundtripZFormat, _invariantCultureExpression)),
+                    new(Literal("o"), dateTimeOffsetValue.ToUniversalTime().InvokeToString(roundtripZFormat, _invariantCultureExpression)),
+                    new(Literal("R"), dateTimeOffsetValue.InvokeToString(Literal("r"), _invariantCultureExpression)),
+                    SwitchCaseExpression.Default(dateTimeOffsetValue.InvokeToString(format, _invariantCultureExpression))
                 }));
 
             var timeSpanParameter = boolValueParameter with { Type = typeof(TimeSpan) };
@@ -115,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 new SwitchExpression(format, new SwitchCaseExpression[]
                 {
                     new(Literal("P"), new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToString), new[] {timeSpanValue})),
-                    SwitchCaseExpression.Default(timeSpanValue.InvokeToString(format, invariantCultureExpression))
+                    SwitchCaseExpression.Default(timeSpanValue.InvokeToString(format, _invariantCultureExpression))
                 }));
 
             var byteArrayParameter = boolValueParameter with { Type = typeof(byte[]) };
@@ -133,7 +136,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }));
         }
 
-        public StringExpression ToString(BoolExpression value)
+        public StringExpression ToString(ValueExpression value)
             => new(new InvokeStaticMethodExpression(Type, _toStringMethodName, new[] { value }));
 
         public StringExpression ToString(ValueExpression value, ValueExpression format)
@@ -228,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }, new IfElseStatement(new IfStatement(Equal(ch, Literal('_')))
                     {
                         Assign(new IndexerExpression(output, i), Literal('/'))
-                    }, Assign<ValueExpression>(new IndexerExpression(output, i), ch)))
+                    }, Assign(new IndexerExpression(output, i), ch)))
                 },
                 EmptyLine,
                 new ForStatement(null, LessThan(i, outputLength), new UnaryOperatorExpression("++", i, true))
@@ -295,5 +298,60 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TimeSpanExpression ParseTimeSpan(ValueExpression value, ValueExpression format)
             => new(new InvokeStaticMethodExpression(Type, _parseTimeSpanMethodName, new[] { value, format }));
+
+        private const string _convertToStringMethodName = "ConvertToString";
+        private Method BuildConvertToStringMethod()
+        {
+            var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
+            var nullableStringType = new CSharpType(typeof(string), true);
+            var formatParameter = new Parameter("format", null, nullableStringType, Constant.Default(nullableStringType), ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: _convertToStringMethodName,
+                Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
+                Parameters: new[] { valueParameter, formatParameter },
+                ReturnType: typeof(string),
+                Summary: null, Description: null, ReturnDescription: null);
+
+            var value = (ValueExpression)valueParameter;
+            var format = new StringExpression(formatParameter);
+            var body = new SwitchExpression(value, new SwitchCaseExpression[]
+            {
+                new SwitchCaseExpression(Null, Literal("null")),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(string), "s", out var s), s),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(bool), "b", out var b), ToString(b)),
+                new SwitchCaseExpression(GetTypePattern(new CSharpType[] {typeof(int),typeof(float), typeof(double), typeof(long), typeof(decimal)}), value.CastTo(typeof(IFormattable)).Invoke(nameof(IFormattable.ToString), _defaultNumberFormatField, _invariantCultureExpression)),
+                // TODO -- figure out how to write this line
+                SwitchCaseExpression.When(new DeclarationExpression(typeof(byte[]), "b", out var bytes), NotEqual(format, Null), ToString(bytes, format)),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(IEnumerable<string>), "s", out var enumerable), StringExpression.Join(Literal(","), enumerable)),
+                SwitchCaseExpression.When(new DeclarationExpression(typeof(DateTimeOffset), "dateTime", out var dateTime), NotEqual(format, Null), ToString(dateTime, format)),
+                SwitchCaseExpression.When(new DeclarationExpression(typeof(TimeSpan), "timeSpan", out var timeSpan), NotEqual(format, Null), ToString(timeSpan, format)),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(TimeSpan), "timeSpan", out var timeSpanNoFormat), new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToString), new[] { timeSpanNoFormat })),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(Guid), "guid", out var guid), guid.InvokeToString()),
+                new SwitchCaseExpression(new DeclarationExpression(typeof(BinaryData), "binaryData", out var binaryData), ConvertToString(new BinaryDataExpression(binaryData).ToArray(), format)),
+                SwitchCaseExpression.Default(value.InvokeToString())
+            });
+
+            return new(signature, body);
+        }
+
+        private static ValueExpression GetTypePattern(IReadOnlyList<CSharpType> types)
+        {
+            ValueExpression result = types[^1];
+
+            for (int i = types.Count - 2; i >= 0; i--)
+            {
+                result = new BinaryOperatorExpression(" or ", types[i], result); // chain them together
+            }
+
+            return result;
+        }
+
+        public StringExpression ConvertToString(ValueExpression value, ValueExpression? format = null)
+        {
+            var arguments = format != null
+                ? new[] { value, format }
+                : new[] { value };
+            return new(new InvokeStaticMethodExpression(Type, _convertToStringMethodName, arguments));
+        }
     }
 }

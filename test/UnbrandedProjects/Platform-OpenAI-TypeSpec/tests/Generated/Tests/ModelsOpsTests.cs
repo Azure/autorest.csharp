@@ -5,16 +5,16 @@
 using System;
 using System.ClientModel;
 using NUnit.Framework;
-using OpenAI;
 
 namespace OpenAI.Tests
 {
     public partial class ModelsOpsTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             ModelsOps client = new OpenAIClient(credential).GetModelsOpsClient();
             Assert.IsNotNull(client);
         }

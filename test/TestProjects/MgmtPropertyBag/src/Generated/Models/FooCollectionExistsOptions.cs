@@ -7,7 +7,6 @@
 
 using System;
 using Azure;
-using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
 {

@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using custom_baseUrl_paging;
 
 namespace custom_baseUrl_paging.Models
 {
@@ -23,7 +22,7 @@ namespace custom_baseUrl_paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProductProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +59,7 @@ namespace custom_baseUrl_paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProductProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -113,7 +112,7 @@ namespace custom_baseUrl_paging.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ProductProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -129,7 +128,7 @@ namespace custom_baseUrl_paging.Models
                         return DeserializeProductProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ProductProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductProperties)} does not support reading '{options.Format}' format.");
             }
         }
 

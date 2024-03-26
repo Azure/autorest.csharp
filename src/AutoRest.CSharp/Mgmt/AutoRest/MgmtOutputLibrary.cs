@@ -74,9 +74,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>> ChildOperations { get; }
 
         private readonly InputNamespace _input;
-
-        private readonly Dictionary<InputType, TypeProvider> _schemaToModels = new Dictionary<InputType, TypeProvider>(ReferenceEqualityComparer.Instance);
-        private readonly Lazy<Dictionary<string, TypeProvider>> _nameToModels;
+        private Dictionary<InputType, TypeProvider> _schemaToModels = new();
+        private Lazy<IReadOnlyDictionary<string, TypeProvider>> _schemaNameToModels;
 
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
@@ -110,14 +109,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureResourceSchemaMap);
             SchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureSchemaMap);
             ChildOperations = new Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>>(EnsureResourceChildOperations);
-            _nameToModels = new Lazy<Dictionary<string, TypeProvider>>(EnsureNameToModelsMap);
+            _schemaNameToModels = new Lazy<IReadOnlyDictionary<string, TypeProvider>>(EnsureSchemaNameToModels);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
         }
 
-        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>(ReferenceEqualityComparer.Instance);
+        private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
+
+        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
@@ -781,7 +782,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            _nameToModels.Value.TryGetValue(originalName, out TypeProvider? provider);
+            _schemaNameToModels.Value.TryGetValue(originalName, out TypeProvider? provider);
 
             // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
             provider ??= _schemaToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
@@ -791,7 +792,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
         {
-            if (_nameToModels.Value.TryGetValue(originalName, out provider))
+            if (_schemaNameToModels.Value.TryGetValue(originalName, out provider))
                 return true;
 
             provider = ResourceSchemaMap.Value.Values.FirstOrDefault(m => m.Type.Name == originalName);

@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -22,7 +21,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            writer.WriteObjectValue<DeploymentWhatIfProperties>(Properties);
             writer.WriteEndObject();
         }
     }

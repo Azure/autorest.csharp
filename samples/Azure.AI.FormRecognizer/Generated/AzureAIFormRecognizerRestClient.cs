@@ -10,7 +10,6 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.AI.FormRecognizer.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -50,7 +49,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(trainRequest);
+            content.JsonWriter.WriteObjectValue<TrainContent>(trainRequest);
             request.Content = content;
             return message;
         }
@@ -305,7 +304,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue<SourcePath>(fileStream);
                 request.Content = content;
             }
             return message;
@@ -429,7 +428,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(copyRequest);
+            content.JsonWriter.WriteObjectValue<CopyContent>(copyRequest);
             request.Content = content;
             return message;
         }
@@ -687,7 +686,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue<SourcePath>(fileStream);
                 request.Content = content;
             }
             return message;
@@ -862,7 +861,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue<SourcePath>(fileStream);
                 request.Content = content;
             }
             return message;

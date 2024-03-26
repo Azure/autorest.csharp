@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using head_LowLevel;
 
 namespace head_LowLevel.Samples
 {

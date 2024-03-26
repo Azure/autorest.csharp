@@ -4,9 +4,7 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -18,16 +16,13 @@ namespace OpenAI
     public partial class Images
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of Images for mocking. </summary>
         protected Images()
@@ -35,13 +30,11 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of Images. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal Images(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        internal Images(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
-            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -51,28 +44,28 @@ namespace OpenAI
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<Result<ImagesResponse>> CreateAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = await CreateAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = await CreateAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an image given a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual Result<ImagesResponse> Create(CreateImageRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> Create(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = Create(content, context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = Create(content, context);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -93,24 +86,14 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -131,52 +114,42 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Create(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<Result<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = await CreateEditAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = await CreateEditAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual Result<ImagesResponse> CreateEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> CreateEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = CreateEdit(content, context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = CreateEdit(content, context);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -197,24 +170,14 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateEditAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateEditAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.CreateEdit");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateEditRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateEditRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -235,52 +198,42 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result CreateEdit(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult CreateEdit(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.CreateEdit");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateEditRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateEditRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<Result<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = await CreateVariationAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = await CreateVariationAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual Result<ImagesResponse> CreateVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> CreateVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = image.ToRequestBody();
-            Result result = CreateVariation(content, context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = image.ToBinaryBody();
+            ClientResult result = CreateVariation(content, context);
+            return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -301,24 +254,14 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateVariationAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateVariationAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.CreateVariation");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateVariationRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateVariationRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -339,67 +282,72 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result CreateVariation(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult CreateVariation(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Images.CreateVariation");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateVariationRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateVariationRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
-        internal PipelineMessage CreateCreateRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/generations", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateCreateEditRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateEditRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/edits", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("content-type", "multipart/form-data");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateCreateVariationRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/variations", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("content-type", "multipart/form-data");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
             return message;
         }
@@ -415,7 +363,7 @@ namespace OpenAI
             return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200;
-        private static ResponseErrorClassifier ResponseErrorClassifier200 => _responseErrorClassifier200 ??= new StatusResponseClassifier(stackalloc ushort[] { 200 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
     }
 }

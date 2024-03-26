@@ -26,8 +26,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="optionalInt"> Optional int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredInt"> Required int. </param>
-        /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
-        /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
+        /// <param name="additionalSerializableProperty"></param>
+        /// <param name="additionalNullableSerializableProperty"></param>
         internal ModelToAddAdditionalSerializableProperty(int requiredIntOnBase, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData, int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty) : base(requiredIntOnBase, optionalInt, serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;

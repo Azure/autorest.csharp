@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using lro;
 
 namespace lro.Models
 {
@@ -23,7 +22,7 @@ namespace lro.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -94,7 +93,7 @@ namespace lro.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -206,7 +205,7 @@ namespace lro.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -222,7 +221,7 @@ namespace lro.Models
                         return DeserializeProduct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support reading '{options.Format}' format.");
             }
         }
 

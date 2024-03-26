@@ -122,6 +122,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             return stack;
         }
 
+        public virtual IEnumerable<string>? FlattenedNames => InputModelProperty?.FlattenedNames;
+
+        public string GetWirePath()
+        {
+            string? wrapper = FlattenedNames?.FirstOrDefault();
+            wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
+            return $"{wrapper}{SerializedName}";
+        }
+
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
         {
             String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();

@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -40,7 +39,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in BlobIndexMatch)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<TagFilter>(item);
                 }
                 writer.WriteEndArray();
             }

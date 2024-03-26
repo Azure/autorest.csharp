@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -17,7 +17,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChatCompletionFunctionCallOption>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -46,7 +46,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChatCompletionFunctionCallOption>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,7 +89,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -105,7 +105,7 @@ namespace OpenAI.Models
                         return DeserializeChatCompletionFunctionCallOption(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChatCompletionFunctionCallOption)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -120,11 +120,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

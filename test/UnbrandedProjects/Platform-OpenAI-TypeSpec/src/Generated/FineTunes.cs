@@ -4,9 +4,7 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -18,16 +16,13 @@ namespace OpenAI
     public partial class FineTunes
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of FineTunes for mocking. </summary>
         protected FineTunes()
@@ -35,13 +30,11 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of FineTunes. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal FineTunes(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        internal FineTunes(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
-            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -58,14 +51,14 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<Result<FineTune>> CreateAsync(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> CreateAsync(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = fineTune.ToRequestBody();
-            Result result = await CreateAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = fineTune.ToBinaryBody();
+            ClientResult result = await CreateAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -79,14 +72,14 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual Result<FineTune> Create(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Create(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = fineTune.ToRequestBody();
-            Result result = Create(content, context);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = fineTune.ToBinaryBody();
+            ClientResult result = Create(content, context);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -111,25 +104,15 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -154,45 +137,35 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual Result Create(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [Obsolete("deprecated")]
-        public virtual async Task<Result<ListFineTunesResponse>> GetFineTunesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await GetFineTunesAsync(context).ConfigureAwait(false);
-            return Result.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await GetFineTunesAsync(context).ConfigureAwait(false);
+            return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [Obsolete("deprecated")]
-        public virtual Result<ListFineTunesResponse> GetFineTunes(CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListFineTunesResponse> GetFineTunes(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = GetFineTunes(context);
-            return Result.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = GetFineTunes(context);
+            return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -211,23 +184,13 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<Result> GetFineTunesAsync(RequestOptions context)
+        public virtual async Task<ClientResult> GetFineTunesAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetFineTunes");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetFineTunesRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetFineTunesRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -246,23 +209,13 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual Result GetFineTunes(RequestOptions context)
+        public virtual ClientResult GetFineTunes(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetFineTunes");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetFineTunesRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetFineTunesRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -275,13 +228,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<Result<FineTune>> RetrieveAsync(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> RetrieveAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await RetrieveAsync(fineTuneId, context).ConfigureAwait(false);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await RetrieveAsync(fineTuneId, context).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -294,13 +247,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual Result<FineTune> Retrieve(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Retrieve(string fineTuneId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = Retrieve(fineTuneId, context);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = Retrieve(fineTuneId, context);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -324,25 +277,15 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<Result> RetrieveAsync(string fineTuneId, RequestOptions context)
+        public virtual async Task<ClientResult> RetrieveAsync(string fineTuneId, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Retrieve");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -366,25 +309,15 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual Result Retrieve(string fineTuneId, RequestOptions context)
+        public virtual ClientResult Retrieve(string fineTuneId, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Retrieve");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Get fine-grained status updates for a fine-tune job. </summary>
@@ -402,13 +335,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<Result<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await GetEventsAsync(fineTuneId, stream, context).ConfigureAwait(false);
-            return Result.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await GetEventsAsync(fineTuneId, stream, context).ConfigureAwait(false);
+            return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get fine-grained status updates for a fine-tune job. </summary>
@@ -426,13 +359,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual Result<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = GetEvents(fineTuneId, stream, context);
-            return Result.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = GetEvents(fineTuneId, stream, context);
+            return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -463,25 +396,15 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<Result> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions context)
+        public virtual async Task<ClientResult> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetEvents");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -512,25 +435,15 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual Result GetEvents(string fineTuneId, bool? stream, RequestOptions context)
+        public virtual ClientResult GetEvents(string fineTuneId, bool? stream, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetEvents");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
@@ -539,13 +452,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<Result<FineTune>> CancelAsync(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> CancelAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CancelAsync(fineTuneId, context).ConfigureAwait(false);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await CancelAsync(fineTuneId, context).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
@@ -554,13 +467,13 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual Result<FineTune> Cancel(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Cancel(string fineTuneId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = Cancel(fineTuneId, context);
-            return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = Cancel(fineTuneId, context);
+            return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -582,25 +495,15 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<Result> CancelAsync(string fineTuneId, RequestOptions context)
+        public virtual async Task<ClientResult> CancelAsync(string fineTuneId, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Cancel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -622,75 +525,85 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual Result Cancel(string fineTuneId, RequestOptions context)
+        public virtual ClientResult Cancel(string fineTuneId, RequestOptions context)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTunes.Cancel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
-        internal PipelineMessage CreateCreateRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateGetFineTunesRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateRetrieveRequest(string fineTuneId, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateGetEventsRequest(string fineTuneId, bool? stream, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
@@ -700,22 +613,27 @@ namespace OpenAI
                 uri.AppendQuery("stream", stream.Value, true);
             }
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateCancelRequest(string fineTuneId, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
@@ -730,7 +648,7 @@ namespace OpenAI
             return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200;
-        private static ResponseErrorClassifier ResponseErrorClassifier200 => _responseErrorClassifier200 ??= new StatusResponseClassifier(stackalloc ushort[] { 200 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
     }
 }

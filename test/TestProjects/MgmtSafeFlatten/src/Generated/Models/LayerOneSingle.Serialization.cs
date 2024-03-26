@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
@@ -19,7 +18,7 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                writer.WriteObjectValue(LayerTwo);
+                writer.WriteObjectValue<LayerTwoSingle>(LayerTwo);
             }
             writer.WriteEndObject();
         }

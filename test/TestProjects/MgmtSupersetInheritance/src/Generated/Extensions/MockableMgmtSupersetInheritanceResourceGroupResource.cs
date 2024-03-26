@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using MgmtSupersetInheritance;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance.Mocking

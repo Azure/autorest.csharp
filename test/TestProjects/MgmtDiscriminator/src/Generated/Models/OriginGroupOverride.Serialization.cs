@@ -8,11 +8,12 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
-using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -25,7 +26,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<OriginGroupOverride>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -62,7 +63,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<OriginGroupOverride>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -113,55 +114,64 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
 
-            if (Optional.IsDefined(OriginGroup))
+            if (propertyOverrides != null)
             {
-                builder.Append("  originGroup:");
-                AppendChildObject(builder, OriginGroup, options, 2, false);
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
             }
 
-            if (Optional.IsDefined(ForwardingProtocol))
+            builder.AppendLine("{");
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroup), out propertyOverride);
+            if (Optional.IsDefined(OriginGroup) || hasPropertyOverride)
             {
-                builder.Append("  forwardingProtocol:");
-                builder.AppendLine($" '{ForwardingProtocol.Value.ToString()}'");
+                builder.Append("  originGroup: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, OriginGroup, options, 2, false, "  originGroup: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride);
+            if (Optional.IsDefined(ForwardingProtocol) || hasPropertyOverride)
+            {
+                builder.Append("  forwardingProtocol: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ForwardingProtocol.Value.ToString()}'");
+                }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
         {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var item in propertyOverrides.ToList())
             {
-                string line = lines[i];
-                if (inMultilineString)
+                switch (item.Key)
                 {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($" {line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
+                    case "OriginGroupId":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("Id", item.Value);
+                        bicepOptions.PropertyOverrides.Add(OriginGroup, propertyDictionary);
+                        break;
+                    default:
+                        continue;
                 }
             }
         }
@@ -177,7 +187,7 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -192,10 +202,8 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeOriginGroupOverride(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support reading '{options.Format}' format.");
             }
         }
 

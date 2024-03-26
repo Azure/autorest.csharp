@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel.Primitives;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             DefaultName = Configuration.IsBranded ? "Utf8JsonRequestContent" : "Utf8JsonRequestBody";
-            Inherits = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
+            Inherits = Configuration.ApiTypes.RequestContentType;
 
             _streamField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly,
@@ -46,8 +46,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 name: _jsonWriterName,
                 propertyBody: new AutoPropertyBody(false));
         }
-
-        private readonly string Create = Configuration.IsBranded ? nameof(RequestContent.Create) : nameof(RequestBody.CreateFromStream);
 
         private readonly FieldDeclaration _streamField;
         private readonly FieldDeclaration _contentField;
@@ -80,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var body = new MethodBodyStatement[]
             {
                 Assign(stream, New.Instance(typeof(MemoryStream))),
-                Assign(content, new InvokeStaticMethodExpression(null, Create, new[] { stream })),
+                Assign(content, new InvokeStaticMethodExpression(null, Configuration.ApiTypes.RequestContentCreateName, new[] { stream })),
                 Assign(writer, New.Instance(typeof(Utf8JsonWriter), stream))
             };
             yield return new Method(signature, body);
@@ -99,9 +97,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private const string _jsonWriterName = "JsonWriter";
 
-        private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(RequestBody.WriteToAsync);
-        private static readonly string WriteTo = Configuration.IsBranded ? nameof(RequestContent.WriteTo) : nameof(RequestBody.WriteTo);
-        private static readonly string TryComputeLength = Configuration.IsBranded ? nameof(RequestContent.TryComputeLength) : nameof(RequestBody.TryComputeLength);
+        private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(BinaryContent.WriteToAsync);
+        private static readonly string WriteTo = Configuration.IsBranded ? nameof(RequestContent.WriteTo) : nameof(BinaryContent.WriteTo);
+        private static readonly string TryComputeLength = Configuration.IsBranded ? nameof(RequestContent.TryComputeLength) : nameof(BinaryContent.TryComputeLength);
         private static readonly string Dispose = nameof(IDisposable.Dispose);
 
         private Method BuildWriteToAsyncMethod()
@@ -181,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var stream = new StreamExpression(_streamField);
             TypedValueExpression content = Configuration.IsBranded
                 ? new RequestContentExpression(_contentField)
-                : new RequestBodyExpression(_contentField);
+                : new BinaryContentExpression(_contentField);
             var writer = new Utf8JsonWriterExpression(_writerProperty);
             var body = new MethodBodyStatement[]
             {
