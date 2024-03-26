@@ -28,7 +28,7 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteStringValue(Property);
+            writer.WriteStringValue(Property.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -67,14 +67,14 @@ namespace _Type.Property.ValueTypes.Models
             {
                 return null;
             }
-            string property = default;
+            ExtendedEnum property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = property0.Value.GetString();
+                    property = new ExtendedEnum(property0.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")

@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
         {
-            var parameter = BuildParameter(operationParameter, operationParameter is { Kind: InputOperationParameterKind.Client, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.EnumValueType).FrameworkType : null);
+            var parameter = BuildParameter(operationParameter);
             if (!operationParameter.IsEndpoint)
             {
                 return parameter;
@@ -498,7 +498,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) :
+                // for apiVersion, we still convert enum type to enum value type
+                operationParameter is { IsApiVersion: true, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.EnumValueType) : _typeFactory.CreateType(operationParameter.Type);
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
         }
 

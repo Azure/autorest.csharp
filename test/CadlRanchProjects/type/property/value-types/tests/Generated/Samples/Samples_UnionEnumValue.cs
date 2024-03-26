@@ -138,7 +138,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-            UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+            UnionEnumValueProperty body = new UnionEnumValueProperty(ExtendedEnum.EnumValue2);
             Response response = client.Put(body);
         }
 
@@ -148,7 +148,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-            UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+            UnionEnumValueProperty body = new UnionEnumValueProperty(ExtendedEnum.EnumValue2);
             Response response = await client.PutAsync(body);
         }
 
@@ -188,7 +188,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-            UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+            UnionEnumValueProperty body = new UnionEnumValueProperty(ExtendedEnum.EnumValue2);
             Response response = client.Put(body);
         }
 
@@ -198,7 +198,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-            UnionEnumValueProperty body = new UnionEnumValueProperty("value2");
+            UnionEnumValueProperty body = new UnionEnumValueProperty(ExtendedEnum.EnumValue2);
             Response response = await client.PutAsync(body);
         }
     }

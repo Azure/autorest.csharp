@@ -131,6 +131,9 @@ namespace AutoRest.CSharp.Output.Models
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)
             => GetFieldByParameter(parameter.Name, parameter.Type);
 
+        public FieldDeclaration? GetFieldByName(string name)
+            => _parameterNamesToFields.TryGetValue(name, out FieldDeclaration? field) ? field : null;
+
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _fields.GetEnumerator();
         public int Count => _fields.Count;

@@ -650,7 +650,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
-                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
+                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByName(parameter.Name);
                 if (field == null)
                 {
                     throw new InvalidOperationException($"Parameter '{parameter.Name}' should have matching field");

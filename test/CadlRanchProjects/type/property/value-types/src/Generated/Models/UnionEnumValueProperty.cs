@@ -47,18 +47,15 @@ namespace _Type.Property.ValueTypes.Models
 
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
-        public UnionEnumValueProperty(string property)
+        public UnionEnumValueProperty(ExtendedEnum property)
         {
-            Argument.AssertNotNull(property, nameof(property));
-
             Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnionEnumValueProperty(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UnionEnumValueProperty(ExtendedEnum property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -70,6 +67,6 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Property. </summary>
-        public string Property { get; set; }
+        public ExtendedEnum Property { get; set; }
     }
 }

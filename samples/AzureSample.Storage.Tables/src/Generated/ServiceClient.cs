@@ -30,9 +30,9 @@ namespace AzureSample.Storage.Tables
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="url"> The URL of the service account or table that is the targe of the desired operation. </param>
-        /// <param name="version"> Specifies the version of the operation to use for this request. Allowed values: "2018-10-10". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="url"/> or <paramref name="version"/> is null. </exception>
-        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version)
+        /// <param name="version"> Specifies the version of the operation to use for this request. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, Enum0 version)
         {
             RestClient = new ServiceRestClient(clientDiagnostics, pipeline, url, version);
             _clientDiagnostics = clientDiagnostics;

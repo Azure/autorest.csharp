@@ -18,7 +18,7 @@ namespace MultipleInputFiles
     internal partial class MultipleInputFilesRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _source;
+        private readonly Source _source;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -26,14 +26,13 @@ namespace MultipleInputFiles
         /// <summary> Initializes a new instance of MultipleInputFilesRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="source"> source - server parameter. The default value is "value1". Allowed values: "us" | "eu". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="source"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="source"/> is an empty string, and was expected to be non-empty. </exception>
-        public MultipleInputFilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string source)
+        /// <param name="source"> source - server parameter. The default value is "value1". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
+        public MultipleInputFilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source source)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            _source = source ?? throw new ArgumentNullException(nameof(source));
+            _source = source;
         }
 
         internal HttpMessage CreateOperation1Request(TestModel value)
@@ -43,7 +42,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(_source, true);
+            uri.AppendRaw(_source.ToString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation1", false);
             request.Uri = uri;
@@ -103,7 +102,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(_source, true);
+            uri.AppendRaw(_source.ToString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation2", false);
             request.Uri = uri;
