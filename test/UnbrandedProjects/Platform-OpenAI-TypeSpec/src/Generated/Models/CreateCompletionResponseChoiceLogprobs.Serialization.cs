@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -206,11 +207,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue<CreateCompletionResponseChoiceLogprobs>(this, new ModelReaderWriterOptions("W"));
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

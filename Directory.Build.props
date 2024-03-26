@@ -9,7 +9,7 @@
     <FakeAzureCoreTestFrameworkSources>$(MSBuildThisFileDirectory)/src/assets/TestFramework/</FakeAzureCoreTestFrameworkSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
     <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
-    <NoWarn>$(NoWarn);NU5105;BicepModelReaderWriterOptions</NoWarn>
+    <NoWarn>$(NoWarn);NU5105;AZPROVISION001</NoWarn>
     <!-- Test client libraries won't be in the approved namespace list -->
     <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0001</NoWarn>
     <!-- Test client libraries can have single word class names -->

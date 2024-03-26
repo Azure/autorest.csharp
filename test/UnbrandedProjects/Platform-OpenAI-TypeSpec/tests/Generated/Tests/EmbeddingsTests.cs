@@ -11,9 +11,10 @@ namespace OpenAI.Tests
     public partial class EmbeddingsTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             Embeddings client = new OpenAIClient(credential).GetEmbeddingsClient();
             Assert.IsNotNull(client);
         }

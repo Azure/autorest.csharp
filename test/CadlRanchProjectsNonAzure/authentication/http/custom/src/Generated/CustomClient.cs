@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading.Tasks;
 
 namespace Scm.Authentication.Http.Custom
@@ -15,16 +14,13 @@ namespace Scm.Authentication.Http.Custom
     public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "SharedAccessKey";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of CustomClient for mocking. </summary>
         protected CustomClient()
@@ -34,7 +30,7 @@ namespace Scm.Authentication.Http.Custom
         /// <summary> Initializes a new instance of CustomClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public CustomClient(KeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new CustomClientOptions())
+        public CustomClient(ApiKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new CustomClientOptions())
         {
         }
 
@@ -43,15 +39,14 @@ namespace Scm.Authentication.Http.Custom
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CustomClient(Uri endpoint, KeyCredential credential, CustomClientOptions options)
+        public CustomClient(Uri endpoint, ApiKeyCredential credential, CustomClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CustomClientOptions();
 
-            ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
-            _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<PipelinePolicy>());
             _endpoint = endpoint;
         }
 
@@ -67,22 +62,12 @@ namespace Scm.Authentication.Http.Custom
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> ValidAsync(RequestOptions context = null)
+        public virtual async Task<ClientResult> ValidAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Valid");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateValidRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateValidRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -97,22 +82,12 @@ namespace Scm.Authentication.Http.Custom
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Valid(RequestOptions context = null)
+        public virtual ClientResult Valid(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Valid");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateValidRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateValidRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -127,22 +102,12 @@ namespace Scm.Authentication.Http.Custom
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> InvalidAsync(RequestOptions context = null)
+        public virtual async Task<ClientResult> InvalidAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Invalid");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateInvalidRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateInvalidRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -157,51 +122,51 @@ namespace Scm.Authentication.Http.Custom
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Invalid(RequestOptions context = null)
+        public virtual ClientResult Invalid(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Invalid");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateInvalidRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateInvalidRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         internal PipelineMessage CreateValidRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.SetMethod("GET");
+            request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/http/custom/valid", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateInvalidRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.SetMethod("GET");
+            request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier204;
-        private static ResponseErrorClassifier ResponseErrorClassifier204 => _responseErrorClassifier204 ??= new StatusResponseClassifier(stackalloc ushort[] { 204 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier204;
+        private static PipelineMessageClassifier PipelineMessageClassifier204 => _pipelineMessageClassifier204 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 204 });
     }
 }
