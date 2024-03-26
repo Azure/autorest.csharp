@@ -262,6 +262,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                             // but we still need to add it to the method argument list as a `default`
                             methodArguments.Add(Default);
                             continue;
+                        case { IsFrameworkType: true, FrameworkType: { } frameworkType } when frameworkType == typeof(string):
+                            overriddenDefaultValue = new Constant("Unknown", typeof(string));
+                            break;
                         default:
                             break;
                     }
