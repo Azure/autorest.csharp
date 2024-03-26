@@ -52,6 +52,7 @@ namespace MgmtCustomizations.Models
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         protected Pet()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
@@ -62,13 +63,17 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="color"></param>
+        /// <param name="tags"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Pet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string color, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Name = name;
             Size = size;
             DateOfBirth = dateOfBirth;
+            Color = color;
+            Tags = tags;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
