@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using AnomalyDetector.Models;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -65,16 +64,24 @@ namespace AnomalyDetector
         }
 
         /// <summary> Initializes a new instance of Univariate. </summary>
-        /// <param name="apiVersion"> Api Version. </param>
-        public virtual Univariate GetUnivariateClient(APIVersion? apiVersion = null)
+        /// <param name="apiVersion"> Api Version. Allowed values: "v1.1". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Univariate GetUnivariateClient(string apiVersion = "v1.1")
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             return new Univariate(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Multivariate. </summary>
-        /// <param name="apiVersion"> Api Version. </param>
-        public virtual Multivariate GetMultivariateClient(APIVersion? apiVersion = null)
+        /// <param name="apiVersion"> Api Version. Allowed values: "v1.1". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Multivariate GetMultivariateClient(string apiVersion = "v1.1")
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             return new Multivariate(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, apiVersion);
         }
     }

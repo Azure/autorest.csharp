@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Server.Path.Multiple.Models;
 
 namespace Server.Path.Multiple
 {
@@ -196,7 +195,7 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion.Value.ToString(), true);
+            uri.AppendRaw(_apiVersion, true);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -211,7 +210,7 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion.Value.ToString(), true);
+            uri.AppendRaw(_apiVersion, true);
             uri.AppendPath("/", false);
             uri.AppendPath(keyword, true);
             request.Uri = uri;
