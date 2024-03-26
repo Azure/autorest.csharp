@@ -1,4 +1,5 @@
 using System;
+using System.Buffers.Text;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -6,6 +7,7 @@ using Azure;
 using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace CadlRanchProjects.Tests
 {
@@ -129,7 +131,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need to fix cadl-ranch issue.")]
         public Task Encode_Bytes_RequestBody_octetStream() => Test(async (host) =>
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
@@ -138,7 +139,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need to fix cadl-ranch issue.")]
         public Task Encode_Bytes_RequestBody_customContentType() => Test(async (host) =>
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
@@ -160,6 +160,43 @@ namespace CadlRanchProjects.Tests
             BinaryData data = new BinaryData($"\"{Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("test")).Replace('+', '-').Replace('/', '_').Replace("=", "")}\"");
             Response response = await new BytesClient(host, null).GetRequestBodyClient().Base64urlAsync(data);
             Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
+        {
+            var response = await new BytesClient(host, null).GetResponseBodyClient().DefaultAsync();
+            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA=="), response.Value);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_octetStream() => Test(async (host) =>
+        {
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
+            var response = await new BytesClient(host, null).GetResponseBodyClient().OctetStreamAsync();
+            BinaryData.Equals(data, response.Value);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_customContentType() => Test(async (host) =>
+        {
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
+            var response = await new BytesClient(host, null).GetResponseBodyClient().CustomContentTypeAsync();
+            BinaryData.Equals(data, response.Value);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_base64() => Test(async (host) =>
+        {
+            var response = await new BytesClient(host, null).GetResponseBodyClient().Base64Async();
+            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA=="), response.Value);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_base64url() => Test(async (host) =>
+        {
+            var response = await new BytesClient(host, null).GetResponseBodyClient().Base64urlAsync();
+            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA"), response.Value);
         });
     }
 }
