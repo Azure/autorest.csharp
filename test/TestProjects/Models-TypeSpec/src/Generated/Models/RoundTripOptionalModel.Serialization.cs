@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripOptionalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -64,19 +63,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                writer.WriteObjectValue(OptionalModel);
+                writer.WriteObjectValue<DerivedModel>(OptionalModel, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
+                writer.WriteObjectValue<DerivedModelWithProperties>(OptionalModelWithPropertiesOnBase, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -117,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<RecordItem>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -169,7 +168,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RoundTripOptionalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -410,7 +409,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -426,7 +425,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeRoundTripOptionalModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -444,7 +443,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripOptionalModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

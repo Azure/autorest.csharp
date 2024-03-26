@@ -164,9 +164,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 },
                 new MethodBodyStatement[]
                 {
-                    Assign<ValueExpression>(
-                            new ArrayElementExpression(EnsureDictionary, new ParameterReference(_indexParam)),
-                            new KeywordExpression("value", null))
+                    Assign(
+                        new ArrayElementExpression(EnsureDictionary, new ParameterReference(_indexParam)),
+                        new KeywordExpression("value", null))
                 }));
         }
 

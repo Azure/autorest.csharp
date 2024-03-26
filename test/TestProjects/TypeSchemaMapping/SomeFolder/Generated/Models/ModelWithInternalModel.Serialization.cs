@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -23,14 +22,14 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithInternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             if (Optional.IsDefined(InternalProperty))
             {
                 writer.WritePropertyName("InternalProperty"u8);
-                writer.WriteObjectValue(InternalProperty);
+                writer.WriteObjectValue<InternalModel>(InternalProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -55,7 +54,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithInternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -102,7 +101,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -118,7 +117,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeModelWithInternalModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support reading '{options.Format}' format.");
             }
         }
 

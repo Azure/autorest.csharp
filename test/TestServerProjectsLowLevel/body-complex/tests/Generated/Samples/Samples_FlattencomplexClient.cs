@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {

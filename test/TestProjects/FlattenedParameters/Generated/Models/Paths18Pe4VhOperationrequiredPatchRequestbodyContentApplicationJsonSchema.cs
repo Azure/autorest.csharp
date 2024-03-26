@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using FlattenedParameters;
 
 namespace FlattenedParameters.Models
 {

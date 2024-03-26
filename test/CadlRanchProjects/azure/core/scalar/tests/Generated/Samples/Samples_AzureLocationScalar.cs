@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Scalar;
 using _Specs_.Azure.Core.Scalar.Models;
 
 namespace _Specs_.Azure.Core.Scalar.Samples

@@ -9,7 +9,7 @@
     <FakeAzureCoreTestFrameworkSources>$(MSBuildThisFileDirectory)/src/assets/TestFramework/</FakeAzureCoreTestFrameworkSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
     <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
-    <NoWarn>$(NoWarn);NU5105</NoWarn>
+    <NoWarn>$(NoWarn);NU5105;AZPROVISION001</NoWarn>
     <!-- Test client libraries won't be in the approved namespace list -->
     <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0001</NoWarn>
     <!-- Test client libraries can have single word class names -->
@@ -50,12 +50,15 @@
     <CodeAnalysisRuleSet>$(RepoEngPath)\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(IsUnbranded)' != 'true'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(RepoEngPath)/AzureSDKClient.snk</AssemblyOriginatorKeyFile>
     <AssemblyOriginatorKeyFile Condition="$(IsTestProject) == 'true'">$(RepoEngPath)/AzSdkTestLibKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PublicSign>false</PublicSign>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ImportDefaultReferences>false</ImportDefaultReferences>
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>

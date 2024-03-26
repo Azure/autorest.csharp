@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -43,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyRuleApplicationProtocol>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -102,6 +101,23 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsDefined(NewIntSerializeProperty))
+            {
+                if (NewIntSerializeProperty != null)
+                {
+                    writer.WritePropertyName("newIntSerializeProperty"u8);
+                    writer.WriteNumberValue(NewIntSerializeProperty.Value);
+                }
+                else
+                {
+                    writer.WriteNull("newIntSerializeProperty");
+                }
+            }
+            if (Optional.IsDefined(NewGeneratedTypeSerializeProperty))
+            {
+                writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
+                writer.WriteObjectValue<VaultKey>(NewGeneratedTypeSerializeProperty);
+            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
@@ -114,6 +130,29 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("ruleType"u8);
             writer.WriteStringValue(RuleType.ToString());
+            if (Optional.IsDefined(NewStringSerializeProperty))
+            {
+                writer.WritePropertyName("newStringSerializeProperty"u8);
+                writer.WriteStringValue(NewStringSerializeProperty);
+            }
+            if (Optional.IsCollectionDefined(NewArraySerializedProperty))
+            {
+                writer.WritePropertyName("newArraySerializedProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NewArraySerializedProperty)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("fakeParent"u8);
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(NewDictionarySerializedProperty))
+            {
+                writer.WritePropertyName("newDictionarySerializedProperty"u8);
+                SerializeNameValue(writer);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -132,9 +171,14 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceIpGroups = default;
             bool? terminateTLS = default;
             IList<string> webCategories = default;
+            int? newIntSerializeProperty = default;
+            VaultKey newGeneratedTypeSerializeProperty = default;
             string name = default;
             string description = default;
             FirewallPolicyRuleType ruleType = default;
+            string newStringSerializeProperty = default;
+            IList<string> newArraySerializedProperty = default;
+            IDictionary<string, string> newDictionarySerializedProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceAddresses"u8))
@@ -258,6 +302,25 @@ namespace MgmtMockAndSample.Models
                     webCategories = array;
                     continue;
                 }
+                if (property.NameEquals("newIntSerializeProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        newIntSerializeProperty = null;
+                        continue;
+                    }
+                    newIntSerializeProperty = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("newGeneratedTypeSerializeProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    newGeneratedTypeSerializeProperty = VaultKey.DeserializeVaultKey(property.Value);
+                    continue;
+                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
@@ -273,11 +336,50 @@ namespace MgmtMockAndSample.Models
                     ruleType = new FirewallPolicyRuleType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("newStringSerializeProperty"u8))
+                {
+                    newStringSerializeProperty = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("newArraySerializedProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    newArraySerializedProperty = array;
+                    continue;
+                }
+                if (property.NameEquals("fakeParent"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("newDictionarySerializedProperty"u8))
+                        {
+                            DeserializeNameValue(property0, ref newDictionarySerializedProperty);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
             }
             return new ApplicationRule(
                 name,
                 description,
                 ruleType,
+                newStringSerializeProperty,
+                newArraySerializedProperty ?? new ChangeTrackingList<string>(),
+                newDictionarySerializedProperty ?? new ChangeTrackingDictionary<string, string>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
@@ -286,7 +388,9 @@ namespace MgmtMockAndSample.Models
                 fqdnTags ?? new ChangeTrackingList<string>(),
                 sourceIpGroups ?? new ChangeTrackingList<string>(),
                 terminateTLS,
-                webCategories ?? new ChangeTrackingList<string>());
+                webCategories ?? new ChangeTrackingList<string>(),
+                newIntSerializeProperty,
+                newGeneratedTypeSerializeProperty);
         }
     }
 }

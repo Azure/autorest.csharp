@@ -6,6 +6,7 @@ using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -17,6 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public MethodBodyStatement WriteStartObject() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteStartObject));
         public MethodBodyStatement WriteEndObject() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteEndObject));
+        public MethodBodyStatement WriteStartArray(ValueExpression name) => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteStartArray), name);
         public MethodBodyStatement WriteStartArray() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteStartArray));
         public MethodBodyStatement WriteEndArray() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteEndArray));
         public MethodBodyStatement WritePropertyName(string propertyName) => WritePropertyName(LiteralU8(propertyName));
@@ -38,16 +40,21 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteRawValue), value);
 
         public MethodBodyStatement WriteNumberValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteNumberValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => ModelSerializationExtensionsProvider.Instance.WriteNumberValue(this, value, format);
 
         public MethodBodyStatement WriteStringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteStringValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => ModelSerializationExtensionsProvider.Instance.WriteStringValue(this, value, format);
 
-        public MethodBodyStatement WriteObjectValue(ValueExpression value)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteObjectValueName, new[] { Untyped, value }, null, true);
+        public MethodBodyStatement WriteObjectValue(TypedValueExpression value, ValueExpression? options = null)
+            => Configuration.UseModelReaderWriter
+            ? ModelSerializationExtensionsProvider.Instance.WriteObjectValue(this, value, options: options)
+            : ModelSerializationExtensionsProvider.Instance.WriteObjectValue(this, value);
+
+        public MethodBodyStatement WriteBase64StringValue(ValueExpression value)
+            => Invoke(nameof(Utf8JsonWriter.WriteBase64StringValue), value).ToStatement();
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteBase64StringValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => ModelSerializationExtensionsProvider.Instance.WriteBase64StringValue(this, value, format);
 
         public MethodBodyStatement WriteBinaryData(ValueExpression value)
             => new IfElsePreprocessorDirective

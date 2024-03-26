@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -23,7 +22,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cat>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cat)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cat)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -67,7 +66,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cat>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cat)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cat)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -140,7 +139,7 @@ namespace multiple_inheritance.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Cat)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cat)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -156,7 +155,7 @@ namespace multiple_inheritance.Models
                         return DeserializeCat(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Cat)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cat)} does not support reading '{options.Format}' format.");
             }
         }
 

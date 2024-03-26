@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -78,7 +77,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -148,7 +147,7 @@ namespace FirstTestTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -164,7 +163,7 @@ namespace FirstTestTypeSpec.Models
                         return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -182,7 +181,7 @@ namespace FirstTestTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelWithRequiredNullableProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

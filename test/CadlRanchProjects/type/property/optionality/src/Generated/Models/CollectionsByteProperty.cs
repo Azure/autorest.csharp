@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {

@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.TwoOperationGroup;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.TwoOperationGroup.Samples

@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Inheritance.Recursive;
 using _Type.Model.Inheritance.Recursive.Models;
 
 namespace _Type.Model.Inheritance.Recursive.Samples

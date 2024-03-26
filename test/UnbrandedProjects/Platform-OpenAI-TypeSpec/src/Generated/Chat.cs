@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 
 namespace OpenAI
@@ -15,16 +14,13 @@ namespace OpenAI
     public partial class Chat
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of Chat for mocking. </summary>
         protected Chat()
@@ -32,13 +28,11 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of Chat. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal Chat(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        internal Chat(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
-            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -49,7 +43,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of ChatCompletions. </summary>
         public virtual ChatCompletions GetChatCompletionsClient()
         {
-            return Volatile.Read(ref _cachedChatCompletions) ?? Interlocked.CompareExchange(ref _cachedChatCompletions, new ChatCompletions(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedChatCompletions;
+            return Volatile.Read(ref _cachedChatCompletions) ?? Interlocked.CompareExchange(ref _cachedChatCompletions, new ChatCompletions(_pipeline, _keyCredential, _endpoint), null) ?? _cachedChatCompletions;
         }
     }
 }

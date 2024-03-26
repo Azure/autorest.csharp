@@ -2,12 +2,12 @@
 
 #nullable disable
 
-using System.ClientModel;
+using System.ClientModel.Primitives;
 
 namespace NoTestTypeSpec
 {
     /// <summary> Client options for NoTestTypeSpecClient. </summary>
-    public partial class NoTestTypeSpecClientOptions : RequestOptions
+    public partial class NoTestTypeSpecClientOptions : ClientPipelineOptions
     {
     }
 }

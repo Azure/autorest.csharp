@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
 

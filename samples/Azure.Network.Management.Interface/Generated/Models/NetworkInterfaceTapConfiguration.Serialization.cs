@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -31,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
-                writer.WriteObjectValue(VirtualNetworkTap);
+                writer.WriteObjectValue<VirtualNetworkTap>(VirtualNetworkTap);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
