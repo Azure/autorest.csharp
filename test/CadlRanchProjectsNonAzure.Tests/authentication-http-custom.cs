@@ -11,7 +11,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Authentication_Http_Custom_valid() => Test(async (host) =>
         {
-            Result result = await new CustomClient(host, new KeyCredential("valid-key"), null).ValidAsync();
+            ClientResult result = await new CustomClient(host, new ApiKeyCredential("valid-key"), null).ValidAsync();
             Assert.AreEqual(204, result.GetRawResponse().Status);
         });
     }
