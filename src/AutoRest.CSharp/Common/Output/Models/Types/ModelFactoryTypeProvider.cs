@@ -240,7 +240,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
-                Constant? overriddenDefaultValue = null;
                 // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
                 if (discriminator != null && discriminator.Property == property && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
                 {
@@ -255,16 +254,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } extensibleEnum }:
                             inputType = extensibleEnum.ValueType;
-                            overriddenDefaultValue = new Constant("Unknown", inputType);
                             break;
                         case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } }:
                             // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
                             // but we still need to add it to the method argument list as a `default`
                             methodArguments.Add(Default);
                             continue;
-                        case { IsFrameworkType: true, FrameworkType: { } frameworkType } when frameworkType == typeof(string):
-                            overriddenDefaultValue = new Constant("Unknown", typeof(string));
-                            break;
                         default:
                             break;
                     }
@@ -280,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Name = parameterName,
                     Type = inputType,
-                    DefaultValue = overriddenDefaultValue ?? Constant.Default(inputType),
+                    DefaultValue = Constant.Default(inputType),
                     Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
 
@@ -305,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // write the initializers and validations
                 new ParameterValidationBlock(methodParameters, true),
-                Return(Snippets.New.Instance(ctorToCall.Signature, methodArguments))
+                Return(New.Instance(ctorToCall.Signature, methodArguments))
             };
 
             return new(signature, methodBody);
