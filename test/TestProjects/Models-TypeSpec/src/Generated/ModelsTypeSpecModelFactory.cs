@@ -330,7 +330,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
-        public static SingleBase SingleBase(string kind = null, int size = default)
+        public static SingleBase SingleBase(string kind = "Unknown", int size = default)
         {
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData: null);
         }

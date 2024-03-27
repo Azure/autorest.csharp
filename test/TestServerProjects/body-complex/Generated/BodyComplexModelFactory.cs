@@ -17,7 +17,7 @@ namespace body_complex.Models
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         /// <returns> A new <see cref="Models.DotFish"/> instance for mocking. </returns>
-        public static DotFish DotFish(string fishType = null, string species = null)
+        public static DotFish DotFish(string fishType = "Unknown", string species = null)
         {
             return new UnknownDotFish(fishType, species, serializedAdditionalRawData: null);
         }
