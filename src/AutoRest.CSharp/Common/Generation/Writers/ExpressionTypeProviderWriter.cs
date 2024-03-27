@@ -104,8 +104,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Append($"{field.Declaration:D}");
                     if (field.InitializationValue != null)
                     {
-                        _writer.AppendRaw(" = ")
-                            .WriteValueExpression(field.InitializationValue);
+                        _writer.AppendRaw(" = ");
+                        field.InitializationValue.Write(_writer);
                     }
                     _writer.LineRaw(",");
                 }
