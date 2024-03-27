@@ -10,11 +10,11 @@ pr:
 
 extends:
 - template: /eng/pipelines/1es-redirect.yml
-parameters:
-  variables:
-    BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
-    OfficialBuildId: $(Build.BuildNumber)
-    nugetMultiFeedWarnLevel: 'none'
+  parameters:
+    variables:
+      BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
+      OfficialBuildId: $(Build.BuildNumber)
+      nugetMultiFeedWarnLevel: 'none'
 
   stages:
   - stage: 'Build_and_Test'
@@ -95,41 +95,42 @@ parameters:
               npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
             displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-            - pwsh: >
-                ./eng/PublishRelease.ps1
-                -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net7.0/
-                -CoverageDirectory ./artifacts/coverage
-                -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
-                -GitHubToken $(azuresdk-github-pat)
-                -NpmToken $(azure-sdk-npm-token)
-                -BuildNumber $(Build.BuildNumber)
-                -Sha $(Build.SourceVersion)
-                -CoverageUser $(storage-coverage-user)
-                -CoveragePass $(storage-coverage-pass)
-              name: Publish
-              failOnStderr: false
-              displayName: 'Publish to GitHub, npm and coverage report'
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - ${{if eq(variables['System.TeamProject'], 'internal')}}:
-            - task: AzureCLI@2
-              displayName: 'Upload Cadl Ranch Azure Coverage Report'
-              condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
-              inputs:
-                azureSubscription: "Cadl Ranch Storage"
-                scriptType: "bash"
-                scriptLocation: "inlineScript"
-                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-azure.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode azure
-                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            - task: AzureCLI@2
-              displayName: 'Upload Cadl Ranch Standard Coverage Report'
-              condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
-              inputs:
-                azureSubscription: "Cadl Ranch Storage"
-                scriptType: "bash"
-                scriptLocation: "inlineScript"
-                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-standard.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode standard
-                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          # TODO: Uncomment before merge
+          # - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+          #   - pwsh: >
+          #       ./eng/PublishRelease.ps1
+          #       -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net7.0/
+          #       -CoverageDirectory ./artifacts/coverage
+          #       -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
+          #       -GitHubToken $(azuresdk-github-pat)
+          #       -NpmToken $(azure-sdk-npm-token)
+          #       -BuildNumber $(Build.BuildNumber)
+          #       -Sha $(Build.SourceVersion)
+          #       -CoverageUser $(storage-coverage-user)
+          #       -CoveragePass $(storage-coverage-pass)
+          #     name: Publish
+          #     failOnStderr: false
+          #     displayName: 'Publish to GitHub, npm and coverage report'
+          #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          # - ${{if eq(variables['System.TeamProject'], 'internal')}}:
+          #   - task: AzureCLI@2
+          #     displayName: 'Upload Cadl Ranch Azure Coverage Report'
+          #     condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+          #     inputs:
+          #       azureSubscription: "Cadl Ranch Storage"
+          #       scriptType: "bash"
+          #       scriptLocation: "inlineScript"
+          #       inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-azure.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode azure
+          #       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          #   - task: AzureCLI@2
+          #     displayName: 'Upload Cadl Ranch Standard Coverage Report'
+          #     condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+          #     inputs:
+          #       azureSubscription: "Cadl Ranch Storage"
+          #       scriptType: "bash"
+          #       scriptLocation: "inlineScript"
+          #       inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-standard.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode standard
+          #       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - template: new-emitter-package-files.yml
               parameters:
@@ -139,62 +140,70 @@ parameters:
                 OutputDirectory: $(Build.ArtifactStagingDirectory)
                 ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
                 UseInternalFeed: false
-        outputs:
-        - output: pipelineArtifact
-          path: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage
-          artifact: CoverageReport
-        - output: pipelineArtifact
-          path: $(Build.ArtifactStagingDirectory)
-          artifact: build_artifacts
-          condition: succeededOrFailed()
-          displayName: "Publish build artifacts"
-        - output: pipelineArtifact
-          path: $(Build.ArtifactStagingDirectory)/packages
-          artifact: packages
-          condition: succeededOrFailed()
-          displayName: "Publish packages artifact"
+        templateContext: 
+          outputs:
+            - output: pipelineArtifact
+              path: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage
+              artifact: CoverageReport
+            - output: pipelineArtifact
+              path: $(Build.ArtifactStagingDirectory)
+              artifact: build_artifacts
+              condition: succeededOrFailed()
+              displayName: "Publish build artifacts"
+            - output: pipelineArtifact
+              path: $(Build.ArtifactStagingDirectory)/packages
+              artifact: packages
+              condition: succeededOrFailed()
+              displayName: "Publish packages artifact"
+      
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_B
           filter: "^[a-b]"
+      
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_C_L
           filter: "^[c-l]"
+      
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_M
           filter: "^m"
+      
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_N_Z
           filter: "^[n-z]"
+      
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-        stage: Release
-        pool:
-          name: $(LINUXPOOL)
-          image: $(LINUXVMIMAGE)
-          os: linux
-        jobs:
-        - deployment: Publish
-          environment: net-release
-          variables:
-            Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
-          steps:
-          - task: DownloadPipelineArtifact@2
-            displayName: Download Packages
-            inputs:
-              artifact: packages
-              path: $(Artifacts)
-          - task: 1ES.PublishNuget@1
-            displayName: 'Publish to DevOps Feed'
-            inputs:
-              useDotNetTask: false
-              publishPackageMetadata: true
-              packageParentPath: '$(Artifacts)'
-              packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
-              nuGetFeedType: 'internal'
-              publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+        - stage: Release
+          pool:
+            name: $(LINUXPOOL)
+            image: $(LINUXVMIMAGE)
+            os: linux
+          jobs:
+          - deployment: Publish
+            environment: net-release
+            variables:
+              Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
+            steps:
+            - task: DownloadPipelineArtifact@2
+              displayName: Download Packages
+              inputs:
+                artifact: packages
+                path: $(Artifacts)
+            # TODO: Uncomment before merge
+            # - task: 1ES.PublishNuget@1
+            #   displayName: 'Publish to DevOps Feed'
+            #   inputs:
+            #     useDotNetTask: false
+            #     publishPackageMetadata: true
+            #     packageParentPath: '$(Artifacts)'
+            #     packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
+            #     nuGetFeedType: 'internal'
+            #     publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+
   - stage: 'Update_azure_sdk_for_net'
     pool:
       name: $(LINUXPOOL)
@@ -213,12 +222,14 @@ parameters:
           Name: Update_Generator_Version
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           BranchName: $(BranchName)
+
       - template: generate-sdk-job-matrix-files.yml
         parameters:
           Name: Generate_Job_Matrix
           DependsOn: Update_Generator_Version
           JobCount: 7
           BranchName: $(BranchName)
+
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           Name: Update_Code
@@ -227,6 +238,7 @@ parameters:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           BranchName: $(BranchName)
           ContinueOnError: true
+
       - job: Create_PR
         dependsOn: Update_Code
         variables:
@@ -244,17 +256,18 @@ parameters:
               Write-Host "Setting variable PrTitle to '$prTitle'"
               Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
             displayName: 'Build PR Title'
-          - task: PowerShell@2
-            displayName: Create pull request
-            inputs:
-              pwsh: true
-              filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
-              arguments: >
-                -RepoOwner "Azure"
-                -RepoName "azure-sdk-for-net"
-                -BaseBranch "main"
-                -PROwner "azure-sdk"
-                -PRBranch $(BranchName)
-                -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "$(PrTitle)"
-                -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
+          # TODO: Uncomment before merge
+          # - task: PowerShell@2
+          #   displayName: Create pull request
+          #   inputs:
+          #     pwsh: true
+          #     filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+          #     arguments: >
+          #       -RepoOwner "Azure"
+          #       -RepoName "azure-sdk-for-net"
+          #       -BaseBranch "main"
+          #       -PROwner "azure-sdk"
+          #       -PRBranch $(BranchName)
+          #       -AuthToken "$(azuresdk-github-pat)"
+          #       -PRTitle "$(PrTitle)"
+          #       -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"

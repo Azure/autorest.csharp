@@ -43,12 +43,13 @@ jobs:
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
-    parameters:
-      BaseRepoBranch: ${{ parameters.BranchName }}
-      BaseRepoOwner: azure-sdk
-      CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
-      TargetRepoOwner: Azure
-      TargetRepoName: azure-sdk-for-net
-      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+  # TODO: Uncomment before merge
+  # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+  #   parameters:
+  #     BaseRepoBranch: ${{ parameters.BranchName }}
+  #     BaseRepoOwner: azure-sdk
+  #     CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
+  #     TargetRepoOwner: Azure
+  #     TargetRepoName: azure-sdk-for-net
+  #     WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+  #     ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
