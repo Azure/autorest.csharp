@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         /// <summary>
         /// null value cannot directly assign to extensible enum from string, because it invokes the implicit operator from string which invokes the ctor, and the ctor does not allow the value to be null
-        /// This method checks if we need a expicitly null check
+        /// This method checks if we need an explicitly null check
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
