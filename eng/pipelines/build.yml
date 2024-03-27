@@ -176,33 +176,33 @@ extends:
               name: Check_Code_Generation_N_Z
               filter: "^[n-z]"
           
-          - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-            - stage: Release
-              pool:
-                name: $(LINUXPOOL)
-                image: $(LINUXVMIMAGE)
-                os: linux
-              jobs:
-              - deployment: Publish
-                environment: net-release
-                variables:
-                  Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
-                steps:
-                - task: DownloadPipelineArtifact@2
-                  displayName: Download Packages
-                  inputs:
-                    artifact: packages
-                    path: $(Artifacts)
-                # TODO: Uncomment before merge
-                # - task: 1ES.PublishNuget@1
-                #   displayName: 'Publish to DevOps Feed'
-                #   inputs:
-                #     useDotNetTask: false
-                #     publishPackageMetadata: true
-                #     packageParentPath: '$(Artifacts)'
-                #     packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
-                #     nuGetFeedType: 'internal'
-                #     publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+      - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+        - stage: Release
+          pool:
+            name: $(LINUXPOOL)
+            image: $(LINUXVMIMAGE)
+            os: linux
+          jobs:
+          - deployment: Publish
+            environment: net-release
+            variables:
+              Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
+            steps:
+            - task: DownloadPipelineArtifact@2
+              displayName: Download Packages
+              inputs:
+                artifact: packages
+                path: $(Artifacts)
+            # TODO: Uncomment before merge
+            # - task: 1ES.PublishNuget@1
+            #   displayName: 'Publish to DevOps Feed'
+            #   inputs:
+            #     useDotNetTask: false
+            #     publishPackageMetadata: true
+            #     packageParentPath: '$(Artifacts)'
+            #     packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
+            #     nuGetFeedType: 'internal'
+            #     publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
 
       - stage: 'Update_azure_sdk_for_net'
         pool:
