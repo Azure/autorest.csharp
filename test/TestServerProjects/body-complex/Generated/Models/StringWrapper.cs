@@ -53,13 +53,13 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="StringWrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="empty"></param>
-        /// <param name="nullProperty"></param>
+        /// <param name="null"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal StringWrapper(string field, string empty, string nullProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal StringWrapper(string field, string empty, string @null, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
             Empty = empty;
-            NullProperty = nullProperty;
+            Null = @null;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -67,7 +67,7 @@ namespace body_complex.Models
         public string Field { get; set; }
         /// <summary> Gets or sets the empty. </summary>
         public string Empty { get; set; }
-        /// <summary> Gets or sets the null property. </summary>
-        public string NullProperty { get; set; }
+        /// <summary> Gets or sets the null. </summary>
+        public string Null { get; set; }
     }
 }
