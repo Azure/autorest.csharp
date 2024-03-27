@@ -14,7 +14,7 @@ namespace PetStore.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
-        public static Fish Fish(string kind = "Unknown", int size = default)
+        public static Fish Fish(string kind = null, int size = default)
         {
             return new UnknownFish(kind, size, serializedAdditionalRawData: null);
         }

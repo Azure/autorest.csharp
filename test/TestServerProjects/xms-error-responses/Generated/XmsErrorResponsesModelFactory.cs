@@ -40,7 +40,7 @@ namespace xms_error_responses.Models
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
-        public static PetActionError PetActionError(string actionResponse = null, string errorType = "Unknown", string errorMessage = null)
+        public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
             return new UnknownPetActionError(actionResponse, serializedAdditionalRawData: null, errorType, errorMessage);
         }

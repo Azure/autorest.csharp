@@ -14,7 +14,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
-        public static Dinosaur Dinosaur(string kind = "Unknown", int size = default)
+        public static Dinosaur Dinosaur(string kind = null, int size = default)
         {
             return new UnknownDinosaur(kind, size, serializedAdditionalRawData: null);
         }
