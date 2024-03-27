@@ -69,17 +69,21 @@ namespace Payload.JsonMergePatch.Models
         {
             _baseDict = new ChangeTrackingDictionary<string, DummyModel>();
             _baseIntDict = new ChangeTrackingDictionary<string, int?>();
+            BaseArray = new ChangeTrackingList<DummyModel>();
+            BaseIntArray = new ChangeTrackingList<int>();
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelSolution1"/>. </summary>
         /// <param name="baseValue"></param>
         /// <param name="baseDict"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModelSolution1(string baseValue, IDictionary<string, DummyModel> baseDict, IDictionary<string, int?> baseIntDict, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BaseModelSolution1(string baseValue, IDictionary<string, DummyModel> baseDict, IDictionary<string, int?> baseIntDict, IList<DummyModel> baseArray, IList<int> baseIntArray, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             _baseValue = baseValue;
             _baseDict = new ChangeTrackingDictionary<string, DummyModel>(baseDict);
             _baseIntDict = new ChangeTrackingDictionary<string, int?>(baseIntDict);
+            BaseArray = new ChangeTrackingList<DummyModel>(baseArray);
+            BaseIntArray = new ChangeTrackingList<int>(baseIntArray);
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -122,7 +126,8 @@ namespace Payload.JsonMergePatch.Models
             }
         }
 
-        public IList<int> BaseArray { get; set; } // Is there any case array has a set?
+        public IList<DummyModel> BaseArray { get; } // Is there any case array has a set?
+        public IList<int> BaseIntArray { get; }
 
         private bool _isChanged = false;
         [EditorBrowsable(EditorBrowsableState.Never)]

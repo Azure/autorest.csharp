@@ -108,6 +108,8 @@ namespace Payload.JsonMergePatch.Models
             Optional<string> baseValue = default;
             IDictionary<string, DummyModel> baseDict = default;
             IDictionary<string, int?> baseIntDict = default;
+            IList<DummyModel> baseArray = default;
+            IList<int> baseIntArray = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -145,13 +147,41 @@ namespace Payload.JsonMergePatch.Models
                     baseIntDict = dictionary;
                     continue;
                 }
+                if (property.NameEquals("baseArray"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<DummyModel> array = new List<DummyModel>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(DummyModel.DeserializeDummyModel(item, options));
+                    }
+                    baseArray = array;
+                    continue;
+                }
+                if (property.NameEquals("baseIntArray"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    baseIntArray = array;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BaseModelSolution1(baseValue.Value, baseDict, baseIntDict, serializedAdditionalRawData);
+            return new BaseModelSolution1(baseValue.Value, baseDict, baseIntDict, baseArray, baseIntArray, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModelSolution1>.Write(ModelReaderWriterOptions options)

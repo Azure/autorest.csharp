@@ -30,7 +30,13 @@ namespace Azure.Core
         internal ChangeTrackingDictionary(IDictionary<TKey, TValue> dictionary, bool asChanged = false)
         {
             if (dictionary == null)
+            {
+                if (asChanged)
+                {
+                    _wasCleared = true; // Assume the dictionary has a set and set it to null
+                }
                 return;
+            }
 
             _innerDictionary = new Dictionary<TKey, TValue>(dictionary);
 
@@ -43,6 +49,7 @@ namespace Azure.Core
             }
         }
 
+        // Do same to this constructor
         private ChangeTrackingDictionary(IReadOnlyDictionary<TKey, TValue> dictionary)
         {
             if (dictionary == null)

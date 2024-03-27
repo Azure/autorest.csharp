@@ -23,7 +23,7 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="baseDict"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="extendedValue"></param>
-        internal ExtendedModelSolution1(string baseValue, IDictionary<string, DummyModel> baseDict, IDictionary<string, int?> baseIntDict, IDictionary<string, BinaryData> serializedAdditionalRawData, string extendedValue) : base(baseValue, baseDict, baseIntDict, serializedAdditionalRawData)
+        internal ExtendedModelSolution1(string baseValue, IDictionary<string, DummyModel> baseDict, IDictionary<string, int?> baseIntDict, IList<DummyModel> baseArray, IList<int> baseIntArray, IDictionary<string, BinaryData> serializedAdditionalRawData, string extendedValue) : base(baseValue, baseDict, baseIntDict, baseArray, baseIntArray, serializedAdditionalRawData)
         {
             ExtendedValue = extendedValue;
         }

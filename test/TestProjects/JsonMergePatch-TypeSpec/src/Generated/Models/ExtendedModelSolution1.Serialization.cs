@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -110,9 +111,9 @@ namespace Payload.JsonMergePatch.Models
             }
 
             // We don't call `IsChanged(nameof(BaseDict))` any more
-            // Case 1: _baseDict = null;
-            // Case 2: _baseDict.Clear();
-            if (BaseDict == null || ((ChangeTrackingDictionary<string, DummyModel>)BaseDict).WasCleared())
+            // BaseDict can never be null, it is always type of ChangeTrackingDictionary
+            // _baseDict.Clear();
+            if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).WasCleared())
             {
                 writer.WritePropertyName("baseDict"u8);
                 writer.WriteNullValue();
@@ -149,7 +150,7 @@ namespace Payload.JsonMergePatch.Models
                 // _baseDict.Remove("a");
                 foreach (var key in ((ChangeTrackingDictionary<string, DummyModel>)BaseDict).ChangedKeys ?? new List<string>())
                 {
-                    if (((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsChanged(key) && !BaseDict.ContainsKey(key))
+                    if (!BaseDict.ContainsKey(key))
                     {
                         if (!baseDictChanged)
                         {
@@ -169,9 +170,9 @@ namespace Payload.JsonMergePatch.Models
                 }
             }
             // We don't call `IsChanged(nameof(BaseIntDict))` any more
-            // Case 1: _baseIntDict = null;
-            // Case 2: _baseIntDict.Clear();
-            if (BaseIntDict == null || ((ChangeTrackingDictionary<string, DummyModel>)BaseIntDict).WasCleared())
+            // BaseIntDict can never be null, it is always type of ChangeTrackingDictionary
+            // _baseIntDict.Clear();
+            if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).WasCleared())
             {
                 writer.WritePropertyName("baseIntDict"u8);
                 writer.WriteNullValue();
@@ -203,21 +204,21 @@ namespace Payload.JsonMergePatch.Models
                             writer.WriteNullValue();
                         }
                     }
-                    // _baseIntDict.Remove("a");
-                    foreach (var key in ((ChangeTrackingDictionary<string, int?>)BaseIntDict).ChangedKeys ?? new List<string>())
+                }
+                // _baseIntDict.Remove("a");
+                foreach (var key in ((ChangeTrackingDictionary<string, int?>)BaseIntDict).ChangedKeys ?? new List<string>())
+                {
+                    if (!BaseIntDict.ContainsKey(key))
                     {
-                        if (((ChangeTrackingDictionary<string, int?>)BaseIntDict).IsChanged(key) && !BaseIntDict.ContainsKey(key))
+                        if (!baseIntDictChanged)
                         {
-                            if (!baseIntDictChanged)
-                            {
-                                writer.WritePropertyName("baseIntDict"u8);
-                                writer.WriteStartObject();
-                                baseIntDictChanged = true;
-                            }
-
-                            writer.WritePropertyName(key);
-                            writer.WriteNullValue();
+                            writer.WritePropertyName("baseIntDict"u8);
+                            writer.WriteStartObject();
+                            baseIntDictChanged = true;
                         }
+
+                        writer.WritePropertyName(key);
+                        writer.WriteNullValue();
                     }
                 }
 
@@ -225,6 +226,42 @@ namespace Payload.JsonMergePatch.Models
                 {
                     writer.WriteEndObject();
                 }
+            }
+            // BaseArray.Clear();
+            if (((ChangeTrackingList<DummyModel>)BaseArray).WasCleared())
+            {
+                writer.WritePropertyName("baseArray"u8);
+                writer.WriteNullValue();
+            }
+            // Case 1: BaseArray.Add(<DummyModel>); 
+            // Case 2: BaseArray[0].Property = "a";
+            else if (((ChangeTrackingList<DummyModel>)BaseArray).IsChanged() || ((ChangeTrackingList<DummyModel>)BaseArray).Any(item => item.IsChanged()))
+            {
+                writer.WritePropertyName("baseArray"u8);
+                writer.WriteStartArray();
+                foreach (var item in BaseArray) // O(2n)
+                {
+                    // Should we handle `BaseArray[0].Property = null;` or throw error here
+                    ((IJsonModel<DummyModel>)item).Write(writer, new ModelReaderWriterOptions("W")); // We write everything in the model
+                }
+                writer.WriteEndArray();
+            }
+            // BaseIntArray.Clear();
+            if (((ChangeTrackingList<int>)BaseIntArray).WasCleared())
+            {
+                writer.WritePropertyName("baseIntArray");
+                writer.WriteNullValue();
+            }
+            // BaseIntArray.Add(5); 
+            else if (((ChangeTrackingList<int>)BaseIntArray).IsChanged())
+            {
+                writer.WritePropertyName("baseIntArray");
+                writer.WriteStartArray();
+                foreach (var item in BaseIntArray)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
             }
             
             writer.WriteEndObject();
@@ -254,6 +291,8 @@ namespace Payload.JsonMergePatch.Models
             Optional<string> baseValue = default;
             IDictionary<string, DummyModel> baseDict = default;
             IDictionary<string, int?> baseIntDict = default;
+            IList<DummyModel> baseArray = default;
+            IList<int> baseIntArray = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -296,13 +335,41 @@ namespace Payload.JsonMergePatch.Models
                     baseIntDict = dictionary;
                     continue;
                 }
+                if (property.NameEquals("baseArray"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<DummyModel> array = new List<DummyModel>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(DummyModel.DeserializeDummyModel(item, options));
+                    }
+                    baseArray = array;
+                    continue;
+                }
+                if (property.NameEquals("baseIntArray"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    baseIntArray = array;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ExtendedModelSolution1(baseValue.Value, baseDict, baseIntDict, serializedAdditionalRawData, extendedValue.Value);
+            return new ExtendedModelSolution1(baseValue.Value, baseDict, baseIntDict, baseArray, baseIntArray, serializedAdditionalRawData, extendedValue.Value);
         }
 
         BinaryData IPersistableModel<ExtendedModelSolution1>.Write(ModelReaderWriterOptions options)

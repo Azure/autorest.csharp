@@ -13,6 +13,11 @@ namespace Azure.Core
     internal class ChangeTrackingList<T>: IList<T>, IReadOnlyList<T>
     {
         private IList<T>? _innerList;
+        private bool _isChanged;
+        private bool _wasCleared;
+
+        public bool IsChanged() => _isChanged;
+        public bool WasCleared() => _wasCleared;
 
         public ChangeTrackingList()
         {
@@ -26,7 +31,7 @@ namespace Azure.Core
         {
         }
 
-        private ChangeTrackingList(IEnumerable<T> innerList)
+        internal ChangeTrackingList(IEnumerable<T> innerList, bool asChanged = false) // If list doesn't have a set, we could remove this parameter
         {
             if (innerList == null)
             {
@@ -34,6 +39,11 @@ namespace Azure.Core
             }
 
             _innerList = innerList.ToList();
+
+            if (asChanged)
+            {
+                _isChanged = true;
+            }
         }
 
         private ChangeTrackingList(IList<T> innerList)
@@ -51,6 +61,7 @@ namespace Azure.Core
         public void Reset()
         {
             _innerList = null;
+            _isChanged = true;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -75,10 +86,12 @@ namespace Azure.Core
         public void Add(T item)
         {
             EnsureList().Add(item);
+            _isChanged = true;
         }
 
         public void Clear()
         {
+            _wasCleared = true;
             EnsureList().Clear();
         }
 
@@ -109,6 +122,7 @@ namespace Azure.Core
                 return false;
             }
 
+            _isChanged = true;
             return EnsureList().Remove(item);
         }
 
@@ -149,6 +163,7 @@ namespace Azure.Core
 
         public void Insert(int index, T item)
         {
+            _isChanged = true;
             EnsureList().Insert(index, item);
         }
 
@@ -159,6 +174,7 @@ namespace Azure.Core
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
+            _isChanged = true;
             EnsureList().RemoveAt(index);
         }
 
@@ -180,6 +196,7 @@ namespace Azure.Core
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
+                _isChanged = true;
                 EnsureList()[index] = value;
             }
         }
