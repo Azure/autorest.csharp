@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
     internal record MethodBodyStatements(IReadOnlyList<MethodBodyStatement> Statements) : MethodBodyStatement
     {
-        public override void Write(CodeWriter writer)
+        public sealed override void Write(CodeWriter writer)
         {
             foreach (var statement in Statements)
             {

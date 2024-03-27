@@ -312,15 +312,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType is null)
                 {
-                    _writer.WriteMethodBodyStatement(Return(response));
+                    Return(response).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
                 }
                 else if (TypeFactory.IsCollectionType(responseType))
                 {
@@ -329,16 +329,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
                     var value = new VariableReference(responseType, "value");
 
-                    _writer.WriteMethodBodyStatement(new[]
+                    ((MethodBodyStatement)new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
                         JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                    });
+                    }).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
+                    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
                 }
             }
             _writer.Line();
@@ -455,17 +455,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
                     if (headAsBoolean)
                     {
-                        writer.WriteMethodBodyStatement(new[]
+                        MethodBodyStatement bodyStatement = new[]
                         {
                             Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
                             Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
-                        });
+                        };
+                        bodyStatement.Write(writer);
                     }
                     else
                     {
-                        writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
+                        MethodBodyStatement bodyStatement = Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message);
+                        bodyStatement.Write(writer);
                         writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
-                        writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
+                        Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)).Write(writer);
                     }
                 }
             }

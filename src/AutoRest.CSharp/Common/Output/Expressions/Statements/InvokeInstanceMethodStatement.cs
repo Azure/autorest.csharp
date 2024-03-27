@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
@@ -12,5 +13,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName) : this(instance, methodName, Array.Empty<ValueExpression>(), false) { }
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg) : this(instance, methodName, new[] { arg }, false) { }
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg1, ValueExpression arg2) : this(instance, methodName, new[] { arg1, arg2 }, false) { }
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            new InvokeInstanceMethodExpression(InstanceReference, MethodName, Arguments, null, CallAsAsync).Write(writer);
+            writer.LineRaw(";");
+        }
     }
 }

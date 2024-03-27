@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
-            writer.WriteMethodBodyStatement(this);
+            Write(writer);
             return writer.ToString();
         }
     }

@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var validationStatement = Snippets.Argument.ValidateParameter(parameter);
 
-            writer.WriteMethodBodyStatement(validationStatement);
+            validationStatement.Write(writer);
 
             return writer;
         }
@@ -490,10 +490,10 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null));
+                    JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null).Write(writer);
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression));
+                    XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression).Write(writer);
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());
@@ -653,7 +653,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (restClientMethod.ShouldEnableRedirect)
             {
-                writer.WriteMethodBodyStatement(new InvokeStaticMethodStatement(typeof(RedirectPolicy), nameof(RedirectPolicy.SetAllowAutoRedirect), messageVariable, Snippets.True));
+                new InvokeStaticMethodStatement(typeof(RedirectPolicy), nameof(RedirectPolicy.SetAllowAutoRedirect), messageVariable, Snippets.True).Write(writer);
             }
             return writer;
         }
@@ -665,7 +665,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (writer.WriteMethodDeclaration(method.Signature))
                 {
-                    writer.WriteMethodBodyStatement(body);
+                    body.Write(writer);
                 }
             }
             else if (method.BodyExpression is { } expression)
@@ -764,7 +764,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .LineRaw("{");
                 using (writer.AmbientScope())
                 {
-                    writer.WriteMethodBodyStatement(body);
+                    body.Write(writer);
                 }
                 writer.LineRaw("}");
             }

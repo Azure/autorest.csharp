@@ -17,10 +17,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     /// <param name="Untyped"></param>
     internal abstract record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
     {
-        public override void Write(CodeWriter writer)
-        {
-            Untyped.Write(writer);
-        }
+        public sealed override void Write(CodeWriter writer) => Untyped.Write(writer);
 
         public static implicit operator TypedValueExpression(FieldDeclaration name) => new VariableReference(name.Type, name.Declaration);
         public static implicit operator TypedValueExpression(Parameter parameter) => new ParameterReference(parameter);

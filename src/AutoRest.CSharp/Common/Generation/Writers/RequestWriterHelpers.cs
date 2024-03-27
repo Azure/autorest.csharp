@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
+            GetRequestContentForSerialization(request, bodySerialization, value).Write(writer);
         }
 
         private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
