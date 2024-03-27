@@ -8,6 +8,7 @@ using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CadlRanchProjects.Tests
 {
@@ -166,7 +167,8 @@ namespace CadlRanchProjects.Tests
         public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
         {
             var response = await new BytesClient(host, null).GetResponseBodyClient().DefaultAsync();
-            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA=="), response.Value);
+            var expected = BinaryData.FromObjectAsJson("dGVzdA==");
+            Assert.AreEqual(expected.ToString(), response.Value.ToString());
         });
 
         [Test]
@@ -174,7 +176,7 @@ namespace CadlRanchProjects.Tests
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
             var response = await new BytesClient(host, null).GetResponseBodyClient().OctetStreamAsync();
-            BinaryData.Equals(data, response.Value);
+            CollectionAssert.AreEqual(data.ToArray(), response.Value.ToArray());
         });
 
         [Test]
@@ -182,21 +184,22 @@ namespace CadlRanchProjects.Tests
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
             var response = await new BytesClient(host, null).GetResponseBodyClient().CustomContentTypeAsync();
-            BinaryData.Equals(data, response.Value);
+            CollectionAssert.AreEqual(data.ToArray(), response.Value.ToArray());
         });
 
         [Test]
         public Task Encode_Bytes_ResponseBody_base64() => Test(async (host) =>
         {
             var response = await new BytesClient(host, null).GetResponseBodyClient().Base64Async();
-            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA=="), response.Value);
+            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA==").ToArray(), response.Value.ToArray());
         });
 
         [Test]
         public Task Encode_Bytes_ResponseBody_base64url() => Test(async (host) =>
         {
             var response = await new BytesClient(host, null).GetResponseBodyClient().Base64urlAsync();
-            BinaryData.Equals(BinaryData.FromObjectAsJson("dGVzdA"), response.Value);
+            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA").ToArray(), response.Value.ToArray());
+
         });
     }
 }
