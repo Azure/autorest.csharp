@@ -261,39 +261,39 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    resourceModel.OperationsFromResourceGroupExtension.Add(convertOperation(r));
+                    resourceModel.OperationsFromResourceGroupExtension.Add(ConvertOperation(r));
                 });
                 MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                    resourceModel.OperationsFromSubscriptionExtension.Add(ConvertOperation(r));
                 });
                 MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                    resourceModel.OperationsFromSubscriptionExtension.Add(ConvertOperation(r));
                 });
                 MgmtContext.Library.GetExtension(typeof(TenantResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    resourceModel.OperationsFromSubscriptionExtension.Add(convertOperation(r));
+                    resourceModel.OperationsFromSubscriptionExtension.Add(ConvertOperation(r));
                 });
 
                 if (resource.ResourceCollection != null && resource.ResourceCollection.GetAllOperation != null)
                 {
-                    resource.ResourceCollection.GetAllOperation.ToList().ForEach(o => resourceModel.ListOperations.Add(convertOperation(o)));
+                    resource.ResourceCollection.GetAllOperation.ToList().ForEach(o => resourceModel.ListOperations.Add(ConvertOperation(o)));
                 }
 
-                resource.GetOperation.ToList().ForEach(o => resourceModel.GetOperations.Add(convertOperation(o)));
+                resource.GetOperation.ToList().ForEach(o => resourceModel.GetOperations.Add(ConvertOperation(o)));
 
                 if (resource.CreateOperation != null)
                 {
-                    resource.CreateOperation.ToList().ForEach(o => resourceModel.CreateOperations.Add(convertOperation(o)));
+                    resource.CreateOperation.ToList().ForEach(o => resourceModel.CreateOperations.Add(ConvertOperation(o)));
                 }
                 if (resource.UpdateOperation != null)
                 {
-                    resource.UpdateOperation.ToList().ForEach(o => resourceModel.UpdateOperations.Add(convertOperation(o)));
+                    resource.UpdateOperation.ToList().ForEach(o => resourceModel.UpdateOperations.Add(ConvertOperation(o)));
                 }
                 if (resource.DeleteOperation != null)
                 {
-                    resource.DeleteOperation.ToList().ForEach(o => resourceModel.DeleteOperations.Add(convertOperation(o)));
+                    resource.DeleteOperation.ToList().ForEach(o => resourceModel.DeleteOperations.Add(ConvertOperation(o)));
                 }
 
                 var existedOperation = resourceModel.GetOperations.Concat(resourceModel.CreateOperations).Concat(resourceModel.UpdateOperations).Concat(resourceModel.DeleteOperations);
@@ -301,7 +301,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     if (!existedOperation.Any(o => o.OperationID == r.OperationId))
                     {
-                        resourceModel.OtherOperations.Add(convertOperation(r));
+                        resourceModel.OtherOperations.Add(ConvertOperation(r));
                     }
                 });
 
@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
         }
 
-        private static ResourceOperation convertOperation(MgmtRestOperation o)
+        private static ResourceOperation ConvertOperation(MgmtRestOperation o)
         {
             var resourceOperation = new ResourceOperation();
             resourceOperation.Name = o.Name;
