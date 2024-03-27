@@ -72,7 +72,7 @@ namespace NameConflicts.Models
         /// <param name="nameof"></param>
         /// <param name="namespace"></param>
         /// <param name="new"></param>
-        /// <param name="nullProperty"></param>
+        /// <param name="null"></param>
         /// <param name="object"></param>
         /// <param name="on"></param>
         /// <param name="operator"></param>
@@ -124,7 +124,7 @@ namespace NameConflicts.Models
         /// <param name="toStringProperty"></param>
         /// <param name="equalsProperty"></param>
         /// <param name="getHashCodeProperty"></param>
-        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classProperty, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringProperty, string equalsProperty, string getHashCodeProperty)
+        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classProperty, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string @null, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringProperty, string equalsProperty, string getHashCodeProperty)
         {
             Abstract = @abstract;
             Add = @add;
@@ -182,7 +182,7 @@ namespace NameConflicts.Models
             Nameof = @nameof;
             Namespace = @namespace;
             New = @new;
-            NullProperty = nullProperty;
+            Null = @null;
             Object = @object;
             On = @on;
             Operator = @operator;
@@ -348,8 +348,8 @@ namespace NameConflicts.Models
         public string Namespace { get; set; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
-        /// <summary> Gets or sets the null property. </summary>
-        public string NullProperty { get; set; }
+        /// <summary> Gets or sets the null. </summary>
+        public string Null { get; set; }
         /// <summary> Gets or sets the object. </summary>
         public string Object { get; set; }
         /// <summary> Gets or sets the on. </summary>

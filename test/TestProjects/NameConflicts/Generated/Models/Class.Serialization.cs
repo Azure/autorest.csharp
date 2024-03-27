@@ -295,10 +295,10 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(NullProperty))
+            if (Optional.IsDefined(Null))
             {
                 writer.WritePropertyName("null"u8);
-                writer.WriteStringValue(NullProperty);
+                writer.WriteStringValue(Null);
             }
             if (Optional.IsDefined(Object))
             {

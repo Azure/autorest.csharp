@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static string DisambiguateName(string typeName, string name, string suffix)
         {
-            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString) or "Null")
+            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
             {
                 return name + suffix;
             }
