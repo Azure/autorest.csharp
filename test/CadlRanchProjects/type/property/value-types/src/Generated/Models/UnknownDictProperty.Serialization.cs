@@ -6,33 +6,77 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    public partial class UnknownDictProperty : IUtf8JsonSerializable
+    public partial class UnknownDictProperty : IUtf8JsonSerializable, IJsonModel<UnknownDictProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownDictProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<UnknownDictProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Property);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(Property.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(Property))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static UnknownDictProperty DeserializeUnknownDictProperty(JsonElement element)
+        UnknownDictProperty IJsonModel<UnknownDictProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDictProperty(document.RootElement, options);
+        }
+
+        internal static UnknownDictProperty DeserializeUnknownDictProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             BinaryData property = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -40,9 +84,45 @@ namespace _Type.Property.ValueTypes.Models
                     property = BinaryData.FromString(property0.Value.GetRawText());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                }
             }
-            return new UnknownDictProperty(property);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnknownDictProperty(property, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<UnknownDictProperty>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        UnknownDictProperty IPersistableModel<UnknownDictProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UnknownDictProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeUnknownDictProperty(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(UnknownDictProperty)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<UnknownDictProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -56,7 +136,7 @@ namespace _Type.Property.ValueTypes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnknownDictProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

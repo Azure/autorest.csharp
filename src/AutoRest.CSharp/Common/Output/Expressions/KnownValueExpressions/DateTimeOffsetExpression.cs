@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
@@ -13,5 +14,22 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static DateTimeOffsetExpression FromUnixTimeSeconds(ValueExpression expression)
             => new(InvokeStatic(nameof(DateTimeOffset.FromUnixTimeSeconds), expression));
+
+        public StringExpression InvokeToString(StringExpression format, ValueExpression formatProvider)
+            => new(Invoke(nameof(DateTimeOffset.ToString), new[] { format, formatProvider }));
+
+        public LongExpression ToUnixTimeSeconds()
+            => new(Invoke(nameof(DateTimeOffset.ToUnixTimeSeconds)));
+
+        public DateTimeOffsetExpression ToUniversalTime()
+            => new(Invoke(nameof(DateTimeOffset.ToUniversalTime)));
+
+        public static DateTimeOffsetExpression Parse(string s) => Parse(Literal(s));
+
+        public static DateTimeOffsetExpression Parse(ValueExpression value)
+            => new(InvokeStatic(nameof(DateTimeOffset.Parse), value));
+
+        public static DateTimeOffsetExpression Parse(ValueExpression value, ValueExpression formatProvider, ValueExpression style)
+            => new(InvokeStatic(nameof(DateTimeOffset.Parse), new[] { value, formatProvider, style }));
     }
 }

@@ -42,12 +42,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             var properties = new List<InputModelProperty>();
             foreach (var parameter in _paramsToKeep)
             {
-                var inputParameter = _operation.Parameters.FirstOrDefault(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
-                var description = parameter.Description ?? $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, parameter.Name, description.ToString(), inputParameter!.Type, parameter.DefaultValue == null, false, false)
-                {
-                    DefaultValue = GetDefaultValue(parameter)
-                };
+                var inputParameter = _operation.Parameters.First(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
+                var description = !string.IsNullOrEmpty(inputParameter.Description) && parameter.Description is not null ? parameter.Description.ToString() : $"The {parameter.Name}";
+                var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -61,6 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 properties,
                 null,
                 Array.Empty<InputModelType>(),
+                null,
                 null,
                 null,
                 false)

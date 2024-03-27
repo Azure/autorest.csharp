@@ -5,21 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace model_flattening.Models
 {
-    public partial class ResourceCollection : IUtf8JsonSerializable
+    public partial class ResourceCollection : IUtf8JsonSerializable, IJsonModel<ResourceCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceCollection>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<ResourceCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ResourceCollection)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                writer.WriteObjectValue(Productresource);
+                writer.WriteObjectValue<FlattenedProduct>(Productresource, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -27,7 +37,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FlattenedProduct>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -38,22 +48,53 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<FlattenedProduct>(item.Value, options);
                 }
                 writer.WriteEndObject();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
 
-        internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
+        ResourceCollection IJsonModel<ResourceCollection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ResourceCollection)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceCollection(document.RootElement, options);
+        }
+
+        internal static ResourceCollection DeserializeResourceCollection(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<FlattenedProduct> productresource = default;
-            Optional<IList<FlattenedProduct>> arrayofresources = default;
-            Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
+            FlattenedProduct productresource = default;
+            IList<FlattenedProduct> arrayofresources = default;
+            IDictionary<string, FlattenedProduct> dictionaryofresources = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("productresource"u8))
@@ -62,7 +103,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
+                    productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"u8))
@@ -74,7 +115,7 @@ namespace model_flattening.Models
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item, options));
                     }
                     arrayofresources = array;
                     continue;
@@ -88,13 +129,49 @@ namespace model_flattening.Models
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value, options));
                     }
                     dictionaryofresources = dictionary;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ResourceCollection(productresource, arrayofresources ?? new ChangeTrackingList<FlattenedProduct>(), dictionaryofresources ?? new ChangeTrackingDictionary<string, FlattenedProduct>(), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ResourceCollection>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ResourceCollection IPersistableModel<ResourceCollection>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeResourceCollection(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ResourceCollection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

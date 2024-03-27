@@ -3,8 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

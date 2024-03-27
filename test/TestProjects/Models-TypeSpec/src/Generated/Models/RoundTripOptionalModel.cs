@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -15,7 +14,39 @@ namespace ModelsTypeSpec.Models
     [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         public RoundTripOptionalModel()
         {
             OptionalStringList = new ChangeTrackingList<string>();
@@ -27,7 +58,7 @@ namespace ModelsTypeSpec.Models
             OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int?>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         /// <param name="optionalString"> Optional string, illustrating an optional reference type property. </param>
         /// <param name="optionalInt"> Optional int, illustrating an optional value type property. </param>
         /// <param name="optionalStringList"> Optional string collection. </param>
@@ -43,7 +74,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -60,6 +92,7 @@ namespace ModelsTypeSpec.Models
             OptionalPlainDate = optionalPlainDate;
             OptionalPlainTime = optionalPlainTime;
             OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Optional string, illustrating an optional reference type property. </summary>

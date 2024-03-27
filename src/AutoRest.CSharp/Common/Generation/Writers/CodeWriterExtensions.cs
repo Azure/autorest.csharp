@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
@@ -19,7 +20,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -115,10 +115,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
-            if (field.DefaultValue != null &&
+            if (field.InitializationValue != null &&
                 (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
-                return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
+                writer.AppendRaw(" = ")
+                    .WriteValueExpression(field.InitializationValue);
+                return writer.Line($";");
             }
 
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");
@@ -148,7 +150,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            if (methodBase.Attributes is {} attributes)
+            if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
                 {
@@ -157,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"[{attribute.Type}(");
                         foreach (var argument in attribute.Arguments)
                         {
-                            writer.Append($"{argument:L}, ");
+                            writer.WriteValueExpression(argument);
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");
@@ -235,12 +237,13 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints})
+            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
-                foreach (var (argument, constraint) in constraints)
+                foreach (var constraint in constraints)
                 {
-                    writer.Append($"where {argument:I}: {constraint}");
+                    writer.WriteValueExpression(constraint);
+                    writer.AppendRaw(" ");
                 }
             }
 
@@ -253,7 +256,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.WriteValueExpression(new FormattableStringToExpression(argument));
+                        writer.WriteValueExpression(argument);
                         writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
@@ -272,6 +275,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
+            if (methodBase.IsRawSummaryText)
+            {
+                return writer.WriteRawXmlDocumentation(methodBase.Description);
+            }
+
             if (methodBase.NonDocumentComment is { } comment)
             {
                 writer.Line($"// {comment}");
@@ -319,6 +327,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            writer.AppendRawIf("out ", clientParameter.IsOut);
+            writer.AppendRawIf("ref ", clientParameter.IsRef);
+
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
@@ -354,12 +365,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            return parameter.Validation switch
-            {
-                ValidationType.AssertNotNullOrEmpty => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-                ValidationType.AssertNotNull => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-                _ => writer
-            };
+            var validationStatement = Snippets.Argument.ValidateParameter(parameter);
+
+            writer.WriteMethodBodyStatement(validationStatement);
+
+            return writer;
         }
 
         public static CodeWriter WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
@@ -395,11 +405,15 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
+                    string nullableFlag = (parameter.Type.IsNullable) ? "?" : "";
                     foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
-                            writer.Line($"Argument.AssertNull({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            using (writer.Scope($"if ({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]} is not null)"))
+                            {
+                                writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            }
                         }
                     }
                 }
@@ -414,10 +428,10 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString methodName, FormattableString parameters)
-            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters);
+            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters, false);
 
-        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
-            => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, bool writeLine = true)
+            => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRawIf(";", writeLine);
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
         {
@@ -471,16 +485,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ValueExpression? variable, FormattableString response, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ValueExpression? variable, FormattableString streamFormattable, CSharpType? type)
         {
-            var responseExpression = new ResponseExpression(new FormattableStringToExpression(response));
+            var streamExpression = new StreamExpression(new FormattableStringToExpression(streamFormattable));
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, responseExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null));
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, responseExpression));
+                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression));
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());
@@ -627,34 +641,35 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
-        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
+        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, bool skipValidation = false)
         {
             var scope = WriteCommonMethodWithoutValidation(writer, signature, returnDescription, isAsync, isPublicType);
-            if (isPublicType)
+            if (isPublicType && !skipValidation)
                 writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
 
-        public static CodeWriter WriteEnableHttpRedirectIfNecessary(this CodeWriter writer, RestClientMethod restClientMethod, CodeWriterDeclaration messageVariable)
+        public static CodeWriter WriteEnableHttpRedirectIfNecessary(this CodeWriter writer, RestClientMethod restClientMethod, TypedValueExpression messageVariable)
         {
             if (restClientMethod.ShouldEnableRedirect)
             {
-                writer.Line($"{nameof(RedirectPolicy)}.{nameof(RedirectPolicy.SetAllowAutoRedirect)}({messageVariable}, true);");
+                writer.WriteMethodBodyStatement(new InvokeStaticMethodStatement(typeof(RedirectPolicy), nameof(RedirectPolicy.SetAllowAutoRedirect), messageVariable, Snippets.True));
             }
             return writer;
         }
 
-        public static void WriteMethod(this CodeWriter writer, Method method)
+        // TODO -- remove the writeEmptyLine optional flag here
+        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
         {
-            if (method.Body is {} body)
+            if (method.Body is { } body)
             {
                 using (writer.WriteMethodDeclaration(method.Signature))
                 {
                     writer.WriteMethodBodyStatement(body);
                 }
             }
-            else if (method.BodyExpression is {} expression)
+            else if (method.BodyExpression is { } expression)
             {
                 using (writer.WriteMethodDeclarationNoScope(method.Signature))
                 {
@@ -664,7 +679,105 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            // TODO -- temporary to minimize the code changes, will remove after the consolidation
+            if (writeEmptyLine)
+                writer.Line();
+        }
+
+        public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
+        {
+            if (property.Description is not null)
+            {
+                writer.Line().WriteXmlDocumentationSummary(property.Description);
+            }
+
+            if (property.Exceptions is not null)
+            {
+                foreach (var (exceptionType, description) in property.Exceptions)
+                {
+                    writer.WriteXmlDocumentationException(exceptionType, description);
+                }
+            }
+
+            var modifiers = property.Modifiers;
+            writer.AppendRawIf("public ", modifiers.HasFlag(MethodSignatureModifiers.Public))
+                .AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
+                .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private))
+                .AppendRawIf("override ", modifiers.HasFlag(MethodSignatureModifiers.Override))
+                .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
+                .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
+
+            writer.Append($"{property.PropertyType} ");
+            if (property is IndexerDeclaration indexer)
+            {
+                writer.Append($"this[{indexer.IndexerParameter.Type} {indexer.IndexerParameter.Name}]");
+            }
+            else
+            {
+                if (property.ExplicitInterface is not null)
+                {
+                    writer.Append($"{property.ExplicitInterface}.");
+                }
+                writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            }
+
+            switch (property.PropertyBody)
+            {
+                case ExpressionPropertyBody(var expression):
+                    writer.AppendRaw(" => ")
+                        .WriteValueExpression(expression);
+                    writer.AppendRaw(";");
+                    break;
+                case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
+                    writer.AppendRaw("{ get; ");
+                    if (hasSetter)
+                    {
+                        WritePropertyAccessorModifiers(writer, setterModifiers);
+                        writer.AppendRaw(" set; ");
+                    }
+                    writer.AppendRaw("}");
+                    if (initialization is not null)
+                    {
+                        writer.AppendRaw(" = ")
+                            .WriteValueExpression(initialization);
+                    }
+                    break;
+                case MethodPropertyBody(var getter, var setter, var setterModifiers):
+                    writer.LineRaw("{");
+                    // write getter
+                    WriteMethodPropertyAccessor(writer, "get", getter);
+                    // write setter
+                    if (setter is not null)
+                    {
+                        WriteMethodPropertyAccessor(writer, "set", setter, setterModifiers);
+                    }
+                    writer.AppendRaw("}");
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unhandled property body type {property.PropertyBody}");
+            }
+
             writer.Line();
+
+            static void WriteMethodPropertyAccessor(CodeWriter writer, string name, MethodBodyStatement body, MethodSignatureModifiers modifiers = MethodSignatureModifiers.None)
+            {
+                WritePropertyAccessorModifiers(writer, modifiers);
+                writer.LineRaw(name)
+                    .LineRaw("{");
+                using (writer.AmbientScope())
+                {
+                    writer.WriteMethodBodyStatement(body);
+                }
+                writer.LineRaw("}");
+            }
+
+            static void WritePropertyAccessorModifiers(CodeWriter writer, MethodSignatureModifiers modifiers)
+            {
+                writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
+                    .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
+                    .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
+            }
         }
     }
 }

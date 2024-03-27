@@ -12,18 +12,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
-    internal class Samples_Datetime
+    public partial class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull()
+        public void Example_Datetime_GetNonNull_ShortVersion()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = client.GetNonNull(null);
 
@@ -34,9 +33,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Async()
+        public async Task Example_Datetime_GetNonNull_ShortVersion_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -47,27 +46,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_Convenience()
+        public void Example_Datetime_GetNonNull_ShortVersion_Convenience()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = client.GetNonNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Convenience_Async()
+        public async Task Example_Datetime_GetNonNull_ShortVersion_Convenience_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = await client.GetNonNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_Datetime_GetNonNull_AllParameters()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = client.GetNonNull(null);
 
@@ -78,9 +77,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_Datetime_GetNonNull_AllParameters_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -91,27 +90,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_Datetime_GetNonNull_AllParameters_Convenience()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = client.GetNonNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_Datetime_GetNonNull_AllParameters_Convenience_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = await client.GetNonNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull()
+        public void Example_Datetime_GetNull_ShortVersion()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = client.GetNull(null);
 
@@ -122,9 +121,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Async()
+        public async Task Example_Datetime_GetNull_ShortVersion_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -135,27 +134,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_Convenience()
+        public void Example_Datetime_GetNull_ShortVersion_Convenience()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = client.GetNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Convenience_Async()
+        public async Task Example_Datetime_GetNull_ShortVersion_Convenience_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = await client.GetNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_Datetime_GetNull_AllParameters()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = client.GetNull(null);
 
@@ -166,9 +165,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_Datetime_GetNull_AllParameters_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -179,139 +178,147 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_Datetime_GetNull_AllParameters_Convenience()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = client.GetNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_Datetime_GetNull_AllParameters_Convenience_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
             Response<DatetimeProperty> response = await client.GetNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull()
+        public void Example_Datetime_PatchNonNull_ShortVersion()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_Async()
+        public async Task Example_Datetime_PatchNonNull_ShortVersion_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_Datetime_PatchNonNull_AllParameters()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_Datetime_PatchNonNull_AllParameters_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull()
+        public void Example_Datetime_PatchNull_ShortVersion()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_Async()
+        public async Task Example_Datetime_PatchNull_ShortVersion_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_Datetime_PatchNull_AllParameters()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_Datetime_PatchNull_AllParameters_Async()
         {
-            Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
+            Datetime client = new NullableClient().GetDatetimeClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

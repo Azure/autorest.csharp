@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -19,8 +18,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<EffectiveNetworkSecurityGroup>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<EffectiveNetworkSecurityGroup> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroupListResult(Optional.ToList(value), nextLink.Value);
+            return new EffectiveNetworkSecurityGroupListResult(value ?? new ChangeTrackingList<EffectiveNetworkSecurityGroup>(), nextLink);
         }
     }
 }

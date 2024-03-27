@@ -37,7 +37,7 @@ namespace Accessibility
             _pipeline = pipeline;
         }
 
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
         {
@@ -54,7 +54,7 @@ namespace Accessibility
             }
         }
 
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
         {
@@ -71,7 +71,7 @@ namespace Accessibility
             }
         }
 
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         internal virtual async Task<Response> OperationInternalAsync(string body = null, CancellationToken cancellationToken = default)
         {
@@ -88,7 +88,7 @@ namespace Accessibility
             }
         }
 
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         internal virtual Response OperationInternal(string body = null, CancellationToken cancellationToken = default)
         {

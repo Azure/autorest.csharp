@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> The Thing_requiredLiteralString. </summary>
-    internal readonly partial struct ThingRequiredLiteralString : IEquatable<ThingRequiredLiteralString>
+    public readonly partial struct ThingRequiredLiteralString : IEquatable<ThingRequiredLiteralString>
     {
         private readonly string _value;
 

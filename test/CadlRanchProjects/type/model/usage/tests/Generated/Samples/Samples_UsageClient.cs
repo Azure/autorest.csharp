@@ -12,116 +12,115 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Usage;
 using _Type.Model.Usage.Models;
 
 namespace _Type.Model.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input()
+        public void Example_Usage_Input_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Async()
+        public async Task Example_Usage_Input_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_Convenience()
+        public void Example_Usage_Input_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Convenience_Async()
+        public async Task Example_Usage_Input_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_AllParameters()
+        public void Example_Usage_Input_AllParameters()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_AllParameters_Async()
+        public async Task Example_Usage_Input_AllParameters_Async()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_AllParameters_Convenience()
+        public void Example_Usage_Input_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_AllParameters_Convenience_Async()
+        public async Task Example_Usage_Input_AllParameters_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output()
+        public void Example_Usage_Output_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
@@ -133,7 +132,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Async()
+        public async Task Example_Usage_Output_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -145,7 +144,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_Convenience()
+        public void Example_Usage_Output_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -154,7 +153,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Convenience_Async()
+        public async Task Example_Usage_Output_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -163,7 +162,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_AllParameters()
+        public void Example_Usage_Output_AllParameters()
         {
             UsageClient client = new UsageClient();
 
@@ -175,7 +174,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_AllParameters_Async()
+        public async Task Example_Usage_Output_AllParameters_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -187,7 +186,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_AllParameters_Convenience()
+        public void Example_Usage_Output_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -196,7 +195,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_AllParameters_Convenience_Async()
+        public async Task Example_Usage_Output_AllParameters_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -205,11 +204,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput()
+        public void Example_Usage_InputAndOutput_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -221,11 +220,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Async()
+        public async Task Example_Usage_InputAndOutput_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -237,7 +236,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_Convenience()
+        public void Example_Usage_InputAndOutput_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -247,7 +246,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Convenience_Async()
+        public async Task Example_Usage_InputAndOutput_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -257,11 +256,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_AllParameters()
+        public void Example_Usage_InputAndOutput_AllParameters()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -273,11 +272,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_AllParameters_Async()
+        public async Task Example_Usage_InputAndOutput_AllParameters_Async()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -289,7 +288,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_AllParameters_Convenience()
+        public void Example_Usage_InputAndOutput_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -299,7 +298,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_AllParameters_Convenience_Async()
+        public async Task Example_Usage_InputAndOutput_AllParameters_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 

@@ -12,18 +12,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_ExtensibleEnum
+    public partial class Samples_ExtensibleEnum
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum()
+        public void Example_ExtensibleEnum_GetExtensibleEnum_ShortVersion()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response response = client.GetExtensibleEnum(null);
 
@@ -33,9 +32,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_Async()
+        public async Task Example_ExtensibleEnum_GetExtensibleEnum_ShortVersion_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response response = await client.GetExtensibleEnumAsync(null);
 
@@ -45,27 +44,27 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum_Convenience()
+        public void Example_ExtensibleEnum_GetExtensibleEnum_ShortVersion_Convenience()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response<ExtensibleEnumProperty> response = client.GetExtensibleEnum();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_Convenience_Async()
+        public async Task Example_ExtensibleEnum_GetExtensibleEnum_ShortVersion_Convenience_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response<ExtensibleEnumProperty> response = await client.GetExtensibleEnumAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum_AllParameters()
+        public void Example_ExtensibleEnum_GetExtensibleEnum_AllParameters()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response response = client.GetExtensibleEnum(null);
 
@@ -75,9 +74,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_AllParameters_Async()
+        public async Task Example_ExtensibleEnum_GetExtensibleEnum_AllParameters_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response response = await client.GetExtensibleEnumAsync(null);
 
@@ -87,120 +86,120 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum_AllParameters_Convenience()
+        public void Example_ExtensibleEnum_GetExtensibleEnum_AllParameters_Convenience()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response<ExtensibleEnumProperty> response = client.GetExtensibleEnum();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_AllParameters_Convenience_Async()
+        public async Task Example_ExtensibleEnum_GetExtensibleEnum_AllParameters_Convenience_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             Response<ExtensibleEnumProperty> response = await client.GetExtensibleEnumAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_ExtensibleEnum_Put_ShortVersion()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_ExtensibleEnum_Put_ShortVersion_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_ExtensibleEnum_Put_ShortVersion_Convenience()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_ExtensibleEnum_Put_ShortVersion_Convenience_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_ExtensibleEnum_Put_AllParameters()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_ExtensibleEnum_Put_AllParameters_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_ExtensibleEnum_Put_AllParameters_Convenience()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_ExtensibleEnum_Put_AllParameters_Convenience_Async()
         {
-            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+            ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient();
 
             ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

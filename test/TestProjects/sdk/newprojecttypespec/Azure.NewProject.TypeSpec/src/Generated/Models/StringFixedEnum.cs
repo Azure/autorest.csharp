@@ -8,7 +8,7 @@
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> Simple enum. </summary>
-    internal enum StringFixedEnum
+    public enum StringFixedEnum
     {
         /// <summary> 1. </summary>
         One,

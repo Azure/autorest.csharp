@@ -34,8 +34,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> fqdn = default;
-            Optional<string> ipAddress = default;
+            string fqdn = default;
+            string ipAddress = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fqdn"u8))
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddress(fqdn.Value, ipAddress.Value);
+            return new ApplicationGatewayBackendAddress(fqdn, ipAddress);
         }
     }
 }

@@ -5,8 +5,6 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -36,7 +34,6 @@ namespace AutoRest.CSharp.Common.Input
             InputType? parameterType = null;
             string? location = null;
             InputConstant? defaultValue = null;
-            VirtualParameter? virtualParameter = null;
             InputParameter? groupBy = null;
             string? kind = null;
             bool isRequired = false;
@@ -57,7 +54,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputParameter.Type), options, ref parameterType)
                     || reader.TryReadString(nameof(InputParameter.Location), ref location)
                     || reader.TryReadWithConverter(nameof(InputParameter.DefaultValue), options, ref defaultValue)
-                    || reader.TryReadWithConverter(nameof(InputParameter.VirtualParameter), options, ref virtualParameter)
                     || reader.TryReadWithConverter(nameof(InputParameter.GroupedBy), options, ref groupBy)
                     || reader.TryReadString(nameof(InputParameter.Kind), ref kind)
                     || reader.TryReadBoolean(nameof(InputParameter.IsRequired), ref isRequired)
@@ -96,11 +92,11 @@ namespace AutoRest.CSharp.Common.Input
                 Name: name,
                 NameInRequest: nameInRequest,
                 Description: description,
-                Type: parameterType,
+                Type: FixInputParameterType(parameterType, requestLocation),
                 Location: requestLocation,
                 DefaultValue: defaultValue,
-                VirtualParameter: virtualParameter,
                 GroupedBy: groupBy,
+                FlattenedBodyProperty: null,
                 Kind: parameterKind,
                 IsRequired: isRequired,
                 IsApiVersion: isApiVersion,
@@ -119,5 +115,17 @@ namespace AutoRest.CSharp.Common.Input
 
             return parameter;
         }
+
+        private static InputType FixInputParameterType(InputType parameterType, RequestLocation requestLocation)
+            => parameterType switch
+            {
+                InputLiteralType literalType => literalType.LiteralValueType,
+                InputListType listType => listType with { ElementType = FixInputParameterType(listType.ElementType, requestLocation) },
+                InputDictionaryType dictionaryType => dictionaryType with { ValueType = FixInputParameterType(dictionaryType.ValueType, requestLocation) },
+                // See https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-parameter-serialization
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC7231,
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Body => InputPrimitiveType.DateTimeRFC3339,
+                _ => parameterType
+            };
     }
 }

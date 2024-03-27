@@ -25,18 +25,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue(Credentials);
+            writer.WriteObjectValue<DataSourceCredentials>(Credentials);
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue(Container);
+            writer.WriteObjectValue<DataContainer>(Container);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                writer.WriteObjectValue(DataChangeDetectionPolicy);
+                writer.WriteObjectValue<DataChangeDetectionPolicy>(DataChangeDetectionPolicy);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                writer.WriteObjectValue(DataDeletionDetectionPolicy);
+                writer.WriteObjectValue<DataDeletionDetectionPolicy>(DataDeletionDetectionPolicy);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -53,13 +53,13 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> description = default;
+            string description = default;
             DataSourceType type = default;
             DataSourceCredentials credentials = default;
             DataContainer container = default;
-            Optional<DataChangeDetectionPolicy> dataChangeDetectionPolicy = default;
-            Optional<DataDeletionDetectionPolicy> dataDeletionDetectionPolicy = default;
-            Optional<string> odataEtag = default;
+            DataChangeDetectionPolicy dataChangeDetectionPolicy = default;
+            DataDeletionDetectionPolicy dataDeletionDetectionPolicy = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -111,7 +111,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value);
+            return new DataSource(
+                name,
+                description,
+                type,
+                credentials,
+                container,
+                dataChangeDetectionPolicy,
+                dataDeletionDetectionPolicy,
+                odataEtag);
         }
     }
 }

@@ -10,12 +10,12 @@ namespace AppConfiguration.Models
     /// <summary> The Label. </summary>
     public partial class Label
     {
-        /// <summary> Initializes a new instance of Label. </summary>
+        /// <summary> Initializes a new instance of <see cref="Label"/>. </summary>
         internal Label()
         {
         }
 
-        /// <summary> Initializes a new instance of Label. </summary>
+        /// <summary> Initializes a new instance of <see cref="Label"/>. </summary>
         /// <param name="name"></param>
         internal Label(string name)
         {

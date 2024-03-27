@@ -2,12 +2,11 @@
  "$id": "1",
  "Name": "Authentication.OAuth2",
  "Description": "Illustrates clients generated with OAuth2 authentication.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "OAuth2FlowType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -21,7 +20,7 @@
      "$id": "4",
      "Name": "implicit",
      "Value": "implicit",
-     "Description": "implcit flow"
+     "Description": "implicit flow"
     },
     {
      "$id": "5",
@@ -44,6 +43,7 @@
   },
   {
    "$id": "7",
+   "Kind": "Enum",
    "Name": "MyFlow_authorizationUrl",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -64,6 +64,7 @@
  "Models": [
   {
    "$id": "9",
+   "Kind": "Model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
@@ -76,8 +77,8 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -87,6 +88,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Model",
    "Name": "MyFlow",
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
@@ -110,6 +112,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "7"
@@ -127,8 +130,8 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -156,8 +159,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "21",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -173,8 +176,8 @@
         "$id": "22",
         "Type": {
          "$id": "23",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -186,8 +189,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "25",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -206,42 +209,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "27",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "28",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$id": "30",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -259,7 +231,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "28",
      "Name": "invalid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
@@ -268,13 +240,13 @@
        "$ref": "20"
       },
       {
-       "$id": "33",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -287,20 +259,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "31",
         "Type": {
-         "$ref": "34"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "27"
       }
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -309,7 +278,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "37",
+       "$id": "33",
        "StatusCodes": [
         403
        ],
@@ -318,7 +287,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": true
+       "IsErrorResponse": true,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -331,15 +303,15 @@
     }
    ],
    "Protocol": {
-    "$id": "38"
+    "$id": "34"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "39",
+  "$id": "35",
   "OAuth2": {
-   "$id": "40",
+   "$id": "36",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

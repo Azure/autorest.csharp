@@ -6,25 +6,23 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
-    internal class Samples_CollectionsModel
+    public partial class Samples_CollectionsModel
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull()
+        public void Example_CollectionsModel_GetNonNull_ShortVersion()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = client.GetNonNull(null);
 
@@ -35,9 +33,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Async()
+        public async Task Example_CollectionsModel_GetNonNull_ShortVersion_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -48,27 +46,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_Convenience()
+        public void Example_CollectionsModel_GetNonNull_ShortVersion_Convenience()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = client.GetNonNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNonNull_ShortVersion_Convenience_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_CollectionsModel_GetNonNull_AllParameters()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = client.GetNonNull(null);
 
@@ -79,9 +77,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_GetNonNull_AllParameters_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -92,27 +90,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_CollectionsModel_GetNonNull_AllParameters_Convenience()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = client.GetNonNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNonNull_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull()
+        public void Example_CollectionsModel_GetNull_ShortVersion()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = client.GetNull(null);
 
@@ -123,9 +121,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Async()
+        public async Task Example_CollectionsModel_GetNull_ShortVersion_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -136,27 +134,27 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_Convenience()
+        public void Example_CollectionsModel_GetNull_ShortVersion_Convenience()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = client.GetNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNull_ShortVersion_Convenience_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = await client.GetNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_CollectionsModel_GetNull_AllParameters()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = client.GetNull(null);
 
@@ -167,9 +165,9 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_GetNull_AllParameters_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -180,187 +178,195 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_CollectionsModel_GetNull_AllParameters_Convenience()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = client.GetNull();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNull_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
             Response<CollectionsModelProperty> response = await client.GetNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull()
+        public void Example_CollectionsModel_PatchNonNull_ShortVersion()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_Async()
+        public async Task Example_CollectionsModel_PatchNonNull_ShortVersion_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_CollectionsModel_PatchNonNull_AllParameters()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_PatchNonNull_AllParameters_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull()
+        public void Example_CollectionsModel_PatchNull_ShortVersion()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_Async()
+        public async Task Example_CollectionsModel_PatchNull_ShortVersion_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_CollectionsModel_PatchNull_AllParameters()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_PatchNull_AllParameters_Async()
         {
-            CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+            CollectionsModel client = new NullableClient().GetCollectionsModelClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new List<object>()
-{
+                nullableProperty = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

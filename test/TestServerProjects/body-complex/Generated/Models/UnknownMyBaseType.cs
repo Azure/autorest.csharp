@@ -5,18 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
-    /// <summary> The UnknownMyBaseType. </summary>
+    /// <summary> Unknown version of MyBaseType. </summary>
     internal partial class UnknownMyBaseType : MyBaseType
     {
-        /// <summary> Initializes a new instance of UnknownMyBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownMyBaseType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1) : base(kind, propB1, propBH1)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, propB1, propBH1, serializedAdditionalRawData)
         {
             Kind = kind;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownMyBaseType"/> for deserialization. </summary>
+        internal UnknownMyBaseType()
+        {
         }
     }
 }

@@ -10,12 +10,12 @@ namespace AppConfiguration.Models
     /// <summary> The Key. </summary>
     public partial class Key
     {
-        /// <summary> Initializes a new instance of Key. </summary>
+        /// <summary> Initializes a new instance of <see cref="Key"/>. </summary>
         internal Key()
         {
         }
 
-        /// <summary> Initializes a new instance of Key. </summary>
+        /// <summary> Initializes a new instance of <see cref="Key"/>. </summary>
         /// <param name="name"></param>
         internal Key(string name)
         {

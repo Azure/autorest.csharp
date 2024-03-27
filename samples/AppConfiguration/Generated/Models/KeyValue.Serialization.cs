@@ -72,14 +72,14 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<string> key = default;
-            Optional<string> label = default;
-            Optional<string> contentType = default;
-            Optional<string> value = default;
-            Optional<DateTimeOffset> lastModified = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<bool> locked = default;
-            Optional<string> etag = default;
+            string key = default;
+            string label = default;
+            string contentType = default;
+            string value = default;
+            DateTimeOffset? lastModified = default;
+            IDictionary<string, string> tags = default;
+            bool? locked = default;
+            string etag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"u8))
@@ -140,7 +140,15 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), Optional.ToDictionary(tags), Optional.ToNullable(locked), etag.Value);
+            return new KeyValue(
+                key,
+                label,
+                contentType,
+                value,
+                lastModified,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                locked,
+                etag);
         }
     }
 }

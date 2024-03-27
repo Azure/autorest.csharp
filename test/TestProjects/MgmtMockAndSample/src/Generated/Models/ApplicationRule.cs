@@ -6,14 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Rule of type application. </summary>
     public partial class ApplicationRule : FirewallPolicyRule
     {
-        /// <summary> Initializes a new instance of ApplicationRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationRule"/>. </summary>
         public ApplicationRule()
         {
             SourceAddresses = new ChangeTrackingList<string>();
@@ -27,10 +26,13 @@ namespace MgmtMockAndSample.Models
             RuleType = FirewallPolicyRuleType.ApplicationRule;
         }
 
-        /// <summary> Initializes a new instance of ApplicationRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
         /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
         /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
         /// <param name="protocols"> Array of Application Protocols. </param>
@@ -40,7 +42,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="terminateTLS"> Terminate TLS connections for this rule. </param>
         /// <param name="webCategories"> List of destination azure web categories. </param>
-        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories) : base(name, description, ruleType)
+        /// <param name="newIntSerializeProperty"></param>
+        /// <param name="newGeneratedTypeSerializeProperty"></param>
+        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories, int? newIntSerializeProperty, VaultKey newGeneratedTypeSerializeProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             SourceAddresses = sourceAddresses;
             DestinationAddresses = destinationAddresses;
@@ -51,6 +55,8 @@ namespace MgmtMockAndSample.Models
             SourceIpGroups = sourceIpGroups;
             TerminateTLS = terminateTLS;
             WebCategories = webCategories;
+            NewIntSerializeProperty = newIntSerializeProperty;
+            NewGeneratedTypeSerializeProperty = newGeneratedTypeSerializeProperty;
             RuleType = ruleType;
         }
 

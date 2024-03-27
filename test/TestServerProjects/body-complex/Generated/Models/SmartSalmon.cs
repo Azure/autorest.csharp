@@ -6,14 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace body_complex.Models
 {
     /// <summary> The SmartSalmon. </summary>
     public partial class SmartSalmon : Salmon
     {
-        /// <summary> Initializes a new instance of SmartSalmon. </summary>
+        /// <summary> Initializes a new instance of <see cref="SmartSalmon"/>. </summary>
         /// <param name="length"></param>
         public SmartSalmon(float length) : base(length)
         {
@@ -21,7 +20,7 @@ namespace body_complex.Models
             Fishtype = "smart_salmon";
         }
 
-        /// <summary> Initializes a new instance of SmartSalmon. </summary>
+        /// <summary> Initializes a new instance of <see cref="SmartSalmon"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>
@@ -33,11 +32,16 @@ namespace body_complex.Models
         /// <param name="iswild"></param>
         /// <param name="collegeDegree"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
+        internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, null, location, iswild)
         {
             CollegeDegree = collegeDegree;
             AdditionalProperties = additionalProperties;
             Fishtype = fishtype ?? "smart_salmon";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SmartSalmon"/> for deserialization. </summary>
+        internal SmartSalmon()
+        {
         }
 
         /// <summary> Gets or sets the college degree. </summary>

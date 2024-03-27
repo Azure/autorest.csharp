@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -14,7 +14,6 @@ using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
 using AutoRest.CSharp.MgmtTest.Generation.Samples;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -30,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
-            MgmtTestOutputLibrary? library = null;
+            MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
                 var sourceFolder = GetSourceFolder();
@@ -69,7 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
-            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)
             {
             }
         }

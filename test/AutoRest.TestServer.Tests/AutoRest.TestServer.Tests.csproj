@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +24,7 @@
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="System.ClientModel" Version="1.0.0-beta.4" NoWarn="NU1605" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
   </ItemGroup>
@@ -39,6 +40,51 @@
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs</Link>
     </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="TestData\AvailabilitySetData\AvailabilitySetData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\AvailabilitySetData\AvailabilitySetDataWireFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\AvailabilitySetData\AvailabilitySetDataWithVMs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\AvailabilitySetData\AvailabilitySetDataWithVMsWireFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ModelWithPersistableOnly\ModelWithPersistableOnlyWireFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ModelXml.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ModelXmlX.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ModelX\ModelX.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ModelX\ModelXWireFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ResourceProviderData\ResourceProviderData-Collapsed.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\ResourceProviderData\ResourceProviderData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\EmptyChildObject.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\Overrides.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\BicepData\NoOverrides.bicep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

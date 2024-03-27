@@ -5,5 +5,5 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record NewArrayExpression(CSharpType? Type, ArrayInitializerExpression? Items = null) : ValueExpression;
+    internal record NewArrayExpression(CSharpType? Type, ArrayInitializerExpression? Items = null, ValueExpression? Size = null) : ValueExpression;
 }

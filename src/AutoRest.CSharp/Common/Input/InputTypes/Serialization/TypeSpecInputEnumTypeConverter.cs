@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -59,15 +60,15 @@ namespace AutoRest.CSharp.Common.Input
             name = name ?? throw new JsonException("Enum must have name");
             // TODO: roll back to throw JSON error when there is linter on the upstream to check enum without @doc
             //description = description ?? throw new JsonException("Enum must have a description");
-            if (description == null)
+            if (description.IsNullOrEmpty())
             {
-                description = "";
-                System.Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
+                Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
+                description = $"The {name}.";
             }
 
             if (usageString != null)
             {
-                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
+                Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
 
             if (allowedValues == null || allowedValues.Count == 0)
@@ -102,7 +103,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isNullable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

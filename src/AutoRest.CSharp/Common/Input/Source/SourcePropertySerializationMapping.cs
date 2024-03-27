@@ -1,26 +1,26 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
     public class SourcePropertySerializationMapping
     {
-        public SourcePropertySerializationMapping(ISymbol existingMember, string[]? serializationPath, string? serializationValueHook, string? deserializationHook)
+        public SourcePropertySerializationMapping(string propertyName, IReadOnlyList<string>? serializationPath, string? jsonSerializationValueHook, string? jsonDeserializationValueHook, string? bicepSerializationValueHook)
         {
-            ExistingMember = existingMember;
+            PropertyName = propertyName;
             SerializationPath = serializationPath;
-            SerializationValueHook = serializationValueHook;
-            DeserializationValueHook = deserializationHook;
+            JsonSerializationValueHook = jsonSerializationValueHook;
+            JsonDeserializationValueHook = jsonDeserializationValueHook;
+            BicepSerializationValueHook = bicepSerializationValueHook;
         }
 
-        public ISymbol ExistingMember { get; }
+        public string PropertyName { get; }
         public IReadOnlyList<string>? SerializationPath { get; }
-        public string? SerializationValueHook { get; }
-        public string? DeserializationValueHook { get; }
+        public string? JsonSerializationValueHook { get; }
+        public string? JsonDeserializationValueHook { get; }
+
+        public string? BicepSerializationValueHook { get; }
     }
 }

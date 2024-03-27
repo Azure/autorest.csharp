@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -17,12 +18,12 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputListType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputListType>(_referenceHandler.CurrentResolver) ?? CreateListType(ref reader, null, null, options);
+            => reader.ReadReferenceAndResolve<InputListType>(_referenceHandler.CurrentResolver) ?? CreateListType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputListType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options)
+        public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
             bool isNullable = false;
@@ -41,7 +42,12 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");
-            return new InputListType(name ?? "List", elementType, isNullable);
+            var listType = new InputListType(name ?? "List", elementType, false, isNullable);
+            if (id != null)
+            {
+                resolver.AddReference(id, listType);
+            }
+            return listType;
         }
     }
 }

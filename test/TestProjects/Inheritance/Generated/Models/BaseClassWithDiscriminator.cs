@@ -16,14 +16,14 @@ namespace Inheritance.Models
     /// Please note <see cref="BaseClassWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="ClassThatInheritsFromBaseClassWithDiscriminator"/> and <see cref="ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties"/>.
     /// </summary>
-    public partial class BaseClassWithDiscriminator : BaseClass
+    public abstract partial class BaseClassWithDiscriminator : BaseClass
     {
-        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
-        public BaseClassWithDiscriminator()
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
+        protected BaseClassWithDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

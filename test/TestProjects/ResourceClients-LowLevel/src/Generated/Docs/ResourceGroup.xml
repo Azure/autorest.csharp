@@ -57,7 +57,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].ToString());
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
@@ -68,7 +68,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].ToString());
+    Console.WriteLine(result.ToString());
 }
 ]]></code></example>
     </member>
@@ -82,7 +82,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 foreach (BinaryData item in client.GetItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].ToString());
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetItems with all parameters and parse the result.
@@ -93,7 +93,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 foreach (BinaryData item in client.GetItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].ToString());
+    Console.WriteLine(result.ToString());
 }
 ]]></code></example>
     </member>

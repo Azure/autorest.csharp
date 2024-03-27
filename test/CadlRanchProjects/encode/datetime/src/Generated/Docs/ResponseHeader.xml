@@ -5,16 +5,18 @@
       <example>
 This sample shows how to call DefaultAsync.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.DefaultAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DefaultAsync with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.DefaultAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -22,16 +24,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Default.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Default();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Default with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Default();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -39,16 +43,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Rfc3339Async.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.Rfc3339Async();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339Async with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.Rfc3339Async();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -56,16 +62,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Rfc3339.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Rfc3339();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339 with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Rfc3339();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -73,16 +81,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Rfc7231Async.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.Rfc7231Async();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231Async with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.Rfc7231Async();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -90,16 +100,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Rfc7231.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Rfc7231();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231 with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.Rfc7231();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -107,16 +119,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call UnixTimestampAsync.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.UnixTimestampAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = await client.UnixTimestampAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -124,16 +138,18 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call UnixTimestamp.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.UnixTimestamp();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestamp with all request content.
 <code><![CDATA[
-ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
+ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
 Response response = client.UnixTimestamp();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

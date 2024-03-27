@@ -14,12 +14,12 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class Similarity
     {
-        /// <summary> Initializes a new instance of Similarity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
         public Similarity()
         {
         }
 
-        /// <summary> Initializes a new instance of Similarity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
         /// <param name="odataType"></param>
         internal Similarity(string odataType)
         {

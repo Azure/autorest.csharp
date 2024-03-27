@@ -19,5 +19,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public string Accessibility { get; }
         public bool IsAbstract { get; }
         public bool IsUserDefined { get; }
+        public string FullName => $"{this.Namespace}.{this.Name}";
     }
 }

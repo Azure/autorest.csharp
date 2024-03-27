@@ -48,12 +48,12 @@ namespace Inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<BaseClass>(value);
             request.Content = content;
             return message;
         }
 
-        /// <param name="value"> The BaseClass to use. </param>
+        /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<BaseClass>> MixedAsync(BaseClass value, CancellationToken cancellationToken = default)
@@ -79,7 +79,7 @@ namespace Inheritance
             }
         }
 
-        /// <param name="value"> The BaseClass to use. </param>
+        /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<BaseClass> Mixed(BaseClass value, CancellationToken cancellationToken = default)

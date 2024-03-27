@@ -30,6 +30,20 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Type_Property_ValueTypes_BooleanLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetBooleanLiteralClient().GetBooleanLiteralAsync();
+            Assert.AreEqual(true, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_BooleanLiteral_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetBooleanLiteralClient().PutAsync(new BooleanLiteralProperty().ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Type_Property_ValueTypes_String_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetStringClient().GetStringAsync();
@@ -40,6 +54,20 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_String_put() => Test(async (host) =>
         {
             Response response = await new ValueTypesClient(host, null).GetStringClient().PutAsync(new StringProperty("hello").ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_StringLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetStringLiteralClient().GetStringLiteralAsync();
+            Assert.AreEqual(StringLiteralPropertyProperty.Hello, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_StringLiteral_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetStringLiteralClient().PutAsync(new StringProperty("hello").ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -72,16 +100,43 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Type_Property_ValueTypes_IntLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetIntLiteralClient().GetIntLiteralAsync();
+            Assert.AreEqual(IntLiteralPropertyProperty._42, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_IntLiteral_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetIntLiteralClient().PutAsync(new IntProperty(42).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Type_Property_ValueTypes_Float_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetFloatClient().GetFloatAsync();
-            Assert.AreEqual(42.42f, response.Value.Property);
+            Assert.AreEqual(43.125f, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_ValueTypes_Float_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)42.42).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)43.125).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Type_Property_ValueTypes_FloatLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetFloatLiteralClient().GetFloatLiteralAsync();
+            Assert.AreEqual(FloatLiteralPropertyProperty._43125, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_FloatLiteral_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetFloatLiteralClient().PutAsync(new FloatLiteralProperty().ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -297,6 +352,89 @@ namespace CadlRanchProjects.Tests
             var input = new[] { "hello", "world" };
 
             Response response = await new ValueTypesClient(host, null).GetUnknownArrayClient().PutAsync(new UnknownArrayProperty(new BinaryData(input)).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetDecimalClient().GetDecimalAsync();
+            Assert.AreEqual(0.33333m, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetDecimalClient().PutAsync(new DecimalProperty(0.33333m));
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal128_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetDecimal128Client().GetDecimal128Async();
+            Assert.AreEqual(0.33333m, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal128_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetDecimal128Client().PutAsync(new Decimal128Property(0.33333m));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionEnumValue_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().GetUnionEnumValueAsync();
+            Assert.AreEqual(UnionEnumValuePropertyProperty.Value2, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionEnumValue_put() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionFloatLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().GetUnionFloatLiteralAsync();
+            var expected = BinaryData.FromObjectAsJson(46.875);
+            var actual = response.Value.Property;
+            BinaryData.Equals(expected, actual);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionFloatLiteral_put() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().PutAsync(new UnionFloatLiteralProperty(BinaryData.FromString("46.875")));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionIntLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().GetUnionIntLiteralAsync();
+            BinaryData.Equals(BinaryData.FromString("42"), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionIntLiteral_put() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().PutAsync(new UnionIntLiteralProperty(BinaryData.FromString("42")));
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Type_Property_ValueTypes_UnionStringLiteral_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().GetUnionStringLiteralAsync();
+            Assert.AreEqual(UnionStringLiteralPropertyProperty.World, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionStringLiteral_put() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().PutAsync(new UnionStringLiteralProperty(new UnionStringLiteralPropertyProperty("world")));
             Assert.AreEqual(204, response.Status);
         });
     }

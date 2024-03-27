@@ -14,12 +14,12 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride. </summary>
     internal partial class ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride : SomeProperties
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride"/>. </summary>
         public ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride"/>. </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
         /// <param name="baseClassProperty"></param>

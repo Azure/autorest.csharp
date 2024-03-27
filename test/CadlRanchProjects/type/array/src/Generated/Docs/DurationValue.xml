@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDurationValueAsync.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response<IReadOnlyList<TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code>
 This sample shows how to call GetDurationValueAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response<IReadOnlyList<TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IReadOnlyList<TimeSpan>> response = await client.GetDurationValueAsync(
       <example>
 This sample shows how to call GetDurationValue.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response<IReadOnlyList<TimeSpan>> response = client.GetDurationValue();
 ]]></code>
 This sample shows how to call GetDurationValue with all parameters.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response<IReadOnlyList<TimeSpan>> response = client.GetDurationValue();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IReadOnlyList<TimeSpan>> response = client.GetDurationValue();
       <example>
 This sample shows how to call GetDurationValueAsync and parse the result.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response response = await client.GetDurationValueAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDurationValueAsync with all parameters and parse the result.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response response = await client.GetDurationValueAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result[0].ToString());
       <example>
 This sample shows how to call GetDurationValue and parse the result.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response response = client.GetDurationValue(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDurationValue with all parameters and parse the result.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
 Response response = client.GetDurationValue(null);
 
@@ -77,70 +77,56 @@ Console.WriteLine(result[0].ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-Response response = await client.PutAsync(new List<TimeSpan>()
-{
-    XmlConvert.ToTimeSpan("PT1H23M45S")
-});
-Console.WriteLine(response.Status);
+Response response = await client.PutAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-Response response = await client.PutAsync(new List<TimeSpan>()
-{
-    XmlConvert.ToTimeSpan("PT1H23M45S")
-});
-Console.WriteLine(response.Status);
+Response response = await client.PutAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 ]]></code></example>
     </member>
     <member name="Put(IEnumerable{TimeSpan},CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-Response response = client.Put(new List<TimeSpan>()
-{
-    XmlConvert.ToTimeSpan("PT1H23M45S")
-});
-Console.WriteLine(response.Status);
+Response response = client.Put(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-Response response = client.Put(new List<TimeSpan>()
-{
-    XmlConvert.ToTimeSpan("PT1H23M45S")
-});
-Console.WriteLine(response.Status);
+Response response = client.Put(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -148,24 +134,26 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+DurationValue client = new ArrayClient().GetDurationValueClient();
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

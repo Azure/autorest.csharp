@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,9 +18,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<TimeSpan> maxRunTime = default;
-            Optional<long> maxDocumentExtractionSize = default;
-            Optional<long> maxDocumentContentCharactersToExtract = default;
+            TimeSpan? maxRunTime = default;
+            long? maxDocumentExtractionSize = default;
+            long? maxDocumentContentCharactersToExtract = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"u8))
@@ -52,7 +51,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract));
+            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
         }
     }
 }

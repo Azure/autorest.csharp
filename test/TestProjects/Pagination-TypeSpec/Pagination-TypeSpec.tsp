@@ -16,13 +16,12 @@ using Azure.ClientGenerator.Core;
 //
 
 // TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
+@versioned(Versions)
 @service(
     {
-        title: "Pagination Service",
-        version: "2022-05-13"
+        title: "Pagination Service"
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
   "{pagnationUri}",
   "Pagination Service",
@@ -32,6 +31,11 @@ using Azure.ClientGenerator.Core;
 )
 @useAuth(OAuth2Auth<[AuthFlow]>)
 namespace Pagination;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "2022-05-13"
+}
 
 model AuthFlow {
     type: OAuth2FlowType.clientCredentials;
@@ -108,10 +112,11 @@ op CustomResourceList<
 // model LedgerUserRole is string {};
 
 @doc("User roles")
-enum LedgerUserRoleKV {
-  Administrator,
-  Contributor,
-  Reader,
+union LedgerUserRoleKV {
+  string,
+  Administrator: "Administrator",
+  Contributor: "Contributor",
+  Reader: "Reader",
 }
 
 // @resource("users")
@@ -213,16 +218,17 @@ model TextBlockItem {
 }
 
 @doc("The interval")
-enum Interval {
+union Interval {
+  string,
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
-  PT5S,
+  PT5S: "PT5S",
   @doc("10 seconds, available only if test run duration is less than 10 minutes")
-  PT10S,
-  @doc("1 minute") PT1M,
+  PT10S: "PT10S",
+  @doc("1 minute") PT1M: "PT1M",
   @doc("5 minutes, available only if test run duration is greater than 1 minute")
-  PT5M,
+  PT5M: "PT5M",
   @doc("1 hour, available only if test run duration is greater than 1 minute")
-  PT1H,
+  PT1H: "PT1H",
 }
 
 model MetricDimensions {
@@ -309,5 +315,99 @@ interface TwoTypesItem {
   listTextBlocklistItems is Azure.Core.ResourceList<
     TextBlockItem,
     ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+}
+
+
+@doc("The result of listing the Pools in an Account.")
+@pagedResult
+model BatchPoolListResult {
+    @doc("The list of Pools.")
+    @items
+    value?: BatchPool[];
+
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+    @doc("The URL to get the next set of results.")
+    @nextLink
+    `odata.nextLink`?: string;
+}
+
+@doc("A Pool in the Azure Batch service.")
+model BatchPool {
+    @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
+    @visibility("read")
+    id?: string;
+
+    @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+    @visibility("read")
+    displayName?: string;
+
+    @doc("The URL of the Pool.")
+    @visibility("read")
+    url?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+@doc("Client related response header values")
+model BatchRequestHeaders {
+    @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
+    """)
+    @query
+    $filter?: string;
+
+    @doc("An OData $select clause.")
+    @query({
+        format: "csv",
+    })
+    $select?: string[];
+
+    @doc("An OData $expand clause.")
+    @query({
+        format: "csv",
+    })
+    $expand?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+@doc("Client related response header values")
+model BatchResponseHeaders {
+    @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
+    @header
+    `client-request-id`?: string;
+
+    @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
+    @header
+    `request-id`?: string;
+
+    @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
+    @header
+    @projectedName("python", "etag")
+    ETag?: string;
+
+    @doc("The time at which the resource was last modified.")
+    @header
+    @encode(DateTimeKnownEncoding.rfc7231)
+    `Last-Modified`?: utcDateTime;
+}
+
+@doc("An error response received from the Azure Batch service.")
+@error
+model BatchError {
+    @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
+    code: string;
+}
+
+interface Pools {
+  @doc("Lists all of the Pools in the specified Account.")
+  @route("/pools")
+  @get
+  @convenientAPI(true)
+  listPools is RpcOperation<
+     BatchRequestHeaders,
+     BatchPoolListResult,
+     BatchResponseHeaders,
+     BatchError
   >;
 }

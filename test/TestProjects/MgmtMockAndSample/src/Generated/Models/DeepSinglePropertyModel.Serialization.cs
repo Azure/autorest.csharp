@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Deep))
             {
                 writer.WritePropertyName("deep"u8);
-                writer.WriteObjectValue(Deep);
+                writer.WriteObjectValue<SinglePropertyModel>(Deep);
             }
             writer.WriteEndObject();
         }
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<SinglePropertyModel> deep = default;
+            SinglePropertyModel deep = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("deep"u8))
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeepSinglePropertyModel(deep.Value);
+            return new DeepSinglePropertyModel(deep);
         }
     }
 }

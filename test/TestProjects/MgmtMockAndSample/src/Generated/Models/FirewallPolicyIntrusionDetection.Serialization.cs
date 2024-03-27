@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
-                writer.WriteObjectValue(Configuration);
+                writer.WriteObjectValue<FirewallPolicyIntrusionDetectionConfiguration>(Configuration);
             }
             writer.WriteEndObject();
         }
@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyIntrusionDetectionStateType> mode = default;
-            Optional<FirewallPolicyIntrusionDetectionConfiguration> configuration = default;
+            FirewallPolicyIntrusionDetectionStateType? mode = default;
+            FirewallPolicyIntrusionDetectionConfiguration configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetection(Optional.ToNullable(mode), configuration.Value);
+            return new FirewallPolicyIntrusionDetection(mode, configuration);
         }
     }
 }

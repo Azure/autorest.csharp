@@ -7,7 +7,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -15,22 +18,21 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class CodeWriter
     {
-        private readonly bool _appendTypeNameOnly;
         private const int DefaultLength = 1024;
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
 
-        private readonly List<string> _usingNamespaces = new List<string>();
+        private readonly HashSet<string> _usingNamespaces = new HashSet<string>();
 
         private readonly Stack<CodeWriterScope> _scopes;
         private string? _currentNamespace;
 
         private char[] _builder;
         private int _length;
+        private bool _writingXmlDocumentation;
 
-        public CodeWriter(bool appendTypeNameOnly = false)
+        public CodeWriter()
         {
-            _appendTypeNameOnly = appendTypeNameOnly;
             _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
 
             _scopes = new Stack<CodeWriterScope>();
@@ -114,7 +116,8 @@ namespace AutoRest.CSharp.Generation.Writers
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
             const string identifierFormatString = ":I";
-            foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattableString.Format))
+            const string crefFormatString = ":C"; // wraps content into "see cref" tag, available only in xmlDoc
+            foreach ((var span, bool isLiteral, int index) in StringExtensions.GetPathParts(formattableString.Format))
             {
                 if (isLiteral)
                 {
@@ -122,16 +125,35 @@ namespace AutoRest.CSharp.Generation.Writers
                     continue;
                 }
 
-                var formatSeparatorIndex = span.IndexOf(':');
-
-                int index = int.Parse(formatSeparatorIndex == -1
-                    ? span
-                    : span.Slice(0, formatSeparatorIndex));
-
                 var argument = formattableString.GetArgument(index);
                 var isDeclaration = span.EndsWith(declarationFormatString);
                 var isIdentifier = span.EndsWith(identifierFormatString);
                 var isLiteralFormat = span.EndsWith(literalFormatString);
+                var isCref = span.EndsWith(crefFormatString);
+
+                if (isCref)
+                {
+                    if (!_writingXmlDocumentation)
+                    {
+                        throw new InvalidOperationException($"':C' formatter can be used only inside XmlDoc");
+                    }
+
+                    switch (argument)
+                    {
+                        case Type t:
+                            AppendTypeForCRef(new CSharpType(t));
+                            break;
+                        case CSharpType t:
+                            AppendTypeForCRef(t);
+                            break;
+                        default:
+                            Append($"<see cref=\"{argument}\"/>");
+                            break;
+                    }
+
+                    continue;
+                }
+
                 switch (argument)
                 {
                     case IEnumerable<FormattableString> fss:
@@ -144,16 +166,19 @@ namespace AutoRest.CSharp.Generation.Writers
                         Append(fs);
                         break;
                     case Type t:
-                        AppendType(new CSharpType(t));
+                        AppendType(new CSharpType(t), false, false);
                         break;
                     case CSharpType t:
-                        AppendType(t, isDeclaration);
+                        AppendType(t, isDeclaration, false);
                         break;
                     case CodeWriterDeclaration declaration when isDeclaration:
                         Declaration(declaration);
                         break;
                     case CodeWriterDeclaration declaration:
                         Append(declaration);
+                        break;
+                    case ValueExpression expression:
+                        this.WriteValueExpression(expression);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
@@ -191,13 +216,24 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            // [TODO] Uncomment to remove unused namespaces
-            //if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
-            //{
-            //    return;
-            //}
+            if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
+            {
+                return;
+            }
 
             _usingNamespaces.Add(@namespace);
+        }
+
+        public CodeWriter WriteRawXmlDocumentation(FormattableString? content)
+        {
+            if (content is null)
+                return this;
+
+            var lines = content.ToString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            var xmlLines = string.Join('\n', lines.Select(l => "/// " + l));
+            AppendRaw(xmlLines);
+            Line();
+            return this;
         }
 
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)
@@ -210,6 +246,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var startTagStart = _length;
             Append(startTag);
+            _writingXmlDocumentation = true;
 
             var contentStart = _length;
             if (content.Format.Length > 0)
@@ -218,6 +255,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             var contentEnd = _length;
 
+            _writingXmlDocumentation = false;
             Append(endTag);
 
             if (contentStart == contentEnd)
@@ -327,18 +365,99 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type, bool isDeclaration = false)
+        private void AppendTypeForCRef(CSharpType type)
         {
+            // Because of the limitations of type cref in XmlDoc
+            // we add "?" nullability operator after `cref` block
+            var isNullable = type is { IsNullable: true, IsValueType: true };
+            var arguments = type.IsGenericType ? type.Arguments : null;
+
+            type = type.WithNullable(false);
+            if (type.IsGenericType)
+            {
+                type = type.GetGenericTypeDefinition();
+            }
+
+            AppendRaw($"<see cref=\"");
+            AppendType(type, false, false);
+            AppendRaw($"\"/>");
+
+            if (isNullable)
+            {
+                AppendRaw("?");
+            }
+
+            if (arguments is not null)
+            {
+                for (int i = 0; i < arguments.Count; i++)
+                {
+                    var argument = arguments[i];
+                    if (argument is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })
+                    {
+                        continue;
+                    }
+
+                    AppendRaw(" where <c>");
+                    AppendType(type.Arguments[i], false, false);
+                    AppendRaw("</c> is");
+                    if (TypeFactory.IsArray(argument))
+                    {
+                        AppendRaw(" an array of type ");
+                        argument = TypeFactory.GetElementType(argument);
+                    }
+                    else
+                    {
+                        AppendRaw(" of type ");
+                    }
+
+                    // If argument type is non-generic, we can provide "see cref" for it
+                    // Otherwise, just write its name
+                    if (argument.IsGenericType)
+                    {
+                        AppendRaw("<c>");
+                        AppendType(argument, false, true);
+                        AppendRaw("</c>");
+                    }
+                    else
+                    {
+                        AppendTypeForCRef(argument);
+                    }
+
+                    AppendRaw(",");
+                }
+                RemoveTrailingComma();
+            }
+        }
+
+        private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
+        {
+            if (type.IsFrameworkType && type.FrameworkType.IsArray && type.FrameworkType.GetGenericArguments().Any())
+            {
+                AppendType(type.FrameworkType.GetElementType()!, isDeclaration, writeTypeNameOnly);
+                AppendRaw("[]");
+                return;
+            }
+
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
+                if (type.FrameworkType.IsGenericParameter && type.IsNullable)
+                {
+                    AppendRaw("?");
+                }
             }
             else if (isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
             }
-            else if (_appendTypeNameOnly)
+            else if (writeTypeNameOnly)
             {
+                AppendRaw(type.Name);
+            }
+            else if (type.DeclaringType != null)
+            {
+                AppendType(type.DeclaringType, isDeclaration, writeTypeNameOnly);
+                AppendRaw(".");
                 AppendRaw(type.Name);
             }
             else
@@ -353,17 +472,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (type.Arguments.Any())
             {
-                AppendRaw("<");
+                AppendRaw(_writingXmlDocumentation ? "{" : "<");
                 foreach (var typeArgument in type.Arguments)
                 {
-                    AppendType(typeArgument);
-                    AppendRaw(", ");
+                    AppendType(typeArgument, false, writeTypeNameOnly);
+                    AppendRaw(_writingXmlDocumentation ? "," : ", ");
                 }
                 RemoveTrailingComma();
-                AppendRaw(">");
+                AppendRaw(_writingXmlDocumentation ? "}" : ">");
             }
 
-            if (!isDeclaration && type.IsNullable && type.IsValueType)
+            if (!isDeclaration && type is { IsNullable: true, IsValueType: true })
             {
                 AppendRaw("?");
             }
@@ -380,9 +499,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 decimal d => SyntaxFactory.Literal(d).ToString(),
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),
+                char c => SyntaxFactory.Literal(c).ToString(),
+                sbyte sc => SyntaxFactory.Literal(sc).ToString(),
+                byte b => SyntaxFactory.Literal(b).ToString(),
                 bool b => b ? "true" : "false",
                 BinaryData bd => bd.ToArray().Length == 0 ? "new byte[] { }" : SyntaxFactory.Literal(bd.ToString()).ToString(),
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException($"Unknown literal type {o?.GetType().Name ?? "'null'"}")
             });
         }
 
@@ -401,8 +523,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        private Span<char> WrittenText => _builder.AsSpan(0, _length);
-        private Span<char> PreviousLine
+        public ReadOnlySpan<char> WrittenText => _builder.AsSpan(0, _length);
+
+        private ReadOnlySpan<char> PreviousLine
         {
             get
             {
@@ -425,7 +548,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private Span<char> CurrentLine
+        private ReadOnlySpan<char> CurrentLine
         {
             get
             {
@@ -526,6 +649,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public virtual CodeWriter Declaration(CodeWriterDeclaration declaration)
         {
+            if (_writingXmlDocumentation)
+            {
+                throw new InvalidOperationException("Can't declare variables inside documentation.");
+            }
+
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
             _scopes.Peek().Declarations.Add(declaration);
             return Declaration(declaration.ActualName);
@@ -543,17 +671,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 return string.Empty;
             }
 
-            var builder = new StringBuilder();
-            string[] namespaces = _usingNamespaces
-                    .Distinct()
-                    .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns,StringComparer.Ordinal)
-                    .ToArray();
+            var builder = new StringBuilder(_length);
+            IEnumerable<string> namespaces = _usingNamespaces
+                .OrderByDescending(ns => ns.StartsWith("System"))
+                .ThenBy(ns => ns, StringComparer.Ordinal);
             if (header)
             {
-                builder.AppendLine("// Copyright (c) Microsoft Corporation. All rights reserved.");
-                builder.AppendLine("// Licensed under the MIT License.");
-                builder.AppendLine();
+                builder.Append(Configuration.ApiTypes.LicenseString);
                 builder.AppendLine("// <auto-generated/>");
                 builder.AppendLine();
                 builder.AppendLine("#nullable disable");
@@ -571,10 +695,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // Normalize newlines
-            builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
-
-            // remove any trailing whitespace, for SA1028. can roll back this change after Roslyn fixes https://github.com/dotnet/roslyn/issues/28818
-            return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
+            var spanLines = _builder.AsSpan(0, _length).EnumerateLines();
+            int lineCount = 0;
+            foreach (var line in spanLines)
+            {
+                builder.Append(line.TrimEnd());
+                builder.AppendLine();
+                lineCount++;
+            }
+            // Remove last new line if there are more than 1
+            if (lineCount > 1)
+            {
+                builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            }
+            return builder.ToString();
         }
 
         internal class CodeWriterScope : IDisposable
@@ -681,6 +815,16 @@ namespace AutoRest.CSharp.Generation.Writers
         public virtual void Append(CodeWriterDeclaration declaration)
         {
             Identifier(declaration.ActualName);
+        }
+
+        internal void WriteTypeModifiers(TypeSignatureModifiers modifiers)
+        {
+            this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(TypeSignatureModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(TypeSignatureModifiers.Static))
+                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed))
+                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial)); // partial must be the last to write otherwise compiler will complain
         }
     }
 }

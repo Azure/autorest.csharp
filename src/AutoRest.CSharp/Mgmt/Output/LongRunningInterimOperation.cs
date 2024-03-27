@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             IOperationSourceType = new CSharpType(typeof(IOperationSource<>), returnType);
             StateLockType = new CSharpType(typeof(AsyncLockWithValue<>), returnType);
             ValueTaskType = new CSharpType(typeof(ValueTask<>), returnType);
-            ResponseType = new CSharpType(typeof(Response<>), returnType);
+            ResponseType = new CSharpType(Configuration.ApiTypes.ResponseOfTType, returnType);
             var trimmedNamespace = MgmtContext.Context.DefaultNamespace.Split('.').Last();
             OperationType = $"{trimmedNamespace}ArmOperation<{returnType.Name}>";
             var resourceName = resource != null ? resource.ResourceName : $"{trimmedNamespace}Extensions";

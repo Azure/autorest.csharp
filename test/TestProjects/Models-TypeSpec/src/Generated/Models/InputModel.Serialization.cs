@@ -5,15 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class InputModel : IUtf8JsonSerializable
+    public partial class InputModel : IUtf8JsonSerializable, IJsonModel<InputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<InputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(InputModel)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -62,9 +74,9 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<BaseModel>(RequiredModel, options);
             writer.WritePropertyName("requiredModel2"u8);
-            writer.WriteObjectValue(RequiredModel2);
+            writer.WriteObjectValue<BaseModel>(RequiredModel2, options);
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
@@ -83,7 +95,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -91,7 +103,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<RecordItem>(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
@@ -124,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -166,7 +178,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -198,7 +210,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        writer.WriteObjectValue(item);
+                        writer.WriteObjectValue<CollectionItem>(item, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -241,14 +253,411 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableIntList");
                 }
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
+        }
+
+        InputModel IJsonModel<InputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(InputModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeInputModel(document.RootElement, options);
+        }
+
+        internal static InputModel DeserializeInputModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string requiredString = default;
+            int requiredInt = default;
+            int? requiredNullableInt = default;
+            string requiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
+            BaseModel requiredModel = default;
+            BaseModel requiredModel2 = default;
+            IList<int> requiredIntList = default;
+            IList<string> requiredStringList = default;
+            IList<CollectionItem> requiredModelList = default;
+            IDictionary<string, RecordItem> requiredModelRecord = default;
+            IList<float?> requiredCollectionWithNullableFloatElement = default;
+            IList<bool?> requiredCollectionWithNullableBooleanElement = default;
+            IList<CollectionItem> requiredNullableModelList = default;
+            IList<string> requiredNullableStringList = default;
+            IList<int> requiredNullableIntList = default;
+            IList<CollectionItem> nonRequiredModelList = default;
+            IList<string> nonRequiredStringList = default;
+            IList<int> nonRequiredIntList = default;
+            IList<CollectionItem> nonRequiredNullableModelList = default;
+            IList<string> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("requiredString"u8))
+                {
+                    requiredString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredInt"u8))
+                {
+                    requiredInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableInt = null;
+                        continue;
+                    }
+                    requiredNullableInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableString"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableString = null;
+                        continue;
+                    }
+                    requiredNullableString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredNullableInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableInt = null;
+                        continue;
+                    }
+                    nonRequiredNullableInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredNullableString"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableString = null;
+                        continue;
+                    }
+                    nonRequiredNullableString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredModel"u8))
+                {
+                    requiredModel = BaseModel.DeserializeBaseModel(property.Value, options);
+                    continue;
+                }
+                if (property.NameEquals("requiredModel2"u8))
+                {
+                    requiredModel2 = BaseModel.DeserializeBaseModel(property.Value, options);
+                    continue;
+                }
+                if (property.NameEquals("requiredIntList"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredStringList"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    requiredStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredModelList"u8))
+                {
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
+                    }
+                    requiredModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredModelRecord"u8))
+                {
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
+                    }
+                    requiredModelRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredCollectionWithNullableFloatElement"u8))
+                {
+                    List<float?> array = new List<float?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                    }
+                    requiredCollectionWithNullableFloatElement = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredCollectionWithNullableBooleanElement"u8))
+                {
+                    List<bool?> array = new List<bool?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                    }
+                    requiredCollectionWithNullableBooleanElement = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableModelList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableModelList = new ChangeTrackingList<CollectionItem>();
+                        continue;
+                    }
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
+                    }
+                    requiredNullableModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableStringList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableStringList = new ChangeTrackingList<string>();
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    requiredNullableStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableIntList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableIntList = new ChangeTrackingList<int>();
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredNullableIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredModelList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
+                    }
+                    nonRequiredModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredStringList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    nonRequiredStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredIntList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    nonRequiredIntList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredNullableModelList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
+                    }
+                    nonRequiredNullableModelList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredNullableStringList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    nonRequiredNullableStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("nonRequiredNullableIntList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    nonRequiredNullableIntList = array;
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredModel,
+                requiredModel2,
+                requiredIntList,
+                requiredStringList,
+                requiredModelList,
+                requiredModelRecord,
+                requiredCollectionWithNullableFloatElement,
+                requiredCollectionWithNullableBooleanElement,
+                requiredNullableModelList,
+                requiredNullableStringList,
+                requiredNullableIntList,
+                nonRequiredModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                serializedAdditionalRawData);
+        }
+
+        BinaryData IPersistableModel<InputModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(InputModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        InputModel IPersistableModel<InputModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeInputModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(InputModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<InputModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InputModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

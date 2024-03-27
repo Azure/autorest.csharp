@@ -4,12 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -22,18 +20,18 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<MgmtExtension> Extensions { get; }
 
-        public IEnumerable<MgmtExtensionClient> ExtensionClients { get; }
+        public IEnumerable<MgmtMockableExtension> MockingExtensions { get; }
 
         public override bool IsStatic => true;
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients) : base(MgmtContext.RPName)
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockingExtensions) : base(MgmtContext.RPName)
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
             Extensions = extensions;
-            ExtensionClients = extensionClients;
+            MockingExtensions = mockingExtensions;
         }
 
         public override CSharpType? BaseType => null;

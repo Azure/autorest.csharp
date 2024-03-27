@@ -5,15 +5,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -27,17 +30,28 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
         private const int PropertyBagThreshold = 5;
-        private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), idVariableName, extensionParameter, isConvenientOperation);
             }
 
             return null;
         }
+
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        {
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariableName, extensionParameter, isConvenientOperation);
+        }
+
+        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+        {
+            return new MgmtClientOperation(other._operations, idVariableName, extensionParameter, isConvenientOperation, parameterOverride);
+        }
+
+        internal FormattableString IdVariableName { get; }
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 
@@ -51,18 +65,20 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
         public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? _passThroughParams : Array.Empty<Parameter>();
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
-        {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
-        }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
+            IdVariableName = idVariableName;
             IsConvenientOperation = isConvenientOperation;
+        }
+
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null) : this(operations, idVariableName, extensionParameter, isConvenientOperation)
+        {
+            _methodParameters = parameterOverride;
         }
 
         public bool IsConvenientOperation { get; }
@@ -70,18 +86,44 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MgmtRestOperation this[int index] => _operations[index];
 
         private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
-            Name,
-            null,
-            Description,
-            Accessibility == Public
-                ? _extensionParameter != null
-                    ? Public | Static | Extension
-                    : Public | Virtual
-                : Accessibility,
-            IsPagingOperation
-                ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+        public MethodSignature MethodSignature
+        {
+            get
+            {
+                if (_methodSignature != null)
+                    return _methodSignature;
+                else
+                {
+                    var attributes = _operations
+                        .Where(op => Configuration.MgmtConfiguration.PrivilegedOperations.ContainsKey(op.OperationId))
+                        .Select(op =>
+                        {
+                            var arg = Configuration.MgmtConfiguration.PrivilegedOperations[op.OperationId];
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
+                                new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
+                                op.Operation.GetFullSerializedName(),
+                                $"Operation {op.OperationId} is marked as Privileged Operation");
+                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), Literal(arg));
+                        })
+                        .ToList();
+
+                    _methodSignature = new MethodSignature(
+                        Name,
+                        null,
+                        Description,
+                        Accessibility == Public
+                            ? _extensionParameter != null
+                                ? Public | Static | Extension
+                                : Public | Virtual
+                            : Accessibility,
+                        IsPagingOperation
+                            ? new CSharpType(typeof(Pageable<>), ReturnType)
+                            : ReturnType, null, MethodParameters.ToArray(),
+                        attributes);
+                    return _methodSignature;
+                }
+            }
+        }
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
@@ -93,21 +135,61 @@ namespace AutoRest.CSharp.Mgmt.Models
         private FormattableString BuildDescription()
         {
             var pathInformation = _operations.Select(operation =>
-                (FormattableString)$@"<item>
+            {
+                FormattableString resourceItem = $"";
+                if (operation.Resource != null)
+                {
+                    resourceItem = $@"
+<item>
+<term>Resource</term>
+<description>{operation.Resource.Type:C}</description>
+</item>";
+                }
+                FormattableString defaultApiVersion = $"";
+                if (operation.Operation.ApiVersions.Any())
+                {
+                    defaultApiVersion = $@"
+<item>
+<term>Default Api Version</term>
+<description>{string.Join(", ", operation.Operation.ApiVersions.Select(v => v.Version))}</description>
+</item>";
+                }
+                    return (FormattableString)$@"<item>
 <term>Request Path</term>
 <description>{operation.Operation.GetHttpPath()}</description>
 </item>
 <item>
 <term>Operation Id</term>
 <description>{operation.OperationId}</description>
-</item>").ToArray().Join(Environment.NewLine);
+</item>{defaultApiVersion}{resourceItem}";
+            }).ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";
+            FormattableString? mockingInformation;
+            if (_extensionParameter == null)
+            {
+                mockingInformation = null;
+            }
+            else
+            {
+                // find the corresponding extension of this method
+                var extendType = _extensionParameter.Type;
+                var mockingExtensionTypeName = MgmtMockableExtension.GetMockableExtensionDefaultName(extendType.Name);
+
+                // construct the cref name
+                FormattableString methodSignature = $"{mockingExtensionTypeName}.{Name}({MethodParameters.Skip(1).GetTypesFormattable(MethodParameters.Count - 1)})";
+                mockingInformation = $@"<item>
+<term>Mocking</term>
+<description>To mock this method, please mock {methodSignature:C} instead.</description>
+</item>";
+            }
+
+            FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
-                return $"{descriptionOfOperation}\n{pathInformation}";
-            return pathInformation;
+                return $"{descriptionOfOperation}{Environment.NewLine}{extraInformation}";
+            return extraInformation;
         }
 
         // TODO -- we need a better way to get this

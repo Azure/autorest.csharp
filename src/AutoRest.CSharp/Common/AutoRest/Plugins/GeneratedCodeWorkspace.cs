@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -10,8 +11,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
-using AutoRest.CSharp.Input;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static readonly string SharedFolder = "shared";
         public static readonly string GeneratedFolder = "Generated";
+        public static readonly string GeneratedTestFolder = "GeneratedTests";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
 
@@ -37,6 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ClientResult).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
             };
 
@@ -51,15 +54,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
+        private static readonly string[] GeneratedTestFolders = { GeneratedFolder, GeneratedTestFolder };
         private static Task<Project>? _cachedProject;
 
         private Project _project;
         private Dictionary<string, XmlDocumentFile> _xmlDocFiles { get; }
+        private Dictionary<string, string> _plainFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
             _xmlDocFiles = new();
+            _plainFiles = new();
         }
 
         /// <summary>
@@ -71,9 +77,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _cachedProject = Task.Run(CreateGeneratedCodeProject);
         }
 
-        public void AddGeneratedFile(string name, string text)
+        public void AddGeneratedFile(string name, string text) => AddGeneratedFile(name, text, GeneratedFolders);
+
+        public void AddGeneratedTestFile(string name, string text) => AddGeneratedFile(name, text, GeneratedTestFolders);
+
+        private void AddGeneratedFile(string name, string text, string[] folders)
         {
-            var document = _project.AddDocument(name, text, GeneratedFolders);
+            var document = _project.AddDocument(name, text, folders);
             var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
             Debug.Assert(root != null);
 
@@ -92,6 +102,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _xmlDocFiles.Add(name, xmlDocument);
         }
 
+        public void AddPlainFiles(string name, string content)
+        {
+            _plainFiles.Add(name, content);
+        }
+
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
             var compilation = await _project.GetCompilationAsync();
@@ -107,18 +122,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
                 }
 
-                documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
+                documents.Add(ProcessDocument(compilation, document, suppressedTypeNames));
             }
-
+            var docs = await Task.WhenAll(documents);
             var needProcessGeneratedDocs = _xmlDocFiles.Any();
             var generatedDocs = new Dictionary<string, SyntaxTree>();
 
-            foreach (var task in documents)
+            foreach (var doc in docs)
             {
-                var processed = await task;
+                var processed = doc;
 
-                processed = await Simplifier.ReduceAsync(processed);
-                processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
                 if (needProcessGeneratedDocs) // TODO -- this is a workaround. In HLC, in some cases, there are multiple documents with the same name added in this list, and we get "dictionary same key has been added" exception
@@ -128,9 +141,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var (docName, doc) in _xmlDocFiles)
             {
                 var xmlWriter = doc.XmlDocWriter;
-                var testDocument = generatedDocs[doc.TestFileName];
-                var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
-                yield return (docName, content);
+                if (generatedDocs.TryGetValue(doc.TestFileName, out var testDocument))
+                {
+                    var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
+                    yield return (docName, content);
+                }
+            }
+
+            foreach (var (file, content) in _plainFiles)
+            {
+                yield return (file, content);
             }
         }
 
@@ -144,6 +164,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 document = document.WithSyntaxRoot(SA1505Rewriter.Visit(modelRemoveRewriter.Visit(await syntaxTree.GetRootAsync())));
             }
 
+            document = await Simplifier.ReduceAsync(document);
+            document = await Formatter.FormatAsync(document);
             return document;
         }
 
@@ -231,6 +253,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(project);
         }
 
+        public static async Task<Compilation?> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
+        {
+            var workspace = new AdhocWorkspace();
+            Project project = workspace.AddProject("PreviousContract", LanguageNames.CSharp);
+            project = project
+                .AddMetadataReferences(AssemblyMetadataReferences)
+                .WithCompilationOptions(new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+            project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath, documentation: XmlDocumentationProvider.CreateFromFile(xmlDocumentationpath)));
+            return await project.GetCompilationAsync();
+        }
+
         private static Project CreateGeneratedCodeProject()
         {
             var workspace = new AdhocWorkspace();
@@ -254,6 +288,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsCustomDocument(Document document) => !IsGeneratedDocument(document) && !IsSharedDocument(document);
         public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
+        public static bool IsGeneratedTestDocument(Document document) => document.Folders.Contains(GeneratedTestFolder);
 
         /// <summary>
         /// This method delegates the caller to do something on the generated code project

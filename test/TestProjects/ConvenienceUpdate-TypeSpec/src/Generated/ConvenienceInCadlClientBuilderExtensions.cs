@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using ConvenienceInCadl;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ConvenienceInCadlClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ConvenienceInCadlClient, ConvenienceInCadlClientOptions> AddConvenienceInCadlClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> Service endpoint. </param>
+        public static IAzureClientBuilder<ConvenienceInCadlClient, ConvenienceInCadlClientOptions> AddConvenienceInCadlClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ConvenienceInCadlClient, ConvenienceInCadlClientOptions>((options) => new ConvenienceInCadlClient(options));
+            return builder.RegisterClientFactory<ConvenienceInCadlClient, ConvenienceInCadlClientOptions>((options) => new ConvenienceInCadlClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ConvenienceInCadlClient"/> instance. </summary>

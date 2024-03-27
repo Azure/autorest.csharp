@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { InputType } from "./inputType";
+import { InputType } from "./inputType.js";
 
 export interface InputModelProperty {
     Name: string;
@@ -10,5 +10,5 @@ export interface InputModelProperty {
     Type: InputType;
     IsRequired: boolean;
     IsReadOnly: boolean;
-    IsDiscriminator: boolean;
+    IsDiscriminator?: boolean;
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,20 +14,260 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripReadOnlyModel
+    public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable, IJsonModel<RoundTripReadOnlyModel>
     {
-        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripReadOnlyModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RoundTripReadOnlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support writing '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyString"u8);
+                writer.WriteStringValue(RequiredReadonlyString);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyString))
+            {
+                writer.WritePropertyName("optionalReadonlyString"u8);
+                writer.WriteStringValue(OptionalReadonlyString);
+            }
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyInt))
+            {
+                writer.WritePropertyName("optionalReadonlyInt"u8);
+                writer.WriteNumberValue(OptionalReadonlyInt.Value);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyModel"u8);
+                writer.WriteObjectValue<DerivedModel>(RequiredReadonlyModel, options);
+            }
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
+            {
+                writer.WritePropertyName("optionalReadonlyModel"u8);
+                writer.WriteObjectValue<DerivedModel>(OptionalReadonlyModel, options);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyFixedStringEnum"u8);
+                writer.WriteStringValue(RequiredReadonlyFixedStringEnum.ToSerialString());
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyExtensibleEnum"u8);
+                writer.WriteStringValue(RequiredReadonlyExtensibleEnum.ToString());
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("optionalReadonlyFixedStringEnum"u8);
+                writer.WriteStringValue(OptionalReadonlyFixedStringEnum.ToSerialString());
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("optionalReadonlyExtensibleEnum"u8);
+                writer.WriteStringValue(OptionalReadonlyExtensibleEnum.ToString());
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredReadonlyStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredReadonlyIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadOnlyModelList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredReadOnlyModelList)
+                {
+                    writer.WriteObjectValue<CollectionItem>(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadOnlyIntRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in RequiredReadOnlyIntRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteNumberValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredStringRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in RequiredStringRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadOnlyModelRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in RequiredReadOnlyModelRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            {
+                writer.WritePropertyName("optionalReadonlyStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalReadonlyStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            {
+                writer.WritePropertyName("optionalReadonlyIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalReadonlyIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            {
+                writer.WritePropertyName("optionalReadOnlyModelList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalReadOnlyModelList)
+                {
+                    writer.WriteObjectValue<CollectionItem>(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("optionalReadOnlyIntRecord"u8);
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyIntRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("optionalReadOnlyStringRecord"u8);
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyStringRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalModelRecord))
+            {
+                writer.WritePropertyName("optionalModelRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in OptionalModelRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("requiredCollectionWithNullableIntElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableIntElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
+            {
+                writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalCollectionWithNullableBooleanElement)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteBooleanValue(item.Value);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        RoundTripReadOnlyModel IJsonModel<RoundTripReadOnlyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
+        }
+
+        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
-            Optional<string> optionalReadonlyString = default;
-            Optional<int> optionalReadonlyInt = default;
+            string optionalReadonlyString = default;
+            int? optionalReadonlyInt = default;
             DerivedModel requiredReadonlyModel = default;
-            Optional<DerivedModel> optionalReadonlyModel = default;
+            DerivedModel optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;
             ExtensibleEnum requiredReadonlyExtensibleEnum = default;
             FixedStringEnum optionalReadonlyFixedStringEnum = default;
@@ -36,14 +278,16 @@ namespace ModelsTypeSpec.Models
             IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> requiredStringRecord = default;
             IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord = default;
-            Optional<IReadOnlyList<string>> optionalReadonlyStringList = default;
-            Optional<IReadOnlyList<int>> optionalReadonlyIntList = default;
-            Optional<IReadOnlyList<CollectionItem>> optionalReadOnlyModelList = default;
+            IReadOnlyList<string> optionalReadonlyStringList = default;
+            IReadOnlyList<int> optionalReadonlyIntList = default;
+            IReadOnlyList<CollectionItem> optionalReadOnlyModelList = default;
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalModelRecord = default;
             IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
-            Optional<IReadOnlyList<bool?>> optionalCollectionWithNullableBooleanElement = default;
+            IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredReadonlyString"u8))
@@ -72,7 +316,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredReadonlyModel"u8))
                 {
-                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalReadonlyModel"u8))
@@ -81,7 +325,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
@@ -129,7 +373,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredReadOnlyModelList = array;
                     continue;
@@ -159,7 +403,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredReadOnlyModelRecord = dictionary;
                     continue;
@@ -201,7 +445,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalReadOnlyModelList = array;
                     continue;
@@ -235,7 +479,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;
@@ -278,9 +522,70 @@ namespace ModelsTypeSpec.Models
                     optionalCollectionWithNullableBooleanElement = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RoundTripReadOnlyModel(
+                requiredReadonlyString,
+                requiredReadonlyInt,
+                optionalReadonlyString,
+                optionalReadonlyInt,
+                requiredReadonlyModel,
+                optionalReadonlyModel,
+                requiredReadonlyFixedStringEnum,
+                requiredReadonlyExtensibleEnum,
+                optionalReadonlyFixedStringEnum,
+                optionalReadonlyExtensibleEnum,
+                requiredReadonlyStringList,
+                requiredReadonlyIntList,
+                requiredReadOnlyModelList,
+                requiredReadOnlyIntRecord,
+                requiredStringRecord,
+                requiredReadOnlyModelRecord,
+                optionalReadonlyStringList ?? new ChangeTrackingList<string>(),
+                optionalReadonlyIntList ?? new ChangeTrackingList<int>(),
+                optionalReadOnlyModelList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalReadOnlyIntRecord,
+                optionalReadOnlyStringRecord,
+                optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                requiredCollectionWithNullableIntElement,
+                optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool?>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<RoundTripReadOnlyModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        RoundTripReadOnlyModel IPersistableModel<RoundTripReadOnlyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RoundTripReadOnlyModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -288,6 +593,14 @@ namespace ModelsTypeSpec.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripReadOnlyModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<RoundTripReadOnlyModel>(this, new ModelReaderWriterOptions("W"));
+            return content;
         }
     }
 }

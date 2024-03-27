@@ -12,20 +12,19 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using lro_LowLevel;
 
 namespace lro_LowLevel.Samples
 {
-    public class Samples_LROsClient
+    public partial class Samples_LROsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200Succeeded()
+        public void Example_Put200Succeeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put200Succeeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -35,12 +34,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200Succeeded_Async()
+        public async Task Example_Put200Succeeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put200SucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -55,7 +54,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -87,7 +86,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -114,12 +113,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch200SucceededIgnoreHeaders()
+        public void Example_Patch200SucceededIgnoreHeaders_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -129,12 +128,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch200SucceededIgnoreHeaders_Async()
+        public async Task Example_Patch200SucceededIgnoreHeaders_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -149,7 +148,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -181,7 +180,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -208,12 +207,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch201RetryWithAsyncHeader()
+        public void Example_Patch201RetryWithAsyncHeader_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -223,12 +222,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch201RetryWithAsyncHeader_Async()
+        public async Task Example_Patch201RetryWithAsyncHeader_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -243,7 +242,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -275,7 +274,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -302,12 +301,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch202RetryWithAsyncAndLocationHeader()
+        public void Example_Patch202RetryWithAsyncAndLocationHeader_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -317,12 +316,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch202RetryWithAsyncAndLocationHeader_Async()
+        public async Task Example_Patch202RetryWithAsyncAndLocationHeader_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -337,7 +336,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -369,7 +368,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -396,12 +395,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201Succeeded()
+        public void Example_Put201Succeeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put201Succeeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -411,12 +410,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201Succeeded_Async()
+        public async Task Example_Put201Succeeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put201SucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -431,7 +430,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -463,7 +462,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -490,7 +489,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202List()
+        public void Example_Post202List_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -504,7 +503,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202List_Async()
+        public async Task Example_Post202List_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -558,12 +557,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200SucceededNoState()
+        public void Example_Put200SucceededNoState_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put200SucceededNoState(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -573,12 +572,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200SucceededNoState_Async()
+        public async Task Example_Put200SucceededNoState_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -593,7 +592,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -625,7 +624,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -652,12 +651,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put202Retry200()
+        public void Example_Put202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put202Retry200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -667,12 +666,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put202Retry200_Async()
+        public async Task Example_Put202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put202Retry200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -687,7 +686,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -719,7 +718,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -746,12 +745,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201CreatingSucceeded200()
+        public void Example_Put201CreatingSucceeded200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -761,12 +760,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingSucceeded200_Async()
+        public async Task Example_Put201CreatingSucceeded200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -781,7 +780,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -813,7 +812,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -840,12 +839,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200UpdatingSucceeded204()
+        public void Example_Put200UpdatingSucceeded204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -855,12 +854,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200UpdatingSucceeded204_Async()
+        public async Task Example_Put200UpdatingSucceeded204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -875,7 +874,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -907,7 +906,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -934,12 +933,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201CreatingFailed200()
+        public void Example_Put201CreatingFailed200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put201CreatingFailed200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -949,12 +948,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingFailed200_Async()
+        public async Task Example_Put201CreatingFailed200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -969,7 +968,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1001,7 +1000,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1028,12 +1027,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200Acceptedcanceled200()
+        public void Example_Put200Acceptedcanceled200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1043,12 +1042,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200Acceptedcanceled200_Async()
+        public async Task Example_Put200Acceptedcanceled200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1063,7 +1062,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1095,7 +1094,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1122,12 +1121,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutNoHeaderInRetry()
+        public void Example_PutNoHeaderInRetry_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutNoHeaderInRetry(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1137,12 +1136,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutNoHeaderInRetry_Async()
+        public async Task Example_PutNoHeaderInRetry_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1157,7 +1156,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1189,7 +1188,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1216,12 +1215,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncRetrySucceeded()
+        public void Example_PutAsyncRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1231,12 +1230,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRetrySucceeded_Async()
+        public async Task Example_PutAsyncRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1251,7 +1250,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1283,7 +1282,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1310,12 +1309,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncNoRetrySucceeded()
+        public void Example_PutAsyncNoRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1325,12 +1324,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncNoRetrySucceeded_Async()
+        public async Task Example_PutAsyncNoRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1345,7 +1344,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1377,7 +1376,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1404,12 +1403,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncRetryFailed()
+        public void Example_PutAsyncRetryFailed_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRetryFailed(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1419,12 +1418,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRetryFailed_Async()
+        public async Task Example_PutAsyncRetryFailed_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1439,7 +1438,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1471,7 +1470,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1498,12 +1497,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncNoRetrycanceled()
+        public void Example_PutAsyncNoRetrycanceled_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1513,12 +1512,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncNoRetrycanceled_Async()
+        public async Task Example_PutAsyncNoRetrycanceled_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1533,7 +1532,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1565,7 +1564,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1592,12 +1591,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncNoHeaderInRetry()
+        public void Example_PutAsyncNoHeaderInRetry_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1607,12 +1606,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncNoHeaderInRetry_Async()
+        public async Task Example_PutAsyncNoHeaderInRetry_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1627,7 +1626,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1659,7 +1658,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1686,12 +1685,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutNonResource()
+        public void Example_PutNonResource_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutNonResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1701,12 +1700,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutNonResource_Async()
+        public async Task Example_PutNonResource_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutNonResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1721,7 +1720,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = "<id>",
@@ -1741,7 +1740,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = "<id>",
@@ -1756,12 +1755,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncNonResource()
+        public void Example_PutAsyncNonResource_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncNonResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1771,12 +1770,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncNonResource_Async()
+        public async Task Example_PutAsyncNonResource_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1791,7 +1790,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = "<id>",
@@ -1811,7 +1810,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = "<id>",
@@ -1826,12 +1825,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutSubResource()
+        public void Example_PutSubResource_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutSubResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1841,12 +1840,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutSubResource_Async()
+        public async Task Example_PutSubResource_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutSubResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1861,7 +1860,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1884,7 +1883,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1902,12 +1901,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncSubResource()
+        public void Example_PutAsyncSubResource_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncSubResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1917,12 +1916,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncSubResource_Async()
+        public async Task Example_PutAsyncSubResource_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -1937,7 +1936,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1960,7 +1959,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -1978,7 +1977,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteProvisioning202Accepted200Succeeded()
+        public void Example_DeleteProvisioning202Accepted200Succeeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -1992,7 +1991,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteProvisioning202Accepted200Succeeded_Async()
+        public async Task Example_DeleteProvisioning202Accepted200Succeeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2046,7 +2045,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteProvisioning202DeletingFailed200()
+        public void Example_DeleteProvisioning202DeletingFailed200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2060,7 +2059,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteProvisioning202DeletingFailed200_Async()
+        public async Task Example_DeleteProvisioning202DeletingFailed200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2114,7 +2113,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteProvisioning202Deletingcanceled200()
+        public void Example_DeleteProvisioning202Deletingcanceled200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2128,7 +2127,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteProvisioning202Deletingcanceled200_Async()
+        public async Task Example_DeleteProvisioning202Deletingcanceled200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2182,7 +2181,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete204Succeeded()
+        public void Example_Delete204Succeeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2192,7 +2191,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete204Succeeded_Async()
+        public async Task Example_Delete204Succeeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2222,7 +2221,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202Retry200()
+        public void Example_Delete202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2236,7 +2235,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202Retry200_Async()
+        public async Task Example_Delete202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2290,7 +2289,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202NoRetry204()
+        public void Example_Delete202NoRetry204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2304,7 +2303,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202NoRetry204_Async()
+        public async Task Example_Delete202NoRetry204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2358,7 +2357,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteNoHeaderInRetry()
+        public void Example_DeleteNoHeaderInRetry_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2368,7 +2367,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteNoHeaderInRetry_Async()
+        public async Task Example_DeleteNoHeaderInRetry_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2398,7 +2397,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncNoHeaderInRetry()
+        public void Example_DeleteAsyncNoHeaderInRetry_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2408,7 +2407,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncNoHeaderInRetry_Async()
+        public async Task Example_DeleteAsyncNoHeaderInRetry_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2438,7 +2437,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRetrySucceeded()
+        public void Example_DeleteAsyncRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2448,7 +2447,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncRetrySucceeded_Async()
+        public async Task Example_DeleteAsyncRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2478,7 +2477,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncNoRetrySucceeded()
+        public void Example_DeleteAsyncNoRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2488,7 +2487,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncNoRetrySucceeded_Async()
+        public async Task Example_DeleteAsyncNoRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2518,7 +2517,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRetryFailed()
+        public void Example_DeleteAsyncRetryFailed_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2528,7 +2527,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncRetryFailed_Async()
+        public async Task Example_DeleteAsyncRetryFailed_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2558,7 +2557,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRetrycanceled()
+        public void Example_DeleteAsyncRetrycanceled_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2568,7 +2567,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncRetrycanceled_Async()
+        public async Task Example_DeleteAsyncRetrycanceled_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2598,7 +2597,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post200WithPayload()
+        public void Example_Post200WithPayload_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2612,7 +2611,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post200WithPayload_Async()
+        public async Task Example_Post200WithPayload_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2656,23 +2655,23 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202Retry200()
+        public void Example_Post202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202Retry200_Async()
+        public async Task Example_Post202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
 
@@ -2683,7 +2682,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -2705,7 +2704,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -2722,12 +2721,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202NoRetry204()
+        public void Example_Post202NoRetry204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Post202NoRetry204(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -2737,12 +2736,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202NoRetry204_Async()
+        public async Task Example_Post202NoRetry204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Post202NoRetry204Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -2757,7 +2756,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -2789,7 +2788,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -2816,7 +2815,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostDoubleHeadersFinalLocationGet()
+        public void Example_PostDoubleHeadersFinalLocationGet_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2830,7 +2829,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostDoubleHeadersFinalLocationGet_Async()
+        public async Task Example_PostDoubleHeadersFinalLocationGet_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2884,7 +2883,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostDoubleHeadersFinalAzureHeaderGet()
+        public void Example_PostDoubleHeadersFinalAzureHeaderGet_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2898,7 +2897,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostDoubleHeadersFinalAzureHeaderGet_Async()
+        public async Task Example_PostDoubleHeadersFinalAzureHeaderGet_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2952,7 +2951,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostDoubleHeadersFinalAzureHeaderGetDefault()
+        public void Example_PostDoubleHeadersFinalAzureHeaderGetDefault_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -2966,7 +2965,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostDoubleHeadersFinalAzureHeaderGetDefault_Async()
+        public async Task Example_PostDoubleHeadersFinalAzureHeaderGetDefault_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
@@ -3020,12 +3019,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRetrySucceeded()
+        public void Example_PostAsyncRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -3035,12 +3034,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRetrySucceeded_Async()
+        public async Task Example_PostAsyncRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -3055,7 +3054,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3087,7 +3086,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3114,12 +3113,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncNoRetrySucceeded()
+        public void Example_PostAsyncNoRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -3129,12 +3128,12 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncNoRetrySucceeded_Async()
+        public async Task Example_PostAsyncNoRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -3149,7 +3148,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3181,7 +3180,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3208,23 +3207,23 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRetryFailed()
+        public void Example_PostAsyncRetryFailed_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = client.PostAsyncRetryFailed(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRetryFailed_Async()
+        public async Task Example_PostAsyncRetryFailed_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, content);
         }
 
@@ -3235,7 +3234,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3257,7 +3256,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3274,23 +3273,23 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRetrycanceled()
+        public void Example_PostAsyncRetrycanceled_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRetrycanceled_Async()
+        public async Task Example_PostAsyncRetrycanceled_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, content);
         }
 
@@ -3301,7 +3300,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -3323,7 +3322,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {

@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using NUnit.Framework;
@@ -18,9 +19,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         {
             var segments = suffixString.Split('/', StringSplitOptions.RemoveEmptyEntries);
             var suffix = SingletonResourceSuffix.Parse(segments);
-            var result = suffix.BuildResourceIdentifier($"Id");
+            var result = suffix.BuildResourceIdentifier(new FormattableStringToExpression($"Id"));
             var writer = new CodeWriter();
-            Assert.AreEqual(expected, writer.Append(result).ToString(false).Trim());
+            writer.WriteValueExpression(result);
+            Assert.AreEqual(expected, writer.ToString(false).Trim());
         }
     }
 }

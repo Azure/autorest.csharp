@@ -2,13 +2,12 @@
  "$id": "1",
  "Name": "Type.Model.Inheritance.NotDiscriminated",
  "Description": "Illustrates not-discriminated inheritance model.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
@@ -22,125 +21,64 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": [
-    {
-     "$id": "5",
-     "Name": "Cat",
-     "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-     "Description": "The second level model in the normal multiple levels inheritance.",
-     "IsNullable": false,
-     "BaseModel": {
-      "$ref": "2"
-     },
-     "Usage": "None",
-     "Properties": [
-      {
-       "$id": "6",
-       "Name": "age",
-       "SerializedName": "age",
-       "Description": "",
-       "Type": {
-        "$id": "7",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "IsRequired": true,
-       "IsReadOnly": false
-      }
-     ],
-     "DerivedModels": [
-      {
-       "$id": "8",
-       "Name": "Siamese",
-       "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-       "Description": "The third level model in the normal multiple levels inheritance.",
-       "IsNullable": false,
-       "BaseModel": {
-        "$ref": "5"
-       },
-       "Usage": "None",
-       "Properties": [
-        {
-         "$id": "9",
-         "Name": "smart",
-         "SerializedName": "smart",
-         "Description": "",
-         "Type": {
-          "$id": "10",
-          "Name": "boolean",
-          "Kind": "Boolean",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
-      }
-     ]
-    }
    ]
   },
   {
-   "$id": "11",
+   "$id": "5",
+   "Kind": "Model",
    "Name": "Cat",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The second level model in the normal multiple levels inheritance.",
    "IsNullable": false,
+   "Usage": "None",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
    "Properties": [
     {
-     "$id": "12",
+     "$id": "6",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "13",
-      "Name": "int32",
-      "Kind": "Int32",
+      "$id": "7",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": [
-    {
-     "$ref": "8"
-    }
    ]
   },
   {
-   "$id": "14",
+   "$id": "8",
+   "Kind": "Model",
    "Name": "Siamese",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
-   "BaseModel": {
-    "$ref": "11"
-   },
    "Usage": "RoundTrip",
+   "BaseModel": {
+    "$ref": "5"
+   },
    "Properties": [
     {
-     "$id": "15",
+     "$id": "9",
      "Name": "smart",
      "SerializedName": "smart",
      "Description": "",
      "Type": {
-      "$id": "16",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "$id": "10",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -151,24 +89,24 @@
  ],
  "Clients": [
   {
-   "$id": "17",
+   "$id": "11",
    "Name": "NotDiscriminatedClient",
    "Description": "Illustrates not-discriminated inheritance model.",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "12",
      "Name": "postValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
       {
-       "$id": "19",
+       "$id": "13",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "20",
+        "$id": "14",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -181,22 +119,22 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "15",
         "Type": {
-         "$id": "22",
+         "$id": "16",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "23",
+       "$id": "17",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "14"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -209,13 +147,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "18",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "25",
+        "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -228,21 +166,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "20",
         "Type": {
-         "$ref": "25"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "27",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "22",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -255,48 +193,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "23",
         "Type": {
-         "$ref": "28"
+         "$ref": "22"
         },
         "Value": "application/json"
-       }
-      },
-      {
-       "$id": "30",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "31",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "32",
-        "Type": {
-         "$id": "33",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -317,21 +224,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "35",
+     "$id": "25",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "13"
       },
       {
-       "$id": "36",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -344,29 +251,29 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "28",
         "Type": {
-         "$ref": "37"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -378,19 +285,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "30",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "13"
       },
       {
-       "$id": "41",
+       "$id": "31",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "14"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -403,40 +310,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "43",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "44",
-        "Type": {
-         "$ref": "43"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "45",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -449,29 +329,56 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "34",
         "Type": {
-         "$ref": "46"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$id": "35",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "36",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "37",
+        "Type": {
+         "$ref": "36"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -487,7 +394,7 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "39"
    },
    "Creatable": true
   }

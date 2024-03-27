@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input
 {
@@ -39,7 +40,7 @@ namespace AutoRest.CSharp.Input
 
         internal static MgmtTestConfiguration? LoadConfiguration(JsonElement root)
         {
-            if (root.TryGetProperty(TestGenOptionsRoot, out var testGenRoot))
+            if (!root.TryGetProperty(TestGenOptionsRoot, out var testGenRoot))
                 return null;
             if (testGenRoot.ValueKind != JsonValueKind.Object)
                 return null;

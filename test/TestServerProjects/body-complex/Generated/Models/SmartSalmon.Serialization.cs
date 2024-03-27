@@ -5,16 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class SmartSalmon : IUtf8JsonSerializable
+    public partial class SmartSalmon : IUtf8JsonSerializable, IJsonModel<SmartSalmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmartSalmon>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SmartSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SmartSalmon)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(CollegeDegree))
             {
@@ -46,31 +56,45 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Fish>(item, options);
                 }
                 writer.WriteEndArray();
             }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<object>(item.Value, options);
             }
             writer.WriteEndObject();
         }
 
-        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
+        SmartSalmon IJsonModel<SmartSalmon>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SmartSalmon)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSmartSalmon(document.RootElement, options);
+        }
+
+        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<string> collegeDegree = default;
-            Optional<string> location = default;
-            Optional<bool> iswild = default;
+            string collegeDegree = default;
+            string location = default;
+            bool? iswild = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -118,7 +142,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
@@ -126,7 +150,46 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+            return new SmartSalmon(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                location,
+                iswild,
+                collegeDegree,
+                additionalProperties);
         }
+
+        BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(SmartSalmon)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SmartSalmon IPersistableModel<SmartSalmon>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSmartSalmon(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SmartSalmon)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SmartSalmon>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

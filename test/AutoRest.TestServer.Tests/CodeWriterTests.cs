@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using NUnit.Framework;
 
@@ -123,6 +124,21 @@ a0
             var codeWriter = new CodeWriter();
             codeWriter.WriteXmlDocumentationSummary($"{string.Empty}");
             var expected = string.Empty;
+            Assert.AreEqual(expected, codeWriter.ToString(false));
+        }
+
+        [TestCase(typeof(string), false, "<see cref=\"string\"/>")]
+        [TestCase(typeof(int), false, "<see cref=\"int\"/>")]
+        [TestCase(typeof(int), true, "<see cref=\"int\"/>?")]
+        [TestCase(typeof(List<>), false, "<see cref=\"global::System.Collections.Generic.List{T}\"/>")]
+        [TestCase(typeof(KeyValuePair<,>), false, "<see cref=\"global::System.Collections.Generic.KeyValuePair{TKey,TValue}\"/>")]
+        [TestCase(typeof(KeyValuePair<int,string>), true, "<see cref=\"global::System.Collections.Generic.KeyValuePair{TKey,TValue}\"/>? where <c>TKey</c> is of type <see cref=\"int\"/>, where <c>TValue</c> is of type <see cref=\"string\"/>")]
+        public void SeeCRefType(Type type, bool isNullable, string expectedWritten)
+        {
+            var csType = new CSharpType(type).WithNullable(isNullable);
+            var codeWriter = new CodeWriter();
+            codeWriter.WriteXmlDocumentationSummary($"Some {csType:C} summary.");
+            var expected = $"/// <summary> Some {expectedWritten} summary. </summary>" + Environment.NewLine;
             Assert.AreEqual(expected, codeWriter.ToString(false));
         }
 

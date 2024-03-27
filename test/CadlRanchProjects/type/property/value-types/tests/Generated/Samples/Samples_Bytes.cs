@@ -12,18 +12,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Bytes
+    public partial class Samples_Bytes
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte()
+        public void Example_Bytes_GetByte_ShortVersion()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = client.GetByte(null);
 
@@ -33,9 +32,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_Async()
+        public async Task Example_Bytes_GetByte_ShortVersion_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = await client.GetByteAsync(null);
 
@@ -45,27 +44,27 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_Convenience()
+        public void Example_Bytes_GetByte_ShortVersion_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetByte();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_Convenience_Async()
+        public async Task Example_Bytes_GetByte_ShortVersion_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetByteAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_AllParameters()
+        public void Example_Bytes_GetByte_AllParameters()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = client.GetByte(null);
 
@@ -75,9 +74,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_AllParameters_Async()
+        public async Task Example_Bytes_GetByte_AllParameters_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = await client.GetByteAsync(null);
 
@@ -87,120 +86,120 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_AllParameters_Convenience()
+        public void Example_Bytes_GetByte_AllParameters_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetByte();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_GetByte_AllParameters_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetByteAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Bytes_Put_ShortVersion()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Bytes_Put_ShortVersion_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Bytes_Put_ShortVersion_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Bytes_Put_ShortVersion_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Bytes_Put_AllParameters()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Bytes_Put_AllParameters_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Bytes_Put_AllParameters_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_Put_AllParameters_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

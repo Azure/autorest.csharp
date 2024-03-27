@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,10 +14,18 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    public partial class Eagle : IUtf8JsonSerializable
+    public partial class Eagle : IUtf8JsonSerializable, IJsonModel<Eagle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Eagle>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Eagle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Eagle>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Eagle)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Friends))
             {
@@ -23,7 +33,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Bird>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -34,33 +44,64 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<Bird>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                writer.WriteObjectValue(Partner);
+                writer.WriteObjectValue<Bird>(Partner, options);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("wingspan"u8);
             writer.WriteNumberValue(Wingspan);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Eagle DeserializeEagle(JsonElement element)
+        Eagle IJsonModel<Eagle>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Eagle>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Eagle)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEagle(document.RootElement, options);
+        }
+
+        internal static Eagle DeserializeEagle(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<IList<Bird>> friends = default;
-            Optional<IDictionary<string, Bird>> hate = default;
-            Optional<Bird> partner = default;
+            IList<Bird> friends = default;
+            IDictionary<string, Bird> hate = default;
+            Bird partner = default;
             string kind = default;
             int wingspan = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friends"u8))
@@ -72,7 +113,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     List<Bird> array = new List<Bird>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBird(item));
+                        array.Add(DeserializeBird(item, options));
                     }
                     friends = array;
                     continue;
@@ -86,7 +127,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        dictionary.Add(property0.Name, DeserializeBird(property0.Value, options));
                     }
                     hate = dictionary;
                     continue;
@@ -97,7 +138,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     {
                         continue;
                     }
-                    partner = DeserializeBird(property.Value);
+                    partner = DeserializeBird(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -110,9 +151,51 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     wingspan = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Eagle(kind, wingspan, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner);
         }
+
+        BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Eagle>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(Eagle)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Eagle IPersistableModel<Eagle>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Eagle>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeEagle(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Eagle)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Eagle>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -126,7 +209,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Eagle>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

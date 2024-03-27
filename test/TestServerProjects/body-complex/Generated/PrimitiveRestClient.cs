@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -101,7 +102,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<IntWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -215,7 +216,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<LongWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -329,7 +330,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<FloatWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -443,7 +444,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<DoubleWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -557,7 +558,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<BooleanWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -671,7 +672,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<StringWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -785,7 +786,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<DateWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -899,7 +900,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<DatetimeWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -1013,7 +1014,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<Datetimerfc1123Wrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -1127,7 +1128,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<DurationWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -1241,7 +1242,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<ByteWrapper>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

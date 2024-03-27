@@ -1,56 +1,41 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
     public class ModelTypeMapping
     {
-        private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
-        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
+        private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
+        private readonly Dictionary<string, SourcePropertySerializationMapping> _typeSerializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
         public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
         {
-            _existingType = existingType;
             _propertyMappings = new();
-            _serializationMappings = new(SymbolEqualityComparer.Default);
+            _codeGenMemberMappings = new();
+            _typeSerializationMappings = new();
 
             foreach (ISymbol member in GetMembers(existingType))
             {
-                string[]? serializationPath = null;
-                (string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
+                // If member is defined in both base and derived class, use derived one
+                if (ShouldIncludeMember(member) && !_propertyMappings.ContainsKey(member.Name))
+                {
+                    _propertyMappings[member.Name] = member;
+                }
+
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
-                        _propertyMappings.Add(schemaMemberName, member);
+                        _codeGenMemberMappings[schemaMemberName] = member;
                     }
-                    // handle CodeGenMemberSerialization attribute
-                    if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var pathResult))
-                    {
-                        serializationPath = pathResult;
-                    }
-                    // handle CodeGenMemberSerializationHooks attribute
-                    if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var hooks))
-                    {
-                        serializationHooks = hooks;
-                    }
-                }
-                if (serializationPath != null || serializationHooks != null)
-                {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
                 }
             }
 
@@ -62,38 +47,37 @@ namespace AutoRest.CSharp.Input.Source
                     Usage = usage;
                     Formats = formats;
                 }
+
+                // handle CodeGenSerialization attribute
+                if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook, out var bicepSerializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
+                {
+                    _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook, bicepSerializationHook));
+                }
             }
         }
 
-        public SourceMemberMapping? GetForMember(string name)
+        private static bool ShouldIncludeMember(ISymbol member)
         {
-            if (!_propertyMappings.TryGetValue(name, out var memberSymbol))
+            // here we exclude those "CompilerGenerated" members, such as the backing field of a property which is also a field.
+            return !member.IsImplicitlyDeclared && member is IPropertySymbol or IFieldSymbol;
+        }
+
+        public ISymbol? GetMemberByOriginalName(string name)
+            => _codeGenMemberMappings.TryGetValue(name, out var renamedSymbol) ?
+                renamedSymbol :
+                _propertyMappings.TryGetValue(name, out var memberSymbol) ? memberSymbol : null;
+
+        public SourcePropertySerializationMapping? GetForMemberSerialization(string name)
+            => _typeSerializationMappings.TryGetValue(name, out var serialization) ? serialization : null;
+
+        public IEnumerable<ISymbol> GetPropertiesWithSerialization()
+        {
+            // only the property with CodeGenSerialization attribute will be emitted into the serialization code.
+            foreach (var (propertyName, symbol) in _propertyMappings)
             {
-                memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
+                if (_typeSerializationMappings.ContainsKey(propertyName))
+                    yield return symbol;
             }
-
-            if (memberSymbol != null)
-            {
-                return new SourceMemberMapping(name, memberSymbol);
-            }
-
-            return null;
-        }
-
-        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
-        {
-            if (symbol == null)
-                return null;
-
-            if (_serializationMappings.TryGetValue(symbol, out var serialization))
-                return serialization;
-
-            return null;
-        }
-
-        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
-        {
-            return _serializationMappings.Values;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

@@ -10,12 +10,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> An error response from the service. </summary>
     internal partial class CloudError
     {
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="error"> Cloud error body. </param>
         internal CloudError(CloudErrorBody error)
         {

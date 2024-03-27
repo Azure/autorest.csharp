@@ -62,14 +62,14 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Inputs)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<InputFieldMappingEntry>(item);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("outputs"u8);
             writer.WriteStartArray();
             foreach (var item in Outputs)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<OutputFieldMappingEntry>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -81,13 +81,13 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<ImageAnalysisSkillLanguage> defaultLanguageCode = default;
-            Optional<IList<VisualFeature>> visualFeatures = default;
-            Optional<IList<ImageDetail>> details = default;
+            ImageAnalysisSkillLanguage? defaultLanguageCode = default;
+            IList<VisualFeature> visualFeatures = default;
+            IList<ImageDetail> details = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -170,7 +170,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToList(visualFeatures), Optional.ToList(details));
+            return new ImageAnalysisSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs,
+                defaultLanguageCode,
+                visualFeatures ?? new ChangeTrackingList<VisualFeature>(),
+                details ?? new ChangeTrackingList<ImageDetail>());
         }
     }
 }

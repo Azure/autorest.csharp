@@ -12,7 +12,7 @@ internal record InputEnumType(string Name, string? Namespace, string? Accessibil
 {
     public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
 
-    private class IgnoreNullabilityComparerImplementation : IEqualityComparer<InputEnumType>
+    private struct IgnoreNullabilityComparerImplementation : IEqualityComparer<InputEnumType>
     {
         public bool Equals(InputEnumType? x, InputEnumType? y)
         {

@@ -569,115 +569,115 @@ namespace NameConflicts.Models
             {
                 return null;
             }
-            Optional<string> _1 = default;
-            Optional<string> @abstract = default;
-            Optional<string> @add = default;
-            Optional<string> @alias = default;
-            Optional<string> @as = default;
-            Optional<string> @ascending = default;
-            Optional<string> @async = default;
-            Optional<string> @await = default;
-            Optional<string> @base = default;
-            Optional<string> @bool = default;
-            Optional<string> @break = default;
-            Optional<string> @by = default;
-            Optional<string> @byte = default;
-            Optional<string> @catch = default;
-            Optional<string> @char = default;
-            Optional<string> @checked = default;
-            Optional<string> @const = default;
-            Optional<string> @continue = default;
-            Optional<string> @class = default;
-            Optional<string> @decimal = default;
-            Optional<string> @default = default;
-            Optional<string> @delegate = default;
-            Optional<string> @descending = default;
-            Optional<string> @do = default;
-            Optional<string> @double = default;
-            Optional<string> @dynamic = default;
-            Optional<string> @else = default;
-            Optional<string> @enum = default;
-            Optional<string> @event = default;
-            Optional<string> @explicit = default;
-            Optional<string> @extern = default;
-            Optional<string> @false = default;
-            Optional<string> @finally = default;
-            Optional<string> @fixed = default;
-            Optional<string> @float = default;
-            Optional<string> @for = default;
-            Optional<string> @foreach = default;
-            Optional<string> @from = default;
-            Optional<string> @get = default;
-            Optional<string> @global = default;
-            Optional<string> @goto = default;
-            Optional<string> group = default;
-            Optional<string> @if = default;
-            Optional<string> @implicit = default;
-            Optional<string> @in = default;
-            Optional<string> @int = default;
-            Optional<string> @interface = default;
-            Optional<string> @internal = default;
-            Optional<string> @into = default;
-            Optional<string> @is = default;
-            Optional<string> @join = default;
-            Optional<string> @let = default;
-            Optional<string> @lock = default;
-            Optional<string> @long = default;
-            Optional<string> @nameof = default;
-            Optional<string> @namespace = default;
-            Optional<string> @new = default;
-            Optional<string> @null = default;
-            Optional<string> @object = default;
-            Optional<string> @on = default;
-            Optional<string> @operator = default;
-            Optional<string> orderby = default;
-            Optional<string> @out = default;
-            Optional<string> @override = default;
-            Optional<string> @params = default;
-            Optional<string> @partial = default;
-            Optional<string> @private = default;
-            Optional<string> @protected = default;
-            Optional<string> @public = default;
-            Optional<string> @readonly = default;
-            Optional<string> @ref = default;
-            Optional<string> @remove = default;
-            Optional<string> @return = default;
-            Optional<string> @sbyte = default;
-            Optional<string> @sealed = default;
-            Optional<string> select = default;
-            Optional<string> @set = default;
-            Optional<string> @short = default;
-            Optional<string> @sizeof = default;
-            Optional<string> @stackalloc = default;
-            Optional<string> @static = default;
-            Optional<string> @string = default;
-            Optional<string> @struct = default;
-            Optional<string> @switch = default;
-            Optional<string> @this = default;
-            Optional<string> @throw = default;
-            Optional<string> @true = default;
-            Optional<string> @try = default;
-            Optional<string> @typeof = default;
-            Optional<string> @uint = default;
-            Optional<string> @ulong = default;
-            Optional<string> @unchecked = default;
-            Optional<string> @unmanaged = default;
-            Optional<string> @unsafe = default;
-            Optional<string> @ushort = default;
-            Optional<string> @using = default;
-            Optional<string> value = default;
-            Optional<string> @var = default;
-            Optional<string> @virtual = default;
-            Optional<string> @void = default;
-            Optional<string> @volatile = default;
-            Optional<string> @when = default;
-            Optional<string> @where = default;
-            Optional<string> @while = default;
-            Optional<string> @yield = default;
-            Optional<SystemEnum> system = default;
-            Optional<string> toString = default;
-            Optional<string> @equals = default;
-            Optional<string> getHashCode = default;
+            string _1 = default;
+            string @abstract = default;
+            string @add = default;
+            string @alias = default;
+            string @as = default;
+            string @ascending = default;
+            string @async = default;
+            string @await = default;
+            string @base = default;
+            string @bool = default;
+            string @break = default;
+            string @by = default;
+            string @byte = default;
+            string @catch = default;
+            string @char = default;
+            string @checked = default;
+            string @const = default;
+            string @continue = default;
+            string @class = default;
+            string @decimal = default;
+            string @default = default;
+            string @delegate = default;
+            string @descending = default;
+            string @do = default;
+            string @double = default;
+            string @dynamic = default;
+            string @else = default;
+            string @enum = default;
+            string @event = default;
+            string @explicit = default;
+            string @extern = default;
+            string @false = default;
+            string @finally = default;
+            string @fixed = default;
+            string @float = default;
+            string @for = default;
+            string @foreach = default;
+            string @from = default;
+            string @get = default;
+            string @global = default;
+            string @goto = default;
+            string group = default;
+            string @if = default;
+            string @implicit = default;
+            string @in = default;
+            string @int = default;
+            string @interface = default;
+            string @internal = default;
+            string @into = default;
+            string @is = default;
+            string @join = default;
+            string @let = default;
+            string @lock = default;
+            string @long = default;
+            string @nameof = default;
+            string @namespace = default;
+            string @new = default;
+            string @null = default;
+            string @object = default;
+            string @on = default;
+            string @operator = default;
+            string orderby = default;
+            string @out = default;
+            string @override = default;
+            string @params = default;
+            string @partial = default;
+            string @private = default;
+            string @protected = default;
+            string @public = default;
+            string @readonly = default;
+            string @ref = default;
+            string @remove = default;
+            string @return = default;
+            string @sbyte = default;
+            string @sealed = default;
+            string select = default;
+            string @set = default;
+            string @short = default;
+            string @sizeof = default;
+            string @stackalloc = default;
+            string @static = default;
+            string @string = default;
+            string @struct = default;
+            string @switch = default;
+            string @this = default;
+            string @throw = default;
+            string @true = default;
+            string @try = default;
+            string @typeof = default;
+            string @uint = default;
+            string @ulong = default;
+            string @unchecked = default;
+            string @unmanaged = default;
+            string @unsafe = default;
+            string @ushort = default;
+            string @using = default;
+            string value = default;
+            string @var = default;
+            string @virtual = default;
+            string @void = default;
+            string @volatile = default;
+            string @when = default;
+            string @where = default;
+            string @while = default;
+            string @yield = default;
+            SystemEnum? system = default;
+            string toString = default;
+            string @equals = default;
+            string getHashCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("1"u8))
@@ -1230,7 +1230,116 @@ namespace NameConflicts.Models
                     continue;
                 }
             }
-            return new Struct(@abstract.Value, @add.Value, @alias.Value, @as.Value, @ascending.Value, @async.Value, @await.Value, @base.Value, @bool.Value, @break.Value, @by.Value, @byte.Value, @catch.Value, @char.Value, @checked.Value, @const.Value, @continue.Value, @class.Value, @decimal.Value, @default.Value, @delegate.Value, @descending.Value, @do.Value, @double.Value, @dynamic.Value, @else.Value, @enum.Value, @event.Value, @explicit.Value, @extern.Value, @false.Value, @finally.Value, @fixed.Value, @float.Value, @for.Value, @foreach.Value, @from.Value, @get.Value, @global.Value, @goto.Value, group.Value, @if.Value, @implicit.Value, @in.Value, @int.Value, @interface.Value, @internal.Value, @into.Value, @is.Value, @join.Value, @let.Value, @lock.Value, @long.Value, @nameof.Value, @namespace.Value, @new.Value, @null.Value, @object.Value, @on.Value, @operator.Value, orderby.Value, @out.Value, @override.Value, @params.Value, @partial.Value, @private.Value, @protected.Value, @public.Value, @readonly.Value, @ref.Value, @remove.Value, @return.Value, @sbyte.Value, @sealed.Value, select.Value, @set.Value, @short.Value, @sizeof.Value, @stackalloc.Value, @static.Value, @string.Value, @struct.Value, @switch.Value, @this.Value, @throw.Value, @true.Value, @try.Value, @typeof.Value, @uint.Value, @ulong.Value, @unchecked.Value, @unmanaged.Value, @unsafe.Value, @ushort.Value, @using.Value, value.Value, @var.Value, @virtual.Value, @void.Value, @volatile.Value, @when.Value, @where.Value, @while.Value, @yield.Value, Optional.ToNullable(system), toString.Value, @equals.Value, getHashCode.Value, _1.Value);
+            return new Struct(
+                @abstract,
+                @add,
+                @alias,
+                @as,
+                @ascending,
+                @async,
+                @await,
+                @base,
+                @bool,
+                @break,
+                @by,
+                @byte,
+                @catch,
+                @char,
+                @checked,
+                @const,
+                @continue,
+                @class,
+                @decimal,
+                @default,
+                @delegate,
+                @descending,
+                @do,
+                @double,
+                @dynamic,
+                @else,
+                @enum,
+                @event,
+                @explicit,
+                @extern,
+                @false,
+                @finally,
+                @fixed,
+                @float,
+                @for,
+                @foreach,
+                @from,
+                @get,
+                @global,
+                @goto,
+                group,
+                @if,
+                @implicit,
+                @in,
+                @int,
+                @interface,
+                @internal,
+                @into,
+                @is,
+                @join,
+                @let,
+                @lock,
+                @long,
+                @nameof,
+                @namespace,
+                @new,
+                @null,
+                @object,
+                @on,
+                @operator,
+                orderby,
+                @out,
+                @override,
+                @params,
+                @partial,
+                @private,
+                @protected,
+                @public,
+                @readonly,
+                @ref,
+                @remove,
+                @return,
+                @sbyte,
+                @sealed,
+                select,
+                @set,
+                @short,
+                @sizeof,
+                @stackalloc,
+                @static,
+                @string,
+                @struct,
+                @switch,
+                @this,
+                @throw,
+                @true,
+                @try,
+                @typeof,
+                @uint,
+                @ulong,
+                @unchecked,
+                @unmanaged,
+                @unsafe,
+                @ushort,
+                @using,
+                value,
+                @var,
+                @virtual,
+                @void,
+                @volatile,
+                @when,
+                @where,
+                @while,
+                @yield,
+                system,
+                toString,
+                @equals,
+                getHashCode,
+                _1);
         }
     }
 }

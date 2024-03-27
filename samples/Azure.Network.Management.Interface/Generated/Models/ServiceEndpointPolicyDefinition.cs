@@ -6,20 +6,19 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Service Endpoint policy definitions. </summary>
     public partial class ServiceEndpointPolicyDefinition : SubResource
     {
-        /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPolicyDefinition"/>. </summary>
         public ServiceEndpointPolicyDefinition()
         {
             ServiceResources = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPolicyDefinition"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

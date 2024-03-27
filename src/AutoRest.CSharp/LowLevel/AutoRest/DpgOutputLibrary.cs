@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output;
+using AutoRest.CSharp.LowLevel.Output.Samples;
+using AutoRest.CSharp.LowLevel.Output.Tests;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -44,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
-            TypeFactory = new TypeFactory(this);
+            TypeFactory = new TypeFactory(this, typeof(BinaryData));
             _libraryName = libraryName;
             _enums = enums;
             _models = models;
@@ -62,7 +64,59 @@ namespace AutoRest.CSharp.Output.Models.Types
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, TypeFactory, _sourceInputModel);
+
+        private DpgTestBaseProvider? _dpgTestBase;
+        public DpgTestBaseProvider DpgTestBase => _dpgTestBase ??= new DpgTestBaseProvider(Configuration.Namespace, RestClients, DpgTestEnvironment, _sourceInputModel);
+
+        private DpgTestEnvironmentProvider? _dpgTestEnvironment;
+        public DpgTestEnvironmentProvider DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironmentProvider(Configuration.Namespace, _sourceInputModel);
+
+        private Dictionary<LowLevelClient, DpgClientTestProvider>? _dpgClientTestProviders;
+        private Dictionary<LowLevelClient, DpgClientTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
+
+        private Dictionary<LowLevelClient, DpgClientTestProvider> EnsureDpgClientTestProviders()
+        {
+            var result = new Dictionary<LowLevelClient, DpgClientTestProvider>();
+            foreach (var client in RestClients)
+            {
+                DpgClientTestProvider testCaseProvider = Configuration.IsBranded ?
+                    new DpgClientRecordedTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel) :
+                    new SmokeTestProvider(Configuration.Namespace, client, _sourceInputModel);
+                if (!testCaseProvider.IsEmpty)
+                {
+                    result.Add(client, testCaseProvider);
+                }
+            }
+
+            return result;
+        }
+
+        public DpgClientTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
+        {
+            var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
+
+            // we do not write samples if the library is not branded, or samples are turned off
+            if (!Configuration.IsBranded || !Configuration.GenerateSampleProject)
+                return result;
+
+            foreach (var client in RestClients)
+            {
+                var sampleProvider = new DpgClientSampleProvider(Configuration.Namespace, client, _sourceInputModel);
+                if (!sampleProvider.IsEmpty)
+                    result.Add(client, sampleProvider);
+            }
+
+            return result;
+        }
+
+        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client)
+            => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

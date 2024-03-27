@@ -18,12 +18,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                writer.WriteObjectValue(RequiredConstantModel);
+                writer.WriteObjectValue<ModelWithRequiredConstant>(RequiredConstantModel);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                writer.WriteObjectValue(OptionalConstantModel);
+                writer.WriteObjectValue<ModelWithOptionalConstant>(OptionalConstantModel);
             }
             writer.WriteEndObject();
         }
@@ -34,8 +34,8 @@ namespace HlcConstants.Models
             {
                 return null;
             }
-            Optional<ModelWithRequiredConstant> requiredConstantModel = default;
-            Optional<ModelWithOptionalConstant> optionalConstantModel = default;
+            ModelWithRequiredConstant requiredConstantModel = default;
+            ModelWithOptionalConstant optionalConstantModel = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredConstantModel"u8))
@@ -57,7 +57,7 @@ namespace HlcConstants.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredConstantModel.Value, optionalConstantModel.Value);
+            return new RoundTripModel(requiredConstantModel, optionalConstantModel);
         }
     }
 }

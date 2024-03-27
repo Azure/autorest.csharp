@@ -6,15 +6,17 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Banana : IXmlSerializable
+    public partial class Banana : IXmlSerializable, IPersistableModel<Banana>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "banana");
             if (Optional.IsDefined(Name))
@@ -38,8 +40,12 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Banana DeserializeBanana(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static Banana DeserializeBanana(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string name = default;
             string flavor = default;
             DateTimeOffset? expiration = default;
@@ -55,7 +61,41 @@ namespace xml_service.Models
             {
                 expiration = expirationElement.GetDateTimeOffsetValue("O");
             }
-            return new Banana(name, flavor, expiration);
+            return new Banana(name, flavor, expiration, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<Banana>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Banana>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Banana)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Banana IPersistableModel<Banana>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Banana>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeBanana(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new FormatException($"The model {nameof(Banana)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Banana>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

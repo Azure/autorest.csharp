@@ -50,14 +50,14 @@ namespace ExtensionClientName
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(renamedBodyParameter);
+            content.JsonWriter.WriteObjectValue<RenamedSchema>(renamedBodyParameter);
             request.Content = content;
             return message;
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
-        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
+        /// <param name="renamedPathParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="renamedQueryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="renamedBodyParameter"> The <see cref="RenamedSchema"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/> or <paramref name="renamedBodyParameter"/> is null. </exception>
         public async Task<ResponseWithHeaders<RenamedSchema, AutoRestParameterFlatteningRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
@@ -92,9 +92,9 @@ namespace ExtensionClientName
             }
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
-        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
+        /// <param name="renamedPathParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="renamedQueryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="renamedBodyParameter"> The <see cref="RenamedSchema"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/> or <paramref name="renamedBodyParameter"/> is null. </exception>
         public ResponseWithHeaders<RenamedSchema, AutoRestParameterFlatteningRenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)

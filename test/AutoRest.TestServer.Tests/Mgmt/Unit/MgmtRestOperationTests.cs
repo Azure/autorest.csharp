@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using NUnit.Framework;
@@ -60,6 +60,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 publicClients: true,
                 modelNamespace: true,
                 headAsBoolean: true,
+                skipCSProj: true,
                 skipCSProjPackageReference: true,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,
@@ -70,9 +71,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 deserializeNullCollectionAsNullValue: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
+                useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
@@ -82,7 +84,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 shouldTreatBase64AsBinaryData: true,
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration,
-                mgmtTestConfiguration: null);
+                mgmtTestConfiguration: null,
+                flavor: "azure",
+                generateSampleProject: true,
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)

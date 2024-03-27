@@ -14,12 +14,12 @@ namespace Inheritance.Models
     /// <summary> The BaseClass. </summary>
     public partial class BaseClass
     {
-        /// <summary> Initializes a new instance of BaseClass. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
         public BaseClass()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClass. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

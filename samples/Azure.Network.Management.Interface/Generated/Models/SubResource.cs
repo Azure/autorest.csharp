@@ -10,12 +10,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Reference to another subresource. </summary>
     public partial class SubResource
     {
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         public SubResource()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         internal SubResource(string id)
         {

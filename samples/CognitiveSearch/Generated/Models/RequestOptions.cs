@@ -12,9 +12,16 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class RequestOptions
     {
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         public RequestOptions()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        internal RequestOptions(Guid? xMsClientRequestId)
+        {
+            XMsClientRequestId = xMsClientRequestId;
         }
 
         /// <summary> The tracking ID sent with the request to help with debugging. </summary>

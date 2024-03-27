@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> type = default;
-            Optional<string> description = default;
-            Optional<int> sev = default;
+            string type = default;
+            string description = default;
+            int? sev = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -43,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultIssue(type.Value, description.Value, Optional.ToNullable(sev));
+            return new VaultIssue(type, description, sev);
         }
     }
 }

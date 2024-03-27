@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;
@@ -116,6 +117,8 @@ namespace AutoRest.CSharp.Input
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
         public string? Usage => TryGetValue("x-csharp-usage", out object? value) ? value?.ToString() : null;
 
+        public bool IsEmbeddingsVector => TryGetValue("x-ms-embedding-vector", out var value) && Convert.ToBoolean(value);
+
         public string[] Formats
         {
             get
@@ -202,6 +205,7 @@ namespace AutoRest.CSharp.Input
         public const string DataFactoryElementOfListOfT = "dfe-list-generic";
         public const string DataFactoryElementOfListOfString = "dfe-list-string";
         public const string DataFactoryElementOfKeyValuePairs = "dfe-key-value-pairs";
+        public const string DataFactoryElementOfKeyObjectValuePairs = "dfe-key-object-value-pairs";
         public const string DataFactoryElementOfDateTime = "dfe-date-time";
         public const string DataFactoryElementOfDuration = "dfe-duration";
         public const string DataFactoryElementOfUri = "dfe-uri";
@@ -258,6 +262,8 @@ namespace AutoRest.CSharp.Input
             Parents = new Relations();
             Children = new Relations();
         }
+
+        public bool IsUnknownDiscriminatorModel { get; init; }
     }
 
     // redefined manually to inherit from ObjectSchema

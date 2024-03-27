@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            writer.WriteObjectValue(Permissions);
+            writer.WriteObjectValue<Permissions>(Permissions);
             writer.WriteEndObject();
         }
 
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
             }
             Guid tenantId = default;
             string objectId = default;
-            Optional<Guid> applicationId = default;
+            Guid? applicationId = default;
             Permissions permissions = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -67,7 +67,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions);
+            return new AccessPolicyEntry(tenantId, objectId, applicationId, permissions);
         }
     }
 }

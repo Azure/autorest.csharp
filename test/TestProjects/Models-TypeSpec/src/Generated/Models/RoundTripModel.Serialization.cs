@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,10 +14,18 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripModel : IUtf8JsonSerializable
+    public partial class RoundTripModel : IUtf8JsonSerializable, IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -74,8 +83,18 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableString");
                 }
             }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
+            {
+                writer.WritePropertyName("nonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+            }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<BaseModelWithDiscriminator>(RequiredModel, options);
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -86,7 +105,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -110,7 +129,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<RecordItem>(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
@@ -141,7 +160,10 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -149,7 +171,10 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("requiredInt8Array"u8);
@@ -231,25 +256,54 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        RoundTripModel IJsonModel<RoundTripModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(document.RootElement, options);
+        }
+
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string requiredString = default;
             int requiredInt = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
             FixedIntEnum requiredFixedIntEnum = default;
@@ -259,17 +313,19 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, string> requiredStringRecord = default;
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
-            Optional<BinaryData> optionalBytes = default;
-            IList<int> requiredUint8Array = default;
-            Optional<IList<int>> optionalUint8Array = default;
+            BinaryData optionalBytes = default;
+            IList<byte> requiredUint8Array = default;
+            IList<byte> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
-            IList<int> requiredInt8Array = default;
-            Optional<IList<int>> optionalInt8Array = default;
+            BinaryData optionalUnknown = default;
+            IList<sbyte> requiredInt8Array = default;
+            IList<sbyte> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
-            Optional<IList<int>> nonRequiredNullableIntList = default;
-            Optional<IList<string>> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
+            IList<string> nonRequiredNullableStringList = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -352,7 +408,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value);
+                    requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredFixedStringEnum"u8))
@@ -375,7 +431,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -405,7 +461,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredModelRecord = dictionary;
                     continue;
@@ -426,10 +482,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     requiredUint8Array = array;
                     continue;
@@ -440,10 +496,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     optionalUint8Array = array;
                     continue;
@@ -464,10 +520,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredInt8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     requiredInt8Array = array;
                     continue;
@@ -478,10 +534,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     optionalInt8Array = array;
                     continue;
@@ -544,13 +600,80 @@ namespace ModelsTypeSpec.Models
                     nonRequiredNullableStringList = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RoundTripModel(
+                serializedAdditionalRawData,
+                requiredString,
+                requiredInt,
+                nonRequiredString,
+                nonRequiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                requiredModel,
+                requiredFixedStringEnum,
+                requiredFixedIntEnum,
+                requiredExtensibleEnum,
+                requiredList,
+                requiredIntRecord,
+                requiredStringRecord,
+                requiredModelRecord,
+                requiredBytes,
+                optionalBytes,
+                requiredUint8Array,
+                optionalUint8Array ?? new ChangeTrackingList<byte>(),
+                requiredUnknown,
+                optionalUnknown,
+                requiredInt8Array,
+                optionalInt8Array ?? new ChangeTrackingList<sbyte>(),
+                requiredNullableIntList,
+                requiredNullableStringList,
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
         }
+
+        BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        RoundTripModel IPersistableModel<RoundTripModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRoundTripModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RoundTripModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static RoundTripModel FromResponse(Response response)
+        internal static new RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripModel(document.RootElement);
@@ -560,7 +683,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

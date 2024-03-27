@@ -24,13 +24,13 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<Skill>(item);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                writer.WriteObjectValue(CognitiveServicesAccount);
+                writer.WriteObjectValue<CognitiveServicesAccount>(CognitiveServicesAccount);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -49,8 +49,8 @@ namespace CognitiveSearch.Models
             string name = default;
             string description = default;
             IList<Skill> skills = default;
-            Optional<CognitiveServicesAccount> cognitiveServices = default;
-            Optional<string> odataEtag = default;
+            CognitiveServicesAccount cognitiveServices = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -88,7 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skillset(name, description, skills, cognitiveServices.Value, odataEtag.Value);
+            return new Skillset(name, description, skills, cognitiveServices, odataEtag);
         }
     }
 }

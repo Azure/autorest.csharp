@@ -43,12 +43,12 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> serviceName = default;
-            Optional<IReadOnlyList<string>> actions = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string serviceName = default;
+            IReadOnlyList<string> actions = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -107,7 +107,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, Optional.ToList(actions), Optional.ToNullable(provisioningState));
+            return new Delegation(
+                id,
+                name,
+                etag,
+                serviceName,
+                actions ?? new ChangeTrackingList<string>(),
+                provisioningState);
         }
     }
 }

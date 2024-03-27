@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<bool> preserveOriginal = default;
+            bool? preserveOriginal = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AsciiFoldingTokenFilter(odataType, name, Optional.ToNullable(preserveOriginal));
+            return new AsciiFoldingTokenFilter(odataType, name, preserveOriginal);
         }
     }
 }

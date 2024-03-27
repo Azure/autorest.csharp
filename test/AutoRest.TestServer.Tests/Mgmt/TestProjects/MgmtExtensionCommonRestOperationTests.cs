@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Azure.Core.Pipeline;
 using MgmtExtensionCommonRestOperation;
+using MgmtExtensionCommonRestOperation.Mocking;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -38,7 +39,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateBothFieldsInExtension()
         {
-            var extensionClient = typeof(SubscriptionResourceExtensionClient);
+            var extensionClient = typeof(MockableMgmtExtensionCommonRestOperationSubscriptionResource);
             var fields = extensionClient.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
             var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);

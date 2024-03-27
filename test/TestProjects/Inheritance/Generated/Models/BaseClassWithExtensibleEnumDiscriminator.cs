@@ -14,12 +14,12 @@ namespace Inheritance.Models
     /// </summary>
     public abstract partial class BaseClassWithExtensibleEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of BaseClassWithExtensibleEnumDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithExtensibleEnumDiscriminator"/>. </summary>
         protected BaseClassWithExtensibleEnumDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClassWithExtensibleEnumDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithExtensibleEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         internal BaseClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty)
         {

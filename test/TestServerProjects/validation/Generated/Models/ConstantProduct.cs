@@ -5,25 +5,62 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class ConstantProduct
     {
-        /// <summary> Initializes a new instance of ConstantProduct. </summary>
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         public ConstantProduct()
         {
             ConstProperty = ConstantProductConstProperty.Constant;
             ConstProperty2 = ConstantProductConstProperty2.Constant2;
         }
 
-        /// <summary> Initializes a new instance of ConstantProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
-        internal ConstantProduct(ConstantProductConstProperty constProperty, ConstantProductConstProperty2 constProperty2)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ConstantProduct(ConstantProductConstProperty constProperty, ConstantProductConstProperty2 constProperty2, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConstProperty = constProperty;
             ConstProperty2 = constProperty2;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

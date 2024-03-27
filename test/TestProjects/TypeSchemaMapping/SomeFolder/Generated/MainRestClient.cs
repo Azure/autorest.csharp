@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,13 +52,13 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<CustomizedModel>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The Model to use. </param>
+        /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +73,7 @@ namespace TypeSchemaMapping
             }
         }
 
-        /// <param name="body"> The Model to use. </param>
+        /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
@@ -101,13 +102,13 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<RenamedModelStruct?>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -127,7 +128,7 @@ namespace TypeSchemaMapping
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -161,13 +162,13 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<SecondModel>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
@@ -187,7 +188,7 @@ namespace TypeSchemaMapping
             }
         }
 
-        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
         {
@@ -221,13 +222,13 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<RenamedThirdModel>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The ThirdModel to use. </param>
+        /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<RenamedThirdModel>> OperationThirdModelAsync(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
         {
@@ -247,7 +248,7 @@ namespace TypeSchemaMapping
             }
         }
 
-        /// <param name="body"> The ThirdModel to use. </param>
+        /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedThirdModel> OperationThirdModel(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
         {
@@ -281,13 +282,13 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<ModelWithArrayOfEnum>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The ModelWithArrayOfEnum to use. </param>
+        /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelWithArrayOfEnum>> OperationModelWithArrayOfEnumAsync(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
         {
@@ -307,7 +308,7 @@ namespace TypeSchemaMapping
             }
         }
 
-        /// <param name="body"> The ModelWithArrayOfEnum to use. </param>
+        /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelWithArrayOfEnum> OperationModelWithArrayOfEnum(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
         {

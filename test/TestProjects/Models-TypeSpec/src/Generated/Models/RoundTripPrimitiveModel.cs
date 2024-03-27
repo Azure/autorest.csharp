@@ -8,14 +8,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Model used both as input and output with primitive types. </summary>
     public partial class RoundTripPrimitiveModel : BaseModel
     {
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
@@ -44,7 +43,8 @@ namespace ModelsTypeSpec.Models
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
         }
 
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement)
+        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -67,6 +67,11 @@ namespace ModelsTypeSpec.Models
             RequiredDateTimeOffset = requiredDateTimeOffset;
             RequiredTimeSpan = requiredTimeSpan;
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/> for deserialization. </summary>
+        internal RoundTripPrimitiveModel()
+        {
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

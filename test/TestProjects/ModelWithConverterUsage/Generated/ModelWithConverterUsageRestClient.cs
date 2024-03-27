@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,12 +29,12 @@ namespace ModelWithConverterUsage
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        public ModelWithConverterUsageRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
+        public ModelWithConverterUsageRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            _endpoint = endpoint ?? new Uri("");
+            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
 
         internal HttpMessage CreateOperationModelRequest(ModelClass value)
@@ -48,12 +49,12 @@ namespace ModelWithConverterUsage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<ModelClass>(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<ModelClass>> OperationModelAsync(ModelClass value, CancellationToken cancellationToken = default)
@@ -79,7 +80,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<ModelClass> OperationModel(ModelClass value, CancellationToken cancellationToken = default)
@@ -119,13 +120,13 @@ namespace ModelWithConverterUsage
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<ModelStruct?>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -145,7 +146,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {

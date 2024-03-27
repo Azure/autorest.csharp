@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                writer.WriteObjectValue<NetworkSecurityGroup>(NetworkSecurityGroup);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -50,14 +50,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue<NetworkInterfaceDnsSettings>(DnsSettings);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
@@ -79,25 +79,25 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<SubResource> virtualMachine = default;
-            Optional<NetworkSecurityGroup> networkSecurityGroup = default;
-            Optional<PrivateEndpoint> privateEndpoint = default;
-            Optional<IList<NetworkInterfaceIPConfiguration>> ipConfigurations = default;
-            Optional<IReadOnlyList<NetworkInterfaceTapConfiguration>> tapConfigurations = default;
-            Optional<NetworkInterfaceDnsSettings> dnsSettings = default;
-            Optional<string> macAddress = default;
-            Optional<bool> primary = default;
-            Optional<bool> enableAcceleratedNetworking = default;
-            Optional<bool> enableIPForwarding = default;
-            Optional<IReadOnlyList<string>> hostedWorkloads = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            SubResource virtualMachine = default;
+            NetworkSecurityGroup networkSecurityGroup = default;
+            PrivateEndpoint privateEndpoint = default;
+            IList<NetworkInterfaceIPConfiguration> ipConfigurations = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations = default;
+            NetworkInterfaceDnsSettings dnsSettings = default;
+            string macAddress = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            bool? enableIPForwarding = default;
+            IReadOnlyList<string> hostedWorkloads = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -276,7 +276,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, Optional.ToList(ipConfigurations), Optional.ToList(tapConfigurations), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), Optional.ToList(hostedWorkloads), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterface(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag,
+                virtualMachine,
+                networkSecurityGroup,
+                privateEndpoint,
+                ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(),
+                dnsSettings,
+                macAddress,
+                primary,
+                enableAcceleratedNetworking,
+                enableIPForwarding,
+                hostedWorkloads ?? new ChangeTrackingList<string>(),
+                resourceGuid,
+                provisioningState);
         }
     }
 }

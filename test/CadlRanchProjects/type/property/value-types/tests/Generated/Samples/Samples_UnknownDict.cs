@@ -12,18 +12,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_UnknownDict
+    public partial class Samples_UnknownDict
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownDict()
+        public void Example_UnknownDict_GetUnknownDict_ShortVersion()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response response = client.GetUnknownDict(null);
 
@@ -33,9 +32,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownDict_Async()
+        public async Task Example_UnknownDict_GetUnknownDict_ShortVersion_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response response = await client.GetUnknownDictAsync(null);
 
@@ -45,27 +44,27 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownDict_Convenience()
+        public void Example_UnknownDict_GetUnknownDict_ShortVersion_Convenience()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response<UnknownDictProperty> response = client.GetUnknownDict();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownDict_Convenience_Async()
+        public async Task Example_UnknownDict_GetUnknownDict_ShortVersion_Convenience_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response<UnknownDictProperty> response = await client.GetUnknownDictAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownDict_AllParameters()
+        public void Example_UnknownDict_GetUnknownDict_AllParameters()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response response = client.GetUnknownDict(null);
 
@@ -75,9 +74,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownDict_AllParameters_Async()
+        public async Task Example_UnknownDict_GetUnknownDict_AllParameters_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response response = await client.GetUnknownDictAsync(null);
 
@@ -87,120 +86,120 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownDict_AllParameters_Convenience()
+        public void Example_UnknownDict_GetUnknownDict_AllParameters_Convenience()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response<UnknownDictProperty> response = client.GetUnknownDict();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownDict_AllParameters_Convenience_Async()
+        public async Task Example_UnknownDict_GetUnknownDict_AllParameters_Convenience_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             Response<UnknownDictProperty> response = await client.GetUnknownDictAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_UnknownDict_Put_ShortVersion()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_UnknownDict_Put_ShortVersion_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_UnknownDict_Put_ShortVersion_Convenience()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             UnknownDictProperty body = new UnknownDictProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_UnknownDict_Put_ShortVersion_Convenience_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             UnknownDictProperty body = new UnknownDictProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_UnknownDict_Put_AllParameters()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_UnknownDict_Put_AllParameters_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_UnknownDict_Put_AllParameters_Convenience()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             UnknownDictProperty body = new UnknownDictProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_UnknownDict_Put_AllParameters_Convenience_Async()
         {
-            UnknownDict client = new ValueTypesClient().GetUnknownDictClient(apiVersion: "1.0.0");
+            UnknownDict client = new ValueTypesClient().GetUnknownDictClient();
 
             UnknownDictProperty body = new UnknownDictProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -21,7 +21,6 @@ namespace Encode.Datetime
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,16 +37,14 @@ namespace Encode.Datetime
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDatetimeProperty,CancellationToken)']/*" />
@@ -56,11 +53,12 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDatetimeProperty,CancellationToken)']/*" />
@@ -69,7 +67,8 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Default(content, context);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
@@ -151,7 +150,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The Rfc3339DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339Async(Rfc3339DatetimeProperty,CancellationToken)']/*" />
@@ -160,11 +159,12 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Rfc3339Async(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Rfc3339Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Rfc3339DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339(Rfc3339DatetimeProperty,CancellationToken)']/*" />
@@ -173,7 +173,8 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Rfc3339(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Rfc3339(content, context);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
@@ -255,7 +256,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The Rfc7231DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231Async(Rfc7231DatetimeProperty,CancellationToken)']/*" />
@@ -264,11 +265,12 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Rfc7231Async(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Rfc7231Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Rfc7231DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231(Rfc7231DatetimeProperty,CancellationToken)']/*" />
@@ -277,7 +279,8 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Rfc7231(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Rfc7231(content, context);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
@@ -359,7 +362,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The UnixTimestampDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampAsync(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
@@ -368,11 +371,12 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnixTimestampAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await UnixTimestampAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The UnixTimestampDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestamp(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
@@ -381,7 +385,8 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnixTimestamp(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = UnixTimestamp(content, context);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
@@ -463,7 +468,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The UnixTimestampArrayDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />
@@ -472,11 +477,12 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnixTimestampArrayAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await UnixTimestampArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The UnixTimestampArrayDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArray(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />
@@ -485,7 +491,8 @@ namespace Encode.Datetime
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnixTimestampArray(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = UnixTimestampArray(content, context);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
@@ -575,7 +582,6 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/property/default", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -591,7 +597,6 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/property/rfc3339", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -607,7 +612,6 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/property/rfc7231", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -623,7 +627,6 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/property/unix-timestamp", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -639,7 +642,6 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/property/unix-timestamp-array", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

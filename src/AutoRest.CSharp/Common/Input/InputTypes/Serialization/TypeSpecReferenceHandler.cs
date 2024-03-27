@@ -20,12 +20,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private class TypeSpecReferenceResolver : ReferenceResolver
         {
-            private readonly Dictionary<string, object> _referenceIdToObjectMap;
-
-            public TypeSpecReferenceResolver()
-            {
-                _referenceIdToObjectMap = new Dictionary<string, object>();
-            }
+            private readonly Dictionary<string, object> _referenceIdToObjectMap = new();
 
             public override void AddReference(string referenceId, object value)
             {

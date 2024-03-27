@@ -54,8 +54,9 @@ This sample shows how to call PutNullAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.PutNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNullAsync with all request content.
@@ -63,8 +64,9 @@ This sample shows how to call PutNullAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("<stringBody>");
+using RequestContent content = RequestContent.Create("<stringBody>");
 Response response = await client.PutNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -75,8 +77,9 @@ This sample shows how to call PutNull.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.PutNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNull with all request content.
@@ -84,8 +87,9 @@ This sample shows how to call PutNull with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("<stringBody>");
+using RequestContent content = RequestContent.Create("<stringBody>");
 Response response = client.PutNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -142,8 +146,9 @@ This sample shows how to call PutEmptyAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("");
+using RequestContent content = RequestContent.Create("");
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
@@ -151,8 +156,9 @@ This sample shows how to call PutEmptyAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("");
+using RequestContent content = RequestContent.Create("");
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -163,8 +169,9 @@ This sample shows how to call PutEmpty.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("");
+using RequestContent content = RequestContent.Create("");
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
@@ -172,8 +179,9 @@ This sample shows how to call PutEmpty with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("");
+using RequestContent content = RequestContent.Create("");
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -230,8 +238,9 @@ This sample shows how to call PutMbcsAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+using RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = await client.PutMbcsAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcsAsync with all request content.
@@ -239,8 +248,9 @@ This sample shows how to call PutMbcsAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+using RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = await client.PutMbcsAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -251,8 +261,9 @@ This sample shows how to call PutMbcs.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+using RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = client.PutMbcs(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcs with all request content.
@@ -260,8 +271,9 @@ This sample shows how to call PutMbcs with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+using RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = client.PutMbcs(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -318,8 +330,9 @@ This sample shows how to call PutWhitespaceAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
+using RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = await client.PutWhitespaceAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespaceAsync with all request content.
@@ -327,8 +340,9 @@ This sample shows how to call PutWhitespaceAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
+using RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = await client.PutWhitespaceAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -339,8 +353,9 @@ This sample shows how to call PutWhitespace.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
+using RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = client.PutWhitespace(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespace with all request content.
@@ -348,8 +363,9 @@ This sample shows how to call PutWhitespace with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
+using RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = client.PutWhitespace(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -498,8 +514,9 @@ This sample shows how to call PutBase64UrlEncodedAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncodedAsync with all request content.
@@ -507,8 +524,9 @@ This sample shows how to call PutBase64UrlEncodedAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -519,8 +537,9 @@ This sample shows how to call PutBase64UrlEncoded.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncoded with all request content.
@@ -528,8 +547,9 @@ This sample shows how to call PutBase64UrlEncoded with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

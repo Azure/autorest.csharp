@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,16 +14,24 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class DerivedModelWithProperties : IUtf8JsonSerializable
+    public partial class DerivedModelWithProperties : IUtf8JsonSerializable, IJsonModel<DerivedModelWithProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<DerivedModelWithProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(OptionalPropertyOnBase))
@@ -29,17 +39,48 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithProperties DeserializeDerivedModelWithProperties(JsonElement element)
+        DerivedModelWithProperties IJsonModel<DerivedModelWithProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDerivedModelWithProperties(document.RootElement, options);
+        }
+
+        internal static DerivedModelWithProperties DeserializeDerivedModelWithProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IList<CollectionItem> requiredList = default;
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredList"u8))
@@ -47,7 +88,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -57,23 +98,59 @@ namespace ModelsTypeSpec.Models
                     optionalPropertyOnBase = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, requiredList);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData, requiredList);
         }
+
+        BinaryData IPersistableModel<DerivedModelWithProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DerivedModelWithProperties IPersistableModel<DerivedModelWithProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDerivedModelWithProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DerivedModelWithProperties)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DerivedModelWithProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DerivedModelWithProperties FromResponse(Response response)
+        internal static new DerivedModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDerivedModelWithProperties(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<DerivedModelWithProperties>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

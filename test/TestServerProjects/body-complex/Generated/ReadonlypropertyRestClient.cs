@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -101,13 +102,13 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<ReadonlyObj>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
-        /// <param name="complexBody"> The ReadonlyObj to use. </param>
+        /// <param name="complexBody"> The <see cref="ReadonlyObj"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
@@ -129,7 +130,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
-        /// <param name="complexBody"> The ReadonlyObj to use. </param>
+        /// <param name="complexBody"> The <see cref="ReadonlyObj"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutValid(ReadonlyObj complexBody, CancellationToken cancellationToken = default)

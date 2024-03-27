@@ -99,9 +99,10 @@ function New-Matrix([array]$PropsFiles) {
   for($i=0;$i -lt $PropsFiles.Length;$i++) {
     $fileName = $PropsFiles[$i].FileName
     $projects = $PropsFiles[$i].Projects
-    $firstInitial = $projects[0].ServiceArea.Substring(0, 1)
-    $lastInitial = $projects[-1].ServiceArea.Substring(0, 1)
-    $matrix["$i`: $firstInitial-$lastInitial"] = @{ 'ProjectListOverrideFile' = $fileName }
+    $firstPrefix = $projects[0].ServiceArea.Substring(0, 2)
+    $lastPrefix = $projects[-1].ServiceArea.Substring(0, 2)
+    $key = "$firstPrefix`_$lastPrefix`_$i"
+    $matrix[$key] = @{ 'JobKey' = $key; 'ProjectListOverrideFile' = $fileName }
   }
   return $matrix
 }

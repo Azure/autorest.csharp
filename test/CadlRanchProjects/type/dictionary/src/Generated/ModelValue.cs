@@ -23,7 +23,6 @@ namespace _Type._Dictionary
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -40,13 +39,11 @@ namespace _Type._Dictionary
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal ModelValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal ModelValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -153,7 +150,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,InnerModel},CancellationToken)']/*" />
@@ -162,11 +159,12 @@ namespace _Type._Dictionary
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(RequestContentHelper.FromDictionary(body), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='Put(IDictionary{string,InnerModel},CancellationToken)']/*" />
@@ -175,7 +173,8 @@ namespace _Type._Dictionary
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(RequestContentHelper.FromDictionary(body), context);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = Put(content, context);
             return response;
         }
 
@@ -265,7 +264,6 @@ namespace _Type._Dictionary
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/dictionary/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -279,7 +277,6 @@ namespace _Type._Dictionary
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/dictionary/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

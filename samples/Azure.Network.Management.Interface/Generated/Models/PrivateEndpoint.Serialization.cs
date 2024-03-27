@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue<Subnet>(Subnet);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -74,17 +74,17 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<Subnet> subnet = default;
-            Optional<IReadOnlyList<NetworkInterface>> networkInterfaces = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<IList<PrivateLinkServiceConnection>> privateLinkServiceConnections = default;
-            Optional<IList<PrivateLinkServiceConnection>> manualPrivateLinkServiceConnections = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            Subnet subnet = default;
+            IReadOnlyList<NetworkInterface> networkInterfaces = default;
+            ProvisioningState? provisioningState = default;
+            IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -199,7 +199,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
+            return new PrivateEndpoint(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag,
+                subnet,
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                provisioningState,
+                privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
+                manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
     }
 }

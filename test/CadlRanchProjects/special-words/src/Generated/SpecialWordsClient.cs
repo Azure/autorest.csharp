@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,34 +44,33 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Operation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Operation GetOperationClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private ModelsOps _cachedModelsOps;
+        private ModelProperties _cachedModelProperties;
+        private Operations _cachedOperations;
+        private Parameters _cachedParameters;
 
-            return new Operation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of ModelsOps. </summary>
+        public virtual ModelsOps GetModelsOpsClient()
+        {
+            return Volatile.Read(ref _cachedModelsOps) ?? Interlocked.CompareExchange(ref _cachedModelsOps, new ModelsOps(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelsOps;
         }
 
-        /// <summary> Initializes a new instance of Parameter. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Parameter GetParameterClient(string apiVersion = "1.0.0")
+        /// <summary> Initializes a new instance of ModelProperties. </summary>
+        public virtual ModelProperties GetModelPropertiesClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Parameter(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedModelProperties) ?? Interlocked.CompareExchange(ref _cachedModelProperties, new ModelProperties(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelProperties;
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Model GetModelClient(string apiVersion = "1.0.0")
+        /// <summary> Initializes a new instance of Operations. </summary>
+        public virtual Operations GetOperationsClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            return Volatile.Read(ref _cachedOperations) ?? Interlocked.CompareExchange(ref _cachedOperations, new Operations(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedOperations;
+        }
 
-            return new Model(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Parameters. </summary>
+        public virtual Parameters GetParametersClient()
+        {
+            return Volatile.Read(ref _cachedParameters) ?? Interlocked.CompareExchange(ref _cachedParameters, new Parameters(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedParameters;
         }
     }
 }

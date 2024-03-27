@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> something = default;
+            string something = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("something"u8))
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new SinglePropertyModel(something.Value);
+            return new SinglePropertyModel(something);
         }
     }
 }

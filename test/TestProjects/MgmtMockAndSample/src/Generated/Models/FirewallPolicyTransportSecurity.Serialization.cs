@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                writer.WriteObjectValue(CertificateAuthority);
+                writer.WriteObjectValue<FirewallPolicyCertificateAuthority>(CertificateAuthority);
             }
             writer.WriteEndObject();
         }
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyCertificateAuthority> certificateAuthority = default;
+            FirewallPolicyCertificateAuthority certificateAuthority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("certificateAuthority"u8))
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyTransportSecurity(certificateAuthority.Value);
+            return new FirewallPolicyTransportSecurity(certificateAuthority);
         }
     }
 }

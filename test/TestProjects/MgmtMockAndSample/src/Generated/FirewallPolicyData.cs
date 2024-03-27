@@ -19,7 +19,7 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class FirewallPolicyData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyData"/>. </summary>
         /// <param name="location"> The location. </param>
         public FirewallPolicyData(AzureLocation location) : base(location)
         {
@@ -28,7 +28,7 @@ namespace MgmtMockAndSample
             ChildPolicies = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

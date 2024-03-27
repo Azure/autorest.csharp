@@ -134,12 +134,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 {
                     "Expression" => nameof(DataFactoryElement<string>.FromExpression),
                     "SecureString" => nameof(DataFactoryElement<string>.FromSecretString),
-                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecretReference),
+                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecret),
                     _ => throw new InvalidOperationException("Unknown DataFactoryElement type: " + dfeType)
                 };
 
                 writer.Append($"{type: L}.{createMethodName}(");
-                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecretReference));
+                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecret));
                 writer.AppendRaw(")");
             }
             else
@@ -204,10 +204,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static CodeWriter AppendBinaryData(this CodeWriter writer, ExampleValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue.RawValue != null && exampleValue.RawValue is string ? "FromString" : "FromObjectAsJson";
-            writer.Append($"{typeof(BinaryData)}.{method}(");
-            writer.AppendAnonymousObject(exampleValue);
-            return writer.AppendRaw(")");
+            if (exampleValue.RawValue != null && exampleValue.RawValue is string strValue)
+            {
+                var method = "FromString";
+                return writer.Append($"{typeof(BinaryData)}.{method}({"\"" + strValue + "\"":L})");
+            }
+            else
+            {
+                var method = "FromObjectAsJson";
+                writer.Append($"{typeof(BinaryData)}.{method}(");
+                writer.AppendAnonymousObject(exampleValue);
+                return writer.AppendRaw(")");
+            }
         }
 
         private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, ObjectSchema objectSchema, Type type, ExampleValue exampleValue)

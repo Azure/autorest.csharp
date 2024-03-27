@@ -21,7 +21,6 @@ namespace Encode.Bytes
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,16 +37,14 @@ namespace Encode.Bytes
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultBytesProperty,CancellationToken)']/*" />
@@ -56,11 +53,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultBytesProperty,CancellationToken)']/*" />
@@ -69,7 +67,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Default(content, context);
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
@@ -151,7 +150,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64Async(Base64BytesProperty,CancellationToken)']/*" />
@@ -160,11 +159,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64Async(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Base64Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64(Base64BytesProperty,CancellationToken)']/*" />
@@ -173,7 +173,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Base64(content, context);
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
@@ -255,7 +256,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64urlBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlAsync(Base64urlBytesProperty,CancellationToken)']/*" />
@@ -264,11 +265,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Base64urlAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64urlBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64url(Base64urlBytesProperty,CancellationToken)']/*" />
@@ -277,7 +279,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64url(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Base64url(content, context);
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
@@ -359,7 +362,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64urlArrayBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArrayAsync(Base64urlArrayBytesProperty,CancellationToken)']/*" />
@@ -368,11 +371,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlArrayAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Base64urlArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64urlArrayBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArray(Base64urlArrayBytesProperty,CancellationToken)']/*" />
@@ -381,7 +385,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64urlArray(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Base64urlArray(content, context);
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
@@ -471,7 +476,6 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/property/default", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -487,7 +491,6 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/property/base64", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -503,7 +506,6 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/property/base64url", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -519,7 +521,6 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/property/base64url-array", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

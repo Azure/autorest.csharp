@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -101,7 +102,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<Fish>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -442,13 +443,13 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<Salmon>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -470,7 +471,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutComplicated(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -503,13 +504,13 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<Salmon>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -536,7 +537,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response<Salmon> PutMissingDiscriminator(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -574,7 +575,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(complexBody);
+            content.JsonWriter.WriteObjectValue<Fish>(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

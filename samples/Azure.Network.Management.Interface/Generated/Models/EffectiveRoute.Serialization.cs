@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -19,13 +18,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<bool> disableBgpRoutePropagation = default;
-            Optional<EffectiveRouteSource> source = default;
-            Optional<EffectiveRouteState> state = default;
-            Optional<IReadOnlyList<string>> addressPrefix = default;
-            Optional<IReadOnlyList<string>> nextHopIpAddress = default;
-            Optional<RouteNextHopType> nextHopType = default;
+            string name = default;
+            bool? disableBgpRoutePropagation = default;
+            EffectiveRouteSource? source = default;
+            EffectiveRouteState? state = default;
+            IReadOnlyList<string> addressPrefix = default;
+            IReadOnlyList<string> nextHopIpAddress = default;
+            RouteNextHopType? nextHopType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -98,7 +97,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType));
+            return new EffectiveRoute(
+                name,
+                disableBgpRoutePropagation,
+                source,
+                state,
+                addressPrefix ?? new ChangeTrackingList<string>(),
+                nextHopIpAddress ?? new ChangeTrackingList<string>(),
+                nextHopType);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,114 +44,82 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Int32Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Int32Value GetInt32ValueClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Int32Value _cachedInt32Value;
+        private Int64Value _cachedInt64Value;
+        private BooleanValue _cachedBooleanValue;
+        private StringValue _cachedStringValue;
+        private Float32Value _cachedFloat32Value;
+        private DatetimeValue _cachedDatetimeValue;
+        private DurationValue _cachedDurationValue;
+        private UnknownValue _cachedUnknownValue;
+        private ModelValue _cachedModelValue;
+        private RecursiveModelValue _cachedRecursiveModelValue;
+        private NullableFloatValue _cachedNullableFloatValue;
 
-            return new Int32Value(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Int32Value. </summary>
+        public virtual Int32Value GetInt32ValueClient()
+        {
+            return Volatile.Read(ref _cachedInt32Value) ?? Interlocked.CompareExchange(ref _cachedInt32Value, new Int32Value(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedInt32Value;
         }
 
         /// <summary> Initializes a new instance of Int64Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Int64Value GetInt64ValueClient(string apiVersion = "1.0.0")
+        public virtual Int64Value GetInt64ValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Int64Value(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedInt64Value) ?? Interlocked.CompareExchange(ref _cachedInt64Value, new Int64Value(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedInt64Value;
         }
 
         /// <summary> Initializes a new instance of BooleanValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual BooleanValue GetBooleanValueClient(string apiVersion = "1.0.0")
+        public virtual BooleanValue GetBooleanValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new BooleanValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedBooleanValue) ?? Interlocked.CompareExchange(ref _cachedBooleanValue, new BooleanValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBooleanValue;
         }
 
         /// <summary> Initializes a new instance of StringValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringValue GetStringValueClient(string apiVersion = "1.0.0")
+        public virtual StringValue GetStringValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new StringValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedStringValue) ?? Interlocked.CompareExchange(ref _cachedStringValue, new StringValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringValue;
         }
 
         /// <summary> Initializes a new instance of Float32Value. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Float32Value GetFloat32ValueClient(string apiVersion = "1.0.0")
+        public virtual Float32Value GetFloat32ValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Float32Value(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedFloat32Value) ?? Interlocked.CompareExchange(ref _cachedFloat32Value, new Float32Value(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedFloat32Value;
         }
 
         /// <summary> Initializes a new instance of DatetimeValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DatetimeValue GetDatetimeValueClient(string apiVersion = "1.0.0")
+        public virtual DatetimeValue GetDatetimeValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DatetimeValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDatetimeValue) ?? Interlocked.CompareExchange(ref _cachedDatetimeValue, new DatetimeValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDatetimeValue;
         }
 
         /// <summary> Initializes a new instance of DurationValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DurationValue GetDurationValueClient(string apiVersion = "1.0.0")
+        public virtual DurationValue GetDurationValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DurationValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDurationValue) ?? Interlocked.CompareExchange(ref _cachedDurationValue, new DurationValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDurationValue;
         }
 
         /// <summary> Initializes a new instance of UnknownValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual UnknownValue GetUnknownValueClient(string apiVersion = "1.0.0")
+        public virtual UnknownValue GetUnknownValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new UnknownValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedUnknownValue) ?? Interlocked.CompareExchange(ref _cachedUnknownValue, new UnknownValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnknownValue;
         }
 
         /// <summary> Initializes a new instance of ModelValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ModelValue GetModelValueClient(string apiVersion = "1.0.0")
+        public virtual ModelValue GetModelValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ModelValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedModelValue) ?? Interlocked.CompareExchange(ref _cachedModelValue, new ModelValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelValue;
         }
 
         /// <summary> Initializes a new instance of RecursiveModelValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual RecursiveModelValue GetRecursiveModelValueClient(string apiVersion = "1.0.0")
+        public virtual RecursiveModelValue GetRecursiveModelValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new RecursiveModelValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedRecursiveModelValue) ?? Interlocked.CompareExchange(ref _cachedRecursiveModelValue, new RecursiveModelValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedRecursiveModelValue;
         }
 
         /// <summary> Initializes a new instance of NullableFloatValue. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual NullableFloatValue GetNullableFloatValueClient(string apiVersion = "1.0.0")
+        public virtual NullableFloatValue GetNullableFloatValueClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new NullableFloatValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedNullableFloatValue) ?? Interlocked.CompareExchange(ref _cachedNullableFloatValue, new NullableFloatValue(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedNullableFloatValue;
         }
     }
 }

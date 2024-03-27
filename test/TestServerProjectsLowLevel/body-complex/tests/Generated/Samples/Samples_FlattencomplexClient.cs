@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_FlattencomplexClient
+    public partial class Samples_FlattencomplexClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public void Example_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);
@@ -32,7 +31,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
+        public async Task Example_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);

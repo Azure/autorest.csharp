@@ -3,12 +3,12 @@
 
 using System;
 using System.IO;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case ObjectResponseBody objectResponseBody:
                     writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
-                    writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, new VariableReference(responseBody.Type, valueVariable), responseVariable, objectResponseBody.Type);
+                    writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, new VariableReference(responseBody.Type, valueVariable), $"{responseVariable}.{Configuration.ApiTypes.ContentStreamName}", objectResponseBody.Type);
                     value = new Reference(valueVariable.ActualName, responseBody.Type);
                     break;
                 case StreamResponseBody _:
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringResponseBody _:
                     var streamReaderVariable = new CodeWriterDeclaration("streamReader");
-                    writer.Line($"{typeof(StreamReader)} {streamReaderVariable:D} = new {typeof(StreamReader)}({responseVariable}.ContentStream);");
+                    writer.Line($"{typeof(StreamReader)} {streamReaderVariable:D} = new {typeof(StreamReader)}({responseVariable}.{Configuration.ApiTypes.ContentStreamName});");
                     writer.Append($"{returnType} {valueVariable:D} = ");
                     if (async)
                     {
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($", headers, {responseVariable});");
                     break;
                 case ReturnKind.Value:
-                    writer.Append($"return {typeof(Azure.Response)}.FromValue");
+                    writer.Append($"return {Configuration.ApiTypes.ResponseType}.FromValue");
                     if (!Equals(responseBody?.Type, operation.ReturnType))
                     {
                         writer.Append($"<{operation.ReturnType}>");
@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer
                     .Line($"default:")
-                    .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                    .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({responseVariable});");
             }
         }
 

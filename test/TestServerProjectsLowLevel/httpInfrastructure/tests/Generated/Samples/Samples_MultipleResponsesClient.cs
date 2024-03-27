@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_MultipleResponsesClient
+    public partial class Samples_MultipleResponsesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model204NoModelDefaultError200Valid()
+        public void Example_Get200Model204NoModelDefaultError200Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -32,7 +31,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model204NoModelDefaultError200Valid_Async()
+        public async Task Example_Get200Model204NoModelDefaultError200Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -71,7 +70,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model204NoModelDefaultError204Valid()
+        public void Example_Get200Model204NoModelDefaultError204Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -84,7 +83,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model204NoModelDefaultError204Valid_Async()
+        public async Task Example_Get200Model204NoModelDefaultError204Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -123,7 +122,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model204NoModelDefaultError201Invalid()
+        public void Example_Get200Model204NoModelDefaultError201Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -136,7 +135,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model204NoModelDefaultError201Invalid_Async()
+        public async Task Example_Get200Model204NoModelDefaultError201Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -175,7 +174,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model204NoModelDefaultError202None()
+        public void Example_Get200Model204NoModelDefaultError202None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -188,7 +187,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model204NoModelDefaultError202None_Async()
+        public async Task Example_Get200Model204NoModelDefaultError202None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -227,7 +226,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model204NoModelDefaultError400Valid()
+        public void Example_Get200Model204NoModelDefaultError400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -240,7 +239,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model204NoModelDefaultError400Valid_Async()
+        public async Task Example_Get200Model204NoModelDefaultError400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -279,7 +278,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model201ModelDefaultError200Valid()
+        public void Example_Get200Model201ModelDefaultError200Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -292,7 +291,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model201ModelDefaultError200Valid_Async()
+        public async Task Example_Get200Model201ModelDefaultError200Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -331,7 +330,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model201ModelDefaultError201Valid()
+        public void Example_Get200Model201ModelDefaultError201Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -344,7 +343,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model201ModelDefaultError201Valid_Async()
+        public async Task Example_Get200Model201ModelDefaultError201Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -383,7 +382,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200Model201ModelDefaultError400Valid()
+        public void Example_Get200Model201ModelDefaultError400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -396,7 +395,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200Model201ModelDefaultError400Valid_Async()
+        public async Task Example_Get200Model201ModelDefaultError400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -435,7 +434,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA201ModelC404ModelDDefaultError200Valid()
+        public void Example_Get200ModelA201ModelC404ModelDDefaultError200Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -448,7 +447,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError200Valid_Async()
+        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError200Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -487,7 +486,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA201ModelC404ModelDDefaultError201Valid()
+        public void Example_Get200ModelA201ModelC404ModelDDefaultError201Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -500,7 +499,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError201Valid_Async()
+        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError201Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -539,7 +538,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA201ModelC404ModelDDefaultError404Valid()
+        public void Example_Get200ModelA201ModelC404ModelDDefaultError404Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -552,7 +551,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError404Valid_Async()
+        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError404Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -591,7 +590,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA201ModelC404ModelDDefaultError400Valid()
+        public void Example_Get200ModelA201ModelC404ModelDDefaultError400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -604,7 +603,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError400Valid_Async()
+        public async Task Example_Get200ModelA201ModelC404ModelDDefaultError400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -643,23 +642,25 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultError202None()
+        public void Example_Get202None204NoneDefaultError202None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultError202None_Async()
+        public async Task Example_Get202None204NoneDefaultError202None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -671,6 +672,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -682,28 +684,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultError204None()
+        public void Example_Get202None204NoneDefaultError204None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultError204None_Async()
+        public async Task Example_Get202None204NoneDefaultError204None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -715,6 +720,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -726,28 +732,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultError400Valid()
+        public void Example_Get202None204NoneDefaultError400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultError400Valid_Async()
+        public async Task Example_Get202None204NoneDefaultError400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -759,6 +768,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -770,28 +780,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultNone202Invalid()
+        public void Example_Get202None204NoneDefaultNone202Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultNone202Invalid_Async()
+        public async Task Example_Get202None204NoneDefaultNone202Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -803,6 +816,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -814,28 +828,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultNone204None()
+        public void Example_Get202None204NoneDefaultNone204None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultNone204None_Async()
+        public async Task Example_Get202None204NoneDefaultNone204None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -847,6 +864,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -858,28 +876,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultNone400None()
+        public void Example_Get202None204NoneDefaultNone400None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultNone400None_Async()
+        public async Task Example_Get202None204NoneDefaultNone400None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -891,6 +912,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -902,28 +924,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get202None204NoneDefaultNone400Invalid()
+        public void Example_Get202None204NoneDefaultNone400Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get202None204NoneDefaultNone400Invalid_Async()
+        public async Task Example_Get202None204NoneDefaultNone400Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -935,6 +960,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -946,12 +972,13 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultModelA200Valid()
+        public void Example_GetDefaultModelA200Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -964,7 +991,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultModelA200Valid_Async()
+        public async Task Example_GetDefaultModelA200Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1003,7 +1030,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultModelA200None()
+        public void Example_GetDefaultModelA200None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1016,7 +1043,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultModelA200None_Async()
+        public async Task Example_GetDefaultModelA200None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1055,23 +1082,25 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultModelA400Valid()
+        public void Example_GetDefaultModelA400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultModelA400Valid_Async()
+        public async Task Example_GetDefaultModelA400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1083,6 +1112,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1094,28 +1124,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultModelA400None()
+        public void Example_GetDefaultModelA400None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultModelA400None_Async()
+        public async Task Example_GetDefaultModelA400None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1127,6 +1160,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1138,28 +1172,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultNone200Invalid()
+        public void Example_GetDefaultNone200Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultNone200Invalid_Async()
+        public async Task Example_GetDefaultNone200Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1171,6 +1208,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1182,28 +1220,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultNone200None()
+        public void Example_GetDefaultNone200None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultNone200None_Async()
+        public async Task Example_GetDefaultNone200None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1215,6 +1256,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1226,28 +1268,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultNone400Invalid()
+        public void Example_GetDefaultNone400Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultNone400Invalid_Async()
+        public async Task Example_GetDefaultNone400Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1259,6 +1304,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1270,28 +1316,31 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefaultNone400None()
+        public void Example_GetDefaultNone400None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefaultNone400None_Async()
+        public async Task Example_GetDefaultNone400None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1303,6 +1352,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1314,12 +1364,13 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA200None()
+        public void Example_Get200ModelA200None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1332,7 +1383,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA200None_Async()
+        public async Task Example_Get200ModelA200None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1371,7 +1422,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA200Valid()
+        public void Example_Get200ModelA200Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1384,7 +1435,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA200Valid_Async()
+        public async Task Example_Get200ModelA200Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1423,7 +1474,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA200Invalid()
+        public void Example_Get200ModelA200Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1436,7 +1487,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA200Invalid_Async()
+        public async Task Example_Get200ModelA200Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1475,7 +1526,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA400None()
+        public void Example_Get200ModelA400None_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1488,7 +1539,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA400None_Async()
+        public async Task Example_Get200ModelA400None_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1527,7 +1578,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA400Valid()
+        public void Example_Get200ModelA400Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1540,7 +1591,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA400Valid_Async()
+        public async Task Example_Get200ModelA400Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1579,7 +1630,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA400Invalid()
+        public void Example_Get200ModelA400Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1592,7 +1643,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA400Invalid_Async()
+        public async Task Example_Get200ModelA400Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1631,7 +1682,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200ModelA202Valid()
+        public void Example_Get200ModelA202Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
@@ -1644,7 +1695,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200ModelA202Valid_Async()
+        public async Task Example_Get200ModelA202Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MultipleResponsesClient client = new MultipleResponsesClient(credential);

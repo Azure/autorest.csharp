@@ -8,8 +8,8 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -43,13 +44,13 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
         {
-            _typeFactory = context.TypeFactory;
-            _library = context.BaseLibrary;
+            _typeFactory = typeFactory;
+            _library = library;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -106,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
             var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), kvp.Key.SerializationFormat))
+                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);
@@ -324,14 +325,26 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
-                            var objectType = (SchemaObjectType)library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
+                            var objectType = bodyRequestParameter.Type switch
+                            {
+                                InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
+                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
+                                _ => null
+                            };
 
+                            if (objectType == null)
+                            {
+                                throw new InvalidOperationException("Unexpected flattened type");
+                            }
+
+                            var properties = objectType.EnumerateHierarchy().SelectMany(o => o.Properties).ToList();
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
                             {
-                                if (inputParameter is { VirtualParameter: { } virtualParameter })
+                                if (inputParameter is { FlattenedBodyProperty: { } flattenedProperty })
                                 {
-                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
+                                    var property = properties.First(p => p.InputModelProperty?.SerializedName == flattenedProperty.SerializedName);
+                                    initializationMap.Add(new ObjectPropertyInitializer(property, references[inputParameter.NameInRequest].Reference));
                                 }
                             }
 
@@ -366,10 +379,15 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
+            var groupedByParameterType = _typeFactory.CreateType(groupedByParameter.Type);
+            var (propertyName, propertyType) = groupedByParameterType.Implementation switch
+            {
+                ModelTypeProvider modelType when modelType.Fields.GetFieldByParameterName(parameter.Name) is { } field => (field.Name, field.Type),
+                SchemaObjectType schemaObjectType when schemaObjectType.GetPropertyForGroupedParameter(operationParameter.Name).Declaration is { } declaration => (declaration.Name, declaration.Type),
+                _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {parameter.Name} in {groupedByParameterType.Name}")
+            };
 
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{propertyName}", propertyType);
         }
 
         private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)

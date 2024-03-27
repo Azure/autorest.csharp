@@ -18,13 +18,16 @@ namespace FirstTestTypeSpec
         /// <param name="endpoint"></param>
         public FirstTestTypeSpecClient(Uri endpoint)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint is null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+
             var options = new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
     }
 }

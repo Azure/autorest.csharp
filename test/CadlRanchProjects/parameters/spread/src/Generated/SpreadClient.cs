@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,24 +44,19 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Model GetModelClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Model _cachedModel;
+        private Alias _cachedAlias;
 
-            return new Model(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
+        {
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModel;
         }
 
         /// <summary> Initializes a new instance of Alias. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Alias GetAliasClient(string apiVersion = "1.0.0")
+        public virtual Alias GetAliasClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Alias(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedAlias) ?? Interlocked.CompareExchange(ref _cachedAlias, new Alias(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedAlias;
         }
     }
 }

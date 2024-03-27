@@ -12,18 +12,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Enum
+    public partial class Samples_Enum
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEnum()
+        public void Example_Enum_GetEnum_ShortVersion()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response response = client.GetEnum(null);
 
@@ -33,9 +32,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEnum_Async()
+        public async Task Example_Enum_GetEnum_ShortVersion_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response response = await client.GetEnumAsync(null);
 
@@ -45,27 +44,27 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEnum_Convenience()
+        public void Example_Enum_GetEnum_ShortVersion_Convenience()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response<EnumProperty> response = client.GetEnum();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEnum_Convenience_Async()
+        public async Task Example_Enum_GetEnum_ShortVersion_Convenience_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response<EnumProperty> response = await client.GetEnumAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEnum_AllParameters()
+        public void Example_Enum_GetEnum_AllParameters()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response response = client.GetEnum(null);
 
@@ -75,9 +74,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEnum_AllParameters_Async()
+        public async Task Example_Enum_GetEnum_AllParameters_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response response = await client.GetEnumAsync(null);
 
@@ -87,120 +86,120 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEnum_AllParameters_Convenience()
+        public void Example_Enum_GetEnum_AllParameters_Convenience()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response<EnumProperty> response = client.GetEnum();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEnum_AllParameters_Convenience_Async()
+        public async Task Example_Enum_GetEnum_AllParameters_Convenience_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             Response<EnumProperty> response = await client.GetEnumAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Enum_Put_ShortVersion()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Enum_Put_ShortVersion_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Enum_Put_ShortVersion_Convenience()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Enum_Put_ShortVersion_Convenience_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Enum_Put_AllParameters()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Enum_Put_AllParameters_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Enum_Put_AllParameters_Convenience()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Enum_Put_AllParameters_Convenience_Async()
         {
-            Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+            Enum client = new ValueTypesClient().GetEnumClient();
 
             EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

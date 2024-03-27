@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Common.Decorator;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 

@@ -32,13 +32,15 @@ export function processServiceAuthentication(
                     break;
                 case "http":
                     const schemeOrApiKeyPrefix = scheme.scheme;
-                    if (
-                        schemeOrApiKeyPrefix === "basic" ||
-                        schemeOrApiKeyPrefix === "bearer"
-                    ) {
+                    if (schemeOrApiKeyPrefix === "basic") {
                         logger.warn(
                             `{schemeOrApiKeyPrefix} auth method is currently not supported.`
                         );
+                    } else if (schemeOrApiKeyPrefix === "bearer") {
+                        auth.ApiKey = {
+                            Name: "Authorization",
+                            Prefix: "Bearer"
+                        } as InputApiKeyAuth;
                     } else {
                         auth.ApiKey = {
                             Name: "Authorization",

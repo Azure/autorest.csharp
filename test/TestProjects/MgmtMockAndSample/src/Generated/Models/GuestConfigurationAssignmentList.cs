@@ -6,21 +6,19 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
     /// <summary> The response of the list guest configuration assignment operation. </summary>
     internal partial class GuestConfigurationAssignmentList
     {
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentList. </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         internal GuestConfigurationAssignmentList()
         {
             Value = new ChangeTrackingList<GuestConfigurationAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentList. </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         /// <param name="value"> Result of the list guest configuration assignment operation. </param>
         internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value)
         {

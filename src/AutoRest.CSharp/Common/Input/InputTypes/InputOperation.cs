@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input.Examples;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
@@ -30,7 +29,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    bool KeepClientDefaultValue)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -51,34 +51,43 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        KeepClientDefaultValue: false)
     { }
 
-    private string? _cleanName;
-    public string CleanName
+    public static InputOperation RemoveApiVersionParam(InputOperation operation)
     {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
-
-            return _cleanName;
-        }
+        return new InputOperation(
+            operation.Name,
+            operation.ResourceName,
+            operation.Summary,
+            operation.Deprecated,
+            operation.Description,
+            operation.Accessibility,
+            operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
+            operation.Responses,
+            operation.HttpMethod,
+            operation.RequestBodyMediaType,
+            operation.Uri,
+            operation.Path,
+            operation.ExternalDocsUrl,
+            operation.RequestMediaTypes,
+            operation.BufferResponse,
+            operation.LongRunning,
+            operation.Paging,
+            operation.GenerateProtocolMethod,
+            operation.GenerateConvenienceMethod,
+            operation.KeepClientDefaultValue);
     }
 
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+    public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    private readonly Dictionary<string, InputOperationExample> _examples = new();
+    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
 
-    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
-
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
+    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
     {
-        return new Dictionary<string, InputOperationExample>()
-        {
-            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
-            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
-        };
+        examples[ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false);
+        examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
+        return examples;
     }
 }

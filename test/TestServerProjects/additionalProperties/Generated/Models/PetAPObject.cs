@@ -6,14 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace additionalProperties.Models
 {
     /// <summary> The PetAPObject. </summary>
     public partial class PetAPObject
     {
-        /// <summary> Initializes a new instance of PetAPObject. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPObject"/>. </summary>
         /// <param name="id"></param>
         public PetAPObject(int id)
         {
@@ -21,7 +20,7 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
-        /// <summary> Initializes a new instance of PetAPObject. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPObject"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -32,6 +31,11 @@ namespace additionalProperties.Models
             Name = name;
             Status = status;
             AdditionalProperties = additionalProperties;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PetAPObject"/> for deserialization. </summary>
+        internal PetAPObject()
+        {
         }
 
         /// <summary> Gets or sets the id. </summary>

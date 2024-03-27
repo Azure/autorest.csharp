@@ -19,13 +19,16 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a DeletedVault along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DeletedVaultResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetDeletedVaultResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetDeletedVault method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="DeletedVaultResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetDeletedVaultResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/> using the GetDeletedVault method.
     /// </summary>
     public partial class DeletedVaultResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DeletedVaultResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="vaultName"> The vaultName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, AzureLocation location, string vaultName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}";
@@ -36,12 +39,15 @@ namespace MgmtMockAndSample
         private readonly VaultsRestOperations _deletedVaultVaultsRestClient;
         private readonly DeletedVaultData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/locations/deletedVaults";
+
         /// <summary> Initializes a new instance of the <see cref="DeletedVaultResource"/> class for mocking. </summary>
         protected DeletedVaultResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DeletedVaultResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedVaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal DeletedVaultResource(ArmClient client, DeletedVaultData data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtMockAndSample
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/locations/deletedVaults";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -98,6 +101,14 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_GetDeleted</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,6 +141,14 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_GetDeleted</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +180,14 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_PurgeDeleted</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -195,6 +222,14 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_PurgeDeleted</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -8,7 +8,7 @@ This sample shows how to call Put201CreatingSucceeded200Async and parse the resu
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -20,7 +20,7 @@ This sample shows how to call Put201CreatingSucceeded200Async with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -52,7 +52,7 @@ This sample shows how to call Put201CreatingSucceeded200 and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -64,7 +64,7 @@ This sample shows how to call Put201CreatingSucceeded200 with all parameters and
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -96,7 +96,7 @@ This sample shows how to call PutAsyncRelativeRetrySucceededAsync and parse the 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -108,7 +108,7 @@ This sample shows how to call PutAsyncRelativeRetrySucceededAsync with all param
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -140,7 +140,7 @@ This sample shows how to call PutAsyncRelativeRetrySucceeded and parse the resul
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
@@ -152,7 +152,7 @@ This sample shows how to call PutAsyncRelativeRetrySucceeded with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -314,7 +314,7 @@ This sample shows how to call Post202Retry200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
@@ -322,7 +322,7 @@ This sample shows how to call Post202Retry200Async with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -344,7 +344,7 @@ This sample shows how to call Post202Retry200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
@@ -352,7 +352,7 @@ This sample shows how to call Post202Retry200 with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -374,7 +374,7 @@ This sample shows how to call PostAsyncRelativeRetrySucceededAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all parameters and request content.
@@ -382,7 +382,7 @@ This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all para
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {
@@ -404,7 +404,7 @@ This sample shows how to call PostAsyncRelativeRetrySucceeded.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Operation operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameters and request content.
@@ -412,7 +412,7 @@ This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     properties = new
     {

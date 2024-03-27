@@ -39,9 +39,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<MgmtMockAndSamplePrivateEndpointServiceConnectionStatus> status = default;
-            Optional<string> description = default;
-            Optional<ActionsRequired> actionsRequired = default;
+            MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status = default;
+            string description = default;
+            ActionsRequired? actionsRequired = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired));
+            return new MhsmPrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
     }
 }

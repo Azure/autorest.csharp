@@ -2,14 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using System.Threading;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
-using Azure;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -47,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)
         {
             var constructorParameters = restClient.Parameters;
-            var constructor = new ConstructorSignature(restClient.Type.Name, null, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
+            var constructor = new ConstructorSignature(restClient.Type, null, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
 
             writer.WriteMethodDocumentation(constructor);
             using (writer.WriteMethodDeclaration(constructor))
@@ -68,8 +67,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
         {
             var returnType = operation.ReturnType != null
-                ? new CSharpType(typeof(Response<>), operation.ReturnType)
-                : new CSharpType(typeof(Response));
+                ? new CSharpType(Configuration.ApiTypes.ResponseOfTType, operation.ReturnType)
+                : new CSharpType(Configuration.ApiTypes.ResponseType);
 
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
             var method = new MethodSignature(operation.Name, $"{operation.Summary}", $"{operation.Description}", MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);

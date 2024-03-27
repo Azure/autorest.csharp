@@ -29,17 +29,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// method using their "value expression"s
         /// </summary>
         /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
-        /// <param name="context">The <see cref="BuildContext"/></param>
         /// <param name="idVariableName">The variable name of the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, FormattableString idVariableName)
         {
             var stack = new Stack<ContextualParameterMapping>();
             BuildContextualParameterMappingHierarchy(requestPath, stack, idVariableName);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
+        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, FormattableString idVariableName, string invocationSuffix = "")
         {
             // Check if the current path is a scope parameter
             if (current.IsRawParameterizedScope())

@@ -10,10 +10,17 @@ namespace Inheritance.Models
     /// <summary> The DerivedClassWithEnumDiscriminator. </summary>
     internal partial class DerivedClassWithEnumDiscriminator : BaseClassWithEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of DerivedClassWithEnumDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedClassWithEnumDiscriminator"/>. </summary>
         internal DerivedClassWithEnumDiscriminator()
         {
             DiscriminatorProperty = BaseClassWithEnumDiscriminatorEnum.Derived;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DerivedClassWithEnumDiscriminator"/>. </summary>
+        /// <param name="discriminatorProperty"></param>
+        internal DerivedClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty) : base(discriminatorProperty)
+        {
+            DiscriminatorProperty = discriminatorProperty;
         }
     }
 }

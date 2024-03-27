@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -138,7 +139,7 @@ namespace validation
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<Product>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -147,7 +148,7 @@ namespace validation
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
-        /// <param name="body"> The Product to use. </param>
+        /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
@@ -176,7 +177,7 @@ namespace validation
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
-        /// <param name="body"> The Product to use. </param>
+        /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
@@ -260,13 +261,13 @@ namespace validation
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
+                content.JsonWriter.WriteObjectValue<Product>(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
         }
 
-        /// <param name="body"> The Product to use. </param>
+        /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
         {
@@ -286,7 +287,7 @@ namespace validation
             }
         }
 
-        /// <param name="body"> The Product to use. </param>
+        /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body = null, CancellationToken cancellationToken = default)
         {

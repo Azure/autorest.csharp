@@ -5,9 +5,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -62,6 +64,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // try to get another configuration to see if this is marked as not a resource
             if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
             {
+                MgmtReport.Instance.TransformSection.AddTransformLog(
+                    new TransformItem(TransformTypeName.RequestPathIsNonResource, set.RequestPath), set.RequestPath, "Path marked as non-resource: " + set.RequestPath);
                 _resourceDataSchemaCache.TryAdd(set.RequestPath, null);
                 return false;
             }

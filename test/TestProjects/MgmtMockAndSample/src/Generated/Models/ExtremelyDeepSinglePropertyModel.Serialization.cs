@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                writer.WriteObjectValue(Extreme);
+                writer.WriteObjectValue<SuperDeepSinglePropertyModel>(Extreme);
             }
             writer.WriteEndObject();
         }
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<SuperDeepSinglePropertyModel> extreme = default;
+            SuperDeepSinglePropertyModel extreme = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extreme"u8))
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ExtremelyDeepSinglePropertyModel(extreme.Value);
+            return new ExtremelyDeepSinglePropertyModel(extreme);
         }
     }
 }

@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -16,15 +13,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
-
-            var library = context.Library;
+            var library = new DataPlaneOutputLibrary(codeModel, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
             var longRunningOperationWriter = new LongRunningOperationWriter();
+
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
+            }
 
             foreach (var model in library.Models)
             {

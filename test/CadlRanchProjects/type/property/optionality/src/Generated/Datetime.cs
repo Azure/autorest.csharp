@@ -21,7 +21,6 @@ namespace _Type.Property.Optionality
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,13 +37,11 @@ namespace _Type.Property.Optionality
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal Datetime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Datetime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
@@ -228,7 +225,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(DatetimeProperty,CancellationToken)']/*" />
@@ -237,12 +234,13 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAllAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutAllAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(DatetimeProperty,CancellationToken)']/*" />
@@ -251,7 +249,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutAll(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutAll(content, context);
             return response;
         }
 
@@ -334,7 +333,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(DatetimeProperty,CancellationToken)']/*" />
@@ -343,12 +342,13 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutDefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutDefaultAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(DatetimeProperty,CancellationToken)']/*" />
@@ -357,7 +357,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutDefault(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutDefault(content, context);
             return response;
         }
 
@@ -447,7 +448,6 @@ namespace _Type.Property.Optionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/datetime/all", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -461,7 +461,6 @@ namespace _Type.Property.Optionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/datetime/default", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -475,7 +474,6 @@ namespace _Type.Property.Optionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/datetime/all", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -491,7 +489,6 @@ namespace _Type.Property.Optionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/datetime/default", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

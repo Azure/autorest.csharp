@@ -12,7 +12,11 @@ param(
 $ErrorActionPreference = 'Stop'
 
 Write-Host "Generating Azure SDK Codes..."
+
 if($ProjectListOverrideFile) {
+    Write-Host "Installing autorest from $SdkRepoRoot/package-lock.json"
+    npm ci --prefix $SdkRepoRoot
+
     Write-Host 'Generating projects in override file ' -ForegroundColor Green -NoNewline
     Write-Host "$ProjectListOverrideFile" -ForegroundColor Yellow
     if ($ShowSummary) {

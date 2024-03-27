@@ -5,15 +5,73 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetActionError
+    [PersistableModelProxy(typeof(UnknownPetActionError))]
+    public partial class PetActionError : IUtf8JsonSerializable, IJsonModel<PetActionError>
     {
-        internal static PetActionError DeserializePetActionError(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetActionError>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<PetActionError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PetActionError)} does not support writing '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("errorType"u8);
+            writer.WriteStringValue(ErrorType);
+            if (Optional.IsDefined(ErrorMessage))
+            {
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
+            }
+            if (Optional.IsDefined(ActionResponse))
+            {
+                writer.WritePropertyName("actionResponse"u8);
+                writer.WriteStringValue(ActionResponse);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        PetActionError IJsonModel<PetActionError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PetActionError)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetActionError(document.RootElement, options);
+        }
+
+        internal static PetActionError DeserializePetActionError(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,32 +80,42 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
-                    case "PetSadError": return PetSadError.DeserializePetSadError(element);
+                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element, options);
+                    case "PetSadError": return PetSadError.DeserializePetSadError(element, options);
                 }
             }
-            string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("errorType"u8))
-                {
-                    errorType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("errorMessage"u8))
-                {
-                    errorMessage = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("actionResponse"u8))
-                {
-                    actionResponse = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new PetActionError(actionResponse.Value, errorType, errorMessage.Value);
+            return UnknownPetActionError.DeserializeUnknownPetActionError(element, options);
         }
+
+        BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(PetActionError)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        PetActionError IPersistableModel<PetActionError>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePetActionError(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(PetActionError)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PetActionError>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = await client.NoOperationParamsAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoOperationParamsAsync with all request content.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = await client.NoOperationParamsAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = client.NoOperationParams();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoOperationParams with all request content.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = client.NoOperationParams();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -47,6 +51,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = await client.WithOperationPathParamAsync("<keyword>");
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOperationPathParamAsync with all parameters.
@@ -55,6 +60,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = await client.WithOperationPathParamAsync("<keyword>");
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -66,6 +72,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = client.WithOperationPathParam("<keyword>");
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOperationPathParam with all parameters.
@@ -74,6 +81,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
 Response response = client.WithOperationPathParam("<keyword>");
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

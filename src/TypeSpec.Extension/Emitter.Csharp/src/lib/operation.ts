@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
-    createSdkContext,
     isApiVersion,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
@@ -12,7 +11,6 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
-    EmitContext,
     getDeprecated,
     getDoc,
     getSummary,
@@ -20,9 +18,10 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation
+    Operation,
+    Program
 } from "@typespec/compiler";
-import { getResourceOperation, ResourceOperation } from "@typespec/rest";
+import { getResourceOperation } from "@typespec/rest";
 import {
     HttpOperation,
     HttpOperationParameter,
@@ -42,9 +41,10 @@ import {
     InputModelType,
     InputType,
     isInputLiteralType,
+    isInputModelType,
     isInputUnionType
 } from "../type/inputType.js";
-import { OperationFinalStateVia } from "../type/operationFinalStateVia.js";
+import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
 import { OperationLongRunning } from "../type/operationLongRunning.js";
 import { OperationPaging } from "../type/operationPaging.js";
 import { OperationResponse } from "../type/operationResponse.js";
@@ -64,10 +64,16 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize } from "./utils.js";
+import {
+    capitalize,
+    createContentTypeOrAcceptParameter,
+    getTypeName
+} from "./utils.js";
+import { Usage } from "../type/usage.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function loadOperation(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext<NetEmitterOptions>,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
@@ -75,14 +81,13 @@ export function loadOperation(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
-    const program = context.program;
-    const sdkContext = createSdkContext(context);
     const {
         path: fullPath,
         operation: op,
         verb,
         parameters: typespecParameters
     } = operation;
+    const program = sdkContext.program;
     logger.info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
@@ -99,47 +104,67 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.bodyParameter) {
+    if (typespecParameters.body?.parameter) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.bodyParameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.bodyType) {
-        if (resourceOperation) {
-            parameters.push(
-                loadBodyParameter(sdkContext, resourceOperation.resourceType)
-            );
-        } else {
-            const effectiveBodyType = getEffectiveSchemaType(
+    } else if (typespecParameters.body?.type) {
+        const effectiveBodyType = getEffectiveSchemaType(
+            sdkContext,
+            typespecParameters.body.type
+        );
+        if (effectiveBodyType.kind === "Model") {
+            let bodyParameter = loadBodyParameter(
                 sdkContext,
-                typespecParameters.bodyType
+                effectiveBodyType
             );
-            if (effectiveBodyType.kind === "Model") {
-                if (effectiveBodyType.name !== "") {
-                    parameters.push(
-                        loadBodyParameter(sdkContext, effectiveBodyType)
-                    );
-                } else {
-                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                    let bodyParameter = loadBodyParameter(
-                        sdkContext,
-                        effectiveBodyType
-                    );
-                    bodyParameter.Kind = InputOperationParameterKind.Spread;
-                    parameters.push(bodyParameter);
-                }
+            if (effectiveBodyType.name === "") {
+                bodyParameter.Kind = InputOperationParameterKind.Spread;
             }
+            // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
+            // workaround for alias model
+            if (
+                isInputModelType(bodyParameter.Type) &&
+                bodyParameter.Type.Name === ""
+            ) {
+                // give body type a name
+                bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
+                var bodyModelType = bodyParameter.Type as InputModelType;
+                bodyModelType.Usage = Usage.Input;
+                // update models cache
+                models.delete("");
+                models.set(bodyModelType.Name, bodyModelType);
+
+                // give body parameter a name
+                bodyParameter.Name = `${capitalize(op.name)}Request`;
+            }
+            parameters.push(bodyParameter);
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(
-            sdkContext,
-            res,
-            resourceOperation
-        );
+        const operationResponse = loadOperationResponse(sdkContext, res);
         if (operationResponse) {
             responses.push(operationResponse);
+        }
+        if (
+            operationResponse?.ContentTypes &&
+            operationResponse.ContentTypes.length > 0
+        ) {
+            const acceptParameter = createContentTypeOrAcceptParameter(
+                [operationResponse.ContentTypes[0]], // We currently only support one content type per response
+                "accept",
+                "Accept"
+            );
+            const acceptIndex = parameters.findIndex(
+                (p) => p.NameInRequest.toLowerCase() === "accept"
+            );
+            if (acceptIndex > -1) {
+                parameters.splice(acceptIndex, 1, acceptParameter);
+            } else {
+                parameters.push(acceptParameter);
+            }
         }
     }
 
@@ -173,15 +198,16 @@ export function loadOperation(
     for (const res of operation.responses) {
         const body = res.responses[0]?.body;
         if (body?.type) {
+            const bodyType = getEffectiveSchemaType(sdkContext, body.type);
             if (
-                body.type.kind === "Model" &&
-                hasDecorator(body?.type, "$pagedResult")
+                bodyType.kind === "Model" &&
+                hasDecorator(bodyType, "$pagedResult")
             ) {
                 const itemsProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$items"));
                 const nextLinkProperty = Array.from(
-                    body.type.properties.values()
+                    bodyType.properties.values()
                 ).find((it) => hasDecorator(it, "$nextLink"));
                 paging = {
                     NextLinkName: nextLinkProperty?.name,
@@ -193,7 +219,7 @@ export function loadOperation(
     /* TODO: handle lro */
 
     return {
-        Name: op.name,
+        Name: getTypeName(sdkContext, op),
         ResourceName:
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
@@ -214,11 +240,7 @@ export function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        LongRunning: loadLongRunningOperation(
-            sdkContext,
-            operation,
-            resourceOperation
-        ),
+        LongRunning: loadLongRunningOperation(sdkContext, operation),
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
@@ -251,7 +273,7 @@ export function loadOperation(
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind =
-            isContentType || inputType.Name === "Literal"
+            isContentType || inputType.Kind === InputTypeKind.Literal
                 ? InputOperationParameterKind.Constant
                 : isApiVer
                 ? defaultValue
@@ -259,7 +281,7 @@ export function loadOperation(
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
         return {
-            Name: param.name,
+            Name: getTypeName(sdkContext, param),
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -286,7 +308,6 @@ export function loadOperation(
         context: SdkContext,
         body: ModelProperty | Model
     ): InputParameter {
-        const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(
             context,
             getFormattedType(program, body),
@@ -297,7 +318,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
+            Name: getTypeName(context, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
@@ -315,8 +336,7 @@ export function loadOperation(
 
     function loadOperationResponse(
         context: SdkContext,
-        response: HttpOperationResponse,
-        resourceOperation?: ResourceOperation
+        response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
             return undefined;
@@ -328,23 +348,14 @@ export function loadOperation(
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(
-                    context,
-                    getFormattedType(program, resourceOperation.resourceType),
-                    models,
-                    enums
-                );
-            } else {
-                const typespecType = getEffectiveSchemaType(context, body.type);
-                const inputType: InputType = getInputType(
-                    context,
-                    getFormattedType(program, typespecType),
-                    models,
-                    enums
-                );
-                type = inputType;
-            }
+            const typespecType = getEffectiveSchemaType(context, body.type);
+            const inputType: InputType = getInputType(
+                context,
+                getFormattedType(program, typespecType),
+                models,
+                enums
+            );
+            type = inputType;
         }
 
         const headers = response.responses[0]?.headers;
@@ -370,63 +381,44 @@ export function loadOperation(
             BodyType: type,
             BodyMediaType: BodyMediaType.Json,
             Headers: responseHeaders,
-            IsErrorResponse: isErrorModel(program, response.type)
+            IsErrorResponse: isErrorModel(program, response.type),
+            ContentTypes: body?.contentTypes
         } as OperationResponse;
     }
 
     function loadLongRunningOperation(
         context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
+        op: HttpOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(context, op.operation)) return undefined;
+        const metadata = getLroMetadata(program, op.operation);
+        if (metadata === undefined) {
+            return undefined;
+        }
 
-        const finalResponse = loadLongRunningFinalResponse(
-            context,
-            op,
-            resourceOperation
-        );
-        if (finalResponse === undefined) return undefined;
+        var bodyType = undefined;
+        if (
+            op.verb !== "delete" &&
+            metadata.finalResult !== undefined &&
+            metadata.finalResult !== "void"
+        ) {
+            const formattedType = getFormattedType(
+                program,
+                metadata.finalEnvelopeResult as Model
+            );
+            bodyType = getInputType(context, formattedType, models, enums);
+        }
 
         return {
-            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
-            FinalResponse: finalResponse
+            FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
+            FinalResponse: {
+                // in swagger, we allow delete to return some meaningful body content
+                // for now, let assume we don't allow return type
+                StatusCodes: op.verb === "delete" ? [204] : [200],
+                BodyType: bodyType,
+                BodyMediaType: BodyMediaType.Json
+            } as OperationResponse,
+            ResultPath: metadata.finalResultPath
         } as OperationLongRunning;
-    }
-
-    function loadLongRunningFinalResponse(
-        context: SdkContext,
-        op: HttpOperation,
-        resourceOperation?: ResourceOperation
-    ): OperationResponse | undefined {
-        let finalResponse: any | undefined;
-        for (const response of op.responses) {
-            if (response.statusCode === "200") {
-                finalResponse = response;
-                break;
-            }
-            if (response.statusCode === "204") {
-                finalResponse = response;
-            }
-        }
-
-        if (finalResponse !== undefined) {
-            return loadOperationResponse(
-                context,
-                finalResponse,
-                resourceOperation
-            );
-        }
-
-        return loadOperationResponse(
-            context,
-            op.responses[0],
-            resourceOperation
-        );
-    }
-
-    function isLongRunningOperation(context: SdkContext, op: Operation) {
-        return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 

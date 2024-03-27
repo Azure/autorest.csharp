@@ -14,23 +14,85 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
-        /// <param name="first"></param>
-        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
-        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithARequiredProperty"/>. </summary>
+        /// <param name="kind"> Required kind. </param>
+        /// <returns> A new <see cref="Models.BaseModelWithARequiredProperty"/> instance for mocking. </returns>
+        public static BaseModelWithARequiredProperty BaseModelWithARequiredProperty(string kind = null)
         {
-            return new FirstDerivedOutputModel("first", first);
+            return new BaseModelWithARequiredProperty(kind, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
-        /// <param name="second"></param>
-        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
-        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
+        /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredNullableInt"> Required nullable int. </param>
+        /// <param name="requiredNullableString"> Required nullable string. </param>
+        /// <param name="nonRequiredNullableInt"> Optional nullable int. </param>
+        /// <param name="nonRequiredNullableString"> Optional nullable string. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredModel2"> Required model. </param>
+        /// <param name="requiredIntList"> Required primitive value type collection. </param>
+        /// <param name="requiredStringList"> Required primitive reference type collection. </param>
+        /// <param name="requiredModelList"> Required model collection. </param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
+        /// <param name="requiredNullableModelList"> Required model nullable collection. </param>
+        /// <param name="requiredNullableStringList"> Required string nullable collection. </param>
+        /// <param name="requiredNullableIntList"> Required int nullable collection. </param>
+        /// <param name="nonRequiredModelList"> Optional model collection. </param>
+        /// <param name="nonRequiredStringList"> Optional string collection. </param>
+        /// <param name="nonRequiredIntList"> Optional int collection. </param>
+        /// <param name="nonRequiredNullableModelList"> Optional model nullable collection. </param>
+        /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
+        /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
+        /// <returns> A new <see cref="Models.InputModel"/> instance for mocking. </returns>
+        public static InputModel InputModel(string requiredString = null, int requiredInt = default, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, BaseModel requiredModel = null, BaseModel requiredModel2 = null, IEnumerable<int> requiredIntList = null, IEnumerable<string> requiredStringList = null, IEnumerable<CollectionItem> requiredModelList = null, IDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<float?> requiredCollectionWithNullableFloatElement = null, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement = null, IEnumerable<CollectionItem> requiredNullableModelList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<CollectionItem> nonRequiredModelList = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, IEnumerable<CollectionItem> nonRequiredNullableModelList = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null)
         {
-            return new SecondDerivedOutputModel("second", second);
+            requiredIntList ??= new List<int>();
+            requiredStringList ??= new List<string>();
+            requiredModelList ??= new List<CollectionItem>();
+            requiredModelRecord ??= new Dictionary<string, RecordItem>();
+            requiredCollectionWithNullableFloatElement ??= new List<float?>();
+            requiredCollectionWithNullableBooleanElement ??= new List<bool?>();
+            requiredNullableModelList ??= new List<CollectionItem>();
+            requiredNullableStringList ??= new List<string>();
+            requiredNullableIntList ??= new List<int>();
+            nonRequiredModelList ??= new List<CollectionItem>();
+            nonRequiredStringList ??= new List<string>();
+            nonRequiredIntList ??= new List<int>();
+            nonRequiredNullableModelList ??= new List<CollectionItem>();
+            nonRequiredNullableStringList ??= new List<string>();
+            nonRequiredNullableIntList ??= new List<int>();
+
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredModel,
+                requiredModel2,
+                requiredIntList?.ToList(),
+                requiredStringList?.ToList(),
+                requiredModelList?.ToList(),
+                requiredModelRecord,
+                requiredCollectionWithNullableFloatElement?.ToList(),
+                requiredCollectionWithNullableBooleanElement?.ToList(),
+                requiredNullableModelList?.ToList(),
+                requiredNullableStringList?.ToList(),
+                requiredNullableIntList?.ToList(),
+                nonRequiredModelList?.ToList(),
+                nonRequiredStringList?.ToList(),
+                nonRequiredIntList?.ToList(),
+                nonRequiredNullableModelList?.ToList(),
+                nonRequiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="nonRequiredString"> Optional string. </param>
@@ -41,7 +103,11 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableString"> Optional nullable string. </param>
         /// <param name="requiredReadonlyInt"> Required readonly int. </param>
         /// <param name="nonRequiredReadonlyInt"> Optional readonly int. </param>
-        /// <param name="requiredModel"> Required model with discriminator. </param>
+        /// <param name="requiredModel">
+        /// Required model with discriminator
+        /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
+        /// </param>
         /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
         /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
         /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>
@@ -62,25 +128,64 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
         /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<int> requiredUint8Array = null, IEnumerable<int> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<int> requiredInt8Array = null, IEnumerable<int> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<byte> requiredUint8Array = null, IEnumerable<byte> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<sbyte> requiredInt8Array = null, IEnumerable<sbyte> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
         {
             requiredList ??= new List<CollectionItem>();
             requiredIntRecord ??= new Dictionary<string, int>();
             requiredStringRecord ??= new Dictionary<string, string>();
             requiredModelRecord ??= new Dictionary<string, RecordItem>();
-            requiredUint8Array ??= new List<int>();
-            optionalUint8Array ??= new List<int>();
-            requiredInt8Array ??= new List<int>();
-            optionalInt8Array ??= new List<int>();
+            requiredUint8Array ??= new List<byte>();
+            optionalUint8Array ??= new List<byte>();
+            requiredInt8Array ??= new List<sbyte>();
+            optionalInt8Array ??= new List<sbyte>();
             requiredNullableIntList ??= new List<int>();
             requiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
 
-            return new RoundTripModel(requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
+            return new RoundTripModel(
+                serializedAdditionalRawData: null,
+                requiredString,
+                requiredInt,
+                nonRequiredString,
+                nonRequiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                requiredModel,
+                requiredFixedStringEnum,
+                requiredFixedIntEnum,
+                requiredExtensibleEnum,
+                requiredList?.ToList(),
+                requiredIntRecord,
+                requiredStringRecord,
+                requiredModelRecord,
+                requiredBytes,
+                optionalBytes,
+                requiredUint8Array?.ToList(),
+                optionalUint8Array?.ToList(),
+                requiredUnknown,
+                optionalUnknown,
+                requiredInt8Array?.ToList(),
+                optionalInt8Array?.ToList(),
+                requiredNullableIntList?.ToList(),
+                requiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                nonRequiredNullableStringList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
+        /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
+        public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null)
+        {
+            return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="requiredList"> Required collection. </param>
         /// <returns> A new <see cref="Models.DerivedModelWithProperties"/> instance for mocking. </returns>
@@ -88,10 +193,10 @@ namespace ModelsTypeSpec.Models
         {
             requiredList ??= new List<CollectionItem>();
 
-            return new DerivedModelWithProperties(optionalPropertyOnBase, requiredList?.ToList());
+            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null, requiredList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
         /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>
@@ -134,10 +239,35 @@ namespace ModelsTypeSpec.Models
             requiredCollectionWithNullableIntElement ??= new List<int?>();
             optionalCollectionWithNullableBooleanElement ??= new List<bool?>();
 
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList());
+            return new RoundTripReadOnlyModel(
+                requiredReadonlyString,
+                requiredReadonlyInt,
+                optionalReadonlyString,
+                optionalReadonlyInt,
+                requiredReadonlyModel,
+                optionalReadonlyModel,
+                requiredReadonlyFixedStringEnum,
+                requiredReadonlyExtensibleEnum,
+                optionalReadonlyFixedStringEnum,
+                optionalReadonlyExtensibleEnum,
+                requiredReadonlyStringList?.ToList(),
+                requiredReadonlyIntList?.ToList(),
+                requiredReadOnlyModelList?.ToList(),
+                requiredReadOnlyIntRecord,
+                requiredStringRecord,
+                requiredReadOnlyModelRecord,
+                optionalReadonlyStringList?.ToList(),
+                optionalReadonlyIntList?.ToList(),
+                optionalReadOnlyModelList?.ToList(),
+                optionalReadOnlyIntRecord,
+                optionalReadOnlyStringRecord,
+                optionalModelRecord,
+                requiredCollectionWithNullableIntElement?.ToList(),
+                optionalCollectionWithNullableBooleanElement?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -157,25 +287,101 @@ namespace ModelsTypeSpec.Models
             optionalRecord ??= new Dictionary<string, RecordItem>();
             optionalNullableRecord ??= new Dictionary<string, RecordItem>();
 
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord);
+            return new OutputModel(
+                requiredString,
+                requiredInt,
+                requiredModel,
+                requiredList?.ToList(),
+                requiredModelRecord,
+                optionalList?.ToList(),
+                optionalNullableList?.ToList(),
+                optionalRecord,
+                optionalNullableRecord,
+                serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InputRecursiveModel"/>. </summary>
+        /// <param name="message"> Message. </param>
+        /// <param name="inner"> Required Record. </param>
+        /// <returns> A new <see cref="Models.InputRecursiveModel"/> instance for mocking. </returns>
+        public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null)
+        {
+            return new InputRecursiveModel(message, inner, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorModel"/>. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
         /// <returns> A new <see cref="Models.ErrorModel"/> instance for mocking. </returns>
         public static ErrorModel ErrorModel(string message = null, ErrorModel innerError = null)
         {
-            return new ErrorModel(message, innerError);
+            return new ErrorModel(message, innerError, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of SingleBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NoUseBase"/>. </summary>
+        /// <param name="baseModelProp"> base model property. </param>
+        /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
+        public static NoUseBase NoUseBase(string baseModelProp = null)
+        {
+            return new NoUseBase(baseModelProp, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
         public static SingleBase SingleBase(string kind = null, int size = default)
         {
-            return new UnknownSingleBase(kind, size);
+            return new UnknownSingleBase(kind, size, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.Facet"/>. </summary>
+        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
+        /// <returns> A new <see cref="Models.Facet"/> instance for mocking. </returns>
+        public static Facet Facet(string field = null)
+        {
+            return new Facet(field, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>
+        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
+        /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
+        /// <param name="value"></param>
+        /// <returns> A new <see cref="Models.NumericValuesFacetint32"/> instance for mocking. </returns>
+        public static NumericValuesFacetint32 NumericValuesFacetint32(string field = null, IEnumerable<int> values = null, int value = default)
+        {
+            values ??= new List<int>();
+
+            return new NumericValuesFacetint32(field, serializedAdditionalRawData: null, values?.ToList(), value);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
+        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
+        /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
+        /// <param name="value"></param>
+        /// <param name="kind"> The facet type. </param>
+        /// <returns> A new <see cref="Models.Int32ValuesFacet"/> instance for mocking. </returns>
+        public static Int32ValuesFacet Int32ValuesFacet(string field = null, IEnumerable<int> values = null, int value = default, Int32ValuesFacetKind kind = default)
+        {
+            values ??= new List<int>();
+
+            return new Int32ValuesFacet(field, serializedAdditionalRawData: null, values?.ToList(), value, kind);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
+        /// <param name="first"></param>
+        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
+        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
+        {
+            return new FirstDerivedOutputModel("first", serializedAdditionalRawData: null, first);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
+        /// <param name="second"></param>
+        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
+        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
+        {
+            return new SecondDerivedOutputModel("second", serializedAdditionalRawData: null, second);
         }
     }
 }

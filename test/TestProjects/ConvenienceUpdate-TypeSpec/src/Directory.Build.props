@@ -1,8 +1,0 @@
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <!-- TODO There seems to be an issue with AD0001 which might be the analyzer itself need to investigate https://github.com/Azure/autorest.csharp/issues/3708 -->
-    <NoWarn>$(NoWarn);AD0001</NoWarn>
-  </PropertyGroup>
- 
-  <Import Project="..\..\Directory.Build.props" />
-</Project>

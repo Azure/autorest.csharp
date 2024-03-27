@@ -21,7 +21,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -46,7 +45,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -137,7 +135,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModelAsync(Bird,CancellationToken)']/*" />
@@ -146,11 +144,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModel(Bird,CancellationToken)']/*" />
@@ -159,7 +158,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutModel(content, context);
             return response;
         }
 
@@ -329,7 +329,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(Bird,CancellationToken)']/*" />
@@ -338,11 +338,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRecursiveModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutRecursiveModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModel(Bird,CancellationToken)']/*" />
@@ -351,7 +352,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRecursiveModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutRecursiveModel(content, context);
             return response;
         }
 
@@ -705,7 +707,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -719,7 +720,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -735,7 +735,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/recursivemodel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -749,7 +748,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/recursivemodel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -765,7 +763,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/missingdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -779,7 +776,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/wrongdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -793,7 +789,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/legacy-model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

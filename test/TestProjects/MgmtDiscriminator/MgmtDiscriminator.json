@@ -6,20 +6,12 @@
         "version": "2020-06-01"
     },
     "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "security": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+            "azure_auth": ["user_impersonation"]
         }
     ],
     "securityDefinitions": {
@@ -36,9 +28,7 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules": {
             "get": {
-                "tags": [
-                    "DeliveryRules"
-                ],
+                "tags": ["DeliveryRules"],
                 "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_List",
                 "parameters": [
@@ -70,9 +60,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}": {
             "get": {
-                "tags": [
-                    "DeliveryRules"
-                ],
+                "tags": ["DeliveryRules"],
                 "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Get",
                 "parameters": [
@@ -109,9 +97,7 @@
                 }
             },
             "put": {
-                "tags": [
-                    "DeliveryRules"
-                ],
+                "tags": ["DeliveryRules"],
                 "description": "Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Create",
                 "parameters": [
@@ -170,9 +156,7 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [
-                    "DeliveryRules"
-                ],
+                "tags": ["DeliveryRules"],
                 "description": "Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Delete",
                 "parameters": [
@@ -215,9 +199,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}/post": {
             "get": {
-                "tags": [
-                    "DeliveryRules"
-                ],
+                "tags": ["DeliveryRules"],
                 "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Post",
                 "parameters": [
@@ -260,16 +242,149 @@
                     }
                 }
             }
+        },
+        "/{resourceScope}/providers/Microsoft.Blueprint/artifacts/{artifactName}": {
+            "put": {
+                "tags": ["Artifact"],
+                "operationId": "Artifacts_CreateOrUpdate",
+                "description": "Create or update blueprint artifact.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScopeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ArtifactNameParameter"
+                    },
+                    {
+                        "name": "artifact",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Artifact"
+                        },
+                        "description": "Blueprint artifact to create or update."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created -- blueprint artifact created/updated.",
+                        "schema": {
+                            "$ref": "#/definitions/Artifact"
+                        }
+                    },
+                    "default": {
+                        "description": "Blueprints error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Artifact"],
+                "operationId": "Artifacts_Get",
+                "description": "Get a blueprint artifact.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScopeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ArtifactNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK -- blueprint artifact retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/Artifact"
+                        }
+                    },
+                    "default": {
+                        "description": "Blueprints error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Artifact"],
+                "operationId": "Artifacts_Delete",
+                "description": "Delete a blueprint artifact.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScopeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ArtifactNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK -- blueprint artifact deleted.",
+                        "schema": {
+                            "$ref": "#/definitions/Artifact"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Blueprints error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/{resourceScope}/providers/Microsoft.Blueprint/artifacts": {
+            "get": {
+                "tags": ["Artifact"],
+                "operationId": "Artifacts_List",
+                "description": "List artifacts for a given blueprint definition.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ScopeParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK -- blueprint artifacts retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ArtifactList"
+                        }
+                    },
+                    "default": {
+                        "description": "Blueprints error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
     },
     "definitions": {
         "DeliveryRule": {
             "description": "A rule that specifies a set of actions and conditions",
             "type": "object",
-            "required": [
-                "order",
-                "actions"
-            ],
+            "required": ["order", "actions"],
             "properties": {
                 "id": {
                     "description": "The resource id of this rule",
@@ -285,6 +400,50 @@
                     "description": "The resource type of this rule",
                     "type": "string",
                     "readOnly": true
+                },
+                "boolProperty": {
+                    "description": "A bool property to verify bicep generation.",
+                    "type": "boolean"
+                },
+                "location": {
+                    "description": "A location property to verify bicep generation.",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
+                "locationWithCustomSerialization": {
+                    "description": "A location property to verify bicep generation.",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
+                "dateTimeProperty": {
+                    "description": "A datetime property to verify bicep generation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "duration": {
+                    "description": "A duration property to verify bicep generation.",
+                    "type": "string",
+                    "format": "duration"
+                },
+                "number": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "number",
+                    "format": "int32"
+                },
+                "uri": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "string",
+                    "format": "url"
+                },
+                "shellProperty": {
+                    "description": "A shell property to verify bicep generation for empty objects.",
+                    "type": "object",
+                    "$ref": "#/definitions/Shell"
+                },
+                "sku": {
+                    "description": "A model that will be safe flattened.",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku1"
                 },
                 "properties": {
                     "description": "The properties",
@@ -306,9 +465,7 @@
                             "items": {
                                 "$ref": "#/definitions/DeliveryRuleAction"
                             },
-                            "x-ms-identifiers": [
-                                "name"
-                            ]
+                            "x-ms-identifiers": ["name"]
                         },
                         "extraMappingInfo": {
                             "description": "A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.",
@@ -345,16 +502,13 @@
         "Pet": {
             "description": "A pet",
             "discriminator": "kind",
-            "required": [ "kind" ],
+            "required": ["kind"],
             "properties": {
                 "kind": {
                     "description": "The kind of the pet",
                     "type": "string",
-                    "enum": [
-                        "Cat",
-                        "Dog"
-                    ],
-                    "x-ms-enum":{
+                    "enum": ["Cat", "Dog"],
+                    "x-ms-enum": {
                         "name": "PetKind",
                         "modelAsString": false
                     }
@@ -363,6 +517,10 @@
                     "description": "The Id of the pet",
                     "type": "string",
                     "readOnly": true
+                },
+                "type": {
+                    "description": "Verify that type is included for non-ResourceData models",
+                    "type": "string"
                 }
             }
         },
@@ -393,24 +551,62 @@
                 "bark": {
                     "description": "A dog can bark",
                     "type": "string"
+                },
+                "dogKind": {
+                    "description": "The kind of the dog",
+                    "type": "string",
+                    "enum": ["german Shepherd", "golden Retriever"],
+                    "x-ms-enum": {
+                        "name": "DogKind",
+                        "modelAsString": false
+                    }
+                }
+            }
+        },
+        "Shell": {
+            "description": "A shell type that can be used to validate bicep generation when no child properties are set",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the shell",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the shell",
+                    "type": "string"
+                }
+            }
+        },
+        "Sku1": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the sku",
+                    "type": "object",
+                    "$ref": "#/definitions/Sku2"
+                }
+            }
+        },
+        "Sku2": {
+            "description": "A model with a single object for testing safe-flattening",
+            "type": "object",
+            "properties": {
+                "nestedName": {
+                    "description": "The name of the sku",
+                    "type": "string"
                 }
             }
         },
         "DeliveryRuleCondition": {
             "description": "A condition for the delivery rule.",
             "discriminator": "name",
-            "required": [
-                "name"
-            ],
+            "required": ["name"],
             "properties": {
                 "name": {
                     "description": "The name of the condition for the delivery rule.",
                     "type": "string",
-                    "enum": [
-                        "RemoteAddress",
-                        "RequestMethod",
-                        "QueryString"
-                    ],
+                    "enum": ["RemoteAddress", "RequestMethod", "QueryString"],
                     "x-ms-enum": {
                         "name": "MatchVariable",
                         "modelAsString": true
@@ -431,9 +627,7 @@
                     "$ref": "#/definitions/DeliveryRuleCondition"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the condition.",
@@ -449,9 +643,7 @@
                     "$ref": "#/definitions/DeliveryRuleCondition"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the condition.",
@@ -467,9 +659,7 @@
                     "$ref": "#/definitions/DeliveryRuleCondition"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the condition.",
@@ -479,25 +669,16 @@
         },
         "RemoteAddressMatchConditionParameters": {
             "description": "Defines the parameters for RemoteAddress match conditions",
-            "required": [
-                "operator",
-                "typeName"
-            ],
+            "required": ["operator", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleRemoteAddressConditionParameters"
-                    ]
+                    "enum": ["DeliveryRuleRemoteAddressConditionParameters"]
                 },
                 "operator": {
                     "description": "Describes operator to be matched",
                     "type": "string",
-                    "enum": [
-                        "Any",
-                        "IPMatch",
-                        "GeoMatch"
-                    ],
+                    "enum": ["Any", "IPMatch", "GeoMatch"],
                     "x-ms-enum": {
                         "name": "RemoteAddressOperator",
                         "modelAsString": true
@@ -525,23 +706,16 @@
         },
         "RequestMethodMatchConditionParameters": {
             "description": "Defines the parameters for RequestMethod match conditions",
-            "required": [
-                "operator",
-                "typeName"
-            ],
+            "required": ["operator", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleRequestMethodConditionParameters"
-                    ]
+                    "enum": ["DeliveryRuleRequestMethodConditionParameters"]
                 },
                 "operator": {
                     "description": "Describes operator to be matched",
                     "type": "string",
-                    "enum": [
-                        "Equal"
-                    ],
+                    "enum": ["Equal"],
                     "x-ms-enum": {
                         "name": "RequestMethodOperator",
                         "modelAsString": true
@@ -578,16 +752,11 @@
         },
         "QueryStringMatchConditionParameters": {
             "description": "Defines the parameters for QueryString match conditions",
-            "required": [
-                "operator",
-                "typeName"
-            ],
+            "required": ["operator", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleQueryStringConditionParameters"
-                    ]
+                    "enum": ["DeliveryRuleQueryStringConditionParameters"]
                 },
                 "operator": {
                     "description": "Describes operator to be matched",
@@ -648,9 +817,7 @@
         "DeliveryRuleAction": {
             "description": "An action for the delivery rule.",
             "discriminator": "name",
-            "required": [
-                "name"
-            ],
+            "required": ["name"],
             "properties": {
                 "name": {
                     "description": "The name of the action for the delivery rule.",
@@ -686,9 +853,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -698,16 +863,11 @@
         },
         "UrlRedirectActionParameters": {
             "description": "Defines the parameters for the url redirect action.",
-            "required": [
-                "redirectType",
-                "typeName"
-            ],
+            "required": ["redirectType", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleUrlRedirectActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleUrlRedirectActionParameters"]
                 },
                 "redirectType": {
                     "description": "The redirect type the rule will use when redirecting traffic.",
@@ -726,11 +886,7 @@
                 "destinationProtocol": {
                     "description": "Protocol to use for the redirect. The default value is MatchRequest",
                     "type": "string",
-                    "enum": [
-                        "MatchRequest",
-                        "Http",
-                        "Https"
-                    ],
+                    "enum": ["MatchRequest", "Http", "Https"],
                     "x-ms-enum": {
                         "name": "DestinationProtocol",
                         "modelAsString": true
@@ -762,9 +918,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -774,22 +928,16 @@
         },
         "UrlSigningActionParameters": {
             "description": "Defines the parameters for the Url Signing action.",
-            "required": [
-                "typeName"
-            ],
+            "required": ["typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleUrlSigningActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleUrlSigningActionParameters"]
                 },
                 "algorithm": {
                     "description": "Algorithm to use for URL signing",
                     "type": "string",
-                    "enum": [
-                        "SHA256"
-                    ],
+                    "enum": ["SHA256"],
                     "x-ms-enum": {
                         "name": "algorithm",
                         "modelAsString": true
@@ -801,27 +949,18 @@
                     "items": {
                         "$ref": "#/definitions/UrlSigningParamIdentifier"
                     },
-                    "x-ms-identifiers": [
-                        "paramName"
-                    ]
+                    "x-ms-identifiers": ["paramName"]
                 }
             }
         },
         "UrlSigningParamIdentifier": {
             "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
-            "required": [
-                "paramIndicator",
-                "paramName"
-            ],
+            "required": ["paramIndicator", "paramName"],
             "properties": {
                 "paramIndicator": {
                     "description": "Indicates the purpose of the parameter",
                     "type": "string",
-                    "enum": [
-                        "Expires",
-                        "KeyId",
-                        "Signature"
-                    ],
+                    "enum": ["Expires", "KeyId", "Signature"],
                     "x-ms-enum": {
                         "name": "paramIndicator",
                         "modelAsString": true
@@ -841,9 +980,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -876,16 +1013,11 @@
         },
         "OriginGroupOverrideActionParameters": {
             "description": "Defines the parameters for the origin group override action.",
-            "required": [
-                "originGroup",
-                "typeName"
-            ],
+            "required": ["originGroup", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleOriginGroupOverrideActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleOriginGroupOverrideActionParameters"]
                 },
                 "originGroup": {
                     "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
@@ -902,9 +1034,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -914,17 +1044,11 @@
         },
         "UrlRewriteActionParameters": {
             "description": "Defines the parameters for the url rewrite action.",
-            "required": [
-                "sourcePattern",
-                "destination",
-                "typeName"
-            ],
+            "required": ["sourcePattern", "destination", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleUrlRewriteActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleUrlRewriteActionParameters"]
                 },
                 "sourcePattern": {
                     "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
@@ -948,9 +1072,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -966,9 +1088,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -978,26 +1098,16 @@
         },
         "HeaderActionParameters": {
             "description": "Defines the parameters for the request header action.",
-            "required": [
-                "headerAction",
-                "headerName",
-                "typeName"
-            ],
+            "required": ["headerAction", "headerName", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleHeaderActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleHeaderActionParameters"]
                 },
                 "headerAction": {
                     "description": "Action to perform",
                     "type": "string",
-                    "enum": [
-                        "Append",
-                        "Overwrite",
-                        "Delete"
-                    ],
+                    "enum": ["Append", "Overwrite", "Delete"],
                     "x-ms-enum": {
                         "name": "HeaderAction",
                         "modelAsString": true
@@ -1021,9 +1131,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -1033,26 +1141,16 @@
         },
         "CacheExpirationActionParameters": {
             "description": "Defines the parameters for the cache expiration action.",
-            "required": [
-                "cacheBehavior",
-                "cacheType",
-                "typeName"
-            ],
+            "required": ["cacheBehavior", "cacheType", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": [
-                        "DeliveryRuleCacheExpirationActionParameters"
-                    ]
+                    "enum": ["DeliveryRuleCacheExpirationActionParameters"]
                 },
                 "cacheBehavior": {
                     "description": "Caching behavior for the requests",
                     "type": "string",
-                    "enum": [
-                        "BypassCache",
-                        "Override",
-                        "SetIfMissing"
-                    ],
+                    "enum": ["BypassCache", "Override", "SetIfMissing"],
                     "x-ms-enum": {
                         "name": "cacheBehavior",
                         "modelAsString": true
@@ -1061,9 +1159,7 @@
                 "cacheType": {
                     "description": "The level at which the content needs to be cached.",
                     "type": "string",
-                    "enum": [
-                        "All"
-                    ],
+                    "enum": ["All"],
                     "x-ms-enum": {
                         "name": "CacheType",
                         "modelAsString": true
@@ -1086,9 +1182,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -1098,10 +1192,7 @@
         },
         "CacheKeyQueryStringActionParameters": {
             "description": "Defines the parameters for the cache-key query string action.",
-            "required": [
-                "queryStringBehavior",
-                "typeName"
-            ],
+            "required": ["queryStringBehavior", "typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
@@ -1112,12 +1203,7 @@
                 "queryStringBehavior": {
                     "description": "Caching behavior for the requests",
                     "type": "string",
-                    "enum": [
-                        "Include",
-                        "IncludeAll",
-                        "Exclude",
-                        "ExcludeAll"
-                    ],
+                    "enum": ["Include", "IncludeAll", "Exclude", "ExcludeAll"],
                     "x-ms-enum": {
                         "name": "queryStringBehavior",
                         "modelAsString": true
@@ -1139,9 +1225,7 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": [
-                "parameters"
-            ],
+            "required": ["parameters"],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -1152,9 +1236,7 @@
         "RouteConfigurationOverrideActionParameters": {
             "description": "Defines the parameters for the route configuration override action.",
             "type": "object",
-            "required": [
-                "typeName"
-            ],
+            "required": ["typeName"],
             "properties": {
                 "typeName": {
                     "type": "string",
@@ -1181,11 +1263,7 @@
                 "forwardingProtocol": {
                     "description": "Protocol this rule will use when forwarding traffic to backends.",
                     "type": "string",
-                    "enum": [
-                        "HttpOnly",
-                        "HttpsOnly",
-                        "MatchRequest"
-                    ],
+                    "enum": ["HttpOnly", "HttpsOnly", "MatchRequest"],
                     "x-ms-enum": {
                         "name": "ForwardingProtocol",
                         "modelAsString": true
@@ -1239,10 +1317,7 @@
                     "items": {
                         "$ref": "#/definitions/ErrorDetail"
                     },
-                    "x-ms-identifiers": [
-                        "message",
-                        "target"
-                    ],
+                    "x-ms-identifiers": ["message", "target"],
                     "description": "The error details."
                 },
                 "additionalInfo": {
@@ -1271,6 +1346,142 @@
                 }
             },
             "description": "The resource management error additional info."
+        },
+        "Artifact": {
+            "type": "object",
+            "discriminator": "kind",
+            "description": "Represents a blueprint artifact.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AzureResourceBase"
+                }
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "Specifies the kind of blueprint artifact.",
+                    "enum": ["template", "roleAssignment", "policyAssignment"],
+                    "x-ms-enum": {
+                        "name": "ArtifactKind",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "required": ["kind"]
+        },
+        "AzureResourceBase": {
+            "description": "Common properties for all Azure resources.",
+            "type": "object",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "String Id used to locate any resource on Azure."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Type of this resource."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Name of this resource."
+                }
+            }
+        },
+        "ArtifactList": {
+            "type": "object",
+            "description": "List of blueprint artifacts.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "List of blueprint artifacts.",
+                    "items": {
+                        "$ref": "#/definitions/Artifact"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Link to the next page of results."
+                }
+            }
+        },
+        "TemplateArtifact": {
+            "description": "Blueprint artifact that deploys a Resource Manager template.",
+            "type": "object",
+            "x-ms-discriminator-value": "template",
+            "properties": {
+                "properties": {
+                    "description": "Properties for a Resource Manager template blueprint artifact.",
+                    "$ref": "#/definitions/TemplateArtifactProperties",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Artifact"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "TemplateArtifactProperties": {
+            "type": "object",
+            "description": "Properties of a Resource Manager template blueprint artifact.",
+            "properties": {
+                "template": {
+                    "type": "object",
+                    "description": "The Resource Manager template blueprint artifact body."
+                },
+                "resourceGroup": {
+                    "type": "string",
+                    "description": "If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed."
+                },
+                "parameters": {
+                    "type": "object",
+                    "description": "Resource Manager template blueprint artifact parameter values.",
+                    "additionalProperties": {}
+                }
+            },
+            "required": ["template", "parameters"]
+        },
+        "RoleAssignmentArtifact": {
+            "description": "Blueprint artifact that applies a Role assignment.",
+            "type": "object",
+            "x-ms-discriminator-value": "roleAssignment",
+            "properties": {
+                "properties": {
+                    "description": "Properties for a Role assignment blueprint artifact.",
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/RoleAssignmentArtifactProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Artifact"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "RoleAssignmentArtifactProperties": {
+            "type": "object",
+            "description": "Properties of a Role assignment blueprint artifact.",
+            "properties": {
+                "roleDefinitionId": {
+                    "type": "string",
+                    "description": "Azure resource ID of the RoleDefinition."
+                },
+                "principalIds": {
+                    "description": "Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity."
+                },
+                "resourceGroup": {
+                    "type": "string",
+                    "description": "RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription."
+                }
+            },
+            "required": ["roleDefinitionId", "principalIds"]
         }
     },
     "parameters": {
@@ -1298,6 +1509,23 @@
             "maxLength": 90,
             "x-ms-parameter-location": "method",
             "description": "Name of the Resource group within the Azure subscription."
+        },
+        "ScopeParameter": {
+            "name": "resourceScope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true
+        },
+        "ArtifactNameParameter": {
+            "name": "artifactName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Name of the blueprint artifact."
         }
     }
 }

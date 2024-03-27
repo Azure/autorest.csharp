@@ -48,12 +48,12 @@ namespace MultipleInputFiles
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<TestModel>(value);
             request.Content = content;
             return message;
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response> Operation1Async(TestModel value, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response Operation1(TestModel value, CancellationToken cancellationToken = default)
@@ -108,12 +108,12 @@ namespace MultipleInputFiles
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<TestModel>(value);
             request.Content = content;
             return message;
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response> Operation2Async(TestModel value, CancellationToken cancellationToken = default)
@@ -134,7 +134,7 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response Operation2(TestModel value, CancellationToken cancellationToken = default)

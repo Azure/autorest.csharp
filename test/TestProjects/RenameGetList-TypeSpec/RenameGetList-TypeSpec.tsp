@@ -12,11 +12,10 @@ using Azure.ClientGenerator.Core;
 
 // NOTE: These features are missing:
 // - Security definition for apiKey
-
+@versioned(Versions)
 @service(
     {
-        title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
-        version: "2022-05-15-preview"
+        title: "Microsoft Cognitive Language Service - Analyze Text Authoring"
     }
 )
 @server(
@@ -26,9 +25,13 @@ using Azure.ClientGenerator.Core;
     Endpoint: Endpoint,
   }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
 namespace RenameGetList;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "2022-05-15-preview"
+}
 
 // Common Parameters
 
@@ -80,15 +83,16 @@ model Project {
 }
 
 @doc("Represents the project kind.")
-enum ProjectKind {
+union ProjectKind {
+  string,
   @doc("For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B.")
-  CustomSingleLabelClassification,
+  CustomSingleLabelClassification: "CustomSingleLabelClassification",
 
   @doc("For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C.")
-  CustomMultiLabelClassification,
+  CustomMultiLabelClassification: "CustomMultiLabelClassification",
 
   @doc("For building an extraction model to identify your domain categories using your own data.")
-  CustomEntityRecognition,
+  CustomEntityRecognition: "CustomEntityRecognition",
 }
 
 @doc("Represents the settings used to define the project behavior.")

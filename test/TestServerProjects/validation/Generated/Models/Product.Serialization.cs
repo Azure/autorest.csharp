@@ -5,16 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace validation.Models
 {
-    public partial class Product : IUtf8JsonSerializable
+    public partial class Product : IUtf8JsonSerializable, IJsonModel<Product>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Product>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Product>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Product)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(DisplayNames))
             {
@@ -37,9 +47,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            writer.WriteObjectValue(Child);
+            writer.WriteObjectValue<ChildProduct>(Child, options);
             writer.WritePropertyName("constChild"u8);
-            writer.WriteObjectValue(ConstChild);
+            writer.WriteObjectValue<ConstantProduct>(ConstChild, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
@@ -49,23 +59,54 @@ namespace validation.Models
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Product DeserializeProduct(JsonElement element)
+        Product IJsonModel<Product>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Product)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeProduct(document.RootElement, options);
+        }
+
+        internal static Product DeserializeProduct(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<IList<string>> displayNames = default;
-            Optional<int> capacity = default;
-            Optional<string> image = default;
+            IList<string> displayNames = default;
+            int? capacity = default;
+            string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             ProductConstInt constInt = default;
             ProductConstString constString = default;
-            Optional<EnumConst> constStringAsEnum = default;
+            EnumConst? constStringAsEnum = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"u8))
@@ -98,12 +139,12 @@ namespace validation.Models
                 }
                 if (property.NameEquals("child"u8))
                 {
-                    child = ChildProduct.DeserializeChildProduct(property.Value);
+                    child = ChildProduct.DeserializeChildProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constChild"u8))
                 {
-                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value);
+                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constInt"u8))
@@ -125,8 +166,53 @@ namespace validation.Models
                     constStringAsEnum = new EnumConst(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Product(
+                displayNames ?? new ChangeTrackingList<string>(),
+                capacity,
+                image,
+                child,
+                constChild,
+                constInt,
+                constString,
+                constStringAsEnum,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(Product)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Product IPersistableModel<Product>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeProduct(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Product)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Product>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

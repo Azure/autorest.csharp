@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public InputExampleValue? Value { get; }
 
-        public FormattableString? Expression { get; }
+        public ValueExpression? Expression { get; }
 
         private InputExampleParameterValue(string name, CSharpType type)
         {
@@ -33,9 +34,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Value = value;
         }
 
-        public InputExampleParameterValue(Reference reference, FormattableString rawValue) : this(reference.Name, reference.Type)
+        public InputExampleParameterValue(Reference reference, ValueExpression expression) : this(reference.Name, reference.Type)
         {
-            Expression = rawValue;
+            Expression = expression;
         }
 
         public InputExampleParameterValue(Parameter parameter, InputExampleValue value) : this(parameter.Name, parameter.Type)
@@ -43,9 +44,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Value = value;
         }
 
-        public InputExampleParameterValue(Parameter parameter, FormattableString rawValue) : this(parameter.Name, parameter.Type)
+        public InputExampleParameterValue(Parameter parameter, ValueExpression expression) : this(parameter.Name, parameter.Type)
         {
-            Expression = rawValue;
+            Expression = expression;
         }
     }
 }

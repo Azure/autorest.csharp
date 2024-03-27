@@ -5,16 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class RootModel : IUtf8JsonSerializable
+    public partial class RootModel : IUtf8JsonSerializable, IJsonModel<RootModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RootModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RootModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RootModel)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyExtensibleEnum))
             {
@@ -24,22 +35,22 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                writer.WriteObjectValue(PropertyModelToMakeInternal);
+                writer.WriteObjectValue<ModelToMakeInternal>(PropertyModelToMakeInternal, options);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                writer.WriteObjectValue(PropertyModelToRename);
+                writer.WriteObjectValue<RenamedModel>(PropertyModelToRename, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                writer.WriteObjectValue(PropertyModelToChangeNamespace);
+                writer.WriteObjectValue<ModelToChangeNamespace>(PropertyModelToChangeNamespace, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
+                writer.WriteObjectValue<ModelWithCustomizedProperties>(PropertyModelWithCustomizedProperties, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -59,32 +70,69 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
+                writer.WriteObjectValue<ModelToAddAdditionalSerializableProperty>(PropertyModelToAddAdditionalSerializableProperty, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
+            if (Optional.IsDefined(PropertyModelStruct))
+            {
+                writer.WritePropertyName("propertyModelStruct"u8);
+                writer.WriteObjectValue<ModelStruct?>(PropertyModelStruct, options);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RootModel DeserializeRootModel(JsonElement element)
+        RootModel IJsonModel<RootModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RootModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RootModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRootModel(document.RootElement, options);
+        }
+
+        internal static RootModel DeserializeRootModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<ExtensibleEnumWithOperator> propertyExtensibleEnum = default;
-            Optional<ModelToMakeInternal> propertyModelToMakeInternal = default;
-            Optional<RenamedModel> propertyModelToRename = default;
-            Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
-            Optional<ModelWithCustomizedProperties> propertyModelWithCustomizedProperties = default;
-            Optional<RenamedEnum> propertyEnumToRename = default;
-            Optional<EnumWithValueToRename> propertyEnumWithValueToRename = default;
-            Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
-            Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
-            Optional<NormalEnum> propertyToMoveToCustomization = default;
+            ExtensibleEnumWithOperator? propertyExtensibleEnum = default;
+            ModelToMakeInternal propertyModelToMakeInternal = default;
+            RenamedModel propertyModelToRename = default;
+            ModelToChangeNamespace propertyModelToChangeNamespace = default;
+            ModelWithCustomizedProperties propertyModelWithCustomizedProperties = default;
+            RenamedEnum? propertyEnumToRename = default;
+            EnumWithValueToRename? propertyEnumWithValueToRename = default;
+            EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible = default;
+            ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty = default;
+            NormalEnum? propertyToMoveToCustomization = default;
+            ModelStruct? propertyModelStruct = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyExtensibleEnum"u8))
@@ -102,7 +150,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value);
+                    propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToRename"u8))
@@ -111,7 +159,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value);
+                    propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToChangeNamespace"u8))
@@ -120,7 +168,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value);
+                    propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
@@ -129,7 +177,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value);
+                    propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("propertyEnumToRename"u8))
@@ -165,7 +213,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value);
+                    propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("propertyToMoveToCustomization"u8))
@@ -177,9 +225,66 @@ namespace CustomizationsInTsp.Models
                     propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("propertyModelStruct"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    propertyModelStruct = ModelStruct.DeserializeModelStruct(property.Value, options);
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RootModel(
+                propertyExtensibleEnum,
+                propertyModelToMakeInternal,
+                propertyModelToRename,
+                propertyModelToChangeNamespace,
+                propertyModelWithCustomizedProperties,
+                propertyEnumToRename,
+                propertyEnumWithValueToRename,
+                propertyEnumToBeMadeExtensible,
+                propertyModelToAddAdditionalSerializableProperty,
+                propertyToMoveToCustomization,
+                propertyModelStruct,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RootModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(RootModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        RootModel IPersistableModel<RootModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RootModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRootModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RootModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RootModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -193,7 +298,7 @@ namespace CustomizationsInTsp.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RootModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

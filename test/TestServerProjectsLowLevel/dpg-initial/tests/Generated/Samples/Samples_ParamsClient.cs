@@ -12,15 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using dpg_initial_LowLevel;
 
 namespace dpg_initial_LowLevel.Samples
 {
-    public class Samples_ParamsClient
+    public partial class Samples_ParamsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HeadNoParams()
+        public void Example_HeadNoParams_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -33,7 +32,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HeadNoParams_Async()
+        public async Task Example_HeadNoParams_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -72,7 +71,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequired()
+        public void Example_GetRequired_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -85,7 +84,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequired_Async()
+        public async Task Example_GetRequired_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -124,7 +123,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOptional()
+        public void Example_PutRequiredOptional_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -137,7 +136,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOptional_Async()
+        public async Task Example_PutRequiredOptional_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -176,12 +175,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostParameters()
+        public void Example_PostParameters_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -193,12 +192,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostParameters_Async()
+        public async Task Example_PostParameters_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -215,7 +214,7 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -232,7 +231,7 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -244,7 +243,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOptional()
+        public void Example_GetOptional_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
@@ -257,7 +256,7 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOptional_Async()
+        public async Task Example_GetOptional_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);

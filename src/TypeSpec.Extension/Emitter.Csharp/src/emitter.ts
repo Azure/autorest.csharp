@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
     Program,
     resolvePath,
@@ -58,7 +59,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const root = createModel(context);
+        const sdkContext = createSdkContext(
+            context,
+            "@azure-tools/typespec-csharp"
+        );
+        const root = createModel(sdkContext);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -74,7 +79,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         const tspNamespace = root.Name; // this is the top-level namespace defined in the typespec file, which is actually always different from the namespace of the SDK
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
-            const generatedFolder = resolvePath(outputFolder, "Generated");
+            const generatedFolder = outputFolder.endsWith("src")
+                ? resolvePath(outputFolder, "Generated")
+                : resolvePath(outputFolder, "src", "Generated");
 
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
@@ -110,19 +117,15 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             //emit configuration.json
-            const configurations = {
+            const namespace = options.namespace ?? tspNamespace;
+            const configurations: Configuration = {
                 "output-folder": ".",
-                namespace: options.namespace ?? tspNamespace,
-                "library-name":
-                    options["library-name"] ??
-                    options.namespace ??
-                    tspNamespace,
+                namespace: namespace,
+                "library-name": options["library-name"] ?? namespace,
                 "shared-source-folders": resolvedSharedFolders ?? [],
                 "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "use-overloads-between-protocol-and-convenience":
-                    options["use-overloads-between-protocol-and-convenience"],
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
@@ -151,8 +154,26 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options["methods-to-keep-client-default-value"],
                 "head-as-boolean": options["head-as-boolean"],
                 "deserialize-null-collection-as-null-value":
-                    options["deserialize-null-collection-as-null-value"]
-            } as Configuration;
+                    options["deserialize-null-collection-as-null-value"],
+                flavor:
+                    options["flavor"] ??
+                    (namespace.toLowerCase().startsWith("azure.")
+                        ? "azure"
+                        : undefined),
+                //only emit these if they are not the default values
+                "generate-sample-project":
+                    options["generate-sample-project"] === true
+                        ? undefined
+                        : options["generate-sample-project"],
+                "generate-test-project":
+                    options["generate-test-project"] === false
+                        ? undefined
+                        : options["generate-test-project"],
+                "use-model-reader-writer":
+                    options["use-model-reader-writer"] ?? true,
+                "azure-arm":
+                    sdkContext.arm === false ? undefined : sdkContext.arm
+            };
 
             await program.host.writeFile(
                 resolvePath(generatedFolder, configurationFileName),

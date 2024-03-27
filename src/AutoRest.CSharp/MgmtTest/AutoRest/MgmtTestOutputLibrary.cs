@@ -3,19 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
 using AutoRest.CSharp.MgmtTest.Output.Samples;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.MgmtTest.AutoRest
 {

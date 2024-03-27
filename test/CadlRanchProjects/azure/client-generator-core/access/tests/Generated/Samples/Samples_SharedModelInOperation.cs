@@ -11,18 +11,17 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.ClientGenerator.Core.Access;
 using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    internal class Samples_SharedModelInOperation
+    public partial class Samples_SharedModelInOperation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public()
+        public void Example_SharedModelInOperation_Public_ShortVersion()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response response = client.Public("<name>", null);
 
@@ -32,9 +31,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Async()
+        public async Task Example_SharedModelInOperation_Public_ShortVersion_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response response = await client.PublicAsync("<name>", null);
 
@@ -44,27 +43,27 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_Convenience()
+        public void Example_SharedModelInOperation_Public_ShortVersion_Convenience()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response<SharedModel> response = client.Public("<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public async Task Example_SharedModelInOperation_Public_ShortVersion_Convenience_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response<SharedModel> response = await client.PublicAsync("<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters()
+        public void Example_SharedModelInOperation_Public_AllParameters()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response response = client.Public("<name>", null);
 
@@ -74,9 +73,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_AllParameters_Async()
+        public async Task Example_SharedModelInOperation_Public_AllParameters_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response response = await client.PublicAsync("<name>", null);
 
@@ -86,18 +85,18 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters_Convenience()
+        public void Example_SharedModelInOperation_Public_AllParameters_Convenience()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response<SharedModel> response = client.Public("<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_AllParameters_Convenience_Async()
+        public async Task Example_SharedModelInOperation_Public_AllParameters_Convenience_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
             Response<SharedModel> response = await client.PublicAsync("<name>");
         }

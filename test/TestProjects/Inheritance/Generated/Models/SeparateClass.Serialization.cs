@@ -26,7 +26,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue(ModelProperty);
+                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -37,8 +37,8 @@ namespace Inheritance.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
-            Optional<BaseClassWithExtensibleEnumDiscriminator> modelProperty = default;
+            string stringProperty = default;
+            BaseClassWithExtensibleEnumDiscriminator modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -56,14 +56,14 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new SeparateClass(stringProperty.Value, modelProperty.Value);
+            return new SeparateClass(stringProperty, modelProperty);
         }
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {
             public override void Write(Utf8JsonWriter writer, SeparateClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<SeparateClass>(model);
             }
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

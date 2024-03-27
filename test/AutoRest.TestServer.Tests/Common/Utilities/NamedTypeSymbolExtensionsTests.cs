@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -85,6 +84,7 @@ namespace NamedTypeSymbolExtensionsTests
                 publicClients: true,
                 modelNamespace: false,
                 headAsBoolean: false,
+                skipCSProj: false,
                 skipCSProjPackageReference: false,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,
@@ -94,9 +94,10 @@ namespace NamedTypeSymbolExtensionsTests
                 publicDiscriminatorProperty: false,
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
+                useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 projectFolder: "/..",
                 existingProjectFolder: null,
@@ -107,7 +108,11 @@ namespace NamedTypeSymbolExtensionsTests
                 shouldTreatBase64AsBinaryData: true,
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
-                mgmtTestConfiguration: null);
+                mgmtTestConfiguration: null,
+                flavor: "azure",
+                generateSampleProject: true,
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         [Test]
@@ -153,13 +158,13 @@ namespace NamedTypeSymbolExtensionsTests
         public void IsSameType_ModelTypes()
         {
             // Different namespace
-            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
-            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null));
+            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, false);
+            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, null));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
-            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
-            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null));
+            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, false);
+            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, null));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }
     }

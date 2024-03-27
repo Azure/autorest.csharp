@@ -22,7 +22,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in SignatureOverrides)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyIntrusionDetectionSignatureSpecification>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in BypassTrafficSettings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -45,8 +45,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyIntrusionDetectionSignatureSpecification>> signatureOverrides = default;
-            Optional<IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>> bypassTrafficSettings = default;
+            IList<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides = default;
+            IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("signatureOverrides"u8))
@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionConfiguration(Optional.ToList(signatureOverrides), Optional.ToList(bypassTrafficSettings));
+            return new FirewallPolicyIntrusionDetectionConfiguration(signatureOverrides ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionSignatureSpecification>(), bypassTrafficSettings ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>());
         }
     }
 }

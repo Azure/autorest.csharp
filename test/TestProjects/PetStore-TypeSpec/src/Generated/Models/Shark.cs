@@ -6,14 +6,14 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
 
 namespace PetStore.Models
 {
     /// <summary> Shark is a fish. </summary>
     public partial class Shark : Fish
     {
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="bite"> The bite of the shark. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bite"/> is null. </exception>
@@ -25,13 +25,19 @@ namespace PetStore.Models
             Bite = bite;
         }
 
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bite"> The bite of the shark. </param>
-        internal Shark(string kind, int size, string bite) : base(kind, size)
+        internal Shark(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData, string bite) : base(kind, size, serializedAdditionalRawData)
         {
             Bite = bite;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Shark"/> for deserialization. </summary>
+        internal Shark()
+        {
         }
 
         /// <summary> The bite of the shark. </summary>

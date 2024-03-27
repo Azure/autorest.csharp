@@ -7,4 +7,5 @@ import { OperationResponse } from "./operationResponse.js";
 export interface OperationLongRunning {
     FinalStateVia: OperationFinalStateVia;
     FinalResponse: OperationResponse;
+    ResultPath?: string;
 }

@@ -10,31 +10,32 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using custom_baseUrl_more_options_LowLevel;
 
 namespace custom_baseUrl_more_options_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +47,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +59,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
             Console.WriteLine(response.Status);
         }
     }

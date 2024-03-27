@@ -6,40 +6,34 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Input.Source;
+
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class DataPlaneClient : TypeProvider
     {
         private readonly InputClient _inputClient;
-        private readonly BuildContext<DataPlaneOutputLibrary> _context;
+        private readonly DataPlaneOutputLibrary _library;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
-        private DataPlaneRestClient? _restClient;
 
-        public DataPlaneClient(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context) :
-            this(inputClient, context, ClientBuilder.GetClientPrefix(inputClient.Name, context), ClientBuilder.GetClientSuffix())
-        {
-        }
-
-        private DataPlaneClient(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context, string clientPrefix, string clientSuffix) : base(context)
+        public DataPlaneClient(InputClient inputClient, DataPlaneRestClient restClient, string defaultName, DataPlaneOutputLibrary library, SourceInputModel? sourceInputModel) : base(Configuration.Namespace, sourceInputModel)
         {
             _inputClient = inputClient;
-            _context = context;
-            DefaultName = clientPrefix + clientSuffix;
-            ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
+            _library = library;
+            RestClient = restClient;
+            DefaultName = defaultName;
         }
 
-        public string ClientShortName { get; }
         protected override string DefaultName { get; }
-        public string Description => ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, _context));
-        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_inputClient);
+        public string Description => ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, DefaultName));
+        public DataPlaneRestClient RestClient { get; }
+
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_inputClient, RestClient, Declaration).ToArray();
@@ -62,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 yield return new LongRunningOperationMethod(
                     name,
-                    _context.Library.FindLongRunningOperation(operation),
+                    _library.FindLongRunningOperation(operation),
                     startMethod,
                     new Diagnostic($"{Declaration.Name}.Start{name}")
                 );

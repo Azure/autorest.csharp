@@ -6,25 +6,23 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_CollectionsInt
+    public partial class Samples_CollectionsInt
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt()
+        public void Example_CollectionsInt_GetCollectionsInt_ShortVersion()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response response = client.GetCollectionsInt(null);
 
@@ -34,9 +32,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_ShortVersion_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response response = await client.GetCollectionsIntAsync(null);
 
@@ -46,27 +44,27 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_Convenience()
+        public void Example_CollectionsInt_GetCollectionsInt_ShortVersion_Convenience()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response<CollectionsIntProperty> response = client.GetCollectionsInt();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_Convenience_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_ShortVersion_Convenience_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response<CollectionsIntProperty> response = await client.GetCollectionsIntAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_AllParameters()
+        public void Example_CollectionsInt_GetCollectionsInt_AllParameters()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response response = client.GetCollectionsInt(null);
 
@@ -76,9 +74,9 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_AllParameters_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_AllParameters_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response response = await client.GetCollectionsIntAsync(null);
 
@@ -88,144 +86,132 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_AllParameters_Convenience()
+        public void Example_CollectionsInt_GetCollectionsInt_AllParameters_Convenience()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response<CollectionsIntProperty> response = client.GetCollectionsInt();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_AllParameters_Convenience_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
             Response<CollectionsIntProperty> response = await client.GetCollectionsIntAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_CollectionsInt_Put_ShortVersion()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_CollectionsInt_Put_ShortVersion_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_CollectionsInt_Put_ShortVersion_Convenience()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_CollectionsInt_Put_ShortVersion_Convenience_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_CollectionsInt_Put_AllParameters()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_CollectionsInt_Put_AllParameters_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_CollectionsInt_Put_AllParameters_Convenience()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsInt_Put_AllParameters_Convenience_Async()
         {
-            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+            CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -2,10 +2,17 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
+
+@versioned(Versions)
 @service({
-    title: "hello world",
-    version: "0.1.0",
+    title: "hello world"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -28,9 +35,10 @@ model AuthFlow {
     scopes: ["https://api.example.com/.default"];
 }
 
-using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
+enum Versions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+    "2022-05-15-preview"
+  }
 
 @doc("float fixed enum")
 @fixed
@@ -57,21 +65,24 @@ enum StringFixedEnum {
 }
 
 @doc("Int based extensible enum")
-enum IntExtensibleEnum {
+union IntExtensibleEnum {
+    int32,
     One: 1,
     Two: 2,
     Four: 4,
 }
 
 @doc("Float based extensible enum")
-enum FloatExtensibleEnum {
+union FloatExtensibleEnum {
+    float32,
     One: 1.0,
     Two: 2.0,
     Four: 4.0,
 }
 
 @doc("Extensible enum")
-enum StringExtensibleEnum {
+union StringExtensibleEnum {
+    string,
     One: "1",
     Two: "2",
     Four: "4",
@@ -213,14 +224,15 @@ model RoundTripModel {
     modelWithRequiredNullable: ModelWithRequiredNullableProperties;
 }
 
-enum DaysOfWeekExtensibleEnum {
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday,
+union DaysOfWeekExtensibleEnum {
+    string,
+    Monday: "Monday",
+    Tuesday: "Tuesday",
+    Wednesday: "Wednesday",
+    Thursday: "Thursday",
+    Friday: "Friday",
+    Saturday: "Saturday",
+    Sunday: "Sunday",
 }
 
 model ModelWithFormat {
@@ -271,7 +283,7 @@ namespace Hello.Demo2 {
     @doc("Return hi in demo2")
     @get
     @convenientAPI(true)
-    op helloDemo2(): Thing;
+    op helloDemoAgain(): Thing;
 
     @route("/literal")
     @doc("Create with literal value")
@@ -367,3 +379,176 @@ namespace ProtocolAndConvenient {
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
+
+
+@route("/stringBody")
+@doc("The body parameter type is string.")
+@put
+@convenientAPI(true)
+op stringBody(@body body: string): void;
+
+
+@route("/boolBody")
+@doc("The body parameter type is bool.")
+@put
+@convenientAPI(true)
+op boolBody(@body body: boolean): void;
+
+
+@route("/dateTimeBody")
+@doc("The body parameter type is datetime.")
+@put
+@convenientAPI(true)
+op dateTimeBody(@body body: utcDateTime): void;
+
+
+@route("/returnString")
+@doc("The return type is datetime.")
+@put
+@convenientAPI(true)
+op returnString(): string;
+
+@route("/returnUnknown")
+@put
+@convenientAPI(true)
+op returnUnknown(
+): {
+  @statusCode statusCode: 200;
+  @body
+  body: unknown;
+};
+
+interface Entity {
+    @route("/entity/doSomething")
+    @doc("doSomething for entity")
+    @get
+    @convenientAPI(true)
+    op doSomething(@path p2: string): Thing;
+}
+
+interface Glossary {
+    @route("/glossary/doSomething")
+    @doc("doSomething for glossary")
+    @get
+    @convenientAPI(true)
+    op doSomething(@path id: string, @header h1: string): Thing;
+}
+
+@doc("extension")
+model Extension extends Element {
+  level: int8;
+}
+
+@doc("element")
+model Element {
+  extension?: Extension[];
+}
+
+@route("/recursiveExtension")
+@doc("test parent reference child")
+@put
+@convenientAPI(true)
+op recursiveExtension(@body input: Extension): void;
+
+@doc("extension")
+model ThereLevelExtension extends ThereLevelElement {
+  level: int8;
+}
+
+@doc("element")
+model ThereLevelElement {
+  extension?: ThereLevelExtension[];
+}
+@doc("FHIR extendible element")
+model Extendible {
+  @doc("Additional Content defined by implementations")
+  extension?: ThereLevelExtension[];
+}
+
+@route("/threeLevelRecursive")
+@doc("test three level recursive extension")
+@put
+@convenientAPI(true)
+op threeLevelRecursive(@body input: Extendible): void;
+
+@doc("parenetModel")
+model BaseModel {
+    level: int8;
+}
+
+@doc("ChildModel")
+model ChildModel extends BaseModel {
+  parent: BaseModel[];
+}
+
+@route("/recursiveModels")
+@doc("test child reference parent")
+@put
+@convenientAPI(true)
+op recursiveModels(@body input: ChildModel): void;
+
+
+@doc("containself")
+model ContainSelf{
+  self: ContainSelf;
+}
+
+@route("/containSelfModels")
+@doc("test contain self models")
+@put
+@convenientAPI(true)
+op ContainSelfModels(@body input: ContainSelf): void;
+
+
+@doc("enum with projected name")
+@fixed
+@projectedName("csharp", "CsProjectedEnum")
+enum ProjectedEnum {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+@route("/enumParameter")
+@doc("test enum parameter.")
+@get
+@convenientAPI(true)
+op enumParameter(@path p1: ProjectedEnum ): void;
+
+
+@doc("enum with projected name used in a model")
+@fixed
+@projectedName("csharp", "CsProjectedEnumInModel")
+enum ProjectedEnumInModel {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+
+model ModelWithProjectedEnum {
+    @doc("enum with projected name used in a model")
+    enumProperty: ProjectedEnumInModel;
+}
+
+@route("/bodyIsModelWithProjectedEnum")
+@doc("test enum parameter.")
+@put
+@convenientAPI(true)
+op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
+
+@route("/optionalDictionary")
+@doc("test optional dictionary.")
+@put
+@convenientAPI(true)
+op optionalDictionary(@body body?: Record<int32>): void;
+
+model AzureLocationModel
+{
+    location: azureLocation;
+}
+@route("/azureLocation")
+@doc("test optional dictionary.")
+@put
+@convenientAPI(true)
+op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;

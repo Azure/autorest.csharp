@@ -6,17 +6,25 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    internal partial class RoundTripModel : IUtf8JsonSerializable
+    public partial class RoundTripModel : IUtf8JsonSerializable, IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -38,7 +46,7 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<Thing>(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -108,7 +116,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -116,7 +127,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("requiredRecordUnknown"u8);
@@ -132,7 +146,10 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();
@@ -151,16 +168,94 @@ namespace Azure.NewProject.TypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndObject();
             }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("readOnlyRequiredRecordUnknown"u8);
+                writer.WriteStartObject();
+                foreach (var item in ReadOnlyRequiredRecordUnknown)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            {
+                writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
+                writer.WriteStartObject();
+                foreach (var item in ReadOnlyOptionalRecordUnknown)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        RoundTripModel IJsonModel<RoundTripModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(document.RootElement, options);
+        }
+
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -170,21 +265,23 @@ namespace Azure.NewProject.TypeSpec.Models
             IList<StringFixedEnum> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
-            Optional<IntExtensibleEnum> intExtensibleEnum = default;
-            Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
-            Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
-            Optional<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
-            Optional<FloatFixedEnum> floatFixedEnum = default;
-            Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
-            Optional<IntFixedEnum> intFixedEnum = default;
-            Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
-            Optional<StringFixedEnum> stringFixedEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
+            IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
+            IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
+            FloatFixedEnum? floatFixedEnum = default;
+            IList<FloatFixedEnum> floatFixedEnumCollection = default;
+            IntFixedEnum? intFixedEnum = default;
+            IList<IntFixedEnum> intFixedEnumCollection = default;
+            StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
-            Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
+            IDictionary<string, BinaryData> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
-            Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
+            IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -219,7 +316,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value);
+                    requiredModel = Thing.DeserializeThing(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -413,9 +510,66 @@ namespace Azure.NewProject.TypeSpec.Models
                     readOnlyOptionalRecordUnknown = dictionary;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RoundTripModel(
+                requiredString,
+                requiredInt,
+                requiredCollection,
+                requiredDictionary,
+                requiredModel,
+                intExtensibleEnum,
+                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
+                floatExtensibleEnum,
+                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
+                floatFixedEnum,
+                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
+                intFixedEnum,
+                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
+                stringFixedEnum,
+                requiredUnknown,
+                optionalUnknown,
+                requiredRecordUnknown,
+                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                readOnlyRequiredRecordUnknown,
+                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        RoundTripModel IPersistableModel<RoundTripModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRoundTripModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RoundTripModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -429,7 +583,7 @@ namespace Azure.NewProject.TypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

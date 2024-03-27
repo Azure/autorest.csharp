@@ -9,6 +9,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head200Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head200Async with all request content.
@@ -17,6 +18,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head200Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head200();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head200 with all request content.
@@ -36,6 +39,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head200();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
@@ -47,6 +51,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head204Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head204Async with all request content.
@@ -55,6 +60,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head204Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
@@ -66,6 +72,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head204();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head204 with all request content.
@@ -74,6 +81,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head204();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
@@ -85,6 +93,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head404Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head404Async with all request content.
@@ -93,6 +102,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = await client.Head404Async();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
@@ -104,6 +114,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head404();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call Head404 with all request content.
@@ -112,6 +123,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response<bool> response = client.Head404();
+
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>

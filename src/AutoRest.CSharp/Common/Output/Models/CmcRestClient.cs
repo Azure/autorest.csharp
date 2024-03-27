@@ -9,21 +9,20 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class CmcRestClient : TypeProvider
     {
-        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
+        private readonly Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>> _requestMethods;
+        private readonly Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>> _nextPageRequestMethods;
         private (Operation Operation, RestClientMethod Method)[]? _allMethods;
         private ConstructorSignature? _constructor;
 
         internal OperationGroup OperationGroup { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public (Operation Operation, RestClientMethod Method)[] Methods => _allMethods ??= BuildAllMethods().ToArray();
-        public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
+        public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
@@ -33,8 +32,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             OperationGroup = operationGroup;
 
-            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
-            _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
 
@@ -105,13 +104,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
+            _nextPageRequestMethods.Value.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
-            return _requestMethods[request];
+            return _requestMethods.Value[request];
         }
     }
 }

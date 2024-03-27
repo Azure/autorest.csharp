@@ -3,4 +3,28 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable) { }
+internal abstract record InputType(string Name, bool IsNullable)
+{
+    public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
+
+    internal InputType GetCollectionEquivalent(InputType inputType)
+    {
+        switch (this)
+        {
+            case InputListType listType:
+                return new InputListType(
+                    listType.Name,
+                    listType.ElementType.GetCollectionEquivalent(inputType),
+                    listType.IsEmbeddingsVector,
+                    listType.IsNullable);
+            case InputDictionaryType dictionaryType:
+                return new InputDictionaryType(
+                    dictionaryType.Name,
+                    dictionaryType.KeyType,
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType),
+                    dictionaryType.IsNullable);
+            default:
+                return inputType;
+        }
+    }
+}

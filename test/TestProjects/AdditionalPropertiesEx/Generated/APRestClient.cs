@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,13 +49,13 @@ namespace AdditionalPropertiesEx
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters);
+            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModel>(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
@@ -76,7 +77,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response WriteOnly(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
@@ -162,13 +163,13 @@ namespace AdditionalPropertiesEx
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters);
+            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModelStruct>(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModelStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {
@@ -184,7 +185,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModelStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response WriteOnlyStruct(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {

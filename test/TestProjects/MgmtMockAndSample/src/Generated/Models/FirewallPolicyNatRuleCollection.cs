@@ -6,21 +6,20 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Firewall Policy NAT Rule Collection. </summary>
     public partial class FirewallPolicyNatRuleCollection : FirewallPolicyRuleCollection
     {
-        /// <summary> Initializes a new instance of FirewallPolicyNatRuleCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyNatRuleCollection"/>. </summary>
         public FirewallPolicyNatRuleCollection()
         {
             Rules = new ChangeTrackingList<FirewallPolicyRule>();
             RuleCollectionType = FirewallPolicyRuleCollectionType.FirewallPolicyNatRuleCollection;
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyNatRuleCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyNatRuleCollection"/>. </summary>
         /// <param name="ruleCollectionType"> The type of the rule collection. </param>
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>

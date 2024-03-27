@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<FirewallPolicyIntrusionDetectionStateType> mode = default;
+            string id = default;
+            FirewallPolicyIntrusionDetectionStateType? mode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionSignatureSpecification(id.Value, Optional.ToNullable(mode));
+            return new FirewallPolicyIntrusionDetectionSignatureSpecification(id, mode);
         }
     }
 }

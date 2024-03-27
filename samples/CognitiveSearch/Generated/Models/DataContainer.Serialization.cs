@@ -32,7 +32,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> query = default;
+            string query = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -46,7 +46,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataContainer(name, query.Value);
+            return new DataContainer(name, query);
         }
     }
 }

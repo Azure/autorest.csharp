@@ -21,7 +21,6 @@ namespace Parameters.Spread
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,13 +37,11 @@ namespace Parameters.Spread
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="bodyParameter"> This is a simple model. </param>
@@ -56,7 +53,8 @@ namespace Parameters.Spread
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = bodyParameter.ToRequestContent();
+            Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +67,8 @@ namespace Parameters.Spread
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
+            using RequestContent content = bodyParameter.ToRequestContent();
+            Response response = SpreadAsRequestBody(content, context);
             return response;
         }
 
@@ -159,7 +158,6 @@ namespace Parameters.Spread
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

@@ -61,43 +61,7 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAll_ListRoleAssignmentsForResource()
-        {
-            // Example: List role assignments for resource
-
-            ResourceIdentifier scope = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", new ResourceType("resourceType"), "resourceName"));
-            var collection = GetArmClient().GetRoleAssignments(scope);
-            await foreach (var _ in collection.GetAllAsync())
-            {
-            }
-        }
-
-        [RecordedTest]
-        public async Task GetAll_ListRoleAssignmentsForResourceGroup()
-        {
-            // Example: List role assignments for resource group
-
-            ResourceIdentifier scope = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", "00000000-0000-0000-0000-000000000000", "rgname"));
-            var collection = GetArmClient().GetRoleAssignments(scope);
-            await foreach (var _ in collection.GetAllAsync())
-            {
-            }
-        }
-
-        [RecordedTest]
-        public async Task GetAll_ListRoleAssignmentsForSubscription()
-        {
-            // Example: List role assignments for subscription
-
-            ResourceIdentifier scope = new ResourceIdentifier(string.Format("/subscriptions/{0}", "00000000-0000-0000-0000-000000000000"));
-            var collection = GetArmClient().GetRoleAssignments(scope);
-            await foreach (var _ in collection.GetAllAsync())
-            {
-            }
-        }
-
-        [RecordedTest]
-        public async Task GetAll_ListRoleAssignmentsForScope()
+        public async Task GetAll()
         {
             // Example: List role assignments for scope
 

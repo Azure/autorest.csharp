@@ -12,7 +12,7 @@ using System.Globalization;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> Float based extensible enum. </summary>
-    internal readonly partial struct FloatExtensibleEnum : IEquatable<FloatExtensibleEnum>
+    public readonly partial struct FloatExtensibleEnum : IEquatable<FloatExtensibleEnum>
     {
         private readonly int _value;
 

@@ -24,7 +24,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                writer.WriteObjectValue<EncryptionKey>(EncryptionKey);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -43,8 +43,8 @@ namespace CognitiveSearch.Models
             string name = default;
             SynonymMapFormat format = default;
             string synonyms = default;
-            Optional<EncryptionKey> encryptionKey = default;
-            Optional<string> odataEtag = default;
+            EncryptionKey encryptionKey = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymMap(name, format, synonyms, encryptionKey.Value, odataEtag.Value);
+            return new SynonymMap(name, format, synonyms, encryptionKey, odataEtag);
         }
     }
 }

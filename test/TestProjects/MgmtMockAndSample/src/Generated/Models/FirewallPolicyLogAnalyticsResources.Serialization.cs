@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Workspaces)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FirewallPolicyLogAnalyticsWorkspace>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyLogAnalyticsWorkspace>> workspaces = default;
-            Optional<WritableSubResource> defaultWorkspaceId = default;
+            IList<FirewallPolicyLogAnalyticsWorkspace> workspaces = default;
+            WritableSubResource defaultWorkspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("workspaces"u8))
@@ -69,7 +69,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyLogAnalyticsResources(Optional.ToList(workspaces), defaultWorkspaceId);
+            return new FirewallPolicyLogAnalyticsResources(workspaces ?? new ChangeTrackingList<FirewallPolicyLogAnalyticsWorkspace>(), defaultWorkspaceId);
         }
     }
 }

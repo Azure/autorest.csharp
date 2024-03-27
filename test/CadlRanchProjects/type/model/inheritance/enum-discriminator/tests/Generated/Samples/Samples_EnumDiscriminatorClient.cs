@@ -12,16 +12,15 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Inheritance.EnumDiscriminator;
 using _Type.Model.Inheritance.EnumDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 {
-    public class Samples_EnumDiscriminatorClient
+    public partial class Samples_EnumDiscriminatorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModel()
+        public void Example_EnumDiscriminator_GetExtensibleModel_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -34,7 +33,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModel_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModel_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -47,7 +46,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModel_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModel_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -56,7 +55,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModel_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModel_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -65,7 +64,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModel_AllParameters()
+        public void Example_EnumDiscriminator_GetExtensibleModel_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -78,7 +77,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModel_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModel_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -91,7 +90,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModel_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModel_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -100,7 +99,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModel_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModel_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -109,111 +108,111 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutExtensibleModel()
+        public void Example_EnumDiscriminator_PutExtensibleModel_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutExtensibleModel_Async()
+        public async Task Example_EnumDiscriminator_PutExtensibleModel_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutExtensibleModel_Convenience()
+        public void Example_EnumDiscriminator_PutExtensibleModel_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Dog input = new Golden(1234);
             Response response = client.PutExtensibleModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutExtensibleModel_Convenience_Async()
+        public async Task Example_EnumDiscriminator_PutExtensibleModel_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutExtensibleModel_AllParameters()
+        public void Example_EnumDiscriminator_PutExtensibleModel_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutExtensibleModel_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_PutExtensibleModel_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutExtensibleModel_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_PutExtensibleModel_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Dog input = new Golden(1234);
             Response response = client.PutExtensibleModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutExtensibleModel_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_PutExtensibleModel_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelMissingDiscriminator()
+        public void Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -226,7 +225,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelMissingDiscriminator_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -239,7 +238,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelMissingDiscriminator_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -248,7 +247,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelMissingDiscriminator_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -257,7 +256,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelMissingDiscriminator_AllParameters()
+        public void Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -270,7 +269,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelMissingDiscriminator_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -283,7 +282,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -292,7 +291,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -301,7 +300,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelWrongDiscriminator()
+        public void Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -314,7 +313,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelWrongDiscriminator_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -327,7 +326,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelWrongDiscriminator_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -336,7 +335,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelWrongDiscriminator_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -345,7 +344,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelWrongDiscriminator_AllParameters()
+        public void Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -358,7 +357,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelWrongDiscriminator_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -371,7 +370,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -380,7 +379,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -389,7 +388,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModel()
+        public void Example_EnumDiscriminator_GetFixedModel_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -402,7 +401,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModel_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModel_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -415,7 +414,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModel_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModel_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -424,7 +423,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModel_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModel_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -433,7 +432,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModel_AllParameters()
+        public void Example_EnumDiscriminator_GetFixedModel_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -446,7 +445,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModel_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModel_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -459,7 +458,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModel_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModel_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -468,7 +467,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModel_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModel_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -477,111 +476,111 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFixedModel()
+        public void Example_EnumDiscriminator_PutFixedModel_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFixedModel_Async()
+        public async Task Example_EnumDiscriminator_PutFixedModel_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFixedModel_Convenience()
+        public void Example_EnumDiscriminator_PutFixedModel_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Snake input = new Cobra(1234);
             Response response = client.PutFixedModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFixedModel_Convenience_Async()
+        public async Task Example_EnumDiscriminator_PutFixedModel_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFixedModel_AllParameters()
+        public void Example_EnumDiscriminator_PutFixedModel_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFixedModel_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_PutFixedModel_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFixedModel_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_PutFixedModel_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Snake input = new Cobra(1234);
             Response response = client.PutFixedModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFixedModel_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_PutFixedModel_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelMissingDiscriminator()
+        public void Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -594,7 +593,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelMissingDiscriminator_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -607,7 +606,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelMissingDiscriminator_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -616,7 +615,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelMissingDiscriminator_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -625,7 +624,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelMissingDiscriminator_AllParameters()
+        public void Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -638,7 +637,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelMissingDiscriminator_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -651,7 +650,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelMissingDiscriminator_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -660,7 +659,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelMissingDiscriminator_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelMissingDiscriminator_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -669,7 +668,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelWrongDiscriminator()
+        public void Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_ShortVersion()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -682,7 +681,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelWrongDiscriminator_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_ShortVersion_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -695,7 +694,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelWrongDiscriminator_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_ShortVersion_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -704,7 +703,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelWrongDiscriminator_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_ShortVersion_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -713,7 +712,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelWrongDiscriminator_AllParameters()
+        public void Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_AllParameters()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -726,7 +725,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelWrongDiscriminator_AllParameters_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_AllParameters_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -739,7 +738,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelWrongDiscriminator_AllParameters_Convenience()
+        public void Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_AllParameters_Convenience()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
@@ -748,7 +747,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelWrongDiscriminator_AllParameters_Convenience_Async()
+        public async Task Example_EnumDiscriminator_GetFixedModelWrongDiscriminator_AllParameters_Convenience_Async()
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 

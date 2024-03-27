@@ -10,10 +10,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using TypeSpec.Versioning;
 
+@versioned(Versions)
 @service(
     {
-        title: "Models in CADL",
-        version: "0.1.0"
+        title: "Models in CADL"
     }
 )
 @server(
@@ -23,9 +23,37 @@ using TypeSpec.Versioning;
         endpoint: string,
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "0.1.0"
+}
+
+@doc("A base model with a required property")
+model BaseModelWithARequiredProperty {
+    @doc("Required kind")
+    kind: string;
+}
+
+@doc("A base model in the discriminated set inheriting from a base with the predefined discriminator property")
+@discriminator("kind")
+model BaseModelWithDiscriminatorDefinedOnBase extends BaseModelWithARequiredProperty {
+    @doc("Optional string.")
+    optionalString?: string;
+}
+
+@doc("A derived class in the discriminated set inheriting from a base with the predefined discriminator property")
+model DerivedWithDiscriminatorDefinedOnBase extends BaseModelWithDiscriminatorDefinedOnBase {
+    kind: "A";
+
+    @doc("Required string.")
+    requiredString: string;
+
+    @doc("Optional int")
+    optionalInt?: int32;
+}
 
 @doc("Base model")
 model BaseModel {
@@ -104,20 +132,33 @@ enum FixedIntEnum {
     Four: 4
 }
 
-// @doc("Fixed float enum")
-// enum FixedFloatEnum {
-//     One: 1.1,
-//     Two: 2.1,
-//     Four: 4.0
-// }
+@doc("Fixed float enum")
+@fixed
+@deprecated("should be replaced by cadl-ranch")
+enum FixedFloatEnum {
+    One: 1.1,
+    Two: 2.1,
+    Four: 4.0
+}
 
 @doc("Extensible enum")
 @deprecated("deprecated for test")
-enum ExtensibleEnum {
+union ExtensibleEnum {
+    string,
     One: "1",
     Two: "2",
     Four: "4"
 }
+
+@doc("Extensible int enum")
+@deprecated("should be replaced by cadl-ranch")
+union ExtensibleIntEnum {
+    int32,
+    One: 1,
+    Two: 2,
+    Four: 4
+}
+
 
 @doc("Model used both as input and output")
 model RoundTripModel extends BaseModel {
@@ -542,6 +583,11 @@ model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
   second: boolean;
 }
 
+@route("/roundTripToDiscriminatorDefinedOnBase")
+@put
+@convenientAPI(true)
+op putBaseModelWithDiscriminatorDefinedOnBase(@body body: BaseModelWithDiscriminatorDefinedOnBase): BaseModelWithDiscriminatorDefinedOnBase;
+
 @route("/pet")
 @get
 @convenientAPI(true)
@@ -596,6 +642,18 @@ op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveM
 @get
 @convenientAPI(true)
 op selfReference(): ErrorModel;
+
+@route("/fixedFloatEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op fixedFloatEnum(@query input: FixedFloatEnum): OutputModel;
+
+@route("/extenisbleIntEnum")
+@doc("Returns model that has property of its own type")
+@get
+@convenientAPI(true)
+op extenisbleIntEnum(@query input: ExtensibleIntEnum): OutputModel;
 
 @doc("Base model")
 model NoUseBase {

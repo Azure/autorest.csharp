@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -10,13 +11,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ReferenceTypeWriter : ModelWriter
     {
-        public static ModelWriter GetWriter(TypeProvider typeProvider) => typeProvider switch
-        {
-            MgmtReferenceType => new ReferenceTypeWriter(),
-            ResourceData data => new ResourceDataWriter(data),
-            _ => new ModelWriter()
-        };
-
         protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
             if (objectType is not SchemaObjectType schema)
@@ -24,7 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var extensions = schema.ObjectSchema.Extensions;
             if (extensions != null)
             {
-                writer.UseNamespace("Azure.Core");
+                if (Configuration.IsBranded)
+                    writer.UseNamespace("Azure.Core");
                 if (extensions.MgmtReferenceType)
                 {
                     writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");

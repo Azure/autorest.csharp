@@ -13,13 +13,13 @@ namespace FirstTestTypeSpec
     /// <summary> Client options for FirstTestTypeSpecClient. </summary>
     public partial class FirstTestTypeSpecClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
+        private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
-            /// <summary> Service version "0.1.0". </summary>
-            V0_1_0 = 1,
+            /// <summary> Service version "2022-05-15-preview". </summary>
+            V2022_05_15_Preview = 1,
         }
 
         internal string Version { get; }
@@ -29,7 +29,7 @@ namespace FirstTestTypeSpec
         {
             Version = version switch
             {
-                ServiceVersion.V0_1_0 => "0.1.0",
+                ServiceVersion.V2022_05_15_Preview => "2022-05-15-preview",
                 _ => throw new NotSupportedException()
             };
         }

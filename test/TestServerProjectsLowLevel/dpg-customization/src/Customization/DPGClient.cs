@@ -64,7 +64,10 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="input"/> is null. </exception>
         public virtual async Task<Response<Product>> PostModelAsync(string mode, Input input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input is null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
@@ -80,7 +83,10 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="input"/> is null. </exception>
         public virtual Response<Product> PostModel(string mode, Input input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input is null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
@@ -139,14 +145,17 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual AsyncPageable<Product> GetPageValuesAsync(string mode, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(mode, nameof(mode));
+            if (mode is null)
+            {
+                throw new ArgumentNullException(nameof(mode));
+            }
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
             return GeneratorPageableHelpers.CreateAsyncPageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
-                Product.DeserializeProduct,
+                e => Product.DeserializeProduct(e),
                 ClientDiagnostics,
                 Pipeline,
                 "DPGClient.GetPagesValues",
@@ -162,14 +171,17 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual Pageable<Product> GetPageValues(string mode, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(mode, nameof(mode));
+            if (mode is null)
+            {
+                throw new ArgumentNullException(nameof(mode));
+            }
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
             return GeneratorPageableHelpers.CreatePageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
-                Product.DeserializeProduct,
+                e => Product.DeserializeProduct(e),
                 ClientDiagnostics,
                 Pipeline,
                 "DPGClient.GetPagesValues",

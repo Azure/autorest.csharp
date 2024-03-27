@@ -21,7 +21,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,16 +37,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal PublicOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal PublicOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublicAsync(string,CancellationToken)']/*" />
@@ -60,7 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(NoDecoratorModelInPublic.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublic(string,CancellationToken)']/*" />
@@ -88,7 +85,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -127,7 +124,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,7 +148,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublicAsync(string,CancellationToken)']/*" />
@@ -164,7 +161,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(PublicDecoratorModelInPublic.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublic(string,CancellationToken)']/*" />
@@ -192,7 +189,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -231,7 +228,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -264,7 +261,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/client-generator-core/access/publicOperation/noDecoratorInPublic", false);
             uri.AppendQuery("name", name, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -279,7 +275,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic", false);
             uri.AppendQuery("name", name, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

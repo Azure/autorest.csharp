@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<long> count = default;
+            long? count = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -36,7 +35,7 @@ namespace CognitiveSearch.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new FacetResult(Optional.ToNullable(count), additionalProperties);
+            return new FacetResult(count, additionalProperties);
         }
     }
 }

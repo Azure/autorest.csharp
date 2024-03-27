@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<double> k1 = default;
-            Optional<double> b = default;
+            double? k1 = default;
+            double? b = default;
             string odataType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new BM25Similarity(odataType, Optional.ToNullable(k1), Optional.ToNullable(b));
+            return new BM25Similarity(odataType, k1, b);
         }
     }
 }

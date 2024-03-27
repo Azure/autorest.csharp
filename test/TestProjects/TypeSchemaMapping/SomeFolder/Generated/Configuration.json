@@ -3,11 +3,15 @@
   "namespace": "TypeSchemaMapping",
   "library-name": "SchemaMapping",
   "shared-source-folders": [
-    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
-    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Generator.Shared",
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Azure.Core.Shared"
   ],
   "public-clients": true,
+  "skip-csproj": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "project-folder": "../../"
+  "project-folder": "../../",
+  "use-model-reader-writer": true,
+  "flavor": "azure",
+  "helper-namespace": "TypeSchemaMapping"
 }

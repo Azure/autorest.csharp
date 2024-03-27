@@ -5,16 +5,21 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> The UnknownFirewallPolicyRule. </summary>
+    /// <summary> Unknown version of FirewallPolicyRule. </summary>
     internal partial class UnknownFirewallPolicyRule : FirewallPolicyRule
     {
-        /// <summary> Initializes a new instance of UnknownFirewallPolicyRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFirewallPolicyRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType) : base(name, description, ruleType)
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
+        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             RuleType = ruleType;
         }

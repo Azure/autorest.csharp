@@ -12,7 +12,7 @@ namespace lro.Models
     /// <summary> Model factory for models. </summary>
     public static partial class LroModelFactory
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Product"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -25,10 +25,18 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
+            return new Product(
+                id,
+                type,
+                tags,
+                location,
+                name,
+                serializedAdditionalRawData: null,
+                provisioningState,
+                provisioningStateValues);
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -39,25 +47,31 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name);
+            return new Resource(
+                id,
+                type,
+                tags,
+                location,
+                name,
+                serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of SubProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
         public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
-            return new SubProduct(id, provisioningState, provisioningStateValues);
+            return new SubProduct(id, serializedAdditionalRawData: null, provisioningState, provisioningStateValues);
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResource"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
         public static SubResource SubResource(string id = null)
         {
-            return new SubResource(id);
+            return new SubResource(id, serializedAdditionalRawData: null);
         }
     }
 }

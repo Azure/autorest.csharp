@@ -54,14 +54,14 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Inputs)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<InputFieldMappingEntry>(item);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("outputs"u8);
             writer.WriteStartArray();
             foreach (var item in Outputs)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<OutputFieldMappingEntry>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -73,12 +73,12 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<KeyPhraseExtractionSkillLanguage> defaultLanguageCode = default;
-            Optional<int?> maxKeyPhraseCount = default;
+            KeyPhraseExtractionSkillLanguage? defaultLanguageCode = default;
+            int? maxKeyPhraseCount = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -143,7 +143,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeyPhraseExtractionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(maxKeyPhraseCount));
+            return new KeyPhraseExtractionSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs,
+                defaultLanguageCode,
+                maxKeyPhraseCount);
         }
     }
 }

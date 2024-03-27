@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,8 +18,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VaultIssue>> issues = default;
-            Optional<string> result = default;
+            IReadOnlyList<VaultIssue> issues = default;
+            string result = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("issues"u8))
@@ -43,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultValidationResult(Optional.ToList(issues), result.Value);
+            return new VaultValidationResult(issues ?? new ChangeTrackingList<VaultIssue>(), result);
         }
     }
 }

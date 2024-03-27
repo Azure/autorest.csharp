@@ -209,7 +209,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Get6ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -299,7 +299,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Head6ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -371,7 +371,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Get7ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -494,7 +494,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(entity);
+                content.JsonWriter.WriteObjectValue<KeyValue>(entity);
                 request.Content = content;
             }
             return message;
@@ -669,7 +669,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Head7ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -766,7 +766,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Get5ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -850,7 +850,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Head5ItemsItem> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -1113,7 +1113,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Enum6> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
@@ -1203,7 +1203,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<Enum7> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }

@@ -10,12 +10,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> This is a single property of string. </summary>
     internal partial class ExtremelyDeepSinglePropertyModel
     {
-        /// <summary> Initializes a new instance of ExtremelyDeepSinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExtremelyDeepSinglePropertyModel"/>. </summary>
         public ExtremelyDeepSinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ExtremelyDeepSinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExtremelyDeepSinglePropertyModel"/>. </summary>
         /// <param name="extreme"> This is a single property of string. </param>
         internal ExtremelyDeepSinglePropertyModel(SuperDeepSinglePropertyModel extreme)
         {

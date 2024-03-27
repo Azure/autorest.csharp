@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -19,7 +20,8 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
+using Configuration = AutoRest.CSharp.Common.Input.Configuration;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -77,22 +79,21 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var nextLinkOperation = paging.NextLinkOperation;
-            var nextLinkName = paging.NextLinkName;
+            RestClientMethod? nextPageMethod = paging switch
+            {
+                { SelfNextLink: true } => _restClientMethod,
+                { NextLinkOperation: { } nextLinkOperation } => builders[nextLinkOperation]._restClientMethod,
+                { NextLinkName: { } } => RestClientBuilder.BuildNextPageMethod(_restClientMethod),
+                _ => null
+            };
 
-            RestClientMethod? nextPageMethod = nextLinkOperation != null
-                ? builders[nextLinkOperation]._restClientMethod
-                : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
-                    : null;
-
-            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
+            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
         }
 
         public LowLevelClientMethod BuildOperationMethodChain()
         {
             var protocolMethodAttributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
@@ -105,12 +106,12 @@ namespace AutoRest.CSharp.Output.Models
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-            var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
+            var responseBodyType = GetReturnedResponseInputType();
 
             // samples will build below
             var samples = new List<DpgOperationSample>();
 
-            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message);
+            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message, GetLongRunningResultRetrievalMethod(Operation.LongRunning));
 
             BuildSamples(method, samples);
 
@@ -141,6 +142,7 @@ namespace AutoRest.CSharp.Output.Models
                     // add protocol method sample
                     samples.Add(new(
                         _client,
+                        _typeFactory,
                         method,
                         clientExample.ClientParameters,
                         operationExample,
@@ -152,6 +154,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         samples.Add(new(
                             _client,
+                            _typeFactory,
                             method,
                             clientExample.ClientParameters,
                             operationExample,
@@ -160,6 +163,14 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
             }
+        }
+
+        private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)
+        {
+            if (longRunning is { ResultPath: not null })
+                return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
+
+            return null;
         }
 
         private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()
@@ -181,27 +192,10 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
-            return confidentLevel switch
+            return new()
             {
-                ConvenienceMethodConfidenceLevel.Confident => new()
-                {
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = false
-                },
-                ConvenienceMethodConfidenceLevel.Internal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.NotConfident,
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = true
-                },
-                ConvenienceMethodConfidenceLevel.Removal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.AnonymousModel,
-                    IsConvenienceMethodGenerated = false
-                },
-                _ => throw new InvalidOperationException($"unhandled case {confidentLevel} for operation {Operation}")
+                IsConvenienceMethodGenerated = true,
+                IsConvenienceMethodInternal = false
             };
         }
 
@@ -240,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (HasAmbiguityBetweenProtocolAndConvenience() && Configuration.UseOverloadsBetweenProtocolAndConvenience)
+            if (HasAmbiguityBetweenProtocolAndConvenience())
             {
                 return false;
             }
@@ -255,16 +249,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
-            CSharpType? responseType = null;
-            if (operationBodyTypes.Length != 0)
-            {
-                var firstBodyType = operationBodyTypes[0];
-                if (firstBodyType != null)
-                {
-                    responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
-                }
-            };
+            CSharpType? responseType = GetReturnedResponseCSharpType();
 
             if (Operation.Paging != null)
             {
@@ -273,7 +258,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
                 }
 
-                if (responseType.TryCast<ModelTypeProvider>(out var modelType))
+                if (responseType is { IsFrameworkType: false, Implementation: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
                     var propertyType = property.ValueType.WithNullable(false);
@@ -311,15 +296,47 @@ namespace AutoRest.CSharp.Output.Models
             var headAsBoolean = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             if (headAsBoolean)
             {
-                return new ReturnTypeChain(typeof(Response<bool>), typeof(Response<bool>), null);
+                return new ReturnTypeChain(Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null);
             }
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
+                return new ReturnTypeChain(new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
             }
 
-            return new ReturnTypeChain(typeof(Response), typeof(Response), null);
+            return new ReturnTypeChain(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseType, null);
+        }
+
+        private CSharpType? GetReturnedResponseCSharpType()
+        {
+            var inputType = GetReturnedResponseInputType();
+            if (inputType != null)
+            {
+                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
+            }
+            return null;
+        }
+
+        private InputType? GetReturnedResponseInputType()
+        {
+            if (Operation.LongRunning != null)
+            {
+                return Operation.LongRunning.ReturnType;
+            }
+
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct();
+            if (operationBodyTypes.Any())
+            {
+                return operationBodyTypes.First();
+            }
+
+            return null;
+        }
+
+        private IReadOnlyList<string>? GetReturnedResponseContentType()
+        {
+            var responses = Operation.Responses.Where(r => !r.IsErrorResponse);
+            return responses.Any() ? responses.First().ContentTypes : null;
         }
 
         private ConvenienceMethod? BuildConvenienceMethod(bool shouldRequestContextOptional, ConvenienceMethodGenerationInfo generationInfo)
@@ -334,7 +351,7 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
             var attributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : null;
 
             var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
@@ -347,7 +364,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (parameterChain.IsSpreadParameter)
                     {
-                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
+                        if (convenienceParameter.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider model })
                         {
                             var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
 
@@ -374,17 +391,34 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility |= Internal; // add internal
             }
             var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
-            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
+            var diagnostic = Configuration.IsBranded
+                ? name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null
+                : null;
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, GetReturnedResponseContentType(), diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
 
         private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
         {
             var fields = model.Fields;
+            var addedParameters = new HashSet<string>();
+            foreach (var parameter in fields.PublicConstructorParameters)
+            {
+                addedParameters.Add(parameter.Name);
+                yield return parameter;
+            }
+
             foreach (var parameter in fields.SerializationParameters)
             {
-                var field = fields.GetFieldByParameter(parameter);
+                if (addedParameters.Contains(parameter.Name))
+                    continue;
+
+                var field = fields.GetFieldByParameterName(parameter.Name);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty is null)
+                    continue; // this means this is an additional properties property, which should never happen.
+
+                if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
+                    continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
@@ -432,7 +466,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? operationParameter.SerializationFormat
+                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
                             : requestConditionSerializationFormat;
 
                         break;
@@ -579,7 +613,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
-            AddReference(name, inputParameter, protocolMethodParameter, inputParameter.SerializationFormat);
+            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;

@@ -20,7 +20,9 @@ namespace AutoRest.CSharp.Output.Models
         OperationLongRunning? LongRunning,
         RequestConditionHeaders ConditionHeaderFlag,
         IEnumerable<DpgOperationSample> Samples,
-        ConvenienceMethodOmittingMessage? ConvenienceMethodOmittingMessage)
+        ConvenienceMethodOmittingMessage? ConvenienceMethodOmittingMessage,
+        LongRunningResultRetrievalMethod? LongRunningResultRetrievalMethod) // TODO: move `LongRunningResultRetrievalMethod` under output model of long running, currently we're using
+                                                                            // input model of long running in DPG
     {
         public bool ShouldGenerateConvenienceMethodRef()
         {

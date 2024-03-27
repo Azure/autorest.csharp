@@ -5,7 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -45,19 +45,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return ResourceTypeSegment.ParseRequestPath(requestPath);
         }
 
-        public static ResourceTypeSegment GetResourceType(this IEnumerable<RequestPath> requestPaths)
+        public static ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
         {
-            var resourceTypes = requestPaths.Select(path => path.GetResourceType()).Distinct();
+            if (scopeTypes == null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
+                return null;
 
-            if (resourceTypes.Count() > 1)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", requestPaths)} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
-
-            var resourceType = resourceTypes.First();
-
-            if (resourceType == ResourceTypeSegment.Scope)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", requestPaths)} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
-
-            return resourceType;
+            return scopeTypes.Select(type => (FormattableString)$"{type}").ToArray();
         }
     }
 }

@@ -12,12 +12,12 @@ namespace CognitiveSearch.Models
     /// <summary> The IndexerLimits. </summary>
     public partial class IndexerLimits
     {
-        /// <summary> Initializes a new instance of IndexerLimits. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexerLimits"/>. </summary>
         internal IndexerLimits()
         {
         }
 
-        /// <summary> Initializes a new instance of IndexerLimits. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexerLimits"/>. </summary>
         /// <param name="maxRunTime"> The maximum duration that the indexer is permitted to run for one execution. </param>
         /// <param name="maxDocumentExtractionSize"> The maximum size of a document, in bytes, which will be considered valid for indexing. </param>
         /// <param name="maxDocumentContentCharactersToExtract"> The maximum number of characters that will be extracted from a document picked up for indexing. </param>

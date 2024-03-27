@@ -46,11 +46,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -88,7 +88,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Resource(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags));
+            return new Resource(id, name, type, location, tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

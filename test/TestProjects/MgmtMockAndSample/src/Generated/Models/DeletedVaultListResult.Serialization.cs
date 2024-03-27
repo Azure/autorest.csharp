@@ -7,8 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -20,8 +18,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DeletedVaultData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<DeletedVaultData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedVaultListResult(Optional.ToList(value), nextLink.Value);
+            return new DeletedVaultListResult(value ?? new ChangeTrackingList<DeletedVaultData>(), nextLink);
         }
     }
 }

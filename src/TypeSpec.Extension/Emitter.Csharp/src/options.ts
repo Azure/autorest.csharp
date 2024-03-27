@@ -21,7 +21,6 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     "existing-project-folder"?: string;
-    "use-overloads-between-protocol-and-convenience"?: boolean;
     "keep-non-overloadable-protocol-signature"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
@@ -31,6 +30,10 @@ export type NetEmitterOptions = {
     logLevel?: string;
     "package-dir"?: string;
     "head-as-boolean"?: boolean;
+    flavor?: string;
+    "generate-sample-project"?: boolean;
+    "generate-test-project"?: boolean;
+    "use-model-reader-writer"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -62,10 +65,6 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "filter-out-core-models": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         "existing-project-folder": { type: "string", nullable: true },
-        "use-overloads-between-protocol-and-convenience": {
-            type: "boolean",
-            nullable: true
-        },
         "keep-non-overloadable-protocol-signature": {
             type: "boolean",
             nullable: true
@@ -102,7 +101,19 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true
         },
         "package-dir": { type: "string", nullable: true },
-        "head-as-boolean": { type: "boolean", nullable: true }
+        "head-as-boolean": { type: "boolean", nullable: true },
+        flavor: { type: "string", nullable: true },
+        "generate-sample-project": {
+            type: "boolean",
+            nullable: true,
+            default: true
+        },
+        "generate-test-project": {
+            type: "boolean",
+            nullable: true,
+            default: false
+        },
+        "use-model-reader-writer": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -117,20 +128,22 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
-    "use-overloads-between-protocol-and-convenience": true,
     "package-name": undefined,
     debug: undefined,
     "models-to-treat-empty-string-as-null": undefined,
     "additional-intrinsic-types-to-treat-empty-string-as-null": [],
     "methods-to-keep-client-default-value": undefined,
     "deserialize-null-collection-as-null-value": undefined,
-    logLevel: LoggerLevel.INFO
+    logLevel: LoggerLevel.INFO,
+    flavor: undefined,
+    "generate-test-project": false
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+
     const outputFolder = resolveOutputFolder(context);
     return {
         ...resolvedOptions,

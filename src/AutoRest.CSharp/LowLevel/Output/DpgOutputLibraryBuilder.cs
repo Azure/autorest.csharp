@@ -4,20 +4,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Configuration = AutoRest.CSharp.Input.Configuration;
+using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -27,27 +26,26 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
-        private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
-            _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
         }
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations();
+            var inputClients = UpdateOperations().ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
                 .ToDictionary(ci => ci.Name);
             AssignParentClients(inputClients, clientInfosByName);
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
-            var clientOptions = CreateClientOptions(topLevelClientInfos);
+            var parametersInClientOptions = new List<Parameter>();
+            var clientOptions = CreateClientOptions(topLevelClientInfos, parametersInClientOptions);
 
             SetRequestsToClients(clientInfosByName.Values);
 
@@ -59,72 +57,145 @@ namespace AutoRest.CSharp.Output.Models
 
             if (isTspInput)
             {
-                CreateEnums(enums, library.TypeFactory);
-                CreateModels(models, library.TypeFactory);
+                CreateModels(_rootNamespace.Models, models, library.TypeFactory, _sourceInputModel);
+                CreateEnums(_rootNamespace.Enums, enums, models, library.TypeFactory, _sourceInputModel);
             }
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
         }
 
-        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, TypeFactory typeFactory)
+        public static void CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputEnumType, EnumType> enums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
-            foreach (var inputEnum in _rootNamespace.Enums)
+            foreach (var inputEnum in inputEnums)
             {
-                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
+                // [TODO]: Consolidate default namespace choice between HLC and DPG
+                var ns = Configuration.Generation1ConvenienceClient ? inputEnum.Namespace : null;
+                enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), "public", typeFactory, sourceInputModel));
+            }
+
+            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
+            foreach (var model in models.Keys)
+            {
+                foreach (var property in model.Properties)
+                {
+                    if (property.Type is not InputUnionType union)
+                        continue;
+
+                    if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
+                    {
+                        string modelName = models[model].Type.Name;
+                        InputEnumType inputEnum = new InputEnumType(
+                            $"{modelName}{GetNameWithCorrectPluralization(union, property.Name)}",
+                            model.Namespace,
+                            model.Accessibility,
+                            null,
+                            $"Enum for {property.Name} in {modelName}",
+                            model.Usage,
+                            InputPrimitiveType.String,
+                            union.GetEnum(),
+                            true,
+                            union.IsNullable);
+                        enumsToReplace.Add((model, property, inputEnum));
+                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
+                    }
+                }
+            }
+
+            foreach (var (containingModel, property, enumType) in enumsToReplace)
+            {
+                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
             }
         }
 
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        public static void CreateModels(IReadOnlyList<InputModelType> inputModels, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
-            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
-
-            foreach (var model in _rootNamespace.Models)
+            var defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
+            foreach (var model in inputModels)
             {
-                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
+                // [TODO]: Consolidate default namespace choice between HLC and DPG
+                var ns = Configuration.Generation1ConvenienceClient ? model.Namespace : null;
+                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
+                models.Add(model, typeProvider);
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        public static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            CreateModels(inputModels, models, typeFactory, sourceInputModel);
+            return models;
+        }
+
+        public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            var enums = new Dictionary<InputEnumType, EnumType>();
+            CreateEnums(inputEnums, enums, models, typeFactory, sourceInputModel);
+            return enums;
+        }
+
+        private static string GetNameWithCorrectPluralization(InputType type, string name)
+        {
+            //TODO: Probably needs special casing for ipThing to become IPThing
+            string result = name.FirstCharToUpperCase();
+            switch (type)
+            {
+                case InputListType:
+                case InputDictionaryType:
+                    return result.ToSingular();
+                default:
+                    return result;
+            }
+        }
+
+        private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
         {
             //only want to create one instance of the default derived per polymorphic set
-            ModelTypeProvider? defaultDerivedType = null;
             bool isBasePolyType = model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
-            if (isBasePolyType || isChildPolyType)
+            if (!isBasePolyType && !isChildPolyType)
             {
-                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+                return null;
+            }
 
-                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
-                    return null;
+            var actualBase = model;
+            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            {
+                actualBase = actualBase.BaseModel;
+            }
 
-                string defaultDerivedName = $"Unknown{actualBase.Name}";
-                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
+            //Since the unknown type is used for deserialization only we don't need to create if it is an input only model
+            // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+            if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+            {
+                return null;
+            }
+
+            string defaultDerivedName = $"Unknown{actualBase.Name}";
+            if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out ModelTypeProvider? defaultDerivedType))
+            {
+                //create the "Unknown" version
+                var unknownDerivedType = new InputModelType(
+                    defaultDerivedName,
+                    actualBase.Namespace,
+                    "internal",
+                    null,
+                    $"Unknown version of {actualBase.Name}",
+                    model.Usage.HasFlag(InputModelTypeUsage.Input) ? InputModelTypeUsage.RoundTrip : InputModelTypeUsage.Output,
+                    Array.Empty<InputModelProperty>(),
+                    actualBase,
+                    Array.Empty<InputModelType>(),
+                    "Unknown", //TODO: do we need to support extensible enum / int values?
+                    null,
+                    null,
+                    false)
                 {
-                    //create the "Unknown" version
-                    var unknownDerviedType = new InputModelType(
-                        defaultDerivedName,
-                        actualBase.Namespace,
-                        "internal",
-                        null,
-                        $"Unknown version of {actualBase.Name}",
-                        InputModelTypeUsage.Output,
-                        Array.Empty<InputModelProperty>(),
-                        actualBase,
-                        Array.Empty<InputModelType>(),
-                        "Unknown", //TODO: do we need to support extensible enum / int values?
-                        null,
-                        false)
-                    {
-                        IsUnknownDiscriminatorModel = true
-                    };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
-                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
-                    models.Add(unknownDerviedType, defaultDerivedType);
-                }
+                    IsUnknownDiscriminatorModel = true
+                };
+                defaultDerivedType = new ModelTypeProvider(unknownDerivedType, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, null);
+                defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                models.Add(unknownDerivedType, defaultDerivedType);
             }
 
             return defaultDerivedType;
@@ -134,41 +205,52 @@ namespace AutoRest.CSharp.Output.Models
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
             // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
-            var operationsMap = new Dictionary<InputOperation, InputOperation>();
+            var operationsMap = new Dictionary<InputOperation, Func<InputOperation>>();
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
+                foreach (var operation in client.Operations)
+                {
+                    operationsMap.CreateAndCacheResult(operation, () => UpdateOperation(operation, clientName, operationsMap));
+                }
+
+                yield return client with { Operations = client.Operations.Select(op => operationsMap[op]()).ToList() };
             }
         }
 
-        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
+        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
         {
-            InputOperation updatedOperation;
+            var name = UpdateOperationName(operation, operation.ResourceName ?? clientName);
             if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
-                updatedOperation = operation with
+                operation = operation with
                 {
-                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
-                    Parameters = UpdateOperationParameters(operation.Parameters),
-                    // to update the lazy initialization of `Paging.NextLinkOperation`
-                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
+                    Parameters = UpdatePageableOperationParameters(operation.Parameters),
+                    Paging = UpdateOperationPaging(operation.Paging, operationsMap),
                 };
             }
-            else
+
+            if (!operation.Parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
             {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
+                operation = operation with
+                {
+                    Uri = $"{{{KnownParameters.Endpoint.Name}}}",
+                    Parameters = operation.Parameters
+                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                        .ToList()
+                };
             }
-            operationsMap.Add(operation, updatedOperation);
 
-            return updatedOperation;
-
+            return operation with
+            {
+                Name = name,
+            };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
             => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
-        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        private static IReadOnlyList<InputParameter> UpdatePageableOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {
             var parameters = new List<InputParameter>(operationParameters.Count);
             foreach (var parameter in operationParameters)
@@ -186,7 +268,22 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
+        private static OperationPaging? UpdateOperationPaging(OperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
+        {
+            if (sourcePaging == null)
+            {
+                return null;
+            }
+
+            if (sourcePaging.NextLinkOperation != null && operationsMap.TryGetValue(sourcePaging.NextLinkOperation, out var nextLinkOperationRef))
+            {
+                return sourcePaging with {NextLinkOperation = nextLinkOperationRef()};
+            }
+
+            return sourcePaging;
+        }
+
+        private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos, List<Parameter> parametersInClientOptions)
         {
             var clientName = topLevelClientInfos.Count == 1
                 ? topLevelClientInfos[0].Name
@@ -197,7 +294,11 @@ namespace AutoRest.CSharp.Output.Models
                 ? (FormattableString)$"Client options for {clientName}."
                 : $"Client options for {_libraryName} library clients.";
 
-            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
+            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, Configuration.Namespace, description, _sourceInputModel)
+            {
+                AdditionalParameters = parametersInClientOptions
+            };
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
@@ -242,7 +343,7 @@ namespace AutoRest.CSharp.Output.Models
             if (topLevelClientInfo == null)
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
-                var clientNamespace = _defaultNamespace;
+                var clientNamespace = Configuration.Namespace;
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
@@ -346,9 +447,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, List<Parameter> parametersInClientOptions)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, parametersInClientOptions);
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -358,7 +459,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, List<Parameter> parametersInClientOptions)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -367,6 +468,14 @@ namespace AutoRest.CSharp.Output.Models
                     : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
+
+                if (!Configuration.IsBranded)
+                {
+                    for (int i = 0; i < clientInfo.Requests.Count; i++)
+                    {
+                        clientInfo.Requests[i] = InputOperation.RemoveApiVersionParam(clientInfo.Requests[i]);
+                    }
+                }
 
                 var client = new LowLevelClient(
                     clientInfo.Name,
@@ -385,7 +494,9 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, parametersInClientOptions));
+                // parametersInClientOptions is assigned to ClientOptionsTypeProvider.AdditionalProperties before, which makes sure AdditionalProperties is readonly and won't change after ClientOptionsTypeProvider is built.
+                parametersInClientOptions.AddRange(client.GetOptionalParametersInOptions());
 
                 yield return client;
             }

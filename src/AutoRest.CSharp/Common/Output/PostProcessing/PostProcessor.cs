@@ -70,7 +70,7 @@ internal class PostProcessor
                     var symbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
                     if (symbol == null)
                         continue;
-                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
+                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public && !document.Name.StartsWith("Internal/", StringComparison.Ordinal))
                         continue;
 
                     // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal
@@ -90,7 +90,7 @@ internal class PostProcessor
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
 
-    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document);
+    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document) && !GeneratedCodeWorkspace.IsGeneratedTestDocument(document);
 
     /// <summary>
     /// This method marks the "not publicly" referenced types as internal if they are previously defined as public. It will do this job in the following steps:
@@ -179,8 +179,16 @@ internal class PostProcessor
             return project;
 
         var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
-        root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
-        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root!);
+        Debug.Assert(root is not null);
+        root = root.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia)!;
+        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root);
+
+        // see if this class still has any method, if it contains nothing, we should remove this document
+        var methods = root.DescendantNodes().OfType<MethodDeclarationSyntax>();
+        if (!methods.Any())
+        {
+            return project.RemoveDocument(modelFactoryGeneratedDocument.Id);
+        }
 
         return modelFactoryGeneratedDocument.Project;
     }
@@ -425,5 +433,5 @@ internal class PostProcessor
         return nodes.Where((val, index) => index >= targetIndex);
     }
 
-    private static readonly List<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
+    private static readonly IReadOnlyList<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
 }

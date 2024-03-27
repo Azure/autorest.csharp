@@ -10,12 +10,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> This is a single property of read-only string. </summary>
     internal partial class ReadOnlySinglePropertyModel
     {
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         public ReadOnlySinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         /// <param name="readOnlySomething"> This is a read only string property. </param>
         internal ReadOnlySinglePropertyModel(string readOnlySomething)
         {

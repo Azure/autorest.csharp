@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
+using System.Text.Json;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
-using Azure.Core;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -14,11 +18,23 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static class InvokeOptional
         {
-            public static BoolExpression IsCollectionDefined(ValueExpression collection) => new(new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.IsCollectionDefined), new[]{collection}));
-            public static BoolExpression IsDefined(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.IsDefined), new[]{value}));
-            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToDictionary), new[]{dictionary});
-            public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToList), new[]{collection});
-            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToNullable), new[]{optional});
+            public static BoolExpression IsCollectionDefined(TypedValueExpression collection)
+            {
+                return OptionalTypeProvider.Instance.IsCollectionDefined(collection);
+            }
+
+            public static ValueExpression FallBackToChangeTrackingCollection(TypedValueExpression collection, CSharpType? paramType)
+            {
+                if (!TypeFactory.IsCollectionType(collection.Type) || TypeFactory.IsReadOnlyMemory(collection.Type))
+                {
+                    return collection;
+                }
+
+                var changeTrackingType = collection.Type.Arguments.Count == 1
+                    ? ChangeTrackingListProvider.Instance.Type.MakeGenericType(collection.Type.Arguments)
+                    : ChangeTrackingDictionaryProvider.Instance.Type.MakeGenericType(collection.Type.Arguments);
+                return NullCoalescing(collection, New.Instance(changeTrackingType));
+            }
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
@@ -27,9 +43,24 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return statement;
                 }
 
-                return TypeFactory.IsCollectionType(serialization.Value.Type)
-                    ? new IfStatement(IsCollectionDefined(serialization.Value)) {statement}
-                    : new IfStatement(IsDefined(serialization.Value)) {statement};
+                if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
+                {
+                    if (!serialization.Value.Type.Equals(typeof(JsonElement)))
+                    {
+                        return statement;
+                    }
+                }
+
+                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                    ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
+                    : new IfStatement(OptionalTypeProvider.Instance.IsDefined(serialization.Value)) { statement };
+            }
+
+            public static MethodBodyStatement WrapInIsNotEmpty(PropertySerialization serialization, MethodBodyStatement statement)
+            {
+                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                    ? new IfStatement(new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value))) { statement }
+                    : statement;
             }
         }
     }

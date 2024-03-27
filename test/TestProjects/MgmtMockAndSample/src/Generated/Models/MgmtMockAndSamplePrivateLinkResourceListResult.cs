@@ -6,20 +6,19 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
     /// <summary> A list of private link resources. </summary>
     internal partial class MgmtMockAndSamplePrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResourceListResult"/>. </summary>
         internal MgmtMockAndSamplePrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MgmtMockAndSamplePrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResourceListResult"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         internal MgmtMockAndSamplePrivateLinkResourceListResult(IReadOnlyList<MgmtMockAndSamplePrivateLinkResource> value)
         {

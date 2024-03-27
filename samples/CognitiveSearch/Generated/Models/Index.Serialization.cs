@@ -22,7 +22,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<Field>(item);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ScoringProfile>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(CorsOptions))
             {
                 writer.WritePropertyName("corsOptions"u8);
-                writer.WriteObjectValue(CorsOptions);
+                writer.WriteObjectValue<CorsOptions>(CorsOptions);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
@@ -51,7 +51,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Suggester>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Analyzer>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +71,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Tokenizer>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -81,7 +81,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<TokenFilter>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -91,19 +91,19 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CharFilter>(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                writer.WriteObjectValue<EncryptionKey>(EncryptionKey);
             }
             if (Optional.IsDefined(Similarity))
             {
                 writer.WritePropertyName("similarity"u8);
-                writer.WriteObjectValue(Similarity);
+                writer.WriteObjectValue<Similarity>(Similarity);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -121,17 +121,17 @@ namespace CognitiveSearch.Models
             }
             string name = default;
             IList<Field> fields = default;
-            Optional<IList<ScoringProfile>> scoringProfiles = default;
-            Optional<string> defaultScoringProfile = default;
-            Optional<CorsOptions> corsOptions = default;
-            Optional<IList<Suggester>> suggesters = default;
-            Optional<IList<Analyzer>> analyzers = default;
-            Optional<IList<Tokenizer>> tokenizers = default;
-            Optional<IList<TokenFilter>> tokenFilters = default;
-            Optional<IList<CharFilter>> charFilters = default;
-            Optional<EncryptionKey> encryptionKey = default;
-            Optional<Similarity> similarity = default;
-            Optional<string> odataEtag = default;
+            IList<ScoringProfile> scoringProfiles = default;
+            string defaultScoringProfile = default;
+            CorsOptions corsOptions = default;
+            IList<Suggester> suggesters = default;
+            IList<Analyzer> analyzers = default;
+            IList<Tokenizer> tokenizers = default;
+            IList<TokenFilter> tokenFilters = default;
+            IList<CharFilter> charFilters = default;
+            EncryptionKey encryptionKey = default;
+            Similarity similarity = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -271,7 +271,20 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, Optional.ToList(scoringProfiles), defaultScoringProfile.Value, corsOptions.Value, Optional.ToList(suggesters), Optional.ToList(analyzers), Optional.ToList(tokenizers), Optional.ToList(tokenFilters), Optional.ToList(charFilters), encryptionKey.Value, similarity.Value, odataEtag.Value);
+            return new Index(
+                name,
+                fields,
+                scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(),
+                defaultScoringProfile,
+                corsOptions,
+                suggesters ?? new ChangeTrackingList<Suggester>(),
+                analyzers ?? new ChangeTrackingList<Analyzer>(),
+                tokenizers ?? new ChangeTrackingList<Tokenizer>(),
+                tokenFilters ?? new ChangeTrackingList<TokenFilter>(),
+                charFilters ?? new ChangeTrackingList<CharFilter>(),
+                encryptionKey,
+                similarity,
+                odataEtag);
         }
     }
 }

@@ -133,7 +133,6 @@ namespace Accessibility_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternalAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
@@ -164,7 +163,6 @@ namespace Accessibility_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternal(RequestContent,RequestContext)']/*" />
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");

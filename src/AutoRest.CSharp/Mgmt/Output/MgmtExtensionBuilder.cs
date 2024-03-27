@@ -8,19 +8,18 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionBuilder
     {
-        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
+        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtMockableExtension> MockableExtensions)
         {
             private IEnumerable<MgmtExtension>? _extensions;
             public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values;
 
             private MgmtExtensionWrapper? _extensionWrapper;
-            public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, ExtensionClients);
+            public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, MockableExtensions);
         }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
@@ -36,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionInfo.Extensions;
 
-        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionInfo.ExtensionClients;
+        public IEnumerable<MgmtMockableExtension> MockableExtensions => ExtensionInfo.MockableExtensions;
 
         public MgmtExtension GetExtension(Type armCoreType)
         {
@@ -50,26 +49,25 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // we use a SortedDictionary or SortedSet here to make sure the order of extensions or extension clients is deterministic
             var extensionDict = new SortedDictionary<CSharpType, MgmtExtension>(new CSharpTypeNameComparer());
-            var extensionClients = new SortedSet<MgmtExtensionClient>(new MgmtExtensionClientComparer());
+            var mockingExtensions = new SortedSet<MgmtMockableExtension>(new MgmtExtensionClientComparer());
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
-                var extension = new MgmtExtension(operations, extensionClients, type);
+                var extension = new MgmtExtension(operations, mockingExtensions, type);
                 extensionDict.Add(type, extension);
             }
             // add ArmResourceExtension methods
-            extensionDict.Add(typeof(ArmResource), new ArmResourceExtension(_armResourceExtensionOperations, extensionClients));
-            // add the ArmClientExtension
-            extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
+            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, mockingExtensions);
+            // add ArmClientExtension methods (which is also the TenantResource extension methods)
+            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, mockingExtensions, armResourceExtension);
+            extensionDict.Add(typeof(ArmResource), armResourceExtension);
+            extensionDict.Add(typeof(ArmClient), armClientExtension);
 
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();
             foreach (var (type, extension) in extensionDict)
             {
-                // explicitly skip ArmClient because it should not have an extension client
-                if (type.Equals(typeof(ArmClient)))
-                    continue;
                 // we add an empty list for the type to ensure that the corresponding extension client will always be constructed, even empty
                 resourceToOperationsDict.Add(type, new());
                 foreach (var operation in extension.AllOperations)
@@ -82,10 +80,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
-                extensionClients.Add(new MgmtExtensionClient(resourceType, operations, extensionForChildResources));
+                var extensionClient = resourceType.Equals(typeof(ArmClient)) ?
+                    new MgmtMockableArmClient(resourceType, operations, extensionForChildResources) :
+                    new MgmtMockableExtension(resourceType, operations, extensionForChildResources);
+                mockingExtensions.Add(extensionClient);
             }
 
-            return new(extensionDict, extensionClients);
+            return new(extensionDict, mockingExtensions);
         }
 
         private struct CSharpTypeNameComparer : IComparer<CSharpType>
@@ -96,9 +97,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private struct MgmtExtensionClientComparer : IComparer<MgmtExtensionClient>
+        private struct MgmtExtensionClientComparer : IComparer<MgmtMockableExtension>
         {
-            public int Compare(MgmtExtensionClient? x, MgmtExtensionClient? y)
+            public int Compare(MgmtMockableExtension? x, MgmtMockableExtension? y)
             {
                 return string.Compare(x?.Declaration.Name, y?.Declaration.Name);
             }

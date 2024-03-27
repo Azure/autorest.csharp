@@ -1,25 +1,25 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Runtime.InteropServices.ComTypes;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
-using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneResponseHeaderGroupWriter
     {
-        private const string ResponseParameter = "response";
-        private const string ResponseField = "_" + ResponseParameter;
+        private static readonly string ResponseParameter = Configuration.ApiTypes.ResponseParameterName;
+        private static readonly string ResponseField = "_" + ResponseParameter;
 
         public void WriteHeaderModel(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
             {
-                writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
+                if (Configuration.IsBranded)
+                    writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
 
                 using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} partial class {responseHeaderGroup.Declaration.Name}"))
                 {
@@ -36,12 +36,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteField(CodeWriter writer)
         {
-            writer.Line($"private readonly {typeof(Response)} {ResponseField};");
+            writer.Line($"private readonly {Configuration.ApiTypes.ResponseType} {ResponseField};");
         }
 
         private void WriteConstructor(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {
-            using (writer.Scope($"public {responseHeaderGroup.Declaration.Name}({typeof(Response)} {ResponseParameter})"))
+            using (writer.Scope($"public {responseHeaderGroup.Declaration.Name}({Configuration.ApiTypes.ResponseType} {ResponseParameter})"))
             {
                 writer.Line($"{ResponseField} = {ResponseParameter};");
             }

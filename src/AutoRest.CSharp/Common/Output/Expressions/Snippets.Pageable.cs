@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using Autorest.CSharp.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
@@ -119,13 +118,13 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return new FuncExpression(new[] { e.Declaration }, BinaryDataExpression.FromString(new JsonElementExpression(e).GetRawText()));
             }
 
-            if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
+            if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } type })
             {
                 return SerializableObjectTypeExpression.DeserializeDelegate(type);
             }
 
             var variable = new VariableReference(typeof(JsonElement), "e");
-            var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType);
+            var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType, null);
             return new FuncExpression(new[] { variable.Declaration }, deserializeImplementation);
         }
     }

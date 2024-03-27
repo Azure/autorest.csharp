@@ -2,10 +2,16 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Azure.Core;
+using Azure.ResourceManager;
+using MgmtDiscriminator;
+using MgmtDiscriminator.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -32,6 +38,142 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(className));
             Assert.NotNull(type);
             Assert.AreEqual(isPublic, type.IsPublic);
+        }
+
+        [Test]
+        public void ToBicep()
+        {
+            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+                new QueryStringMatchConditionParameters(
+                    QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
+                    QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" } });
+            var actions =
+                new[]
+                {
+                    new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null),
+                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                };
+            var data = new DeliveryRuleData
+            {
+                Properties = new DeliveryRuleProperties(3, condition, actions,
+                    new Dictionary<string, DeliveryRuleAction>()
+                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd, PetType = "dog" }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                {
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
+                }),
+                BoolProperty = false,
+                // validate explicit null is still excluded
+                Location = null,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
+                Duration = TimeSpan.FromDays(1),
+                Number = 4,
+                ShellProperty = new Shell { Name = "shell" }
+            };
+
+            var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/NoOverrides.bicep"));
+            Assert.AreEqual(expected, bicep);
+        }
+
+        [Test]
+        public void ToBicepWithOverrides()
+        {
+            var queryParams = new QueryStringMatchConditionParameters(
+                QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
+                QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
+            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+                queryParams);
+            var firstAction = new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null);
+            var actions =
+                new[]
+                {
+                    firstAction,
+                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                };
+            var data = new DeliveryRuleData
+            {
+                Properties = new DeliveryRuleProperties(3, condition, actions,
+                    new Dictionary<string, DeliveryRuleAction>()
+                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                {
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
+                }),
+                BoolProperty = false,
+                Location = AzureLocation.AustraliaCentral,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
+                Duration = TimeSpan.FromDays(1),
+                Number = 4,
+                NestedName = "someSku"
+            };
+            var options = new BicepModelReaderWriterOptions
+            {
+                PropertyOverrides =
+                    {
+                        {
+                            data, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
+                                { nameof(DeliveryRuleData.Location), "locationParameter" },
+                                { nameof(DeliveryRuleData.NestedName), "'overridenSku'" },
+                            }
+                        },
+                        {
+                            queryParams, new Dictionary<string, string>
+                            {
+                                { nameof(QueryStringMatchConditionParametersTypeName), "queryParametersTypeNameParameter" },
+                            }
+                        },
+                        {
+                            firstAction, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleAction.Foo), "fooParameter" },
+                            }
+                        }
+                    }
+            };
+            var bicep = ModelReaderWriter.Write(data, options).ToString();
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/Overrides.bicep"));
+            Assert.AreEqual(expected, bicep);
+        }
+
+        [Test]
+        public void ToBicepEmptyChildObject()
+        {
+            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+                new QueryStringMatchConditionParameters(
+                    QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
+                    QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" } });
+            var actions =
+                new[]
+                {
+                    new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null),
+                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                };
+            var data = new DeliveryRuleData
+            {
+                Properties = new DeliveryRuleProperties(3, condition, actions,
+                    new Dictionary<string, DeliveryRuleAction>()
+                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                {
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
+                }),
+                BoolProperty = false,
+                Location = AzureLocation.AustraliaCentral,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
+                Duration = TimeSpan.FromDays(1),
+                Number = 4,
+                ShellProperty = new Shell()
+            };
+
+            var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/EmptyChildObject.bicep"));
+            Assert.AreEqual(expected, bicep);
         }
     }
 }

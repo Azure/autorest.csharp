@@ -12,124 +12,123 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Model.Inheritance.NotDiscriminated;
 using _Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 {
-    public class Samples_NotDiscriminatedClient
+    public partial class Samples_NotDiscriminatedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid()
+        public void Example_NotDiscriminated_PostValid_ShortVersion()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_Async()
+        public async Task Example_NotDiscriminated_PostValid_ShortVersion_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid_Convenience()
+        public void Example_NotDiscriminated_PostValid_ShortVersion_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = client.PostValid(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_Convenience_Async()
+        public async Task Example_NotDiscriminated_PostValid_ShortVersion_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid_AllParameters()
+        public void Example_NotDiscriminated_PostValid_AllParameters()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_AllParameters_Async()
+        public async Task Example_NotDiscriminated_PostValid_AllParameters_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid_AllParameters_Convenience()
+        public void Example_NotDiscriminated_PostValid_AllParameters_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = client.PostValid(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_AllParameters_Convenience_Async()
+        public async Task Example_NotDiscriminated_PostValid_AllParameters_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public void Example_NotDiscriminated_GetValid_ShortVersion()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -143,7 +142,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
+        public async Task Example_NotDiscriminated_GetValid_ShortVersion_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -157,7 +156,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_Convenience()
+        public void Example_NotDiscriminated_GetValid_ShortVersion_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -166,7 +165,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Convenience_Async()
+        public async Task Example_NotDiscriminated_GetValid_ShortVersion_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -175,7 +174,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
+        public void Example_NotDiscriminated_GetValid_AllParameters()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -189,7 +188,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_AllParameters_Async()
+        public async Task Example_NotDiscriminated_GetValid_AllParameters_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -203,7 +202,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters_Convenience()
+        public void Example_NotDiscriminated_GetValid_AllParameters_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -212,7 +211,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_AllParameters_Convenience_Async()
+        public async Task Example_NotDiscriminated_GetValid_AllParameters_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -221,11 +220,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid()
+        public void Example_NotDiscriminated_PutValid_ShortVersion()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -241,11 +240,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
+        public async Task Example_NotDiscriminated_PutValid_ShortVersion_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -261,7 +260,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_Convenience()
+        public void Example_NotDiscriminated_PutValid_ShortVersion_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -271,7 +270,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Convenience_Async()
+        public async Task Example_NotDiscriminated_PutValid_ShortVersion_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -281,11 +280,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
+        public void Example_NotDiscriminated_PutValid_AllParameters()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -301,11 +300,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_AllParameters_Async()
+        public async Task Example_NotDiscriminated_PutValid_AllParameters_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -321,7 +320,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters_Convenience()
+        public void Example_NotDiscriminated_PutValid_AllParameters_Convenience()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
@@ -331,7 +330,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_AllParameters_Convenience_Async()
+        public async Task Example_NotDiscriminated_PutValid_AllParameters_Convenience_Async()
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 

@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents service-level resource counters and quotas. </summary>
     public partial class ServiceCounters
     {
-        /// <summary> Initializes a new instance of ServiceCounters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceCounters"/>. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
         /// <param name="indexerCounter"> Total number of indexers. </param>

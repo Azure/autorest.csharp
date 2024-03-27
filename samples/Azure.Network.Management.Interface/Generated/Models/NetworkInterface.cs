@@ -6,14 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> A network interface in a resource group. </summary>
     public partial class NetworkInterface : Resource
     {
-        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterface"/>. </summary>
         public NetworkInterface()
         {
             IpConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
@@ -21,7 +20,7 @@ namespace Azure.Network.Management.Interface.Models
             HostedWorkloads = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterface"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

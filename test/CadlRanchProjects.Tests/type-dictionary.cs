@@ -92,7 +92,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_Float32Value_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
-            Assert.AreEqual(42.42f, response.Value["k1"]);
+            Assert.AreEqual(43.125f, response.Value["k1"]);
         });
 
         [Test]
@@ -100,7 +100,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new DictionaryClient(host, null).GetFloat32ValueClient().PutAsync(new Dictionary<string, float>()
             {
-                {"k1", 42.42f }
+                {"k1", 43.125f }
             });
             Assert.AreEqual(204, response.Status);
         });
@@ -196,8 +196,35 @@ namespace CadlRanchProjects.Tests
             firstModel.Children.Clear();
             var response = await new DictionaryClient(host, null).GetRecursiveModelValueClient().PutAsync(new Dictionary<string, InnerModel>()
             {
-                {"k1", firstModel },
-                {"k2", new InnerModel("world", new Dictionary<string, InnerModel>() {{"k2.1", new InnerModel("inner world")} }) }
+                ["k1"] = firstModel,
+                ["k2"] = new InnerModel("world")
+                {
+                    Children =
+                    {
+                        ["k2.1"] = new InnerModel("inner world")
+                    }
+                }
+            });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Dictionary_NullableFloatValue_get() => Test(async (host) =>
+        {
+            var response = await new DictionaryClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
+            Assert.AreEqual(1.25f, response.Value["k1"]);
+            Assert.AreEqual(0.5f, response.Value["k2"]);
+            Assert.AreEqual(null, response.Value["k3"]);
+        });
+
+        [Test]
+        public Task Type_Dictionary_NullableFloatValue_put() => Test(async (host) =>
+        {
+            var response = await new DictionaryClient(host, null).GetNullableFloatValueClient().PutAsync(new Dictionary<string, float?>()
+            {
+                {"k1", 1.25f },
+                {"k2", 0.5f },
+                {"k3", null }
             });
             Assert.AreEqual(204, response.Status);
         });

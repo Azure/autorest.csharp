@@ -7,14 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
     /// <summary> The OutputAdditionalPropertiesModelStruct. </summary>
     public readonly partial struct OutputAdditionalPropertiesModelStruct
     {
-        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputAdditionalPropertiesModelStruct"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
@@ -24,6 +23,11 @@ namespace AdditionalPropertiesEx.Models
 
             Id = id;
             AdditionalProperties = additionalProperties;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OutputAdditionalPropertiesModelStruct"/> for deserialization. </summary>
+        public OutputAdditionalPropertiesModelStruct()
+        {
         }
 
         /// <summary> Gets the id. </summary>

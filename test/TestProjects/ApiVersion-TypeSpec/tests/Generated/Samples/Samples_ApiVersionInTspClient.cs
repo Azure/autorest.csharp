@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ApiVersionInTsp;
 using ApiVersionInTsp.Models;
 using Azure;
 using Azure.Identity;
@@ -16,11 +15,11 @@ using NUnit.Framework;
 
 namespace ApiVersionInTsp.Samples
 {
-    public class Samples_ApiVersionInTspClient
+    public partial class Samples_ApiVersionInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBatchDetectionResult()
+        public void Example_ApiVersionInTsp_GetBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -34,7 +33,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBatchDetectionResult_Async()
+        public async Task Example_ApiVersionInTsp_GetBatchDetectionResult_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -48,7 +47,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBatchDetectionResult_Convenience()
+        public void Example_ApiVersionInTsp_GetBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -59,7 +58,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBatchDetectionResult_Convenience_Async()
+        public async Task Example_ApiVersionInTsp_GetBatchDetectionResult_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -70,7 +69,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBatchDetectionResult_AllParameters()
+        public void Example_ApiVersionInTsp_GetBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,7 +83,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBatchDetectionResult_AllParameters_Async()
+        public async Task Example_ApiVersionInTsp_GetBatchDetectionResult_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -98,7 +97,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBatchDetectionResult_AllParameters_Convenience()
+        public void Example_ApiVersionInTsp_GetBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -109,7 +108,7 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBatchDetectionResult_AllParameters_Convenience_Async()
+        public async Task Example_ApiVersionInTsp_GetBatchDetectionResult_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

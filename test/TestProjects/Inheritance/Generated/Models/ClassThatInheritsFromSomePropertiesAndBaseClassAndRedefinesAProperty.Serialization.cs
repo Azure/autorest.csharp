@@ -97,20 +97,20 @@ namespace Inheritance.Models
             {
                 return null;
             }
-            Optional<string> baseClassProperty = default;
-            Optional<DataFactoryElement<string>> dfeString = default;
-            Optional<DataFactoryElement<double>> dfeDouble = default;
-            Optional<DataFactoryElement<bool>> dfeBool = default;
-            Optional<DataFactoryElement<int>> dfeInt = default;
-            Optional<DataFactoryElement<BinaryData>> dfeObject = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> dfeListOfT = default;
-            Optional<DataFactoryElement<IList<string>>> dfeListOfString = default;
-            Optional<DataFactoryElement<IDictionary<string, string>>> dfeKeyValuePairs = default;
-            Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
-            Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
-            Optional<DataFactoryElement<Uri>> dfeUri = default;
-            Optional<string> someProperty = default;
-            Optional<string> someOtherProperty = default;
+            string baseClassProperty = default;
+            DataFactoryElement<string> dfeString = default;
+            DataFactoryElement<double> dfeDouble = default;
+            DataFactoryElement<bool> dfeBool = default;
+            DataFactoryElement<int> dfeInt = default;
+            DataFactoryElement<BinaryData> dfeObject = default;
+            DataFactoryElement<IList<SeparateClass>> dfeListOfT = default;
+            DataFactoryElement<IList<string>> dfeListOfString = default;
+            DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs = default;
+            DataFactoryElement<DateTimeOffset> dfeDateTime = default;
+            DataFactoryElement<TimeSpan> dfeDuration = default;
+            DataFactoryElement<Uri> dfeUri = default;
+            string someProperty = default;
+            string someOtherProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -228,7 +228,21 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
+            return new ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(
+                someProperty,
+                someOtherProperty,
+                baseClassProperty,
+                dfeString,
+                dfeDouble,
+                dfeBool,
+                dfeInt,
+                dfeObject,
+                dfeListOfT,
+                dfeListOfString,
+                dfeKeyValuePairs,
+                dfeDateTime,
+                dfeDuration,
+                dfeUri);
         }
     }
 }

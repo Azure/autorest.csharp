@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -21,9 +20,9 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             InnerErrorCodeValue code = default;
             string message = default;
-            Optional<IReadOnlyDictionary<string, string>> details = default;
-            Optional<string> target = default;
-            Optional<InnerError> innererror = default;
+            IReadOnlyDictionary<string, string> details = default;
+            string target = default;
+            InnerError innererror = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -65,7 +64,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new InnerError(code, message, Optional.ToDictionary(details), target.Value, innererror.Value);
+            return new InnerError(code, message, details ?? new ChangeTrackingDictionary<string, string>(), target, innererror);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue<Subnet>(Subnet);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -42,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<Subnet> subnet = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            Subnet subnet = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -101,7 +101,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
+            return new IPConfigurationProfile(
+                id,
+                name,
+                type,
+                etag,
+                subnet,
+                provisioningState);
         }
     }
 }

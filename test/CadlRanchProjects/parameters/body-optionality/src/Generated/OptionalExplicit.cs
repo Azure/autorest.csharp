@@ -21,7 +21,6 @@ namespace Parameters.BodyOptionality
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,32 +37,32 @@ namespace Parameters.BodyOptionality
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal OptionalExplicit(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal OptionalExplicit(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='SetAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> SetAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SetAsync(body?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = await SetAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Set(BodyModel,CancellationToken)']/*" />
         public virtual Response Set(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Set(body?.ToRequestContent(), context);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = Set(content, context);
             return response;
         }
 
@@ -139,23 +138,25 @@ namespace Parameters.BodyOptionality
             }
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='OmitAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> OmitAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OmitAsync(body?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = await OmitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Omit(BodyModel,CancellationToken)']/*" />
         public virtual Response Omit(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Omit(body?.ToRequestContent(), context);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = Omit(content, context);
             return response;
         }
 
@@ -239,7 +240,6 @@ namespace Parameters.BodyOptionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/optional-explicit/set", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -255,7 +255,6 @@ namespace Parameters.BodyOptionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/optional-explicit/omit", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

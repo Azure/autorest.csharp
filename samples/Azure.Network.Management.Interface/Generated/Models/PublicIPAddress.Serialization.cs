@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<PublicIPAddressSku>(Sku);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -67,12 +67,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue<PublicIPAddressDnsSettings>(DnsSettings);
             }
             if (Optional.IsDefined(DdosSettings))
             {
                 writer.WritePropertyName("ddosSettings"u8);
-                writer.WriteObjectValue(DdosSettings);
+                writer.WriteObjectValue<DdosSettings>(DdosSettings);
             }
             if (Optional.IsCollectionDefined(IpTags))
             {
@@ -80,7 +80,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpTags)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<IpTag>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -92,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                writer.WriteObjectValue(PublicIPPrefix);
+                writer.WriteObjectValue<SubResource>(PublicIPPrefix);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
@@ -109,25 +109,25 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<PublicIPAddressSku> sku = default;
-            Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IPAllocationMethod> publicIPAllocationMethod = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
-            Optional<IPConfiguration> ipConfiguration = default;
-            Optional<PublicIPAddressDnsSettings> dnsSettings = default;
-            Optional<DdosSettings> ddosSettings = default;
-            Optional<IList<IpTag>> ipTags = default;
-            Optional<string> ipAddress = default;
-            Optional<SubResource> publicIPPrefix = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            PublicIPAddressSku sku = default;
+            string etag = default;
+            IList<string> zones = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IPAllocationMethod? publicIPAllocationMethod = default;
+            IPVersion? publicIPAddressVersion = default;
+            IPConfiguration ipConfiguration = default;
+            PublicIPAddressDnsSettings dnsSettings = default;
+            DdosSettings ddosSettings = default;
+            IList<IpTag> ipTags = default;
+            string ipAddress = default;
+            SubResource publicIPPrefix = default;
+            int? idleTimeoutInMinutes = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -301,7 +301,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, Optional.ToList(ipTags), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new PublicIPAddress(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                sku,
+                etag,
+                zones ?? new ChangeTrackingList<string>(),
+                publicIPAllocationMethod,
+                publicIPAddressVersion,
+                ipConfiguration,
+                dnsSettings,
+                ddosSettings,
+                ipTags ?? new ChangeTrackingList<IpTag>(),
+                ipAddress,
+                publicIPPrefix,
+                idleTimeoutInMinutes,
+                resourceGuid,
+                provisioningState);
         }
     }
 }
