@@ -20,7 +20,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Result).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ClientResult).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
             };
 

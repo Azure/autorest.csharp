@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
@@ -22,7 +21,7 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<QuotaBaseProperties>(item);
                 }
                 writer.WriteEndArray();
             }

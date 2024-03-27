@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.ResourceManager.Storage;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -19,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(TierToCool))
             {
                 writer.WritePropertyName("tierToCool"u8);
-                writer.WriteObjectValue(TierToCool);
+                writer.WriteObjectValue<DateAfterModification>(TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
                 writer.WritePropertyName("tierToArchive"u8);
-                writer.WriteObjectValue(TierToArchive);
+                writer.WriteObjectValue<DateAfterModification>(TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
                 writer.WritePropertyName("delete"u8);
-                writer.WriteObjectValue(Delete);
+                writer.WriteObjectValue<DateAfterModification>(Delete);
             }
             if (Optional.IsDefined(EnableAutoTierToHotFromCool))
             {

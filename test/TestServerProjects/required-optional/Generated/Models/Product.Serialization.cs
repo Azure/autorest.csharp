@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using required_optional;
 
 namespace required_optional.Models
 {
@@ -23,7 +22,7 @@ namespace required_optional.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +56,7 @@ namespace required_optional.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +105,7 @@ namespace required_optional.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -122,7 +121,7 @@ namespace required_optional.Models
                         return DeserializeProduct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support reading '{options.Format}' format.");
             }
         }
 

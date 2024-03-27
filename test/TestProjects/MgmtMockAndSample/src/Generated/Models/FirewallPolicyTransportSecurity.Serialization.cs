@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                writer.WriteObjectValue(CertificateAuthority);
+                writer.WriteObjectValue<FirewallPolicyCertificateAuthority>(CertificateAuthority);
             }
             writer.WriteEndObject();
         }

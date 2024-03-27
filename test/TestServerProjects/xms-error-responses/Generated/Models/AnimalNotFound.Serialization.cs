@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -23,7 +22,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<AnimalNotFound>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AnimalNotFound)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AnimalNotFound)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -67,7 +66,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<AnimalNotFound>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AnimalNotFound)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AnimalNotFound)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -128,7 +127,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AnimalNotFound)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AnimalNotFound)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -144,7 +143,7 @@ namespace xms_error_responses.Models
                         return DeserializeAnimalNotFound(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AnimalNotFound)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AnimalNotFound)} does not support reading '{options.Format}' format.");
             }
         }
 

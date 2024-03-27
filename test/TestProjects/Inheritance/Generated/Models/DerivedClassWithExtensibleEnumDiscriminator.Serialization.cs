@@ -9,7 +9,6 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -46,7 +45,7 @@ namespace Inheritance.Models
         {
             public override void Write(Utf8JsonWriter writer, DerivedClassWithExtensibleEnumDiscriminator model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<DerivedClassWithExtensibleEnumDiscriminator>(model);
             }
             public override DerivedClassWithExtensibleEnumDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

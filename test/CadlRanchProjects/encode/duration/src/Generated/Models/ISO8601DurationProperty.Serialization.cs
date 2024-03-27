@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Encode.Duration;
 
 namespace Encode.Duration.Models
 {
@@ -24,7 +23,7 @@ namespace Encode.Duration.Models
             var format = options.Format == "W" ? ((IPersistableModel<ISO8601DurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace Encode.Duration.Models
             var format = options.Format == "W" ? ((IPersistableModel<ISO8601DurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -96,7 +95,7 @@ namespace Encode.Duration.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace Encode.Duration.Models
                         return DeserializeISO8601DurationProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace Encode.Duration.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ISO8601DurationProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

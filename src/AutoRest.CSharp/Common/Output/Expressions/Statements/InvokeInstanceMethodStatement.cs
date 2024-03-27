@@ -12,5 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName) : this(instance, methodName, Array.Empty<ValueExpression>(), false) { }
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg) : this(instance, methodName, new[] { arg }, false) { }
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg1, ValueExpression arg2) : this(instance, methodName, new[] { arg1, arg2 }, false) { }
+        public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, IReadOnlyList<ValueExpression> arguments) : this(instance, methodName, arguments, false) { }
     }
 }

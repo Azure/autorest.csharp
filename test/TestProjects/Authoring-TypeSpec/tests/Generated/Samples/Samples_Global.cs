@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AuthoringTypeSpec;
 using Azure.Identity;
 using NUnit.Framework;
 

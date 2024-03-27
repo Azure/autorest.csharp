@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -303,11 +302,6 @@ extends:
             {
                 builder.PackageReferences.Add(packages);
             }
-            // TODO -- add this to _brandedDependencyPackages when we remove this flag
-            if (Configuration.UseModelReaderWriter)
-            {
-                builder.PackageReferences.Add(new("System.ClientModel"));
-            }
             if (Configuration.AzureArm)
             {
                 builder.PackageReferences.Add(new("Azure.ResourceManager"));
@@ -349,7 +343,7 @@ extends:
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.0.0-beta.4"),
+            new("System.ClientModel", "1.1.0-beta.2"),
             new("System.Text.Json", "4.7.2")
         };
 

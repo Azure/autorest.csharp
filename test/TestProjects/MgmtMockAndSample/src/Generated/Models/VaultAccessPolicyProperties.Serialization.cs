@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -21,7 +20,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartArray();
             foreach (var item in AccessPolicies)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<AccessPolicyEntry>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

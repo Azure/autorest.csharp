@@ -7,7 +7,6 @@
 
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Mocking
 {

@@ -70,7 +70,7 @@ namespace xml_service.Models
                         return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AccessPolicy)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -83,7 +83,7 @@ namespace xml_service.Models
                 case "X":
                     return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AccessPolicy)} does not support reading '{options.Format}' format.");
             }
         }
 

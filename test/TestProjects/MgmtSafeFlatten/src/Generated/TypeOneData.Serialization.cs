@@ -27,12 +27,12 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                writer.WriteObjectValue(LayerOne);
+                writer.WriteObjectValue<LayerOneSingle>(LayerOne);
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                writer.WriteObjectValue(LayerOneType);
+                writer.WriteObjectValue<LayerOneBaseType>(LayerOneType);
             }
             if (Optional.IsDefined(LayerOneConflict))
             {

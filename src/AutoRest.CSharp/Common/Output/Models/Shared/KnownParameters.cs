@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Output.Models.Shared
@@ -22,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType RequestContextNullableType = new(Configuration.ApiTypes.RequestContextType, true);
         private static readonly CSharpType ResponseType = new(Configuration.ApiTypes.ResponseType);
 
-        public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(Configuration.ApiTypes.ClientDiagnosticsType), null, ValidationType.AssertNotNull, null);
+        public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(typeof(ClientDiagnostics)), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(Configuration.ApiTypes.KeyCredentialType), null, ValidationType.None, null);
         public static readonly Parameter TokenAuth = new("tokenCredential", $"The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);

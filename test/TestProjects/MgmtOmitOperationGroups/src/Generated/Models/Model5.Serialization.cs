@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -28,7 +27,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ModelQ>(item);
                 }
                 writer.WriteEndArray();
             }

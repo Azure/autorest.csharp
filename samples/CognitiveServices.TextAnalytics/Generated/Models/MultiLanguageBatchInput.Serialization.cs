@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using CognitiveServices.TextAnalytics;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -20,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Documents)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<MultiLanguageInput>(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using Client.Naming;
 using Client.Naming.Models;
 using NUnit.Framework;
 

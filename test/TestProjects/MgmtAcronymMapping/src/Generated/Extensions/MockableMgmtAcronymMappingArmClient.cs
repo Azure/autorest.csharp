@@ -7,7 +7,6 @@
 
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Mocking
 {

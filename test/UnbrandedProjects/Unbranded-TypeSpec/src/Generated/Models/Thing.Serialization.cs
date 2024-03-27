@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -17,7 +17,7 @@ namespace UnbrandedTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -116,7 +116,7 @@ namespace UnbrandedTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -281,7 +281,7 @@ namespace UnbrandedTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -297,7 +297,7 @@ namespace UnbrandedTypeSpec.Models
                         return DeserializeThing(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -312,11 +312,9 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

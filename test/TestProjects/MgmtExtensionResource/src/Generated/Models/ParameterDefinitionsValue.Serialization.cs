@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
 {
@@ -60,7 +59,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                writer.WriteObjectValue(Metadata);
+                writer.WriteObjectValue<ParameterDefinitionsValueMetadata>(Metadata);
             }
             writer.WriteEndObject();
         }

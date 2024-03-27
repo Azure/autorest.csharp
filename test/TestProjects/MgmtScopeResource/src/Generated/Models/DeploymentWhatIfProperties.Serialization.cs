@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -19,7 +18,7 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(WhatIfSettings))
             {
                 writer.WritePropertyName("whatIfSettings"u8);
-                writer.WriteObjectValue(WhatIfSettings);
+                writer.WriteObjectValue<DeploymentWhatIfSettings>(WhatIfSettings);
             }
             if (Optional.IsDefined(Template))
             {
