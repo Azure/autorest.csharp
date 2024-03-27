@@ -23,7 +23,7 @@ namespace Pagination.Models
             var format = options.Format == "W" ? ((IPersistableModel<TextBlocklist>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(TextBlocklist)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(TextBlocklist)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace Pagination.Models
             var format = options.Format == "W" ? ((IPersistableModel<TextBlocklist>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(TextBlocklist)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(TextBlocklist)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +106,7 @@ namespace Pagination.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(TextBlocklist)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(TextBlocklist)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -122,7 +122,7 @@ namespace Pagination.Models
                         return DeserializeTextBlocklist(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(TextBlocklist)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(TextBlocklist)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -140,7 +140,7 @@ namespace Pagination.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<TextBlocklist>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

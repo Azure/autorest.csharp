@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -47,18 +47,33 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                if (Configuration.IsBranded)
                 {
-                    writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
-                    if (responseClassifierType != default)
+                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                     {
-                        writer.Append($", {responseClassifierType}");
+                        writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
+                        if (responseClassifierType != default)
+                        {
+                            writer.Append($", {responseClassifierType}");
+                        }
+                        writer.Line($");");
                     }
-                    writer.Line($");");
+                    else
+                    {
+                        writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)});");
+                    }
                 }
                 else
                 {
-                    writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)});");
+                    writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                    {
+                        using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
+                        {
+                            writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                        }
+                    }
+                    writer.Line($"{message}.ResponseClassifier = {responseClassifierType};");
                 }
 
                 writer.Line($"var {request:D} = {message}.{Configuration.ApiTypes.HttpMessageRequestName};");
@@ -266,7 +281,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 JsonSerialization jsonSerialization => new[]
                 {
                     Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var utf8JsonContent, out var writer),
-                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, valueExpression),
+                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, new TypedValueExpression(jsonSerialization.Type, valueExpression), ModelReaderWriterOptionsExpression.Wire),
                     Assign(requestExpression.Property(nameof(Request.Content)), utf8JsonContent)
                 },
 
@@ -325,7 +340,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var value = GetFieldReference(fields, header.Value);
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"{request}.SetHeaderValue({header.Name:L}, ");
+                writer.Append($"{request}.Headers.Set({header.Name:L}, ");
                 WriteConstantOrParameter(writer, value, enumAsString: true);
                 var formatSpecifier = header.Format.ToFormatSpecifier();
                 if (formatSpecifier != null)

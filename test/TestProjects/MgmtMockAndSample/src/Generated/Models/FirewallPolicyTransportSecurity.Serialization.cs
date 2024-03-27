@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                writer.WriteObjectValue(CertificateAuthority);
+                writer.WriteObjectValue<FirewallPolicyCertificateAuthority>(CertificateAuthority);
             }
             writer.WriteEndObject();
         }

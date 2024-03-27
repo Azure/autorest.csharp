@@ -23,7 +23,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ThereLevelElement>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ThereLevelElement)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ThereLevelElement)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -33,7 +33,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ThereLevelExtension>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +60,7 @@ namespace FirstTestTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ThereLevelElement>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ThereLevelElement)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ThereLevelElement)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -112,7 +112,7 @@ namespace FirstTestTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ThereLevelElement)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ThereLevelElement)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -128,7 +128,7 @@ namespace FirstTestTypeSpec.Models
                         return DeserializeThereLevelElement(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ThereLevelElement)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ThereLevelElement)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -146,7 +146,7 @@ namespace FirstTestTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ThereLevelElement>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

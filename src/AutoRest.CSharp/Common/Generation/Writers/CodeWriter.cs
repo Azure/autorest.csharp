@@ -817,7 +817,7 @@ namespace AutoRest.CSharp.Generation.Writers
             Identifier(declaration.ActualName);
         }
 
-        internal void WriteClassModifiers(TypeSignatureModifiers modifiers)
+        internal void WriteTypeModifiers(TypeSignatureModifiers modifiers)
         {
             this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
                 .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))

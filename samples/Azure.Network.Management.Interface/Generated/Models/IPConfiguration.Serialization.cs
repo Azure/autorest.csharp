@@ -40,12 +40,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue<Subnet>(Subnet);
             }
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                writer.WriteObjectValue(PublicIPAddress);
+                writer.WriteObjectValue<PublicIPAddress>(PublicIPAddress);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

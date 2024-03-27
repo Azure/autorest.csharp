@@ -24,12 +24,12 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRemoteAddressCondition>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters);
+            writer.WriteObjectValue<RemoteAddressMatchConditionParameters>(Parameters, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))
@@ -60,7 +60,7 @@ namespace MgmtDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRemoteAddressCondition>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -111,7 +111,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -179,7 +179,7 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -194,10 +194,8 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeDeliveryRuleRemoteAddressCondition(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DeliveryRuleRemoteAddressCondition)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -121,7 +121,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -137,7 +137,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeNumericValuesFacetint32(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -155,7 +155,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<NumericValuesFacetint32>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

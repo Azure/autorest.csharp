@@ -26,7 +26,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                writer.WriteObjectValue<LayerOneSingle>(Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     /// </summary>
     /// <param name="Type">Type expected to be returned by value expression</param>
     /// <param name="Untyped"></param>
-    internal abstract record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
+    internal record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
     {
         public sealed override void Write(CodeWriter writer) => Untyped.Write(writer);
 

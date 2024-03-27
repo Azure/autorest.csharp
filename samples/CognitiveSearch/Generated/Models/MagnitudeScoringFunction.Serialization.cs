@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("magnitude"u8);
-            writer.WriteObjectValue(Parameters);
+            writer.WriteObjectValue<MagnitudeScoringParameters>(Parameters);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);

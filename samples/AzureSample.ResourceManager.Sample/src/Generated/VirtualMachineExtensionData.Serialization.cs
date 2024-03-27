@@ -27,7 +27,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineExtensionData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -128,7 +128,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                writer.WriteObjectValue<VirtualMachineExtensionInstanceView>(InstanceView, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -154,7 +154,7 @@ namespace AzureSample.ResourceManager.Sample
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineExtensionData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -345,7 +345,7 @@ namespace AzureSample.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -648,7 +648,7 @@ namespace AzureSample.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -663,10 +663,8 @@ namespace AzureSample.ResourceManager.Sample
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineExtensionData(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineExtensionData)} does not support reading '{options.Format}' format.");
             }
         }
 

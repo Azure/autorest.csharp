@@ -31,8 +31,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         public BoolExpression InvokeEquals(ValueExpression other) => new(Invoke(nameof(Equals), other));
 
-        public virtual ValueExpression Property(string propertyName)
-            => new MemberExpression(this, propertyName);
+        public virtual ValueExpression Property(string propertyName, bool nullConditional = false)
+            => new MemberExpression(nullConditional ? new NullConditionalExpression(this) : this, propertyName);
 
         public InvokeInstanceMethodExpression Invoke(string methodName)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, false);

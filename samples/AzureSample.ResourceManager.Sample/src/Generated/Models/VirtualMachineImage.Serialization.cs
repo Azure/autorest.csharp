@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineImage>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,12 +54,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                writer.WriteObjectValue<PurchasePlan>(Plan, options);
             }
             if (Optional.IsDefined(OSDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                writer.WriteObjectValue(OSDiskImage);
+                writer.WriteObjectValue<OSDiskImage>(OSDiskImage, options);
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -67,14 +67,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DataDiskImage>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradeProperties);
+                writer.WriteObjectValue<AutomaticOSUpgradeProperties>(AutomaticOSUpgradeProperties, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -84,7 +84,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed);
+                writer.WriteObjectValue<DisallowedConfiguration>(Disallowed, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineImage>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -264,7 +264,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
             IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
@@ -474,17 +474,17 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "OSDiskImageOperatingSystem":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("OperatingSystem", item.Value);
-                        bicepOptions.ParameterOverrides.Add(OSDiskImage, propertyDictionary);
+                        bicepOptions.PropertyOverrides.Add(OSDiskImage, propertyDictionary);
                         break;
                     case "AutomaticOSUpgradeSupported":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("AutomaticOSUpgradeSupported", item.Value);
-                        bicepOptions.ParameterOverrides.Add(AutomaticOSUpgradeProperties, propertyDictionary0);
+                        bicepOptions.PropertyOverrides.Add(AutomaticOSUpgradeProperties, propertyDictionary0);
                         break;
                     case "DisallowedVmDiskType":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("VmDiskType", item.Value);
-                        bicepOptions.ParameterOverrides.Add(Disallowed, propertyDictionary1);
+                        bicepOptions.PropertyOverrides.Add(Disallowed, propertyDictionary1);
                         break;
                     default:
                         continue;
@@ -503,7 +503,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -518,10 +518,8 @@ namespace AzureSample.ResourceManager.Sample.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeVirtualMachineImage(document.RootElement, options);
                     }
-                case "bicep":
-                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(VirtualMachineImage)} does not support reading '{options.Format}' format.");
             }
         }
 

@@ -34,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddresses)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ApplicationGatewayBackendAddress>(item);
                 }
                 writer.WriteEndArray();
             }

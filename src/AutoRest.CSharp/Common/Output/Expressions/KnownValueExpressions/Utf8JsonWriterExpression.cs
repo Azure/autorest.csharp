@@ -3,6 +3,7 @@
 
 using System;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Types;
@@ -44,8 +45,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public MethodBodyStatement WriteStringValue(ValueExpression value, string? format)
             => ModelSerializationExtensionsProvider.Instance.WriteStringValue(this, value, format);
 
-        public MethodBodyStatement WriteObjectValue(ValueExpression value)
-            => ModelSerializationExtensionsProvider.Instance.WriteObjectValue(this, value);
+        public MethodBodyStatement WriteObjectValue(TypedValueExpression value, ValueExpression? options = null)
+            => Configuration.UseModelReaderWriter
+            ? ModelSerializationExtensionsProvider.Instance.WriteObjectValue(this, value, options: options)
+            : ModelSerializationExtensionsProvider.Instance.WriteObjectValue(this, value);
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value)
             => Invoke(nameof(Utf8JsonWriter.WriteBase64StringValue), value).ToStatement();

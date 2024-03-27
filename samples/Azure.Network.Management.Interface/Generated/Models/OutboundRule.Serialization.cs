@@ -39,14 +39,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<SubResource>(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue(BackendAddressPool);
+                writer.WriteObjectValue<SubResource>(BackendAddressPool);
             }
             if (Optional.IsDefined(Protocol))
             {

@@ -22,14 +22,14 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ResourceCollection)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ResourceCollection)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                writer.WriteObjectValue(Productresource);
+                writer.WriteObjectValue<FlattenedProduct>(Productresource, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -37,7 +37,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FlattenedProduct>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -48,7 +48,7 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue<FlattenedProduct>(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -75,7 +75,7 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<ResourceCollection>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ResourceCollection)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ResourceCollection)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -152,7 +152,7 @@ namespace model_flattening.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -168,7 +168,7 @@ namespace model_flattening.Models
                         return DeserializeResourceCollection(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ResourceCollection)} does not support reading '{options.Format}' format.");
             }
         }
 

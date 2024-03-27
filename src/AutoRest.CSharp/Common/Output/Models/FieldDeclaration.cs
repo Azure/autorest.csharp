@@ -69,6 +69,7 @@ namespace AutoRest.CSharp.Output.Models
     [Flags]
     internal enum FieldModifiers
     {
+        None = 0,
         Public = 1 << 0,
         Internal = 1 << 1,
         Protected = 1 << 2,

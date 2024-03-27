@@ -22,7 +22,7 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<FlattenedProduct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FlattenedProduct)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -103,7 +103,7 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<FlattenedProduct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FlattenedProduct)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -229,7 +229,7 @@ namespace model_flattening.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FlattenedProduct)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -245,7 +245,7 @@ namespace model_flattening.Models
                         return DeserializeFlattenedProduct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FlattenedProduct)} does not support reading '{options.Format}' format.");
             }
         }
 

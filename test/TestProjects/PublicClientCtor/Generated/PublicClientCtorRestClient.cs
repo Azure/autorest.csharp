@@ -65,7 +65,7 @@ namespace PublicClientCtor
             }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
+            content.JsonWriter.WriteObjectValue<TestModel>(value);
             request.Content = content;
             return message;
         }

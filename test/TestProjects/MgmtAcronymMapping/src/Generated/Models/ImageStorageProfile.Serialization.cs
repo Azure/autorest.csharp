@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                writer.WriteObjectValue<ImageOSDisk>(OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ImageDataDisk>(item);
                 }
                 writer.WriteEndArray();
             }

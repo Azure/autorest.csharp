@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("distance"u8);
-            writer.WriteObjectValue(Parameters);
+            writer.WriteObjectValue<DistanceScoringParameters>(Parameters);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);

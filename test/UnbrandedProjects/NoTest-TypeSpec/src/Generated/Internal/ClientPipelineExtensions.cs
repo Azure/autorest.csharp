@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ namespace NoTestTypeSpec
 {
     internal static class ClientPipelineExtensions
     {
-        public static async ValueTask<PipelineResponse> ProcessMessageAsync(this Pipeline<PipelineMessage> pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
+        public static async ValueTask<PipelineResponse> ProcessMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
         {
             await pipeline.SendAsync(message).ConfigureAwait(false);
 
@@ -22,15 +21,15 @@ namespace NoTestTypeSpec
                 throw new InvalidOperationException("Failed to receive Result.");
             }
 
-            if (!message.Response.IsError || requestContext.ErrorBehavior == ErrorBehavior.NoThrow)
+            if (!message.Response.IsError || requestContext?.ErrorOptions == ClientErrorBehaviors.NoThrow)
             {
                 return message.Response;
             }
 
-            throw new MessageFailedException(message.Response);
+            throw new ClientResultException(message.Response);
         }
 
-        public static PipelineResponse ProcessMessage(this Pipeline<PipelineMessage> pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
+        public static PipelineResponse ProcessMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
         {
             pipeline.Send(message);
 
@@ -39,39 +38,39 @@ namespace NoTestTypeSpec
                 throw new InvalidOperationException("Failed to receive Result.");
             }
 
-            if (!message.Response.IsError || requestContext.ErrorBehavior == ErrorBehavior.NoThrow)
+            if (!message.Response.IsError || requestContext?.ErrorOptions == ClientErrorBehaviors.NoThrow)
             {
                 return message.Response;
             }
 
-            throw new MessageFailedException(message.Response);
+            throw new ClientResultException(message.Response);
         }
 
-        public static async ValueTask<NullableResult<bool>> ProcessHeadAsBoolMessageAsync(this Pipeline<PipelineMessage> pipeline, PipelineMessage message, RequestOptions requestContext)
+        public static async ValueTask<ClientResult<bool>> ProcessHeadAsBoolMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext)
         {
             PipelineResponse response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
             switch (response.Status)
             {
                 case >= 200 and < 300:
-                    return Result.FromValue(true, response);
+                    return ClientResult.FromValue(true, response);
                 case >= 400 and < 500:
-                    return Result.FromValue(false, response);
+                    return ClientResult.FromValue(false, response);
                 default:
-                    return new ErrorResult<bool>(response, new MessageFailedException(response));
+                    return new ErrorResult<bool>(response, new ClientResultException(response));
             }
         }
 
-        public static NullableResult<bool> ProcessHeadAsBoolMessage(this Pipeline<PipelineMessage> pipeline, PipelineMessage message, RequestOptions requestContext)
+        public static ClientResult<bool> ProcessHeadAsBoolMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext)
         {
             PipelineResponse response = pipeline.ProcessMessage(message, requestContext);
             switch (response.Status)
             {
                 case >= 200 and < 300:
-                    return Result.FromValue(true, response);
+                    return ClientResult.FromValue(true, response);
                 case >= 400 and < 500:
-                    return Result.FromValue(false, response);
+                    return ClientResult.FromValue(false, response);
                 default:
-                    return new ErrorResult<bool>(response, new MessageFailedException(response));
+                    return new ErrorResult<bool>(response, new ClientResultException(response));
             }
         }
     }

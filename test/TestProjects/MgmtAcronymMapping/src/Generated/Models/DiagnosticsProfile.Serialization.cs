@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics);
+                writer.WriteObjectValue<BootDiagnostics>(BootDiagnostics);
             }
             writer.WriteEndObject();
         }

@@ -23,14 +23,14 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -76,7 +76,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InstanceViewStatus>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetPatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -246,7 +246,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -262,7 +262,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                         return DeserializeAvailabilitySetPatch(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support reading '{options.Format}' format.");
             }
         }
 

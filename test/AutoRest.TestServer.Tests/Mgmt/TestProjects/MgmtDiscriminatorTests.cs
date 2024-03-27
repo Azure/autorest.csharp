@@ -111,7 +111,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             };
             var options = new BicepModelReaderWriterOptions
             {
-                ParameterOverrides =
+                PropertyOverrides =
                     {
                         {
                             data, new Dictionary<string, string>

@@ -23,7 +23,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnivariateDetectionOptions>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<TimeSeriesPoint>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Granularity))
@@ -92,7 +92,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnivariateDetectionOptions>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -219,7 +219,7 @@ namespace AnomalyDetector.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -235,7 +235,7 @@ namespace AnomalyDetector.Models
                         return DeserializeUnivariateDetectionOptions(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnivariateDetectionOptions)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -253,7 +253,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnivariateDetectionOptions>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

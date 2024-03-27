@@ -22,7 +22,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAction>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetAction)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAction)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAction>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetAction)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAction)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -97,7 +97,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(PetAction)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAction)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -113,7 +113,7 @@ namespace xms_error_responses.Models
                         return DeserializePetAction(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(PetAction)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAction)} does not support reading '{options.Format}' format.");
             }
         }
 

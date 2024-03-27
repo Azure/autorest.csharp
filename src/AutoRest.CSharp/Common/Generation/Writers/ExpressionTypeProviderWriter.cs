@@ -40,8 +40,28 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteType()
         {
-            _writer.WriteClassModifiers(_provider.DeclarationModifiers);
-            _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
+            if (_provider.IsEnum)
+            {
+                WriteEnum();
+            }
+            else
+            {
+                WriteClassOrStruct();
+            }
+        }
+
+        private void WriteClassOrStruct()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            if (_provider.IsStruct)
+            {
+                _writer.AppendRaw(" struct ");
+            }
+            else
+            {
+                _writer.AppendRaw(" class ");
+            }
+            _writer.Append($"{_provider.Type:D}")
                 .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                 .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 
@@ -67,6 +87,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteMethods();
 
                 WriteNestedTypes();
+            }
+        }
+
+        private void WriteEnum()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            _writer.Append($" enum {_provider.Type:D}")
+                .AppendRawIf(" : ", _provider.Inherits != null)
+                .AppendIf($"{_provider.Inherits}", _provider.Inherits != null);
+
+            using (_writer.Scope())
+            {
+                foreach (var field in _provider.Fields)
+                {
+                    _writer.Append($"{field.Declaration:D}");
+                    if (field.InitializationValue != null)
+                    {
+                        _writer.AppendRaw(" = ")
+                            .WriteValueExpression(field.InitializationValue);
+                    }
+                    _writer.LineRaw(",");
+                }
+                _writer.RemoveTrailingComma();
             }
         }
 
