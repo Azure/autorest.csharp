@@ -784,6 +784,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
+            // [TODO]: May require support for writing docs when '{' is used instead of '<'
             writer.AppendRaw("<");
             foreach (var argument in typeArguments)
             {
