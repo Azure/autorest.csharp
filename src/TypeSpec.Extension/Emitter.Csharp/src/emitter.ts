@@ -40,7 +40,13 @@ export const $lib = createTypeSpecLibrary({
             messages: {
                 default: paramMessage`No Route for service for service ${"service"}`
             }
-        }
+        },
+        "Invalid-Name": {
+            severity: "warning",
+            messages: {
+                default: paramMessage`Invalid interface or operation group name ${"name"} when configuration "model-namespace" is on`
+            }
+        },
     },
     emitter: {
         options: NetEmitterOptionsSchema
