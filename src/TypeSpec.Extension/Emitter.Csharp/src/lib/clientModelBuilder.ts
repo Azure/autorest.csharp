@@ -219,7 +219,10 @@ export function createModelForService(
         }
 
         var clientName = getLibraryName(sdkContext, client.type);
-        if (clientName === "Models" && resolveOptions(sdkContext.emitContext)["model-namespace"] !== false) {
+        if (
+            clientName === "Models" &&
+            resolveOptions(sdkContext.emitContext)["model-namespace"] !== false
+        ) {
             $lib.reportDiagnostic(program, {
                 code: "Invalid-Name",
                 format: { name: clientName },

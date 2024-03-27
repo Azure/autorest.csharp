@@ -76,7 +76,7 @@ import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 import { fromSdkEnumType } from "../type/converter.js";
-import { NetEmitterOptions} from "../options.js";
+import { NetEmitterOptions } from "../options.js";
 /**
  * Map calType to csharp InputTypeKind
  */
