@@ -66,9 +66,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
             var onlyGenerateMetadata = Configuration.MgmtConfiguration.MgmtDebug.OnlyGenerateMetadata;
 
-            // generate metadata for converter
-            GenerateMetadataForConverter(project);
-
+            if (onlyGenerateMetadata)
+            {
+                GenerateMetadataForConverter(project);
+                return;
+            }
 
             foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
             {
