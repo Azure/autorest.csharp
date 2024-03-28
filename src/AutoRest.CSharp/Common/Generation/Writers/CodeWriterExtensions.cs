@@ -25,7 +25,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal static partial class CodeWriterExtensions
+    internal static class CodeWriterExtensions
     {
         public static CodeWriter AppendIf(this CodeWriter writer, FormattableString formattableString, bool condition)
         {
@@ -784,7 +784,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            // [TODO]: May require support for writing docs when '{' is used instead of '<'
             writer.AppendRaw("<");
             foreach (var argument in typeArguments)
             {
