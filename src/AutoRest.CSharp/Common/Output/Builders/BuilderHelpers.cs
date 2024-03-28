@@ -299,11 +299,7 @@ namespace AutoRest.CSharp.Output.Builders
         }
 
         public static string CreateDescription(this Schema schema)
-        {
-            return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
-                string.Empty :
-                EscapeXmlDocDescription(schema.Language.Default.Description);
-        }
+            => EscapeXmlDocDescription(schema.Language.Default.Description);
 
         public static string DisambiguateName(string typeName, string name, string suffix = "Value")
         {

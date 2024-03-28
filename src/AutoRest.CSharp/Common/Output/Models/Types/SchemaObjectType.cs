@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var existingMember = ModelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, MgmtContext.TypeFactory),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
                     "Additional Properties",
                     true,
                     null
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 _rawDataField = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
-                        _privateAdditionalPropertiesPropertyType, accessibility, null, MgmtContext.TypeFactory),
+                        _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
                     PrivateAdditionalPropertiesPropertyDescription,
                     true,
                     null);
@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
                     var constantValue = property.InputModelProperty?.ConstantValue;
-                    Constant? clientDefaultValue = constantValue != null ? BuilderHelpers.ParseConstant(constantValue.Value, MgmtContext.TypeFactory.CreateType(constantValue.Type)) : null;
+                    Constant? clientDefaultValue = constantValue != null ? BuilderHelpers.ParseConstant(constantValue.Value, _typeFactory.CreateType(constantValue.Type)) : null;
                     if (clientDefaultValue is object defaultValueObject)
                     {
                         defaultInitializationValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
@@ -503,7 +503,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (propertiesFromSpec.Contains(propertyWithSerialization.Name))
                         continue;
 
-                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
+                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), _typeFactory);
                     var isReadOnly = BuilderHelpers.IsReadOnlyFromExisting(propertyWithSerialization);
                     var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
                     yield return new ObjectTypeProperty(
@@ -540,7 +540,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 propertyType,
                 accessibility,
                 existingMember,
-                MgmtContext.TypeFactory);
+                _typeFactory);
 
             var type = memberDeclaration.Type;
 
@@ -593,7 +593,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(InputModelProperty property)
         {
-            var valueType = MgmtContext.TypeFactory.CreateType(property.Type);
+            var valueType = _typeFactory.CreateType(property.Type);
             if (!_usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {
@@ -612,12 +612,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (sourceBaseType != null &&
                 sourceBaseType.SpecialType != SpecialType.System_ValueType &&
                 sourceBaseType.SpecialType != SpecialType.System_Object &&
-                MgmtContext.TypeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
             {
                 return baseType;
             }
 
-            var objectSchemas = InputModel.GetImmediateBaseModels();
+            var objectSchemas = InputModel.GetAllBaseModels();
 
             InputModelType? selectedSchema = null;
 
@@ -635,7 +635,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (selectedSchema != null)
             {
-                CSharpType type = MgmtContext.TypeFactory.CreateType(selectedSchema);
+                CSharpType type = _typeFactory.CreateType(selectedSchema);
                 Debug.Assert(!type.IsFrameworkType);
                 return type;
             }
@@ -649,7 +649,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return new CSharpType(
                         _usage.HasFlag(InputModelTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
-                        MgmtContext.TypeFactory.CreateType(InputModel.InheritedDictionaryType));
+                        _typeFactory.CreateType(InputModel.InheritedDictionaryType));
             }
 
             return null;
@@ -695,7 +695,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            return $"{InputModel.DerivedModels}";
+            return $"{InputModel.Description}";
         }
 
         protected override bool EnsureIncludeSerializer()
@@ -743,7 +743,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var derivedInputType in derivedInputTypes)
             {
-                var derivedType = (SchemaObjectType)MgmtContext.TypeFactory.CreateType(derivedInputType).Implementation;
+                var derivedType = (SchemaObjectType)_typeFactory.CreateType(derivedInputType).Implementation;
                 foreach (var discriminatorImplementation in GetDerivedTypes(derivedType.InputModel.DerivedModels))
                 {
                     yield return discriminatorImplementation;

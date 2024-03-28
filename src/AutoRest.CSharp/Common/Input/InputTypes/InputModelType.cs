@@ -43,8 +43,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 
-        public IReadOnlyList<InputModelType> GetImmediateBaseModels() => EnumerateBase(BaseModel, "AzureResourceBase").ToArray();
-
         public IReadOnlyList<InputModelType> GetAllDerivedModels()
         {
             var list = new List<InputModelType>(DerivedModels);
@@ -56,18 +54,11 @@ namespace AutoRest.CSharp.Common.Input
             return list;
         }
 
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model, string? skipModelName = null)
+        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
             while (model != null)
             {
-                if (skipModelName is null)
-                {
-                    yield return model;
-                }
-                else if (model.Name != skipModelName)
-                {
-                    yield return model;
-                }
+                yield return model;
                 model = model.BaseModel;
             }
         }
