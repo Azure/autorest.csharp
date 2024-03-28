@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case Resource { ResourceData: SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
-                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
+                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";
 
                 case SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } type:

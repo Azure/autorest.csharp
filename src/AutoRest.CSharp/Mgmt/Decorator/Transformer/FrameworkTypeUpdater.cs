@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -15,9 +14,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         // max number of words to keep if trimming the property
         private const int MaxTrimmingPropertyWordCount = 2;
 
-        public static void ValidateAndUpdate()
+        public static void ValidateAndUpdate(CodeModel codeModel)
         {
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;

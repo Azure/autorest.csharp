@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    if (property.SchemaProperty?.ClientDefaultValue is { } defaultValueObject)
+                    if (property.InputModelProperty?.DefaultValue is object defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                         defaultInitializationValue = defaultParameterValue;
@@ -450,7 +450,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -616,10 +616,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 shouldExcludeInWireSerialization);
         }
 
-        protected override XmlObjectSerialization? BuildXmlSerialization()
-        {
-            return _inputModelSerialization.Xml is {} xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
-        }
+        // TODO
+        protected override XmlObjectSerialization? BuildXmlSerialization() => null;
+        //{
+        //    return _inputModelSerialization.Xml is {} xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
+        //}
 
         protected override bool EnsureIncludeSerializer()
         {

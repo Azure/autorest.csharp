@@ -152,9 +152,5 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return null;
         }
-
-        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
-
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
     }
 }

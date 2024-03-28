@@ -30,7 +30,9 @@ internal record InputOperation(
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
     bool GenerateConvenienceMethod,
-    bool KeepClientDefaultValue)
+    bool KeepClientDefaultValue,
+    string? OperationId,
+    string? OriginalName)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -52,7 +54,9 @@ internal record InputOperation(
         Paging: null,
         GenerateProtocolMethod: true,
         GenerateConvenienceMethod: false,
-        KeepClientDefaultValue: false)
+        KeepClientDefaultValue: false,
+        OperationId: null,
+        OriginalName: null)
     { }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
@@ -77,12 +81,15 @@ internal record InputOperation(
             operation.Paging,
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
-            operation.KeepClientDefaultValue);
+            operation.KeepClientDefaultValue,
+            operation.OperationId,
+            operation.OriginalName);
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
     private readonly Dictionary<string, InputOperationExample> _examples = new();
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
+    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
 
     private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
     {
@@ -90,4 +97,6 @@ internal record InputOperation(
         examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
         return examples;
     }
+
+    public bool IsLongRunning => LongRunning != null;
 }

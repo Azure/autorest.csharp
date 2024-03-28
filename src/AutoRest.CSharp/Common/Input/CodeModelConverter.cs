@@ -4,35 +4,39 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Common.Input
 {
     internal class CodeModelConverter
     {
         private readonly CodeModel _codeModel;
-        private readonly SchemaUsageProvider _schemaUsages;
+        private readonly SchemaUsageProvider _schemaUsageProvider;
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
+        private readonly ICollection<ExampleGroup>? _exampleGroups;
 
-        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
+        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
         {
             _codeModel = codeModel;
-            _schemaUsages = schemaUsages;
+            _schemaUsageProvider = schemaUsageProvider;
             _enumsCache = new Dictionary<Schema, InputEnumType>();
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
+            _exampleGroups = codeModel.TestModel?.MockTest.ExampleGroups;
         }
 
         public InputNamespace CreateNamespace() => CreateNamespace(null, null);
@@ -61,30 +65,20 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
-        {
-            var clients = new List<InputClient>();
-            foreach (var og in operationGroups)
-            {
-                clients.Add(CreateClient(og, serviceRequestToInputOperation, inputOperationToOperation));
-            }
-            return clients;
-        }
+            => operationGroups.Select(operationGroup => CreateClient(operationGroup, serviceRequestToInputOperation, inputOperationToOperation)).ToList();
 
         private InputClient CreateClient(OperationGroup operationGroup, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
-        {
-            var parameters = Array.Empty<InputParameter>();
-            return new(
+            => new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
-                Parameters: parameters,
+                Parameters: Array.Empty<InputParameter>(),
                 Parent: null)
             {
                 Key = operationGroup.Key,
             };
-        }
 
-        public IReadOnlyList<InputOperation> CreateOperations(ICollection<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
+        private IReadOnlyList<InputOperation> CreateOperations(ICollection<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var serviceRequests = new List<ServiceRequest>();
             var inputOperations = new List<InputOperation>();
@@ -137,7 +131,7 @@ namespace AutoRest.CSharp.Common.Input
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
             var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
-            return new InputOperation(
+            var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
                 Summary: operation.Language.Default.Summary,
@@ -157,10 +151,53 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId));
+                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
+                OperationId: operation.OperationId,
+                OriginalName: operation.Language.Default.SerializedName);
+            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
+            return inputOperation;
         }
 
-        public List<InputParameter> CreateOperationParameters(IReadOnlyCollection<RequestParameter> requestParameters)
+        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
+        {
+            var result = new List<InputOperationExample>();
+            var exampleOperation = _exampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
+            if (exampleOperation is null)
+            {
+                return result;
+            }
+            foreach (var example in exampleOperation.Examples)
+            {
+                var parameters = example.AllParameters
+                    .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
+                    .ToList();
+                result.Add(new InputOperationExample(operation, parameters, example.Name, example.OriginalFile));
+            }
+            return result;
+        }
+
+        private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
+        {
+            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache);
+            if (exampleValue.RawValue != null)
+            {
+                return new InputExampleRawValue(inputType, exampleValue.RawValue);
+            }
+            if (exampleValue.Elements != null && exampleValue.Elements.Any())
+            {
+                return new InputExampleListValue(inputType, exampleValue.Elements.Select(CreateExampleValue).ToList());
+            }
+            if (exampleValue.Properties is null)
+            {
+                return InputExampleValue.Null(inputType);
+            }
+            else
+            {
+                return new InputExampleObjectValue(inputType, exampleValue.Properties.ToDictionary(p => p.Key, p => CreateExampleValue(p.Value)));
+            }
+        }
+
+        private List<InputParameter> CreateOperationParameters(IReadOnlyCollection<RequestParameter> requestParameters)
         {
             foreach (var parameter in requestParameters)
             {
@@ -170,7 +207,7 @@ namespace AutoRest.CSharp.Common.Input
             return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
         }
 
-        public InputParameter CreateOperationParameter(RequestParameter input) => new(
+        private InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
@@ -193,7 +230,7 @@ namespace AutoRest.CSharp.Common.Input
                 : null
         );
 
-        public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
+        private OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
@@ -240,7 +277,7 @@ namespace AutoRest.CSharp.Common.Input
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
-        public IReadOnlyDictionary<Schema, InputEnumType> CreateEnums()
+        private IReadOnlyDictionary<Schema, InputEnumType> CreateEnums()
         {
             var enums = new Dictionary<Schema, InputEnumType>();
 
@@ -290,7 +327,7 @@ namespace AutoRest.CSharp.Common.Input
                 return model;
             }
 
-            var usage = _schemaUsages.GetUsage(schema);
+            var usage = _schemaUsageProvider.GetUsage(schema);
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
@@ -310,7 +347,9 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
-                IsNullable: false)
+                IsNullable: false,
+                IsEmpty: schema is EmptyObjectSchema,
+                OriginalName: schema.Language.Default.SerializedName)
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
                 Serialization = GetSerialization(schema, usage)
@@ -329,6 +368,7 @@ namespace AutoRest.CSharp.Common.Input
                 SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                 SchemaTypeUsage.Output => InputModelTypeUsage.Output,
                 SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                SchemaTypeUsage.Converter => InputModelTypeUsage.Converter,
                 _ => InputModelTypeUsage.None
             };
 
@@ -349,7 +389,7 @@ namespace AutoRest.CSharp.Common.Input
             FlattenedNames: property.FlattenedNames.ToList()
         );
 
-        public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
+        private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
 
@@ -467,9 +507,16 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType GetOrCreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
         {
-            if (schema is ObjectSchema objectSchema && !Configuration.AzureArm && modelsCache != null)
+            if (schema is ObjectSchema objectSchema && modelsCache != null)
             {
-                return modelsCache[objectSchema] with { IsNullable = isNullable };
+                if (!Configuration.AzureArm)
+                {
+                    return modelsCache[objectSchema] with { IsNullable = isNullable };
+                }
+                else
+                {
+                    return modelsCache[objectSchema];
+                }
             }
 
             if (_enumsCache.TryGetValue(schema, out var enumType))
@@ -545,12 +592,12 @@ namespace AutoRest.CSharp.Common.Input
 
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, false),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
-            ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
+            ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
 
-            AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
-            AnyObjectSchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
+            AnySchema => InputIntrinsicType.Unknown,
+            AnyObjectSchema => InputIntrinsicType.Unknown,
 
-            _ => new CodeModelType(schema, false)
+            _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
@@ -579,7 +626,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
         {
-            var usage = _schemaUsages.GetUsage(schema);
+            var usage = _schemaUsageProvider.GetUsage(schema);
 
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
@@ -607,7 +654,7 @@ namespace AutoRest.CSharp.Common.Input
             Value: choiceValue.Value
         );
 
-        public static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
+        private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
         {
             HttpParameterIn.Uri => RequestLocation.Uri,
             HttpParameterIn.Path => RequestLocation.Path,

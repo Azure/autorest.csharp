@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -23,7 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class MockTestCase : OperationExample
     {
-        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, ExampleModel example) : base(operationId, carrier, operation, example)
+        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperationExample example) : base(operationId, carrier, operation, example)
         {
         }
 
@@ -51,12 +52,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
             // Only when this resource is a "scope resource", we could have multiple parents
             // We could use the value of the scope variable, get the resource type from it to know which resource we should use as a parent here
             return parents.FirstOrDefault();
-        }
-
-        private static string GetRequestParameterName(RequestParameter requestParameter)
-        {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
         }
 
         private MappingObject? _parameterValueMapping;
@@ -96,7 +91,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // if this parameter is a body parameter, we might have changed it to required, and we cannot tell if we have changed it on the codemodel right now. In this case we just fake an empty body.
                 if (parameter.DefaultValue == null && parameter.RequestLocation == RequestLocation.Body)
                 {
-                    exampleParameter ??= new() { ExampleValue = new() { Properties = new() } };
+                    exampleParameter ??= new(new InputParameter(), new InputExampleObjectValue(InputPrimitiveType.Boolean, new Dictionary<string, InputExampleValue>()));
                 }
                 if (exampleParameter == null)
                 {
@@ -157,16 +152,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public bool IsPageable => Operation.IsPagingOperation;
 
-        protected override ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
+        protected override InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
         {
             if (serializedName == "subscriptionId")
             {
-                return new ExampleValue()
-                {
-                    Language = value.Language,
-                    Schema = value.Schema,
-                    RawValue = ReplaceValueForSubscriptionId((string)value.RawValue!)
-                };
+                return new InputExampleRawValue(value.Type, ReplaceValueForSubscriptionId((string)(value as InputExampleRawValue)?.RawValue!));
             }
 
             return value;

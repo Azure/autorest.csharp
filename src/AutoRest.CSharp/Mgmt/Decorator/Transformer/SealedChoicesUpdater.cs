@@ -17,10 +17,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
         };
 
-        public static void UpdateSealChoiceTypes()
+        public static void UpdateSealChoiceTypes(CodeModel codeModel)
         {
             var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema choiceSchema)
                     continue;

@@ -45,4 +45,8 @@ internal record InputParameter(
         ArraySerializationDelimiter: null,
         HeaderCollectionPrefix: null)
     { }
+
+    public string Name { get; internal set; } = Name;
+    public string NameInRequest { get; internal set; } = NameInRequest;
+    public bool IsRequired { get; internal set; } = IsRequired;
 }

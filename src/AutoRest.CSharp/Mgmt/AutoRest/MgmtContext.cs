@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -19,9 +19,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static TypeFactory TypeFactory => Context.TypeFactory;
 
-        public static CodeModel CodeModel => Context.CodeModel;
+        public static InputNamespace InputNamespace => Context.InputNamespace;
 
-        public static string DefaultNamespace => Context.DefaultNamespace;
+        public static string DefaultNamespace => Configuration.Namespace;
 
         public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);
 

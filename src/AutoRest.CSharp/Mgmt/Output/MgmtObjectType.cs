@@ -6,8 +6,8 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
-            : base(objectSchema, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.TypeFactory, MgmtContext.Context.SchemaUsageProvider, MgmtContext.Context.BaseLibrary, MgmtContext.Context.SourceInputModel)
+        public MgmtObjectType(InputModelType inputModel, string? name = null, string? nameSpace = null, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModel, MgmtContext.Context.DefaultNamespace, MgmtContext.TypeFactory, MgmtContext.Context.SourceInputModel, defaultDerivedType)
         {
             _defaultName = name;
             _defaultNamespace = nameSpace;
@@ -29,21 +29,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool IsResourceType => false;
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
+        protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, ObjectSchema, IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
+        private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
-            var name = objectSchema.CSharpName();
+            var name = inputModel.CSharpName();
             return isResourceType ? name + "Data" : name;
         }
 
-        private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)
+        private static string GetDefaultNamespace(bool isResourceType)
         {
-            return isResourceType ? context.DefaultNamespace : GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
+            return isResourceType ? MgmtContext.DefaultNamespace : $"{Configuration.Namespace}.Models";
         }
 
         private HashSet<string> GetParentPropertyNames()
@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         new MemberDeclarationOptions(objectTypeProperty.Declaration.Accessibility, objectTypeProperty.Declaration.Name, newType),
                         objectTypeProperty.Description,
                         objectTypeProperty.IsReadOnly,
-                        objectTypeProperty.SchemaProperty
+                        objectTypeProperty.InputModelProperty
                     );
                 }
                 return objectTypeProperty;
@@ -192,9 +192,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            if (ObjectSchema.DiscriminatorValue == "Unknown" &&
-                ObjectSchema.Parents?.Immediate.Count == 1 &&
-                ObjectSchema.Parents.Immediate.First().Equals(schemaObjectType.ObjectSchema))
+            var immediateParents = InputModel.GetAllBaseModels().ToArray();
+            if (InputModel.DiscriminatorValue == "Unknown" &&
+                immediateParents.Length == 1 &&
+                immediateParents.Single().Equals(schemaObjectType.InputModel))
             {
                 descendantTypes.Add(Type);
             }
@@ -284,31 +285,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             return base.CreateInheritedType();
         }
 
-        public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
-        {
-            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
-            {
-                if (Inherits?.Implementation is SystemObjectType)
-                {
-                    return GetPropertyBySerializedName(property.SerializedName, includeParents);
-                }
-                throw new InvalidOperationException($"Unable to find object property for schema property '{property.SerializedName}' in schema {DefaultName}");
-            }
-
-            return objectProperty;
-        }
-
         protected override FormattableString CreateDescription()
         {
-            return $"{ObjectSchema.CreateDescription()}";
+            return $"{InputModel.Description}";
         }
 
         internal string GetFullSerializedName()
         {
-            return this.ObjectSchema.GetFullSerializedName();
+            return this.InputModel.GetFullSerializedName();
         }
 
-        internal string GetFullSerializedName(Property property)
+        internal string GetFullSerializedName(InputModelProperty property)
         {
             var parentSchema = this.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
             if (parentSchema == null)
@@ -323,8 +310,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(ObjectTypeProperty otProperty)
         {
-            if (otProperty.SchemaProperty != null)
-                return this.GetFullSerializedName(otProperty.SchemaProperty);
+            if (otProperty.InputModelProperty != null)
+                return this.GetFullSerializedName(otProperty.InputModelProperty);
             else
                 return $"{this.GetFullSerializedName()}.{otProperty.Declaration.Name}";
         }

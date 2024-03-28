@@ -11,8 +11,10 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Humanizer.Inflections;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -28,6 +30,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel);
+            ApplyGlobalConfigurations();
+            CodeModelTransformer.Transform(codeModel);
+            var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
             if (Configuration.Generation1ConvenienceClient)
             {
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
@@ -38,21 +44,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
+                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, null);
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    await MgmtTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                 }
                 GenerateMgmtReport(project);
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel)).CreateNamespace(), sourceInputModel, false);
+                await LowLevelTarget.ExecuteAsync(project, inputNamespace, sourceInputModel, false);
             }
             return project;
+        }
+
+        private static void ApplyGlobalConfigurations()
+        {
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
+            {
+                Vocabularies.Default.AddIrregular(word, plural);
+            }
         }
 
         private void GenerateMgmtReport(GeneratedCodeWorkspace project)
