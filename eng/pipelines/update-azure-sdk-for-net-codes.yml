@@ -46,24 +46,24 @@ jobs:
     inputs:
       artifact: matrix-props
       targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/artifacts/matrix-props
-  - task: Powershell@2
-    displayName: Update SDK codes
-    inputs:
-      pwsh: true
-      filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
-      arguments: >
-        -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-        -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
-        -ShowSummary
-      failOnStderr: false
-      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-    retryCountOnTaskFailure: 1
-    continueOnError: ${{ parameters.ContinueOnError}}
-  - pwsh: |
-      git restore NuGet.Config
-    displayName: Discard versions change
-    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-  # TODO: Uncomment before merge
+  # TODO: uncomment before merge
+  # - task: Powershell@2
+  #   displayName: Update SDK codes
+  #   inputs:
+  #     pwsh: true
+  #     filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
+  #     arguments: >
+  #       -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+  #       -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
+  #       -ShowSummary
+  #     failOnStderr: false
+  #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+  #   retryCountOnTaskFailure: 1
+  #   continueOnError: ${{ parameters.ContinueOnError}}
+  # - pwsh: |
+  #     git restore NuGet.Config
+  #   displayName: Discard versions change
+  #   workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
   #   parameters:
   #     BaseRepoBranch: ${{ parameters.BranchName }}
