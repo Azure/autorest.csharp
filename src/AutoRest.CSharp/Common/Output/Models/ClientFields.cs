@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -131,6 +132,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)
             => GetFieldByParameter(parameter.Name, parameter.Type);
+
+        public FieldDeclaration? GetFieldByName(string name)
+            => _parameterNamesToFields.TryGetValue(name, out FieldDeclaration? field) ? field : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _fields.GetEnumerator();
