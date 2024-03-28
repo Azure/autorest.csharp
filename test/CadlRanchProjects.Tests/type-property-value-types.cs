@@ -401,7 +401,7 @@ namespace CadlRanchProjects.Tests
             var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().GetUnionFloatLiteralAsync();
             var expected = BinaryData.FromObjectAsJson(46.875);
             var actual = response.Value.Property;
-            BinaryData.Equals(expected, actual);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
         });
 
         [Test]
@@ -415,7 +415,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionIntLiteral_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().GetUnionIntLiteralAsync();
-            BinaryData.Equals(BinaryData.FromString("42"), response.Value.Property);
+            Assert.AreEqual(BinaryData.FromString("42").ToString(), response.Value.Property.ToString());
         });
 
         [Test]
