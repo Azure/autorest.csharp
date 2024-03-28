@@ -41,5 +41,13 @@ namespace _Type.Property.ValueTypes.Models
         {
             return new BooleanLiteralProperty(property, serializedAdditionalRawData: null);
         }
+
+        /// <summary> Initializes a new instance of <see cref="Models.UnionEnumValueProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <returns> A new <see cref="Models.UnionEnumValueProperty"/> instance for mocking. </returns>
+        public static UnionEnumValueProperty UnionEnumValueProperty(ExtendedEnum property = default)
+        {
+            return new UnionEnumValueProperty(property, serializedAdditionalRawData: null);
+        }
     }
 }

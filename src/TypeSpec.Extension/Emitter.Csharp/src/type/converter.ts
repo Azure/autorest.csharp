@@ -68,7 +68,12 @@ function fromSdkType(
     if (sdkType.kind === "enum")
         return fromSdkEnumType(sdkType, context, enums);
     if (sdkType.kind === "enumvalue")
-        return fromSdkEnumType(sdkType.enumType, context, enums);
+        return fromSdkEnumValueTypeToConstantType(
+            sdkType,
+            context,
+            enums,
+            literalTypeContext
+        );
     if (sdkType.kind === "dict")
         return fromSdkDictionaryType(sdkType, context, models, enums);
     if (sdkType.kind === "array")
@@ -493,6 +498,25 @@ function fromSdkConstantType(
         enums.set(enumName, enumType);
         return enumType;
     }
+}
+
+function fromSdkEnumValueTypeToConstantType(
+    enumValueType: SdkEnumValueType,
+    context: SdkContext,
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
+): InputLiteralType {
+    return {
+        Kind: InputTypeKind.Literal,
+        Name: InputTypeKind.Literal,
+        LiteralValueType:
+            enumValueType.valueType.kind === "boolean" ||
+            literalTypeContext === undefined
+                ? fromSdkBuiltInType(enumValueType.valueType as SdkBuiltInType) // TODO: TCGC fix
+                : fromSdkEnumType(enumValueType.enumType, context, enums),
+        Value: enumValueType.value,
+        IsNullable: false
+    };
 }
 
 function fromSdkEnumValueType(

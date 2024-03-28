@@ -46,10 +46,8 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
-        public UnionEnumValueProperty(ExtendedEnum property)
+        public UnionEnumValueProperty()
         {
-            Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
@@ -61,12 +59,7 @@ namespace _Type.Property.ValueTypes.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/> for deserialization. </summary>
-        internal UnionEnumValueProperty()
-        {
-        }
-
         /// <summary> Property. </summary>
-        public ExtendedEnum Property { get; set; }
+        public ExtendedEnum Property { get; } = ExtendedEnum.EnumValue2;
     }
 }

@@ -675,18 +675,25 @@
      "SerializedName": "type",
      "Description": "",
      "Type": {
-      "$ref": "8"
+      "$id": "86",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "8"
+      },
+      "Value": "clientCredentials",
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "86",
+     "$id": "87",
      "Name": "tokenUrl",
      "SerializedName": "tokenUrl",
      "Description": "",
      "Type": {
-      "$id": "87",
+      "$id": "88",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -699,12 +706,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "88",
+     "$id": "89",
      "Name": "refreshUrl",
      "SerializedName": "refreshUrl",
      "Description": "",
      "Type": {
-      "$id": "89",
+      "$id": "90",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -717,12 +724,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "90",
+     "$id": "91",
      "Name": "scopes",
      "SerializedName": "scopes",
      "Description": "",
      "Type": {
-      "$id": "91",
+      "$id": "92",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -733,7 +740,7 @@
    ]
   },
   {
-   "$id": "92",
+   "$id": "93",
    "Kind": "Model",
    "Name": "ListLedgerEntryInput",
    "Namespace": "Pagination",
@@ -742,7 +749,7 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "93",
+     "$id": "94",
      "Name": "bodyInput",
      "SerializedName": "bodyInput",
      "Description": "Body parameter",
@@ -755,7 +762,7 @@
    ]
   },
   {
-   "$id": "94",
+   "$id": "95",
    "Kind": "Model",
    "Name": "MetricDimensions",
    "Namespace": "Pagination",
@@ -764,7 +771,7 @@
    "Properties": []
   },
   {
-   "$id": "95",
+   "$id": "96",
    "Kind": "Model",
    "Name": "TestRuns",
    "Namespace": "Pagination",
@@ -774,7 +781,7 @@
    "Properties": []
   },
   {
-   "$id": "96",
+   "$id": "97",
    "Kind": "Model",
    "Name": "Dimension",
    "Namespace": "Pagination",
@@ -783,7 +790,7 @@
    "Properties": []
   },
   {
-   "$id": "97",
+   "$id": "98",
    "Kind": "Model",
    "Name": "BatchRequestHeaders",
    "Namespace": "Pagination",
@@ -793,7 +800,7 @@
    "Properties": []
   },
   {
-   "$id": "98",
+   "$id": "99",
    "Kind": "Model",
    "Name": "BatchResponseHeaders",
    "Namespace": "Pagination",
@@ -803,7 +810,7 @@
    "Properties": []
   },
   {
-   "$id": "99",
+   "$id": "100",
    "Kind": "Model",
    "Name": "BatchError",
    "Namespace": "Pagination",
@@ -812,12 +819,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "100",
+     "$id": "101",
      "Name": "code",
      "SerializedName": "code",
      "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
-      "$id": "101",
+      "$id": "102",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -830,23 +837,23 @@
  ],
  "Clients": [
   {
-   "$id": "102",
+   "$id": "103",
    "Name": "PaginationClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "103",
+     "$id": "104",
      "Name": "ListPaginationLedgerEntries",
      "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
       {
-       "$id": "104",
+       "$id": "105",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
        "Type": {
-        "$id": "105",
+        "$id": "106",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -862,21 +869,21 @@
        "Kind": "Client"
       },
       {
-       "$id": "106",
+       "$id": "107",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "107",
+        "$id": "108",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "108",
+        "$id": "109",
         "Type": {
-         "$id": "109",
+         "$id": "110",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -893,7 +900,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "110",
+       "$id": "111",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "Body parameter",
@@ -911,11 +918,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "111",
+       "$id": "112",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "112",
+        "$id": "113",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -930,19 +937,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "114",
         "Type": {
-         "$ref": "112"
+         "$ref": "113"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "114",
+       "$id": "115",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "115",
+        "$id": "116",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -957,9 +964,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "117",
         "Type": {
-         "$ref": "115"
+         "$ref": "116"
         },
         "Value": "application/json"
        }
@@ -967,7 +974,7 @@
      ],
      "Responses": [
       {
-       "$id": "117",
+       "$id": "118",
        "StatusCodes": [
         200
        ],
@@ -991,7 +998,7 @@
      ],
      "BufferResponse": true,
      "Paging": {
-      "$id": "118",
+      "$id": "119",
       "NextLinkName": "customNextLink",
       "ItemName": "entries"
      },
@@ -1000,39 +1007,39 @@
     }
    ],
    "Protocol": {
-    "$id": "119"
+    "$id": "120"
    },
    "Creatable": true
   },
   {
-   "$id": "120",
+   "$id": "121",
    "Name": "AdditionalParameter",
    "Description": "",
    "Operations": [
     {
-     "$id": "121",
+     "$id": "122",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
      "Parameters": [
       {
-       "$ref": "104"
+       "$ref": "105"
       },
       {
-       "$id": "122",
+       "$id": "123",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "123",
+        "$id": "124",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "108"
+        "$ref": "109"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1044,12 +1051,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "124",
+       "$id": "125",
        "Name": "testRunId",
        "NameInRequest": "testRunId",
        "Description": "Unique test run name as identifier",
        "Type": {
-        "$id": "125",
+        "$id": "126",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1065,12 +1072,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "126",
+       "$id": "127",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "Dimension name",
        "Type": {
-        "$id": "127",
+        "$id": "128",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1086,7 +1093,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "128",
+       "$id": "129",
        "Name": "interval",
        "NameInRequest": "interval",
        "Description": "The interval (i.e. timegrain) of the query.",
@@ -1104,12 +1111,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "129",
+       "$id": "130",
        "Name": "metricName",
        "NameInRequest": "metricName",
        "Description": "Metric name",
        "Type": {
-        "$id": "130",
+        "$id": "131",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1125,12 +1132,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "131",
+       "$id": "132",
        "Name": "metricNamespace",
        "NameInRequest": "metricNamespace",
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
-        "$id": "132",
+        "$id": "133",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1146,12 +1153,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "133",
+       "$id": "134",
        "Name": "timespan",
        "NameInRequest": "timespan",
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
-        "$id": "134",
+        "$id": "135",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1167,11 +1174,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "136",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "136",
+        "$id": "137",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1186,9 +1193,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "138",
         "Type": {
-         "$ref": "136"
+         "$ref": "137"
         },
         "Value": "application/json"
        }
@@ -1196,7 +1203,7 @@
      ],
      "Responses": [
       {
-       "$id": "138",
+       "$id": "139",
        "StatusCodes": [
         200
        ],
@@ -1217,7 +1224,7 @@
      "Path": "/app/test-runs/{testRunId}/metric-dimensions/{name}/values",
      "BufferResponse": true,
      "Paging": {
-      "$id": "139",
+      "$id": "140",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1226,39 +1233,39 @@
     }
    ],
    "Protocol": {
-    "$id": "140"
+    "$id": "141"
    },
    "Creatable": false,
    "Parent": "PaginationClient"
   },
   {
-   "$id": "141",
+   "$id": "142",
    "Name": "UseFoundationsResourceList",
    "Description": "",
    "Operations": [
     {
-     "$id": "142",
+     "$id": "143",
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
      "Parameters": [
       {
-       "$ref": "104"
+       "$ref": "105"
       },
       {
-       "$id": "143",
+       "$id": "144",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "144",
+        "$id": "145",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "108"
+        "$ref": "109"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1270,11 +1277,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "145",
+       "$id": "146",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "147",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1289,9 +1296,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "148",
         "Type": {
-         "$ref": "146"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
@@ -1299,7 +1306,7 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "149",
        "StatusCodes": [
         200
        ],
@@ -1320,7 +1327,7 @@
      "Path": "/app/adp/transactions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "149",
+      "$id": "150",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1329,40 +1336,40 @@
     }
    ],
    "Protocol": {
-    "$id": "150"
+    "$id": "151"
    },
    "Creatable": false,
    "Parent": "PaginationClient"
   },
   {
-   "$id": "151",
+   "$id": "152",
    "Name": "TwoTypesItem",
    "Description": "",
    "Operations": [
     {
-     "$id": "152",
+     "$id": "153",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
      "Summary": "Get All Text Blocklists",
      "Description": "Get all text blocklists details.",
      "Parameters": [
       {
-       "$ref": "104"
+       "$ref": "105"
       },
       {
-       "$id": "153",
+       "$id": "154",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "154",
+        "$id": "155",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "108"
+        "$ref": "109"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1374,11 +1381,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "155",
+       "$id": "156",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "156",
+        "$id": "157",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1393,9 +1400,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "157",
+        "$id": "158",
         "Type": {
-         "$ref": "156"
+         "$ref": "157"
         },
         "Value": "application/json"
        }
@@ -1403,7 +1410,7 @@
      ],
      "Responses": [
       {
-       "$id": "158",
+       "$id": "159",
        "StatusCodes": [
         200
        ],
@@ -1424,7 +1431,7 @@
      "Path": "/app/text/blocklists",
      "BufferResponse": true,
      "Paging": {
-      "$id": "159",
+      "$id": "160",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1432,29 +1439,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "160",
+     "$id": "161",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
      "Summary": "Get All BlockItems By blocklistName",
      "Description": "Get all blockItems in a text blocklist",
      "Parameters": [
       {
-       "$ref": "104"
+       "$ref": "105"
       },
       {
-       "$id": "161",
+       "$id": "162",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "162",
+        "$id": "163",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "108"
+        "$ref": "109"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1466,12 +1473,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "163",
+       "$id": "164",
        "Name": "blocklistName",
        "NameInRequest": "blocklistName",
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
-        "$id": "164",
+        "$id": "165",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1487,12 +1494,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "165",
+       "$id": "166",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "The number of result items to return.",
        "Type": {
-        "$id": "166",
+        "$id": "167",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -1508,12 +1515,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "167",
+       "$id": "168",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "The number of result items to skip.",
        "Type": {
-        "$id": "168",
+        "$id": "169",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -1529,12 +1536,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "169",
+       "$id": "170",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "170",
+        "$id": "171",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -1550,11 +1557,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "171",
+       "$id": "172",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "172",
+        "$id": "173",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1569,9 +1576,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "173",
+        "$id": "174",
         "Type": {
-         "$ref": "172"
+         "$ref": "173"
         },
         "Value": "application/json"
        }
@@ -1579,7 +1586,7 @@
      ],
      "Responses": [
       {
-       "$id": "174",
+       "$id": "175",
        "StatusCodes": [
         200
        ],
@@ -1600,7 +1607,7 @@
      "Path": "/app/text/blocklists/{blocklistName}/blockItems",
      "BufferResponse": true,
      "Paging": {
-      "$id": "175",
+      "$id": "176",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1609,39 +1616,39 @@
     }
    ],
    "Protocol": {
-    "$id": "176"
+    "$id": "177"
    },
    "Creatable": false,
    "Parent": "PaginationClient"
   },
   {
-   "$id": "177",
+   "$id": "178",
    "Name": "Pools",
    "Description": "",
    "Operations": [
     {
-     "$id": "178",
+     "$id": "179",
      "Name": "listPools",
      "ResourceName": "Pools",
      "Description": "Lists all of the Pools in the specified Account.",
      "Parameters": [
       {
-       "$ref": "104"
+       "$ref": "105"
       },
       {
-       "$id": "179",
+       "$id": "180",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "180",
+        "$id": "181",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "108"
+        "$ref": "109"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1653,12 +1660,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "181",
+       "$id": "182",
        "Name": "$filter",
        "NameInRequest": "$filter",
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
-        "$id": "182",
+        "$id": "183",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1674,16 +1681,16 @@
        "Kind": "Method"
       },
       {
-       "$id": "183",
+       "$id": "184",
        "Name": "$select",
        "NameInRequest": "$select",
        "Description": "An OData $select clause.",
        "Type": {
-        "$id": "184",
+        "$id": "185",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "185",
+         "$id": "186",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1702,16 +1709,16 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "186",
+       "$id": "187",
        "Name": "$expand",
        "NameInRequest": "$expand",
        "Description": "An OData $expand clause.",
        "Type": {
-        "$id": "187",
+        "$id": "188",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "188",
+         "$id": "189",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1730,11 +1737,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "189",
+       "$id": "190",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "190",
+        "$id": "191",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1749,9 +1756,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "191",
+        "$id": "192",
         "Type": {
-         "$ref": "190"
+         "$ref": "191"
         },
         "Value": "application/json"
        }
@@ -1759,7 +1766,7 @@
      ],
      "Responses": [
       {
-       "$id": "192",
+       "$id": "193",
        "StatusCodes": [
         200
        ],
@@ -1780,7 +1787,7 @@
      "Path": "/app/pools",
      "BufferResponse": true,
      "Paging": {
-      "$id": "193",
+      "$id": "194",
       "NextLinkName": "odata.nextLink",
       "ItemName": "value"
      },
@@ -1789,16 +1796,16 @@
     }
    ],
    "Protocol": {
-    "$id": "194"
+    "$id": "195"
    },
    "Creatable": false,
    "Parent": "PaginationClient"
   }
  ],
  "Auth": {
-  "$id": "195",
+  "$id": "196",
   "OAuth2": {
-   "$id": "196",
+   "$id": "197",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]

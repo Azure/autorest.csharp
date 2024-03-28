@@ -76,18 +76,25 @@
      "SerializedName": "type",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$id": "11",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "2"
+      },
+      "Value": "implicit",
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "authorizationUrl",
      "SerializedName": "authorizationUrl",
      "Description": "",
      "Type": {
-      "$id": "12",
+      "$id": "13",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -100,12 +107,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "13",
+     "$id": "14",
      "Name": "scopes",
      "SerializedName": "scopes",
      "Description": "",
      "Type": {
-      "$id": "14",
+      "$id": "15",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -118,23 +125,23 @@
  ],
  "Clients": [
   {
-   "$id": "15",
+   "$id": "16",
    "Name": "UnionClient",
    "Description": "Illustrates clients generated with ApiKey and OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "validKey",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "18",
+        "$id": "19",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -149,9 +156,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "20",
         "Type": {
-         "$id": "20",
+         "$id": "21",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -160,11 +167,11 @@
        }
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "23",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -179,9 +186,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "24",
         "Type": {
-         "$ref": "22"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
@@ -189,7 +196,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "25",
        "StatusCodes": [
         204
        ],
@@ -207,20 +214,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "26",
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$ref": "17"
+       "$ref": "18"
       },
       {
-       "$id": "26",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "28",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -235,9 +242,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "29",
         "Type": {
-         "$ref": "27"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
@@ -245,7 +252,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "30",
        "StatusCodes": [
         204
        ],
@@ -264,19 +271,19 @@
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "31"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "31",
+  "$id": "32",
   "ApiKey": {
-   "$id": "32",
+   "$id": "33",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "33",
+   "$id": "34",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

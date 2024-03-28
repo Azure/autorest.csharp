@@ -510,18 +510,25 @@
      "SerializedName": "type",
      "Description": "",
      "Type": {
-      "$ref": "8"
+      "$id": "65",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "8"
+      },
+      "Value": "clientCredentials",
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "65",
+     "$id": "66",
      "Name": "tokenUrl",
      "SerializedName": "tokenUrl",
      "Description": "",
      "Type": {
-      "$id": "66",
+      "$id": "67",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -534,12 +541,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "67",
+     "$id": "68",
      "Name": "refreshUrl",
      "SerializedName": "refreshUrl",
      "Description": "",
      "Type": {
-      "$id": "68",
+      "$id": "69",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -552,12 +559,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "scopes",
      "SerializedName": "scopes",
      "Description": "",
      "Type": {
-      "$id": "70",
+      "$id": "71",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -568,7 +575,7 @@
    ]
   },
   {
-   "$id": "71",
+   "$id": "72",
    "Kind": "Model",
    "Name": "HealthInsightsRetryAfterTrait",
    "Namespace": "lro",
@@ -577,12 +584,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "72",
+     "$id": "73",
      "Name": "retryAfter",
      "SerializedName": "retryAfter",
      "Description": "The retry-after header.",
      "Type": {
-      "$id": "73",
+      "$id": "74",
       "Kind": "Model",
       "Name": "HealthInsightsRetryAfterTraitRetryAfter",
       "Namespace": "lro",
@@ -590,12 +597,12 @@
       "Usage": "None",
       "Properties": [
        {
-        "$id": "74",
+        "$id": "75",
         "Name": "response",
         "SerializedName": "response",
         "Description": "",
         "Type": {
-         "$id": "75",
+         "$id": "76",
          "Kind": "Model",
          "Name": "RetryAfterHeader",
          "Namespace": "Azure.Core.Foundations",
@@ -615,41 +622,41 @@
    ]
   },
   {
-   "$ref": "73"
+   "$ref": "74"
   },
   {
-   "$ref": "75"
+   "$ref": "76"
   }
  ],
  "Clients": [
   {
-   "$id": "76",
+   "$id": "77",
    "Name": "lroClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "77"
+    "$id": "78"
    },
    "Creatable": true
   },
   {
-   "$id": "78",
+   "$id": "79",
    "Name": "LegacyLro",
    "Description": "",
    "Operations": [
     {
-     "$id": "79",
+     "$id": "80",
      "Name": "getJob",
      "ResourceName": "LegacyLro",
      "Summary": "Get Radiology Insights job details",
      "Description": "Gets the status and details of the Radiology Insights job.",
      "Parameters": [
       {
-       "$id": "80",
+       "$id": "81",
        "Name": "lroEndpoint",
        "NameInRequest": "lroEndpoint",
        "Type": {
-        "$id": "81",
+        "$id": "82",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -665,12 +672,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "82",
+       "$id": "83",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "83",
+        "$id": "84",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -686,12 +693,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "85",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "A processing job identifier.",
        "Type": {
-        "$id": "85",
+        "$id": "86",
         "Kind": "Primitive",
         "Name": "Guid",
         "IsNullable": false
@@ -707,11 +714,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
+        "$id": "88",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -726,9 +733,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "89",
         "Type": {
-         "$ref": "87"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
@@ -736,7 +743,7 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "90",
        "StatusCodes": [
         200
        ],
@@ -746,12 +753,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "90",
+         "$id": "91",
          "Name": "Retry-After",
          "NameInResponse": "retryAfter",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "91",
+          "$id": "92",
           "Kind": "Primitive",
           "Name": "Int32",
           "IsNullable": false
@@ -773,22 +780,22 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "92",
+     "$id": "93",
      "Name": "createJob",
      "ResourceName": "LegacyLro",
      "Summary": "Create Radiology Insights job",
      "Description": "Creates a Radiology Insights job with the given request body.",
      "Parameters": [
       {
-       "$ref": "80"
+       "$ref": "81"
       },
       {
-       "$id": "93",
+       "$id": "94",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "94",
+        "$id": "95",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -804,12 +811,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "95",
+       "$id": "96",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "96",
+        "$id": "97",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -825,12 +832,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "97",
+       "$id": "98",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "98",
+        "$id": "99",
         "Kind": "Primitive",
         "Name": "DateTime",
         "IsNullable": false
@@ -846,7 +853,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "99",
+       "$id": "100",
        "Name": "RadiologyInsightsData",
        "NameInRequest": "RadiologyInsightsData",
        "Description": "The body of the Radiology Insights request.",
@@ -864,11 +871,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "100",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "101",
+        "$id": "102",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -883,19 +890,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "102",
+        "$id": "103",
         "Type": {
-         "$ref": "101"
+         "$ref": "102"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "103",
+       "$id": "104",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "104",
+        "$id": "105",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -910,9 +917,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "105",
+        "$id": "106",
         "Type": {
-         "$ref": "104"
+         "$ref": "105"
         },
         "Value": "application/json"
        }
@@ -920,7 +927,7 @@
      ],
      "Responses": [
       {
-       "$id": "106",
+       "$id": "107",
        "StatusCodes": [
         202
        ],
@@ -930,45 +937,45 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "107",
+         "$id": "108",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "108",
+          "$id": "109",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
          }
         },
         {
-         "$id": "109",
+         "$id": "110",
          "Name": "Retry-After",
          "NameInResponse": "retryAfter",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "110",
+          "$id": "111",
           "Kind": "Primitive",
           "Name": "Int32",
           "IsNullable": false
          }
         },
         {
-         "$id": "111",
+         "$id": "112",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$id": "112",
+          "$id": "113",
           "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
-            "$id": "113",
+            "$id": "114",
             "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "114",
+             "$id": "115",
              "Kind": "Primitive",
              "Name": "String",
              "IsNullable": false
@@ -977,11 +984,11 @@
             "IsNullable": false
            },
            {
-            "$id": "115",
+            "$id": "116",
             "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "116",
+             "$id": "117",
              "Kind": "Primitive",
              "Name": "String",
              "IsNullable": false
@@ -1009,10 +1016,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "117",
+      "$id": "118",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "118",
+       "$id": "119",
        "StatusCodes": [
         200
        ],
@@ -1028,20 +1035,20 @@
     }
    ],
    "Protocol": {
-    "$id": "119"
+    "$id": "120"
    },
    "Creatable": false,
    "Parent": "lroClient"
   }
  ],
  "Auth": {
-  "$id": "120",
+  "$id": "121",
   "ApiKey": {
-   "$id": "121",
+   "$id": "122",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "122",
+   "$id": "123",
    "Scopes": [
     "https://api.example.com/.default"
    ]
