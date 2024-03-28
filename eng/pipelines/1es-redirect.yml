@@ -54,21 +54,21 @@ extends:
       - ${{ each pair in stage }}:
           ${{ if ne(pair.key, 'variables') }}:
             ${{ pair.key }}: ${{ pair.value }}
-        variables:
-          - template: /eng/pipelines/variables/image.yml
-          - ${{ each variable in parameters.variables }}:
-              - ${{ if variable.key }}:
-                  # turn objects into name/value lists
-                  - name: ${{ variable.key }}
-                    value: ${{ variable.value }}
-              - ${{ else }}:
-                  # preserve all other variables
-                  - ${{ variable }}
-          - ${{ each variable in stage.variables }}:
-              - ${{ if variable.key }}:
-                  # turn objects into name/value lists
-                  - name: ${{ variable.key }}
-                    value: ${{ variable.value }}
-              - ${{ else }}:
-                  # preserve all other variables
-                  - ${{ variable }}
+          variables:
+            - template: eng/pipelines/variables/image.yml
+            - ${{ each variable in parameters.variables }}:
+                - ${{ if variable.key }}:
+                    # turn objects into name/value lists
+                    - name: ${{ variable.key }}
+                      value: ${{ variable.value }}
+                - ${{ else }}:
+                    # preserve all other variables
+                    - ${{ variable }}
+            - ${{ each variable in stage.variables }}:
+                - ${{ if variable.key }}:
+                    # turn objects into name/value lists
+                    - name: ${{ variable.key }}
+                      value: ${{ variable.value }}
+                - ${{ else }}:
+                    # preserve all other variables
+                    - ${{ variable }}
