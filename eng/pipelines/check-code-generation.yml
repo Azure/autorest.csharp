@@ -15,9 +15,6 @@ parameters:
 
 jobs:
 - job: ${{ parameters.name }}
-  pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: windows-2022
   dependsOn: ${{ parameters.dependsOn }}
   steps:
     - task: NodeTool@0

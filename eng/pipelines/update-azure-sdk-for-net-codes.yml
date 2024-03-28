@@ -18,9 +18,6 @@ parameters:
 jobs:
 - job: ${{ parameters.Name }}
   timeoutInMinutes: 60
-  pool:
-    name: azsdk-pool-mms-ubuntu-2004-general
-    vmImage: ubuntu-20.04
   strategy:
     matrix: ${{ parameters.Matrix }}
   dependsOn: ${{ parameters.DependsOn }}
@@ -66,12 +63,13 @@ jobs:
       git restore NuGet.Config
     displayName: Discard versions change
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
-    parameters:
-      BaseRepoBranch: ${{ parameters.BranchName }}
-      BaseRepoOwner: azure-sdk
-      CommitMsg: Update SDK codes $(JobKey)
-      TargetRepoOwner: Azure
-      TargetRepoName: azure-sdk-for-net
-      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+  # TODO: Uncomment before merge
+  # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+  #   parameters:
+  #     BaseRepoBranch: ${{ parameters.BranchName }}
+  #     BaseRepoOwner: azure-sdk
+  #     CommitMsg: Update SDK codes $(JobKey)
+  #     TargetRepoOwner: Azure
+  #     TargetRepoName: azure-sdk-for-net
+  #     WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+  #     ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
