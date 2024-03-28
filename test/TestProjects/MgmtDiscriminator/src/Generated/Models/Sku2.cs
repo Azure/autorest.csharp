@@ -46,12 +46,7 @@ namespace MgmtDiscriminator.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        public Sku2()
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        /// <param name="nestedName"> The name of the sku. </param>
+        /// <param name="nestedName"> The childmost sku property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Sku2(string nestedName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,8 +54,7 @@ namespace MgmtDiscriminator.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the sku. </summary>
-        [WirePath("nestedName")]
+        /// <summary> The childmost sku property. </summary>
         public string NestedName { get; set; }
     }
 }

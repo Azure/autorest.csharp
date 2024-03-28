@@ -151,6 +151,10 @@ namespace MgmtDiscriminator.Models
                     case "OriginGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (OriginGroup == null)
+                        {
+                            OriginGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(OriginGroup, propertyDictionary);
                         break;
                     default:

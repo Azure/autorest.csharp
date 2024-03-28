@@ -163,7 +163,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: Sku2NestedName
-          description: The name of the sku
+          description: The childmost sku property
       protocol: !Protocols {}
     - !StringSchema &ref_78
       type: string
@@ -2517,7 +2517,7 @@ schemas: !Schemas
                               language: !Languages 
                                 default:
                                   name: nestedName
-                                  description: The name of the sku
+                                  description: The childmost sku property
                               protocol: !Protocols {}
                           serializationFormats:
                             - json
@@ -2530,11 +2530,11 @@ schemas: !Schemas
                               description: A model with a single object for testing safe-flattening
                               namespace: ''
                           protocol: !Protocols {}
-                        serializedName: name
+                        serializedName: name1
                         language: !Languages 
                           default:
-                            name: name
-                            description: The name of the sku
+                            name: name1
+                            description: The middle sku property
                         protocol: !Protocols {}
                     serializationFormats:
                       - json
@@ -2552,7 +2552,7 @@ schemas: !Schemas
                   language: !Languages 
                     default:
                       name: sku
-                      description: A model that will be safe flattened.
+                      description: The top level sku property.
                   protocol: !Protocols {}
                 - !Property 
                   schema: !ObjectSchema &ref_95

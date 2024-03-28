@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (true, null, false);
         }
 
-        private static bool HasDefaultPublicCtor(CSharpType type)
+        public static bool HasDefaultPublicCtor(CSharpType type)
         {
             if (type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return true;

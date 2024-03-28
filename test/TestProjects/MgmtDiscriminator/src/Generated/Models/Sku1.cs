@@ -51,26 +51,26 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Sku1"/>. </summary>
-        /// <param name="name"> The name of the sku. </param>
+        /// <param name="name1"> The middle sku property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Sku1(Sku2 name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Sku1(Sku2 name1, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            Name1 = name1;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the sku. </summary>
-        internal Sku2 Name { get; set; }
-        /// <summary> The name of the sku. </summary>
-        [WirePath("name.nestedName")]
+        /// <summary> The middle sku property. </summary>
+        internal Sku2 Name1 { get; set; }
+        /// <summary> The childmost sku property. </summary>
+        [WirePath("name1.nestedName")]
         public string NestedName
         {
-            get => Name is null ? default : Name.NestedName;
+            get => Name1 is null ? default : Name1.NestedName;
             set
             {
-                if (Name is null)
-                    Name = new Sku2();
-                Name.NestedName = value;
+                if (Name1 is null)
+                    Name1 = new Sku2();
+                Name1.NestedName = value;
             }
         }
     }

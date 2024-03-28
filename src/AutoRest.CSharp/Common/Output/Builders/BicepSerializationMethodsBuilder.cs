@@ -83,21 +83,37 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (var property in objectSerialization.FlattenedProperties)
             {
                 var stack = property.BuildHierarchyStack();
-                var instanceName = stack.Last().Declaration.Name;
-                var childPropertyName = stack.Pop().Declaration.Name;
+                var childProperty = stack.Last();
+                var childMostProperty = stack.Peek();
+
                 var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
 
+                ValueExpression? propertyInitialization;
+                if (FlattenedObjectTypeProperty.HasDefaultPublicCtor(childProperty.Declaration.Type))
+                {
+                    propertyInitialization = New.Instance(childProperty.Declaration.Type);
+                }
+                else
+                {
+                    propertyInitialization = New.Instance(childProperty.Declaration.Type, new[] { This.Property(childProperty.Declaration.Name) });
+                }
+
+                var propertyInstance = This.Property(childProperty.Declaration.Name);
                 switchStatement.Add(
                     new SwitchCase(Literal(property.Declaration.Name), new MethodBodyStatement[]
                     {
                         Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
                         propertyDictionary.Invoke(
                             "Add",
-                            Literal(childPropertyName),
+                            Literal(childMostProperty.Declaration.Name),
                             item.Property("Value")).ToStatement(),
+                        new IfStatement(Equal(propertyInstance, Null))
+                        {
+                            Assign(propertyInstance, propertyInitialization)
+                        },
                         objectOverrides.Invoke(
                             "Add",
-                            This.Property(instanceName),
+                            propertyInstance,
                             propertyDictionary).ToStatement(),
                         new KeywordStatement("break", null)
                 }));

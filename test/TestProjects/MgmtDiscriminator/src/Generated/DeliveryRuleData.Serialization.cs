@@ -517,6 +517,10 @@ namespace MgmtDiscriminator
                     case "NestedName":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("NestedName", item.Value);
+                        if (Sku == null)
+                        {
+                            Sku = new Sku1();
+                        }
                         bicepOptions.PropertyOverrides.Add(Sku, propertyDictionary);
                         break;
                     default:
