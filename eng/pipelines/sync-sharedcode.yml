@@ -10,7 +10,7 @@ schedules:
   always: true
 
 extends:
-- template: /eng/pipelines/1es-redirect.yml
+  template: /eng/pipelines/1es-redirect.yml
   parameters:
     variables:
     - group: Release Secrets for GitHub
