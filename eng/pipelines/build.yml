@@ -213,70 +213,70 @@ extends:
                     #     nuGetFeedType: 'internal'
                     #     publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
 
-      - stage: 'Update_azure_sdk_for_net'
-        pool:
-          name: $(LINUXPOOL)
-          image: $(LINUXVMIMAGE)
-          os: linux
-        dependsOn:
-          - Build_and_Test
-          - Release
-        variables:
-          AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-          TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.TypeSpecEmitterVersion']]
-          BranchName: "auto-update-autorest-$(AutorestCSharpVersion)"
-        jobs:
-          - template: update-generator-versions.yml
-            parameters:
-              Name: Update_Generator_Version
-              AutorestCSharpVersion: $(AutorestCSharpVersion)
-              BranchName: $(BranchName)
+        - stage: 'Update_azure_sdk_for_net'
+          pool:
+            name: $(LINUXPOOL)
+            image: $(LINUXVMIMAGE)
+            os: linux
+          dependsOn:
+            - Build_and_Test
+            - Release
+          variables:
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.TypeSpecEmitterVersion']]
+            BranchName: "auto-update-autorest-$(AutorestCSharpVersion)"
+          jobs:
+            - template: update-generator-versions.yml
+              parameters:
+                Name: Update_Generator_Version
+                AutorestCSharpVersion: $(AutorestCSharpVersion)
+                BranchName: $(BranchName)
 
-          - template: generate-sdk-job-matrix-files.yml
-            parameters:
-              Name: Generate_Job_Matrix
-              DependsOn: Update_Generator_Version
-              JobCount: 7
-              BranchName: $(BranchName)
+            - template: generate-sdk-job-matrix-files.yml
+              parameters:
+                Name: Generate_Job_Matrix
+                DependsOn: Update_Generator_Version
+                JobCount: 7
+                BranchName: $(BranchName)
 
-          - template: update-azure-sdk-for-net-codes.yml
-            parameters:
-              Name: Update_Code
-              DependsOn: Generate_Job_Matrix
-              Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
-              AutorestCSharpVersion: $(AutorestCSharpVersion)
-              BranchName: $(BranchName)
-              ContinueOnError: true
+            - template: update-azure-sdk-for-net-codes.yml
+              parameters:
+                Name: Update_Code
+                DependsOn: Generate_Job_Matrix
+                Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
+                AutorestCSharpVersion: $(AutorestCSharpVersion)
+                BranchName: $(BranchName)
+                ContinueOnError: true
 
-          - job: Create_PR
-            dependsOn: Update_Code
-            variables:
-              UpdateCodeResult: $[dependencies.Update_Code.result]
-            steps:
-              - checkout: self
-              - checkout: azure-sdk-tools
-              - pwsh: |
-                  if ('$(UpdateCodeResult)' -eq 'Succeeded') {
-                    $prTitle = 'Update AutoRest C# version to $(AutorestCSharpVersion)'
-                  } else {
-                    $prTitle = 'Failed Update AutoRest C# version to $(AutorestCSharpVersion)'
-                  }
+            - job: Create_PR
+              dependsOn: Update_Code
+              variables:
+                UpdateCodeResult: $[dependencies.Update_Code.result]
+              steps:
+                - checkout: self
+                - checkout: azure-sdk-tools
+                - pwsh: |
+                    if ('$(UpdateCodeResult)' -eq 'Succeeded') {
+                      $prTitle = 'Update AutoRest C# version to $(AutorestCSharpVersion)'
+                    } else {
+                      $prTitle = 'Failed Update AutoRest C# version to $(AutorestCSharpVersion)'
+                    }
 
-                  Write-Host "Setting variable PrTitle to '$prTitle'"
-                  Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
-                displayName: 'Build PR Title'
-              # TODO: Uncomment before merge
-              # - task: PowerShell@2
-              #   displayName: Create pull request
-              #   inputs:
-              #     pwsh: true
-              #     filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
-              #     arguments: >
-              #       -RepoOwner "Azure"
-              #       -RepoName "azure-sdk-for-net"
-              #       -BaseBranch "main"
-              #       -PROwner "azure-sdk"
-              #       -PRBranch $(BranchName)
-              #       -AuthToken "$(azuresdk-github-pat)"
-              #       -PRTitle "$(PrTitle)"
-              #       -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                    Write-Host "Setting variable PrTitle to '$prTitle'"
+                    Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
+                  displayName: 'Build PR Title'
+                # TODO: Uncomment before merge
+                # - task: PowerShell@2
+                #   displayName: Create pull request
+                #   inputs:
+                #     pwsh: true
+                #     filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+                #     arguments: >
+                #       -RepoOwner "Azure"
+                #       -RepoName "azure-sdk-for-net"
+                #       -BaseBranch "main"
+                #       -PROwner "azure-sdk"
+                #       -PRBranch $(BranchName)
+                #       -AuthToken "$(azuresdk-github-pat)"
+                #       -PRTitle "$(PrTitle)"
+                #       -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
