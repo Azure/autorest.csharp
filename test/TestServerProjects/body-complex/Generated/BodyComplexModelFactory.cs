@@ -66,9 +66,9 @@ namespace body_complex.Models
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
         /// <returns> A new <see cref="Models.MyBaseType"/> instance for mocking. </returns>
-        public static MyBaseType MyBaseType(string kind = "Unknown", string propB1 = null, string propBH1 = null)
+        public static MyBaseType MyBaseType(string kind = null, string propB1 = null, string propBH1 = null)
         {
-            return new UnknownMyBaseType(kind, propB1, propBH1, serializedAdditionalRawData: null);
+            return new UnknownMyBaseType(kind == null ? default : new MyKind(kind), propB1, propBH1, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MyDerivedType"/>. </summary>
