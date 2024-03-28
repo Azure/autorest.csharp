@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -84,6 +85,22 @@ namespace CognitiveSearch.Models
                 }
             }
             return new InputFieldMappingEntry(name, source, sourceContext, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputFieldMappingEntry FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputFieldMappingEntry(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<InputFieldMappingEntry>(this);
+            return content;
         }
     }
 }

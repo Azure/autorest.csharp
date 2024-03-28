@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 
 namespace Inheritance.Models
@@ -39,6 +40,22 @@ namespace Inheritance.Models
                 }
             }
             return new DerivedClassWithExtensibleEnumDiscriminator(discriminatorProperty);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new DerivedClassWithExtensibleEnumDiscriminator FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDerivedClassWithExtensibleEnumDiscriminator(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<DerivedClassWithExtensibleEnumDiscriminator>(this);
+            return content;
         }
 
         internal partial class DerivedClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<DerivedClassWithExtensibleEnumDiscriminator>

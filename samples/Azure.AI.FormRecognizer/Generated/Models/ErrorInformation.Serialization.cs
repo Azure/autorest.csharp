@@ -34,5 +34,13 @@ namespace Azure.AI.FormRecognizer.Models
             }
             return new ErrorInformation(code, message);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ErrorInformation FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeErrorInformation(document.RootElement);
+        }
     }
 }
