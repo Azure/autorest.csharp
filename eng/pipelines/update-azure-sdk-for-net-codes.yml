@@ -46,30 +46,29 @@ jobs:
     inputs:
       artifact: matrix-props
       targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/artifacts/matrix-props
-  # TODO: uncomment before merge
-  # - task: Powershell@2
-  #   displayName: Update SDK codes
-  #   inputs:
-  #     pwsh: true
-  #     filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
-  #     arguments: >
-  #       -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-  #       -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
-  #       -ShowSummary
-  #     failOnStderr: false
-  #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-  #   retryCountOnTaskFailure: 1
-  #   continueOnError: ${{ parameters.ContinueOnError}}
-  # - pwsh: |
-  #     git restore NuGet.Config
-  #   displayName: Discard versions change
-  #   workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-  # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
-  #   parameters:
-  #     BaseRepoBranch: ${{ parameters.BranchName }}
-  #     BaseRepoOwner: azure-sdk
-  #     CommitMsg: Update SDK codes $(JobKey)
-  #     TargetRepoOwner: Azure
-  #     TargetRepoName: azure-sdk-for-net
-  #     WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-  #     ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+  - task: Powershell@2
+    displayName: Update SDK codes
+    inputs:
+      pwsh: true
+      filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
+      arguments: >
+        -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+        -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
+        -ShowSummary
+      failOnStderr: false
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+    retryCountOnTaskFailure: 1
+    continueOnError: ${{ parameters.ContinueOnError}}
+  - pwsh: |
+      git restore NuGet.Config
+    displayName: Discard versions change
+    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+    parameters:
+      BaseRepoBranch: ${{ parameters.BranchName }}
+      BaseRepoOwner: azure-sdk
+      CommitMsg: Update SDK codes $(JobKey)
+      TargetRepoOwner: Azure
+      TargetRepoName: azure-sdk-for-net
+      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
