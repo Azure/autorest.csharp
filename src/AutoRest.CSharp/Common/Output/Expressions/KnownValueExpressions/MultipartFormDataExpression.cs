@@ -11,25 +11,28 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
-    internal sealed record MultipartFormDataExpression(ValueExpression Untyped) : TypedValueExpression<MultipartFormData>(Untyped)
+    internal sealed record MultipartFormDataExpression(ValueExpression Untyped) : TypedValueExpression<MultipartFormDataRequestContent>(Untyped)
     {
         //public ValueExpression ContentParts => new TypedMemberExpression(null, "ContentParts", typeof(List<MultipartContentPart>));
         //public ValueExpression ContentParts => new(Property(nameof(MultipartFormDataContent.ContentParts)));
-        public ValueExpression ContentParts => new MemberExpression(this, nameof(MultipartFormData.ContentParts));
-        public MethodBodyStatement Add() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add));
-        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] { toBinaryDataExpress, Literal(name)}, false);
-        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] {toBinaryDataExpress, Literal(name), headers}, false);
-        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, string fileName, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] { toBinaryDataExpress, Literal(name), Literal(fileName), headers }, false);
+        public ValueExpression ContentParts => new MemberExpression(this, nameof(MultipartFormDataRequestContent.ContentParts));
+        public MethodBodyStatement Add() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataRequestContent.Add));
+        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataRequestContent.Add), new[] { toBinaryDataExpress, Literal(name)}, false);
+        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataRequestContent.Add), new[] {toBinaryDataExpress, Literal(name), headers}, false);
+        public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, string fileName, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataRequestContent.Add), new[] { toBinaryDataExpress, Literal(name), Literal(fileName), headers }, false);
         //public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.ToContent));
         public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(ModelReaderWriter.Write));
         //public MethodBodyStatement Create(ValueExpression content) => new InvokeStaticMethodStatement(typeof(MultipartFormDataContent), nameof(MultipartFormDataContent.Create), new[] { content });
-        public static MultipartFormDataExpression Create(ValueExpression content) => new(InvokeStatic(nameof(MultipartFormData.Create), new[] { content }));
+        public static MultipartFormDataExpression Create(ValueExpression content, ValueExpression contentType) => new(InvokeStatic(nameof(MultipartFormDataContent.Create), new[] { content, contentType }));
         //public static MultipartFormDataContentExpression FromObject(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromObject), new[] { value }));
-        public static MultipartFormDataExpression ParseToFormData() => new(InvokeStatic(nameof(MultipartFormDataExtensions.ParseToFormData)));
+        //public static MultipartFormDataExpression ParseToFormData() => new(InvokeStatic(nameof(MultipartFormDataExtensions.ParseToFormData)));
+        //public static MultipartFormDataExpression ParseToFormData() => new(InvokeStatic("ParseToFormData"));
+        public ValueExpression ParseToFormData() => Extensible.MultipartFormData.ParseToFormData(this);
     }
 }

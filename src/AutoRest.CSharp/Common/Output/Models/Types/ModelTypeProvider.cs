@@ -667,6 +667,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
         }
+        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
+        {
+            if (inputProperty.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InitializationValue is not null)
+            {
+                return false;
+            }
+
+            return inputProperty.IsReadOnly;
+        }
+
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
             bool shouldExcludeInWireSerialization = false;

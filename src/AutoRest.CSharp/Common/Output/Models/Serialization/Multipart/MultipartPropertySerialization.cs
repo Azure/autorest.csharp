@@ -12,7 +12,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal record MultipartPropertySerialization: PropertySerialization
+    internal class MultipartPropertySerialization: PropertySerialization
     {
         /*
         public MultipartPropertySerialization(

@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types.System;
@@ -26,6 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
+            yield return FormDataItemProvider.Instance;
+            yield return MultipartFormDataExtensionsProvider.Instance;
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;

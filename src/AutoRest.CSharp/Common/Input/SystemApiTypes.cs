@@ -70,6 +70,7 @@ namespace AutoRest.CSharp.Common.Input
         public override CSharpType RequestUriType => ClientUriBuilderProvider.Instance.Type;
         public override Type RequestContentType => typeof(BinaryContent);
         public override string ToRequestContentName => "ToBinaryBody";
+        public override string ToMultipartRequestContentName => "ToMultipartBinaryBody";
         public override string RequestContentCreateName => nameof(BinaryContent.Create);
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");

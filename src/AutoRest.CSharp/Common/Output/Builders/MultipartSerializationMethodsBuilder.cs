@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
             var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
+            var contentType = new StringExpression(KnownParameters.Serializations.contentType);
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method(
                 new MethodSignature(
@@ -68,7 +69,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     multipart.Type,
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartDeSerializationMethodBody(multipart!, data, options).ToArray());
+                BuildMultipartDeSerializationMethodBody(multipart!, data, contentType, options).ToArray());
             yield return new Method(
                 new MethodSignature(
                     "FromResponse",
@@ -78,7 +79,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     multipart.Type,
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartDeSerializationMethodBody(multipart, data, options).ToArray());
+                BuildMultipartDeSerializationMethodBody(multipart, data, contentType, options).ToArray());
         }
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
@@ -132,18 +133,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new MethodBodyStatement[]
                         {
                             Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
-                            UsingDeclare("content", typeof(MultipartFormDataBinaryContent), New.Instance(typeof(MultipartFormDataBinaryContent), new[]{boundary}), out var content),
+                            UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
                             WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                             //Declare(typeof(BinaryData), "binaryData", new InvokeInstanceMethodExpression(content, nameof(MultipartFormData.ToContent), Array.Empty<ValueExpression>(),
                             Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
                             Snippets.Return(binaryData)
                         };
         }
-        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, StringExpression contentType, ModelReaderWriterOptionsExpression options)
         {
             return new MethodBodyStatement[]
                         {
-                            UsingDeclare("content", typeof(MultipartFormDataBinaryContent), MultipartFormDataExpression.Create(data), out var content),
+                            UsingDeclare("content", typeof(MultipartFormDataRequestContent), MultipartFormDataExpression.Create(data, contentType), out var content),
                             InitialObject(multipart, new MultipartFormDataExpression(content)).ToArray()
                         };
         }
@@ -274,7 +275,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                  .Select(x => x.Trim().Split('='))
                  .ToDictionary(x => x[0], x => x[1].Trim('"'));
             */
-            yield return Declare(typeof(string), "propertyName", new MemberExpression(partContent, nameof(FormDataItem.Name)), out var propertyName);
+            //yield return Declare(typeof(string), "propertyName", new MemberExpression(partContent, FormDataItemProvider.Instance.NameProperty), out var propertyName);
+            yield return Declare(typeof(string), "propertyName", FormDataItemProvider.Instance.NamePropertyValue(partContent), out var propertyName);
             foreach (var property in properties)
             {
                 yield return new IfStatement(Equal(propertyName, Literal(property.SerializedName)))
@@ -288,11 +290,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             ValueExpression propertyValue;
             if (property.SerializedType is { IsFrameworkType: true } framework && framework.FrameworkType == typeof(BinaryData))
             {
-                propertyValue = new MemberExpression(partContent, nameof(FormDataItem.Content));
+                //propertyValue = new MemberExpression(partContent, nameof(FormDataItem.Content));
+                propertyValue = FormDataItemProvider.Instance.ContentProeptyValue(partContent);
             }
             else
             {
-                propertyValue = new InvokeInstanceMethodExpression(new MemberExpression(partContent, nameof(FormDataItem.Content)), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
+                //propertyValue = new InvokeInstanceMethodExpression(new MemberExpression(partContent, nameof(FormDataItem.Content)), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
+                propertyValue = new InvokeInstanceMethodExpression(FormDataItemProvider.Instance.ContentProeptyValue(partContent), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
             }
             List <MethodBodyStatement> statements = new List<MethodBodyStatement>
             {
@@ -389,6 +393,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return Declare(variable.Value, Default);
             }
             /* Deserialize multiparts to properties. */
+            CSharpType formDataItemType = FormDataItemProvider.Instance.Type;
+            CSharpType readonlyListType = new CSharpType(typeof(IReadOnlyList<>), new CSharpType[] { formDataItemType });
             if (additionalProperties != null)
             {
                 var dictionary = new VariableReference(additionalProperties.Type, "additionalPropertiesDictionary");
@@ -399,9 +405,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray()
                 };
                 */
-                yield return Declare(typeof(IReadOnlyList<FormDataItem>), "multiParts", new InvokeInstanceMethodExpression(multipartContent, nameof(MultipartFormDataExtensions.ParseToFormData), Array.Empty<ValueExpression>(), null, false), out var multiParts);
 
-                yield return new ForeachStatement(typeof(FormDataItem), "part", multiParts, false, out var part)
+                //yield return Declare(typeof(IReadOnlyList<FormDataItem>), "multiParts", new InvokeInstanceMethodExpression(multipartContent, nameof(MultipartFormDataExtensions.ParseToFormData), Array.Empty<ValueExpression>(), null, false), out var multiParts);
+                yield return Declare(readonlyListType, "multiParts", multipartContent.ParseToFormData(), out var multiParts);
+
+                yield return new ForeachStatement(FormDataItemProvider.Instance.Type, "part", multiParts, false, out var part)
                 {
                     DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray()
                 };
@@ -414,8 +422,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray()
                 };
                 */
-                yield return Declare(typeof(IReadOnlyList<FormDataItem>), "multiParts", new InvokeInstanceMethodExpression(multipartContent, nameof(MultipartFormDataExtensions.ParseToFormData), Array.Empty<ValueExpression>(), null, false), out var multiParts);
-                yield return new ForeachStatement(typeof(FormDataItem), "part", multiParts, false, out var part)
+                //yield return Declare(typeof(IReadOnlyList<FormDataItem>), "multiParts", new InvokeInstanceMethodExpression(multipartContent, nameof(MultipartFormDataExtensions.ParseToFormData), Array.Empty<ValueExpression>(), null, false), out var multiParts);
+                yield return Declare(readonlyListType, "multiParts", multipartContent.ParseToFormData(), out var multiParts);
+                yield return new ForeachStatement(formDataItemType, "part", multiParts, false, out var part)
                 {
                     DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray()
                 };

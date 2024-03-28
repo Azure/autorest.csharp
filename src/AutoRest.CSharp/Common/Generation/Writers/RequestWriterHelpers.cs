@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var contentParameter = parameters.FirstOrDefault(p => p.Name == "content");
                     if (contentParameter != null)
                     {
-                        var validationStatement = Snippets.Extensible.Argument.AssertNotNullOrEmpty(((ValueExpression)contentParameter).Property(nameof(RequestContent.ContentType)));
+                        var validationStatement = Snippets.Argument.AssertNotNullOrEmpty(((ValueExpression)contentParameter).Property(nameof(RequestContent.ContentType)));
                         writer.WriteMethodBodyStatement(validationStatement);
                     }
                 }

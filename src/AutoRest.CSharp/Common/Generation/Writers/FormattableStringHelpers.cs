@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             /* Remove this if check when Azure.Core upgrade to 1.0.2 */
                             if (mediaType == BodyMediaType.Multipart)
                             {
-                                return $"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateFromModelName}({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
+                                return $"{parameter.Name:I}.{Configuration.ApiTypes.ToMultipartRequestContentName}()";
                             }
                             break;
                         }
