@@ -95,18 +95,18 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
+        public static DeliveryRuleCondition DeliveryRuleCondition(string name = null, string foo = null)
         {
-            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData: null);
+            return new UnknownDeliveryRuleCondition(name == null ? default : new MatchVariable(name), foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
-        public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
+        public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
         {
-            return new DeliveryRuleAction(name, foo, serializedAdditionalRawData: null);
+            return new DeliveryRuleAction(name == null ? default : new DeliveryRuleActionType(name), foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
@@ -125,14 +125,14 @@ namespace MgmtDiscriminator.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="kind"> Specifies the kind of blueprint artifact. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.ArtifactData"/> instance for mocking. </returns>
-        public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = "Unknown")
+        public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = null)
         {
             return new UnknownArtifact(
                 id,
                 name,
                 resourceType,
                 systemData,
-                kind,
+                kind == null ? default : new ArtifactKind(kind),
                 serializedAdditionalRawData: null);
         }
 
