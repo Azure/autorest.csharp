@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             // TODO -- this is temporary, in the future, TypeFormatters will be a standalone static class, but now it is a nested type inside ModelSerializationExtensions
             var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
             var convertToStringExpression = typeFormattersProvider.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
-            var body = new InvokeInstanceMethodStatement(null, _appendQueryMethodName, new ValueExpression[] { nameParameter, convertToStringExpression, escapeParameter });
+            var body = new InvokeInstanceMethodStatement(null, _appendQueryMethodName, nameParameter, convertToStringExpression, escapeParameter);
 
             return new(signature, body);
         }
@@ -314,15 +314,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
 
             var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
             var v = new VariableReference(_t, "v");
-            var body = new MethodBodyStatement[]
+            var body = new[]
             {
                 Var("stringValues", value.Select(new TypedFuncExpression(new[] {v.Declaration}, typeFormattersProvider.ConvertToString(v, format))), out var stringValues),
-                new InvokeInstanceMethodStatement(null, _appendQueryMethodName, new ValueExpression[]
-                {
-                    name,
-                    StringExpression.Join(delimiter, stringValues),
-                    escape
-                })
+                new InvokeInstanceMethodStatement(null, _appendQueryMethodName, name, StringExpression.Join(delimiter, stringValues), escape)
             };
 
             return new(signature, body);

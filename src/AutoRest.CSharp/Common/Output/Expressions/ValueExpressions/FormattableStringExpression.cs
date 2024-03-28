@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
@@ -35,6 +36,28 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         {
             format = Format;
             args = Args;
+        }
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            writer.AppendRaw("$\"");
+            var argumentCount = 0;
+            foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(Format))
+            {
+                if (isLiteral)
+                {
+                    writer.AppendRaw(span.ToString());
+                    continue;
+                }
+
+                var arg = Args[argumentCount];
+                argumentCount++;
+                // append the argument
+                writer.AppendRaw("{");
+                arg.Write(writer);
+                writer.AppendRaw("}");
+            }
+            writer.AppendRaw("\"");
         }
 
         private static void Validate(string format, IReadOnlyList<ValueExpression> args)

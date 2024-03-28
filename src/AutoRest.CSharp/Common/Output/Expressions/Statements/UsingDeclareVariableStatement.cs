@@ -7,5 +7,22 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record UsingDeclareVariableStatement(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : DeclarationStatement;
+    internal record UsingDeclareVariableStatement(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyStatement
+    {
+        public sealed override void Write(CodeWriter writer)
+        {
+            if (Type != null)
+            {
+                writer.Append($"using {Type}");
+            }
+            else
+            {
+                writer.AppendRaw("using var");
+            }
+
+            writer.Append($" {Name:D} = ");
+            Value.Write(writer);
+            writer.LineRaw(";");
+        }
+    }
 }

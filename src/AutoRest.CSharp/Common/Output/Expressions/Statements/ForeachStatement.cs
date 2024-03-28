@@ -43,5 +43,34 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public void Add(MethodBodyStatement statement) => _body.Add(statement);
         public IEnumerator<MethodBodyStatement> GetEnumerator() => _body.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_body).GetEnumerator();
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            using (writer.AmbientScope())
+            {
+                writer.AppendRawIf("await ", IsAsync);
+                writer.AppendRaw("foreach (");
+                if (ItemType == null)
+                {
+                    writer.AppendRaw("var ");
+                }
+                else
+                {
+                    writer.Append($"{ItemType} ");
+                }
+
+                writer.Append($"{Item:D} in ");
+                Enumerable.Write(writer);
+                //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
+                writer.LineRaw(")");
+
+                writer.LineRaw("{");
+                foreach (var bodyStatement in Body)
+                {
+                    bodyStatement.Write(writer);
+                }
+                writer.LineRaw("}");
+            }
+        }
     }
 }
