@@ -37,10 +37,10 @@ namespace body_complex.Models
                 writer.WritePropertyName("empty"u8);
                 writer.WriteStringValue(Empty);
             }
-            if (Optional.IsDefined(NullProperty))
+            if (Optional.IsDefined(Null))
             {
                 writer.WritePropertyName("null"u8);
-                writer.WriteStringValue(NullProperty);
+                writer.WriteStringValue(Null);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

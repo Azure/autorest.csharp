@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
+            GetRequestContentForSerialization(request, bodySerialization, value).Write(writer);
         }
 
         private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
@@ -482,10 +482,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
                 writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
@@ -494,7 +494,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 return writer.Line($" != null)").Scope();
             }
