@@ -14,13 +14,13 @@ using NUnit.Framework;
 
 namespace SpecialWords.Samples
 {
-    public partial class Samples_ModelsOps
+    public partial class Samples_Models
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAnd_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -35,7 +35,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAnd_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -50,7 +50,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAnd_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             And body = new And("<name>");
             Response response = client.WithAnd(body);
@@ -60,7 +60,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAnd_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             And body = new And("<name>");
             Response response = await client.WithAndAsync(body);
@@ -70,7 +70,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAnd_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -85,7 +85,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAnd_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -100,7 +100,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAnd_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             And body = new And("<name>");
             Response response = client.WithAnd(body);
@@ -110,7 +110,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAnd_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             And body = new And("<name>");
             Response response = await client.WithAndAsync(body);
@@ -120,7 +120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAs_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -135,7 +135,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAs_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -150,7 +150,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAs_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             As body = new As("<name>");
             Response response = client.WithAs(body);
@@ -160,7 +160,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAs_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             As body = new As("<name>");
             Response response = await client.WithAsAsync(body);
@@ -170,7 +170,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAs_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -185,7 +185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAs_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -200,7 +200,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAs_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             As body = new As("<name>");
             Response response = client.WithAs(body);
@@ -210,7 +210,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAs_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             As body = new As("<name>");
             Response response = await client.WithAsAsync(body);
@@ -220,7 +220,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAssert_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -235,7 +235,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAssert_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -250,7 +250,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAssert_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Assert body = new Assert("<name>");
             Response response = client.WithAssert(body);
@@ -260,7 +260,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAssert_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Assert body = new Assert("<name>");
             Response response = await client.WithAssertAsync(body);
@@ -270,7 +270,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAssert_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -285,7 +285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAssert_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -300,7 +300,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAssert_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Assert body = new Assert("<name>");
             Response response = client.WithAssert(body);
@@ -310,7 +310,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAssert_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Assert body = new Assert("<name>");
             Response response = await client.WithAssertAsync(body);
@@ -320,7 +320,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAsync_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -335,7 +335,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAsync_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -350,7 +350,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAsync_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Async body = new Async("<name>");
             Response response = client.WithAsync(body);
@@ -360,7 +360,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAsync_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Async body = new Async("<name>");
             Response response = await client.WithAsyncAsync(body);
@@ -370,7 +370,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAsync_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -385,7 +385,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAsync_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -400,7 +400,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAsync_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Async body = new Async("<name>");
             Response response = client.WithAsync(body);
@@ -410,7 +410,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAsync_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Async body = new Async("<name>");
             Response response = await client.WithAsyncAsync(body);
@@ -420,7 +420,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAwait_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -435,7 +435,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAwait_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -450,7 +450,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAwait_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Await body = new Await("<name>");
             Response response = client.WithAwait(body);
@@ -460,7 +460,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAwait_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Await body = new Await("<name>");
             Response response = await client.WithAwaitAsync(body);
@@ -470,7 +470,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAwait_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -485,7 +485,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAwait_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -500,7 +500,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithAwait_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Await body = new Await("<name>");
             Response response = client.WithAwait(body);
@@ -510,7 +510,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithAwait_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Await body = new Await("<name>");
             Response response = await client.WithAwaitAsync(body);
@@ -520,7 +520,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithBreak_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -535,7 +535,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithBreak_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -550,7 +550,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithBreak_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Break body = new Break("<name>");
             Response response = client.WithBreak(body);
@@ -560,7 +560,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithBreak_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Break body = new Break("<name>");
             Response response = await client.WithBreakAsync(body);
@@ -570,7 +570,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithBreak_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -585,7 +585,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithBreak_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -600,7 +600,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithBreak_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Break body = new Break("<name>");
             Response response = client.WithBreak(body);
@@ -610,7 +610,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithBreak_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Break body = new Break("<name>");
             Response response = await client.WithBreakAsync(body);
@@ -620,7 +620,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithClass_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -635,7 +635,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithClass_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -650,7 +650,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithClass_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Class body = new Class("<name>");
             Response response = client.WithClass(body);
@@ -660,7 +660,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithClass_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Class body = new Class("<name>");
             Response response = await client.WithClassAsync(body);
@@ -670,7 +670,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithClass_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -685,7 +685,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithClass_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -700,7 +700,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithClass_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Class body = new Class("<name>");
             Response response = client.WithClass(body);
@@ -710,7 +710,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithClass_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Class body = new Class("<name>");
             Response response = await client.WithClassAsync(body);
@@ -720,7 +720,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithConstructor_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -735,7 +735,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithConstructor_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -750,7 +750,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithConstructor_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Constructor body = new Constructor("<name>");
             Response response = client.WithConstructor(body);
@@ -760,7 +760,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithConstructor_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Constructor body = new Constructor("<name>");
             Response response = await client.WithConstructorAsync(body);
@@ -770,7 +770,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithConstructor_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -785,7 +785,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithConstructor_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -800,7 +800,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithConstructor_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Constructor body = new Constructor("<name>");
             Response response = client.WithConstructor(body);
@@ -810,7 +810,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithConstructor_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Constructor body = new Constructor("<name>");
             Response response = await client.WithConstructorAsync(body);
@@ -820,7 +820,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithContinue_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -835,7 +835,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithContinue_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -850,7 +850,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithContinue_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Continue body = new Continue("<name>");
             Response response = client.WithContinue(body);
@@ -860,7 +860,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithContinue_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Continue body = new Continue("<name>");
             Response response = await client.WithContinueAsync(body);
@@ -870,7 +870,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithContinue_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -885,7 +885,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithContinue_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -900,7 +900,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithContinue_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Continue body = new Continue("<name>");
             Response response = client.WithContinue(body);
@@ -910,7 +910,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithContinue_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Continue body = new Continue("<name>");
             Response response = await client.WithContinueAsync(body);
@@ -920,7 +920,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDef_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -935,7 +935,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDef_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -950,7 +950,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDef_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Def body = new Def("<name>");
             Response response = client.WithDef(body);
@@ -960,7 +960,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDef_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Def body = new Def("<name>");
             Response response = await client.WithDefAsync(body);
@@ -970,7 +970,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDef_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -985,7 +985,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDef_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1000,7 +1000,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDef_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Def body = new Def("<name>");
             Response response = client.WithDef(body);
@@ -1010,7 +1010,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDef_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Def body = new Def("<name>");
             Response response = await client.WithDefAsync(body);
@@ -1020,7 +1020,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDel_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1035,7 +1035,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDel_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1050,7 +1050,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDel_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Del body = new Del("<name>");
             Response response = client.WithDel(body);
@@ -1060,7 +1060,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDel_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Del body = new Del("<name>");
             Response response = await client.WithDelAsync(body);
@@ -1070,7 +1070,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDel_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1085,7 +1085,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDel_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1100,7 +1100,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithDel_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Del body = new Del("<name>");
             Response response = client.WithDel(body);
@@ -1110,7 +1110,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithDel_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Del body = new Del("<name>");
             Response response = await client.WithDelAsync(body);
@@ -1120,7 +1120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElif_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1135,7 +1135,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElif_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1150,7 +1150,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElif_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Elif body = new Elif("<name>");
             Response response = client.WithElif(body);
@@ -1160,7 +1160,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElif_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Elif body = new Elif("<name>");
             Response response = await client.WithElifAsync(body);
@@ -1170,7 +1170,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElif_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1185,7 +1185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElif_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1200,7 +1200,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElif_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Elif body = new Elif("<name>");
             Response response = client.WithElif(body);
@@ -1210,7 +1210,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElif_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Elif body = new Elif("<name>");
             Response response = await client.WithElifAsync(body);
@@ -1220,7 +1220,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElse_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1235,7 +1235,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElse_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1250,7 +1250,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElse_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Else body = new Else("<name>");
             Response response = client.WithElse(body);
@@ -1260,7 +1260,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElse_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Else body = new Else("<name>");
             Response response = await client.WithElseAsync(body);
@@ -1270,7 +1270,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElse_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1285,7 +1285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElse_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1300,7 +1300,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithElse_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Else body = new Else("<name>");
             Response response = client.WithElse(body);
@@ -1310,7 +1310,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithElse_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Else body = new Else("<name>");
             Response response = await client.WithElseAsync(body);
@@ -1320,7 +1320,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExcept_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1335,7 +1335,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExcept_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1350,7 +1350,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExcept_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Except body = new Except("<name>");
             Response response = client.WithExcept(body);
@@ -1360,7 +1360,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExcept_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Except body = new Except("<name>");
             Response response = await client.WithExceptAsync(body);
@@ -1370,7 +1370,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExcept_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1385,7 +1385,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExcept_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1400,7 +1400,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExcept_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Except body = new Except("<name>");
             Response response = client.WithExcept(body);
@@ -1410,7 +1410,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExcept_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Except body = new Except("<name>");
             Response response = await client.WithExceptAsync(body);
@@ -1420,7 +1420,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExec_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1435,7 +1435,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExec_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1450,7 +1450,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExec_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Exec body = new Exec("<name>");
             Response response = client.WithExec(body);
@@ -1460,7 +1460,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExec_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Exec body = new Exec("<name>");
             Response response = await client.WithExecAsync(body);
@@ -1470,7 +1470,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExec_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1485,7 +1485,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExec_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1500,7 +1500,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithExec_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Exec body = new Exec("<name>");
             Response response = client.WithExec(body);
@@ -1510,7 +1510,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithExec_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Exec body = new Exec("<name>");
             Response response = await client.WithExecAsync(body);
@@ -1520,7 +1520,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFinally_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1535,7 +1535,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFinally_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1550,7 +1550,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFinally_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Finally body = new Finally("<name>");
             Response response = client.WithFinally(body);
@@ -1560,7 +1560,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFinally_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Finally body = new Finally("<name>");
             Response response = await client.WithFinallyAsync(body);
@@ -1570,7 +1570,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFinally_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1585,7 +1585,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFinally_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1600,7 +1600,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFinally_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Finally body = new Finally("<name>");
             Response response = client.WithFinally(body);
@@ -1610,7 +1610,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFinally_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Finally body = new Finally("<name>");
             Response response = await client.WithFinallyAsync(body);
@@ -1620,7 +1620,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFor_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1635,7 +1635,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFor_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1650,7 +1650,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFor_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             For body = new For("<name>");
             Response response = client.WithFor(body);
@@ -1660,7 +1660,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFor_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             For body = new For("<name>");
             Response response = await client.WithForAsync(body);
@@ -1670,7 +1670,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFor_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1685,7 +1685,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFor_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1700,7 +1700,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFor_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             For body = new For("<name>");
             Response response = client.WithFor(body);
@@ -1710,7 +1710,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFor_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             For body = new For("<name>");
             Response response = await client.WithForAsync(body);
@@ -1720,7 +1720,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFrom_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1735,7 +1735,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFrom_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1750,7 +1750,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFrom_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             From body = new From("<name>");
             Response response = client.WithFrom(body);
@@ -1760,7 +1760,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFrom_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             From body = new From("<name>");
             Response response = await client.WithFromAsync(body);
@@ -1770,7 +1770,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFrom_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1785,7 +1785,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFrom_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1800,7 +1800,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithFrom_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             From body = new From("<name>");
             Response response = client.WithFrom(body);
@@ -1810,7 +1810,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithFrom_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             From body = new From("<name>");
             Response response = await client.WithFromAsync(body);
@@ -1820,7 +1820,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithGlobal_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1835,7 +1835,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithGlobal_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1850,7 +1850,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithGlobal_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Global body = new Global("<name>");
             Response response = client.WithGlobal(body);
@@ -1860,7 +1860,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithGlobal_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Global body = new Global("<name>");
             Response response = await client.WithGlobalAsync(body);
@@ -1870,7 +1870,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithGlobal_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1885,7 +1885,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithGlobal_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1900,7 +1900,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithGlobal_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Global body = new Global("<name>");
             Response response = client.WithGlobal(body);
@@ -1910,7 +1910,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithGlobal_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Global body = new Global("<name>");
             Response response = await client.WithGlobalAsync(body);
@@ -1920,7 +1920,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIf_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1935,7 +1935,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIf_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1950,7 +1950,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIf_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             If body = new If("<name>");
             Response response = client.WithIf(body);
@@ -1960,7 +1960,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIf_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             If body = new If("<name>");
             Response response = await client.WithIfAsync(body);
@@ -1970,7 +1970,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIf_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1985,7 +1985,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIf_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2000,7 +2000,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIf_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             If body = new If("<name>");
             Response response = client.WithIf(body);
@@ -2010,7 +2010,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIf_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             If body = new If("<name>");
             Response response = await client.WithIfAsync(body);
@@ -2020,7 +2020,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithImport_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2035,7 +2035,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithImport_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2050,7 +2050,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithImport_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Import body = new Import("<name>");
             Response response = client.WithImport(body);
@@ -2060,7 +2060,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithImport_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Import body = new Import("<name>");
             Response response = await client.WithImportAsync(body);
@@ -2070,7 +2070,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithImport_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2085,7 +2085,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithImport_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2100,7 +2100,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithImport_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Import body = new Import("<name>");
             Response response = client.WithImport(body);
@@ -2110,7 +2110,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithImport_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Import body = new Import("<name>");
             Response response = await client.WithImportAsync(body);
@@ -2120,7 +2120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIn_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2135,7 +2135,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIn_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2150,7 +2150,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIn_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             In body = new In("<name>");
             Response response = client.WithIn(body);
@@ -2160,7 +2160,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIn_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             In body = new In("<name>");
             Response response = await client.WithInAsync(body);
@@ -2170,7 +2170,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIn_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2185,7 +2185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIn_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2200,7 +2200,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIn_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             In body = new In("<name>");
             Response response = client.WithIn(body);
@@ -2210,7 +2210,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIn_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             In body = new In("<name>");
             Response response = await client.WithInAsync(body);
@@ -2220,7 +2220,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIs_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2235,7 +2235,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIs_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2250,7 +2250,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIs_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Is body = new Is("<name>");
             Response response = client.WithIs(body);
@@ -2260,7 +2260,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIs_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Is body = new Is("<name>");
             Response response = await client.WithIsAsync(body);
@@ -2270,7 +2270,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIs_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2285,7 +2285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIs_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2300,7 +2300,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithIs_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Is body = new Is("<name>");
             Response response = client.WithIs(body);
@@ -2310,7 +2310,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithIs_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Is body = new Is("<name>");
             Response response = await client.WithIsAsync(body);
@@ -2320,7 +2320,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithLambda_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2335,7 +2335,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithLambda_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2350,7 +2350,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithLambda_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Lambda body = new Lambda("<name>");
             Response response = client.WithLambda(body);
@@ -2360,7 +2360,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithLambda_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Lambda body = new Lambda("<name>");
             Response response = await client.WithLambdaAsync(body);
@@ -2370,7 +2370,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithLambda_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2385,7 +2385,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithLambda_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2400,7 +2400,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithLambda_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Lambda body = new Lambda("<name>");
             Response response = client.WithLambda(body);
@@ -2410,7 +2410,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithLambda_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Lambda body = new Lambda("<name>");
             Response response = await client.WithLambdaAsync(body);
@@ -2420,7 +2420,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithNot_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2435,7 +2435,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithNot_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2450,7 +2450,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithNot_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Not body = new Not("<name>");
             Response response = client.WithNot(body);
@@ -2460,7 +2460,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithNot_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Not body = new Not("<name>");
             Response response = await client.WithNotAsync(body);
@@ -2470,7 +2470,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithNot_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2485,7 +2485,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithNot_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2500,7 +2500,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithNot_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Not body = new Not("<name>");
             Response response = client.WithNot(body);
@@ -2510,7 +2510,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithNot_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Not body = new Not("<name>");
             Response response = await client.WithNotAsync(body);
@@ -2520,7 +2520,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithOr_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2535,7 +2535,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithOr_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2550,7 +2550,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithOr_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Or body = new Or("<name>");
             Response response = client.WithOr(body);
@@ -2560,7 +2560,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithOr_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Or body = new Or("<name>");
             Response response = await client.WithOrAsync(body);
@@ -2570,7 +2570,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithOr_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2585,7 +2585,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithOr_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2600,7 +2600,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithOr_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Or body = new Or("<name>");
             Response response = client.WithOr(body);
@@ -2610,7 +2610,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithOr_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Or body = new Or("<name>");
             Response response = await client.WithOrAsync(body);
@@ -2620,7 +2620,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithPass_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2635,7 +2635,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithPass_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2650,7 +2650,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithPass_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Pass body = new Pass("<name>");
             Response response = client.WithPass(body);
@@ -2660,7 +2660,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithPass_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Pass body = new Pass("<name>");
             Response response = await client.WithPassAsync(body);
@@ -2670,7 +2670,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithPass_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2685,7 +2685,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithPass_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2700,7 +2700,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithPass_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Pass body = new Pass("<name>");
             Response response = client.WithPass(body);
@@ -2710,7 +2710,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithPass_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Pass body = new Pass("<name>");
             Response response = await client.WithPassAsync(body);
@@ -2720,7 +2720,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithRaise_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2735,7 +2735,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithRaise_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2750,7 +2750,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithRaise_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Raise body = new Raise("<name>");
             Response response = client.WithRaise(body);
@@ -2760,7 +2760,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithRaise_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Raise body = new Raise("<name>");
             Response response = await client.WithRaiseAsync(body);
@@ -2770,7 +2770,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithRaise_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2785,7 +2785,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithRaise_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2800,7 +2800,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithRaise_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Raise body = new Raise("<name>");
             Response response = client.WithRaise(body);
@@ -2810,7 +2810,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithRaise_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Raise body = new Raise("<name>");
             Response response = await client.WithRaiseAsync(body);
@@ -2820,7 +2820,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithReturn_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2835,7 +2835,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithReturn_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2850,7 +2850,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithReturn_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Return body = new Return("<name>");
             Response response = client.WithReturn(body);
@@ -2860,7 +2860,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithReturn_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Return body = new Return("<name>");
             Response response = await client.WithReturnAsync(body);
@@ -2870,7 +2870,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithReturn_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2885,7 +2885,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithReturn_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2900,7 +2900,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithReturn_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Return body = new Return("<name>");
             Response response = client.WithReturn(body);
@@ -2910,7 +2910,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithReturn_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Return body = new Return("<name>");
             Response response = await client.WithReturnAsync(body);
@@ -2920,7 +2920,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithTry_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2935,7 +2935,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithTry_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2950,7 +2950,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithTry_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Try body = new Try("<name>");
             Response response = client.WithTry(body);
@@ -2960,7 +2960,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithTry_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Try body = new Try("<name>");
             Response response = await client.WithTryAsync(body);
@@ -2970,7 +2970,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithTry_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -2985,7 +2985,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithTry_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3000,7 +3000,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithTry_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Try body = new Try("<name>");
             Response response = client.WithTry(body);
@@ -3010,7 +3010,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithTry_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Try body = new Try("<name>");
             Response response = await client.WithTryAsync(body);
@@ -3020,7 +3020,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWhile_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3035,7 +3035,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWhile_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3050,7 +3050,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWhile_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             While body = new While("<name>");
             Response response = client.WithWhile(body);
@@ -3060,7 +3060,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWhile_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             While body = new While("<name>");
             Response response = await client.WithWhileAsync(body);
@@ -3070,7 +3070,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWhile_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3085,7 +3085,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWhile_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3100,7 +3100,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWhile_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             While body = new While("<name>");
             Response response = client.WithWhile(body);
@@ -3110,7 +3110,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWhile_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             While body = new While("<name>");
             Response response = await client.WithWhileAsync(body);
@@ -3120,7 +3120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWith_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3135,7 +3135,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWith_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3150,7 +3150,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWith_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             With body = new With("<name>");
             Response response = client.WithWith(body);
@@ -3160,7 +3160,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWith_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             With body = new With("<name>");
             Response response = await client.WithWithAsync(body);
@@ -3170,7 +3170,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWith_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3185,7 +3185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWith_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3200,7 +3200,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithWith_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             With body = new With("<name>");
             Response response = client.WithWith(body);
@@ -3210,7 +3210,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithWith_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             With body = new With("<name>");
             Response response = await client.WithWithAsync(body);
@@ -3220,7 +3220,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithYield_ShortVersion()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3235,7 +3235,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithYield_ShortVersion_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3250,7 +3250,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithYield_ShortVersion_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Yield body = new Yield("<name>");
             Response response = client.WithYield(body);
@@ -3260,7 +3260,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithYield_ShortVersion_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Yield body = new Yield("<name>");
             Response response = await client.WithYieldAsync(body);
@@ -3270,7 +3270,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithYield_AllParameters()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3285,7 +3285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithYield_AllParameters_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -3300,7 +3300,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Models_WithYield_AllParameters_Convenience()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Yield body = new Yield("<name>");
             Response response = client.WithYield(body);
@@ -3310,7 +3310,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Models_WithYield_AllParameters_Convenience_Async()
         {
-            ModelsOps client = new SpecialWordsClient().GetModelsOpsClient();
+            Models client = new SpecialWordsClient().GetModelsClient();
 
             Yield body = new Yield("<name>");
             Response response = await client.WithYieldAsync(body);

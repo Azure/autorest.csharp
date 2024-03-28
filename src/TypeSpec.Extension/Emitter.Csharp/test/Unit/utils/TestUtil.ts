@@ -107,7 +107,7 @@ export function createEmitterContext(
 
 /* Navigate all the models in the whole namespace. */
 export function navigateModels(
-    context: SdkContext,
+    context: SdkContext<NetEmitterOptions>,
     namespace: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>

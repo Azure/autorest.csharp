@@ -247,7 +247,7 @@ export function loadOperation(
     } as InputOperation;
 
     function loadOperationParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
@@ -305,7 +305,7 @@ export function loadOperation(
     }
 
     function loadBodyParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         body: ModelProperty | Model
     ): InputParameter {
         const inputType: InputType = getInputType(
@@ -335,7 +335,7 @@ export function loadOperation(
     }
 
     function loadOperationResponse(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
@@ -387,7 +387,7 @@ export function loadOperation(
     }
 
     function loadLongRunningOperation(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         op: HttpOperation
     ): OperationLongRunning | undefined {
         const metadata = getLroMetadata(program, op.operation);

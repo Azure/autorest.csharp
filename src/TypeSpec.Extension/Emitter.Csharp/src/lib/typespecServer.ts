@@ -17,6 +17,7 @@ import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType, getFormattedType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { InputTypeKind } from "../type/inputTypeKind.js";
+import { NetEmitterOptions } from "../options.js";
 
 export interface TypeSpecServer {
     url: string;
@@ -40,7 +41,7 @@ function getDefaultValue(type: Type): any {
 }
 
 export function resolveServers(
-    context: SdkContext,
+    context: SdkContext<NetEmitterOptions>,
     servers: HttpServer[],
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
