@@ -215,8 +215,8 @@ extends:
 
         - stage: 'Update_azure_sdk_for_net'
           pool:
-            name: $(LINUXPOOL)
-            image: $(LINUXVMIMAGE)
+            name: azsdk-pool-mms-ubuntu-2004-general
+            image: azsdk-pool-mms-ubuntu-2004-1espt
             os: linux
           dependsOn:
             - Build_and_Test
