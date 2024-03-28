@@ -131,15 +131,15 @@ extends:
               #       scriptLocation: "inlineScript"
               #       inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-standard.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode standard
               #       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-                - template: new-emitter-package-files.yml
-                  parameters:
-                    EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
-                    AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
-                    TypeSpecEmitterVersion: $(Publish.TypeSpecEmitterVersion)
-                    OutputDirectory: $(Build.ArtifactStagingDirectory)
-                    ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
-                    UseInternalFeed: false
+              # - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+              #   - template: new-emitter-package-files.yml
+              #     parameters:
+              #       EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
+              #       AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
+              #       TypeSpecEmitterVersion: $(Publish.TypeSpecEmitterVersion)
+              #       OutputDirectory: $(Build.ArtifactStagingDirectory)
+              #       ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
+              #       UseInternalFeed: false
             templateContext: 
               outputs:
                 - output: pipelineArtifact
