@@ -10,13 +10,15 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal record MethodBodyStatement
     {
+        public virtual void Write(CodeWriter writer) { }
+
         public static implicit operator MethodBodyStatement(MethodBodyStatement[] statements) => new MethodBodyStatements(Statements: statements);
         public static implicit operator MethodBodyStatement(List<MethodBodyStatement> statements) => new MethodBodyStatements(Statements: statements);
 
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
-            writer.WriteMethodBodyStatement(this);
+            Write(writer);
             return writer.ToString();
         }
     }
