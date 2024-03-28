@@ -16,10 +16,9 @@ extends:
       OfficialBuildId: $(Build.BuildNumber)
       nugetMultiFeedWarnLevel: 'none'
 
-    SdlConfigs:
-      binskim:
-        enabled: false
-        justificationForDisabling: 'Binskim is consistently crashing with "Fatal error. System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt." blocking a production pipeline'
+    BinSkimSettings:
+      enabled: false
+      justificationForDisabling: 'Binskim is consistently crashing with "Fatal error. System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt." blocking a production pipeline'
 
     stages:
       - stage: 'Build_and_Test'
