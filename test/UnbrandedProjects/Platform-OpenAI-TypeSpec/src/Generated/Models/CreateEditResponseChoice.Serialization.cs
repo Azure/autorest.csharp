@@ -26,7 +26,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             writer.WritePropertyName("finish_reason"u8);
-            writer.WriteStringValue(FinishReason.ToString());
+            writer.WriteStringValue(FinishReason.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -84,7 +84,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new CreateEditResponseChoiceFinishReason(property.Value.GetString());
+                    finishReason = property.Value.GetString().ToCreateEditResponseChoiceFinishReason();
                     continue;
                 }
                 if (options.Format != "W")

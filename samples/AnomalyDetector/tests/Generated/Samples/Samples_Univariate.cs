@@ -122,7 +122,7 @@ new TimeSeriesPoint(123.45F)
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -161,7 +161,7 @@ value = 123.45F,
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -198,7 +198,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             })
             {
@@ -225,7 +225,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             })
             {
@@ -346,7 +346,7 @@ new TimeSeriesPoint(123.45F)
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -386,7 +386,7 @@ value = 123.45F,
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -424,7 +424,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             })
             {
@@ -451,7 +451,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             })
             {
@@ -560,7 +560,7 @@ new TimeSeriesPoint(123.45F)
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -592,7 +592,7 @@ value = 123.45F,
             {
 new
 {
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
+timestamp = "2022-05-10T18:57:31.2311892Z",
 value = 123.45F,
 }
             },
@@ -622,7 +622,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             }, TimeGranularity.Yearly)
             {
@@ -646,7 +646,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             {
 new TimeSeriesPoint(123.45F)
 {
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 }
             }, TimeGranularity.Yearly)
             {

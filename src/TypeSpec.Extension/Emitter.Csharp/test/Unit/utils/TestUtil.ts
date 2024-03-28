@@ -17,7 +17,8 @@ import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 import { getFormattedType, getInputType } from "../../../src/lib/model.js";
 import {
     SdkContext,
-    createSdkContext
+    createSdkContext,
+    getAllModels
 } from "@azure-tools/typespec-client-generator-core";
 import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
 
@@ -137,5 +138,8 @@ export function navigateModels(
 export function createNetSdkContext(
     program: EmitContext<NetEmitterOptions>
 ): SdkContext<NetEmitterOptions> {
-    return createSdkContext(program, "@azure-tools/typespec-azure");
+    const sdkContext = createSdkContext(program, "@azure-tools/typespec-azure");
+    // initialize TCGC
+    getAllModels(sdkContext);
+    return sdkContext;
 }

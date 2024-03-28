@@ -34,7 +34,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("purpose"u8);
             writer.WriteStringValue(Purpose);
             writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
+            writer.WriteStringValue(Status.ToSerialString());
             if (Optional.IsDefined(StatusDetails))
             {
                 if (StatusDetails != null)
@@ -129,7 +129,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new OpenAIFileStatus(property.Value.GetString());
+                    status = property.Value.GetString().ToOpenAIFileStatus();
                     continue;
                 }
                 if (property.NameEquals("status_details"u8))

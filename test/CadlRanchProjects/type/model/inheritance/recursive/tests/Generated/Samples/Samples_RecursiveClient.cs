@@ -112,7 +112,10 @@ null
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = client.Put(input);
         }
 
@@ -122,7 +125,10 @@ null
         {
             RecursiveClient client = new RecursiveClient();
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = await client.PutAsync(input);
         }
 

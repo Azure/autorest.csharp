@@ -46,7 +46,7 @@ namespace ModelsTypeSpec.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
-        internal BaseModelWithProperties()
+        public BaseModelWithProperties()
         {
         }
 
@@ -60,6 +60,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Optional properties on base. </summary>
-        public string OptionalPropertyOnBase { get; }
+        public string OptionalPropertyOnBase { get; set; }
     }
 }

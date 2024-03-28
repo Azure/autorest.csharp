@@ -40,6 +40,5 @@ export enum InputPrimitiveTypeKind {
     Uri = "Uri",
     Enum = "Enum",
     SByte = "SByte", //int8
-    Byte = "Byte", //uint8
-    UnKnownKind = "UnknownKind"
+    Byte = "Byte" //uint8
 }

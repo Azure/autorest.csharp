@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="Facet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="field"/> is null. </exception>
-        internal Facet(string field)
+        public Facet(string field)
         {
             Argument.AssertNotNull(field, nameof(field));
 

@@ -400,7 +400,7 @@ namespace CadlRanchProjects.Tests
         {
             UnionFloatLiteralProperty data = new()
             {
-                Property = BinaryData.FromString("2.375")
+                Property = UnionFloatLiteralPropertyProperty._2375
             };
             Response response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().PutAllAsync(data.ToRequestContent());
             Assert.AreEqual(204, response.Status);
@@ -432,7 +432,7 @@ namespace CadlRanchProjects.Tests
         {
             UnionIntLiteralProperty data = new()
             {
-                Property = BinaryData.FromString("2")
+                Property = UnionIntLiteralPropertyProperty._2
             };
             Response response = await new OptionalClient(host, null).GetUnionIntLiteralClient().PutAllAsync(data.ToRequestContent());
             Assert.AreEqual(204, response.Status);

@@ -38,7 +38,7 @@
    "$id": "6",
    "Kind": "Enum",
    "Name": "FixedIntEnum",
-   "EnumValueType": "Float32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "7",
@@ -67,7 +67,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "11",
@@ -125,7 +125,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "19",
@@ -192,31 +192,6 @@
   {
    "$id": "26",
    "Kind": "Model",
-   "Name": "BaseModelWithARequiredProperty",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "A base model with a required property",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "27",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Required kind",
-     "Type": {
-      "$id": "28",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "29",
-   "Kind": "Model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
    "Namespace": "ModelsTypeSpec",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
@@ -224,7 +199,29 @@
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "26"
+    "$id": "27",
+    "Kind": "Model",
+    "Name": "BaseModelWithARequiredProperty",
+    "Namespace": "ModelsTypeSpec",
+    "Description": "A base model with a required property",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "28",
+      "Name": "kind",
+      "SerializedName": "kind",
+      "Description": "Required kind",
+      "Type": {
+       "$id": "29",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -232,14 +229,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "31",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -259,6 +256,9 @@
    ]
   },
   {
+   "$ref": "27"
+  },
+  {
    "$id": "34",
    "Kind": "Model",
    "Name": "OutputBaseModelWithDiscriminator",
@@ -273,14 +273,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "36",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     }
    ]
@@ -390,7 +390,7 @@
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model",
       "IsNullable": false,
-      "Usage": "Input",
+      "Usage": "RoundTrip",
       "Properties": []
      },
      "IsRequired": true,
@@ -776,10 +776,10 @@
    "$ref": "61"
   },
   {
-   "$ref": "66"
+   "$ref": "65"
   },
   {
-   "$ref": "65"
+   "$ref": "66"
   },
   {
    "$id": "102",
@@ -953,14 +953,14 @@
         "Name": "discriminatorProperty",
         "SerializedName": "discriminatorProperty",
         "Description": "Discriminator",
-        "IsRequired": true,
-        "IsReadOnly": false,
         "Type": {
          "$id": "126",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
         },
+        "IsRequired": true,
+        "IsReadOnly": false,
         "IsDiscriminator": true
        },
        {
@@ -1349,7 +1349,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "51"
    },
@@ -1460,7 +1460,7 @@
      "Type": {
       "$id": "195",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1628,7 +1628,7 @@
        "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "RoundTrip",
        "Properties": [
         {
          "$id": "218",
@@ -1817,10 +1817,10 @@
    ]
   },
   {
-   "$ref": "217"
+   "$ref": "216"
   },
   {
-   "$ref": "216"
+   "$ref": "217"
   },
   {
    "$id": "242",
@@ -2540,38 +2540,35 @@
   {
    "$id": "334",
    "Kind": "Model",
-   "Name": "NoUseBase",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Base model",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "335",
-     "Name": "baseModelProp",
-     "SerializedName": "baseModelProp",
-     "Description": "base model property",
-     "Type": {
-      "$id": "336",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "337",
-   "Kind": "Model",
    "Name": "RoundTripOnNoUse",
    "Namespace": "ModelsTypeSpec",
    "Description": "Derived model",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "334"
+    "$id": "335",
+    "Kind": "Model",
+    "Name": "NoUseBase",
+    "Namespace": "ModelsTypeSpec",
+    "Description": "Base model",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "336",
+      "Name": "baseModelProp",
+      "SerializedName": "baseModelProp",
+      "Description": "base model property",
+      "Type": {
+       "$id": "337",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -2594,6 +2591,9 @@
    ]
   },
   {
+   "$ref": "335"
+  },
+  {
    "$id": "340",
    "Kind": "Model",
    "Name": "SingleBase",
@@ -2608,14 +2608,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "342",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -2637,85 +2637,79 @@
   {
    "$id": "345",
    "Kind": "Model",
-   "Name": "Facet",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Facet",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "346",
-     "Name": "field",
-     "SerializedName": "field",
-     "Description": "A field to facet by, where the field is attributed as 'facetable'",
-     "Type": {
-      "$id": "347",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "348",
-   "Kind": "Model",
-   "Name": "NumericValuesFacetint32",
-   "Namespace": "ModelsTypeSpec",
-   "IsNullable": false,
-   "Usage": "None",
-   "BaseModel": {
-    "$ref": "345"
-   },
-   "Properties": [
-    {
-     "$id": "349",
-     "Name": "values",
-     "SerializedName": "values",
-     "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
-     "Type": {
-      "$id": "350",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "351",
-       "Kind": "Primitive",
-       "Name": "Int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "352",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
-      "$id": "353",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "354",
-   "Kind": "Model",
    "Name": "Int32ValuesFacet",
    "Namespace": "ModelsTypeSpec",
    "Description": "Facets an int32 field by the specified value ranges.",
    "IsNullable": false,
    "Usage": "Input",
    "BaseModel": {
-    "$ref": "348"
+    "$id": "346",
+    "Kind": "Model",
+    "Name": "NumericValuesFacetint32",
+    "Namespace": "ModelsTypeSpec",
+    "IsNullable": false,
+    "Usage": "Input",
+    "BaseModel": {
+     "$id": "347",
+     "Kind": "Model",
+     "Name": "Facet",
+     "Namespace": "ModelsTypeSpec",
+     "Description": "Facet",
+     "IsNullable": false,
+     "Usage": "Input",
+     "Properties": [
+      {
+       "$id": "348",
+       "Name": "field",
+       "SerializedName": "field",
+       "Description": "A field to facet by, where the field is attributed as 'facetable'",
+       "Type": {
+        "$id": "349",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
+    },
+    "Properties": [
+     {
+      "$id": "350",
+      "Name": "values",
+      "SerializedName": "values",
+      "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
+      "Type": {
+       "$id": "351",
+       "Kind": "Array",
+       "Name": "Array",
+       "ElementType": {
+        "$id": "352",
+        "Kind": "Primitive",
+        "Name": "Int32",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     },
+     {
+      "$id": "353",
+      "Name": "value",
+      "SerializedName": "value",
+      "Description": "",
+      "Type": {
+       "$id": "354",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -2739,6 +2733,12 @@
    ]
   },
   {
+   "$ref": "346"
+  },
+  {
+   "$ref": "347"
+  },
+  {
    "$id": "357",
    "Kind": "Model",
    "Name": "DerivedWithDiscriminatorDefinedOnBase",
@@ -2748,7 +2748,7 @@
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "29"
+    "$ref": "26"
    },
    "Properties": [
     {
@@ -2918,7 +2918,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": true
     },
     {
      "$id": "377",
@@ -2973,7 +2973,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "29"
+        "$ref": "26"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3047,7 +3047,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "26"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4121,7 +4121,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "337"
+        "$ref": "334"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4195,7 +4195,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "337"
+        "$ref": "334"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4383,7 +4383,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "354"
+        "$ref": "345"
        },
        "Location": "Body",
        "IsRequired": true,

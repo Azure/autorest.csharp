@@ -1446,7 +1446,10 @@ This sample shows how to call RecursiveExtensionAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = await client.RecursiveExtensionAsync(input);
 ]]></code></example>
     </member>
@@ -1465,7 +1468,10 @@ This sample shows how to call RecursiveExtension with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = client.RecursiveExtension(input);
 ]]></code></example>
     </member>
@@ -1552,7 +1558,10 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(123) },
+    Extension = {new ThereLevelExtension(123)
+    {
+        Extension = {default},
+    }},
 };
 Response response = await client.ThreeLevelRecursiveAsync(input);
 ]]></code></example>
@@ -1574,7 +1583,10 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(123) },
+    Extension = {new ThereLevelExtension(123)
+    {
+        Extension = {default},
+    }},
 };
 Response response = client.ThreeLevelRecursive(input);
 ]]></code></example>

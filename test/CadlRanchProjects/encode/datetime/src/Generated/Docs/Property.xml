@@ -7,14 +7,14 @@ This sample shows how to call DefaultAsync.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient();
 
-DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient();
 
-DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
 ]]></code></example>
     </member>
@@ -24,14 +24,14 @@ This sample shows how to call Default.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient();
 
-DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<DefaultDatetimeProperty> response = client.Default(body);
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient();
 
-DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<DefaultDatetimeProperty> response = client.Default(body);
 ]]></code></example>
     </member>
@@ -43,7 +43,7 @@ Property client = new DatetimeClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.DefaultAsync(content);
 
@@ -56,7 +56,7 @@ Property client = new DatetimeClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.DefaultAsync(content);
 
@@ -72,7 +72,7 @@ Property client = new DatetimeClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Default(content);
 
@@ -85,7 +85,7 @@ Property client = new DatetimeClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Default(content);
 

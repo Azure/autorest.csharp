@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedTypeAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse9>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedTypeAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse9.FromResponse(response), response);
+            return Response.FromValue(GetResponse.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedType(CancellationToken)']/*" />
-        public virtual Response<GetResponse9> GetMixedType(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse> GetMixedType(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedType(context);
-            return Response.FromValue(GetResponse9.FromResponse(response), response);
+            return Response.FromValue(GetResponse.FromResponse(response), response);
         }
 
         /// <summary>
@@ -141,8 +141,8 @@ namespace _Type.Union
             Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest9 sendRequest9 = new SendRequest9(prop);
-            Response response = await SendAsync(sendRequest9.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest sendRequest = new SendRequest(prop);
+            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -155,8 +155,8 @@ namespace _Type.Union
             Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest9 sendRequest9 = new SendRequest9(prop);
-            Response response = Send(sendRequest9.ToRequestContent(), context);
+            SendRequest sendRequest = new SendRequest(prop);
+            Response response = Send(sendRequest.ToRequestContent(), context);
             return response;
         }
 

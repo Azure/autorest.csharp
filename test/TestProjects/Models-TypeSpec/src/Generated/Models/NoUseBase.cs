@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="NoUseBase"/>. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
-        internal NoUseBase(string baseModelProp)
+        public NoUseBase(string baseModelProp)
         {
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 
@@ -70,6 +70,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> base model property. </summary>
-        public string BaseModelProp { get; }
+        public string BaseModelProp { get; set; }
     }
 }

@@ -76,7 +76,7 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            IReadOnlyList<int> values = default;
+            IList<int> values = default;
             int value = default;
             string field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

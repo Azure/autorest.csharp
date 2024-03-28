@@ -30,7 +30,8 @@ import {
     isGlobalNamespace,
     navigateTypesInNamespace,
     isVoidType,
-    resolveUsages
+    resolveUsages,
+    NoTarget
 } from "@typespec/compiler";
 import {
     HttpOperation,
@@ -66,6 +67,8 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
+    SdkEnumType,
+    SdkModelType,
     getAccess,
     getClientType,
     getUsageOverride,
@@ -75,20 +78,24 @@ import {
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
-import { fromSdkEnumType } from "../type/converter.js";
+import { fromSdkEnumType, fromSdkModelType } from "../type/converter.js";
+import { $lib } from "../emitter.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapTypeSpecTypeToCSharpInputTypeKind(
-    context: SdkContext,
     typespecType: Type,
     format?: string,
     encode?: EncodeData
 ): InputPrimitiveTypeKind {
+    // TODO: https://github.com/Azure/typespec-azure/issues/201
+    if (typespecType === undefined && format === "string") {
+        return InputPrimitiveTypeKind.String;
+    }
     const kind = typespecType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(
+            return getCSharpInputTypeKindByPrimitiveModelName(
                 typespecType.name,
                 format,
                 encode
@@ -110,11 +117,11 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
             if (format === "uri") return InputPrimitiveTypeKind.Uri;
             return InputPrimitiveTypeKind.String;
         default:
-            return InputPrimitiveTypeKind.UnKnownKind;
+            throw new Error(`Unsupported primitive kind ${kind}`);
     }
 }
 
-function getCSharpInputTypeKindByIntrinsicModelName(
+export function getCSharpInputTypeKindByPrimitiveModelName(
     name: string,
     format?: string,
     encode?: EncodeData
@@ -293,7 +300,7 @@ export function getInputType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
-): InputType {
+): InputType | undefined {
     const type =
         formattedType.type.kind === "ModelProperty"
             ? formattedType.type.type
@@ -339,7 +346,7 @@ export function getInputType(
                 const sdkType = getClientType(context, type);
                 return {
                     Kind: InputTypeKind.Primitive,
-                    Name: getCSharpInputTypeKindByIntrinsicModelName(
+                    Name: getCSharpInputTypeKindByPrimitiveModelName(
                         sdkType.kind,
                         formattedType.format,
                         formattedType.encode
@@ -369,7 +376,7 @@ export function getInputType(
 
     function getInputModelType(
         m: Model
-    ): InputListType | InputDictionaryType | InputModelType {
+    ): InputListType | InputDictionaryType | InputModelType | undefined {
         /* Array and Map Type. */
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
@@ -421,7 +428,6 @@ export function getInputType(
         const type = formattedType.type;
         const builtInKind: InputPrimitiveTypeKind =
             mapTypeSpecTypeToCSharpInputTypeKind(
-                context,
                 type,
                 formattedType.format,
                 formattedType.encode
@@ -491,7 +497,18 @@ export function getInputType(
     ): InputEnumType {
         const name = getTypeName(context, e);
         let enumType = enums.get(name);
+
         if (!enumType) {
+            // if it's in TCGC model cache, then construct from TCGC
+            if (context.modelsMap?.has(e)) {
+                return fromSdkEnumType(
+                    context.modelsMap!.get(e) as SdkEnumType,
+                    context,
+                    enums,
+                    addToCollection
+                );
+            }
+            // TODO remove the following after https://github.com/Azure/typespec-azure/issues/128 is resolved
             if (e.members.size === 0) {
                 throw new Error(
                     `Enum type '${e.name}' doesn't define any values.`
@@ -536,6 +553,7 @@ export function getInputType(
             setUsage(context, e, enumType);
             if (addToCollection) enums.set(name, enumType);
         }
+
         return enumType;
 
         function enumMemberType(member: EnumMember): string {
@@ -550,7 +568,7 @@ export function getInputType(
         return {
             Kind: InputTypeKind.Array,
             Name: InputTypeKind.Array,
-            ElementType: getInputType(
+            ElementType: ensureInputType(
                 context,
                 getFormattedType(program, elementType),
                 models,
@@ -564,13 +582,13 @@ export function getInputType(
         return {
             Kind: InputTypeKind.Dictionary,
             Name: InputTypeKind.Dictionary,
-            KeyType: getInputType(
+            KeyType: ensureInputType(
                 context,
                 getFormattedType(program, key),
                 models,
                 enums
             ),
-            ValueType: getInputType(
+            ValueType: ensureInputType(
                 context,
                 getFormattedType(program, value),
                 models,
@@ -580,47 +598,26 @@ export function getInputType(
         };
     }
 
-    function getInputModelForModel(m: Model): InputModelType {
-        const name = getTypeName(context, m);
-        let model = models.get(name);
-        if (!model) {
-            const { baseModel, inheritedDictionaryType } =
-                getInputModelBaseType(m);
-            model = models.get(name);
-            if (model) return model;
-            const properties: InputModelProperty[] = [];
-
-            const discriminator = getDiscriminator(program, m);
-            model = {
-                Kind: InputTypeKind.Model,
-                Name: name,
-                Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m)
-                    ? "internal"
-                    : getAccess(context, m),
-                Deprecated: getDeprecated(program, m),
-                Description: getDoc(program, m),
-                IsNullable: false,
-                DiscriminatorPropertyName: discriminator?.propertyName,
-                DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                Usage: Usage.None,
-                InheritedDictionaryType: inheritedDictionaryType, // InheritedDictionaryType represent the type of additional properties property
-                BaseModel: baseModel, // BaseModel should be the last but one assigned to model
-                Properties: properties // Properties should be the last assigned to model
-            };
-            setUsage(context, m, model);
-
-            // open generic type model which has un-instanced template parameter will not be generated. e.g.
-            // model GenericModel<T> { value: T }
-            if (m.isFinished) {
-                models.set(name, model);
-            }
-
-            // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(model, m.properties, properties);
+    function getInputModelForModel(m: Model): InputModelType | undefined {
+        if (context.modelsMap!.has(m)) {
+            return fromSdkModelType(
+                context.modelsMap!.get(m) as SdkModelType,
+                context,
+                models,
+                enums
+            );
         }
-
-        return model;
+        var createdSdkModelType = getClientType(context, m) as SdkModelType;
+        if (createdSdkModelType) {
+            context.modelsMap!.set(m, createdSdkModelType);
+            return fromSdkModelType(
+                createdSdkModelType,
+                context,
+                models,
+                enums
+            );
+        }
+        return undefined;
     }
 
     function getDiscriminatorValue(
@@ -683,7 +680,7 @@ export function getInputType(
                     PropertyName: name,
                     Namespace: model.Namespace
                 };
-                const inputType = getInputType(
+                const inputType = ensureInputType(
                     context,
                     getFormattedType(program, value),
                     models,
@@ -764,8 +761,15 @@ export function getInputType(
 
         if (baseModel) {
             const baseModelType = getInputModelType(baseModel);
+            if (baseModelType === undefined) {
+                $lib.reportDiagnostic(program, {
+                    code: "No-Model",
+                    format: { name: baseModel.name },
+                    target: NoTarget
+                });
+            }
 
-            if (isInputListType(baseModelType)) {
+            if (isInputListType(baseModelType!)) {
                 // tsp never allows array to be the base model of a model
                 // meaning that it should be invalid tsp if you write:
                 // model Foo extends Bar[] {}
@@ -775,7 +779,7 @@ export function getInputType(
                 return {};
             }
 
-            if (isInputDictionaryType(baseModelType)) {
+            if (isInputDictionaryType(baseModelType!)) {
                 return {
                     inheritedDictionaryType: baseModelType
                 };
@@ -821,7 +825,7 @@ export function getInputType(
 
         let hasNullType = false;
         for (const variant of variants) {
-            const inputType = getInputType(
+            const inputType = ensureInputType(
                 context,
                 getFormattedType(program, variant.type),
                 models,
@@ -853,6 +857,38 @@ export function getInputType(
               }
             : itemTypes[0];
     }
+}
+
+export function ensureInputType(
+    context: SdkContext,
+    formattedType: FormattedType,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
+): InputType {
+    const type = getInputType(
+        context,
+        formattedType,
+        models,
+        enums,
+        literalTypeContext
+    );
+    if (type === undefined) {
+        if (formattedType.type.kind === "Model") {
+            $lib.reportDiagnostic(context.program, {
+                code: "No-Model",
+                format: { name: (formattedType.type as Model).name },
+                target: NoTarget
+            });
+        } else {
+            $lib.reportDiagnostic(context.program, {
+                code: "No-Type",
+                format: { kind: formattedType.type.kind },
+                target: NoTarget
+            });
+        }
+    }
+    return type!;
 }
 
 export function setUsage(

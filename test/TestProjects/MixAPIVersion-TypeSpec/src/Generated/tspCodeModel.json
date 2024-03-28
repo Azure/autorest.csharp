@@ -82,7 +82,7 @@
   {
    "$id": "11",
    "Kind": "Model",
-   "Name": "PagedToy",
+   "Name": "PagedToyToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
    "IsNullable": false,

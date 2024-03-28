@@ -160,7 +160,7 @@ UnionIntLiteral client = new OptionalClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1),
+    Property = UnionIntLiteralPropertyProperty._1,
 };
 Response response = await client.PutAllAsync(body);
 ]]></code></example>
@@ -180,7 +180,7 @@ UnionIntLiteral client = new OptionalClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1),
+    Property = UnionIntLiteralPropertyProperty._1,
 };
 Response response = client.PutAll(body);
 ]]></code></example>
@@ -248,7 +248,7 @@ UnionIntLiteral client = new OptionalClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1),
+    Property = UnionIntLiteralPropertyProperty._1,
 };
 Response response = await client.PutDefaultAsync(body);
 ]]></code></example>
@@ -268,7 +268,7 @@ UnionIntLiteral client = new OptionalClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1),
+    Property = UnionIntLiteralPropertyProperty._1,
 };
 Response response = client.PutDefault(body);
 ]]></code></example>

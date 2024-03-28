@@ -468,52 +468,52 @@
   {
    "$id": "64",
    "Kind": "Model",
-   "Name": "ModelForRecord",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "model for record",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "65",
-     "Name": "state",
-     "SerializedName": "state",
-     "Description": "The state property",
-     "Type": {
-      "$id": "66",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "67",
-   "Kind": "Model",
    "Name": "ExtendsModelAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
-    "$id": "68",
+    "$id": "65",
     "Kind": "Dictionary",
     "Name": "Dictionary",
     "KeyType": {
-     "$id": "69",
+     "$id": "66",
      "Kind": "Primitive",
      "Name": "String",
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "64"
+     "$id": "67",
+     "Kind": "Model",
+     "Name": "ModelForRecord",
+     "Namespace": "Type.Property.AdditionalProperties",
+     "Description": "model for record",
+     "IsNullable": false,
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "68",
+       "Name": "state",
+       "SerializedName": "state",
+       "Description": "The state property",
+       "Type": {
+        "$id": "69",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
     },
     "IsNullable": false
    },
    "Properties": []
+  },
+  {
+   "$ref": "67"
   },
   {
    "$id": "70",
@@ -534,7 +534,7 @@
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "64"
+     "$ref": "67"
     },
     "IsNullable": false
    },
@@ -563,7 +563,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "64"
+      "$ref": "67"
      },
      "IsNullable": false
     },
@@ -594,7 +594,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "64"
+      "$ref": "67"
      },
      "IsNullable": false
     },
@@ -2557,7 +2557,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "67"
+        "$ref": "64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2590,7 +2590,7 @@
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "67"
+        "$ref": "64"
        },
        "Location": "Body",
        "IsRequired": true,

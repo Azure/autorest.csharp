@@ -27,8 +27,11 @@ namespace Pagination.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("blockItemId"u8);
-            writer.WriteStringValue(BlockItemId);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("blockItemId"u8);
+                writer.WriteStringValue(BlockItemId);
+            }
             if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);

@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -189,7 +189,7 @@
      "Type": {
       "$id": "26",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -203,7 +203,7 @@
      "Type": {
       "$id": "28",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -217,7 +217,7 @@
      "Type": {
       "$id": "30",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -231,7 +231,7 @@
      "Type": {
       "$id": "32",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -245,7 +245,7 @@
   {
    "$id": "33",
    "Kind": "Model",
-   "Name": "PagedProject",
+   "Name": "PagedProjectProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
@@ -311,7 +311,7 @@
   {
    "$id": "41",
    "Kind": "Model",
-   "Name": "PagedDeployment",
+   "Name": "PagedDeploymentDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,

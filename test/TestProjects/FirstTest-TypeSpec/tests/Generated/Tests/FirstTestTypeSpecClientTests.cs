@@ -767,7 +767,10 @@ null
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -830,7 +833,10 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(123) },
+                Extension = {new ThereLevelExtension(123)
+{
+Extension = {default},
+}},
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }

@@ -48,7 +48,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="TrackedResourceData"/>. </summary>
         /// <param name="location"> The location property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        internal TrackedResourceData(string location)
+        public TrackedResourceData(string location)
         {
             Argument.AssertNotNull(location, nameof(location));
 
@@ -63,7 +63,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="location"> The location property. </param>
         /// <param name="tags"> The tags property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrackedResourceData(string id, string name, string resourceType, string location, IReadOnlyDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal TrackedResourceData(string id, string name, string resourceType, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
@@ -85,8 +85,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <summary> The resource type. </summary>
         public string ResourceType { get; }
         /// <summary> The location property. </summary>
-        public string Location { get; }
+        public string Location { get; set; }
         /// <summary> The tags property. </summary>
-        public IReadOnlyDictionary<string, string> Tags { get; }
+        public IDictionary<string, string> Tags { get; }
     }
 }

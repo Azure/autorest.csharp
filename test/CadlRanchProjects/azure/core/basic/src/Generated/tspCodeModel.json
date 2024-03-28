@@ -10,7 +10,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ListItemInputExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -178,7 +178,7 @@
   {
    "$id": "23",
    "Kind": "Model",
-   "Name": "PagedUser",
+   "Name": "PagedUserUser",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
    "IsNullable": false,
@@ -245,7 +245,7 @@
   {
    "$id": "31",
    "Kind": "Model",
-   "Name": "UserListResults",
+   "Name": "UserListResultsUser",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
    "Usage": "Output",
@@ -286,7 +286,7 @@
   {
    "$id": "36",
    "Kind": "Model",
-   "Name": "PagedFirstItem",
+   "Name": "PagedFirstItemFirstItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
@@ -353,7 +353,7 @@
   {
    "$id": "44",
    "Kind": "Model",
-   "Name": "PagedSecondItem",
+   "Name": "PagedSecondItemSecondItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,

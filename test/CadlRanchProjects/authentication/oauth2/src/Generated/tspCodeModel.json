@@ -100,18 +100,25 @@
      "SerializedName": "type",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$id": "14",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "2"
+      },
+      "Value": "implicit",
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "authorizationUrl",
      "SerializedName": "authorizationUrl",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "16",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -124,12 +131,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "scopes",
      "SerializedName": "scopes",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "18",
       "Kind": "Intrinsic",
       "Name": "unknown",
       "IsNullable": false
@@ -142,23 +149,23 @@
  ],
  "Clients": [
   {
-   "$id": "18",
+   "$id": "19",
    "Name": "OAuth2Client",
    "Description": "Illustrates clients generated with OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "19",
+     "$id": "20",
      "Name": "valid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "21",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "21",
+        "$id": "22",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -173,9 +180,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "23",
         "Type": {
-         "$id": "23",
+         "$id": "24",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -184,11 +191,11 @@
        }
       },
       {
-       "$id": "24",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "26",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -203,9 +210,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "27",
         "Type": {
-         "$ref": "25"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
@@ -213,7 +220,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -231,20 +238,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "29",
      "Name": "invalid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "21"
       },
       {
-       "$id": "29",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "31",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -259,9 +266,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "32",
         "Type": {
-         "$ref": "30"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -269,7 +276,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -278,7 +285,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "33",
+       "$id": "34",
        "StatusCodes": [
         403
        ],
@@ -303,15 +310,15 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "35"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "35",
+  "$id": "36",
   "OAuth2": {
-   "$id": "36",
+   "$id": "37",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

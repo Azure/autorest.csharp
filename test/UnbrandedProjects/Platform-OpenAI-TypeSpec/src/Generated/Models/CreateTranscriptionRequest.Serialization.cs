@@ -33,7 +33,7 @@ namespace OpenAI.Models
             if (Optional.IsDefined(ResponseFormat))
             {
                 writer.WritePropertyName("response_format"u8);
-                writer.WriteStringValue(ResponseFormat.Value.ToString());
+                writer.WriteStringValue(ResponseFormat.Value.ToSerialString());
             }
             if (Optional.IsDefined(Temperature))
             {
@@ -114,7 +114,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    responseFormat = new CreateTranscriptionRequestResponseFormat(property.Value.GetString());
+                    responseFormat = property.Value.GetString().ToCreateTranscriptionRequestResponseFormat();
                     continue;
                 }
                 if (property.NameEquals("temperature"u8))

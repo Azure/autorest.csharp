@@ -30,7 +30,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
         /// <param name="kind"> The facet type. </param>
-        internal Int32ValuesFacet(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IReadOnlyList<int> values, int value, Int32ValuesFacetKind kind) : base(field, serializedAdditionalRawData, values, value)
+        internal Int32ValuesFacet(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<int> values, int value, Int32ValuesFacetKind kind) : base(field, serializedAdditionalRawData, values, value)
         {
             Kind = kind;
         }

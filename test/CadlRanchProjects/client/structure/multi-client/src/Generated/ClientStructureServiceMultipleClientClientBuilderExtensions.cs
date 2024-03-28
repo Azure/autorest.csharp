@@ -8,6 +8,7 @@
 using System;
 using Azure.Core.Extensions;
 using Client.Structure.Service.Multiple.Client;
+using Client.Structure.Service.Multiple.Client.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -17,8 +18,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ClientAClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        public static IAzureClientBuilder<ClientAClient, ClientStructureServiceMultipleClientOptions> AddClientAClient<TBuilder>(this TBuilder builder, Uri endpoint, string client)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        public static IAzureClientBuilder<ClientAClient, ClientStructureServiceMultipleClientOptions> AddClientAClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ClientAClient, ClientStructureServiceMultipleClientOptions>((options) => new ClientAClient(endpoint, client, options));
@@ -27,8 +28,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ClientBClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        public static IAzureClientBuilder<ClientBClient, ClientStructureServiceMultipleClientOptions> AddClientBClient<TBuilder>(this TBuilder builder, Uri endpoint, string client)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        public static IAzureClientBuilder<ClientBClient, ClientStructureServiceMultipleClientOptions> AddClientBClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ClientBClient, ClientStructureServiceMultipleClientOptions>((options) => new ClientBClient(endpoint, client, options));

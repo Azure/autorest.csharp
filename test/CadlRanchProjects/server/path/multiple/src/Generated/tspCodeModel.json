@@ -22,7 +22,7 @@
    "Description": "Service versions",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [],

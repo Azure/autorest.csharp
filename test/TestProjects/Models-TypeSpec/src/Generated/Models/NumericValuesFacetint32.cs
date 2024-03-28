@@ -19,7 +19,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="field"/> or <paramref name="values"/> is null. </exception>
-        internal NumericValuesFacetint32(string field, IEnumerable<int> values, int value) : base(field)
+        public NumericValuesFacetint32(string field, IEnumerable<int> values, int value) : base(field)
         {
             Argument.AssertNotNull(field, nameof(field));
             Argument.AssertNotNull(values, nameof(values));
@@ -33,7 +33,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
-        internal NumericValuesFacetint32(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IReadOnlyList<int> values, int value) : base(field, serializedAdditionalRawData)
+        internal NumericValuesFacetint32(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<int> values, int value) : base(field, serializedAdditionalRawData)
         {
             Values = values;
             Value = value;
@@ -45,7 +45,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </summary>
-        public IReadOnlyList<int> Values { get; }
+        public IList<int> Values { get; }
         /// <summary> Gets the value. </summary>
         public int Value { get; }
     }
