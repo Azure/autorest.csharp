@@ -12,9 +12,6 @@ schedules:
 extends:
   template: /eng/pipelines/1es-redirect.yml
   parameters:
-    variables:
-    - group: Release Secrets for GitHub
-
     stages:
     - stage: Synchronize_Shared_Codes
       pool:
