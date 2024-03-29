@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement());
+                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement().Write(_writer);
             }
         }
 
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement());
+                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
             }
         }
 

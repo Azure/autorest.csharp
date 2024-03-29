@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
