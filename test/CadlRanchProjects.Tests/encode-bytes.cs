@@ -1,5 +1,4 @@
 using System;
-using System.Buffers.Text;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -8,7 +7,6 @@ using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CadlRanchProjects.Tests
 {
