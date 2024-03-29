@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -146,7 +147,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (property.InitializationValue != null)
             {
                 writer.AppendRaw(" = ");
-                writer.WriteValueExpression(property.InitializationValue);
+                property.InitializationValue.Write(writer);
                 writer.Line($";");
             }
 
