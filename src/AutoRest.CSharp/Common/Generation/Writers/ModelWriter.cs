@@ -46,9 +46,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                // TODO: figure out why schema.Description.IsNullOrEmpty() is not working here
                 var description = string.IsNullOrEmpty(schema.Description.ToString()) ? $"The {schema.Declaration.Name}." : schema.Description;
-                writer.WriteXmlDocumentationSummary($"{description}");
+                writer.WriteXmlDocumentationSummary(description);
                 AddClassAttributes(writer, schema);
 
                 if (schema.IsStruct)
