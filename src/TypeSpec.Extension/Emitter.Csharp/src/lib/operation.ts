@@ -19,7 +19,6 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Program
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -59,7 +58,6 @@ import {
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
 import { logger } from "./logger.js";
 import {
-    ensureInputType,
     getDefaultValue,
     getEffectiveSchemaType,
     getFormattedType,
@@ -254,7 +252,7 @@ export function loadOperation(
         const { type: location, name, param } = parameter;
         const format = parameter.type === "path" ? undefined : parameter.format;
         const typespecType = param.type;
-        const inputType: InputType = ensureInputType(
+        const inputType: InputType = getInputType(
             context,
             getFormattedType(program, param),
             models,
@@ -309,7 +307,7 @@ export function loadOperation(
         context: SdkContext,
         body: ModelProperty | Model
     ): InputParameter {
-        const inputType: InputType = ensureInputType(
+        const inputType: InputType = getInputType(
             context,
             getFormattedType(program, body),
             models,
@@ -350,7 +348,7 @@ export function loadOperation(
         let type: InputType | undefined = undefined;
         if (body?.type) {
             const typespecType = getEffectiveSchemaType(context, body.type);
-            const inputType: InputType = ensureInputType(
+            const inputType: InputType = getInputType(
                 context,
                 getFormattedType(program, typespecType),
                 models,
