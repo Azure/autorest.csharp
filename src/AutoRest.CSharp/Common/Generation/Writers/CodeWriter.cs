@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         Append(declaration);
                         break;
                     case ValueExpression expression:
-                        this.WriteValueExpression(expression);
+                        expression.Write(this);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
