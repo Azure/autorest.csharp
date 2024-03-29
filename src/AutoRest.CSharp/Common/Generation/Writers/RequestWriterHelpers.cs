@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -29,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -239,8 +238,8 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
-            fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
+        private static ReferenceOrConstant GetFieldReference(ClientFields fields, ReferenceOrConstant value) =>
+            !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
         private static ReferenceOrConstant GetReferenceForQueryParameter(ClientFields? fields, QueryParameter parameter)
         {
@@ -255,7 +254,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value;
         }
 
-        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields? fields)
+        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields fields)
         {
             foreach (var header in clientMethod.Request.Headers)
             {
@@ -299,7 +298,7 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        internal static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        internal static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields fields)
         {
             string? delimiter = header.Delimiter;
             string method = delimiter != null
@@ -336,10 +335,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        internal static void WriteHeaderSystem(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        internal static void WriteHeaderSystem(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields fields)
         {
-            string? delimiter = header.Delimiter;
-
             var value = GetFieldReference(fields, header.Value);
             using (WriteValueNullCheck(writer, value))
             {
