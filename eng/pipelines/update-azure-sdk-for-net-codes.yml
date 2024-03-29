@@ -18,9 +18,6 @@ parameters:
 jobs:
 - job: ${{ parameters.Name }}
   timeoutInMinutes: 60
-  pool:
-    name: azsdk-pool-mms-ubuntu-2004-general
-    vmImage: ubuntu-20.04
   strategy:
     matrix: ${{ parameters.Matrix }}
   dependsOn: ${{ parameters.DependsOn }}
