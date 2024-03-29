@@ -43,11 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in properties)
             {
-                // [TODO]: Resolve differences in HLC and DPG for ambiguous property names
-                var originalFieldName = Configuration.Generation1ConvenienceClient
-                    ? inputModelProperty.Name == "null" ? "NullProperty" : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName())
-                    : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
-
+                var originalFieldName = BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
@@ -143,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var field = CreateFieldFromExisting(existingMember, existingCSharpType, null, SerializationFormat.Default, typeFactory, false, false);
-                    var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
+                    var parameter = new Parameter(field.Name.ToVariableName(), $"", field.Type, null, ValidationType.None, null);
 
                     fields.Add(field);
                     serializationParameters.Add(parameter);
@@ -156,21 +152,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
-        }
-
-        private static InputType GetInputTypeFromExistingMemberType(CSharpType type)
-        {
-            if (TypeFactory.IsList(type))
-            {
-                return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), TypeFactory.IsReadOnlyMemory(type), false);
-            }
-
-            if (TypeFactory.IsDictionary(type))
-            {
-                return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromExistingMemberType(type.Arguments[1]), false);
-            }
-
-            return InputPrimitiveType.Object;
         }
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
@@ -307,7 +288,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var fieldModifiers = GetAccessModifiers(existingMember);
-            if (IsReadOnly(existingMember))
+            if (BuilderHelpers.IsReadOnlyFromExisting(existingMember))
             {
                 fieldModifiers |= ReadOnly;
             }
@@ -337,13 +318,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             Accessibility.Internal => Internal,
             Accessibility.Private => Private,
             _ => throw new ArgumentOutOfRangeException()
-        };
-
-        private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
-        {
-            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
-            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)

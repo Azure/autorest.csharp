@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -220,6 +221,13 @@ namespace AutoRest.CSharp.Output.Builders
             return PromoteNullabilityInformation(newType, defaultType);
         }
 
+        public static bool IsReadOnlyFromExisting(ISymbol existingMember) => existingMember switch
+        {
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+        };
+
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
         {
             return existingMember != null ?
@@ -288,7 +296,7 @@ namespace AutoRest.CSharp.Output.Builders
                 EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 
-        public static string DisambiguateName(string typeName, string name, string suffix = "Value")
+        public static string DisambiguateName(string typeName, string name, string suffix)
         {
             if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
             {
