@@ -69,7 +69,7 @@ namespace MgmtDiscriminator
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
         /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
-        /// <param name="sku"> A model that will be safe flattened. </param>
+        /// <param name="sku"> The top level sku property. </param>
         /// <param name="properties"> The properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, Sku1 sku, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
@@ -111,10 +111,10 @@ namespace MgmtDiscriminator
         /// <summary> A shell property to verify bicep generation for empty objects. </summary>
         [WirePath("shellProperty")]
         public Shell ShellProperty { get; set; }
-        /// <summary> A model that will be safe flattened. </summary>
+        /// <summary> The top level sku property. </summary>
         internal Sku1 Sku { get; set; }
-        /// <summary> The name of the sku. </summary>
-        [WirePath("sku.name.nestedName")]
+        /// <summary> The childmost sku property. </summary>
+        [WirePath("sku.name1.nestedName")]
         public string NestedName
         {
             get => Sku is null ? default : Sku.NestedName;

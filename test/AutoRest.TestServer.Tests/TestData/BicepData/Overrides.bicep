@@ -6,7 +6,7 @@
   duration: 'P1D'
   number: 4
   sku: {
-    name: {
+    name1: {
       nestedName: 'overridenSku'
     }
   }

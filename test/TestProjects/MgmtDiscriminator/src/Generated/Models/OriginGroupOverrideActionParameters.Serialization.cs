@@ -106,11 +106,6 @@ namespace MgmtDiscriminator.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
@@ -138,20 +133,27 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
+            if (propertyOverrides != null)
+            {
+                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
+            }
+
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
         {
             foreach (var item in propertyOverrides.ToList())
             {
                 switch (item.Key)
                 {
                     case "OriginGroupId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(OriginGroup, propertyDictionary);
+                        stringBuilder.AppendLine("originGroup: {");
+                        stringBuilder.Append("  id: ");
+                        stringBuilder.AppendLine(item.Value);
+                        stringBuilder.AppendLine("  }");
+                        stringBuilder.AppendLine("}");
                         break;
                     default:
                         continue;

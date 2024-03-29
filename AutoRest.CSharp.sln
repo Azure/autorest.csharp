@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Tests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadlRanchProjectsNonAzure.Tests", "test\CadlRanchProjectsNonAzure.Tests\CadlRanchProjectsNonAzure.Tests.csproj", "{32CC2EC8-C107-4C0B-BAA8-973486F6303C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgmtDiscriminator", "test\TestProjects\MgmtDiscriminator\src\MgmtDiscriminator.csproj", "{551AD38D-4173-4576-8872-2060036B8C21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{551AD38D-4173-4576-8872-2060036B8C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{551AD38D-4173-4576-8872-2060036B8C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{551AD38D-4173-4576-8872-2060036B8C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{551AD38D-4173-4576-8872-2060036B8C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

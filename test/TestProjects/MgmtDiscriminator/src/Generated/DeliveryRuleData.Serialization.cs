@@ -304,11 +304,6 @@ namespace MgmtDiscriminator
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -504,20 +499,29 @@ namespace MgmtDiscriminator
                 }
             }
 
+            if (propertyOverrides != null)
+            {
+                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
+            }
+
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
         {
             foreach (var item in propertyOverrides.ToList())
             {
                 switch (item.Key)
                 {
                     case "NestedName":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("NestedName", item.Value);
-                        bicepOptions.PropertyOverrides.Add(Sku, propertyDictionary);
+                        stringBuilder.AppendLine("sku: {");
+                        stringBuilder.AppendLine("  name1: {");
+                        stringBuilder.Append("    nestedName: ");
+                        stringBuilder.AppendLine(item.Value);
+                        stringBuilder.AppendLine("    }");
+                        stringBuilder.AppendLine("  }");
+                        stringBuilder.AppendLine("}");
                         break;
                     default:
                         continue;

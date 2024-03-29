@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtDiscriminator.Mocking;
+using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
 {
@@ -254,6 +255,78 @@ namespace MgmtDiscriminator
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeliveryRules_ParamConstructor</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.ParamfunctionObjectNativeCodeDeliveryRule(Sku2,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="body"> Endpoint properties. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="body"/> is null. </exception>
+        public static async Task<Response> ParamfunctionObjectNativeCodeDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, Sku2 body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).ParamfunctionObjectNativeCodeDeliveryRuleAsync(body, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeliveryRules_ParamConstructor</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.ParamfunctionObjectNativeCodeDeliveryRule(Sku2,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="body"> Endpoint properties. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="body"/> is null. </exception>
+        public static Response ParamfunctionObjectNativeCodeDeliveryRule(this ResourceGroupResource resourceGroupResource, Sku2 body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).ParamfunctionObjectNativeCodeDeliveryRule(body, cancellationToken);
         }
     }
 }

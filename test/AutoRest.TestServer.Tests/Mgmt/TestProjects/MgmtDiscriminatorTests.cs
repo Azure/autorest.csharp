@@ -78,7 +78,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void ToBicepWithOverrides()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void ToBicepWithOverrides(bool initializeOverridedProperty)
         {
             var queryParams = new QueryStringMatchConditionParameters(
                 QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
@@ -107,8 +109,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
-                NestedName = "someSku"
             };
+            if (initializeOverridedProperty)
+            {
+                data.NestedName = "someSku";
+            }
             var options = new BicepModelReaderWriterOptions
             {
                 PropertyOverrides =

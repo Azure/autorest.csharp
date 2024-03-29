@@ -29,10 +29,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Optional.IsDefined(Name1))
             {
-                writer.WritePropertyName("name"u8);
-                writer.WriteObjectValue<Sku2>(Name, options);
+                writer.WritePropertyName("name1"u8);
+                writer.WriteObjectValue<Sku2>(Name1, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -72,18 +72,18 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Sku2 name = default;
+            Sku2 name1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
+                if (property.NameEquals("name1"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    name = Sku2.DeserializeSku2(property.Value, options);
+                    name1 = Sku2.DeserializeSku2(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -92,7 +92,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Sku1(name, serializedAdditionalRawData);
+            return new Sku1(name1, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -104,41 +104,43 @@ namespace MgmtDiscriminator.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name1), out propertyOverride);
+            if (Optional.IsDefined(Name1) || hasPropertyOverride)
             {
-                builder.Append("  name: ");
+                builder.Append("  name1: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    BicepSerializationHelpers.AppendChildObject(builder, Name, options, 2, false, "  name: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Name1, options, 2, false, "  name1: ");
                 }
+            }
+
+            if (propertyOverrides != null)
+            {
+                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
         {
             foreach (var item in propertyOverrides.ToList())
             {
                 switch (item.Key)
                 {
                     case "NestedName":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("NestedName", item.Value);
-                        bicepOptions.PropertyOverrides.Add(Name, propertyDictionary);
+                        stringBuilder.AppendLine("name1: {");
+                        stringBuilder.Append("  nestedName: ");
+                        stringBuilder.AppendLine(item.Value);
+                        stringBuilder.AppendLine("  }");
+                        stringBuilder.AppendLine("}");
                         break;
                     default:
                         continue;

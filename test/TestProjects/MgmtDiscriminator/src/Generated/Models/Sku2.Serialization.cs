@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
+    public partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -28,11 +28,8 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(NestedName))
-            {
-                writer.WritePropertyName("nestedName"u8);
-                writer.WriteStringValue(NestedName);
-            }
+            writer.WritePropertyName("nestedName"u8);
+            writer.WriteStringValue(NestedName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
