@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             var suffix = SingletonResourceSuffix.Parse(segments);
             var result = suffix.BuildResourceIdentifier(new FormattableStringToExpression($"Id"));
             var writer = new CodeWriter();
-            writer.WriteValueExpression(result);
+            result.Write(writer);
             Assert.AreEqual(expected, writer.ToString(false).Trim());
         }
     }

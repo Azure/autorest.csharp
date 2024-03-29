@@ -102,13 +102,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return _innerListField;
         }
 
-        protected override IEnumerable<PropertyDeclaration> BuildProperties()
-        {
-            yield return new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(bool), "IsUndefined", new ExpressionPropertyBody(Equal(_innerList, Null)));
-            yield return BuildCount();
-            yield return BuildIsReadOnly();
-            yield return BuildIndexer();
-        }
+        protected override PropertyDeclaration[] BuildProperties() =>
+            new[]
+            {
+                new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(bool), "IsUndefined", new ExpressionPropertyBody(Equal(_innerList, Null))),
+                BuildCount(),
+                BuildIsReadOnly(),
+                BuildIndexer()
+            };
 
         private PropertyDeclaration BuildIsReadOnly()
         {
