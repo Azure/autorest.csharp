@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -28,13 +29,13 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            writer.Append($"{methodAccessibility} {Configuration.ApiTypes.HttpMessageType} {methodName}(");
+            writer.Append($"internal {Configuration.ApiTypes.HttpMessageType} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
@@ -66,13 +67,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     writer.Line($"var {message:D} = _pipeline.CreateMessage();");
-                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
-                    {
-                        using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
-                        {
-                            writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
-                        }
-                    }
                     writer.Line($"{message}.ResponseClassifier = {responseClassifierType};");
                 }
 
@@ -229,6 +223,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (writeSDKUserAgent)
                 {
                     writer.Line($"_userAgent.Apply({message});");
+                }
+
+                // we need to apply the RequestOptions in non-branded case as a last step
+                if (!Configuration.IsBranded && clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                {
+                    using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
+                    {
+                        writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                    }
                 }
 
                 writer.Line($"return {message};");

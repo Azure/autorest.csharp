@@ -501,10 +501,6 @@ namespace OpenAI
         internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -515,16 +511,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateGetPaginatedsRequest(string after, long? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -541,16 +537,16 @@ namespace OpenAI
             }
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateRetrieveRequest(string fineTuningJobId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -560,16 +556,16 @@ namespace OpenAI
             uri.AppendPath(fineTuningJobId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -588,16 +584,16 @@ namespace OpenAI
             }
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCancelRequest(string fineTuningJobId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -608,6 +604,10 @@ namespace OpenAI
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 

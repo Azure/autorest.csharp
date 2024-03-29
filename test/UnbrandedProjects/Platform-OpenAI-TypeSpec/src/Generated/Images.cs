@@ -295,10 +295,6 @@ namespace OpenAI
         internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -309,16 +305,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCreateEditRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -329,16 +325,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -349,6 +345,10 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 

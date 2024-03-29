@@ -451,10 +451,6 @@ namespace OpenAI
         internal PipelineMessage CreateGetFilesRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -463,16 +459,16 @@ namespace OpenAI
             uri.AppendPath("/files", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -483,16 +479,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateRetrieveRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -502,16 +498,16 @@ namespace OpenAI
             uri.AppendPath(fileId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateDeleteRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "DELETE";
@@ -521,16 +517,16 @@ namespace OpenAI
             uri.AppendPath(fileId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateDownloadRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -541,6 +537,10 @@ namespace OpenAI
             uri.AppendPath("/content", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 

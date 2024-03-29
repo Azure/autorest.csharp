@@ -1301,10 +1301,6 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1319,16 +1315,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1341,16 +1337,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "text/plain");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1363,16 +1359,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateHelloDemo2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1381,16 +1377,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1401,16 +1397,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateHelloLiteralRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1422,16 +1418,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", "test");
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1441,16 +1437,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(action.ToString("O"), true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateTopAction2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1459,16 +1455,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "PATCH";
@@ -1479,16 +1475,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1499,16 +1495,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1519,16 +1515,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1538,16 +1534,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "POST";
@@ -1559,16 +1555,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1579,16 +1575,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1597,16 +1593,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1615,16 +1611,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1635,16 +1631,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateStillConvenientRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1653,16 +1649,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200To300400To500;
             var request = message.Request;
             request.Method = "HEAD";
@@ -1672,6 +1668,10 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 

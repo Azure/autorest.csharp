@@ -539,10 +539,6 @@ namespace OpenAI
         internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -553,16 +549,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateGetFineTunesRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -571,16 +567,16 @@ namespace OpenAI
             uri.AppendPath("/fine-tunes", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateRetrieveRequest(string fineTuneId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -590,16 +586,16 @@ namespace OpenAI
             uri.AppendPath(fineTuneId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateGetEventsRequest(string fineTuneId, bool? stream, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -614,16 +610,16 @@ namespace OpenAI
             }
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateCancelRequest(string fineTuneId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -634,6 +630,10 @@ namespace OpenAI
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
