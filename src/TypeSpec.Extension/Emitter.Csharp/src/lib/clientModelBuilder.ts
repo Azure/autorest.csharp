@@ -226,7 +226,7 @@ export function createModelForService(
             $lib.reportDiagnostic(program, {
                 code: "Invalid-Name",
                 format: { name: clientName },
-                target: NoTarget
+                target: client.type
             });
             return "ModelsOps";
         }
