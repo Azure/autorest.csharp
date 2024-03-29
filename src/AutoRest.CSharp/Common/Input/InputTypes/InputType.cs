@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = default)
+internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = null)
 {
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
 
