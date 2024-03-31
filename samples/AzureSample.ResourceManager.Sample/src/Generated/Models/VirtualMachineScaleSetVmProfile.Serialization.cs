@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -262,11 +261,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSProfile), out propertyOverride);
@@ -275,7 +269,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  osProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -289,7 +283,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  storageProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -303,7 +297,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  networkProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -311,13 +305,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SecurityProfile), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("EncryptionAtHost", out propertyOverride);
             if (Optional.IsDefined(SecurityProfile) || hasPropertyOverride)
             {
                 builder.Append("  securityProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    encryptionAtHost: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -325,13 +322,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiagnosticsProfile), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("BootDiagnostics", out propertyOverride);
             if (Optional.IsDefined(DiagnosticsProfile) || hasPropertyOverride)
             {
                 builder.Append("  diagnosticsProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    bootDiagnostics: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -345,7 +345,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  extensionProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -359,7 +359,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  licenseType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -381,7 +381,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  priority: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -395,7 +395,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  evictionPolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -403,13 +403,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BillingProfile), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("BillingMaxPrice", out propertyOverride);
             if (Optional.IsDefined(BillingProfile) || hasPropertyOverride)
             {
                 builder.Append("  billingProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    maxPrice: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -417,13 +420,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ScheduledEventsProfile), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ScheduledEventsTerminateNotificationProfile", out propertyOverride);
             if (Optional.IsDefined(ScheduledEventsProfile) || hasPropertyOverride)
             {
                 builder.Append("  scheduledEventsProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    terminateNotificationProfile: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -433,38 +439,6 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "EncryptionAtHost":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("EncryptionAtHost", item.Value);
-                        bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary);
-                        break;
-                    case "BootDiagnostics":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("BootDiagnostics", item.Value);
-                        bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary0);
-                        break;
-                    case "BillingMaxPrice":
-                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
-                        propertyDictionary1.Add("MaxPrice", item.Value);
-                        bicepOptions.PropertyOverrides.Add(BillingProfile, propertyDictionary1);
-                        break;
-                    case "ScheduledEventsTerminateNotificationProfile":
-                        Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
-                        propertyDictionary2.Add("TerminateNotificationProfile", item.Value);
-                        bicepOptions.PropertyOverrides.Add(ScheduledEventsProfile, propertyDictionary2);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmProfile>.Write(ModelReaderWriterOptions options)

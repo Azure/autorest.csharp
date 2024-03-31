@@ -217,20 +217,23 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  lun: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
                 builder.AppendLine($"{Lun}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Snapshot), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SnapshotId", out propertyOverride);
             if (Optional.IsDefined(Snapshot) || hasPropertyOverride)
             {
                 builder.Append("  snapshot: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -238,13 +241,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ManagedDisk), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ManagedDiskId", out propertyOverride);
             if (Optional.IsDefined(ManagedDisk) || hasPropertyOverride)
             {
                 builder.Append("  managedDisk: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -258,7 +264,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  blobUri: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -272,7 +278,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  caching: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -286,7 +292,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskSizeGB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -300,7 +306,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  storageAccountType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -308,13 +314,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionSet), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DiskEncryptionSetId", out propertyOverride);
             if (Optional.IsDefined(DiskEncryptionSet) || hasPropertyOverride)
             {
                 builder.Append("  diskEncryptionSet: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {

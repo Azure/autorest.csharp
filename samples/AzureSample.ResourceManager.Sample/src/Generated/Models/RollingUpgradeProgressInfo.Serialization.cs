@@ -156,7 +156,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  successfulInstanceCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -170,7 +170,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  failedInstanceCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  inProgressInstanceCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -198,7 +198,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  pendingInstanceCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -111,7 +111,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  patchMode: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

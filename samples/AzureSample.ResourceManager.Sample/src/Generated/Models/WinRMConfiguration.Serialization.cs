@@ -124,7 +124,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  listeners: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {

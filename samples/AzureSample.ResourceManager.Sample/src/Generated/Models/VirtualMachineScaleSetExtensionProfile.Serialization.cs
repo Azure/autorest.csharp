@@ -135,7 +135,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  extensions: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  extensionsTimeBudget: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

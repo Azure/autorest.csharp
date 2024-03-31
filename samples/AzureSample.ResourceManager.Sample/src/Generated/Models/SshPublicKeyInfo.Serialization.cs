@@ -118,7 +118,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  path: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  keyData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -356,11 +356,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PlatformUpdateDomain), out propertyOverride);
@@ -369,7 +364,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  platformUpdateDomain: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -383,7 +378,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  platformFaultDomain: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -397,7 +392,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  computerName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -419,7 +414,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  osName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -441,7 +436,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  osVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -463,7 +458,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  hyperVGeneration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -477,7 +472,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  rdpThumbPrint: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -499,7 +494,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  vmAgent: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -513,7 +508,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maintenanceRedeployStatus: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -529,7 +524,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  disks: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -551,7 +546,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  extensions: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -565,13 +560,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmHealth), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("VmHealthStatus", out propertyOverride);
             if (Optional.IsDefined(VmHealth) || hasPropertyOverride)
             {
                 builder.Append("  vmHealth: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    status: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -585,7 +583,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  bootDiagnostics: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -599,7 +597,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  assignedHost: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -623,7 +621,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  statuses: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -643,7 +641,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  patchStatus: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -653,23 +651,6 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "VmHealthStatus":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Status", item.Value);
-                        bicepOptions.PropertyOverrides.Add(VmHealth, propertyDictionary);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineInstanceView>.Write(ModelReaderWriterOptions options)

@@ -205,11 +205,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -218,7 +213,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -242,7 +237,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    idleTimeoutInMinutes: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -250,13 +245,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsSettings), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DnsDomainNameLabel", out propertyOverride);
             if (Optional.IsDefined(DnsSettings) || hasPropertyOverride)
             {
                 builder.Append("    dnsSettings: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      dnsSettings: {");
+                    builder.Append("        domainNameLabel: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -272,7 +272,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("    ipTags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -286,13 +286,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicIPPrefix), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("PublicIPPrefixId", out propertyOverride);
             if (Optional.IsDefined(PublicIPPrefix) || hasPropertyOverride)
             {
                 builder.Append("    publicIPPrefix: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      publicIPPrefix: {");
+                    builder.Append("        id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -306,7 +311,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    publicIPAddressVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -317,28 +322,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "DnsDomainNameLabel":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("DomainNameLabel", item.Value);
-                        bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary);
-                        break;
-                    case "PublicIPPrefixId":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(PublicIPPrefix, propertyDictionary0);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetPublicIPAddressConfiguration>.Write(ModelReaderWriterOptions options)

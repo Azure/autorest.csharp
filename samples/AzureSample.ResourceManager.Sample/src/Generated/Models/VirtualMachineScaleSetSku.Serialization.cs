@@ -141,7 +141,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  resourceType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  sku: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  capacity: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -202,7 +202,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  $schema: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  contentVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -246,7 +246,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  parameters: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -262,7 +262,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  resources: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -287,7 +287,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

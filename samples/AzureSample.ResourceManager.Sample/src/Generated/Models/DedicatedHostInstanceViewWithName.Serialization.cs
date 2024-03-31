@@ -159,7 +159,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -181,7 +181,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  assetId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -197,13 +197,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailableCapacity), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("AvailableCapacityAllocatableVms", out propertyOverride);
             if (Optional.IsDefined(AvailableCapacity) || hasPropertyOverride)
             {
                 builder.Append("  availableCapacity: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    allocatableVMs: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -219,7 +222,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  statuses: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {

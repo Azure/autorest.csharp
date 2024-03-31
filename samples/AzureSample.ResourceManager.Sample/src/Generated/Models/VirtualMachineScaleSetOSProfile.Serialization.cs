@@ -204,7 +204,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  computerNamePrefix: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -226,7 +226,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  adminUsername: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  adminPassword: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  customData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -292,7 +292,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  windowsConfiguration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -306,7 +306,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  linuxConfiguration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -322,7 +322,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  secrets: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {

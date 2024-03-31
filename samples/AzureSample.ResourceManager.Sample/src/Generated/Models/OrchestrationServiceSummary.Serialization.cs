@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  serviceName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  serviceState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

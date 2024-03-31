@@ -158,7 +158,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  vmAgentVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -182,7 +182,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  extensionHandlers: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -204,7 +204,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  statuses: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {

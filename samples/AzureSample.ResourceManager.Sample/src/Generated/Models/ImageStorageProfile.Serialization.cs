@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  osDisk: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -168,7 +168,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  dataDisks: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  zoneResilient: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

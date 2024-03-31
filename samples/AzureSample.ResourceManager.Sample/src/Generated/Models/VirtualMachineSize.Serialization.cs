@@ -189,7 +189,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -211,7 +211,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  numberOfCores: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -225,7 +225,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  osDiskSizeInMB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -239,7 +239,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  resourceDiskSizeInMB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -253,7 +253,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  memoryInMB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -267,7 +267,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maxDataDiskCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

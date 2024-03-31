@@ -317,7 +317,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -339,7 +339,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -363,7 +363,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    forceUpdateTag: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -385,7 +385,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    publisher: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -407,7 +407,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    type: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -429,7 +429,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    typeHandlerVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -451,7 +451,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    autoUpgradeMinorVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -466,7 +466,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    enableAutomaticUpgrade: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -481,7 +481,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    settings: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -495,7 +495,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    protectedSettings: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -509,7 +509,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    provisioningState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -533,7 +533,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("    provisionAfterExtensions: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {

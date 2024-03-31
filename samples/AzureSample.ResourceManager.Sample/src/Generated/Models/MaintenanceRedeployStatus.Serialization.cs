@@ -205,7 +205,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  isCustomerInitiatedMaintenanceAllowed: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -220,7 +220,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  preMaintenanceWindowStartTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -235,7 +235,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  preMaintenanceWindowEndTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -250,7 +250,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maintenanceWindowStartTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -265,7 +265,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maintenanceWindowEndTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -280,7 +280,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastOperationResultCode: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -294,7 +294,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastOperationMessage: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

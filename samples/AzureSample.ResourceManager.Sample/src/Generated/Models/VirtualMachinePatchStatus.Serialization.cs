@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  availablePatchSummary: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastPatchInstallationSummary: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

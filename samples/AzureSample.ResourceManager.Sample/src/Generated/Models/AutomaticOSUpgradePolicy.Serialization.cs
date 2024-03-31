@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  enableAutomaticOSUpgrade: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -141,7 +141,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  disableAutomaticRollback: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

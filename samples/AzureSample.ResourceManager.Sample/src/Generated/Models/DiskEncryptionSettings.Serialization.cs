@@ -141,7 +141,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskEncryptionKey: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  keyEncryptionKey: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  enabled: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

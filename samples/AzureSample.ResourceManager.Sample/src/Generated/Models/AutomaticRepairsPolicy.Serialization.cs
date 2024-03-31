@@ -122,7 +122,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  enabled: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -137,7 +137,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  gracePeriod: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  publisher: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -191,7 +191,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  offer: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -213,7 +213,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  sku: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -235,7 +235,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  version: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -257,7 +257,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  exactVersion: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -279,7 +279,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

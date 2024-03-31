@@ -350,11 +350,6 @@ namespace AzureSample.ResourceManager.Sample
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -363,7 +358,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -383,7 +378,7 @@ namespace AzureSample.ResourceManager.Sample
             builder.Append("  location: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -398,7 +393,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  tags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -434,7 +429,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  zones: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -469,7 +464,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  hostUris: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -494,7 +489,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  tenantId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -508,7 +503,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -522,7 +517,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  systemData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -538,7 +533,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    platformFaultDomainCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -554,7 +549,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("    hosts: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -568,13 +563,18 @@ namespace AzureSample.ResourceManager.Sample
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(InstanceView), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("InstanceViewHosts", out propertyOverride);
             if (Optional.IsDefined(InstanceView) || hasPropertyOverride)
             {
                 builder.Append("    instanceView: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      instanceView: {");
+                    builder.Append("        hosts: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -588,7 +588,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    supportAutomaticPlacement: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -600,23 +600,6 @@ namespace AzureSample.ResourceManager.Sample
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "InstanceViewHosts":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Hosts", item.Value);
-                        bicepOptions.PropertyOverrides.Add(InstanceView, propertyDictionary);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<DedicatedHostGroupData>.Write(ModelReaderWriterOptions options)

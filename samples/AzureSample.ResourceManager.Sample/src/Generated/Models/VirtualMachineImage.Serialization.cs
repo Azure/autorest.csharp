@@ -268,11 +268,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -281,7 +276,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -301,7 +296,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  location: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -316,7 +311,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  tags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -350,7 +345,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -374,7 +369,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    plan: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -382,13 +377,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDiskImage), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("OSDiskImageOperatingSystem", out propertyOverride);
             if (Optional.IsDefined(OSDiskImage) || hasPropertyOverride)
             {
                 builder.Append("    osDiskImage: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      osDiskImage: {");
+                    builder.Append("        operatingSystem: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -404,7 +404,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("    dataDiskImages: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -418,13 +418,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradeProperties), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("AutomaticOSUpgradeSupported", out propertyOverride);
             if (Optional.IsDefined(AutomaticOSUpgradeProperties) || hasPropertyOverride)
             {
                 builder.Append("    automaticOSUpgradeProperties: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      automaticOSUpgradeProperties: {");
+                    builder.Append("        automaticOSUpgradeSupported: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -438,7 +443,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    hyperVGeneration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -446,13 +451,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Disallowed), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DisallowedVmDiskType", out propertyOverride);
             if (Optional.IsDefined(Disallowed) || hasPropertyOverride)
             {
                 builder.Append("    disallowed: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      disallowed: {");
+                    builder.Append("        vmDiskType: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -463,33 +473,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "OSDiskImageOperatingSystem":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("OperatingSystem", item.Value);
-                        bicepOptions.PropertyOverrides.Add(OSDiskImage, propertyDictionary);
-                        break;
-                    case "AutomaticOSUpgradeSupported":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("AutomaticOSUpgradeSupported", item.Value);
-                        bicepOptions.PropertyOverrides.Add(AutomaticOSUpgradeProperties, propertyDictionary0);
-                        break;
-                    case "DisallowedVmDiskType":
-                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
-                        propertyDictionary1.Add("VmDiskType", item.Value);
-                        bicepOptions.PropertyOverrides.Add(Disallowed, propertyDictionary1);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineImage>.Write(ModelReaderWriterOptions options)

@@ -130,20 +130,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HealthProbe), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("HealthProbeId", out propertyOverride);
             if (Optional.IsDefined(HealthProbe) || hasPropertyOverride)
             {
                 builder.Append("  healthProbe: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -159,7 +157,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  networkInterfaceConfigurations: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -175,23 +173,6 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "HealthProbeId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(HealthProbe, propertyDictionary);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetNetworkProfile>.Write(ModelReaderWriterOptions options)

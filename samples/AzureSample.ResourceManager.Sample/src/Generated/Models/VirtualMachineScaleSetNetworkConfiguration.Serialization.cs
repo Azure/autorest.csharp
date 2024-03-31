@@ -233,11 +233,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -246,7 +241,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -268,7 +263,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -292,7 +287,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    primary: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -307,7 +302,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    enableAcceleratedNetworking: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -316,13 +311,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NetworkSecurityGroup), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NetworkSecurityGroupId", out propertyOverride);
             if (Optional.IsDefined(NetworkSecurityGroup) || hasPropertyOverride)
             {
                 builder.Append("    networkSecurityGroup: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      networkSecurityGroup: {");
+                    builder.Append("        id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -330,13 +330,18 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsSettings), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DnsServers", out propertyOverride);
             if (Optional.IsDefined(DnsSettings) || hasPropertyOverride)
             {
                 builder.Append("    dnsSettings: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      dnsSettings: {");
+                    builder.Append("        dnsServers: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -352,7 +357,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("    ipConfigurations: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -372,7 +377,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("    enableIPForwarding: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -384,28 +389,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "NetworkSecurityGroupId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(NetworkSecurityGroup, propertyDictionary);
-                        break;
-                    case "DnsServers":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("DnsServers", item.Value);
-                        bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary0);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetNetworkConfiguration>.Write(ModelReaderWriterOptions options)

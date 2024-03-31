@@ -156,7 +156,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  code: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -170,7 +170,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  startTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -185,7 +185,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastAction: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -199,7 +199,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastActionTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

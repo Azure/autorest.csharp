@@ -141,7 +141,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  mode: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  rollingUpgradePolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  automaticOSUpgradePolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

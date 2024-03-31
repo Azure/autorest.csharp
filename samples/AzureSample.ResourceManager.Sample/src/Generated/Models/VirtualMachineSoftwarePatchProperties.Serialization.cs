@@ -248,7 +248,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  patchId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -292,7 +292,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  version: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -314,7 +314,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  kbid: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -338,7 +338,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  classifications: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -371,7 +371,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  rebootBehavior: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -385,7 +385,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  activityId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -407,7 +407,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  publishedDate: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -422,7 +422,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastModifiedDateTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -437,7 +437,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  assessmentState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

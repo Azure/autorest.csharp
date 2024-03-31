@@ -256,11 +256,6 @@ namespace AzureSample.ResourceManager.Sample
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -269,7 +264,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -289,7 +284,7 @@ namespace AzureSample.ResourceManager.Sample
             builder.Append("  location: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -304,7 +299,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  tags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -338,7 +333,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -352,7 +347,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  systemData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -362,13 +357,18 @@ namespace AzureSample.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourceVirtualMachine), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SourceVirtualMachineId", out propertyOverride);
             if (Optional.IsDefined(SourceVirtualMachine) || hasPropertyOverride)
             {
                 builder.Append("    sourceVirtualMachine: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      sourceVirtualMachine: {");
+                    builder.Append("        id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -382,7 +382,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    storageProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -396,7 +396,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    provisioningState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -418,7 +418,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    hyperVGeneration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -429,23 +429,6 @@ namespace AzureSample.ResourceManager.Sample
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "SourceVirtualMachineId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(SourceVirtualMachine, propertyDictionary);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options)

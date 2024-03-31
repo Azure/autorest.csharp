@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  walkPerformed: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -141,7 +141,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  nextPlatformUpdateDomain: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

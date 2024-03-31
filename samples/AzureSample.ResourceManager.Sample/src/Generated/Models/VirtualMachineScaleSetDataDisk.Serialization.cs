@@ -223,7 +223,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  lun: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -256,7 +256,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  caching: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  writeAcceleratorEnabled: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -283,7 +283,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  createOption: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -296,7 +296,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskSizeGB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -310,7 +310,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  managedDisk: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -324,7 +324,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskIOPSReadWrite: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -338,7 +338,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskMBpsReadWrite: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

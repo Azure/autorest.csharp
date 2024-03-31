@@ -343,7 +343,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -363,7 +363,7 @@ namespace AzureSample.ResourceManager.Sample
             builder.Append("  location: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -378,7 +378,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  tags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -412,7 +412,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  sku: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -426,7 +426,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -440,7 +440,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  systemData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -456,7 +456,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    platformFaultDomain: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -470,7 +470,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    autoReplaceOnFailure: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -485,7 +485,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    hostId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -509,7 +509,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("    virtualMachines: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -529,7 +529,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    licenseType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -543,7 +543,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    provisioningTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -558,7 +558,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    provisioningState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -580,7 +580,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    instanceView: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

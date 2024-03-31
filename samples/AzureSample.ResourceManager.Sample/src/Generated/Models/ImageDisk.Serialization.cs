@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -203,20 +202,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Snapshot), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SnapshotId", out propertyOverride);
             if (Optional.IsDefined(Snapshot) || hasPropertyOverride)
             {
                 builder.Append("  snapshot: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -224,13 +221,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ManagedDisk), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ManagedDiskId", out propertyOverride);
             if (Optional.IsDefined(ManagedDisk) || hasPropertyOverride)
             {
                 builder.Append("  managedDisk: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -244,7 +244,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  blobUri: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -258,7 +258,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  caching: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -272,7 +272,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  diskSizeGB: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -286,7 +286,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  storageAccountType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -294,13 +294,16 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionSet), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DiskEncryptionSetId", out propertyOverride);
             if (Optional.IsDefined(DiskEncryptionSet) || hasPropertyOverride)
             {
                 builder.Append("  diskEncryptionSet: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -310,33 +313,6 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "SnapshotId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(Snapshot, propertyDictionary);
-                        break;
-                    case "ManagedDiskId":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(ManagedDisk, propertyDictionary0);
-                        break;
-                    case "DiskEncryptionSetId":
-                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
-                        propertyDictionary1.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(DiskEncryptionSet, propertyDictionary1);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<ImageDisk>.Write(ModelReaderWriterOptions options)

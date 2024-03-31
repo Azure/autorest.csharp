@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  passName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -166,7 +166,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  componentName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -180,7 +180,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  settingName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -194,7 +194,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  content: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

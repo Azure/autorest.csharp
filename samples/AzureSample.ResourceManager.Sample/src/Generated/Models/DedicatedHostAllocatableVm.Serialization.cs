@@ -122,7 +122,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  vmSize: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -144,7 +144,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  count: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

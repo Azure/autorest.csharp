@@ -156,7 +156,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  minimum: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -170,7 +170,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maximum: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  defaultCapacity: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -198,7 +198,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  scaleType: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

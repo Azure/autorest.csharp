@@ -297,7 +297,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  status: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -311,7 +311,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  installationActivityId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -333,7 +333,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  maintenanceWindowExceeded: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -348,7 +348,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  rebootStatus: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -362,7 +362,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  notSelectedPatchCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -376,7 +376,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  excludedPatchCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -390,7 +390,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  pendingPatchCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -404,7 +404,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  installedPatchCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -418,7 +418,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  failedPatchCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -432,7 +432,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  startTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -447,7 +447,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  lastModifiedTime: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -462,7 +462,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  startedBy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -484,7 +484,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  error: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

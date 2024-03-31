@@ -107,7 +107,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  output: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

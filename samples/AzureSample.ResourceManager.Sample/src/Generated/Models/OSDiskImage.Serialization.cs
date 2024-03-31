@@ -102,7 +102,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  operatingSystem: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {

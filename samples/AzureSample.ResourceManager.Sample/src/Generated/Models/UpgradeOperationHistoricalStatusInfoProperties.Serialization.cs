@@ -193,7 +193,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  runningStatus: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -207,7 +207,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  progress: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -221,7 +221,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  error: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -235,7 +235,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  startedBy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -249,7 +249,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  targetImageReference: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -263,7 +263,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  rollbackInfo: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

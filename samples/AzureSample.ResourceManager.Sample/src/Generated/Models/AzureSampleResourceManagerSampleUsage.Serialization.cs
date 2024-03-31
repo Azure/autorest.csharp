@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  unit: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -137,7 +137,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  currentValue: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -148,7 +148,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  limit: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -161,7 +161,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

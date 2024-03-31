@@ -486,11 +486,6 @@ namespace AzureSample.ResourceManager.Sample
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
@@ -499,7 +494,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -519,7 +514,7 @@ namespace AzureSample.ResourceManager.Sample
             builder.Append("  location: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -534,7 +529,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  tags: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -568,7 +563,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  sku: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -582,7 +577,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  plan: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -596,7 +591,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  identity: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -612,7 +607,7 @@ namespace AzureSample.ResourceManager.Sample
                     builder.Append("  zones: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -645,7 +640,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -659,7 +654,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("  systemData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -675,7 +670,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    upgradePolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -689,7 +684,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    automaticRepairsPolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -703,7 +698,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    virtualMachineProfile: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -717,7 +712,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    provisioningState: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -739,7 +734,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    overprovision: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -754,7 +749,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    doNotRunExtensionsOnOverprovisionedVMs: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -769,7 +764,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    uniqueId: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -791,7 +786,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    singlePlacementGroup: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -806,7 +801,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    zoneBalance: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -821,7 +816,7 @@ namespace AzureSample.ResourceManager.Sample
                 builder.Append("    platformFaultDomainCount: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -829,13 +824,18 @@ namespace AzureSample.ResourceManager.Sample
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProximityPlacementGroup), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ProximityPlacementGroupId", out propertyOverride);
             if (Optional.IsDefined(ProximityPlacementGroup) || hasPropertyOverride)
             {
                 builder.Append("    proximityPlacementGroup: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      proximityPlacementGroup: {");
+                    builder.Append("        id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -843,13 +843,18 @@ namespace AzureSample.ResourceManager.Sample
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HostGroup), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("HostGroupId", out propertyOverride);
             if (Optional.IsDefined(HostGroup) || hasPropertyOverride)
             {
                 builder.Append("    hostGroup: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      hostGroup: {");
+                    builder.Append("        id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -857,13 +862,18 @@ namespace AzureSample.ResourceManager.Sample
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdditionalCapabilities), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UltraSSDEnabled", out propertyOverride);
             if (Optional.IsDefined(AdditionalCapabilities) || hasPropertyOverride)
             {
                 builder.Append("    additionalCapabilities: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      additionalCapabilities: {");
+                    builder.Append("        ultraSSDEnabled: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -871,13 +881,18 @@ namespace AzureSample.ResourceManager.Sample
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ScaleInPolicy), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ScaleInRules", out propertyOverride);
             if (Optional.IsDefined(ScaleInPolicy) || hasPropertyOverride)
             {
                 builder.Append("    scaleInPolicy: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("      scaleInPolicy: {");
+                    builder.Append("        rules: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("      }");
+                    builder.AppendLine("    }");
                 }
                 else
                 {
@@ -888,38 +903,6 @@ namespace AzureSample.ResourceManager.Sample
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "ProximityPlacementGroupId":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(ProximityPlacementGroup, propertyDictionary);
-                        break;
-                    case "HostGroupId":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(HostGroup, propertyDictionary0);
-                        break;
-                    case "UltraSSDEnabled":
-                        Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
-                        propertyDictionary1.Add("UltraSSDEnabled", item.Value);
-                        bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary1);
-                        break;
-                    case "ScaleInRules":
-                        Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
-                        propertyDictionary2.Add("Rules", item.Value);
-                        bicepOptions.PropertyOverrides.Add(ScaleInPolicy, propertyDictionary2);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetData>.Write(ModelReaderWriterOptions options)

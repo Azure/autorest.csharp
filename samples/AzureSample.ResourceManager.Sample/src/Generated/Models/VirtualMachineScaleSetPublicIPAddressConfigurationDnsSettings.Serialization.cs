@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 builder.Append("  domainNameLabel: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

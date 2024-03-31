@@ -124,7 +124,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     builder.Append("  networkInterfaceConfigurations: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
