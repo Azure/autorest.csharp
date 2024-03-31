@@ -10,18 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
     public partial class MockableMgmtDiscriminatorResourceGroupResource : ArmResource
     {
-        private ClientDiagnostics _deliveryRuleClientDiagnostics;
-        private DeliveryRulesRestOperations _deliveryRuleRestClient;
-
         /// <summary> Initializes a new instance of the <see cref="MockableMgmtDiscriminatorResourceGroupResource"/> class for mocking. </summary>
         protected MockableMgmtDiscriminatorResourceGroupResource()
         {
@@ -33,9 +28,6 @@ namespace MgmtDiscriminator.Mocking
         internal MockableMgmtDiscriminatorResourceGroupResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
-
-        private ClientDiagnostics DeliveryRuleClientDiagnostics => _deliveryRuleClientDiagnostics ??= new ClientDiagnostics("MgmtDiscriminator", DeliveryRuleResource.ResourceType.Namespace, Diagnostics);
-        private DeliveryRulesRestOperations DeliveryRuleRestClient => _deliveryRuleRestClient ??= new DeliveryRulesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(DeliveryRuleResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -110,90 +102,6 @@ namespace MgmtDiscriminator.Mocking
         public virtual Response<DeliveryRuleResource> GetDeliveryRule(string name, CancellationToken cancellationToken = default)
         {
             return GetDeliveryRules().Get(name, cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>DeliveryRules_ParamConstructor</description>
-        /// </item>
-        /// <item>
-        /// <term>Default Api Version</term>
-        /// <description>2020-06-01</description>
-        /// </item>
-        /// <item>
-        /// <term>Resource</term>
-        /// <description><see cref="DeliveryRuleResource"/></description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="body"> Endpoint properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Response> ParamfunctionObjectNativeCodeDeliveryRuleAsync(Sku2 body, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using var scope = DeliveryRuleClientDiagnostics.CreateScope("MockableMgmtDiscriminatorResourceGroupResource.ParamfunctionObjectNativeCodeDeliveryRule");
-            scope.Start();
-            try
-            {
-                var response = await DeliveryRuleRestClient.ParamfunctionObjectNativeCodeAsync(Id.SubscriptionId, Id.ResourceGroupName, body, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>DeliveryRules_ParamConstructor</description>
-        /// </item>
-        /// <item>
-        /// <term>Default Api Version</term>
-        /// <description>2020-06-01</description>
-        /// </item>
-        /// <item>
-        /// <term>Resource</term>
-        /// <description><see cref="DeliveryRuleResource"/></description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="body"> Endpoint properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Response ParamfunctionObjectNativeCodeDeliveryRule(Sku2 body, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using var scope = DeliveryRuleClientDiagnostics.CreateScope("MockableMgmtDiscriminatorResourceGroupResource.ParamfunctionObjectNativeCodeDeliveryRule");
-            scope.Start();
-            try
-            {
-                var response = DeliveryRuleRestClient.ParamfunctionObjectNativeCode(Id.SubscriptionId, Id.ResourceGroupName, body, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
     }
 }

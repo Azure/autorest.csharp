@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
+    internal partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

@@ -1372,7 +1372,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_156
+    - !ConstantSchema &ref_158
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -2523,8 +2523,8 @@ schemas: !Schemas
                           serializationFormats:
                             - json
                           usage:
-                            - input
                             - output
+                            - input
                           language: !Languages 
                             default:
                               name: Sku2
@@ -3666,7 +3666,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_109
-    - !ObjectSchema &ref_181
+    - !ObjectSchema &ref_178
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3884,122 +3884,13 @@ operationGroups:
             description: Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DeliveryRules_ParamConstructor
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_148
-          - !Parameter &ref_159
-            schema: *ref_149
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: Name of the Resource group within the Azure subscription.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_150
-          - *ref_151
-        requestMediaTypes:
-          application/json: !Request &ref_158
-            parameters:
-              - !Parameter 
-                schema: *ref_156
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_157
-                schema: *ref_94
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: body
-                    description: Endpoint properties
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_152
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_157
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor
-                method: get
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_158
-        signatureParameters:
-          - *ref_159
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_155
-            language: !Languages 
-              default:
-                name: ''
-                description: CDN error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Paramfunction Object() { [native code] }
-            description: Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
-        protocol: !Protocols {}
-      - !Operation 
         operationId: DeliveryRules_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_148
-          - !Parameter &ref_160
+          - !Parameter &ref_156
             schema: *ref_149
             implementation: Method
             required: true
@@ -4011,7 +3902,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_161
+          - !Parameter &ref_157
             schema: *ref_146
             implementation: Method
             required: true
@@ -4052,8 +3943,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_160
-          - *ref_161
+          - *ref_156
+          - *ref_157
         responses:
           - !SchemaResponse 
             schema: *ref_91
@@ -4094,7 +3985,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_148
-          - !Parameter &ref_164
+          - !Parameter &ref_161
             schema: *ref_149
             implementation: Method
             required: true
@@ -4106,7 +3997,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_165
+          - !Parameter &ref_162
             schema: *ref_146
             implementation: Method
             required: true
@@ -4121,10 +4012,10 @@ operationGroups:
           - *ref_150
           - *ref_151
         requestMediaTypes:
-          application/json: !Request &ref_163
+          application/json: !Request &ref_160
             parameters:
               - !Parameter 
-                schema: *ref_156
+                schema: *ref_158
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -4136,7 +4027,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_162
+              - !Parameter &ref_159
                 schema: *ref_91
                 implementation: Method
                 required: true
@@ -4162,7 +4053,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_162
+              - *ref_159
             language: !Languages 
               default:
                 name: ''
@@ -4176,10 +4067,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_163
+          - *ref_160
         signatureParameters:
-          - *ref_164
-          - *ref_165
+          - *ref_161
+          - *ref_162
         responses:
           - !SchemaResponse 
             schema: *ref_91
@@ -4248,7 +4139,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_148
-          - !Parameter &ref_166
+          - !Parameter &ref_163
             schema: *ref_149
             implementation: Method
             required: true
@@ -4260,7 +4151,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_167
+          - !Parameter &ref_164
             schema: *ref_146
             implementation: Method
             required: true
@@ -4301,8 +4192,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_166
-          - *ref_167
+          - *ref_163
+          - *ref_164
         responses:
           - !Response 
             language: !Languages 
@@ -4359,7 +4250,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_148
-          - !Parameter &ref_170
+          - !Parameter &ref_167
             schema: *ref_149
             implementation: Method
             required: true
@@ -4371,7 +4262,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_171
+          - !Parameter &ref_168
             schema: *ref_146
             implementation: Method
             required: true
@@ -4386,10 +4277,10 @@ operationGroups:
           - *ref_150
           - *ref_151
         requestMediaTypes:
-          application/json: !Request &ref_169
+          application/json: !Request &ref_166
             parameters:
               - !Parameter 
-                schema: *ref_156
+                schema: *ref_158
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -4401,7 +4292,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_168
+              - !Parameter &ref_165
                 schema: *ref_103
                 implementation: Method
                 required: false
@@ -4427,7 +4318,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_168
+              - *ref_165
             language: !Languages 
               default:
                 name: ''
@@ -4441,10 +4332,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_169
+          - *ref_166
         signatureParameters:
-          - *ref_170
-          - *ref_171
+          - *ref_167
+          - *ref_168
         responses:
           - !SchemaResponse 
             schema: *ref_103
@@ -4494,7 +4385,7 @@ operationGroups:
         parameters:
           - *ref_148
           - *ref_151
-          - !Parameter &ref_174
+          - !Parameter &ref_171
             schema: *ref_146
             implementation: Method
             required: true
@@ -4508,7 +4399,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_175
+          - !Parameter &ref_172
             schema: *ref_146
             implementation: Method
             required: true
@@ -4521,10 +4412,10 @@ operationGroups:
               http: !HttpParameter 
                 in: path
         requestMediaTypes:
-          application/json: !Request &ref_173
+          application/json: !Request &ref_170
             parameters:
               - !Parameter 
-                schema: *ref_156
+                schema: *ref_158
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -4536,7 +4427,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_172
+              - !Parameter &ref_169
                 schema: *ref_107
                 implementation: Method
                 required: true
@@ -4562,7 +4453,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_172
+              - *ref_169
             language: !Languages 
               default:
                 name: ''
@@ -4576,10 +4467,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_173
+          - *ref_170
         signatureParameters:
-          - *ref_174
-          - *ref_175
+          - *ref_171
+          - *ref_172
         responses:
           - !SchemaResponse 
             schema: *ref_107
@@ -4621,7 +4512,7 @@ operationGroups:
         parameters:
           - *ref_148
           - *ref_151
-          - !Parameter &ref_176
+          - !Parameter &ref_173
             schema: *ref_146
             implementation: Method
             required: true
@@ -4635,7 +4526,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_177
+          - !Parameter &ref_174
             schema: *ref_146
             implementation: Method
             required: true
@@ -4674,8 +4565,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_176
-          - *ref_177
+          - *ref_173
+          - *ref_174
         responses:
           - !SchemaResponse 
             schema: *ref_107
@@ -4717,7 +4608,7 @@ operationGroups:
         parameters:
           - *ref_148
           - *ref_151
-          - !Parameter &ref_178
+          - !Parameter &ref_175
             schema: *ref_146
             implementation: Method
             required: true
@@ -4731,7 +4622,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_179
+          - !Parameter &ref_176
             schema: *ref_146
             implementation: Method
             required: true
@@ -4770,8 +4661,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_178
-          - *ref_179
+          - *ref_175
+          - *ref_176
         responses:
           - !SchemaResponse 
             schema: *ref_107
@@ -4822,7 +4713,7 @@ operationGroups:
         parameters:
           - *ref_148
           - *ref_151
-          - !Parameter &ref_180
+          - !Parameter &ref_177
             schema: *ref_146
             implementation: Method
             required: true
@@ -4863,10 +4754,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_180
+          - *ref_177
         responses:
           - !SchemaResponse 
-            schema: *ref_181
+            schema: *ref_178
             language: !Languages 
               default:
                 name: ''

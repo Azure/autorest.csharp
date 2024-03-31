@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> A model with a single object for testing safe-flattening. </summary>
-    public partial class Sku2
+    internal partial class Sku2
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

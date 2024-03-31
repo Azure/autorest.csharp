@@ -58,44 +58,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/paramConstructor": {
-            "get": {
-                "tags": ["DeliveryRules"],
-                "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
-                "operationId": "DeliveryRules_ParamConstructor",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Endpoint properties",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Sku2"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK. The request has succeeded."
-                    },
-                    "default": {
-                        "description": "CDN error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}": {
             "get": {
                 "tags": ["DeliveryRules"],
