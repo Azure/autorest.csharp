@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var stringBuilderExpression = new StringBuilderExpression(stringBuilder);
             statements.Add(stringBuilderExpression.AppendLine("{"));
             statements.Add(EmptyLine);
-            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization, propertyOverrideVariables))
+            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData, propertyOverrideVariables))
             {
                 statements.Add(methodBodyStatement);
             }
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             IEnumerable<BicepPropertySerialization> properties,
             StringBuilderExpression stringBuilder,
             int spaces,
-            BicepObjectSerialization objectSerialization,
+            bool isResourceData,
             PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             BicepPropertySerialization? tags = null;
             BicepPropertySerialization? type = null;
 
-            if (objectSerialization.IsResourceData)
+            if (isResourceData)
             {
                 name = propertyList.FirstOrDefault(p => p.SerializedName == "name");
                 location = propertyList.FirstOrDefault(p => p.SerializedName == "location");
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // as it will be put in the outer envelope.
             if (name != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent, propertyOverrideVariables, objectSerialization))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (location != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent, propertyOverrideVariables, objectSerialization))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (tags != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent, propertyOverrideVariables, objectSerialization))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     continue;
                 }
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent, propertyOverrideVariables, objectSerialization))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 }
@@ -214,8 +214,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             int spaces,
             BicepPropertySerialization property,
             string indent,
-            PropertyOverrideVariables propertyOverrideVariables,
-            BicepObjectSerialization objectSerialization)
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             if (property.ValueSerialization == null)
             {
@@ -224,13 +223,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     stringBuilder.Append($"{indent}{property.SerializedName}:"),
                     stringBuilder.AppendLine(" {"),
-                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, objectSerialization, propertyOverrideVariables).ToArray(),
+                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false, propertyOverrideVariables).ToArray(),
                     stringBuilder.AppendLine($"{indent}}}")
                 };
             }
             else
             {
-                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces, propertyOverrideVariables, objectSerialization))
+                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces, propertyOverrideVariables))
                 {
                     yield return statement;
                 }
@@ -241,8 +240,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             StringBuilderExpression stringBuilder,
             BicepPropertySerialization property,
             int spaces,
-            PropertyOverrideVariables propertyOverrideVariables,
-            BicepObjectSerialization objectSerialization)
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
             bool isFlattened = false;
