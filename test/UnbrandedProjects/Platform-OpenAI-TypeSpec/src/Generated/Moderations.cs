@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -17,16 +16,13 @@ namespace OpenAI
     public partial class Moderations
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of Moderations for mocking. </summary>
         protected Moderations()
@@ -34,13 +30,11 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of Moderations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal Moderations(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        internal Moderations(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
-            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -50,28 +44,28 @@ namespace OpenAI
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Result<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content0 = content.ToRequestBody();
-            Result result = await CreateAsync(content0, context).ConfigureAwait(false);
-            return Result.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content0 = content.ToBinaryBody();
+            ClientResult result = await CreateAsync(content0, context).ConfigureAwait(false);
+            return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Result<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content0 = content.ToRequestBody();
-            Result result = Create(content0, context);
-            return Result.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content0 = content.ToBinaryBody();
+            ClientResult result = Create(content0, context);
+            return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -92,24 +86,14 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Moderations.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -130,37 +114,32 @@ namespace OpenAI
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Create(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("Moderations.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
-        internal PipelineMessage CreateCreateRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
+            request.Method = "POST";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/moderations", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
@@ -176,7 +155,7 @@ namespace OpenAI
             return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200;
-        private static ResponseErrorClassifier ResponseErrorClassifier200 => _responseErrorClassifier200 ??= new StatusResponseClassifier(stackalloc ushort[] { 200 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
     }
 }

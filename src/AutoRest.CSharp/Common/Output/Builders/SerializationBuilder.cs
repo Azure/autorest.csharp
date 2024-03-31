@@ -13,6 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -20,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -374,17 +376,39 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties)
             {
-                var schemaProperty = property.SchemaProperty!; // we ensured this is never null when constructing the list
-                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
-                if (parameter is null)
+                if (property.SchemaProperty == null)
                 {
-                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    // Property is not part of specification,
+                    var declaredName = property.Declaration.Name;
+                    var propertyType = property.Declaration.Type;
+                    var varName = declaredName.ToVariableName();
+                    yield return new JsonPropertySerialization(
+                        varName,
+                        new TypedMemberExpression(null, property.Declaration.Name, propertyType),
+                        serializationMapping?.SerializationPath?[^1] ?? varName,
+                        propertyType,
+                        BuildJsonSerializationFromValue(propertyType, false),
+                        property.IsRequired,
+                        property.IsReadOnly,
+                        property,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook));
                 }
+                else
+                {
+                    var schemaProperty = property.SchemaProperty;
+                    var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+                    if (parameter is null)
+                    {
+                        throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    }
 
-                var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
-                var isRequired = schemaProperty.IsRequired;
-                var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
-                var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
+                    var isRequired = schemaProperty.IsRequired;
+                    var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
+                    var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                 TypedMemberExpression? enumerableExpression = null;
@@ -424,10 +448,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    if (objectTypeProperty.SchemaProperty != null)
-                    {
-                        propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
-                    }
+                    if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
+                        continue;
+                    propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
 
@@ -450,8 +473,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
-                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
-                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
+                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? property.SchemaProperty?.FlattenedNames ?? new List<string>();
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtCustomizations.Models
 {
@@ -26,12 +27,20 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="color"></param>
+        /// <param name="tags"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="jump"> A dog can jump. </param>
-        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string bark, string jump) : base(kind, name, size, dateOfBirth)
+        /// <param name="friend">
+        /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
+        /// </param>
+        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string color, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, string bark, string jump, Pet friend) : base(kind, name, size, dateOfBirth, color, tags, serializedAdditionalRawData)
         {
             Bark = bark;
             Jump = jump;
+            Friend = friend;
             Kind = kind;
         }
         /// <summary> A dog can jump. </summary>

@@ -4,6 +4,7 @@
 using System;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -22,15 +23,21 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public virtual Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers, CSharpType type)
             {
                 var utf8RequestContent = Utf8JsonRequestContentProvider.Instance;
-                return new Method
-                (
-                    new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a {utf8RequestContent.Declaration.Name}.", modifiers, utf8RequestContent.Inherits, null, Array.Empty<Parameter>()),
-                    new[]
+                var bodyStatements = Configuration.IsBranded
+                    ? new[]
                     {
                         Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var requestContent, out var writer),
                         writer.WriteObjectValue(new TypedValueExpression(type, This), ModelReaderWriterOptionsExpression.Wire),
                         Return(requestContent)
                     }
+                    : new[]
+                    {
+                        Return(BinaryContentExpression.Create(This, ModelReaderWriterOptionsExpression.Wire))
+                    };
+                return new Method
+                (
+                    new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a {utf8RequestContent.Declaration.Name}.", modifiers, utf8RequestContent.Inherits, null, Array.Empty<Parameter>()),
+                    bodyStatements
                 );
             }
 

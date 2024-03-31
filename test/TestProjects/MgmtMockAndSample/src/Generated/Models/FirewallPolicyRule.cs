@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary>
@@ -17,17 +19,25 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         protected FirewallPolicyRule()
         {
+            NewArraySerializedProperty = new ChangeTrackingList<string>();
+            NewDictionarySerializedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType)
+        /// <param name="newStringSerializeProperty"></param>
+        /// <param name="newArraySerializedProperty"></param>
+        /// <param name="newDictionarySerializedProperty"></param>
+        internal FirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty)
         {
             Name = name;
             Description = description;
             RuleType = ruleType;
+            NewStringSerializeProperty = newStringSerializeProperty;
+            NewArraySerializedProperty = newArraySerializedProperty;
+            NewDictionarySerializedProperty = newDictionarySerializedProperty;
         }
 
         /// <summary> Name of the rule. </summary>

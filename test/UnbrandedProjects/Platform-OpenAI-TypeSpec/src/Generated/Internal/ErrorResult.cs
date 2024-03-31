@@ -7,24 +7,17 @@ using System.ClientModel.Primitives;
 
 namespace OpenAI
 {
-    internal class ErrorResult<T> : Result<T>
+    internal class ErrorResult<T> : ClientResult<T>
     {
         private readonly PipelineResponse _response;
-        private readonly MessageFailedException _exception;
+        private readonly ClientResultException _exception;
 
-        public ErrorResult(PipelineResponse response, MessageFailedException exception) : base(default, response)
+        public ErrorResult(PipelineResponse response, ClientResultException exception) : base(default, response)
         {
             _response = response;
             _exception = exception;
         }
 
         public override T Value => throw _exception;
-
-        public override bool HasValue => false;
-
-        public override PipelineResponse GetRawResponse()
-        {
-            return _response;
-        }
     }
 }

@@ -15,6 +15,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -478,8 +479,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .ToHashSet();
         }
 
+        private HashSet<string> GetParentPropertyDeclarationNames()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
             foreach (var objectSchema in GetCombinedSchemas())
@@ -490,14 +501,34 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-
-                    yield return CreateProperty(property);
+                    var prop = CreateProperty(property);
+                    propertiesFromSpec.Add(prop.Declaration.Name);
+                    yield return prop;
                 }
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
             {
+                propertiesFromSpec.Add(additionalPropertiesProperty.Declaration.Name);
                 yield return additionalPropertiesProperty;
+            }
+
+            if (ModelTypeMapping != null)
+            {
+                foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
+                {
+                    if (propertiesFromSpec.Contains(propertyWithSerialization.Name))
+                        continue;
+
+                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
+                    var isReadOnly = BuilderHelpers.IsReadOnlyFromExisting(propertyWithSerialization);
+                    var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
+                    yield return new ObjectTypeProperty(
+                        new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
+                        string.Empty,
+                        isReadOnly,
+                        null);
+                }
             }
         }
 

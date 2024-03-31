@@ -11,9 +11,10 @@ namespace OpenAI.Tests
     public partial class ImagesTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("OpenAIClient_KEY"));
             Images client = new OpenAIClient(credential).GetImagesClient();
             Assert.IsNotNull(client);
         }
