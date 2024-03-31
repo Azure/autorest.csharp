@@ -536,6 +536,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "VmHealthStatus":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Status", item.Value);
+                        if (VmHealth == null)
+                        {
+                            this.VmHealth = new VirtualMachineHealthStatus(VmHealth);
+                        }
                         bicepOptions.PropertyOverrides.Add(VmHealth, propertyDictionary);
                         break;
                     default:

@@ -532,6 +532,10 @@ namespace AzureSample.ResourceManager.Sample
                     case "ProximityPlacementGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (ProximityPlacementGroup == null)
+                        {
+                            ProximityPlacementGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(ProximityPlacementGroup, propertyDictionary);
                         break;
                     default:

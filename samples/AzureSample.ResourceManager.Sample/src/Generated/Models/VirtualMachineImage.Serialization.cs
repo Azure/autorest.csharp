@@ -474,16 +474,28 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "OSDiskImageOperatingSystem":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("OperatingSystem", item.Value);
+                        if (OSDiskImage == null)
+                        {
+                            OSDiskImage = new OSDiskImage(OSDiskImage);
+                        }
                         bicepOptions.PropertyOverrides.Add(OSDiskImage, propertyDictionary);
                         break;
                     case "AutomaticOSUpgradeSupported":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("AutomaticOSUpgradeSupported", item.Value);
+                        if (AutomaticOSUpgradeProperties == null)
+                        {
+                            AutomaticOSUpgradeProperties = new AutomaticOSUpgradeProperties(AutomaticOSUpgradeProperties);
+                        }
                         bicepOptions.PropertyOverrides.Add(AutomaticOSUpgradeProperties, propertyDictionary0);
                         break;
                     case "DisallowedVmDiskType":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("VmDiskType", item.Value);
+                        if (Disallowed == null)
+                        {
+                            Disallowed = new DisallowedConfiguration();
+                        }
                         bicepOptions.PropertyOverrides.Add(Disallowed, propertyDictionary1);
                         break;
                     default:

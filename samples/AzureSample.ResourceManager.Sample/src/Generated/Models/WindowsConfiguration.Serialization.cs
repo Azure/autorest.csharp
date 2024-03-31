@@ -314,11 +314,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "PatchMode":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("PatchMode", item.Value);
+                        if (PatchSettings == null)
+                        {
+                            PatchSettings = new PatchSettings();
+                        }
                         bicepOptions.PropertyOverrides.Add(PatchSettings, propertyDictionary);
                         break;
                     case "WinRMListeners":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Listeners", item.Value);
+                        if (WinRM == null)
+                        {
+                            WinRM = new WinRMConfiguration();
+                        }
                         bicepOptions.PropertyOverrides.Add(WinRM, propertyDictionary0);
                         break;
                     default:

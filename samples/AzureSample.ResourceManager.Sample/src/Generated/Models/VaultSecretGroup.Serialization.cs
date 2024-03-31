@@ -186,6 +186,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SourceVaultId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (SourceVault == null)
+                        {
+                            SourceVault = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(SourceVault, propertyDictionary);
                         break;
                     default:

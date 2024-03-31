@@ -328,11 +328,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "DnsDomainNameLabel":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("DomainNameLabel", item.Value);
+                        if (DnsSettings == null)
+                        {
+                            DnsSettings = new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(DnsSettings);
+                        }
                         bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary);
                         break;
                     case "PublicIPPrefixId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
+                        if (PublicIPPrefix == null)
+                        {
+                            PublicIPPrefix = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(PublicIPPrefix, propertyDictionary0);
                         break;
                     default:

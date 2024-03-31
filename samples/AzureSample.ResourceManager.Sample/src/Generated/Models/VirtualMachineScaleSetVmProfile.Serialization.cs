@@ -444,21 +444,37 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("EncryptionAtHost", item.Value);
+                        if (SecurityProfile == null)
+                        {
+                            SecurityProfile = new SecurityProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("BootDiagnostics", item.Value);
+                        if (DiagnosticsProfile == null)
+                        {
+                            DiagnosticsProfile = new DiagnosticsProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary0);
                         break;
                     case "BillingMaxPrice":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("MaxPrice", item.Value);
+                        if (BillingProfile == null)
+                        {
+                            BillingProfile = new BillingProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(BillingProfile, propertyDictionary1);
                         break;
                     case "ScheduledEventsTerminateNotificationProfile":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("TerminateNotificationProfile", item.Value);
+                        if (ScheduledEventsProfile == null)
+                        {
+                            ScheduledEventsProfile = new ScheduledEventsProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(ScheduledEventsProfile, propertyDictionary2);
                         break;
                     default:

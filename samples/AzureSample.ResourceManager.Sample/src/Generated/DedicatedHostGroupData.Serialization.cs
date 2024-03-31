@@ -611,6 +611,10 @@ namespace AzureSample.ResourceManager.Sample
                     case "InstanceViewHosts":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Hosts", item.Value);
+                        if (InstanceView == null)
+                        {
+                            this.InstanceView = new DedicatedHostGroupInstanceView(InstanceView);
+                        }
                         bicepOptions.PropertyOverrides.Add(InstanceView, propertyDictionary);
                         break;
                     default:

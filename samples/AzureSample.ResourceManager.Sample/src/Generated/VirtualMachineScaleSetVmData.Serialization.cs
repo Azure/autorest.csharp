@@ -1016,36 +1016,64 @@ namespace AzureSample.ResourceManager.Sample
                     case "HardwareVmSize":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("VmSize", item.Value);
+                        if (HardwareProfile == null)
+                        {
+                            HardwareProfile = new HardwareProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(HardwareProfile, propertyDictionary);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("UltraSSDEnabled", item.Value);
+                        if (AdditionalCapabilities == null)
+                        {
+                            AdditionalCapabilities = new AdditionalCapabilities();
+                        }
                         bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary0);
                         break;
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("EncryptionAtHost", item.Value);
+                        if (SecurityProfile == null)
+                        {
+                            SecurityProfile = new SecurityProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary1);
                         break;
                     case "NetworkInterfaces":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("NetworkInterfaces", item.Value);
+                        if (NetworkProfile == null)
+                        {
+                            NetworkProfile = new NetworkProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(NetworkProfile, propertyDictionary2);
                         break;
                     case "NetworkInterfaceConfigurations":
                         Dictionary<string, string> propertyDictionary3 = new Dictionary<string, string>();
                         propertyDictionary3.Add("NetworkInterfaceConfigurations", item.Value);
+                        if (NetworkProfileConfiguration == null)
+                        {
+                            NetworkProfileConfiguration = new VirtualMachineScaleSetVmNetworkProfileConfiguration();
+                        }
                         bicepOptions.PropertyOverrides.Add(NetworkProfileConfiguration, propertyDictionary3);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary4 = new Dictionary<string, string>();
                         propertyDictionary4.Add("BootDiagnostics", item.Value);
+                        if (DiagnosticsProfile == null)
+                        {
+                            DiagnosticsProfile = new DiagnosticsProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary4);
                         break;
                     case "AvailabilitySetId":
                         Dictionary<string, string> propertyDictionary5 = new Dictionary<string, string>();
                         propertyDictionary5.Add("Id", item.Value);
+                        if (AvailabilitySet == null)
+                        {
+                            AvailabilitySet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(AvailabilitySet, propertyDictionary5);
                         break;
                     default:

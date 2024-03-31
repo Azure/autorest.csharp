@@ -218,6 +218,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "DnsDomainNameLabel":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("DomainNameLabel", item.Value);
+                        if (DnsSettings == null)
+                        {
+                            DnsSettings = new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(DnsSettings);
+                        }
                         bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary);
                         break;
                     default:

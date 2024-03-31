@@ -279,6 +279,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "VirtualMachineStatusesSummary":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("StatusesSummary", item.Value);
+                        if (VirtualMachine == null)
+                        {
+                            this.VirtualMachine = new VirtualMachineScaleSetInstanceViewStatusesSummary(VirtualMachine);
+                        }
                         bicepOptions.PropertyOverrides.Add(VirtualMachine, propertyDictionary);
                         break;
                     default:

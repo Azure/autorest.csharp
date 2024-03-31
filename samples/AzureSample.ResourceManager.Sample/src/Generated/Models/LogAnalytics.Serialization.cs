@@ -138,6 +138,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "LogAnalyticsOutput":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Output", item.Value);
+                        if (Properties == null)
+                        {
+                            this.Properties = new LogAnalyticsOutput(Properties);
+                        }
                         bicepOptions.PropertyOverrides.Add(Properties, propertyDictionary);
                         break;
                     default:

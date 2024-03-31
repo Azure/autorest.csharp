@@ -186,6 +186,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "HealthProbeId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (HealthProbe == null)
+                        {
+                            HealthProbe = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(HealthProbe, propertyDictionary);
                         break;
                     default:

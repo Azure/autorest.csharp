@@ -398,11 +398,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "NetworkSecurityGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (NetworkSecurityGroup == null)
+                        {
+                            NetworkSecurityGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(NetworkSecurityGroup, propertyDictionary);
                         break;
                     case "DnsServers":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("DnsServers", item.Value);
+                        if (DnsSettings == null)
+                        {
+                            DnsSettings = new VirtualMachineScaleSetNetworkConfigurationDnsSettings();
+                        }
                         bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary0);
                         break;
                     default:

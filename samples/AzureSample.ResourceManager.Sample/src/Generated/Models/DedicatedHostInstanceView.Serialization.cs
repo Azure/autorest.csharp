@@ -218,6 +218,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "AvailableCapacityAllocatableVms":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("AllocatableVms", item.Value);
+                        if (AvailableCapacity == null)
+                        {
+                            this.AvailableCapacity = new DedicatedHostAvailableCapacity(AvailableCapacity);
+                        }
                         bicepOptions.PropertyOverrides.Add(AvailableCapacity, propertyDictionary);
                         break;
                     default:

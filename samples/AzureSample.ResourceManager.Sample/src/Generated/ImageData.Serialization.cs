@@ -440,6 +440,10 @@ namespace AzureSample.ResourceManager.Sample
                     case "SourceVirtualMachineId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (SourceVirtualMachine == null)
+                        {
+                            SourceVirtualMachine = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(SourceVirtualMachine, propertyDictionary);
                         break;
                     default:

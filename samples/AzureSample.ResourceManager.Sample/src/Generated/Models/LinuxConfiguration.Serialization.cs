@@ -198,6 +198,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SshPublicKeys":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("PublicKeys", item.Value);
+                        if (Ssh == null)
+                        {
+                            Ssh = new SshConfiguration();
+                        }
                         bicepOptions.PropertyOverrides.Add(Ssh, propertyDictionary);
                         break;
                     default:

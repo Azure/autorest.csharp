@@ -510,6 +510,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SubnetId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (Subnet == null)
+                        {
+                            Subnet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(Subnet, propertyDictionary);
                         break;
                     default:

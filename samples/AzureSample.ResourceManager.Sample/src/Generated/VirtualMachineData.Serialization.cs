@@ -1101,56 +1101,100 @@ namespace AzureSample.ResourceManager.Sample
                     case "HardwareVmSize":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("VmSize", item.Value);
+                        if (HardwareProfile == null)
+                        {
+                            HardwareProfile = new HardwareProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(HardwareProfile, propertyDictionary);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("UltraSSDEnabled", item.Value);
+                        if (AdditionalCapabilities == null)
+                        {
+                            AdditionalCapabilities = new AdditionalCapabilities();
+                        }
                         bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary0);
                         break;
                     case "NetworkInterfaces":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("NetworkInterfaces", item.Value);
+                        if (NetworkProfile == null)
+                        {
+                            NetworkProfile = new NetworkProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(NetworkProfile, propertyDictionary1);
                         break;
                     case "EncryptionAtHost":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("EncryptionAtHost", item.Value);
+                        if (SecurityProfile == null)
+                        {
+                            SecurityProfile = new SecurityProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(SecurityProfile, propertyDictionary2);
                         break;
                     case "BootDiagnostics":
                         Dictionary<string, string> propertyDictionary3 = new Dictionary<string, string>();
                         propertyDictionary3.Add("BootDiagnostics", item.Value);
+                        if (DiagnosticsProfile == null)
+                        {
+                            DiagnosticsProfile = new DiagnosticsProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(DiagnosticsProfile, propertyDictionary3);
                         break;
                     case "AvailabilitySetId":
                         Dictionary<string, string> propertyDictionary4 = new Dictionary<string, string>();
                         propertyDictionary4.Add("Id", item.Value);
+                        if (AvailabilitySet == null)
+                        {
+                            AvailabilitySet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(AvailabilitySet, propertyDictionary4);
                         break;
                     case "VirtualMachineScaleSetId":
                         Dictionary<string, string> propertyDictionary5 = new Dictionary<string, string>();
                         propertyDictionary5.Add("Id", item.Value);
+                        if (VirtualMachineScaleSet == null)
+                        {
+                            VirtualMachineScaleSet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(VirtualMachineScaleSet, propertyDictionary5);
                         break;
                     case "ProximityPlacementGroupId":
                         Dictionary<string, string> propertyDictionary6 = new Dictionary<string, string>();
                         propertyDictionary6.Add("Id", item.Value);
+                        if (ProximityPlacementGroup == null)
+                        {
+                            ProximityPlacementGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(ProximityPlacementGroup, propertyDictionary6);
                         break;
                     case "BillingMaxPrice":
                         Dictionary<string, string> propertyDictionary7 = new Dictionary<string, string>();
                         propertyDictionary7.Add("MaxPrice", item.Value);
+                        if (BillingProfile == null)
+                        {
+                            BillingProfile = new BillingProfile();
+                        }
                         bicepOptions.PropertyOverrides.Add(BillingProfile, propertyDictionary7);
                         break;
                     case "HostId":
                         Dictionary<string, string> propertyDictionary8 = new Dictionary<string, string>();
                         propertyDictionary8.Add("Id", item.Value);
+                        if (Host == null)
+                        {
+                            Host = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(Host, propertyDictionary8);
                         break;
                     case "HostGroupId":
                         Dictionary<string, string> propertyDictionary9 = new Dictionary<string, string>();
                         propertyDictionary9.Add("Id", item.Value);
+                        if (HostGroup == null)
+                        {
+                            HostGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(HostGroup, propertyDictionary9);
                         break;
                     default:

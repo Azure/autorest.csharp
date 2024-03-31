@@ -321,16 +321,28 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "SnapshotId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (Snapshot == null)
+                        {
+                            Snapshot = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(Snapshot, propertyDictionary);
                         break;
                     case "ManagedDiskId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
+                        if (ManagedDisk == null)
+                        {
+                            ManagedDisk = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(ManagedDisk, propertyDictionary0);
                         break;
                     case "DiskEncryptionSetId":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("Id", item.Value);
+                        if (DiskEncryptionSet == null)
+                        {
+                            DiskEncryptionSet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(DiskEncryptionSet, propertyDictionary1);
                         break;
                     default:

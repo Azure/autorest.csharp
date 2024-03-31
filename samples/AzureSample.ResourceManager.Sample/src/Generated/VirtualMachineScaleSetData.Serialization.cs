@@ -899,21 +899,37 @@ namespace AzureSample.ResourceManager.Sample
                     case "ProximityPlacementGroupId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (ProximityPlacementGroup == null)
+                        {
+                            ProximityPlacementGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(ProximityPlacementGroup, propertyDictionary);
                         break;
                     case "HostGroupId":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Id", item.Value);
+                        if (HostGroup == null)
+                        {
+                            HostGroup = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(HostGroup, propertyDictionary0);
                         break;
                     case "UltraSSDEnabled":
                         Dictionary<string, string> propertyDictionary1 = new Dictionary<string, string>();
                         propertyDictionary1.Add("UltraSSDEnabled", item.Value);
+                        if (AdditionalCapabilities == null)
+                        {
+                            AdditionalCapabilities = new AdditionalCapabilities();
+                        }
                         bicepOptions.PropertyOverrides.Add(AdditionalCapabilities, propertyDictionary1);
                         break;
                     case "ScaleInRules":
                         Dictionary<string, string> propertyDictionary2 = new Dictionary<string, string>();
                         propertyDictionary2.Add("Rules", item.Value);
+                        if (ScaleInPolicy == null)
+                        {
+                            ScaleInPolicy = new ScaleInPolicy();
+                        }
                         bicepOptions.PropertyOverrides.Add(ScaleInPolicy, propertyDictionary2);
                         break;
                     default:

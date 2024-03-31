@@ -435,11 +435,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "VhdUri":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Uri", item.Value);
+                        if (Vhd == null)
+                        {
+                            Vhd = new VirtualHardDisk();
+                        }
                         bicepOptions.PropertyOverrides.Add(Vhd, propertyDictionary);
                         break;
                     case "ImageUri":
                         Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
                         propertyDictionary0.Add("Uri", item.Value);
+                        if (Image == null)
+                        {
+                            Image = new VirtualHardDisk();
+                        }
                         bicepOptions.PropertyOverrides.Add(Image, propertyDictionary0);
                         break;
                     default:

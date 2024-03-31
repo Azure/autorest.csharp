@@ -168,6 +168,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                     case "DiskEncryptionSetId":
                         Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
                         propertyDictionary.Add("Id", item.Value);
+                        if (DiskEncryptionSet == null)
+                        {
+                            DiskEncryptionSet = new WritableSubResource();
+                        }
                         bicepOptions.PropertyOverrides.Add(DiskEncryptionSet, propertyDictionary);
                         break;
                     default:
