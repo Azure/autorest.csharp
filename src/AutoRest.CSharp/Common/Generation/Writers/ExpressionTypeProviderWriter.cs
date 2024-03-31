@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -72,7 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (_provider.WhereClause is not null)
             {
-                _writer.WriteValueExpression(_provider.WhereClause);
+                _provider.WhereClause.Write(_writer);
             }
 
             using (_writer.Scope())
@@ -103,8 +104,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Append($"{field.Declaration:D}");
                     if (field.InitializationValue != null)
                     {
-                        _writer.AppendRaw(" = ")
-                            .WriteValueExpression(field.InitializationValue);
+                        _writer.AppendRaw(" = ");
+                        field.InitializationValue.Write(_writer);
                     }
                     _writer.LineRaw(",");
                 }

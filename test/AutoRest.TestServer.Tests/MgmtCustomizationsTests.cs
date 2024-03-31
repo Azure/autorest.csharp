@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
 using MgmtCustomizations.Models;
@@ -16,7 +17,13 @@ namespace AutoRest.TestServer.Tests
             Pet pet = new Cat()
             {
                 Size = 8,
-                Meow = "MEOW"
+                Meow = "MEOW",
+                Color = "Red",
+                Tags = new Dictionary<string, string>()
+                {
+                    ["like"]="Cheese",
+                    ["area"]="China"
+                }
             };
 
             var root = JsonAsserts.AssertWireSerializes(pet);
@@ -25,12 +32,15 @@ namespace AutoRest.TestServer.Tests
             // asserts we serialize the int size into a string
             Assert.AreEqual(JsonValueKind.String, sizeProperty.ValueKind);
             Assert.AreEqual("8", sizeProperty.GetString());
+            Assert.AreEqual("Red", root.GetProperty("properties").GetProperty("color").GetString());
+            Assert.AreEqual("Cheese", root.GetProperty("tags").GetProperty("like").ToString());
+            Assert.AreEqual("China", root.GetProperty("tags").GetProperty("area").ToString());
         }
 
         [Test]
         public void Cat_SizeDeserializeIntoInt()
         {
-            var json = @"{""kind"": ""Cat"", ""size"": ""10"", ""meow"": ""MEOW""}";
+            var json = @"{""kind"":""Cat"",""size"":""10"", ""meow"": ""MEOW"",""tags"":{""like"":""Cheese"",""area"":""China""},""properties"":{""color"":""Red""}}";
             using var document = JsonDocument.Parse(json);
 
             var pet = Pet.DeserializePet(document.RootElement);
@@ -39,18 +49,27 @@ namespace AutoRest.TestServer.Tests
             Assert.IsTrue(cat != null);
             Assert.AreEqual(10, cat.Size);
             Assert.AreEqual("MEOW", cat.Meow);
+            Assert.AreEqual(pet.Color, "Red");
+            Assert.AreEqual(pet.Tags.Count, 2);
+            Assert.AreEqual(pet.Tags["like"], "Cheese");
+            Assert.AreEqual(pet.Tags["area"], "China");
         }
 
         [Test]
         public void Dog_SerializeIntoProperties()
         {
+            Pet friendDog = new Dog()
+            {
+                Bark = "bark again"
+            };
             Pet pet = new Dog()
             {
-                Bark = "Dog barks"
+                Bark = "Dog barks",
+                Friend = friendDog
             };
 
             // this should serialize into:
-            // { "kind": "Dog", "properties": { "dog": { "bark": "DOG BARKS" } } }
+            // {"kind":"Dog","size":"0","properties":{"dog":{"bark":"DOG BARKS","friend":{"kind":"Dog","size":"0","properties":{"dog":{"bark":"BARK AGAIN"}}}}}}
 
             var root = JsonAsserts.AssertWireSerializes(pet);
             var properties = root.GetProperty("properties");
@@ -60,12 +79,13 @@ namespace AutoRest.TestServer.Tests
             var barkProperty = dogProperty.GetProperty("bark");
             Assert.AreEqual(JsonValueKind.String, barkProperty.ValueKind);
             Assert.AreEqual("DOG BARKS", barkProperty.GetString());
+            Assert.AreEqual("BARK AGAIN", dogProperty.GetProperty("friend").GetProperty("properties").GetProperty("dog").GetProperty("bark").GetString());
         }
 
         [Test]
         public void Dog_DeserializeFromProperties()
         {
-            var json = @"{""kind"": ""Dog"", ""properties"": { ""dog"": { ""bark"": ""dog barks"" }}}";
+            var json = @"{""kind"":""Dog"",""size"":""0"",""properties"":{""dog"":{""bark"":""dog barks"",""friend"":{""kind"":""Dog"",""size"":""0"",""properties"":{""dog"":{""bark"":""bark again""}}}}}}";
             using var document = JsonDocument.Parse(json);
 
             var pet = Pet.DeserializePet(document.RootElement);
@@ -73,6 +93,7 @@ namespace AutoRest.TestServer.Tests
 
             Assert.IsTrue(dog != null);
             Assert.AreEqual("dog barks", dog.Bark);
+            Assert.AreEqual("bark again", ((Dog)dog.Friend).Bark);
         }
     }
 }

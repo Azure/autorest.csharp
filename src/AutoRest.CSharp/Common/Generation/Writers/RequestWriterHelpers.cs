@@ -47,18 +47,33 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                if (Configuration.IsBranded)
                 {
-                    writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
-                    if (responseClassifierType != default)
+                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                     {
-                        writer.Append($", {responseClassifierType}");
+                        writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
+                        if (responseClassifierType != default)
+                        {
+                            writer.Append($", {responseClassifierType}");
+                        }
+                        writer.Line($");");
                     }
-                    writer.Line($");");
+                    else
+                    {
+                        writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)});");
+                    }
                 }
                 else
                 {
-                    writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)});");
+                    writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                    {
+                        using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
+                        {
+                            writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                        }
+                    }
+                    writer.Line($"{message}.ResponseClassifier = {responseClassifierType};");
                 }
 
                 writer.Line($"var {request:D} = {message}.{Configuration.ApiTypes.HttpMessageRequestName};");
@@ -253,7 +268,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
+            GetRequestContentForSerialization(request, bodySerialization, value).Write(writer);
         }
 
         private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
@@ -325,7 +340,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var value = GetFieldReference(fields, header.Value);
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"{request}.SetHeaderValue({header.Name:L}, ");
+                writer.Append($"{request}.Headers.Set({header.Name:L}, ");
                 WriteConstantOrParameter(writer, value, enumAsString: true);
                 var formatSpecifier = header.Format.ToFormatSpecifier();
                 if (formatSpecifier != null)
@@ -467,10 +482,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
                 writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
@@ -479,7 +494,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 return writer.Line($" != null)").Scope();
             }
