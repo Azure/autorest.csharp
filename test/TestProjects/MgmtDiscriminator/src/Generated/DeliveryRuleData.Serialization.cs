@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -312,7 +311,7 @@ namespace MgmtDiscriminator
                 builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -334,7 +333,7 @@ namespace MgmtDiscriminator
                 builder.Append("  location: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -348,7 +347,7 @@ namespace MgmtDiscriminator
                 builder.Append("  boolProperty: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -363,7 +362,7 @@ namespace MgmtDiscriminator
                 builder.Append("  locationWithCustomSerialization: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -377,7 +376,7 @@ namespace MgmtDiscriminator
                 builder.Append("  dateTimeProperty: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -392,7 +391,7 @@ namespace MgmtDiscriminator
                 builder.Append("  duration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -407,7 +406,7 @@ namespace MgmtDiscriminator
                 builder.Append("  number: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -421,7 +420,7 @@ namespace MgmtDiscriminator
                 builder.Append("  uri: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -435,7 +434,7 @@ namespace MgmtDiscriminator
                 builder.Append("  shellProperty: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -443,13 +442,18 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Sku), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
             if (Optional.IsDefined(Sku) || hasPropertyOverride)
             {
                 builder.Append("  sku: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.AppendLine("    name1: {");
+                    builder.Append("      nestedName: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("    }");
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -463,7 +467,7 @@ namespace MgmtDiscriminator
                 builder.Append("  properties: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -477,7 +481,7 @@ namespace MgmtDiscriminator
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -491,7 +495,7 @@ namespace MgmtDiscriminator
                 builder.Append("  systemData: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -499,34 +503,8 @@ namespace MgmtDiscriminator
                 }
             }
 
-            if (propertyOverrides != null)
-            {
-                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
-            }
-
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "NestedName":
-                        stringBuilder.AppendLine("sku: {");
-                        stringBuilder.AppendLine("  name1: {");
-                        stringBuilder.Append("    nestedName: ");
-                        stringBuilder.AppendLine(item.Value);
-                        stringBuilder.AppendLine("    }");
-                        stringBuilder.AppendLine("  }");
-                        stringBuilder.AppendLine("}");
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<DeliveryRuleData>.Write(ModelReaderWriterOptions options)

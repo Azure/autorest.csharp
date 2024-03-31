@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -112,20 +111,23 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroup), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride);
             if (Optional.IsDefined(OriginGroup) || hasPropertyOverride)
             {
                 builder.Append("  originGroup: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    id: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -133,32 +135,8 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (propertyOverrides != null)
-            {
-                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
-            }
-
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "OriginGroupId":
-                        stringBuilder.AppendLine("originGroup: {");
-                        stringBuilder.Append("  id: ");
-                        stringBuilder.AppendLine(item.Value);
-                        stringBuilder.AppendLine("  }");
-                        stringBuilder.AppendLine("}");
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<OriginGroupOverrideActionParameters>.Write(ModelReaderWriterOptions options)

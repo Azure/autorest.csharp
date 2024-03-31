@@ -133,7 +133,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -146,7 +146,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  sourcePattern: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -168,7 +168,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  destination: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -190,7 +190,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  preserveUnmatchedPath: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -141,7 +141,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -152,7 +152,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  cacheBehavior: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -163,7 +163,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  cacheType: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -176,7 +176,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  cacheDuration: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

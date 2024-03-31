@@ -26,11 +26,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
     internal static class BicepSerializationMethodsBuilder
     {
         private const string SerializeBicepMethodName = "SerializeBicep";
-        private const string WriteFlattenedPropertiesWithOverridesMethodName = "WriteFlattenedPropertiesWithOverrides";
-        private static Parameter BicepOptions = new Parameter("bicepOptions", null, typeof(BicepModelReaderWriterOptions), null, ValidationType.None, null);
-        private static Parameter PropertyOverrides = new Parameter("propertyOverrides", null, typeof(IDictionary<string, string>), null, ValidationType.None, null);
-        private static readonly Parameter StringBuilderParameter =
-            new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
 
         public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
@@ -44,70 +39,44 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
                 WriteSerializeBicep(objectSerialization).AsStatement());
-
-            if (objectSerialization.FlattenedProperties.Count > 0)
-            {
-                yield return new Method(
-                    new MethodSignature(
-                        WriteFlattenedPropertiesWithOverridesMethodName,
-                        null,
-                        null,
-                        MethodSignatureModifiers.Private,
-                        null,
-                        null,
-                        new Parameter[] { BicepOptions, PropertyOverrides, StringBuilderParameter }),
-                    WriteFlattenedPropertiesWithOverrides(objectSerialization));
-            }
         }
 
-        private static MethodBodyStatement WriteFlattenedPropertiesWithOverrides(BicepObjectSerialization objectSerialization)
+        private static MethodBodyStatement WriteFlattenedPropertiesWithOverrides(ObjectTypeProperty property, StringBuilderExpression stringBuilder, ValueExpression propertyOverride, int spaces)
         {
-            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
+            var parts = property.GetWirePath().Split('.');
 
-            var propertyOverrides = new ParameterReference(PropertyOverrides);
+            var body = new List<MethodBodyStatement>();
 
-            var forLoop = new ForeachStatement(
-                "item",
-                new EnumerableExpression(
-                    typeof(IDictionary<string, string>),
-                    new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.ToList),
-                        new[] { propertyOverrides })),
-                out var item);
-            var switchStatement = new SwitchStatement(item.Property("Key"));
-            forLoop.Add(switchStatement);
+            // opening brace
+            body.Add(stringBuilder.AppendLine("{"));
 
-            foreach (var property in objectSerialization.FlattenedProperties)
+            // nested property names and opening braces
+            for (int i = 1; i < parts.Length; i++)
             {
-                var parts = property.GetWirePath().Split('.');
-
-                var caseBody = new List<MethodBodyStatement>();
-
-                // opening braces
-                for (int i = 0; i < parts.Length - 1; i++)
+                spaces += 2;
+                var indent = new string(' ', spaces);
+                if (i == parts.Length - 1)
                 {
-                    var spaces = i * 2;
-                    var indent = new string(' ', spaces);
-                    caseBody.Add(stringBuilder.AppendLine($"{indent}{parts[i]}: {{"));
+                    body.Add(stringBuilder.Append($"{indent}{parts[i]}: "));
                 }
-
-                // value
-                caseBody.Add(stringBuilder.Append($"{new string(' ', (parts.Length - 1) * 2)}{parts[^1]}: "));
-                caseBody.Add(stringBuilder.AppendLine(item.Property("Value")));
-
-                // closing braces
-                for (int i = parts.Length - 1; i >= 0; i--)
+                else
                 {
-                    var spaces = i * 2;
-                    var indent = new string(' ', spaces);
-                    caseBody.Add(stringBuilder.AppendLine($"{indent}}}"));
+                    body.Add(stringBuilder.AppendLine($"{indent}{parts[i]}: {{"));
                 }
-                caseBody.Add(new KeywordStatement("break", null));
-                var switchCase = new SwitchCase(Literal(property.Declaration.Name), caseBody);
-                switchStatement.Add(switchCase);
             }
-            switchStatement.Add(SwitchCase.Default(Continue));
 
-            return forLoop;
+            // value
+            body.Add(stringBuilder.AppendLine(propertyOverride));
+
+            // closing braces
+            for (int i = parts.Length - 1; i >= 1; i--)
+            {
+                spaces -= 2;
+                var indent = new string(' ', spaces);
+                body.Add(stringBuilder.AppendLine($"{indent}}}"));
+            }
+
+            return body;
         }
 
         public static SwitchCase BuildBicepWriteSwitchCase(BicepObjectSerialization bicep, ModelReaderWriterOptionsExpression options)
@@ -171,16 +140,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization, propertyOverrideVariables))
             {
                 statements.Add(methodBodyStatement);
-            }
-
-            if (objectSerialization.FlattenedProperties.Count > 0)
-            {
-                statements.Add(new IfStatement(new BoolExpression(NotEqual(PropertyOverrides, Null)))
-                {
-                    This.Invoke(WriteFlattenedPropertiesWithOverridesMethodName, new[] { bicepOptions, propertyOverrides, stringBuilder})
-                        .ToStatement()
-                });
-                statements.Add(EmptyLine);
             }
 
             statements.Add(stringBuilderExpression.AppendLine("}"));
@@ -286,11 +245,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             BicepObjectSerialization objectSerialization)
         {
             var indent = new string(' ', spaces);
-            var flattenedProperty = objectSerialization.FlattenedProperties.SingleOrDefault(p => p.SerializedName == property.SerializedName);
+            bool isFlattened = false;
+            // is the property that we are trying to serialize a flattened property? If so, we need to use the name of the childmost property for overrides.
             ValueExpression overridePropertyName = Nameof(property.Value);
-            if (flattenedProperty != null)
+            if (property.Property!.FlattenedProperty != null)
             {
-                overridePropertyName = Literal(flattenedProperty.BuildHierarchyStack().Peek().Declaration.Name);
+                overridePropertyName = Literal(property.Property!.FlattenedProperty.Declaration.Name);
+                isFlattened = true;
             }
 
             yield return Assign(
@@ -314,7 +275,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         stringBuilder.Append(formattedPropertyName),
                         new IfElseStatement(
                             new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
-                            stringBuilder.AppendLine(new FormattableStringExpression($"{{0}}",propertyOverrideVariables.PropertyOverride)),
+                            isFlattened
+                                ? WriteFlattenedPropertiesWithOverrides(property.Property.FlattenedProperty!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces)
+                                : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride),
                             property.CustomSerializationMethodName is {} serializationMethodName
                                 ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
                                 : SerializeExpression(stringBuilder, formattedPropertyName, property.ValueSerialization!, property.Value, spaces))

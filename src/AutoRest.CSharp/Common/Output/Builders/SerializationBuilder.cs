@@ -310,6 +310,7 @@ namespace AutoRest.CSharp.Output.Builders
                     BuildJsonSerializationFromValue(propertyType, false),
                     property.IsRequired,
                     property.IsReadOnly,
+                    property,
                     serializationHooks: new CustomSerializationHooks(
                         serializationMapping?.JsonSerializationValueHook,
                         serializationMapping?.JsonDeserializationValueHook,
@@ -329,6 +330,7 @@ namespace AutoRest.CSharp.Output.Builders
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),
+                property,
                 serializationHooks: new CustomSerializationHooks(
                     serializationMapping?.JsonSerializationValueHook,
                     serializationMapping?.JsonDeserializationValueHook,
@@ -400,6 +402,7 @@ namespace AutoRest.CSharp.Output.Builders
                     serialization,
                     isRequired,
                     shouldExcludeInWireSerialization,
+                    property,
                     serializationHooks: new CustomSerializationHooks(
                         serializationMapping?.JsonSerializationValueHook,
                         serializationMapping?.JsonDeserializationValueHook,

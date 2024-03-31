@@ -129,7 +129,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -140,7 +140,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  headerAction: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -153,7 +153,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  headerName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -175,7 +175,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  value: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -177,7 +177,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -188,7 +188,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  redirectType: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -201,7 +201,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  destinationProtocol: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -215,7 +215,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  customPath: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  customHostname: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -259,7 +259,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  customQueryString: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -281,7 +281,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  customFragment: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -158,7 +158,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  bark: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -180,7 +180,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  dogKind: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -192,7 +192,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -205,7 +205,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -227,7 +227,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  type: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

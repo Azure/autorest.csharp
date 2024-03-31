@@ -137,7 +137,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  meow: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -157,7 +157,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -170,7 +170,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  id: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -192,7 +192,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  type: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

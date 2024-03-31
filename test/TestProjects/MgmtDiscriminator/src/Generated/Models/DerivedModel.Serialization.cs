@@ -128,7 +128,7 @@ namespace MgmtDiscriminator.Models
                     builder.Append("  requiredCollection: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -161,7 +161,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  optionalString: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

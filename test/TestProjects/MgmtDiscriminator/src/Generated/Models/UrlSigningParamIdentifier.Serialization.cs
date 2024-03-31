@@ -110,7 +110,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  paramIndicator: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  paramName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

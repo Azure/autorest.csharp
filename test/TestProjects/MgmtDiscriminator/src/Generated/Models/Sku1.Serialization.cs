@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -106,13 +105,16 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name1), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
             if (Optional.IsDefined(Name1) || hasPropertyOverride)
             {
                 builder.Append("  name1: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine("{");
+                    builder.Append("    nestedName: ");
+                    builder.AppendLine(propertyOverride);
+                    builder.AppendLine("  }");
                 }
                 else
                 {
@@ -120,32 +122,8 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (propertyOverrides != null)
-            {
-                WriteFlattenedPropertiesWithOverrides(bicepOptions, propertyOverrides, builder);
-            }
-
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void WriteFlattenedPropertiesWithOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides, StringBuilder stringBuilder)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "NestedName":
-                        stringBuilder.AppendLine("name1: {");
-                        stringBuilder.Append("  nestedName: ");
-                        stringBuilder.AppendLine(item.Value);
-                        stringBuilder.AppendLine("  }");
-                        stringBuilder.AppendLine("}");
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<Sku1>.Write(ModelReaderWriterOptions options)

@@ -104,7 +104,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  nestedName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

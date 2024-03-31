@@ -211,7 +211,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  order: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -225,7 +225,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  conditions: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -241,7 +241,7 @@ namespace MgmtDiscriminator.Models
                     builder.Append("  actions: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -263,7 +263,7 @@ namespace MgmtDiscriminator.Models
                     builder.Append("  extraMappingInfo: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
@@ -284,7 +284,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  pet: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {
@@ -298,7 +298,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  foo: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

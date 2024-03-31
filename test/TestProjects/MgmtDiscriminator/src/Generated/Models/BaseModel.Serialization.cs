@@ -107,7 +107,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  optionalString: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

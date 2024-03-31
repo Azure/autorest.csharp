@@ -106,7 +106,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  name: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
@@ -119,7 +119,7 @@ namespace MgmtDiscriminator.Models
                 builder.Append("  foo: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(propertyOverride);
                 }
                 else
                 {

@@ -124,7 +124,7 @@ namespace MgmtDiscriminator.Models
                     builder.Append("  value: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"{propertyOverride}");
+                        builder.AppendLine(propertyOverride);
                     }
                     else
                     {
