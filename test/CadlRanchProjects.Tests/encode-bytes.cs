@@ -165,7 +165,7 @@ namespace CadlRanchProjects.Tests
         public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
         {
             var response = await new BytesClient(host, null).GetResponseBodyClient().DefaultAsync();
-            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA==").ToString(), response.Value.ToString());
+            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA==").ToArray(), response.Value.ToArray());
         });
 
         [Test]
