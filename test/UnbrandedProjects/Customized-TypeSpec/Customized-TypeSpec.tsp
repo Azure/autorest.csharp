@@ -147,65 +147,6 @@ model RoundTripModel {
 
     @doc("Required int, illustrating a value type property.")
     requiredInt: int32;
-
-    @doc("Required collection of enums")
-    requiredCollection: StringFixedEnum[];
-
-    @doc("Required dictionary of enums")
-    requiredDictionary: Record<StringExtensibleEnum>;
-
-    @doc("Required model")
-    requiredModel: Thing;
-
-    @doc("this is an int based extensible enum")
-    intExtensibleEnum?: IntExtensibleEnum;
-
-    @doc("this is a collection of int based extensible enum")
-    intExtensibleEnumCollection?: IntExtensibleEnum[];
-
-    @doc("this is a float based extensible enum")
-    floatExtensibleEnum?: FloatExtensibleEnum;
-
-    @doc("this is a collection of float based extensible enum")
-    floatExtensibleEnumCollection?: FloatExtensibleEnum[];
-
-    @doc("this is a float based fixed enum")
-    floatFixedEnum?: FloatFixedEnum;
-
-    @doc("this is a collection of float based fixed enum")
-    floatFixedEnumCollection?: FloatFixedEnum[];
-
-    @doc("this is a int based fixed enum")
-    intFixedEnum?: IntFixedEnum;
-
-    @doc("this is a collection of int based fixed enum")
-    intFixedEnumCollection?: IntFixedEnum[];
-
-    @doc("this is a string based fixed enum")
-    stringFixedEnum?: StringFixedEnum;
-
-    @doc("required unknown")
-    requiredUnknown: unknown;
-
-    @doc("optional unknown")
-    optionalUnknown?: unknown;
-
-    @doc("required record of unknown")
-    requiredRecordUnknown: Record<unknown>;
-
-    @doc("optional record of unknown")
-    optionalRecordUnknown?: Record<unknown>;
-
-    @doc("required readonly record of unknown")
-    @visibility("read")
-    readOnlyRequiredRecordUnknown: Record<unknown>;
-
-    @doc("optional readonly record of unknown")
-    @visibility("read")
-    readOnlyOptionalRecordUnknown?: Record<unknown>;
-
-    @doc("this is a model with required nullable properties")
-    modelWithRequiredNullable: ModelWithRequiredNullableProperties;
 }
 
 union DaysOfWeekExtensibleEnum {

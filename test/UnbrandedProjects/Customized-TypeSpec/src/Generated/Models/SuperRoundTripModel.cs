@@ -8,8 +8,8 @@ using CustomizedTypeSpec;
 
 namespace CustomizedTypeSpec.Models
 {
-    /// <summary> The ModelWithFormat. </summary>
-    public partial class ModelWithFormat
+    /// <summary> this is a roundtrip model. </summary>
+    public partial class SuperRoundTripModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,25 +43,35 @@ namespace CustomizedTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
-        /// <param name="sourceUrl"> url format. </param>
-        /// <param name="guid"> uuid format. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/>. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
+        public SuperRoundTripModel(string requiredString, int requiredSuperInt)
         {
-            SourceUrl = sourceUrl;
-            Guid = guid;
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+
+            RequiredString = requiredString;
+            RequiredSuperInt = requiredSuperInt;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/>. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuperRoundTripModel(string requiredString, int requiredSuperInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredString = requiredString;
+            RequiredSuperInt = requiredSuperInt;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>
-        internal ModelWithFormat()
+        /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/> for deserialization. </summary>
+        internal SuperRoundTripModel()
         {
         }
 
-        /// <summary> url format. </summary>
-        public Uri SourceUrl { get; }
-        /// <summary> uuid format. </summary>
-        public Guid Guid { get; }
+        /// <summary> Required string, illustrating a reference type property. </summary>
+        public string RequiredString { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using CustomizedTypeSpec;
 namespace CustomizedTypeSpec.Models
 {
     /// <summary> this is not a friendly model but with a friendly name. </summary>
-    public partial class Friend
+    public partial class SuperFriend
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,27 +43,27 @@ namespace CustomizedTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Friend(string name)
+        public SuperFriend(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Friend(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SuperFriend(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Friend"/> for deserialization. </summary>
-        internal Friend()
+        /// <summary> Initializes a new instance of <see cref="SuperFriend"/> for deserialization. </summary>
+        internal SuperFriend()
         {
         }
 

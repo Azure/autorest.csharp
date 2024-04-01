@@ -133,11 +133,11 @@ namespace CustomizedTypeSpec
         /// <summary> Return hi again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
-        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
+        /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual async Task<Result<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -146,17 +146,17 @@ namespace CustomizedTypeSpec
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
             Result result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
-            return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
-        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
+        /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual Result<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -165,7 +165,7 @@ namespace CustomizedTypeSpec
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = action.ToRequestBody();
             Result result = HelloAgain(p2, p1, content, context);
-            return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace CustomizedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,SuperRoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -221,7 +221,7 @@ namespace CustomizedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgain(string,string,SuperRoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -925,31 +925,31 @@ namespace CustomizedTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
+        public virtual async Task<Result<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = friend.ToRequestBody();
+            using RequestBody content = superFriend.ToRequestBody();
             Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual Result<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
+        public virtual Result<SuperFriend> FriendlyModel(SuperFriend superFriend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = friend.ToRequestBody();
+            using RequestBody content = superFriend.ToRequestBody();
             Result result = FriendlyModel(content, context);
-            return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -962,7 +962,7 @@ namespace CustomizedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(SuperFriend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1000,7 +1000,7 @@ namespace CustomizedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(SuperFriend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

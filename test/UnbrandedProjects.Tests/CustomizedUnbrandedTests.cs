@@ -1,25 +1,20 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using CustomizedTypeSpec.Models;
+using NUnit.Framework;
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using AutoRest.TestServer.Tests.Infrastructure;
-using NUnit.Framework;
-using CustomizedTypeSpec.Models;
-//namespace AutoRest.TestServer.Tests.Infrastructure
-//{
-namespace UnbrandedProjects.Tests
+
+namespace CustomizedTypeSpec.Tests
 {
     public class CustomizedUnbrandedTests
     {
         [Test]
         public void VerifyCodeGenMember()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("SuperRoundTripModel").GetProperty("RequiredSuperString"));
+            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel").GetProperty("RequiredSuperInt"));
         }
 
         [Test]
@@ -28,58 +23,40 @@ namespace UnbrandedProjects.Tests
             SuperRoundTripModel model = new SuperRoundTripModel
             (
                 "requiredSuperString",
-                1,
-                new List<StringFixedEnum?> { StringFixedEnum.One, StringFixedEnum.Two },
-                new Dictionary<string, StringExtensibleEnum?> { { "1", StringExtensibleEnum.One }, { "2", StringExtensibleEnum.Two } },
-                new Thing
-                {
-                    Name = "requiredModel",
-                    OptionalLiteralBool = true
-                },
-                BinaryData.FromObjectAsJson(1),
-                new Dictionary<string, BinaryData> { { "1", BinaryData.FromObjectAsJson(1) }, { "2", BinaryData.FromObjectAsJson(2) } },
-                new ModelWithRequiredNullableProperties
-                {
-                    RequiredNullablePrimitive = 1,
-                    RequiredExtensibleEnum = StringExtensibleEnum.One,
-                    RequiredFixedEnum = StringFixedEnum.Two
-                }
+                1
             );
 
-            BinaryData x = ModelReaderWriter.Write(model);
-            var stream = new MemoryStream();
-            var writer = new Utf8JsonWriter(stream);
-            var options = new ModelReaderWriterOptions("J");
-            ((IJsonModel<SuperRoundTripModel>)model).Write(writer, options);
-
-
-            writer.Flush();
-            stream.Position = 0;
-            string jsonString = Encoding.UTF8.GetString(stream.ToArray());
-
-            //var jsonString = JsonSerializer.Serialize(model);
-            //BinaryData x = ModelReaderWriter.Write(model);
-            ////var y = Convert.ToBase64String(x);
-            Assert.IsTrue(jsonString.Contains("requiredSuperModel"));
-            Assert.IsFalse(jsonString.Contains("requiredModel"));
+            BinaryData binaryData = ModelReaderWriter.Write(model);
+            string jsonString = binaryData.ToString();
+            Assert.IsTrue(jsonString.Contains("requiredSuperString"));
+            Assert.IsFalse(jsonString.Contains("requiredString"));
         }
 
         [Test]
         public void VerifyCodeGenType()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("SuperRoundTripModel"));
+            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel"));
+            Assert.Null(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.RoundTripModel"));
         }
 
         [Test]
         public void VerifyCodeGenModel()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("SuperFriend"));
+            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperFriend"));
         }
 
-        //[Test]
-        //public void VerifyCodeGenSuppress()
-        //{
-        //    Assert.AreEqual("RoundTripModel6", typeof(RoundTripModel6).Name);
-        //}
+        [Test]
+        public void VerifyCodeGenSuppress()
+        {
+            var t = GetType().Assembly.GetType("CustomizedTypeSpec.Models.ModelWithFormat");
+
+            Type[] parameterTypes = { typeof(Uri), typeof(Guid), typeof(string), typeof(IDictionary<string, BinaryData>)};
+            var constructor = t.GetConstructor(parameterTypes);
+            Assert.NotNull(constructor);
+
+            Type[] parameterTypes1 = { typeof(Uri), typeof(Guid) };
+            var constructor1 = t.GetConstructor(parameterTypes1);
+            Assert.Null(constructor1);
+        }
     }
 }

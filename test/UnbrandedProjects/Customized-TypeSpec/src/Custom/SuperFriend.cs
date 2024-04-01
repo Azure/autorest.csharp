@@ -3,10 +3,10 @@
 
 #nullable disable
 
-namespace UnbrandedTypeSpec.Models
+namespace CustomizedTypeSpec.Models
 {
-    /// <summary> this is a roundtrip model. </summary>
-    [CodeGenModel("Friend")]
+    /// <summary> this is a friend model. </summary>
+    [CodeGenType("Friend")]
     public partial class SuperFriend
     {
     }

@@ -11,16 +11,16 @@ using CustomizedTypeSpec;
 
 namespace CustomizedTypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonWriteable, IJsonModel<Friend>
+    public partial class SuperFriend : IUtf8JsonWriteable, IJsonModel<SuperFriend>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<SuperFriend>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<SuperFriend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SuperFriend>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Friend)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SuperFriend)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -44,19 +44,19 @@ namespace CustomizedTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Friend IJsonModel<Friend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SuperFriend IJsonModel<SuperFriend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SuperFriend>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Friend)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SuperFriend)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFriend(document.RootElement, options);
+            return DeserializeSuperFriend(document.RootElement, options);
         }
 
-        internal static Friend DeserializeFriend(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static SuperFriend DeserializeSuperFriend(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -80,46 +80,46 @@ namespace CustomizedTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Friend(name, serializedAdditionalRawData);
+            return new SuperFriend(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<Friend>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SuperFriend>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SuperFriend>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SuperFriend)} does not support '{options.Format}' format.");
             }
         }
 
-        Friend IPersistableModel<Friend>.Create(BinaryData data, ModelReaderWriterOptions options)
+        SuperFriend IPersistableModel<SuperFriend>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SuperFriend>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFriend(document.RootElement, options);
+                        return DeserializeSuperFriend(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SuperFriend)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Friend>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SuperFriend>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static Friend FromResponse(PipelineResponse response)
+        internal static SuperFriend FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement);
+            return DeserializeSuperFriend(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -7,9 +7,9 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using CustomizedTypeSpec;
+using UnbrandedTypeSpec;
 
-namespace CustomizedTypeSpec.Models
+namespace UnbrandedTypeSpec.Models
 {
     public partial class RoundTripModel : IUtf8JsonWriteable, IJsonModel<RoundTripModel>
     {

@@ -48,8 +48,8 @@ namespace UnbrandedTypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.SuperRoundTripModel"/>. </summary>
-        /// <param name="requiredSuperString"> Required string, illustrating a reference type property. </param>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredCollection"> Required collection of enums. </param>
         /// <param name="requiredDictionary"> Required dictionary of enums. </param>
@@ -70,8 +70,8 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
-        /// <returns> A new <see cref="Models.SuperRoundTripModel"/> instance for mocking. </returns>
-        public static SuperRoundTripModel SuperRoundTripModel(string requiredSuperString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null)
+        /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null)
         {
             requiredCollection ??= new List<StringFixedEnum?>();
             requiredDictionary ??= new Dictionary<string, StringExtensibleEnum?>();
@@ -84,8 +84,8 @@ namespace UnbrandedTypeSpec.Models
             readOnlyRequiredRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyOptionalRecordUnknown ??= new Dictionary<string, BinaryData>();
 
-            return new SuperRoundTripModel(
-                requiredSuperString,
+            return new RoundTripModel(
+                requiredString,
                 requiredInt,
                 requiredCollection?.ToList(),
                 requiredDictionary,
