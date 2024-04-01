@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             => new(instance.Property(_namePropertyName));
         public ValueExpression NamePropertyValue(ValueExpression instance)
             => instance.Property(_namePropertyName);
-        public ValueExpression ContentProeptyValue(ValueExpression instance)
+        public ValueExpression ContentPropertyValue(ValueExpression instance)
             => instance.Property((_contentPropertyName));
         public ValueExpression ConentTypePropertyValue(ValueExpression instance)
             => instance.Property(_contentTypePropertyName);

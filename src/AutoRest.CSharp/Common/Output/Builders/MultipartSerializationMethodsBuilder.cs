@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -23,12 +24,10 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -38,7 +37,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
             var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
-            var contentType = new StringExpression(KnownParameters.Serializations.contentType);
+            var responseParam = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
+            var response = new ResponseExpression(KnownParameters.Response);
+            //var contentType = new StringExpression(KnownParameters.Serializations.contentType);
+            //var contentType = response.ContentType;
+            var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method(
                 new MethodSignature(
@@ -69,17 +72,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     multipart.Type,
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartDeSerializationMethodBody(multipart!, data, contentType, options).ToArray());
+                BuildMultipartDeSerializationMethodBody(multipart!, response.Content, contentType, options).ToArray());
+            var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
             yield return new Method(
                 new MethodSignature(
                     "FromResponse",
                     null,
                     null,
-                    MethodSignatureModifiers.Public,
+                    MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static,
                     multipart.Type,
                     null,
-                    new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartDeSerializationMethodBody(multipart, data, contentType, options).ToArray());
+                    new Parameter[] { responseParam }),
+                new MethodBodyStatement[]
+                {
+                    //Declare(typeof(string), "contentType", new InvokeInstanceMethodExpression(response, nameof(Response.Content), Array.Empty<ValueExpression>(), null, false), out var contentTypeFromResponae),
+                    Declare(typeof(string), "contentType", contentyTypeDeclare, out var contentTypeFromResponae),
+                    BuildMultipartDeSerializationMethodBody(multipart, response.Content, contentTypeFromResponae, options).ToArray(),
+                }
+                );
         }
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
@@ -135,12 +145,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
                             UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
                             WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
+                            SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties),
                             //Declare(typeof(BinaryData), "binaryData", new InvokeInstanceMethodExpression(content, nameof(MultipartFormData.ToContent), Array.Empty<ValueExpression>(),
                             Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
                             Snippets.Return(binaryData)
                         };
         }
-        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, StringExpression contentType, ModelReaderWriterOptionsExpression options)
+        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, ValueExpression contentType, ModelReaderWriterOptionsExpression options)
         {
             return new MethodBodyStatement[]
                         {
@@ -181,6 +192,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     WritePropertySerialization(multipartContent, property));
                 */
             }
+        }
+
+        private static MethodBodyStatement SerializeAdditionalProperties(MultipartFormDataExpression multipartContent, MultipartAdditionalPropertiesSerialization? additionalProperties)
+        {
+            if (additionalProperties is null)
+            {
+                return EmptyStatement;
+            }
+            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
+            MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
+            {
+                //SerializationExression(multipartContent, )
+                //SerializationValue(multipartContent, additionalProperties.ValueSerialization, item.Value, item.Key)
+                multipartContent.Add(BuildValueSerizationExpression(additionalProperties.Type.Arguments[1], item.Value), item.Key)
+            };
+            return statement;
         }
         private static MethodBodyStatement WritePropertySerialization(MultipartFormDataExpression mulitpartContent, MultipartPropertySerialization serialization)
         {
@@ -291,12 +318,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (property.SerializedType is { IsFrameworkType: true } framework && framework.FrameworkType == typeof(BinaryData))
             {
                 //propertyValue = new MemberExpression(partContent, nameof(FormDataItem.Content));
-                propertyValue = FormDataItemProvider.Instance.ContentProeptyValue(partContent);
+                propertyValue = FormDataItemProvider.Instance.ContentPropertyValue(partContent);
             }
             else
             {
                 //propertyValue = new InvokeInstanceMethodExpression(new MemberExpression(partContent, nameof(FormDataItem.Content)), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
-                propertyValue = new InvokeInstanceMethodExpression(FormDataItemProvider.Instance.ContentProeptyValue(partContent), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
+                propertyValue = new InvokeInstanceMethodExpression(FormDataItemProvider.Instance.ContentPropertyValue(partContent), GetPropertyDeserializationMethod(property), Array.Empty<ValueExpression>(), GetArguments(property), false);
             }
             List <MethodBodyStatement> statements = new List<MethodBodyStatement>
             {
@@ -398,6 +425,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (additionalProperties != null)
             {
                 var dictionary = new VariableReference(additionalProperties.Type, "additionalPropertiesDictionary");
+                var dictionaryExpress = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], dictionary);
                 yield return Declare(dictionary, New.Instance(additionalProperties.Type));
                 /*
                 yield return new ForeachStatement(typeof(MultipartContentPart), "part", multipartContent.ContentParts, false, out var part)
@@ -411,8 +439,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 yield return new ForeachStatement(FormDataItemProvider.Instance.Type, "part", multiParts, false, out var part)
                 {
-                    DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray()
-                };
+                    DeserializeIntoObjectProperties(multipart.Properties, part, propertyVariables).ToArray(),
+                    dictionaryExpress.Add(FormDataItemProvider.Instance.NamePropertyValue(part), FormDataItemProvider.Instance.ContentPropertyValue(part))
+                /*
+                var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
+
+            yield return Serializations.WrapInCheckNotWire(
+                additionalPropertiesSerialization,
+                options?.Format,
+                additionalPropertiesStatement);
+                */
+            };
                 yield return Assign(propertyVariables[additionalProperties], dictionary);
             } else
             {

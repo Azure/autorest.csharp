@@ -577,7 +577,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (EnsureIncludeSerializer() && _inputModel.MediaTypes.Contains("multipart/form-data"))
             {
                 var additionalProperties = CreateMultipartAdditionalPropertiesSerialization();
-                return new MultipartObjectSerialization(this, SerializationConstructorSignature.Parameters, CreateMultipartPropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+                var properties = SerializationBuilder.CreateMultipartPropertySerializations(this).ToArray();
+                return new MultipartObjectSerialization(this, SerializationConstructorSignature.Parameters, properties, additionalProperties, Discriminator, false);
             }
             return null;
         }
@@ -632,7 +633,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 shouldExcludeInWireSerialization,
                 new ValueExpression());//TODO: need deserialization for additionalProperties
         }
-
+        /*
         private IEnumerable<MultipartPropertySerialization> CreateMultipartPropertySerializations()
         {
             foreach (var objType in EnumerateHierarchy())
@@ -681,7 +682,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return inputProperty.IsReadOnly;
         }
-
+        */
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
             bool shouldExcludeInWireSerialization = false;

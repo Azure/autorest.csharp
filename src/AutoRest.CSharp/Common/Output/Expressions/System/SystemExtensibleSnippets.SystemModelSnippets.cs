@@ -4,6 +4,7 @@
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -11,6 +12,8 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.System
 {
@@ -33,6 +36,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             }
 
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new BinaryContentExpression(model.Invoke("ToRequestBody"));
+            public override ValueExpression ContentTypeFromResponse()
+            {
+                var response = new PipelineResponseExpression(KnownParameters.Response);
+                var valueParameter = new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true);
+                var valueReference = new ParameterReference(valueParameter);
+                return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out", valueReference) }, null, false);
+            }
         }
     }
 }
