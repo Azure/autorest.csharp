@@ -48,9 +48,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, context).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -62,9 +62,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = Create(content, context);
+            ClientResult result = Create(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -84,16 +84,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -112,16 +112,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
@@ -132,9 +132,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateEditAsync(content, context).ConfigureAwait(false);
+            ClientResult result = await CreateEditAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -146,9 +146,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateEdit(content, context);
+            ClientResult result = CreateEdit(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -168,16 +168,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateEditAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateEditAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateEditRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateEditRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -196,16 +196,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult CreateEdit(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult CreateEdit(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateEditRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateEditRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
@@ -216,9 +216,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateVariationAsync(content, context).ConfigureAwait(false);
+            ClientResult result = await CreateVariationAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -230,9 +230,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
+            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateVariation(content, context);
+            ClientResult result = CreateVariation(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -252,16 +252,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateVariationAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateVariationAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateVariationRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateVariationRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -280,19 +280,19 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult CreateVariation(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult CreateVariation(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateVariationRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateVariationRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -305,14 +305,14 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (context != null)
+            if (options != null)
             {
-                message.Apply(context);
+                message.Apply(options);
             }
             return message;
         }
 
-        internal PipelineMessage CreateCreateEditRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateEditRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -325,14 +325,14 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
-            if (context != null)
+            if (options != null)
             {
-                message.Apply(context);
+                message.Apply(options);
             }
             return message;
         }
 
-        internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -345,9 +345,9 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
-            if (context != null)
+            if (options != null)
             {
-                message.Apply(context);
+                message.Apply(options);
             }
             return message;
         }

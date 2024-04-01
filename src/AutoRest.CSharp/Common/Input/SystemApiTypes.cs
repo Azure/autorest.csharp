@@ -38,6 +38,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestOptions);
 
+        public override string RequestContextName => "options";
+        public override string RequestContextDescription => "The request options, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(ApiKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(ClientPipeline);

@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestContext);
 
+        public override string RequestContextName => "context";
+        public override string RequestContextDescription => "The request context, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
