@@ -110,10 +110,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
             };
+
             if (initializeOverridedProperty)
             {
                 data.NestedName = "someSku";
             }
+
             var options = new BicepModelReaderWriterOptions
             {
                 PropertyOverrides =
