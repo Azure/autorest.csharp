@@ -29,10 +29,13 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            foreach (var item in AdditionalProperties)
+            if (options.Format != "W" && AdditionalProperties != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteNumberValue(item.Value);
+                foreach (var item in AdditionalProperties)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteNumberValue(item.Value);
+                }
             }
             writer.WriteEndObject();
         }
@@ -59,6 +62,7 @@ namespace _Type.Property.AdditionalProperties.Models
             }
             float id = default;
             IDictionary<string, float> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, float> additionalPropertiesDictionary = new Dictionary<string, float>();
             foreach (var property in element.EnumerateObject())
             {
@@ -67,10 +71,13 @@ namespace _Type.Property.AdditionalProperties.Models
                     id = property.Value.GetSingle();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsFloatAdditionalProperties(id, additionalProperties);
+            return new ExtendsFloatAdditionalProperties(id, additionalProperties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ExtendsFloatAdditionalProperties>.Write(ModelReaderWriterOptions options)

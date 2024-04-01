@@ -29,10 +29,13 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            foreach (var item in AdditionalProperties)
+            if (options.Format != "W" && AdditionalProperties != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                foreach (var item in AdditionalProperties)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
             }
             writer.WriteEndObject();
         }
@@ -59,6 +62,7 @@ namespace _Type.Property.AdditionalProperties.Models
             }
             string name = default;
             IDictionary<string, string> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
@@ -67,10 +71,13 @@ namespace _Type.Property.AdditionalProperties.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IsStringAdditionalProperties(name, additionalProperties);
+            return new IsStringAdditionalProperties(name, additionalProperties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<IsStringAdditionalProperties>.Write(ModelReaderWriterOptions options)

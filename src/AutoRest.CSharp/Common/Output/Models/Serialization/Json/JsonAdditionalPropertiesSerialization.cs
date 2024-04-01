@@ -10,12 +10,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonAdditionalPropertiesSerialization : JsonPropertySerialization
     {
-        public CSharpType Type { get; }
+        public CSharpType ImplementationType { get; }
 
         public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type, bool shouldExcludeInWireSerialization)
             : base(property.Declaration.Name.ToVariableName(), new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type), property.Declaration.Name, property.ValueType, valueSerialization, true, shouldExcludeInWireSerialization)
         {
-            Type = type;
+            ImplementationType = type;
         }
     }
 }

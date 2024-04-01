@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return EmptyStatement;
             }
 
-            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
+            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.ImplementationType.Arguments[0], additionalProperties.ImplementationType.Arguments[1], additionalProperties.Value);
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
                 utf8JsonWriter.WritePropertyName(item.Key),
@@ -514,6 +514,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
             }
 
+            if (serialization.RawDataField is { } rawDataField)
+            {
+                propertyVariables.Add(rawDataField, new VariableReference(rawDataField.Value.Type, rawDataField.SerializationConstructorParameterName));
+            }
+
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
 
             foreach (var variable in propertyVariables)
@@ -533,16 +538,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var shouldTreatEmptyStringAsNull = Configuration.ModelsToTreatEmptyStringAsNull.Contains(serialization.Type.Name);
-            var objAdditionalProperties = serialization.AdditionalProperties;
-            if (objAdditionalProperties != null)
+            // TODO -- should also include raw data field here.
+            if (additionalProperties != null)
             {
-                var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
-                yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
+                var dictionary = new VariableReference(additionalProperties.ImplementationType, "additionalPropertiesDictionary");
+                yield return Declare(dictionary, New.Instance(additionalProperties.ImplementationType));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
-                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(objAdditionalProperties.Type.Arguments[0], objAdditionalProperties.Type.Arguments[1], dictionary), options, propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
+                    DeserializeIntoObjectProperties(serialization.Properties, additionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(additionalProperties.ImplementationType.Arguments[0], additionalProperties.ImplementationType.Arguments[1], dictionary), options, propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
                 };
-                yield return Assign(propertyVariables[objAdditionalProperties], dictionary);
+                yield return Assign(propertyVariables[additionalProperties], dictionary);
             }
             else
             {

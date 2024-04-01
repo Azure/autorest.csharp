@@ -68,8 +68,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (_rawDataField != null)
                     return _rawDataField;
 
-                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                if (!ShouldHaveRawData)
                     return null;
+
+                // if we have an additional properties property, and its value type is also BinaryData, we should not have a raw data field
+                if (AdditionalPropertiesProperty != null)
+                {
+                    var valueType = TypeFactory.GetElementType(AdditionalPropertiesProperty.Declaration.Type);
+                    if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
+                    {
+                        return null;
+                    }
+                }
 
                 // when this model has derived types, the accessibility should change from private to `protected internal`
                 string accessibility = HasDerivedTypes() ? "private protected" : "private";
@@ -107,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputModel = inputModel;
             _deprecated = inputModel.Deprecated;
             _derivedModels = inputModel.DerivedModels;
-            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is {DiscriminatorPropertyName: not null}
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null }
                 ? this //if I have children and parents then I am my own defaultDerivedType
                 : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
@@ -412,7 +422,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // only initialization ctor initializes the discriminator
             // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
             // [TODO]: Consolidate property initializer generation between HLC and DPG
-            if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
+            if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is { Value: { } discriminatorValue } && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -564,61 +574,76 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
-            var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, JsonConverter);
+            var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization();
+            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, rawDataField, Discriminator, JsonConverter);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
+        private (JsonAdditionalPropertiesSerialization? AdditionalPropertiesSerialization, JsonAdditionalPropertiesSerialization? RawDataFieldSerialization) CreateAdditionalPropertiesSerialization()
         {
-            bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
-            InputType? additionalPropertiesValueType = null;
+            ObjectTypeProperty? rawDataField = null;
+            InputType? additionalPropertiesValueInputType = null;
             foreach (var model in EnumerateHierarchy())
             {
-                additionalPropertiesProperty = model.AdditionalPropertiesProperty ?? (model as SerializableObjectType)?.RawDataField;
-                if (additionalPropertiesProperty != null)
+                additionalPropertiesProperty = model.AdditionalPropertiesProperty;
+                if (additionalPropertiesProperty != null && additionalPropertiesValueInputType == null)
                 {
-                    // if this is a real "AdditionalProperties", we should NOT exclude it in wire
-                    shouldExcludeInWireSerialization = additionalPropertiesProperty != model.AdditionalPropertiesProperty;
                     if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
                     {
-                        additionalPropertiesValueType = inheritedDictionaryType.ValueType;
+                        additionalPropertiesValueInputType = inheritedDictionaryType.ValueType;
                     }
-                    break;
                 }
+                rawDataField = (model as SerializableObjectType)?.RawDataField;
             }
 
-            if (additionalPropertiesProperty == null)
+            if (additionalPropertiesProperty == null && rawDataField == null)
             {
-                return null;
+                return (null, null);
             }
 
-            var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
-            Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            JsonSerialization valueSerialization;
-            if (additionalPropertiesValueType is not null)
+            // build serialization for additional properties property (if any)
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType);
+            // build serialization for raw data field (if any)
+            var rawDataFieldSerialization = BuildSerializationForRawDataField(rawDataField);
+
+            return (additionalPropertiesSerialization, rawDataFieldSerialization);
+
+            JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType)
             {
-                // build the serialization when there is an input type corresponding to it
-                valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, dictionaryValueType, false, SerializationFormat.Default);
-            }
-            else
-            {
-                // build a simple one from its type when there is not an input type corresponding to it (indicating it is a raw data field)
-                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+                if (additionalPropertiesProperty is null || additionalPropertiesValueType is null)
+                    return null;
+
+                var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+                var valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false, SerializationFormat.Default);
+
+                return new JsonAdditionalPropertiesSerialization(
+                    additionalPropertiesProperty,
+                    valueSerialization,
+                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                    true);
             }
 
-            return new JsonAdditionalPropertiesSerialization(
-                additionalPropertiesProperty,
-                valueSerialization,
-                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                shouldExcludeInWireSerialization);
+            JsonAdditionalPropertiesSerialization? BuildSerializationForRawDataField(ObjectTypeProperty? rawDataField)
+            {
+                if (rawDataField is null)
+                    return null;
+
+                var rawDataFieldValueType = rawDataField.Declaration.Type.Arguments[1];
+                var valueSerialization = new JsonValueSerialization(rawDataFieldValueType, SerializationFormat.Default, true);
+
+                return new JsonAdditionalPropertiesSerialization(
+                    rawDataField,
+                    valueSerialization,
+                    new CSharpType(typeof(Dictionary<,>), rawDataField.Declaration.Type.Arguments),
+                    false);
+            }
         }
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _inputModelSerialization.Xml is {} xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
+            return _inputModelSerialization.Xml is { } xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
         }
 
         protected override bool EnsureIncludeSerializer()

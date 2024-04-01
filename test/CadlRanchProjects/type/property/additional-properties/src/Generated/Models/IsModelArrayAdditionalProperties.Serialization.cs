@@ -27,27 +27,30 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
-            foreach (var item in AdditionalProperties)
+            if (options.Format != "W" && AdditionalProperties != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStartArray();
-                foreach (var item0 in item.Value)
+                foreach (var item in AdditionalProperties)
                 {
-                    if (item0 == null)
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
                     {
-                        writer.WriteNullValue();
-                        continue;
-                    }
+                        if (item0 == null)
+                        {
+                            writer.WriteNullValue();
+                            continue;
+                        }
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item0);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item0))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
+                        using (JsonDocument document = JsonDocument.Parse(item0))
+                        {
+                            JsonSerializer.Serialize(writer, document.RootElement);
+                        }
 #endif
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }
@@ -73,6 +76,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             IDictionary<string, IList<BinaryData>> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, IList<BinaryData>> additionalPropertiesDictionary = new Dictionary<string, IList<BinaryData>>();
             foreach (var property in element.EnumerateObject())
             {
@@ -88,10 +92,13 @@ namespace _Type.Property.AdditionalProperties.Models
                         array.Add(BinaryData.FromString(item.GetRawText()));
                     }
                 }
-                additionalPropertiesDictionary.Add(property.Name, array);
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, array);
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IsModelArrayAdditionalProperties(additionalProperties);
+            return new IsModelArrayAdditionalProperties(additionalProperties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<IsModelArrayAdditionalProperties>.Write(ModelReaderWriterOptions options)

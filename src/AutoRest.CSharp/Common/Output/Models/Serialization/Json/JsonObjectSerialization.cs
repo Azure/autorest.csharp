@@ -11,20 +11,26 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal record JsonObjectSerialization
     {
-        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter)
+        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, JsonAdditionalPropertiesSerialization? rawDataField, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter)
         {
             Type = model.Type;
             ConstructorParameters = constructorParameters;
             Properties = properties;
             AdditionalProperties = additionalProperties;
+            RawDataField = rawDataField;
             Discriminator = discriminator;
             JsonConverter = jsonConverter;
+        }
+
+        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter) : this(model, constructorParameters, properties, additionalProperties, null, discriminator, jsonConverter)
+        {
         }
 
         public CSharpType Type { get; }
         public IReadOnlyList<Parameter> ConstructorParameters { get; }
         public IReadOnlyList<JsonPropertySerialization> Properties { get; }
         public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
+        public JsonAdditionalPropertiesSerialization? RawDataField { get; }
         public ObjectTypeDiscriminator? Discriminator { get; }
         public JsonConverterProvider? JsonConverter { get; }
     }
