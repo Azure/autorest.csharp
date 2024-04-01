@@ -610,7 +610,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType)
             {
                 if (additionalPropertiesProperty is null || additionalPropertiesValueType is null)
                     return null;
@@ -622,10 +622,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     additionalPropertiesProperty,
                     valueSerialization,
                     new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                    true);
+                    false);
             }
 
-            JsonAdditionalPropertiesSerialization? BuildSerializationForRawDataField(ObjectTypeProperty? rawDataField)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForRawDataField(ObjectTypeProperty? rawDataField)
             {
                 if (rawDataField is null)
                     return null;
@@ -637,7 +637,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     rawDataField,
                     valueSerialization,
                     new CSharpType(typeof(Dictionary<,>), rawDataField.Declaration.Type.Arguments),
-                    false);
+                    true);
             }
         }
 

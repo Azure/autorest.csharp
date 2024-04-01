@@ -29,12 +29,24 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (options.Format != "W" && AdditionalProperties != null)
+            foreach (var item in AdditionalProperties)
             {
-                foreach (var item in AdditionalProperties)
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteNumberValue(item.Value);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
             }
             writer.WriteEndObject();
@@ -64,6 +76,7 @@ namespace _Type.Property.AdditionalProperties.Models
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, float> additionalPropertiesDictionary = new Dictionary<string, float>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -71,12 +84,14 @@ namespace _Type.Property.AdditionalProperties.Models
                     id = property.Value.GetSingle();
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             additionalProperties = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new IsFloatAdditionalProperties(id, additionalProperties, serializedAdditionalRawData);
         }
 
