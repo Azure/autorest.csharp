@@ -33,7 +33,19 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-                    writer.WriteObjectValue<ModelForRecord>(item0, options);
+                    if (item0 == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item0);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item0))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
                 writer.WriteEndArray();
             }
@@ -60,14 +72,21 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
-            IDictionary<string, IList<ModelForRecord>> additionalProperties = default;
-            Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
+            IDictionary<string, IList<BinaryData>> additionalProperties = default;
+            Dictionary<string, IList<BinaryData>> additionalPropertiesDictionary = new Dictionary<string, IList<BinaryData>>();
             foreach (var property in element.EnumerateObject())
             {
-                List<ModelForRecord> array = new List<ModelForRecord>();
+                List<BinaryData> array = new List<BinaryData>();
                 foreach (var item in property.Value.EnumerateArray())
                 {
-                    array.Add(ModelForRecord.DeserializeModelForRecord(item, options));
+                    if (item.ValueKind == JsonValueKind.Null)
+                    {
+                        array.Add(null);
+                    }
+                    else
+                    {
+                        array.Add(BinaryData.FromString(item.GetRawText()));
+                    }
                 }
                 additionalPropertiesDictionary.Add(property.Name, array);
             }

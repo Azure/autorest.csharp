@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
@@ -15,17 +16,17 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <summary> Initializes a new instance of <see cref="IsModelArrayAdditionalProperties"/>. </summary>
         public IsModelArrayAdditionalProperties()
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, IList<ModelForRecord>>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, IList<BinaryData>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="IsModelArrayAdditionalProperties"/>. </summary>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal IsModelArrayAdditionalProperties(IDictionary<string, IList<ModelForRecord>> additionalProperties)
+        internal IsModelArrayAdditionalProperties(IDictionary<string, IList<BinaryData>> additionalProperties)
         {
             AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Additional Properties. </summary>
-        public IDictionary<string, IList<ModelForRecord>> AdditionalProperties { get; }
+        public IDictionary<string, IList<BinaryData>> AdditionalProperties { get; }
     }
 }

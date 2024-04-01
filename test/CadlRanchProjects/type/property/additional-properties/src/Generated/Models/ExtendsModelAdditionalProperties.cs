@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
@@ -15,17 +16,46 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/>. </summary>
         public ExtendsModelAdditionalProperties()
         {
-            AdditionalProperties = new ChangeTrackingDictionary<string, ModelForRecord>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/>. </summary>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal ExtendsModelAdditionalProperties(IDictionary<string, ModelForRecord> additionalProperties)
+        internal ExtendsModelAdditionalProperties(IDictionary<string, BinaryData> additionalProperties)
         {
             AdditionalProperties = additionalProperties;
         }
 
-        /// <summary> Additional Properties. </summary>
-        public IDictionary<string, ModelForRecord> AdditionalProperties { get; }
+        /// <summary>
+        /// Additional Properties
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public IDictionary<string, BinaryData> AdditionalProperties { get; }
     }
 }

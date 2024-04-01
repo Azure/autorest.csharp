@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // the same name.
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
-                var type = typeFactory.CreateType(additionalPropertiesType);
+                var type = CreateAdditionalPropertiesPropertyType(typeFactory, additionalPropertiesType);
                 if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))
                 {
                     type = TypeFactory.GetOutputType(type);
@@ -109,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
 
-                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
+                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, SerializationFormat.Default, true);
                 var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
 
                 // we intentionally do not add this field into the field list to avoid cyclic references
@@ -153,6 +154,58 @@ namespace AutoRest.CSharp.Output.Models.Types
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
         }
+
+        private static CSharpType CreateAdditionalPropertiesPropertyType(TypeFactory typeFactory, InputDictionaryType additionalPropertiesInputType)
+        {
+            // TODO -- we only construct additional properties when the type is verifiable, because we always need the property to fall into the bucket of serialized additional raw data field when it does not fit the additional properties.
+            var type = typeFactory.CreateType(additionalPropertiesInputType);
+            var arguments = type.Arguments;
+            var keyType = arguments[0];
+            var valueType = arguments[1];
+
+            return type.MakeGenericType(new[] { ReplaceUnverifiableType(keyType), ReplaceUnverifiableType(valueType) });
+        }
+
+        private static CSharpType ReplaceUnverifiableType(CSharpType type)
+        {
+            // when the type is a verifiable type
+            if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && _verifiableTypes.Contains(frameworkType))
+            {
+                return type;
+            }
+
+            // when the type is a union
+            if (type.IsUnion)
+            {
+                return type;
+            }
+
+            // otherwise the type is not a verifiable type
+            // replace for list
+            if (TypeFactory.IsList(type))
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0]) });
+            }
+            // replace for dictionary
+            if (TypeFactory.IsDictionary(type))
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0]), ReplaceUnverifiableType(type.Arguments[1]) });
+            }
+            // for the other cases, wrap them in a union
+            return CSharpType.FromUnion(new[] { type }, type.IsNullable);
+        }
+
+        private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>
+        {
+            // The following types are constructed by the `TryGetXXX` methods on `JsonElement`.
+            typeof(byte), typeof(byte[]), typeof(sbyte),
+            typeof(DateTime), typeof(DateTimeOffset),
+            typeof(decimal), typeof(double), typeof(short), typeof(int), typeof(long), typeof(float),
+            typeof(ushort), typeof(uint), typeof(ulong),
+            typeof(Guid),
+            // The following types have a firm JsonValueKind to verify
+            typeof(string), typeof(bool)
+        };
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
         {
