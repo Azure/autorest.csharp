@@ -133,10 +133,6 @@ namespace Scm.Authentication.Http.Custom
         internal PipelineMessage CreateValidRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -145,16 +141,16 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/valid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
         internal PipelineMessage CreateInvalidRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -163,6 +159,10 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (context != null)
+            {
+                message.Apply(context);
+            }
             return message;
         }
 
