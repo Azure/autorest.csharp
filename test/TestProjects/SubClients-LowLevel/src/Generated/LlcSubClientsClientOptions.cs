@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace SubClients_LowLevel
 {
-    /// <summary> Client options for RootClient. </summary>
-    public partial class RootClientOptions : ClientOptions
+    /// <summary> Client options for LlcSubClients library clients. </summary>
+    public partial class LlcSubClientsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_10_19;
 
@@ -24,8 +24,8 @@ namespace SubClients_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of RootClientOptions. </summary>
-        public RootClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of LlcSubClientsClientOptions. </summary>
+        public LlcSubClientsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

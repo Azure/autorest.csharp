@@ -27,7 +27,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.GetCollectionAsync(null);
         }
@@ -38,7 +38,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.GetCollectionAsync(null);
         }
@@ -49,7 +49,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateCollectionAsync(content);
@@ -61,7 +61,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -81,7 +81,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.DeleteCollectionAsync();
         }
@@ -92,7 +92,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.DeleteCollectionAsync();
         }
@@ -103,7 +103,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.GetCollectionPathAsync(null);
         }
@@ -114,7 +114,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             Response response = await client.GetCollectionPathAsync(null);
         }
@@ -125,7 +125,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
             {
@@ -138,7 +138,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
             {
@@ -151,7 +151,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
             {
@@ -164,7 +164,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+            PurviewAccountCollections client = CreatePurviewAccountCollections(endpoint, "<CollectionName>", credential);
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
             {

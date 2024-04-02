@@ -25,7 +25,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceGroup(endpoint, "<GroupId>", credential);
 
             Response response = await client.GetGroupAsync(null);
         }
@@ -36,33 +36,33 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceGroup(endpoint, "<GroupId>", credential);
 
             Response response = await client.GetGroupAsync(null);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_ShortVersion()
+        public async Task GetGroups_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceGroup(endpoint, null, credential);
 
-            await foreach (BinaryData item in client.GetItemsAsync(null))
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
             }
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_AllParameters()
+        public async Task GetGroups_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceGroup(endpoint, null, credential);
 
-            await foreach (BinaryData item in client.GetItemsAsync(null))
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
             }
         }

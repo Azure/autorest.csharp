@@ -6,7 +6,7 @@
 This sample shows how to call GetItemAsync and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+Resource client = new Resource("<GroupId>", "<ItemId>", credential);
 
 Response response = await client.GetItemAsync(null);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetItemAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+Resource client = new Resource("<GroupId>", "<ItemId>", credential);
 
 Response response = await client.GetItemAsync(null);
 
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetItem and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+Resource client = new Resource("<GroupId>", "<ItemId>", credential);
 
 Response response = client.GetItem(null);
 
@@ -39,12 +39,112 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetItem with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+Resource client = new Resource("<GroupId>", "<ItemId>", credential);
 
 Response response = client.GetItem(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code></example>
+    </member>
+    <member name="GetAllItemsAsync(RequestContext)">
+      <example>
+This sample shows how to call GetAllItemsAsync and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource(null, null, credential);
+
+await foreach (BinaryData item in client.GetAllItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetAllItemsAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource(null, null, credential);
+
+await foreach (BinaryData item in client.GetAllItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetAllItems(RequestContext)">
+      <example>
+This sample shows how to call GetAllItems and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource(null, null, credential);
+
+foreach (BinaryData item in client.GetAllItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetAllItems with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource(null, null, credential);
+
+foreach (BinaryData item in client.GetAllItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetItemsAsync(RequestContext)">
+      <example>
+This sample shows how to call GetItemsAsync and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource("<GroupId>", null, credential);
+
+await foreach (BinaryData item in client.GetItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetItemsAsync with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource("<GroupId>", null, credential);
+
+await foreach (BinaryData item in client.GetItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetItems(RequestContext)">
+      <example>
+This sample shows how to call GetItems and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource("<GroupId>", null, credential);
+
+foreach (BinaryData item in client.GetItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetItems with all parameters and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Resource client = new Resource("<GroupId>", null, credential);
+
+foreach (BinaryData item in client.GetItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
 ]]></code></example>
     </member>
   </members>

@@ -27,7 +27,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             Response response = await client.GetResourceSetRuleAsync(null);
         }
@@ -38,7 +38,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             Response response = await client.GetResourceSetRuleAsync(null);
         }
@@ -49,7 +49,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
@@ -61,7 +61,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -183,7 +183,7 @@ storeType = "<storeType>",
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             Response response = await client.DeleteResourceSetRuleAsync();
         }
@@ -194,7 +194,7 @@ storeType = "<storeType>",
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            PurviewAccountResourceSetRules client = CreatePurviewAccountResourceSetRules(endpoint, credential);
 
             Response response = await client.DeleteResourceSetRuleAsync();
         }
