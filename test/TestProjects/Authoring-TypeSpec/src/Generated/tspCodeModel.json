@@ -75,7 +75,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   },
@@ -141,7 +141,7 @@
    ],
    "Namespace": "AuthoringTypeSpec",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

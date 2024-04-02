@@ -530,7 +530,7 @@ export function getInputType(
                 Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
-                IsExtensible: !isFixed(program, e),
+                IsExtensible: false,
                 IsNullable: false,
                 Usage: "None"
             };
