@@ -237,11 +237,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             static FormattableString AddAllowedValues(FormattableString description, ICollection<ChoiceValue> choices)
             {
-                var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
+                var allowedValues = choices.Select(c => (FormattableString)$"{c.Value:L}").ToArray().Join(" | ");
 
-                return string.IsNullOrEmpty(allowedValues)
+                return allowedValues.IsNullOrEmpty()
                     ? description
-                    : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+                    : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues.ToString())}";
             }
         }
 
