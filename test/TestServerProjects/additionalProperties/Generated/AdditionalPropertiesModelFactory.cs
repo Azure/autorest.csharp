@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace additionalProperties.Models
@@ -18,9 +19,9 @@ namespace additionalProperties.Models
         /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
-        public static PetAPTrue PetAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
+        public static PetAPTrue PetAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, BinaryData> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, BinaryData>();
 
             return new PetAPTrue(id, name, status, additionalProperties);
         }
@@ -32,9 +33,9 @@ namespace additionalProperties.Models
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="friendly"></param>
         /// <returns> A new <see cref="Models.CatAPTrue"/> instance for mocking. </returns>
-        public static CatAPTrue CatAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null, bool? friendly = null)
+        public static CatAPTrue CatAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, BinaryData> additionalProperties = null, bool? friendly = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, BinaryData>();
 
             return new CatAPTrue(id, name, status, additionalProperties, friendly);
         }
@@ -45,9 +46,9 @@ namespace additionalProperties.Models
         /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
-        public static PetAPObject PetAPObject(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
+        public static PetAPObject PetAPObject(int id = default, string name = null, bool? status = null, IDictionary<string, BinaryData> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, BinaryData>();
 
             return new PetAPObject(id, name, status, additionalProperties);
         }
@@ -62,7 +63,7 @@ namespace additionalProperties.Models
         {
             additionalProperties ??= new Dictionary<string, string>();
 
-            return new PetAPString(id, name, status, additionalProperties);
+            return new PetAPString(id, name, status, additionalProperties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetAPInProperties"/>. </summary>

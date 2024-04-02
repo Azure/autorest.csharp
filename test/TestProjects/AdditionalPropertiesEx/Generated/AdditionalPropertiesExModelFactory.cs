@@ -17,9 +17,9 @@ namespace AdditionalPropertiesEx.Models
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.InputAdditionalPropertiesModel"/> instance for mocking. </returns>
-        public static InputAdditionalPropertiesModel InputAdditionalPropertiesModel(int id = default, IDictionary<string, object> additionalProperties = null)
+        public static InputAdditionalPropertiesModel InputAdditionalPropertiesModel(int id = default, IDictionary<string, BinaryData> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, BinaryData>();
 
             return new InputAdditionalPropertiesModel(id, additionalProperties);
         }
@@ -32,19 +32,18 @@ namespace AdditionalPropertiesEx.Models
         {
             additionalProperties ??= new Dictionary<string, string>();
 
-            return new OutputAdditionalPropertiesModel(id, additionalProperties);
+            return new OutputAdditionalPropertiesModel(id, additionalProperties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputAdditionalPropertiesModelStruct"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, string>();
 
-            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
+            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties, serializedAdditionalRawData: null);
         }
     }
 }
