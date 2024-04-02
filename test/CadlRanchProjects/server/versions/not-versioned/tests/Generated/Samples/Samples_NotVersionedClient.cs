@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using Server.Versions.NotVersioned;
 
 namespace Server.Versions.NotVersioned.Samples
 {

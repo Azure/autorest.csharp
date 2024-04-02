@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Encode.Bytes;
 
 namespace Encode.Bytes.Models
 {

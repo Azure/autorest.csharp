@@ -17,6 +17,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal record ValueExpression
     {
+        public virtual void Write(CodeWriter writer) { }
+
         public static implicit operator ValueExpression(Type type) => new TypeReference(type);
         public static implicit operator ValueExpression(CSharpType type) => new TypeReference(type);
         public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
@@ -25,11 +27,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         public ValueExpression NullableStructValue(CSharpType candidateType) => this is not ConstantExpression && candidateType is { IsNullable: true, IsValueType: true } ? new MemberExpression(this, nameof(Nullable<int>.Value)) : this;
         public StringExpression InvokeToString() => new(Invoke(nameof(ToString)));
+        public ValueExpression InvokeGetType() => Invoke(nameof(GetType));
 
         public BoolExpression InvokeEquals(ValueExpression other) => new(Invoke(nameof(Equals), other));
 
-        public virtual ValueExpression Property(string propertyName)
-            => new MemberExpression(this, propertyName);
+        public virtual ValueExpression Property(string propertyName, bool nullConditional = false)
+            => new MemberExpression(nullConditional ? new NullConditionalExpression(this) : this, propertyName);
 
         public InvokeInstanceMethodExpression Invoke(string methodName)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, false);
@@ -60,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
-            writer.WriteValueExpression(this);
+            Write(writer);
             return writer.ToString();
         }
     }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using MultipleMediaTypes;
 
 namespace MultipleMediaTypes.Models
 {

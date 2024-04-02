@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
@@ -15,5 +16,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public InvokeStaticMethodStatement(CSharpType? methodType, string methodName, ValueExpression arg1, ValueExpression arg2) : this(methodType, methodName, new[] { arg1, arg2 }) { }
         public static InvokeStaticMethodStatement Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference) => new(methodType, methodName, new[] { instanceReference }, CallAsExtension: true);
         public static InvokeStaticMethodStatement Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference, ValueExpression arg) => new(methodType, methodName, new[] { instanceReference, arg }, CallAsExtension: true);
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            new InvokeStaticMethodExpression(MethodType, MethodName, Arguments, TypeArguments, CallAsExtension, CallAsAsync).Write(writer);
+            writer.LineRaw(";");
+        }
     }
 }

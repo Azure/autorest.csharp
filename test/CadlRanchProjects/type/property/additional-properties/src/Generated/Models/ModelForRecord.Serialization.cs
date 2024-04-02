@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelForRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelForRecord)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelForRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelForRecord)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -70,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Models
             }
             string state = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("state"u8))
@@ -80,10 +79,10 @@ namespace _Type.Property.AdditionalProperties.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new ModelForRecord(state, serializedAdditionalRawData);
         }
 
@@ -96,7 +95,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeModelForRecord(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelForRecord)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace _Type.Property.AdditionalProperties.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ModelForRecord>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

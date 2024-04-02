@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Parameters.BodyOptionality;
 
 namespace Parameters.BodyOptionality.Models
 {
@@ -24,7 +23,7 @@ namespace Parameters.BodyOptionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace Parameters.BodyOptionality.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -70,7 +69,7 @@ namespace Parameters.BodyOptionality.Models
             }
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -80,10 +79,10 @@ namespace Parameters.BodyOptionality.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new BodyModel(name, serializedAdditionalRawData);
         }
 
@@ -96,7 +95,7 @@ namespace Parameters.BodyOptionality.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace Parameters.BodyOptionality.Models
                         return DeserializeBodyModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace Parameters.BodyOptionality.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<BodyModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

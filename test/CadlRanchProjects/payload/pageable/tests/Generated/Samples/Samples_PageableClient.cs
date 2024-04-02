@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using Payload.Pageable;
 using Payload.Pageable.Models;
 
 namespace Payload.Pageable.Samples

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {

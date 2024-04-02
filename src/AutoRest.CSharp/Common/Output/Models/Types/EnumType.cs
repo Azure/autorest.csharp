@@ -19,13 +19,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
-        {
-        }
-
-        public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, Schema schema, BuildContext context)
+            : this(enumType, GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
@@ -87,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var values = new List<EnumTypeValue>();
             foreach (var value in _allowedValues)
             {
-                var name = BuilderHelpers.DisambiguateName(Type, value.Name.ToCleanName());
+                var name = BuilderHelpers.DisambiguateName(Type.Name, value.Name.ToCleanName(), "Value");
                 var existingMember = _typeMapping?.GetMemberByOriginalName(name);
                 values.Add(new EnumTypeValue(
                     BuilderHelpers.CreateMemberDeclaration(name, Type, "public", existingMember, _typeFactory),

@@ -19,7 +19,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                writer.WriteObjectValue<GuestConfigurationAssignmentProperties>(Properties);
             }
             if (Optional.IsDefined(Name))
             {

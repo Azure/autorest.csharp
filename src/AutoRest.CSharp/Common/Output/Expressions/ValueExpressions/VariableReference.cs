@@ -6,8 +6,16 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record VariableReference(CSharpType Type, CodeWriterDeclaration Declaration) : TypedValueExpression(Type, new FormattableStringToExpression($"{Declaration:I}"))
+    internal record VariableReference(CSharpType Type, CodeWriterDeclaration Declaration) : TypedValueExpression(Type, new UntypedVariableReference(Declaration))
     {
         public VariableReference(CSharpType type, string name) : this(type, new CodeWriterDeclaration(name)) { }
+
+        private record UntypedVariableReference(CodeWriterDeclaration Declaration) : ValueExpression
+        {
+            public override void Write(CodeWriter writer)
+            {
+                writer.Append(Declaration);
+            }
+        }
     }
 }

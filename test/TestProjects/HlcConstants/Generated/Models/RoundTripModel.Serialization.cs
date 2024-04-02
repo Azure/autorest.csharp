@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using HlcConstants;
 
 namespace HlcConstants.Models
 {
@@ -19,12 +18,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                writer.WriteObjectValue(RequiredConstantModel);
+                writer.WriteObjectValue<ModelWithRequiredConstant>(RequiredConstantModel);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                writer.WriteObjectValue(OptionalConstantModel);
+                writer.WriteObjectValue<ModelWithOptionalConstant>(OptionalConstantModel);
             }
             writer.WriteEndObject();
         }

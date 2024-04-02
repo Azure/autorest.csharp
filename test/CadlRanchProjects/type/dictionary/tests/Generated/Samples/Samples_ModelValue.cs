@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary;
 using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples

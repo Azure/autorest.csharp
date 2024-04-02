@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
-using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -24,7 +23,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SecondModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -69,7 +68,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SecondModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -88,7 +87,7 @@ namespace TypeSchemaMapping.Models
             IReadOnlyDictionary<string, string> dictionaryProperty = default;
             CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -125,10 +124,10 @@ namespace TypeSchemaMapping.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SecondModel(stringProperty, dictionaryProperty ?? new ChangeTrackingDictionary<string, string>(), daysOfWeek, serializedAdditionalRawData);
         }
 
@@ -141,7 +140,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SecondModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -157,7 +156,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeSecondModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SecondModel)} does not support reading '{options.Format}' format.");
             }
         }
 

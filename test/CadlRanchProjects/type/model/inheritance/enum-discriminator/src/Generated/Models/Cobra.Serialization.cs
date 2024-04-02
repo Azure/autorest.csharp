@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.EnumDiscriminator;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cobra>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cobra)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cobra)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +54,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cobra>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cobra)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cobra)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -73,7 +72,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             SnakeKind kind = default;
             int length = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -88,10 +87,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Cobra(kind, length, serializedAdditionalRawData);
         }
 
@@ -104,7 +103,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Cobra)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cobra)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -120,7 +119,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                         return DeserializeCobra(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Cobra)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cobra)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -138,7 +137,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Cobra>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

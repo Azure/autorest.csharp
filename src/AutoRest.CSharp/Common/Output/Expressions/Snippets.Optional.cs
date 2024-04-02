@@ -36,16 +36,14 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 
-            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
+            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                //bicep shares its serialization types with JsonSerialization so we need the additional bool to know if we are serializing bicep.
-                //if we are serializing bicep, we don't need to check if the property is required
-                if (!isBicep && serialization.IsRequired)
+                if (serialization.IsRequired)
                 {
                     return statement;
                 }
 
-                if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
+                if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
                 {
                     if (!serialization.Value.Type.Equals(typeof(JsonElement)))
                     {

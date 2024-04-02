@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.Recursive;
 
 namespace _Type.Model.Inheritance.Recursive.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             var format = options.Format == "W" ? ((IPersistableModel<Element>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Element)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Element)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -34,7 +33,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Extension>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +60,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             var format = options.Format == "W" ? ((IPersistableModel<Element>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Element)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Element)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -78,7 +77,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             }
             IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extension"u8))
@@ -97,10 +96,10 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Element(extension ?? new ChangeTrackingList<Extension>(), serializedAdditionalRawData);
         }
 
@@ -113,7 +112,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Element)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Element)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -129,7 +128,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                         return DeserializeElement(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Element)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Element)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -147,7 +146,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Element>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

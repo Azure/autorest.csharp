@@ -630,11 +630,18 @@ namespace Client.Naming
         }
 
         private ClientModel _cachedClientModel;
+        private UnionEnum _cachedUnionEnum;
 
         /// <summary> Initializes a new instance of ClientModel. </summary>
         public virtual ClientModel GetClientModelClient()
         {
             return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClientModel;
+        }
+
+        /// <summary> Initializes a new instance of UnionEnum. </summary>
+        public virtual UnionEnum GetUnionEnumClient()
+        {
+            return Volatile.Read(ref _cachedUnionEnum) ?? Interlocked.CompareExchange(ref _cachedUnionEnum, new UnionEnum(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionEnum;
         }
 
         internal HttpMessage CreateClientNameRequest(RequestContext context)

@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Bird>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Bird)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Bird)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +54,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             var format = options.Format == "W" ? ((IPersistableModel<Bird>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Bird)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Bird)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -74,10 +73,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
+                    case "eagle": return Eagle.DeserializeEagle(element, options);
+                    case "goose": return Goose.DeserializeGoose(element, options);
                     case "seagull": return SeaGull.DeserializeSeaGull(element, options);
                     case "sparrow": return Sparrow.DeserializeSparrow(element, options);
-                    case "goose": return Goose.DeserializeGoose(element, options);
-                    case "eagle": return Eagle.DeserializeEagle(element, options);
                 }
             }
             return UnknownBird.DeserializeUnknownBird(element, options);
@@ -92,7 +91,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Bird)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Bird)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -108,7 +107,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                         return DeserializeBird(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Bird)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Bird)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -126,7 +125,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Bird>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

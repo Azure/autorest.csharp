@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {

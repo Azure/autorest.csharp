@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using url_multi_collectionFormat_LowLevel;
 
 namespace url_multi_collectionFormat_LowLevel.Samples
 {

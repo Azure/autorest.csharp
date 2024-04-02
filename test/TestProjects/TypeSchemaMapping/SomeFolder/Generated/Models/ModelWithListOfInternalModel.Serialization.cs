@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -23,7 +22,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithListOfInternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -38,7 +37,7 @@ namespace TypeSchemaMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in InternalListProperty)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InternalModel>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +64,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithListOfInternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -83,7 +82,7 @@ namespace TypeSchemaMapping.Models
             string stringProperty = default;
             IReadOnlyList<InternalModel> internalListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -107,10 +106,10 @@ namespace TypeSchemaMapping.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new ModelWithListOfInternalModel(stringProperty, internalListProperty ?? new ChangeTrackingList<InternalModel>(), serializedAdditionalRawData);
         }
 
@@ -123,7 +122,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -139,7 +138,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeModelWithListOfInternalModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithListOfInternalModel)} does not support reading '{options.Format}' format.");
             }
         }
 

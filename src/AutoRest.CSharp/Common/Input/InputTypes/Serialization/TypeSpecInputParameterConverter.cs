@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Common.Input
             InputType? parameterType = null;
             string? location = null;
             InputConstant? defaultValue = null;
-            VirtualParameter? virtualParameter = null;
             InputParameter? groupBy = null;
             string? kind = null;
             bool isRequired = false;
@@ -55,7 +54,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputParameter.Type), options, ref parameterType)
                     || reader.TryReadString(nameof(InputParameter.Location), ref location)
                     || reader.TryReadWithConverter(nameof(InputParameter.DefaultValue), options, ref defaultValue)
-                    || reader.TryReadWithConverter(nameof(InputParameter.VirtualParameter), options, ref virtualParameter)
                     || reader.TryReadWithConverter(nameof(InputParameter.GroupedBy), options, ref groupBy)
                     || reader.TryReadString(nameof(InputParameter.Kind), ref kind)
                     || reader.TryReadBoolean(nameof(InputParameter.IsRequired), ref isRequired)
@@ -97,8 +95,8 @@ namespace AutoRest.CSharp.Common.Input
                 Type: FixInputParameterType(parameterType, requestLocation),
                 Location: requestLocation,
                 DefaultValue: defaultValue,
-                VirtualParameter: virtualParameter,
                 GroupedBy: groupBy,
+                FlattenedBodyProperty: null,
                 Kind: parameterKind,
                 IsRequired: isRequired,
                 IsApiVersion: isApiVersion,

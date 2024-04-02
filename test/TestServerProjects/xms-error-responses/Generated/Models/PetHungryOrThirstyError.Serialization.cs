@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -23,7 +22,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetHungryOrThirstyError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -72,7 +71,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetHungryOrThirstyError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -93,7 +92,7 @@ namespace xms_error_responses.Models
             string errorMessage = default;
             string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hungryOrThirsty"u8))
@@ -123,10 +122,10 @@ namespace xms_error_responses.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new PetHungryOrThirstyError(
                 actionResponse,
                 serializedAdditionalRawData,
@@ -145,7 +144,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -161,7 +160,7 @@ namespace xms_error_responses.Models
                         return DeserializePetHungryOrThirstyError(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support reading '{options.Format}' format.");
             }
         }
 

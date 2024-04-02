@@ -222,7 +222,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
-                _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
+                if (Configuration.IsBranded)
+                {
+                    _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
+                }
 
                 FormattableString perCallPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
                 FormattableString perRetryPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
@@ -237,17 +240,19 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
                         if (credentialField.Type.Equals(Configuration.ApiTypes.KeyCredentialType))
                         {
+                            var ctor = Configuration.IsBranded ? $"new {Configuration.ApiTypes.KeyCredentialPolicyType}" : $"{Configuration.ApiTypes.KeyCredentialPolicyType}.CreateHeaderApiKeyPolicy";
                             string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
-                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.KeyCredentialPolicyType}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{{ctor}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.BearerAuthenticationPolicyType}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
+                            var ctor = Configuration.IsBranded ? $"new {Configuration.ApiTypes.BearerAuthenticationPolicyType}" : $"{Configuration.ApiTypes.BearerAuthenticationPolicyType}.CreateBearerAuthorizationPolicy";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{{ctor}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
                 }
 
-                _writer.Line(Configuration.ApiTypes.GetHttpPipelineClassifierString(_client.Fields.PipelineField.Name, clientOptionsParameter.Name, perCallPolicies, perRetryPolicies));
+                _writer.Line(Configuration.ApiTypes.GetHttpPipelineClassifierString(_client.Fields.PipelineField.Name, clientOptionsParameter.Name, perCallPolicies, perRetryPolicies, $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()"));
 
                 foreach (var parameter in _client.Parameters)
                 {
@@ -312,15 +317,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType is null)
                 {
-                    _writer.WriteMethodBodyStatement(Return(response));
+                    Return(response).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
                 }
                 else if (TypeFactory.IsCollectionType(responseType))
                 {
@@ -329,16 +334,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
                     var value = new VariableReference(responseType, "value");
 
-                    _writer.WriteMethodBodyStatement(new[]
+                    new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
                         JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                    });
+                    }.AsStatement().Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
+                    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
                 }
             }
             _writer.Line();
@@ -450,26 +455,35 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
                 }
 
-                using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
+                if (Configuration.IsBranded)
                 {
-                    var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
-                    if (headAsBoolean)
+                    using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                     {
-                        writer.WriteMethodBodyStatement(new[]
-                        {
-                            Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
-                            Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
-                        });
+                        writeStatements(writer, headAsBoolean, restMethod, fields, async);
                     }
-                    else
-                    {
-                        writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
-                        writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
-                        writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
-                    }
+                }
+                else
+                {
+                    writeStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
             writer.Line();
+
+            static void writeStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
+            {
+                var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
+                if (headAsBoolean)
+                {
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
+                    Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async).Write(writer);
+                }
+                else
+                {
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
+                    writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
+                    Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)).Write(writer);
+                }
+            }
         }
 
         private void WriteSubClientFactoryMethod()
@@ -533,16 +547,46 @@ namespace AutoRest.CSharp.Generation.Writers
                 // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
                 using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {Configuration.ApiTypes.ResponseClassifierType}"))
                 {
-                    using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message)"))
+                    if (Configuration.IsBranded)
                     {
-                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
+                        using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message)"))
                         {
-                            foreach (var statusCode in statusCodes)
+                            using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
                             {
-                                writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
-                            }
+                                foreach (var statusCode in statusCodes)
+                                {
+                                    writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
+                                }
 
-                            writer.LineRaw("_ => true");
+                                writer.LineRaw("_ => true");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message, out bool isError)"))
+                        {
+                            writer.Line($"isError = false;");
+                            using (writer.Scope($"if (message.Response is null)"))
+                            {
+                                writer.Line($"return false;");
+                            }
+                            using (writer.Scope($"isError = message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
+                            {
+                                foreach (var statusCode in statusCodes)
+                                {
+                                    writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
+                                }
+
+                                writer.LineRaw("_ => true");
+                            }
+                            writer.Line($"return true;");
+                        }
+                        writer.Line();
+                        using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message, {typeof(Exception)} exception, out bool isRetriable)"))
+                        {
+                            writer.Line($"isRetriable = false;");
+                            writer.Line($"return false;");
                         }
                     }
                 }
@@ -550,14 +594,30 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line($"private static {Configuration.ApiTypes.ResponseClassifierType} _{responseClassifierTypeName.FirstCharToLowerCase()};");
-            writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
             if (hasStatusCodeRanges)
             {
+                writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
                 writer.Line($"{responseClassifierTypeName}Override();");
             }
             else
             {
-                writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}(stackalloc ushort[]{{");
+                if (Configuration.IsBranded)
+                {
+                    writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+                    writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}(");
+                    writeStatusCodes(writer, statusCodes);
+                }
+                else
+                {
+                    writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= ");
+                    writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}.Create(");
+                    writeStatusCodes(writer, statusCodes);
+                }
+            }
+
+            static void writeStatusCodes(CodeWriter writer, StatusCodes[] statusCodes)
+            {
+                writer.Append($"stackalloc ushort[]{{");
                 foreach (var statusCode in statusCodes)
                 {
                     if (statusCode.Code != null)

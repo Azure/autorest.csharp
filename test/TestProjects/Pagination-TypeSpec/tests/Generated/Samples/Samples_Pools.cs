@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Pagination;
 using Pagination.Models;
 
 namespace Pagination.Samples

@@ -29,7 +29,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    bool KeepClientDefaultValue)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -50,7 +51,8 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        KeepClientDefaultValue: false)
     { }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
@@ -74,34 +76,18 @@ internal record InputOperation(
             operation.LongRunning,
             operation.Paging,
             operation.GenerateProtocolMethod,
-            operation.GenerateConvenienceMethod);
+            operation.GenerateConvenienceMethod,
+            operation.KeepClientDefaultValue);
     }
 
-    private string? _cleanName;
-    public string CleanName
+    public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    private readonly Dictionary<string, InputOperationExample> _examples = new();
+    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
+
+    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
     {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
-
-            return _cleanName;
-        }
-    }
-
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
-
-    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
-
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
-    {
-        return new Dictionary<string, InputOperationExample>()
-        {
-            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
-            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
-        };
+        examples[ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false);
+        examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
+        return examples;
     }
 }

@@ -15,6 +15,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -28,7 +29,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaObjectType : SerializableObjectType
+    internal abstract class SchemaObjectType : SerializableObjectType
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+        protected SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = objectSchema.CSharpName();
@@ -75,6 +76,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
             IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
+
+            JsonConverter = _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -378,10 +381,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        private JsonConverterProvider? _jsonConverter;
-        public override JsonConverterProvider? JsonConverter
-            => _jsonConverter ??= _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
-
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -465,7 +464,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
                 _typeFactory.CreateType(implementation.Value, false)
-            )).ToArray();
+            )).OrderBy(i => i.Key).ToArray();
         }
 
         private HashSet<string?> GetParentPropertySerializedNames()
@@ -480,8 +479,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .ToHashSet();
         }
 
+        private HashSet<string> GetParentPropertyDeclarationNames()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
             foreach (var objectSchema in GetCombinedSchemas())
@@ -492,14 +501,34 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-
-                    yield return CreateProperty(property);
+                    var prop = CreateProperty(property);
+                    propertiesFromSpec.Add(prop.Declaration.Name);
+                    yield return prop;
                 }
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
             {
+                propertiesFromSpec.Add(additionalPropertiesProperty.Declaration.Name);
                 yield return additionalPropertiesProperty;
+            }
+
+            if (ModelTypeMapping != null)
+            {
+                foreach (var propertyWithSerialization in ModelTypeMapping.GetPropertiesWithSerialization())
+                {
+                    if (propertiesFromSpec.Contains(propertyWithSerialization.Name))
+                        continue;
+
+                    var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), MgmtContext.TypeFactory);
+                    var isReadOnly = BuilderHelpers.IsReadOnlyFromExisting(propertyWithSerialization);
+                    var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
+                    yield return new ObjectTypeProperty(
+                        new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
+                        string.Empty,
+                        isReadOnly,
+                        null);
+                }
             }
         }
 
@@ -743,7 +772,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml)
+                ? SerializationBuilder.BuildXmlObjectSerialization(ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name, this, _typeFactory)
+                : null;
         }
 
         protected override IEnumerable<Method> BuildMethods()

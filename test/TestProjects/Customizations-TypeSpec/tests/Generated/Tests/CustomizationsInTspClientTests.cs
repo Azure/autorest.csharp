@@ -13,7 +13,6 @@ using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using CustomizationsInTsp;
 using CustomizationsInTsp.Models;
 using NUnit.Framework;
 

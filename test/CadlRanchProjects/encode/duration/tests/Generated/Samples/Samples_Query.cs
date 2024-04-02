@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Azure;
 using Azure.Identity;
-using Encode.Duration;
 using NUnit.Framework;
 
 namespace Encode.Duration.Samples

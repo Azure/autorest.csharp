@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
 using System;
 using AutoRest.CSharp.Common.Output.Expressions;
@@ -32,9 +32,6 @@ namespace AutoRest.CSharp.Common.Input
         public override Type HttpMessageType => typeof(HttpMessage);
         public override string HttpMessageResponseName => nameof(HttpMessage.Response);
 
-        public override Type ClientDiagnosticsType => typeof(ClientDiagnostics);
-        public override string ClientDiagnosticsCreateScopeName => nameof(ClientDiagnostics.CreateScope);
-
         public override Type ClientOptionsType => typeof(ClientOptions);
 
         public override Type RequestContextType => typeof(RequestContext);
@@ -43,7 +40,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
         public override Type KeyCredentialPolicyType => typeof(AzureKeyCredentialPolicy);
-        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
+        public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, new {Configuration.ApiTypes.ResponseClassifierType}());";
 
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);
@@ -59,16 +56,12 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
-        public override Type RequestUriType => typeof(RawRequestUriBuilder);
+        public override CSharpType RequestUriType => typeof(RawRequestUriBuilder);
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
-        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
-
         public override Type IXmlSerializableType => typeof(IXmlSerializable);
-
-        public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
 
         public override Type RequestFailedExceptionType => typeof(RequestFailedException);
 
@@ -93,5 +86,7 @@ namespace AutoRest.CSharp.Common.Input
 
 
 """;
+
+        public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
     }
 }

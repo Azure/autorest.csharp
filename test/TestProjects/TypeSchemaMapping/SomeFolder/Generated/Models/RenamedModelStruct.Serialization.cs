@@ -24,7 +24,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -74,7 +74,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -94,7 +94,7 @@ namespace CustomNamespace
             CustomFruitEnum? fruit = default;
             CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -139,10 +139,10 @@ namespace CustomNamespace
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RenamedModelStruct(modelProperty, propertyToField, fruit, daysOfWeek, serializedAdditionalRawData);
         }
 
@@ -155,7 +155,7 @@ namespace CustomNamespace
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -171,7 +171,7 @@ namespace CustomNamespace
                         return DeserializeRenamedModelStruct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support reading '{options.Format}' format.");
             }
         }
 

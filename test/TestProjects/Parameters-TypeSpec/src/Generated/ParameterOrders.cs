@@ -245,6 +245,7 @@ namespace ParametersCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/parameterOrders", false);
             uri.AppendQuery("start", start, true);
             if (end != null)
@@ -263,6 +264,7 @@ namespace ParametersCadl
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/parameterOrders", false);
             uri.AppendQuery("end", end, true);
             if (start != null)
