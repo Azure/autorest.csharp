@@ -93,19 +93,23 @@ namespace _Type.Property.AdditionalProperties.Models
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                List<BinaryData> array = new List<BinaryData>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.Value.ValueKind == JsonValueKind.Array)
                 {
-                    if (item.ValueKind == JsonValueKind.Null)
+                    List<BinaryData> array = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(null);
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
                     }
-                    else
-                    {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
-                    }
+                    additionalPropertiesDictionary.Add(property.Name, array);
+                    continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, array);
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

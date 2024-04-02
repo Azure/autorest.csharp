@@ -6,7 +6,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -828,7 +827,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         // TODO -- make options parameter non-nullable again when we remove the `use-model-reader-writer` flag
         public static MethodBodyStatement TryDeserializeValue(JsonSerialization serialization, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
         {
-            if (serialization.Type is {IsFrameworkType: true, FrameworkType: { } frameworkType } && BuilderHelpers.IsVerifiableType(frameworkType))
+            if (serialization.Type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && BuilderHelpers.IsVerifiableType(frameworkType))
             {
                 if (frameworkType == typeof(string))
                 {
@@ -847,6 +846,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     value = variable;
                     return new IfStatement(new BoolExpression(element.Invoke($"TryGet{frameworkType.Name}", declarationExpression)));
                 }
+            }
+            else if (TypeFactory.IsList(serialization.Type))
+            {
+                return new IfStatement(Equal(element.ValueKind, JsonValueKindExpression.Array))
+                {
+                    DeserializeValue(serialization, element, options, out value)
+                };
+            }
+            else if (TypeFactory.IsDictionary(serialization.Type))
+            {
+                return new IfStatement(Equal(element.ValueKind, JsonValueKindExpression.Object))
+                {
+                    DeserializeValue(serialization, element, options, out value)
+                };
             }
             else
             {
