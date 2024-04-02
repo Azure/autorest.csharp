@@ -12,7 +12,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;

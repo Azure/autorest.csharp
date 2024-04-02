@@ -168,6 +168,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static CSharpType ReplaceUnverifiableType(CSharpType type)
         {
+            // when the type is System.Object
+            if (type.EqualsIgnoreNullable(typeof(object)))
+            {
+                return type;
+            }
+
             // when the type is a verifiable type
             if (BuilderHelpers.IsVerifiableType(type))
             {

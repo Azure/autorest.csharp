@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (AdditionalPropertiesProperty != null)
                 {
                     var valueType = TypeFactory.GetElementType(AdditionalPropertiesProperty.Declaration.Type);
-                    if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
+                    if (valueType.EqualsIgnoreNullable(typeof(BinaryData)) || valueType.EqualsIgnoreNullable(typeof(object)))
                     {
                         return null;
                     }

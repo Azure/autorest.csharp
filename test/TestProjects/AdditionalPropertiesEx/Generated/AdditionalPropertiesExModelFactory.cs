@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace AdditionalPropertiesEx.Models
@@ -17,9 +16,9 @@ namespace AdditionalPropertiesEx.Models
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.InputAdditionalPropertiesModel"/> instance for mocking. </returns>
-        public static InputAdditionalPropertiesModel InputAdditionalPropertiesModel(int id = default, IDictionary<string, BinaryData> additionalProperties = null)
+        public static InputAdditionalPropertiesModel InputAdditionalPropertiesModel(int id = default, IDictionary<string, object> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, BinaryData>();
+            additionalProperties ??= new Dictionary<string, object>();
 
             return new InputAdditionalPropertiesModel(id, additionalProperties);
         }
