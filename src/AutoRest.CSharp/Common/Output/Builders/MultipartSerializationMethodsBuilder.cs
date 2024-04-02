@@ -25,9 +25,11 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -36,12 +38,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
-            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
-            var responseParam = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
-            var response = new ResponseExpression(KnownParameters.Response);
-            //var contentType = new StringExpression(KnownParameters.Serializations.contentType);
-            //var contentType = response.ContentType;
-            var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method(
                 new MethodSignature(
@@ -77,6 +73,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new BinaryDataExpression(typeof(BinaryData)),
                 (ValueExpression)KnownParameters.Serializations.contentType, options).ToArray());
             /*
+            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
+            var responseParam = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
+            var response = new ResponseExpression(KnownParameters.Response);
+            var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
             var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
             yield return new Method(
                 new MethodSignature(
@@ -211,9 +211,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
-                //SerializationExression(multipartContent, )
-                //SerializationValue(multipartContent, additionalProperties.ValueSerialization, item.Value, item.Key)
-                multipartContent.Add(BuildValueSerizationExpression(additionalProperties.Type.Arguments[1], item.Value), item.Key)
+                //multipartContent.Add(BuildValueSerizationExpression(additionalProperties.Type.Arguments[1], item.Value), item.Key)
+                SerializationExression(multipartContent, additionalProperties.ValueSerialization, item.Value, new StringExpression(item.Key))
             };
             return statement;
         }
@@ -221,33 +220,58 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new[]
             {
-                SerializationExression(mulitpartContent, serialization.ValueSerialization,serialization.Value, serialization.SerializedName)
+                SerializationExression(mulitpartContent, serialization.ValueSerialization,serialization.Value, Literal(serialization.SerializedName))
             };
         }
-        private static MethodBodyStatement SerializationExression(MultipartFormDataExpression mulitpartContent, ObjectSerialization serialization, TypedValueExpression value, string serializedName) => serialization switch
+        private static MethodBodyStatement SerializationExression(MultipartFormDataExpression mulitpartContent, ObjectSerialization serialization, TypedValueExpression value, StringExpression name) => serialization switch
         {
-            MultipartArraySerialization arraySerialization => SerializeArray(mulitpartContent, arraySerialization, value, serializedName),
-            MultipartValueSerialization valueSerialization => SerializeValue(mulitpartContent, valueSerialization, value.NullableStructValue(), serializedName),
+            MultipartArraySerialization arraySerialization => SerializeArray(mulitpartContent, arraySerialization, value, name),
+            MultipartValueSerialization valueSerialization => SerializeValue(mulitpartContent, valueSerialization, value.NullableStructValue(), name),
             _ => throw new NotImplementedException()
         };
-        private static MethodBodyStatement SerializeArray(MultipartFormDataExpression mulitpartContent, MultipartArraySerialization serialization, ValueExpression value, string serializedName)
+        private static MethodBodyStatement SerializeArray(MultipartFormDataExpression mulitpartContent, MultipartArraySerialization serialization, ValueExpression value, StringExpression name)
         {
             return new[]
             {
                 //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
                 new ForeachStatement(TypeFactory.GetElementType(serialization.Type), "item", value, false, out var item)
                 {
-                    SerializationExression(mulitpartContent, serialization.ValueSerialization, item, serializedName)
+                    SerializationExression(mulitpartContent, serialization.ValueSerialization, item, name)
                 }
             };
         }
 
-        private static MethodBodyStatement SerializeValue(MultipartFormDataExpression mulitpartContent, MultipartValueSerialization serialization, ValueExpression valueExpression, string serializedName) => serialization switch
+        private static MethodBodyStatement SerializeValue(MultipartFormDataExpression mulitpartContent, MultipartValueSerialization valueSerialization, ValueExpression valueExpression, StringExpression name)
         {
-            _ when serialization.Type != null && serialization.Type.IsFrameworkType && serialization.Type.FrameworkType == typeof(BinaryData) => mulitpartContent.Add(BuildValueSerizationExpression(serialization.Type, valueExpression), serializedName, serializedName + ".wav", Null),
-            _ when serialization.Type != null  => mulitpartContent.Add(BuildValueSerizationExpression(serialization.Type, valueExpression), serializedName),
-            _ => mulitpartContent.Add(valueExpression, serializedName)//TODO: check when no serialization Type scenario
-        };
+            if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
+            {
+                return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Contact(Literal(".wav")));
+            }
+            if (valueSerialization.Type.IsFrameworkType)
+            {
+                return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
+            }
+            if (!valueSerialization.Type.IsFrameworkType)
+            {
+
+            }
+            switch (valueSerialization.Type.Implementation)
+            {
+                case SerializableObjectType serializableObjectType:
+                    return mulitpartContent.Add(BuildValueSerizationExpression(serializableObjectType.Type, valueExpression), name);
+                case ObjectType:
+                    return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
+                case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
+                    return mulitpartContent.Add(BuildValueSerizationExpression(typeof(int), valueExpression), name);
+                case EnumType { IsNumericValueType: true } enumType:
+                    return mulitpartContent.Add(BuildValueSerizationExpression(typeof(float), valueExpression), name);
+                case EnumType enumType:
+                    return mulitpartContent.Add(BuildValueSerizationExpression(typeof(string), valueExpression), name);
+                default:
+                    throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
+            }
+        }
+
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
         {
             _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { valueExpression }),
