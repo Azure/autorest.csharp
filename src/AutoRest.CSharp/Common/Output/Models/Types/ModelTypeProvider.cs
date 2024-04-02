@@ -587,7 +587,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             InputType? additionalPropertiesValueInputType = null;
             foreach (var model in EnumerateHierarchy())
             {
-                additionalPropertiesProperty = model.AdditionalPropertiesProperty;
+                additionalPropertiesProperty ??= model.AdditionalPropertiesProperty;
                 if (additionalPropertiesProperty != null && additionalPropertiesValueInputType == null)
                 {
                     if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
@@ -595,7 +595,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         additionalPropertiesValueInputType = inheritedDictionaryType.ValueType;
                     }
                 }
-                rawDataField = (model as SerializableObjectType)?.RawDataField;
+                rawDataField ??= (model as SerializableObjectType)?.RawDataField;
             }
 
             if (additionalPropertiesProperty == null && rawDataField == null)
