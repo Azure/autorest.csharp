@@ -147,7 +147,7 @@ model NotFriend {
 }
 
 @doc("this is a model with a projected name")
-@projectedName("client", "ProjectedModel")
+@clientName("ProjectedModel")
 model ModelWithProjectedName {
     @doc("name of the ModelWithProjectedName")
     name: string;
@@ -498,9 +498,9 @@ op ContainSelfModels(@body input: ContainSelf): void;
 
 
 @doc("enum with projected name")
-@projectedName("csharp", "CsProjectedEnum")
+@clientName("CsProjectedEnum")
 enum ProjectedEnum {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,
@@ -513,9 +513,9 @@ op enumParameter(@path p1: ProjectedEnum ): void;
 
 
 @doc("enum with projected name used in a model")
-@projectedName("csharp", "CsProjectedEnumInModel")
+@clientName("CsProjectedEnumInModel")
 enum ProjectedEnumInModel {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,

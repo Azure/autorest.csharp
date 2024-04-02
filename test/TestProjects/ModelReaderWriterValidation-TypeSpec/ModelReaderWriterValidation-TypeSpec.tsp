@@ -106,7 +106,7 @@ model TrackedResourceData {
 
     @doc("The resource type.")
     @visibility("read")
-    @projectedName("csharp", "resourceType")
+    @clientName("resourceType")
     type: string;
 
     @doc("The location property.")
@@ -236,7 +236,7 @@ model ProviderExtendedLocation {
     location?: string; // TODO -- find if there is a way for azure-location
 
     @doc("The extended location type.")
-    @projectedName("csharp", "providerExtendedLocationType")
+    @clientName("providerExtendedLocationType")
     type?: string;
 
     @doc("The extended locations for the azure location.")
