@@ -84,7 +84,11 @@ namespace _Type.Property.AdditionalProperties.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (property.Value.ValueKind == JsonValueKind.String || property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

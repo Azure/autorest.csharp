@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, ObjectType? baseModel, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static CSharpType ReplaceUnverifiableType(CSharpType type)
         {
             // when the type is a verifiable type
-            if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && _verifiableTypes.Contains(frameworkType))
+            if (BuilderHelpers.IsVerifiableType(type))
             {
                 return type;
             }
@@ -194,18 +194,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             // for the other cases, wrap them in a union
             return CSharpType.FromUnion(new[] { type }, type.IsNullable);
         }
-
-        private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>
-        {
-            // The following types are constructed by the `TryGetXXX` methods on `JsonElement`.
-            typeof(byte), typeof(byte[]), typeof(sbyte),
-            typeof(DateTime), typeof(DateTimeOffset),
-            typeof(decimal), typeof(double), typeof(short), typeof(int), typeof(long), typeof(float),
-            typeof(ushort), typeof(uint), typeof(ulong),
-            typeof(Guid),
-            // The following types have a firm JsonValueKind to verify
-            typeof(string), typeof(bool)
-        };
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
         {

@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security;
 using System.Text;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -358,5 +356,21 @@ namespace AutoRest.CSharp.Output.Builders
             }
             return modifiers;
         }
+
+        private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>
+        {
+            // The following types are constructed by the `TryGetXXX` methods on `JsonElement`.
+            typeof(byte), typeof(byte[]), typeof(sbyte),
+            typeof(DateTime), typeof(DateTimeOffset),
+            typeof(decimal), typeof(double), typeof(short), typeof(int), typeof(long), typeof(float),
+            typeof(ushort), typeof(uint), typeof(ulong),
+            typeof(Guid),
+            // The following types have a firm JsonValueKind to verify
+            typeof(string), typeof(bool)
+        };
+
+        public static bool IsVerifiableType(Type type) => _verifiableTypes.Contains(type);
+
+        public static bool IsVerifiableType(CSharpType type) => type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && IsVerifiableType(frameworkType);
     }
 }

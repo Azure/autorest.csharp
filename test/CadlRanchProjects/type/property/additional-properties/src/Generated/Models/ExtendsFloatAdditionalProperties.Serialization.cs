@@ -84,7 +84,11 @@ namespace _Type.Property.AdditionalProperties.Models
                     id = property.Value.GetSingle();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                if (property.Value.TryGetSingle(out float value))
+                {
+                    additionalPropertiesDictionary.Add(property.Name, value);
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

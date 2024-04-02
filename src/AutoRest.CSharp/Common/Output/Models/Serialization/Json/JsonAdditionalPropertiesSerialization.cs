@@ -10,6 +10,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonAdditionalPropertiesSerialization : JsonPropertySerialization
     {
+        /// <summary>
+        /// The implementation type of the additional properties, which should usually be `Dictionary{string, T}`.
+        /// This is not the type of the property, which is usually `IDictionary{string, T}`, or `IReadOnlyDictionary{string, T}`.
+        /// </summary>
         public CSharpType ImplementationType { get; }
 
         public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type, bool shouldExcludeInWireSerialization)
