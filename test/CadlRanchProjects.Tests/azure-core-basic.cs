@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
@@ -44,46 +45,57 @@ namespace CadlRanchProjects.Tests
         public Task Azure_Core_Basic_list() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new BasicClient(host, null).GetUsersAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
-            await foreach (Page<User> page in allPages.AsPages())
+            var results = new List<User>();
+            await foreach (var item in allPages)
             {
-                User firstUser = page.Values.First();
-                Assert.AreEqual(1, firstUser.Id);
-                Assert.AreEqual("Madge", firstUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag);
-                Assert.AreEqual(1, firstUser.Orders.First().Id);
-                Assert.AreEqual(1, firstUser.Orders.First().UserId);
-                Assert.AreEqual("a recorder", firstUser.Orders.First().Detail);
-
-                User secondUser = page.Values.Last();
-                Assert.AreEqual(2, secondUser.Id);
-                Assert.AreEqual("John", secondUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b5a", secondUser.Etag);
-                Assert.AreEqual(2, secondUser.Orders.First().Id);
-                Assert.AreEqual(2, secondUser.Orders.First().UserId);
-                Assert.AreEqual("a TV", secondUser.Orders.First().Detail);
+                results.Add(item);
             }
+            Assert.AreEqual(2, results.Count);
+
+            User firstUser = results.First();
+            Assert.AreEqual(1, firstUser.Id);
+            Assert.AreEqual("Madge", firstUser.Name);
+            Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag);
+            Assert.AreEqual(1, firstUser.Orders.First().Id);
+            Assert.AreEqual(1, firstUser.Orders.First().UserId);
+            Assert.AreEqual("a recorder", firstUser.Orders.First().Detail);
+
+            User secondUser = results.Last();
+            Assert.AreEqual(2, secondUser.Id);
+            Assert.AreEqual("John", secondUser.Name);
+            Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b5a", secondUser.Etag);
+            Assert.AreEqual(2, secondUser.Orders.First().Id);
+            Assert.AreEqual(2, secondUser.Orders.First().UserId);
+            Assert.AreEqual("a TV", secondUser.Orders.First().Detail);
         });
 
         [Test]
         public Task Azure_Core_Basic_listWithPage() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new BasicClient(host, null).GetWithPageAsync();
-            await foreach (Page<User> page in allPages.AsPages())
+            var results = new List<User>();
+            await foreach (var item in allPages)
             {
-                User firstUser = page.Values.First();
-                Assert.AreEqual("Madge", firstUser.Name);
+                results.Add(item);
             }
+            Assert.AreEqual(1, results.Count);
+            User firstUser = results.First();
+            Assert.AreEqual("Madge", firstUser.Name);
         });
 
         [Test]
         public Task Azure_Core_Basic_listWithCustomPageModel() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new BasicClient(host, null).GetWithCustomPageModelAsync();
-            await foreach (Page<User> page in allPages.AsPages())
+            var results = new List<User>();
+            await foreach (var item in allPages)
             {
-                User firstUser = page.Values.First();
-                Assert.AreEqual("Madge", firstUser.Name);
+                results.Add(item);
             }
+            Assert.AreEqual(1, results.Count);
+
+            User firstUser = results.First();
+            Assert.AreEqual("Madge", firstUser.Name);
         });
 
         [Test]
