@@ -4,9 +4,7 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using CustomizedTypeSpec.Models;
@@ -18,15 +16,12 @@ namespace CustomizedTypeSpec
     public partial class CustomizedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
-        private readonly KeyCredential _keyCredential;
-        private readonly MessagePipeline _pipeline;
+        private readonly ApiKeyCredential _keyCredential;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of CustomizedTypeSpecClient for mocking. </summary>
         protected CustomizedTypeSpecClient()
@@ -37,7 +32,7 @@ namespace CustomizedTypeSpec
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CustomizedTypeSpecClient(Uri endpoint, KeyCredential credential) : this(endpoint, credential, new CustomizedTypeSpecClientOptions())
+        public CustomizedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new CustomizedTypeSpecClientOptions())
         {
         }
 
@@ -46,15 +41,14 @@ namespace CustomizedTypeSpec
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CustomizedTypeSpecClient(Uri endpoint, KeyCredential credential, CustomizedTypeSpecClientOptions options)
+        public CustomizedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, CustomizedTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CustomizedTypeSpecClientOptions();
 
-            ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
-            _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
             _endpoint = endpoint;
         }
 
@@ -73,25 +67,15 @@ namespace CustomizedTypeSpec
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.SayHi");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -109,25 +93,15 @@ namespace CustomizedTypeSpec
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.SayHi");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Return hi again. </summary>
@@ -137,16 +111,16 @@ namespace CustomizedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = action.ToRequestBody();
-            Result result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
-            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = action.ToBinaryBody();
+            ClientResult result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi again. </summary>
@@ -156,16 +130,16 @@ namespace CustomizedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual ClientResult<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = action.ToRequestBody();
-            Result result = HelloAgain(p2, p1, content, context);
-            return Result.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = action.ToBinaryBody();
+            ClientResult result = HelloAgain(p2, p1, content, context);
+            return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -189,26 +163,16 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> HelloAgainAsync(string p2, string p1, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloAgain");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -232,26 +196,16 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result HelloAgain(string p2, string p1, RequestBody content, RequestOptions context = null)
+        public virtual ClientResult HelloAgain(string p2, string p1, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloAgain");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -270,26 +224,16 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> NoContentTypeAsync(string p2, string p1, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.NoContentType");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -308,44 +252,34 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result NoContentType(string p2, string p1, RequestBody content, RequestOptions context = null)
+        public virtual ClientResult NoContentType(string p2, string p1, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.NoContentType");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await HelloDemo2Async(context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await HelloDemo2Async(context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<Thing> HelloDemo2(CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = HelloDemo2(context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = HelloDemo2(context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -364,22 +298,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> HelloDemo2Async(RequestOptions context)
+        public virtual async Task<ClientResult> HelloDemo2Async(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloDemo2Request(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloDemo2Request(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -398,50 +322,40 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result HelloDemo2(RequestOptions context)
+        public virtual ClientResult HelloDemo2(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloDemo2Request(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloDemo2Request(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Result<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = await CreateLiteralAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = await CreateLiteralAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Result<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = CreateLiteral(content, context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = CreateLiteral(content, context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -462,24 +376,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateLiteralAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateLiteralAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.CreateLiteral");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateLiteralRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateLiteralRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -500,42 +404,32 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result CreateLiteral(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult CreateLiteral(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.CreateLiteral");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateLiteralRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateLiteralRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await HelloLiteralAsync(context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await HelloLiteralAsync(context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<Thing> HelloLiteral(CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = HelloLiteral(context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = HelloLiteral(context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -554,22 +448,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> HelloLiteralAsync(RequestOptions context)
+        public virtual async Task<ClientResult> HelloLiteralAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloLiteral");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloLiteralRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloLiteralRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -588,42 +472,32 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result HelloLiteral(RequestOptions context)
+        public virtual ClientResult HelloLiteral(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HelloLiteral");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHelloLiteralRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloLiteralRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await TopActionAsync(action, context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await TopActionAsync(action, context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = TopAction(action, context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = TopAction(action, context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -643,22 +517,12 @@ namespace CustomizedTypeSpec
         /// </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> TopActionAsync(DateTimeOffset action, RequestOptions context)
+        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateTopActionRequest(action, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateTopActionRequest(action, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -678,22 +542,12 @@ namespace CustomizedTypeSpec
         /// </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result TopAction(DateTimeOffset action, RequestOptions context)
+        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateTopActionRequest(action, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateTopActionRequest(action, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -707,22 +561,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> TopAction2Async(RequestOptions context)
+        public virtual async Task<ClientResult> TopAction2Async(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateTopAction2Request(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateTopAction2Request(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -736,22 +580,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result TopAction2(RequestOptions context)
+        public virtual ClientResult TopAction2(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateTopAction2Request(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateTopAction2Request(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -767,24 +601,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> PatchActionAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> PatchActionAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.PatchAction");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreatePatchActionRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreatePatchActionRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -800,52 +624,42 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result PatchAction(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult PatchAction(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.PatchAction");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreatePatchActionRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreatePatchActionRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        public virtual async Task<Result<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = thing.ToRequestBody();
-            Result result = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = thing.ToBinaryBody();
+            ClientResult result = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        public virtual Result<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = thing.ToRequestBody();
-            Result result = AnonymousBody(content, context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = thing.ToBinaryBody();
+            ClientResult result = AnonymousBody(content, context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -866,24 +680,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> AnonymousBodyAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> AnonymousBodyAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AnonymousBody");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -904,52 +708,42 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result AnonymousBody(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult AnonymousBody(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AnonymousBody");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual async Task<Result<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = superFriend.ToRequestBody();
-            Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = superFriend.ToBinaryBody();
+            ClientResult result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual Result<SuperFriend> FriendlyModel(SuperFriend superFriend, CancellationToken cancellationToken = default)
+        public virtual ClientResult<SuperFriend> FriendlyModel(SuperFriend superFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = superFriend.ToRequestBody();
-            Result result = FriendlyModel(content, context);
-            return Result.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = superFriend.ToBinaryBody();
+            ClientResult result = FriendlyModel(content, context);
+            return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -970,24 +764,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> FriendlyModelAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> FriendlyModelAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.FriendlyModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateFriendlyModelRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateFriendlyModelRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1008,24 +792,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result FriendlyModel(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult FriendlyModel(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.FriendlyModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateFriendlyModelRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateFriendlyModelRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -1039,22 +813,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> AddTimeHeaderAsync(RequestOptions context = null)
+        public virtual async Task<ClientResult> AddTimeHeaderAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AddTimeHeader");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateAddTimeHeaderRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateAddTimeHeaderRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1068,22 +832,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result AddTimeHeader(RequestOptions context = null)
+        public virtual ClientResult AddTimeHeader(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.AddTimeHeader");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateAddTimeHeaderRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateAddTimeHeaderRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> parameter has string format. </summary>
@@ -1091,13 +845,13 @@ namespace CustomizedTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return result;
         }
 
@@ -1106,13 +860,13 @@ namespace CustomizedTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Result StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = StringFormat(subscriptionId, content, context);
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = StringFormat(subscriptionId, content, context);
             return result;
         }
 
@@ -1135,24 +889,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StringFormat");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1174,52 +918,42 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result StringFormat(Guid subscriptionId, RequestBody content, RequestOptions context = null)
+        public virtual ClientResult StringFormat(Guid subscriptionId, BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StringFormat");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = projectedModel.ToRequestBody();
-            Result result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = projectedModel.ToBinaryBody();
+            ClientResult result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = projectedModel.ToRequestBody();
-            Result result = ProjectedNameModel(content, context);
-            return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = projectedModel.ToBinaryBody();
+            ClientResult result = ProjectedNameModel(content, context);
+            return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -1240,24 +974,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> ProjectedNameModelAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> ProjectedNameModelAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ProjectedNameModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1278,42 +1002,32 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result ProjectedNameModel(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult ProjectedNameModel(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ProjectedNameModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
-            return Result.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
+            return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = ReturnsAnonymousModel(context);
-            return Result.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            ClientResult result = ReturnsAnonymousModel(context);
+            return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -1332,22 +1046,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> ReturnsAnonymousModelAsync(RequestOptions context)
+        public virtual async Task<ClientResult> ReturnsAnonymousModelAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ReturnsAnonymousModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1366,22 +1070,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result ReturnsAnonymousModel(RequestOptions context)
+        public virtual ClientResult ReturnsAnonymousModel(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.ReturnsAnonymousModel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary>
@@ -1395,22 +1089,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> GetUnknownValueAsync(RequestOptions context)
+        public virtual async Task<ClientResult> GetUnknownValueAsync(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.GetUnknownValue");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetUnknownValueRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetUnknownValueRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1424,50 +1108,40 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result GetUnknownValue(RequestOptions context)
+        public virtual ClientResult GetUnknownValue(RequestOptions context)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.GetUnknownValue");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetUnknownValueRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetUnknownValueRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Result<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = await InternalProtocolAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = await InternalProtocolAsync(content, context).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Result<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = body.ToRequestBody();
-            Result result = InternalProtocol(content, context);
-            return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            using BinaryContent content = body.ToBinaryBody();
+            ClientResult result = InternalProtocol(content, context);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -1483,24 +1157,14 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual async Task<Result> InternalProtocolAsync(RequestBody content, RequestOptions context = null)
+        internal virtual async Task<ClientResult> InternalProtocolAsync(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.InternalProtocol");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateInternalProtocolRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateInternalProtocolRequest(content, context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1516,62 +1180,32 @@ namespace CustomizedTypeSpec
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual Result InternalProtocol(RequestBody content, RequestOptions context = null)
+        internal virtual ClientResult InternalProtocol(BinaryContent content, RequestOptions context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.InternalProtocol");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateInternalProtocolRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateInternalProtocolRequest(content, context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result> StillConvenientValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenientValue");
-            scope.Start();
-            try
-            {
-                RequestOptions context = FromCancellationToken(cancellationToken);
-                Result result = await StillConvenientAsync(context).ConfigureAwait(false);
-                return result;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            ClientResult result = await StillConvenientAsync(context).ConfigureAwait(false);
+            return result;
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result StillConvenientValue(CancellationToken cancellationToken = default)
+        public virtual ClientResult StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenientValue");
-            scope.Start();
-            try
-            {
-                RequestOptions context = FromCancellationToken(cancellationToken);
-                Result result = StillConvenient(context);
-                return result;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            ClientResult result = StillConvenient(context);
+            return result;
         }
 
         /// <summary>
@@ -1585,22 +1219,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual async Task<Result> StillConvenientAsync(RequestOptions context = null)
+        internal virtual async Task<ClientResult> StillConvenientAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenient");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateStillConvenientRequest(context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateStillConvenientRequest(context);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1614,22 +1238,12 @@ namespace CustomizedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual Result StillConvenient(RequestOptions context = null)
+        internal virtual ClientResult StillConvenient(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.StillConvenient");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateStillConvenientRequest(context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateStillConvenientRequest(context);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -1647,25 +1261,15 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, RequestOptions context = null)
+        public virtual async Task<ClientResult<bool>> HeadAsBooleanAsync(string id, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HeadAsBoolean");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, context).ConfigureAwait(false);
-                return Result.FromValue(result.Value, result.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
+            var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, context).ConfigureAwait(false);
+            return ClientResult.FromValue(result.Value, result.GetRawResponse());
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -1683,33 +1287,28 @@ namespace CustomizedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result<bool> HeadAsBoolean(string id, RequestOptions context = null)
+        public virtual ClientResult<bool> HeadAsBoolean(string id, RequestOptions context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using var scope = ClientDiagnostics.CreateSpan("CustomizedTypeSpecClient.HeadAsBoolean");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = _pipeline.ProcessHeadAsBoolMessage(message, context);
-                return Result.FromValue(result.Value, result.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
+            var result = _pipeline.ProcessHeadAsBoolMessage(message, context);
+            return ClientResult.FromValue(result.Value, result.GetRawResponse());
         }
 
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
@@ -1718,271 +1317,361 @@ namespace CustomizedTypeSpec
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("head-parameter", headParameter);
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("head-parameter", headParameter);
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
-        internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("p1", p1);
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("content-type", "text/plain");
+            request.Headers.Set("p1", p1);
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("content-type", "text/plain");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("p1", p1);
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("p1", p1);
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateHelloDemo2Request(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
-        internal PipelineMessage CreateCreateLiteralRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateHelloLiteralRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
             uri.AppendPath(123.ToString(), true);
             uri.AppendQuery("p3", "true", true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("p1", "test");
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("p1", "test");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action.ToString("O"), true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateTopAction2Request(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
-        internal PipelineMessage CreatePatchActionRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("PATCH");
-            var uri = new RequestUri();
+            request.Method = "PATCH";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateAnonymousBodyRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateFriendlyModelRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
             return message;
         }
 
-        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
             uri.AppendPath(subscriptionId.ToString(), true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
-        internal PipelineMessage CreateProjectedNameModelRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
-        internal PipelineMessage CreateInternalProtocolRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateStillConvenientRequest(RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
         internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200To300400To500);
+            var message = _pipeline.CreateMessage();
+            if (context != null)
+            {
+                message.Apply(context);
+            }
+            message.ResponseClassifier = PipelineMessageClassifier200To300400To500;
             var request = message.Request;
-            request.SetMethod("HEAD");
-            var uri = new RequestUri();
+            request.Method = "HEAD";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
             return message;
         }
 
@@ -1997,24 +1686,36 @@ namespace CustomizedTypeSpec
             return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200;
-        private static ResponseErrorClassifier ResponseErrorClassifier200 => _responseErrorClassifier200 ??= new StatusResponseClassifier(stackalloc ushort[] { 200 });
-        private static ResponseErrorClassifier _responseErrorClassifier204;
-        private static ResponseErrorClassifier ResponseErrorClassifier204 => _responseErrorClassifier204 ??= new StatusResponseClassifier(stackalloc ushort[] { 204 });
-        private sealed class ResponseErrorClassifier200To300400To500Override : ResponseErrorClassifier
+        private static PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier204;
+        private static PipelineMessageClassifier PipelineMessageClassifier204 => _pipelineMessageClassifier204 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 204 });
+        private sealed class PipelineMessageClassifier200To300400To500Override : PipelineMessageClassifier
         {
-            public override bool IsErrorResponse(PipelineMessage message)
+            public override bool TryClassify(PipelineMessage message, out bool isError)
             {
-                return message.Response.Status switch
+                isError = false;
+                if (message.Response is null)
+                {
+                    return false;
+                }
+                isError = message.Response.Status switch
                 {
                     >= 200 and < 300 => false,
                     >= 400 and < 500 => false,
                     _ => true
                 };
+                return true;
+            }
+
+            public override bool TryClassify(PipelineMessage message, Exception exception, out bool isRetriable)
+            {
+                isRetriable = false;
+                return false;
             }
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200To300400To500;
-        private static ResponseErrorClassifier ResponseErrorClassifier200To300400To500 => _responseErrorClassifier200To300400To500 ??= new ResponseErrorClassifier200To300400To500Override();
+        private static PipelineMessageClassifier _pipelineMessageClassifier200To300400To500;
+        private static PipelineMessageClassifier PipelineMessageClassifier200To300400To500 => _pipelineMessageClassifier200To300400To500 ??= new PipelineMessageClassifier200To300400To500Override();
     }
 }

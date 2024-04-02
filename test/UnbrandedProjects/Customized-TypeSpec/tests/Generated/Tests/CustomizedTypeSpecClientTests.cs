@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using CustomizedTypeSpec;
 using NUnit.Framework;
 
 namespace CustomizedTypeSpec.Tests
@@ -12,10 +11,11 @@ namespace CustomizedTypeSpec.Tests
     public partial class CustomizedTypeSpecClientTests
     {
         [Test]
+        [Ignore("Compilation test only")]
         public void SmokeTest()
         {
             Uri endpoint = new Uri("https://my-service.com");
-            KeyCredential credential = new KeyCredential(Environment.GetEnvironmentVariable("CustomizedTypeSpecClient_KEY"));
+            ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("CustomizedTypeSpecClient_KEY"));
             CustomizedTypeSpecClient client = new CustomizedTypeSpecClient(endpoint, credential);
             Assert.IsNotNull(client);
         }

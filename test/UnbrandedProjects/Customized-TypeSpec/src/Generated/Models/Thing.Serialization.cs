@@ -3,24 +3,21 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using CustomizedTypeSpec;
 
 namespace CustomizedTypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonWriteable, IJsonModel<Thing>
+    public partial class Thing : IJsonModel<Thing>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -119,7 +116,7 @@ namespace CustomizedTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Thing)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -148,7 +145,7 @@ namespace CustomizedTypeSpec.Models
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -254,10 +251,10 @@ namespace CustomizedTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Thing(
                 name,
                 requiredUnion,
@@ -284,7 +281,7 @@ namespace CustomizedTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -300,7 +297,7 @@ namespace CustomizedTypeSpec.Models
                         return DeserializeThing(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Thing)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -315,11 +312,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }
