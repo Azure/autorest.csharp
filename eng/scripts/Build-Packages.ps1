@@ -10,7 +10,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
 $root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
+. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 $artifactsPath = "$root/artifacts"
