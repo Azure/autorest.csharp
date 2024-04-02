@@ -18,7 +18,6 @@ union FillNAMethod {
   "Fixed",
 }
 
-@fixed
 @doc("The batch detection status.")
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
@@ -36,14 +35,12 @@ union DataSchema {
   "MultiTable",
 }
 
-@fixed
 @doc("The alignment mode.")
 enum AlignMode {
   "Inner",
   "Outer",
 }
 
-@fixed
 @doc("the model status.")
 enum ModelStatus {
   Created: "CREATED",
