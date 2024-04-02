@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Reflection.PortableExecutable;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
@@ -24,13 +23,23 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
                 var fromResponse = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
+                var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
+                var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
                 return new Method
                 (
                     new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { fromResponse }),
                     new MethodBodyStatement[]
                     {
-                        Snippets.UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
-                        Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                        Declare(typeof(string), "contentType", contentyTypeDeclare, out var contentTypeFromResponse),
+                        new IfElseStatement(new IfStatement(And(NotEqual(contentTypeFromResponse, Null),new StringExpression(contentTypeFromResponse).StartsWith(Literal("Multipart/form-data"))))
+                        {
+                            Snippets.Return(SerializableObjectTypeExpression.DeserializeFromMultipart(type, new ResponseExpression(fromResponse).Content, contentTypeFromResponse))
+                        },
+                        new MethodBodyStatement[]
+                        {
+                            Snippets.UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
+                            Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                        })
                     }
                 );
             }

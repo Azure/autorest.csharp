@@ -63,16 +63,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[] {KnownParameters.Serializations.Options }),
                 BuildMultipartSerializationMethodBody(multipart).ToArray());
+
             yield return new Method(
                 new MethodSignature(
                     "DeserializeMultipart",
                     null,
                     null,
-                    MethodSignatureModifiers.Private,
+                    MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static,
                     multipart.Type,
                     null,
-                    new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartDeSerializationMethodBody(multipart!, response.Content, contentType, options).ToArray());
+                    new Parameter[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.contentType }),
+                BuildMultipartDeSerializationMethodBody(multipart!,
+                new BinaryDataExpression(typeof(BinaryData)),
+                (ValueExpression)KnownParameters.Serializations.contentType, options).ToArray());
+            /*
             var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
             yield return new Method(
                 new MethodSignature(
@@ -90,6 +94,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     BuildMultipartDeSerializationMethodBody(multipart, response.Content, contentTypeFromResponae, options).ToArray(),
                 }
                 );
+            */
         }
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
@@ -117,6 +122,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static SwitchCase BuildMultipartReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
         {
+            var contentType = data.Property("MediaType");
             return new SwitchCase(
                 Serializations.MultipartFormat,
                 Return(
@@ -131,11 +137,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             null,
                             new[]
                             {
-                                KnownParameters.Serializations.Options
+                                KnownParameters.Serializations.Data,
+                                KnownParameters.Serializations.contentType
                             }),
                         new ValueExpression[]
                         {
-                            options
+                            data,
+                            contentType
                         })));
         }
         public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody(MultipartObjectSerialization? multipart)

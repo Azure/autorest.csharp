@@ -24,13 +24,23 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
                 var result = new Parameter("response", $"The result to deserialize the model from.", typeof(PipelineResponse), null, ValidationType.None, null);
+                var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
+                var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
                 return new Method
                 (
                     new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { result }),
                     new MethodBodyStatement[]
                     {
-                        Snippets.UsingVar("document", JsonDocumentExpression.Parse(new PipelineResponseExpression(result).Content), out var document),
-                        Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                        Declare(typeof(string), "contentType", contentyTypeDeclare, out var contentTypeFromResponse),
+                        new IfElseStatement(new IfStatement(And(NotEqual(contentTypeFromResponse, Null),new StringExpression(contentTypeFromResponse).StartsWith(Literal("Multipart/form-data"))))
+                        {
+                            Snippets.Return(SerializableObjectTypeExpression.DeserializeFromMultipart(type, new ResponseExpression(result).Content, contentTypeFromResponse))
+                        },
+                        new MethodBodyStatement[]
+                        {
+                            Snippets.UsingVar("document", JsonDocumentExpression.Parse(new PipelineResponseExpression(result).Content), out var document),
+                            Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                        })
                     }
                 );
             }
