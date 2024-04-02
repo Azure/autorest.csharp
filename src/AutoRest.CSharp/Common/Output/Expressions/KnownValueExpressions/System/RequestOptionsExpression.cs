@@ -11,5 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
     {
         public static RequestOptionsExpression FromCancellationToken()
             => new(new InvokeStaticMethodExpression(null, "FromCancellationToken", new ValueExpression[] { KnownParameters.CancellationTokenParameter }));
+
+        public ValueExpression ErrorOptions => Property(nameof(RequestOptions.ErrorOptions));
     }
 }
