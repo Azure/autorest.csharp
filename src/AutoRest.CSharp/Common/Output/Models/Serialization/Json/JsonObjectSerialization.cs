@@ -22,10 +22,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             JsonConverter = jsonConverter;
         }
 
-        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter) : this(model, constructorParameters, properties, additionalProperties, null, discriminator, jsonConverter)
-        {
-        }
-
         public CSharpType Type { get; }
         public IReadOnlyList<Parameter> ConstructorParameters { get; }
         public IReadOnlyList<JsonPropertySerialization> Properties { get; }

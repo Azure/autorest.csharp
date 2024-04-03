@@ -582,6 +582,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private (JsonAdditionalPropertiesSerialization? AdditionalPropertiesSerialization, JsonAdditionalPropertiesSerialization? RawDataFieldSerialization) CreateAdditionalPropertiesSerialization()
         {
+            // collect additional properties and raw data field
             ObjectTypeProperty? additionalPropertiesProperty = null;
             ObjectTypeProperty? rawDataField = null;
             InputType? additionalPropertiesValueInputType = null;
@@ -604,40 +605,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // build serialization for additional properties property (if any)
-            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType);
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false);
             // build serialization for raw data field (if any)
-            var rawDataFieldSerialization = BuildSerializationForRawDataField(rawDataField);
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
             {
-                if (additionalPropertiesProperty is null || additionalPropertiesValueType is null)
+                if (additionalPropertiesProperty is null)
                     return null;
 
                 var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
-                var valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false, SerializationFormat.Default);
+                JsonSerialization valueSerialization;
+                if (additionalPropertiesValueType is not null)
+                {
+                    valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false, SerializationFormat.Default);
+                }
+                else
+                {
+                    valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
+                }
 
                 return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
                     valueSerialization,
                     new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                    false);
-            }
-
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForRawDataField(ObjectTypeProperty? rawDataField)
-            {
-                if (rawDataField is null)
-                    return null;
-
-                var rawDataFieldValueType = rawDataField.Declaration.Type.Arguments[1];
-                var valueSerialization = new JsonValueSerialization(rawDataFieldValueType, SerializationFormat.Default, true);
-
-                return new JsonAdditionalPropertiesSerialization(
-                    rawDataField,
-                    valueSerialization,
-                    new CSharpType(typeof(Dictionary<,>), rawDataField.Declaration.Type.Arguments),
-                    true);
+                    shouldExcludeInWireSerialization);
             }
         }
 
