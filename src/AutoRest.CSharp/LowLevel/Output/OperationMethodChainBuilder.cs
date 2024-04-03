@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Output.Models
         // If all the corresponding parameters and return types of convenience method and protocol method have the same type, it does not make sense to generate the convenience method.
         private bool IsConvenienceMethodMeaningful()
         {
-            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+            return _orderedParameters.Where(parameter => parameter.Protocol != KnownParameters.RequestContext && parameter.Protocol != KnownParameters.RequestContextRequired).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !_returnType.Convenience.Equals(_returnType.Protocol);
         }
 

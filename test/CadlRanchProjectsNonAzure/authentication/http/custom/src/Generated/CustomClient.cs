@@ -50,20 +50,7 @@ namespace Scm.Authentication.Http.Custom
             _endpoint = endpoint;
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
-        public virtual async Task<ClientResult> ValidAsync()
-        {
-            ClientResult result = await ValidAsync().ConfigureAwait(false);
-            return result;
-        }
-
-        /// <summary> Check whether client is authenticated. </summary>
-        public virtual ClientResult Valid()
-        {
-            ClientResult result = Valid();
-            return result;
-        }
-
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -72,22 +59,18 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/samples/ServiceMethods.md#protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ValidAsync()"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ValidAsync(RequestOptions options)
+        public virtual async Task<ClientResult> ValidAsync(RequestOptions options = null)
         {
             using PipelineMessage message = CreateValidRequest(options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -96,36 +79,18 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/samples/ServiceMethods.md#protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="Valid()"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Valid(RequestOptions options)
+        public virtual ClientResult Valid(RequestOptions options = null)
         {
             using PipelineMessage message = CreateValidRequest(options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
-        public virtual async Task<ClientResult> InvalidAsync()
-        {
-            ClientResult result = await InvalidAsync().ConfigureAwait(false);
-            return result;
-        }
-
-        /// <summary> Check whether client is authenticated. </summary>
-        public virtual ClientResult Invalid()
-        {
-            ClientResult result = Invalid();
-            return result;
-        }
-
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
@@ -134,22 +99,18 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/samples/ServiceMethods.md#protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InvalidAsync()"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> InvalidAsync(RequestOptions options)
+        public virtual async Task<ClientResult> InvalidAsync(RequestOptions options = null)
         {
             using PipelineMessage message = CreateInvalidRequest(options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
@@ -158,17 +119,12 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/samples/ServiceMethods.md#protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="Invalid()"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Invalid(RequestOptions options)
+        public virtual ClientResult Invalid(RequestOptions options = null)
         {
             using PipelineMessage message = CreateInvalidRequest(options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
