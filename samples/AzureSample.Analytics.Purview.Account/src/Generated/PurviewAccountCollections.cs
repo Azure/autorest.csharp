@@ -14,8 +14,8 @@ using AzureSample.Analytics.Purview.Account;
 
 namespace Azure.Analytics.Purview.Account
 {
-    // Data plane generated client.
-    /// <summary> The PurviewAccountCollections service client. </summary>
+    // Data plane generated sub-client.
+    /// <summary> The PurviewAccountCollections sub-client. </summary>
     public partial class PurviewAccountCollections
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
@@ -37,35 +37,20 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="collectionName"> The <see cref="string"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="collectionName"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="collectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public PurviewAccountCollections(Uri endpoint, string collectionName, TokenCredential credential) : this(endpoint, collectionName, credential, new PurviewAccountClientOptions())
+        /// <param name="apiVersion"> Api Version. </param>
+        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion)
         {
-        }
-
-        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
-        /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
-        /// <param name="collectionName"> The <see cref="string"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="collectionName"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="collectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public PurviewAccountCollections(Uri endpoint, string collectionName, TokenCredential credential, PurviewAccountClientOptions options)
-        {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(collectionName, nameof(collectionName));
-            Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new PurviewAccountClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _tokenCredential = tokenCredential;
             _endpoint = endpoint;
             _collectionName = collectionName;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <summary>

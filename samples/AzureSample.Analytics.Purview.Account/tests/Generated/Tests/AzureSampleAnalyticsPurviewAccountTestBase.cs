@@ -20,22 +20,8 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         protected PurviewAccountsClient CreatePurviewAccountsClient(Uri endpoint, TokenCredential credential)
         {
-            PurviewAccountClientOptions options = InstrumentClientOptions(new PurviewAccountClientOptions());
+            PurviewAccountsClientOptions options = InstrumentClientOptions(new PurviewAccountsClientOptions());
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential, options);
-            return InstrumentClient(client);
-        }
-
-        protected PurviewAccountCollections CreatePurviewAccountCollections(Uri endpoint, string collectionName, TokenCredential credential)
-        {
-            PurviewAccountClientOptions options = InstrumentClientOptions(new PurviewAccountClientOptions());
-            PurviewAccountCollections client = new PurviewAccountCollections(endpoint, collectionName, credential, options);
-            return InstrumentClient(client);
-        }
-
-        protected PurviewAccountResourceSetRules CreatePurviewAccountResourceSetRules(Uri endpoint, TokenCredential credential)
-        {
-            PurviewAccountClientOptions options = InstrumentClientOptions(new PurviewAccountClientOptions());
-            PurviewAccountResourceSetRules client = new PurviewAccountResourceSetRules(endpoint, credential, options);
             return InstrumentClient(client);
         }
     }

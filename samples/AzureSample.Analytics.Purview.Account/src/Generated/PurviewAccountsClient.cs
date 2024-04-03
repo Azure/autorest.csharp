@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure.Core;
@@ -39,7 +40,7 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new PurviewAccountClientOptions())
+        public PurviewAccountsClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new PurviewAccountsClientOptions())
         {
         }
 
@@ -48,11 +49,11 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options)
+        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountsClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new PurviewAccountClientOptions();
+            options ??= new PurviewAccountsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
@@ -359,6 +360,25 @@ namespace Azure.Analytics.Purview.Account
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetResourceSetRulesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
+        }
+
+        private PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
+
+        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
+        /// <param name="collectionName"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="collectionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="collectionName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
+        {
+            Argument.AssertNotNullOrEmpty(collectionName, nameof(collectionName));
+
+            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
+        public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
+        {
+            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest(RequestContext context)
