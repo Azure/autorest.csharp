@@ -99,7 +99,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
+                    // since the non-azure libraries do not have cancellationToken parameters on their convenience methods, we do not need to add the method to convert the cancellationToken to RequestContext
+                    if (Configuration.IsBranded && _client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
