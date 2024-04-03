@@ -500,12 +500,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
-        {
-            new EnumExpression(enumType, new ValueExpression()).ToSerial().Write(writer);
-            return writer;
-        }
-
         public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)
         {
             if (enumType.IsExtensible)

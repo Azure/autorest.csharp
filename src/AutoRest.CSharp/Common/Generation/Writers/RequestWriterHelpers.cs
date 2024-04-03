@@ -8,8 +8,10 @@ using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -30,6 +32,18 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
+            // TODO -- change the implementation of this method to build a `Method` instance here and then call `method.Write(writer)` for future convenience of refactoring.
+            var methodSignature = new MethodSignature(
+                Name: CreateRequestMethodName(clientMethod.Name),
+                Modifiers: MethodSignatureModifiers.Internal,
+                Parameters: clientMethod.Parameters,
+                ReturnType: Configuration.ApiTypes.HttpMessageType,
+                Summary: null, Description: null, ReturnDescription: null);
+
+            var method = new Method(methodSignature, BuildCreateRequestMethodBody(clientMethod, fields, responseClassifierType, writeSDKUserAgent, clientParameters).ToArray());
+
+            writer.WriteMethod(method);
+#if false
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
@@ -236,16 +250,243 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"return {message};");
             }
             writer.Line();
+#endif
+        }
+
+        private static IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+            => Configuration.IsBranded
+            ? BuildAzureCreateRequestMethodBody(clientMethod, fields, responseClassifierType, writeSDKUserAgent, clientParameters)
+            : BuildNonAzureCreateRequestMethodBody(clientMethod, fields, responseClassifierType, writeSDKUserAgent, clientParameters);
+
+        private static IEnumerable<MethodBodyStatement> BuildAzureCreateRequestMethodBody(RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        {
+            var contextParameter = clientMethod.Parameters.FirstOrDefault(p => p == KnownParameters.RequestContext || p == KnownParameters.RequestContextRequired);
+            var pipeline = new HttpPipelineExpression(fields.PipelineField);
+            ValueExpression createMessage;
+            if (contextParameter != null)
+            {
+                var context = new RequestContextExpression(contextParameter);
+                if (responseClassifierType != null)
+                {
+                    createMessage = pipeline.CreateMessage(context, new FormattableStringToExpression($"{responseClassifierType:I}"));
+                }
+                else
+                {
+                    createMessage = pipeline.CreateMessage(context);
+                }
+            }
+            else
+            {
+                createMessage = pipeline.CreateMessage();
+            }
+
+            var messageVar = new VariableReference(Configuration.ApiTypes.HttpMessageType, "message");
+            yield return Var(messageVar, createMessage);
+            var message = new HttpMessageExpression(messageVar);
+            var requestVar = new VariableReference(typeof(Azure.Core.Request), "request");
+            yield return Var(requestVar, message.Request);
+            var request = new RequestExpression(requestVar);
+
+            var method = clientMethod.Request.HttpMethod;
+            if (!clientMethod.BufferResponse)
+            {
+                yield return Assign(message.BufferResponse, False);
+            }
+            yield return Assign(request.Method, ConvertRequestMethod(clientMethod.Request.HttpMethod));
+            var uriVar = new VariableReference(Configuration.ApiTypes.RequestUriType, "uri");
+            yield return Var(uriVar, New.Instance(Configuration.ApiTypes.RequestUriType));
+            var uri = new RawRequestUriBuilderExpression(uriVar);
+
+            foreach (var segment in clientMethod.Request.PathSegments)
+            {
+                var value = GetFieldReference(fields, segment.Value);
+                if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
+                {
+                    yield return uri.Reset(ConvertConstantOrParameter(value, enumAsString: !segment.IsRaw));
+                }
+                else if (!value.IsConstant && value.Reference.Name == "nextLink")
+                {
+                    yield return BuildAppendPathSegment(uri, segment, value, true);
+                }
+                else
+                {
+                    yield return BuildAppendPathSegment(uri, segment, value, false);
+                }
+            }
+
+            // TODO -- fix this later
+            //foreach (var queryParameter in clientMethod.Request.Query)
+            //{
+            //    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
+            //}
+
+            yield return Assign(request.Uri, uri);
+
+            yield return BuildAppendHeaders(clientMethod, request, content: false, fields);
+
+            static ValueExpression ConvertRequestMethod(RequestMethod method)
+            {
+                var methodStr = method.Method.ToLowerInvariant().FirstCharToUpperCase();
+                return new MemberExpression(typeof(RequestMethod), methodStr);
+            }
+
+#if false
+            // TODO -- to be migrated
+            WriteHeaders(writer, clientMethod, request, content: false, fields);
+
+            switch (clientMethod.Request.Body)
+            {
+                case RequestContentRequestBody body:
+                    WriteHeaders(writer, clientMethod, request, content: true, fields);
+                    writer.Line(Configuration.ApiTypes.GetSetContentString(request.ActualName, body.Parameter.Name));
+                    break;
+                case SchemaRequestBody body:
+                    using (WriteValueNullCheck(writer, body.Value))
+                    {
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
+                        WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false));
+                    }
+
+                    break;
+                case BinaryRequestBody binaryBody:
+                    using (WriteValueNullCheck(writer, binaryBody.Value))
+                    {
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
+                        writer.Append($"{request}.Content = {Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
+                        WriteConstantOrParameter(writer, binaryBody.Value);
+                        writer.Line($");");
+                    }
+                    break;
+                case TextRequestBody textBody:
+                    using (WriteValueNullCheck(writer, textBody.Value))
+                    {
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
+                        writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
+                        WriteConstantOrParameter(writer, textBody.Value);
+                        writer.Line($");");
+                    }
+                    break;
+                case MultipartRequestBody multipartRequestBody:
+                    WriteHeaders(writer, clientMethod, request, content: true, fields);
+
+                    var multipartContent = new CodeWriterDeclaration("content");
+                    writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
+
+                    foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
+                    {
+                        switch (bodyParameter.Content)
+                        {
+                            case BinaryRequestBody binaryBody:
+                                using (WriteValueNullCheck(writer, binaryBody.Value))
+                                {
+                                    writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
+                                    WriteConstantOrParameter(writer, binaryBody.Value);
+                                    writer.Line($"), {bodyParameter.Name:L}, null);");
+                                }
+                                break;
+                            case TextRequestBody textBody:
+                                using (WriteValueNullCheck(writer, textBody.Value))
+                                {
+                                    writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
+                                    WriteConstantOrParameter(writer, textBody.Value);
+                                    writer.Line($"), {bodyParameter.Name:L}, null);");
+                                }
+                                break;
+                            case BinaryCollectionRequestBody collectionBody:
+                                var collectionItemVariable = new CodeWriterDeclaration("value");
+                                using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
+                                {
+                                    writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}({collectionItemVariable}), {bodyParameter.Name:L}, null);");
+                                }
+                                break;
+                            default:
+                                throw new NotImplementedException(bodyParameter.Content?.GetType().FullName);
+                        }
+                    }
+                    writer.Line($"{multipartContent}.ApplyToRequest({request});");
+                    break;
+                case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+                    WriteHeaders(writer, clientMethod, request, content: true, fields);
+
+                    var initializers = new List<PropertyInitializer>();
+                    foreach (var initializer in flattenedSchemaRequestBody.Initializers)
+                    {
+                        initializers.Add(new PropertyInitializer(initializer.Property.Declaration.Name, initializer.Property.Declaration.Type, initializer.Property.IsReadOnly, initializer.Value.GetReferenceOrConstantFormattable(), initializer.Value.Type));
+                    }
+                    var modelVariable = new CodeWriterDeclaration("model");
+                    writer.WriteInitialization(
+                            v => writer.Line($"var {modelVariable:D} = {v};"),
+                            flattenedSchemaRequestBody.ObjectType,
+                            flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
+                            initializers);
+
+                    WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}");
+                    break;
+                case UrlEncodedBody urlEncodedRequestBody:
+                    var urlContent = new CodeWriterDeclaration("content");
+
+                    WriteHeaders(writer, clientMethod, request, content: true, fields);
+                    writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
+
+                    foreach (var (name, value) in urlEncodedRequestBody.Values)
+                    {
+                        using (WriteValueNullCheck(writer, value))
+                        {
+                            writer.Append($"{urlContent}.Add({name:L},");
+                            WriteConstantOrParameterAsString(writer, value);
+                            writer.Line($");");
+                        }
+                    }
+                    writer.Line($"{request}.Content = {urlContent};");
+                    break;
+                case null:
+                    break;
+                default:
+                    throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
+            }
+
+            if (writeSDKUserAgent)
+            {
+                writer.Line($"_userAgent.Apply({message});");
+            }
+
+            // we need to apply the RequestOptions in non-branded case as a last step
+            if (!Configuration.IsBranded && clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+            {
+                using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
+                {
+                    writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                }
+            }
+
+            writer.Line($"return {message};");
+#endif
+        }
+
+        private static IEnumerable<MethodBodyStatement> BuildNonAzureCreateRequestMethodBody(RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        {
+            yield break;
+        }
+
+        private static TypedValueExpression GetFieldExpression(ClientFields fields, ReferenceOrConstant value)
+        {
+            if (value.IsConstant)
+                return new ConstantExpression(value.Constant);
+
+            var field = fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type);
+            if (field != null)
+                return new TypedValueExpression(field.Type, field);
+
+            return new TypedValueExpression(value.Reference.Type, new FormattableStringToExpression($"{value.Reference.Name:I}"));
         }
 
         private static ReferenceOrConstant GetFieldReference(ClientFields fields, ReferenceOrConstant value) =>
             !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
-        private static ReferenceOrConstant GetReferenceForQueryParameter(ClientFields? fields, QueryParameter parameter)
+        private static ReferenceOrConstant GetReferenceForQueryParameter(ClientFields fields, QueryParameter parameter)
         {
             var value = parameter.Value;
-            if (fields is null ||
-                value.IsConstant is true ||
+            if (value.IsConstant is true ||
                 (value.Reference.Name == "apiVersion" && parameter.IsApiVersion is false))// strictly check api-version parameter name
             {
                 return parameter.Value;
@@ -254,14 +495,52 @@ namespace AutoRest.CSharp.Generation.Writers
             return fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value;
         }
 
-        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields fields)
+        private static MethodBodyStatement BuildAppendHeaders(RestClientMethod clientMethod, RequestExpression request, bool content, ClientFields fields)
         {
             foreach (var header in clientMethod.Request.Headers)
             {
                 if (header.IsContentHeader == content)
                 {
-                    Configuration.ApiTypes.WriteHeaderMethod(writer, request, header, fields);
+                    BuildAppendHeader(request, header, fields);
                 }
+            }
+        }
+
+        internal static MethodBodyStatement BuildAppendHeader(CodeWriterDeclaration request, RequestHeader header, ClientFields fields)
+        {
+            var delimiter = header.Delimiter;
+            string method = delimiter != null
+                ? nameof(RequestHeaderExtensions.AddDelimited)
+                : nameof(RequestHeaderExtensions.Add);
+
+            var value = ConvertConstantOrParameter(GetFieldReference(fields, header.Value));
+            var ifStatement = new IfStatement();
+            using (WriteValueNullCheck(writer, value))
+            {
+                if (value.Type.Equals(typeof(MatchConditions)) || value.Type.Equals(typeof(RequestConditions)))
+                {
+                    writer.Append($"{request}.Headers.{method}(");
+                }
+                else
+                {
+                    writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
+
+                if (value.Type.Equals(typeof(ContentType)))
+                {
+                    WriteConstantOrParameterAsString(writer, value);
+                }
+                else
+                {
+                    WriteConstantOrParameter(writer, value, enumAsString: true);
+                }
+
+                if (delimiter != null)
+                {
+                    writer.Append($", {delimiter:L}");
+                }
+                WriteSerializationFormat(writer, header.Format);
+                writer.Line($");");
             }
         }
 
@@ -351,6 +630,30 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private static MethodBodyStatement BuildAppendPathSegment(RawRequestUriBuilderExpression uri, PathSegment segment, ReferenceOrConstant value, bool isNextLink)
+        {
+            var valueExpression = ConvertConstantOrParameter(value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(value.Type));
+            if (isNextLink)
+            {
+                return uri.AppendRawNextLink(valueExpression, segment.Escape);
+            }
+            else if (segment.IsRaw)
+            {
+                return uri.AppendRaw(valueExpression, segment.Escape);
+            }
+            else
+            {
+                if (segment.Format != SerializationFormat.Default)
+                {
+                    return uri.AppendPath(valueExpression, segment.Escape);
+                }
+                else
+                {
+                    return uri.AppendPath(valueExpression, segment.Format, segment.Escape);
+                }
+            }
+        }
+
         private static void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, ReferenceOrConstant value, string? methodName = null)
         {
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
@@ -381,6 +684,40 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private static ValueExpression GetExpressionConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool convertBinaryDataToArray = true)
+        {
+            if (constantOrReference.IsConstant)
+            {
+                return new ConstantExpression(constantOrReference.Constant);
+            }
+
+            var reference = new TypedValueExpression(constantOrReference.Reference.Type, new FormattableStringToExpression($"{constantOrReference.Reference.Name:I}"));
+            if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
+            {
+                return reference.NullableStructValue();
+            }
+
+            if (constantOrReference.Type.Equals(typeof(BinaryData)) && convertBinaryDataToArray)
+            {
+                var binaryData = new BinaryDataExpression(reference);
+                return binaryData.ToArray();
+            }
+
+            return reference;
+        }
+
+        private static ValueExpression ConvertConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool enumAsString = false)
+        {
+            var result = GetExpressionConstantOrParameter(constantOrReference, ignoreNullability);
+
+            if (enumAsString && constantOrReference.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
+            {
+                result = new EnumExpression(enumType, result).ToSerial();
+            }
+
+            return result;
+        }
+
         private static void WriteConstantOrParameter(CodeWriter writer, ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool enumAsString = false)
         {
             writer.Append(GetConstantOrParameter(constantOrReference, ignoreNullability));
@@ -391,6 +728,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.AppendEnumToString(enumType);
             }
+        }
+
+        // TODO -- remove this, this is so incorrect
+        private static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
+        {
+            new EnumExpression(enumType, new ValueExpression()).ToSerial().Write(writer);
+            return writer;
         }
 
         private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool convertBinaryDataToArray = true)
@@ -429,7 +773,27 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, IReadOnlyList<Parameter>? parameters)
+        //private static MethodBodyStatement BuildAppendQueryParameter(RawRequestUriBuilderExpression uri, QueryParameter queryParameter, ClientFields fields, IReadOnlyList<Parameter>? parameters)
+        //{
+        //    var delimiter = queryParameter.Delimiter;
+        //    var explode = queryParameter.Explode;
+        //    if (delimiter != null && !explode)
+        //    {
+        //        return BuildAppendQueryParameterDelimited(uri, queryParameter, fields, parameters);
+        //    }
+        //    else
+        //    {
+        //        return BuildAppendQueryParameter2(uri, queryParameter, fields, parameters);
+        //    }
+        //}
+
+        //private static MethodBodyStatement BuildAppendQueryParameter2(RawRequestUriBuilderExpression uri, QueryParameter queryParameter, ClientFields fields, IReadOnlyList<Parameter>? parameters)
+        //{
+        //    var value = GetReferenceForQueryParameter(fields, queryParameter);
+        //    var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
+        //}
+
+        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields fields, IReadOnlyList<Parameter>? parameters)
         {
             string? delimiter = queryParameter.Delimiter;
             bool explode = queryParameter.Explode;
