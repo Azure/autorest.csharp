@@ -106,7 +106,7 @@ model TrackedResourceData {
 
     @doc("The resource type.")
     @visibility("read")
-    @projectedName("csharp", "resourceType")
+    @clientName("resourceType")
     type: string;
 
     @doc("The location property.")
@@ -236,7 +236,7 @@ model ProviderExtendedLocation {
     location?: string; // TODO -- find if there is a way for azure-location
 
     @doc("The extended location type.")
-    @projectedName("csharp", "providerExtendedLocationType")
+    @clientName("providerExtendedLocationType")
     type?: string;
 
     @doc("The extended locations for the azure location.")
@@ -297,7 +297,6 @@ model ResourceTypeAliasPath {
 }
 
 @doc("The type of the alias.")
-@fixed
 enum ResourceTypeAliasType {
     @doc("Alias type is unknown (same as not providing alias type).")
     NotSpecified,
@@ -331,7 +330,6 @@ model ResourceTypeAliasPathMetadata {
 }
 
 @doc("The type of alias pattern.")
-@fixed
 enum ResourceTypeAliasPatternType {
     @doc("NotSpecified is not allowed.")
     NotSpecified,

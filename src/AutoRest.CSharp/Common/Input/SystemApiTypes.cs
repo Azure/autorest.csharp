@@ -38,6 +38,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestOptions);
 
+        public override string RequestContextName => "options";
+        public override string RequestContextDescription => "The request options, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(ApiKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(ClientPipeline);
@@ -62,7 +65,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName}.ToUri();";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
+        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
@@ -80,7 +83,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type StatusCodeClassifierType => typeof(PipelineMessageClassifier);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
-            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{ BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
+            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[] { BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
 
         public override string EndPointSampleValue => "https://my-service.com";
 
