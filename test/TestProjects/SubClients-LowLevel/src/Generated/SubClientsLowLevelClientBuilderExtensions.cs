@@ -12,7 +12,7 @@ using SubClients_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="RootClient"/>, <see cref="Parameter"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="RootClient"/> to client builder. </summary>
     public static partial class SubClientsLowLevelClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="RootClient"/> instance. </summary>
@@ -20,37 +20,19 @@ namespace Microsoft.Extensions.Azure
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="cachedParameter"> The <see cref="string"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<RootClient, LlcSubClientsClientOptions> AddRootClient<TBuilder>(this TBuilder builder, Uri endpoint, string cachedParameter, AzureKeyCredential credential)
+        public static IAzureClientBuilder<RootClient, RootClientOptions> AddRootClient<TBuilder>(this TBuilder builder, Uri endpoint, string cachedParameter, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RootClient, LlcSubClientsClientOptions>((options) => new RootClient(endpoint, cachedParameter, credential, options));
-        }
-
-        /// <summary> Registers a <see cref="Parameter"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<Parameter, LlcSubClientsClientOptions> AddParameter<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
-        where TBuilder : IAzureClientFactoryBuilder
-        {
-            return builder.RegisterClientFactory<Parameter, LlcSubClientsClientOptions>((options) => new Parameter(endpoint, credential, options));
+            return builder.RegisterClientFactory<RootClient, RootClientOptions>((options) => new RootClient(endpoint, cachedParameter, credential, options));
         }
 
         /// <summary> Registers a <see cref="RootClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<RootClient, LlcSubClientsClientOptions> AddRootClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<RootClient, RootClientOptions> AddRootClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
-            return builder.RegisterClientFactory<RootClient, LlcSubClientsClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Parameter"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Parameter, LlcSubClientsClientOptions> AddParameter<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Parameter, LlcSubClientsClientOptions>(configuration);
+            return builder.RegisterClientFactory<RootClient, RootClientOptions>(configuration);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -39,7 +40,7 @@ namespace SubClients_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), cachedParameter, credential, new LlcSubClientsClientOptions())
+        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), cachedParameter, credential, new RootClientOptions())
         {
         }
 
@@ -50,12 +51,12 @@ namespace SubClients_LowLevel
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential, LlcSubClientsClientOptions options)
+        public RootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential, RootClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNullOrEmpty(cachedParameter, nameof(cachedParameter));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new LlcSubClientsClientOptions();
+            options ??= new RootClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -122,6 +123,14 @@ namespace SubClients_LowLevel
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        private Parameter _cachedParameter0;
+
+        /// <summary> Initializes a new instance of Parameter. </summary>
+        public virtual Parameter GetParameterClient()
+        {
+            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
         }
 
         internal HttpMessage CreateGetCachedParameterRequest(RequestContext context)

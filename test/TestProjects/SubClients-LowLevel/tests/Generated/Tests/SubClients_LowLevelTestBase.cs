@@ -19,15 +19,8 @@ namespace SubClients_LowLevel.Tests
 
         protected RootClient CreateRootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential)
         {
-            LlcSubClientsClientOptions options = InstrumentClientOptions(new LlcSubClientsClientOptions());
+            RootClientOptions options = InstrumentClientOptions(new RootClientOptions());
             RootClient client = new RootClient(endpoint, cachedParameter, credential, options);
-            return InstrumentClient(client);
-        }
-
-        protected Parameter CreateParameter(Uri endpoint, AzureKeyCredential credential)
-        {
-            LlcSubClientsClientOptions options = InstrumentClientOptions(new LlcSubClientsClientOptions());
-            Parameter client = new Parameter(endpoint, credential, options);
             return InstrumentClient(client);
         }
     }

@@ -25,7 +25,7 @@ namespace SubClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Parameter client = CreateParameter(endpoint, credential);
+            Parameter client = CreateRootClient(endpoint, null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
         }
@@ -36,7 +36,7 @@ namespace SubClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Parameter client = CreateParameter(endpoint, credential);
+            Parameter client = CreateRootClient(endpoint, null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
         }

@@ -67,5 +67,117 @@ namespace ResourceClients_LowLevel.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetGroups_ShortVersion()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            foreach (BinaryData item in client.GetGroups(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetGroups_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetGroups_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            foreach (BinaryData item in client.GetGroups(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetGroups_AllParameters_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetAllItems_ShortVersion()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            foreach (BinaryData item in client.GetAllItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAllItems_ShortVersion_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            await foreach (BinaryData item in client.GetAllItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetAllItems_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            foreach (BinaryData item in client.GetAllItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAllItems_AllParameters_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = new ResourceServiceClient(credential);
+
+            await foreach (BinaryData item in client.GetAllItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
+            }
+        }
     }
 }

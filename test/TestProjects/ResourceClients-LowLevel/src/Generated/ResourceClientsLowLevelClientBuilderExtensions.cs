@@ -12,65 +12,26 @@ using ResourceClients_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="ResourceServiceClient"/>, <see cref="ResourceGroup"/>, <see cref="Resource"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="ResourceServiceClient"/> to client builder. </summary>
     public static partial class ResourceClientsLowLevelClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ResourceServiceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<ResourceServiceClient, LlcResourceClientsClientOptions> AddResourceServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<ResourceServiceClient, ResourceServiceClientOptions> AddResourceServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ResourceServiceClient, LlcResourceClientsClientOptions>((options) => new ResourceServiceClient(endpoint, credential, options));
-        }
-
-        /// <summary> Registers a <see cref="ResourceGroup"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <param name="groupId"> Group identifier. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<ResourceGroup, LlcResourceClientsClientOptions> AddResourceGroup<TBuilder>(this TBuilder builder, Uri endpoint, string groupId, AzureKeyCredential credential)
-        where TBuilder : IAzureClientFactoryBuilder
-        {
-            return builder.RegisterClientFactory<ResourceGroup, LlcResourceClientsClientOptions>((options) => new ResourceGroup(endpoint, groupId, credential, options));
-        }
-
-        /// <summary> Registers a <see cref="Resource"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <param name="groupId"> Group identifier. </param>
-        /// <param name="itemId"> Item identifier. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<Resource, LlcResourceClientsClientOptions> AddResource<TBuilder>(this TBuilder builder, Uri endpoint, string groupId, string itemId, AzureKeyCredential credential)
-        where TBuilder : IAzureClientFactoryBuilder
-        {
-            return builder.RegisterClientFactory<Resource, LlcResourceClientsClientOptions>((options) => new Resource(endpoint, groupId, itemId, credential, options));
+            return builder.RegisterClientFactory<ResourceServiceClient, ResourceServiceClientOptions>((options) => new ResourceServiceClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="ResourceServiceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<ResourceServiceClient, LlcResourceClientsClientOptions> AddResourceServiceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<ResourceServiceClient, ResourceServiceClientOptions> AddResourceServiceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
-            return builder.RegisterClientFactory<ResourceServiceClient, LlcResourceClientsClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="ResourceGroup"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<ResourceGroup, LlcResourceClientsClientOptions> AddResourceGroup<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<ResourceGroup, LlcResourceClientsClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Resource"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Resource, LlcResourceClientsClientOptions> AddResource<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Resource, LlcResourceClientsClientOptions>(configuration);
+            return builder.RegisterClientFactory<ResourceServiceClient, ResourceServiceClientOptions>(configuration);
         }
     }
 }

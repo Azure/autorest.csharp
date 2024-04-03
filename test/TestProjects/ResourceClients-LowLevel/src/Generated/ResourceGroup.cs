@@ -14,8 +14,8 @@ using Azure.Core.Pipeline;
 
 namespace ResourceClients_LowLevel
 {
-    // Data plane generated client.
-    /// <summary> The ResourceGroup service client. </summary>
+    // Data plane generated sub-client.
+    /// <summary> The ResourceGroup sub-client. </summary>
     public partial class ResourceGroup
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -38,33 +38,18 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
-        /// <param name="groupId"> Group identifier. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
-        public ResourceGroup(string groupId, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), groupId, credential, new LlcResourceClientsClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of ResourceGroup. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="groupId"> Group identifier. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="groupId"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
-        public ResourceGroup(Uri endpoint, string groupId, AzureKeyCredential credential, LlcResourceClientsClientOptions options)
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string groupId)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new LlcResourceClientsClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            GroupId = groupId;
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
+            GroupId = groupId;
         }
 
         /// <summary>
@@ -128,7 +113,7 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.
+        /// [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -140,16 +125,16 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetGroupsAsync(RequestContext context)
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetGroups", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
         /// <summary>
-        /// [Protocol Method] Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.
+        /// [Protocol Method] Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -161,25 +146,23 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroups(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetGroups(RequestContext context)
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetItems(RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetGroups", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
-        internal HttpMessage CreateGetGroupsRequest(RequestContext context)
+        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="itemId"> Item identifier. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Resource GetResource(string itemId)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/groups", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
+            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
+
+            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, itemId);
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)
@@ -196,7 +179,21 @@ namespace ResourceClients_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetGroupsNextPageRequest(string nextLink, RequestContext context)
+        internal HttpMessage CreateGetItemsRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/items/", false);
+            uri.AppendPath(GroupId, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetItemsNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

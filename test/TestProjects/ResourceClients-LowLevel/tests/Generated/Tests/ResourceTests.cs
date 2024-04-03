@@ -25,7 +25,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, "<GroupId>", "<ItemId>", credential);
+            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
         }
@@ -36,61 +36,9 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, "<GroupId>", "<ItemId>", credential);
+            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAllItems_ShortVersion()
-        {
-            Uri endpoint = null;
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, null, null, credential);
-
-            await foreach (BinaryData item in client.GetAllItemsAsync(null))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAllItems_AllParameters()
-        {
-            Uri endpoint = null;
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, null, null, credential);
-
-            await foreach (BinaryData item in client.GetAllItemsAsync(null))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_ShortVersion()
-        {
-            Uri endpoint = null;
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, "<GroupId>", null, credential);
-
-            await foreach (BinaryData item in client.GetItemsAsync(null))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_AllParameters()
-        {
-            Uri endpoint = null;
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResource(endpoint, "<GroupId>", null, credential);
-
-            await foreach (BinaryData item in client.GetItemsAsync(null))
-            {
-            }
         }
     }
 }

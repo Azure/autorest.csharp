@@ -40,5 +40,57 @@ namespace ResourceClients_LowLevel.Tests
 
             Response response = await client.GetParametersAsync(null);
         }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task GetGroups_ShortVersion()
+        {
+            Uri endpoint = null;
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task GetGroups_AllParameters()
+        {
+            Uri endpoint = null;
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetGroupsAsync(null))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task GetAllItems_ShortVersion()
+        {
+            Uri endpoint = null;
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetAllItemsAsync(null))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task GetAllItems_AllParameters()
+        {
+            Uri endpoint = null;
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetAllItemsAsync(null))
+            {
+            }
+        }
     }
 }
