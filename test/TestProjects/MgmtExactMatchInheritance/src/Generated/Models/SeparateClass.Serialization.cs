@@ -65,6 +65,7 @@ namespace MgmtExactMatchInheritance.Models
             {
                 writer.WriteObjectValue<SeparateClass>(model);
             }
+
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

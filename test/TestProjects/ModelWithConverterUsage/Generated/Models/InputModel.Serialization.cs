@@ -127,6 +127,7 @@ namespace ModelWithConverterUsage.Models
             {
                 writer.WriteObjectValue<InputModel>(model, new ModelReaderWriterOptions("W"));
             }
+
             public override InputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

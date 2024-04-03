@@ -658,8 +658,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        // TODO -- remove the writeEmptyLine optional flag here
-        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
+        public static void WriteMethod(this CodeWriter writer, Method method)
         {
             if (method.Body is { } body)
             {
@@ -678,9 +677,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            // TODO -- temporary to minimize the code changes, will remove after the consolidation
-            if (writeEmptyLine)
-                writer.Line();
+            writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
