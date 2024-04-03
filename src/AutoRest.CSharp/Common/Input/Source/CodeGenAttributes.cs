@@ -15,24 +15,24 @@ namespace AutoRest.CSharp.Input.Source
     {
         public CodeGenAttributes(Compilation compilation)
         {
-            CodeGenMemberAttributeName = "CodeGenMemberAttribute";
             CodeGenTypeAttributeName = "CodeGenTypeAttribute";
-            CodeGenModelAttributeName = "CodeGenModelAttribute";
             CodeGenClientAttributeName = "CodeGenClientAttribute";
-            CodeGenSerializationAttributeName = "CodeGenSerializationAttribute";
+            CodeGenMemberAttribute = GetSymbol(compilation, typeof(CodeGenMemberAttribute));
+            CodeGenModelAttribute = GetSymbol(compilation, typeof(CodeGenModelAttribute));
+            CodeGenSerializationAttribute = GetSymbol(compilation, typeof(CodeGenSerializationAttribute));
         }
 
         public const string CodeGenSuppressAttributeName = "CodeGenSuppressAttribute";
 
-        public string CodeGenMemberAttributeName { get; }
+        public INamedTypeSymbol CodeGenMemberAttribute { get; }
 
         public string CodeGenTypeAttributeName { get; }
 
-        public string CodeGenModelAttributeName { get; }
+        public INamedTypeSymbol CodeGenModelAttribute { get; }
 
         public string CodeGenClientAttributeName { get; }
 
-        public string CodeGenSerializationAttributeName { get; }
+        public INamedTypeSymbol CodeGenSerializationAttribute { get; }
 
         private static INamedTypeSymbol GetSymbol(Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName!) ?? throw new InvalidOperationException($"cannot load symbol of attribute {type}");
 
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Input.Source
         public bool TryGetCodeGenMemberAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string name)
         {
             name = null;
-            if (attributeData.AttributeClass?.Name != CodeGenMemberAttributeName)
+            if (!CheckAttribute(attributeData, CodeGenMemberAttribute))
                 return false;
 
             name = attributeData.ConstructorArguments.FirstOrDefault().Value as string;
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Input.Source
             serializationHook = null;
             deserializationHook = null;
             bicepSerializationHook = null;
-            if (attributeData.AttributeClass?.Name != CodeGenSerializationAttributeName)
+            if (!CheckAttribute(attributeData, CodeGenSerializationAttribute))
             {
                 return false;
             }
@@ -80,16 +80,16 @@ namespace AutoRest.CSharp.Input.Source
             {
                 switch (key)
                 {
-                    case nameof(CodeGenSerializationAttribute.SerializationPath):
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.SerializationPath):
                         serializationNames = ToStringArray(namedArgument.Values);
                         break;
-                    case nameof(CodeGenSerializationAttribute.SerializationValueHook):
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.SerializationValueHook):
                         serializationHook = namedArgument.Value as string;
                         break;
-                    case nameof(CodeGenSerializationAttribute.DeserializationValueHook):
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.DeserializationValueHook):
                         deserializationHook = namedArgument.Value as string;
                         break;
-                    case nameof(CodeGenSerializationAttribute.BicepSerializationValueHook):
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.BicepSerializationValueHook):
                         bicepSerializationHook = namedArgument.Value as string;
                         break;
                 }
@@ -102,16 +102,16 @@ namespace AutoRest.CSharp.Input.Source
         {
             usage = null;
             formats = null;
-            if (attributeData.AttributeClass?.Name != CodeGenModelAttributeName)
+            if (!CheckAttribute(attributeData, CodeGenModelAttribute))
                 return false;
             foreach (var namedArgument in attributeData.NamedArguments)
             {
                 switch (namedArgument.Key)
                 {
-                    case nameof(CodeGenModelAttribute.Usage):
+                    case nameof(Azure.Core.CodeGenModelAttribute.Usage):
                         usage = ToStringArray(namedArgument.Value.Values);
                         break;
-                    case nameof(CodeGenModelAttribute.Formats):
+                    case nameof(Azure.Core.CodeGenModelAttribute.Formats):
                         formats = ToStringArray(namedArgument.Value.Values);
                         break;
                 }
