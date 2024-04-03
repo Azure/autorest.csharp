@@ -42,29 +42,25 @@ namespace OpenAI
 
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranslationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateTranslationResponse>> CreateAsync(CreateTranslationRequest audio, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateTranslationResponse>> CreateAsync(CreateTranslationRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = audio.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranslationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        public virtual ClientResult<CreateTranslationResponse> Create(CreateTranslationRequest audio, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateTranslationResponse> Create(CreateTranslationRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = audio.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +74,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateTranslationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateTranslationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +102,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateTranslationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateTranslationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -48,16 +48,14 @@ namespace OpenAI
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
         /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<FineTune>> CreateAsync(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> CreateAsync(CreateFineTuneRequest fineTune)
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -69,16 +67,14 @@ namespace OpenAI
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
         /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual ClientResult<FineTune> Create(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Create(CreateFineTuneRequest fineTune)
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -96,7 +92,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateFineTuneRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateFineTuneRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -129,7 +125,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateFineTuneRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateFineTuneRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -149,22 +145,18 @@ namespace OpenAI
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetFineTunesAsync(options).ConfigureAwait(false);
+            ClientResult result = await GetFineTunesAsync().ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         [Obsolete("deprecated")]
-        public virtual ClientResult<ListFineTunesResponse> GetFineTunes(CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListFineTunesResponse> GetFineTunes()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = GetFineTunes(options);
+            ClientResult result = GetFineTunes();
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -178,7 +170,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFineTunesAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFineTunesAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -203,7 +195,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFineTunes(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFineTunes()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -224,16 +216,14 @@ namespace OpenAI
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<FineTune>> RetrieveAsync(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> RetrieveAsync(string fineTuneId)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(fineTuneId, options).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(fineTuneId).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -243,16 +233,14 @@ namespace OpenAI
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual ClientResult<FineTune> Retrieve(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Retrieve(string fineTuneId)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(fineTuneId, options);
+            ClientResult result = Retrieve(fineTuneId);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -268,7 +256,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RetrieveAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -300,7 +288,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Retrieve(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Retrieve(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -331,16 +319,14 @@ namespace OpenAI
         ///
         /// If set to false, only events generated so far will be returned.
         /// </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetEventsAsync(fineTuneId, stream, options).ConfigureAwait(false);
+            ClientResult result = await GetEventsAsync(fineTuneId, stream).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -355,16 +341,14 @@ namespace OpenAI
         ///
         /// If set to false, only events generated so far will be returned.
         /// </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual ClientResult<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = GetEvents(fineTuneId, stream, options);
+            ClientResult result = GetEvents(fineTuneId, stream);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -378,7 +362,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEventsAsync(string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEventsAsync(string,bool?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -417,7 +401,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEvents(string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEvents(string,bool?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -448,31 +432,27 @@ namespace OpenAI
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<FineTune>> CancelAsync(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTune>> CancelAsync(string fineTuneId)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CancelAsync(fineTuneId, options).ConfigureAwait(false);
+            ClientResult result = await CancelAsync(fineTuneId).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         [Obsolete("deprecated")]
-        public virtual ClientResult<FineTune> Cancel(string fineTuneId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTune> Cancel(string fineTuneId)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Cancel(fineTuneId, options);
+            ClientResult result = Cancel(fineTuneId);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -486,7 +466,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CancelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CancelAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -516,7 +496,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Cancel(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Cancel(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

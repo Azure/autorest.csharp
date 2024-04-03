@@ -41,28 +41,24 @@ namespace OpenAI
         }
 
         /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest)
         {
             Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createChatCompletionRequest.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest)
         {
             Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createChatCompletionRequest.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -76,7 +72,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateChatCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateChatCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -104,7 +100,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateChatCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateChatCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -41,28 +41,24 @@ namespace OpenAI
         }
 
         /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest)
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createCompletionRequest.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest)
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createCompletionRequest.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -76,7 +72,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -104,7 +100,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

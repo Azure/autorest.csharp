@@ -42,29 +42,25 @@ namespace OpenAI
 
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateTranscriptionResponse>> CreateAsync(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateTranscriptionResponse>> CreateAsync(CreateTranscriptionRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = audio.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        public virtual ClientResult<CreateTranscriptionResponse> Create(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateTranscriptionResponse> Create(CreateTranscriptionRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = audio.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +74,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateTranscriptionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateTranscriptionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +102,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateTranscriptionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateTranscriptionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -42,29 +42,25 @@ namespace OpenAI
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content0 = content.ToBinaryBody();
-            ClientResult result = await CreateAsync(content0, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content0).ConfigureAwait(false);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content0 = content.ToBinaryBody();
-            ClientResult result = Create(content0, options);
+            ClientResult result = Create(content0);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +74,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateModerationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateModerationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +102,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateModerationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateModerationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

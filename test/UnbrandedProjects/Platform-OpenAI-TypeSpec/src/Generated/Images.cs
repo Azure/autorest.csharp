@@ -42,29 +42,25 @@ namespace OpenAI
 
         /// <summary> Creates an image given a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<ClientResult<ImagesResponse>> CreateAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateAsync(CreateImageRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an image given a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual ClientResult<ImagesResponse> Create(CreateImageRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> Create(CreateImageRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +74,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateImageRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +102,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateImageRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -126,29 +122,25 @@ namespace OpenAI
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<ClientResult<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateEditAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateEditAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual ClientResult<ImagesResponse> CreateEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> CreateEdit(CreateImageEditRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateEdit(content, options);
+            ClientResult result = CreateEdit(content);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -162,7 +154,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateEditAsync(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateEditAsync(CreateImageEditRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -190,7 +182,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateEdit(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateEdit(CreateImageEditRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -210,29 +202,25 @@ namespace OpenAI
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual async Task<ClientResult<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateVariationAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateVariationAsync(content).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public virtual ClientResult<ImagesResponse> CreateVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ImagesResponse> CreateVariation(CreateImageVariationRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateVariation(content, options);
+            ClientResult result = CreateVariation(content);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -246,7 +234,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateVariationAsync(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateVariationAsync(CreateImageVariationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -274,7 +262,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateVariation(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateVariation(CreateImageVariationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

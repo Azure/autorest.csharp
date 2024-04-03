@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private record RequestContentParameterInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
 
-        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo,  CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
+        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
         {
             CodeWriterDeclaration? spreadVariable = null;
             var parameters = new List<FormattableString>();
@@ -108,7 +108,11 @@ namespace AutoRest.CSharp.Output.Models
         // RequestContext context = FromCancellationToken(cancellationToken);
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
-            writer.Line($"{Configuration.ApiTypes.RequestContextType} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+            // non-branded convenience methods do not have the cancellationToken parameter any more therefore they no longer need this conversion
+            if (Configuration.IsBranded)
+            {
+                writer.Line($"{Configuration.ApiTypes.RequestContextType} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+            }
         }
 
         private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)

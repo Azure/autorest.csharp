@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Scm.Authentication.Http.Custom
@@ -50,7 +51,20 @@ namespace Scm.Authentication.Http.Custom
             _endpoint = endpoint;
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary> Check whether client is authenticated. </summary>
+        public virtual async Task<ClientResult> ValidAsync()
+        {
+            ClientResult result = await ValidAsync().ConfigureAwait(false);
+            return result;
+        }
+
+        /// <summary> Check whether client is authenticated. </summary>
+        public virtual ClientResult Valid()
+        {
+            ClientResult result = Valid();
+            return result;
+        }
+
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -59,18 +73,22 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ValidAsync()"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ValidAsync(RequestOptions options = null)
+        public virtual async Task<ClientResult> ValidAsync(RequestOptions options)
         {
             using PipelineMessage message = CreateValidRequest(options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -79,18 +97,36 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Valid()"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Valid(RequestOptions options = null)
+        public virtual ClientResult Valid(RequestOptions options)
         {
             using PipelineMessage message = CreateValidRequest(options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary> Check whether client is authenticated. </summary>
+        public virtual async Task<ClientResult> InvalidAsync()
+        {
+            ClientResult result = await InvalidAsync().ConfigureAwait(false);
+            return result;
+        }
+
+        /// <summary> Check whether client is authenticated. </summary>
+        public virtual ClientResult Invalid()
+        {
+            ClientResult result = Invalid();
+            return result;
+        }
+
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
@@ -99,18 +135,22 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InvalidAsync()"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> InvalidAsync(RequestOptions options = null)
+        public virtual async Task<ClientResult> InvalidAsync(RequestOptions options)
         {
             using PipelineMessage message = CreateInvalidRequest(options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
@@ -119,12 +159,17 @@ namespace Scm.Authentication.Http.Custom
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Invalid()"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Invalid(RequestOptions options = null)
+        public virtual ClientResult Invalid(RequestOptions options)
         {
             using PipelineMessage message = CreateInvalidRequest(options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
@@ -164,6 +209,17 @@ namespace Scm.Authentication.Http.Custom
                 message.Apply(options);
             }
             return message;
+        }
+
+        private static RequestOptions DefaultRequestContext = new RequestOptions();
+        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier204;

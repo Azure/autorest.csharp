@@ -590,10 +590,20 @@ namespace AutoRest.CSharp.Output.Models
 
         public void AddRequestContext()
         {
-            _orderedParameters.Add(new ParameterChain(
-                KnownParameters.CancellationTokenParameter,
-                ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
-                KnownParameters.RequestContext));
+            if (Configuration.IsBranded)
+            {
+                _orderedParameters.Add(new ParameterChain(
+                    KnownParameters.CancellationTokenParameter,
+                    ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
+                    KnownParameters.RequestContext));
+            }
+            else
+            {
+                _orderedParameters.Add(new ParameterChain(
+                    null,
+                    KnownParameters.RequestContext,
+                    KnownParameters.RequestContext));
+            }
         }
 
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
