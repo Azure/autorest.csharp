@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -23,7 +24,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private readonly SemanticModel _semanticModel;
         private readonly ImmutableHashSet<string> _suppressedTypeNames;
         private readonly Dictionary<INamedTypeSymbol, List<Supression>> _suppressionCache;
-        private readonly INamedTypeSymbol _suppressAttribute;
 
         public MemberRemoverRewriter(Project project, SemanticModel semanticModel, ImmutableHashSet<string> suppressedTypeNames)
         {
@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _semanticModel = semanticModel;
             _suppressedTypeNames = suppressedTypeNames;
             _suppressionCache = new Dictionary<INamedTypeSymbol, List<Supression>>();
-            _suppressAttribute = semanticModel.Compilation.GetTypeByMetadataName(typeof(CodeGenSuppressAttribute).FullName!)!;
         }
 
         public override SyntaxNode? VisitCompilationUnit(CompilationUnitSyntax node)
@@ -103,7 +102,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var attributeData in namedTypeSymbol.GetAttributes())
             {
-                if (attributeData.AttributeClass?.Equals(_suppressAttribute) == true)
+                if (attributeData.AttributeClass?.Name.Equals(CodeGenAttributes.CodeGenSuppressAttributeName) == true)
                 {
                     ValidateArguments(namedTypeSymbol, attributeData);
 
