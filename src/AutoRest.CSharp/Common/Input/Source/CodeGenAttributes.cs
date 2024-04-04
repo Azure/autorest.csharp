@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         public CodeGenAttributes(Compilation compilation)
         {
-            CodeGenTypeAttributeName = "CodeGenTypeAttribute";
+            CodeGenTypeAttribute = GetSymbol(compilation, typeof(CodeGenTypeAttribute));
             CodeGenClientAttributeName = "CodeGenClientAttribute";
             CodeGenMemberAttribute = GetSymbol(compilation, typeof(CodeGenMemberAttribute));
             CodeGenModelAttribute = GetSymbol(compilation, typeof(CodeGenModelAttribute));
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public INamedTypeSymbol CodeGenMemberAttribute { get; }
 
-        public string CodeGenTypeAttributeName { get; }
+        public INamedTypeSymbol CodeGenTypeAttribute { get; }
 
         public INamedTypeSymbol CodeGenModelAttribute { get; }
 

@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Input.Source
                 INamedTypeSymbol? type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (type.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) == _codeGenAttributes.CodeGenTypeAttributeName)
+                    if (SymbolEqualityComparer.Default.Equals(type, _codeGenAttributes.CodeGenTypeAttribute))
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {
