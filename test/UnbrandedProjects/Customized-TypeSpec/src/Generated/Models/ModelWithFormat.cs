@@ -45,6 +45,18 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
+        public ModelWithFormat(Uri sourceUrl, Guid guid)
+        {
+            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
+
+            SourceUrl = sourceUrl;
+            Guid = guid;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {

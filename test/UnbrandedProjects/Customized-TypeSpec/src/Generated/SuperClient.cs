@@ -7,13 +7,12 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using CustomizedTypeSpec.Models;
 
-namespace CustomizedTypeSpec
+namespace CustomizedTypeSpec.Models
 {
     // Data plane generated client.
     /// <summary> This is a sample typespec project. </summary>
-    public partial class CustomizedTypeSpecClient
+    public partial class SuperClient
     {
         private const string AuthorizationHeader = "my-api-key";
         private readonly ApiKeyCredential _keyCredential;
@@ -23,29 +22,29 @@ namespace CustomizedTypeSpec
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CustomizedTypeSpecClient for mocking. </summary>
-        protected CustomizedTypeSpecClient()
+        /// <summary> Initializes a new instance of SuperClient for mocking. </summary>
+        protected SuperClient()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomizedTypeSpecClient. </summary>
+        /// <summary> Initializes a new instance of SuperClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CustomizedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new CustomizedTypeSpecClientOptions())
+        public SuperClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new SuperClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of CustomizedTypeSpecClient. </summary>
+        /// <summary> Initializes a new instance of SuperClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CustomizedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, CustomizedTypeSpecClientOptions options)
+        public SuperClient(Uri endpoint, ApiKeyCredential credential, SuperClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new CustomizedTypeSpecClientOptions();
+            options ??= new SuperClientOptions();
 
             _keyCredential = credential;
             _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());

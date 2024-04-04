@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Input.Source
                 var attributeType = attribute.AttributeClass;
                 while (attributeType != null)
                 {
-                    if (attributeType.ToDisplayString() == _codeGenAttributes.CodeGenClientAttributeName)
+                    if (attributeType.Name == _codeGenAttributes.CodeGenClientAttributeName)
                     {
                         INamedTypeSymbol? parentClientType = null;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)

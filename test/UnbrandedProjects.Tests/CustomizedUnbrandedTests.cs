@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CustomizedTypeSpec.Tests
 {
@@ -43,6 +44,14 @@ namespace CustomizedTypeSpec.Tests
         public void VerifyCodeGenModel()
         {
             Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperFriend"));
+        }
+
+        [Test]
+        public void VerifyCodeGenClient()
+        {
+            var x = this.GetType().Assembly.GetTypes();
+            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperClient"));
+            Assert.Null(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.CustomizedTypeSpecClient"));
         }
 
         [Test]
