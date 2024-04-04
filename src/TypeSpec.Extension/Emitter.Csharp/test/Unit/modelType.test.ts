@@ -202,7 +202,7 @@ op test(@body input: Pet): Pet;
                                 Description: undefined
                             }
                         ],
-                        IsExtensible: true,
+                        IsExtensible: false,
                         IsNullable: false,
                         Usage: "None"
                     },
@@ -336,7 +336,7 @@ op test(@body input: Pet): Pet;
                                 Description: undefined
                             }
                         ],
-                        IsExtensible: true,
+                        IsExtensible: false,
                         IsNullable: false,
                         Usage: "None"
                     },

@@ -64,6 +64,7 @@ namespace Inheritance.Models
             {
                 writer.WriteObjectValue<AnotherDerivedClassWithExtensibleEnumDiscriminator>(model);
             }
+
             public override AnotherDerivedClassWithExtensibleEnumDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

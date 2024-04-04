@@ -459,17 +459,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                     {
-                        writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                        WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                     }
                 }
                 else
                 {
-                    writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                    WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
             writer.Line();
 
-            static void writeStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
+            static void WriteStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
             {
                 var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
                 if (headAsBoolean)
@@ -528,7 +528,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
