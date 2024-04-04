@@ -106,5 +106,13 @@ namespace Azure.Network.Management.Interface.Models
                 nextHopIpAddress ?? new ChangeTrackingList<string>(),
                 nextHopType);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static EffectiveRoute FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeEffectiveRoute(document.RootElement);
+        }
     }
 }
