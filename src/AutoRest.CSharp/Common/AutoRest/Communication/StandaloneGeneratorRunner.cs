@@ -90,6 +90,16 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
                 await File.WriteAllTextAsync(filename, file.Text);
             }
+
+
+            // compile the workspace
+            //var result = await workspace.CompileProject();
+            //var errors = result.Diagnostics.Where(n => n.Severity == DiagnosticSeverity.Error);
+            //Console.WriteLine($"Compilation success?: {result.Success}");
+            //foreach (var error in errors)
+            //{
+            //    Console.WriteLine(error);
+            //}
         }
 
         private static void DeleteDirectory(string path, string[] keepFiles)

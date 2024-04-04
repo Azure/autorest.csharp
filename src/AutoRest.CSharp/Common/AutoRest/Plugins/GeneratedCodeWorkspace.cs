@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static readonly string GeneratedTestFolder = "GeneratedTests";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
+        private static readonly WorkspaceMetadataReferenceResolver _metadataReferenceResolver;
 
         private static readonly CSharpSyntaxRewriter SA1505Rewriter = new SA1505Rewriter();
 
@@ -41,15 +42,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ClientResult).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(NUnit.Framework.NUnitAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Azure.Core.Expressions.DataFactory.DataFactoryElementKind).Assembly.Location),
             };
 
-            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
-            foreach (var tpl in trustedAssemblies)
-            {
-                references.Add(MetadataReference.CreateFromFile(tpl));
-            }
-
+            IReadOnlyList<string> trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
             AssemblyMetadataReferences = references;
+            _metadataReferenceResolver = new WorkspaceMetadataReferenceResolver(trustedAssemblies);
         }
 
         private static readonly string[] SharedFolders = { SharedFolder };
@@ -248,7 +247,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project = project
                 .AddMetadataReferences(AssemblyMetadataReferences)
                 .WithCompilationOptions(new CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+                    OutputKind.DynamicallyLinkedLibrary, metadataReferenceResolver: _metadataReferenceResolver, nullableContextOptions: NullableContextOptions.Disable));
 
             return new GeneratedCodeWorkspace(project);
         }
@@ -260,7 +259,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project = project
                 .AddMetadataReferences(AssemblyMetadataReferences)
                 .WithCompilationOptions(new CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+                    OutputKind.DynamicallyLinkedLibrary, metadataReferenceResolver: _metadataReferenceResolver, nullableContextOptions: NullableContextOptions.Disable));
             project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath, documentation: XmlDocumentationProvider.CreateFromFile(xmlDocumentationpath)));
             return await project.GetCompilationAsync();
         }
@@ -274,7 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             generatedCodeProject = generatedCodeProject
                 .AddMetadataReferences(AssemblyMetadataReferences)
                 .WithCompilationOptions(new CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+                    OutputKind.DynamicallyLinkedLibrary, metadataReferenceResolver: _metadataReferenceResolver, nullableContextOptions: NullableContextOptions.Disable));
             return generatedCodeProject;
         }
 
