@@ -74,5 +74,21 @@ namespace Azure.Network.Management.Interface.Models
             }
             return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DdosSettings FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDdosSettings(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<DdosSettings>(this);
+            return content;
+        }
     }
 }
