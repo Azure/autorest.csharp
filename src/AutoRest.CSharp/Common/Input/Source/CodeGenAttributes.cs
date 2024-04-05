@@ -13,31 +13,17 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class CodeGenAttributes
     {
-        public CodeGenAttributes(Compilation compilation)
-        {
-            CodeGenMemberAttributeName = "CodeGenMemberAttribute";
-            CodeGenTypeAttributeName = "CodeGenTypeAttribute";
-            CodeGenModelAttributeName = "CodeGenModelAttribute";
-            CodeGenClientAttributeName = "CodeGenClientAttribute";
-            CodeGenSerializationAttributeName = "CodeGenSerializationAttribute";
-        }
-
         public const string CodeGenSuppressAttributeName = "CodeGenSuppressAttribute";
 
-        public string CodeGenMemberAttributeName { get; }
+        public const string CodeGenMemberAttributeName = "CodeGenMemberAttribute";
 
-        public string CodeGenTypeAttributeName { get; }
+        public const string CodeGenTypeAttributeName = "CodeGenTypeAttribute";
 
-        public string CodeGenModelAttributeName { get; }
+        public const string CodeGenModelAttributeName = "CodeGenModelAttribute";
 
-        public string CodeGenClientAttributeName { get; }
+        public const string CodeGenClientAttributeName = "CodeGenClientAttribute";
 
-        public string CodeGenSerializationAttributeName { get; }
-
-        private static INamedTypeSymbol GetSymbol(Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName!) ?? throw new InvalidOperationException($"cannot load symbol of attribute {type}");
-
-        private static bool CheckAttribute(AttributeData attributeData, INamedTypeSymbol codeGenAttribute)
-            => SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, codeGenAttribute);
+        public const string CodeGenSerializationAttributeName = "CodeGenSerializationAttribute";
 
         public bool TryGetCodeGenMemberAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string name)
         {

@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Input.Source
             PreviousContract = LoadBaselineContract().GetAwaiter().GetResult();
             _existingCompilation = existingCompilation;
 
-            _codeGenAttributes = new CodeGenAttributes(customization);
+            _codeGenAttributes = new CodeGenAttributes();
 
             IAssemblySymbol assembly = Customization.Assembly;
 
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Input.Source
                 var attributeType = attribute.AttributeClass;
                 while (attributeType != null)
                 {
-                    if (attributeType.Name == _codeGenAttributes.CodeGenClientAttributeName)
+                    if (attributeType.Name == CodeGenAttributes.CodeGenClientAttributeName)
                     {
                         INamedTypeSymbol? parentClientType = null;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Input.Source
                 INamedTypeSymbol? type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (type.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) == _codeGenAttributes.CodeGenTypeAttributeName)
+                    if (type.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) == CodeGenAttributes.CodeGenTypeAttributeName)
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {
