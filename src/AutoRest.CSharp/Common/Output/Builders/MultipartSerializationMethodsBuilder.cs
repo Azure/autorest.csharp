@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     typeof(RequestContent),
                     null,
                     new Parameter[] {KnownParameters.Serializations.Options }),
-                BuildMultipartSerializationMethodBody(multipart).ToArray());
+                BuildToMultipartRequestContentMethodBody(multipart).ToArray());
 
             yield return new Method(
                 new MethodSignature(
@@ -146,6 +146,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             contentType
                         })));
         }
+        public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationBody(MultipartObjectSerialization? multipart)
+        {
+            return new MethodBodyStatement[]
+                    {
+                        Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
+                        UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
+                        WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
+                        SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties)
+                    };
+        }
         public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody(MultipartObjectSerialization? multipart)
         {
             return new MethodBodyStatement[]
@@ -154,10 +164,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
                             WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                             SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties),
-                            //Declare(typeof(BinaryData), "binaryData", new InvokeInstanceMethodExpression(content, nameof(MultipartFormData.ToContent), Array.Empty<ValueExpression>(),
                             Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
                             Snippets.Return(binaryData)
                         };
+        }
+        public static IEnumerable<MethodBodyStatement> BuildToMultipartRequestContentMethodBody(MultipartObjectSerialization? multipart)
+        {
+            return new MethodBodyStatement[]
+                    {
+                        Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
+                        UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
+                        WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
+                        SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties),
+                        Return(content)
+                    };
         }
         public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, ValueExpression contentType, ModelReaderWriterOptionsExpression options)
         {
@@ -245,7 +265,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
             {
-                return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Contact(Literal(".wav")));
+                return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Add(Literal(".wav")));
             }
             if (valueSerialization.Type.IsFrameworkType)
             {

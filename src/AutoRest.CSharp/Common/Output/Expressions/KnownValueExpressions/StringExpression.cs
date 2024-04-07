@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
         public BoolExpression StartsWith(StringExpression value)
             => new(new InvokeInstanceMethodExpression(this, nameof(string.StartsWith), new[] {value}, null, false));
-        public StringExpression Contact(StringExpression value)
-            => new(new InvokeInstanceMethodExpression(this, nameof(string.Concat), new[] {value}, null, false));
+        public StringExpression Add(StringExpression value)
+            => new(new BinaryOperatorExpression(" + ", this, value));
     }
 }
