@@ -727,7 +727,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var linkForProtocol = Configuration.IsBranded
                 ? "https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md"
-                : "https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/samples/ServiceMethods.md#protocol-methods";
+                : "https://aka.ms/azsdk/net/protocol-methods";
             List <FormattableString> lines = new()
             {
                 $"[Protocol Method] {methodSignature.SummaryText}",
