@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveSearch.Models
 {
@@ -59,6 +60,14 @@ namespace CognitiveSearch.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new SearchResult(searchScore, searchHighlights ?? new ChangeTrackingDictionary<string, IList<string>>(), additionalProperties);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SearchResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSearchResult(document.RootElement);
         }
     }
 }
