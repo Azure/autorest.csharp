@@ -859,7 +859,7 @@
   },
   {
    "$id": "109",
-   "Name": "ModelsOps",
+   "Name": "Models",
    "Description": "Verify model names",
    "Operations": [
     {

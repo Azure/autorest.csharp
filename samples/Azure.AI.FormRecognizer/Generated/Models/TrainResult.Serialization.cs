@@ -74,5 +74,13 @@ namespace Azure.AI.FormRecognizer.Models
             }
             return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), averageModelAccuracy, errors ?? new ChangeTrackingList<ErrorInformation>());
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static TrainResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeTrainResult(document.RootElement);
+        }
     }
 }
