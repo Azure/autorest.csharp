@@ -18,7 +18,7 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation,
+    Operation
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
