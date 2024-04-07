@@ -240,7 +240,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
-                Constant? overriddenDefaultValue = null;
                 // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
                 if (discriminator != null && discriminator.Property == property && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
                 {
@@ -255,7 +254,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } extensibleEnum }:
                             inputType = extensibleEnum.ValueType;
-                            overriddenDefaultValue = new Constant("Unknown", inputType);
                             break;
                         case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } }:
                             // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
@@ -277,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Name = parameterName,
                     Type = inputType,
-                    DefaultValue = overriddenDefaultValue ?? Constant.Default(inputType),
+                    DefaultValue = Constant.Default(inputType),
                     Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
 
@@ -302,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // write the initializers and validations
                 new ParameterValidationBlock(methodParameters, true),
-                Return(Snippets.New.Instance(ctorToCall.Signature, methodArguments))
+                Return(New.Instance(ctorToCall.Signature, methodArguments))
             };
 
             return new(signature, methodBody);
@@ -320,14 +318,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField));
-            // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
-            if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField)).ToArray();
+            // we skip models with internal properties when the internal property is neither a discriminator or safe flattened
+            if (properties.Any(p => p.Declaration.Accessibility != "public" && model.Discriminator?.Property != p && p.FlattenedProperty == null))
             {
                 return false;
             }
 
-            if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            // We skip models that don't have read-only properties other than discriminator or collections
+            // While discriminator property is generated as read-write, it can be made read-only via customization
+            if (!properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
             {
                 return false;
             }

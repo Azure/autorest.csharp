@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Request = Azure.Core.Request;
 
@@ -77,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");

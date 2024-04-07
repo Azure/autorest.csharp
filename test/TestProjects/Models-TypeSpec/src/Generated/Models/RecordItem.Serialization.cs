@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RecordItem>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RecordItem)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RecordItem)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -32,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -58,7 +57,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<RecordItem>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RecordItem)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RecordItem)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -106,7 +105,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RecordItem)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RecordItem)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -122,7 +121,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeRecordItem(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RecordItem)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RecordItem)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -140,7 +139,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RecordItem>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

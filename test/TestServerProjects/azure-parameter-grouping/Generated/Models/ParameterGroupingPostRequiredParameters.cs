@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using azure_parameter_grouping;
 
 namespace azure_parameter_grouping.Models
 {

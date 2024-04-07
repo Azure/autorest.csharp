@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {

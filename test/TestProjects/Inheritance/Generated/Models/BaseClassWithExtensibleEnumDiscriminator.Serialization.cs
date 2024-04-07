@@ -44,7 +44,7 @@ namespace Inheritance.Models
         {
             public override void Write(Utf8JsonWriter writer, BaseClassWithExtensibleEnumDiscriminator model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(model);
             }
             public override BaseClassWithExtensibleEnumDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

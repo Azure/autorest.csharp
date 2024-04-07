@@ -10,7 +10,6 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using body_complex;
 
 namespace body_complex.Models
 {
@@ -23,14 +22,14 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFishMarket>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFishMarket)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue(SampleSalmon);
+                writer.WriteObjectValue<DotSalmon>(SampleSalmon, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -38,14 +37,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DotSalmon>(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue(SampleFish);
+                writer.WriteObjectValue<DotFish>(SampleFish, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -53,7 +52,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<DotFish>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -80,7 +79,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFishMarket>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFishMarket)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -167,7 +166,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFishMarket)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -183,7 +182,7 @@ namespace body_complex.Models
                         return DeserializeDotFishMarket(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFishMarket)} does not support reading '{options.Format}' format.");
             }
         }
 

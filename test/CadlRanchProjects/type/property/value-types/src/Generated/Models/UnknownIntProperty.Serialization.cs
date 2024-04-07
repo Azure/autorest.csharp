@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -24,7 +23,7 @@ namespace _Type.Property.ValueTypes.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnknownIntProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +59,7 @@ namespace _Type.Property.ValueTypes.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnknownIntProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -103,7 +102,7 @@ namespace _Type.Property.ValueTypes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -119,7 +118,7 @@ namespace _Type.Property.ValueTypes.Models
                         return DeserializeUnknownIntProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -137,7 +136,7 @@ namespace _Type.Property.ValueTypes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnknownIntProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

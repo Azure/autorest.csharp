@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using Parameters_LowLevel;
 
 namespace Parameters_LowLevel.Tests
 {

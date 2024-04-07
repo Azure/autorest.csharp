@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -3625,7 +3626,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                content.JsonWriter.WriteObjectValue<Product>(item, new ModelReaderWriterOptions("W"));
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

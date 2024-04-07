@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using HeadAsBooleanTrue_LowLevel;
 using NUnit.Framework;
 
 namespace HeadAsBooleanTrue_LowLevel.Samples

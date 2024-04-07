@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -43,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+                writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
+                writer.WriteObjectValue<FrontendIPConfiguration>(DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {

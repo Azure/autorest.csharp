@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
-using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -25,7 +24,7 @@ namespace ModelWithConverterUsage.Models
             var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OutputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OutputModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +56,7 @@ namespace ModelWithConverterUsage.Models
             var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OutputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OutputModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -100,7 +99,7 @@ namespace ModelWithConverterUsage.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(OutputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OutputModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -116,7 +115,7 @@ namespace ModelWithConverterUsage.Models
                         return DeserializeOutputModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(OutputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OutputModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -126,7 +125,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<OutputModel>(model, new ModelReaderWriterOptions("W"));
             }
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

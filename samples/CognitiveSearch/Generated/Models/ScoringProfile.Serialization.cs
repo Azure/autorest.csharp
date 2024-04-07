@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -22,7 +21,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
-                writer.WriteObjectValue(TextWeights);
+                writer.WriteObjectValue<TextWeights>(TextWeights);
             }
             if (Optional.IsCollectionDefined(Functions))
             {
@@ -30,7 +29,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ScoringFunction>(item);
                 }
                 writer.WriteEndArray();
             }

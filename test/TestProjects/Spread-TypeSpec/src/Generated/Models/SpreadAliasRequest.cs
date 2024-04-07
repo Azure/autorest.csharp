@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {

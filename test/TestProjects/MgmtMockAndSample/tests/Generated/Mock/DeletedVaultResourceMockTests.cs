@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Tests.Mock
 {

@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -26,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                writer.WriteObjectValue(MappingFunction);
+                writer.WriteObjectValue<FieldMappingFunction>(MappingFunction);
             }
             writer.WriteEndObject();
         }

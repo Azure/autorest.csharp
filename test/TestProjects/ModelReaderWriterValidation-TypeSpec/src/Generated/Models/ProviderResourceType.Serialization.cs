@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProviderResourceType>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProviderResourceType)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProviderResourceType)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -49,7 +48,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in LocationMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ProviderExtendedLocation>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -59,7 +58,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Aliases)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ResourceTypeAlias>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -84,7 +83,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ZoneMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ZoneMapping>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +93,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ApiProfiles)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<ApiProfile>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -137,7 +136,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProviderResourceType>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProviderResourceType)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProviderResourceType)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -308,7 +307,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ProviderResourceType)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProviderResourceType)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -324,7 +323,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                         return DeserializeProviderResourceType(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ProviderResourceType)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProviderResourceType)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -342,7 +341,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<ProviderResourceType>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

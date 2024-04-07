@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
@@ -17,5 +18,37 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         public MethodBodyStatement ToStatement()
             => new InvokeStaticMethodStatement(MethodType, MethodName, Arguments, TypeArguments, CallAsExtension, CallAsAsync);
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            if (CallAsExtension)
+            {
+                writer.AppendRawIf("await ", CallAsAsync);
+                if (MethodType != null)
+                {
+                    writer.UseNamespace(MethodType.Namespace);
+                }
+
+                Arguments[0].Write(writer);
+                writer.AppendRaw(".");
+                writer.AppendRaw(MethodName);
+                writer.WriteTypeArguments(TypeArguments);
+                writer.WriteArguments(Arguments.Skip(1));
+                writer.AppendRawIf(".ConfigureAwait(false)", CallAsAsync);
+            }
+            else
+            {
+                writer.AppendRawIf("await ", CallAsAsync);
+                if (MethodType != null)
+                {
+                    writer.Append($"{MethodType}.");
+                }
+
+                writer.AppendRaw(MethodName);
+                writer.WriteTypeArguments(TypeArguments);
+                writer.WriteArguments(Arguments);
+                writer.AppendRawIf(".ConfigureAwait(false)", CallAsAsync);
+            }
+        }
     }
 }

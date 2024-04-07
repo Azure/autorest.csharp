@@ -494,7 +494,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(entity);
+                content.JsonWriter.WriteObjectValue<KeyValue>(entity);
                 request.Content = content;
             }
             return message;

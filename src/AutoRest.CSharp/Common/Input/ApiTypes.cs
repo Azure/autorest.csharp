@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
@@ -49,9 +47,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public Type GetNextPageFuncType() => typeof(Func<,,>).MakeGenericType(typeof(int?), typeof(string), HttpMessageType);
 
-        public abstract Type ClientDiagnosticsType { get; }
-        public abstract string ClientDiagnosticsCreateScopeName { get; }
-
         public abstract Type ClientOptionsType { get; }
 
         public abstract Type RequestContextType { get; }
@@ -65,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
             => $"{pipelineField} = {HttpPipelineBuilderType}.Build({optionsVariable}, new {BearerAuthenticationPolicyType}({credentialVariable}, {scopesParam}));";
         public FormattableString GetHttpPipelineKeyCredentialString(string pipelineField, string optionsVariable, string credentialVariable, string keyName)
             => $"{pipelineField} = {HttpPipelineBuilderType}.Build({optionsVariable}, new {KeyCredentialPolicyType}({credentialVariable}, \"{keyName}\"));";
-        public abstract FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies);
+        public abstract FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies);
 
         public abstract Type HttpPipelinePolicyType { get; }
         public abstract string HttpMessageRequestName { get; }
@@ -77,24 +72,16 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract FormattableString GetSetContentString(string requestName, string contentName);
 
-        public abstract Type RequestUriType { get; }
+        public abstract CSharpType RequestUriType { get; }
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
 
-        public abstract Type IUtf8JsonSerializableType { get; }
         public abstract Type IXmlSerializableType { get; }
-        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
-
-        public abstract Type Utf8JsonWriterExtensionsType { get; }
-        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
-        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
-        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
-        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
 
         public abstract Type RequestFailedExceptionType { get; }
 
-        public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);
+        public abstract string ResponseClassifierIsErrorResponseName { get; }
 
         public abstract string EndPointSampleValue { get; }
 
