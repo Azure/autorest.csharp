@@ -59,5 +59,13 @@ namespace Azure.AI.FormRecognizer.Models
             }
             return new KeyValueElement(text, boundingBox ?? new ChangeTrackingList<float>(), elements ?? new ChangeTrackingList<string>());
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static KeyValueElement FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeKeyValueElement(document.RootElement);
+        }
     }
 }

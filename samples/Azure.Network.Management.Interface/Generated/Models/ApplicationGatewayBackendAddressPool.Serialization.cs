@@ -136,5 +136,21 @@ namespace Azure.Network.Management.Interface.Models
                 backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
                 provisioningState);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new ApplicationGatewayBackendAddressPool FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeApplicationGatewayBackendAddressPool(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ApplicationGatewayBackendAddressPool>(this);
+            return content;
+        }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -51,6 +52,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SentenceSentiment FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSentenceSentiment(document.RootElement);
         }
     }
 }

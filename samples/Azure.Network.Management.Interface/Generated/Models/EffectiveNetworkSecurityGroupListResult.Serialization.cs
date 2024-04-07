@@ -44,5 +44,13 @@ namespace Azure.Network.Management.Interface.Models
             }
             return new EffectiveNetworkSecurityGroupListResult(value ?? new ChangeTrackingList<EffectiveNetworkSecurityGroup>(), nextLink);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static EffectiveNetworkSecurityGroupListResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
+        }
     }
 }
