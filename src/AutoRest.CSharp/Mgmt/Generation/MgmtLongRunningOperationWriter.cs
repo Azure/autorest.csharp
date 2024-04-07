@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         using (_writer.Scope($"else"))
                         {
                             // This implies the operation is complete and we can cache the rehydration token since it won't change anymore
-                            _writer.Line($"_completeRehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                            _writer.Line($"_completeRehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia);");
                             _writer.Line($"_operationId = GetOperationId(_completeRehydrationToken);");
                         }
                         if (_isGeneric)
