@@ -1079,7 +1079,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1088,17 +1088,21 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetUnknownValueAsync(RequestOptions options)
+        public virtual async Task<ClientResult> CreateUnknownValueAsync(BinaryContent content, RequestOptions options = null)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateCreateUnknownValueRequest(content, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1107,12 +1111,16 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetUnknownValue(RequestOptions options)
+        public virtual ClientResult CreateUnknownValue(BinaryContent content, RequestOptions options = null)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateCreateUnknownValueRequest(content, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -1600,17 +1608,19 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions options)
+        internal PipelineMessage CreateCreateUnknownValueRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            message.ResponseClassifier = PipelineMessageClassifier200;
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.Method = "GET";
+            request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
             if (options != null)
             {
                 message.Apply(options);

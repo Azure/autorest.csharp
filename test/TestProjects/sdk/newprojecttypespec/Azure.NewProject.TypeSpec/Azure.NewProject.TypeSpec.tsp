@@ -293,11 +293,12 @@ op addTimeHeader(
 @convenientAPI(true)
 op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
+// TODO: https://github.com/Azure/typespec-azure/issues/509
 namespace EnumTest {
-    @get
+    @put
     @route("/unknown-value")
-    @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
+    @doc("create extensible enum")
+    op getUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
 namespace ProtocolAndConvenient {

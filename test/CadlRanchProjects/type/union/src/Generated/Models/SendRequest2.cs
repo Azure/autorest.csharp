@@ -47,15 +47,18 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest2"/>. </summary>
         /// <param name="prop"></param>
-        public SendRequest2(StringExtensibleNamedUnion prop)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        public SendRequest2(StringAndArrayCases prop)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="SendRequest2"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SendRequest2(StringExtensibleNamedUnion prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SendRequest2(StringAndArrayCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +70,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public StringExtensibleNamedUnion Prop { get; }
+        public StringAndArrayCases Prop { get; }
     }
 }

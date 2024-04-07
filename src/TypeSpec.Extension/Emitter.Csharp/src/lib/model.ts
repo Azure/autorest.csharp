@@ -902,7 +902,7 @@ export function getUsages(
         if (type.kind === "Union") {
             let clientType = getClientType(context, type);
             if (clientType.kind === "enum" && clientType.isFixed === false) {
-                typeName = clientType.generatedName || clientType.name;
+                typeName = clientType.name;
             }
         }
         const affectTypes: Set<string> = new Set<string>();
