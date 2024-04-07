@@ -368,7 +368,7 @@ extends:
             var writer = new CSProjWriter()
             {
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
-                NoWarn = new("$(NoWarn);CS1591;Nu1605", "We don't care about XML doc comments on test types and members. We also don't care about System.ClientModel downgrade in the test project.")
+                NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
             };
 
             // add the project references
