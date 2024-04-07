@@ -139,8 +139,8 @@ namespace CadlRanchProjects.Tests
         [TestCaseSource(nameof(ModelsClientCases))]
         public Task SpecialWords_Models<T>(T body, string methodName) => Test(async (host) =>
         {
-            var client = new SpecialWordsClient(host, null).GetModelsOpsClient();
-            Response response = await (Task<Response>)typeof(SpecialWords.ModelsOps).GetMethod(methodName, new Type[] {typeof(T), typeof(CancellationToken) }).Invoke(client, new Object[] { body, CancellationToken.None});
+            var client = new SpecialWordsClient(host, null).GetModelsClient();
+            Response response = await (Task<Response>)typeof(SpecialWords.Models).GetMethod(methodName, new Type[] {typeof(T), typeof(CancellationToken) }).Invoke(client, new Object[] { body, CancellationToken.None});
             NUnit.Framework.Assert.AreEqual(204, response.Status);
         });
     }

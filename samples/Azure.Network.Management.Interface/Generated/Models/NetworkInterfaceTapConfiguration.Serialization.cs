@@ -109,5 +109,21 @@ namespace Azure.Network.Management.Interface.Models
                 virtualNetworkTap,
                 provisioningState);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new NetworkInterfaceTapConfiguration FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<NetworkInterfaceTapConfiguration>(this);
+            return content;
+        }
     }
 }
