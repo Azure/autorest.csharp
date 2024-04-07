@@ -198,9 +198,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _fakePolicyAssignmentRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var uri = _fakePolicyAssignmentRestClient.CreateDeleteRequestUri(Id.Parent, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -242,9 +240,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _fakePolicyAssignmentRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                var uri = _fakePolicyAssignmentRestClient.CreateDeleteRequestUri(Id.Parent, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -290,9 +286,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _fakePolicyAssignmentRestClient.CreateAsync(Id.Parent, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _fakePolicyAssignmentRestClient.CreateCreateRequestUri(Id.Parent, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -338,9 +332,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _fakePolicyAssignmentRestClient.Create(Id.Parent, Id.Name, data, cancellationToken);
-                var uri = _fakePolicyAssignmentRestClient.CreateCreateRequestUri(Id.Parent, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

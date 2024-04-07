@@ -80,9 +80,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = await _artifactRestClient.CreateOrUpdateAsync(Id, artifactName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _artifactRestClient.CreateCreateOrUpdateRequestUri(Id, artifactName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -131,9 +129,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = _artifactRestClient.CreateOrUpdate(Id, artifactName, data, cancellationToken);
-                var uri = _artifactRestClient.CreateCreateOrUpdateRequestUri(Id, artifactName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

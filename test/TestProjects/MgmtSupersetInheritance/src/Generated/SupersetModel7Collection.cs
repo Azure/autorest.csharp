@@ -90,9 +90,7 @@ namespace MgmtSupersetInheritance
             try
             {
                 var response = await _supersetModel7RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _supersetModel7RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,9 +138,7 @@ namespace MgmtSupersetInheritance
             try
             {
                 var response = _supersetModel7RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data, cancellationToken);
-                var uri = _supersetModel7RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel7Resource>(Response.FromValue(new SupersetModel7Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -38,22 +38,6 @@ namespace AzureSample.ResourceManager.Sample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData data)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/hostGroups/", false);
-            uri.AppendPath(hostGroupName, true);
-            uri.AppendPath("/hosts/", false);
-            uri.AppendPath(hostName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData data)
         {
             var message = _pipeline.CreateMessage();
@@ -138,22 +122,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, DedicatedHostPatch patch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/hostGroups/", false);
-            uri.AppendPath(hostGroupName, true);
-            uri.AppendPath("/hosts/", false);
-            uri.AppendPath(hostName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, DedicatedHostPatch patch)
         {
             var message = _pipeline.CreateMessage();
@@ -236,22 +204,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/hostGroups/", false);
-            uri.AppendPath(hostGroupName, true);
-            uri.AppendPath("/hosts/", false);
-            uri.AppendPath(hostName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName)
         {
             var message = _pipeline.CreateMessage();
@@ -327,26 +279,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, InstanceViewType? expand)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/hostGroups/", false);
-            uri.AppendPath(hostGroupName, true);
-            uri.AppendPath("/hosts/", false);
-            uri.AppendPath(hostName, true);
-            if (expand != null)
-            {
-                uri.AppendQuery("$expand", expand.Value.ToString(), true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, InstanceViewType? expand)
@@ -443,21 +375,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateListByHostGroupRequestUri(string subscriptionId, string resourceGroupName, string hostGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/hostGroups/", false);
-            uri.AppendPath(hostGroupName, true);
-            uri.AppendPath("/hosts", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListByHostGroupRequest(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -535,14 +452,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListByHostGroupNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string hostGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateListByHostGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string hostGroupName)

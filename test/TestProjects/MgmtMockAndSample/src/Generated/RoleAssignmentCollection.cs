@@ -81,9 +81,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _roleAssignmentRestClient.CreateAsync(Id, roleAssignmentName, content, cancellationToken).ConfigureAwait(false);
-                var uri = _roleAssignmentRestClient.CreateCreateRequestUri(Id, roleAssignmentName, content);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtMockAndSampleArmOperation<RoleAssignmentResource>(Response.FromValue(new RoleAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtMockAndSampleArmOperation<RoleAssignmentResource>(Response.FromValue(new RoleAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -132,9 +130,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _roleAssignmentRestClient.Create(Id, roleAssignmentName, content, cancellationToken);
-                var uri = _roleAssignmentRestClient.CreateCreateRequestUri(Id, roleAssignmentName, content);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtMockAndSampleArmOperation<RoleAssignmentResource>(Response.FromValue(new RoleAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtMockAndSampleArmOperation<RoleAssignmentResource>(Response.FromValue(new RoleAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

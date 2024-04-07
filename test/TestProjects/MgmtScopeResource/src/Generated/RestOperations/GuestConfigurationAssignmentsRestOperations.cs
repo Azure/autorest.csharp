@@ -37,22 +37,6 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName, GuestConfigurationAssignmentData data)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
-            uri.AppendPath("/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/", false);
-            uri.AppendPath(guestConfigurationAssignmentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName, GuestConfigurationAssignmentData data)
         {
             var message = _pipeline.CreateMessage();
@@ -147,22 +131,6 @@ namespace MgmtScopeResource
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
-            uri.AppendPath("/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/", false);
-            uri.AppendPath(guestConfigurationAssignmentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName)
         {
             var message = _pipeline.CreateMessage();
@@ -251,22 +219,6 @@ namespace MgmtScopeResource
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
-            uri.AppendPath("/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/", false);
-            uri.AppendPath(guestConfigurationAssignmentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName)
         {
             var message = _pipeline.CreateMessage();
@@ -338,21 +290,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, string vmName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
-            uri.AppendPath("/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string vmName)

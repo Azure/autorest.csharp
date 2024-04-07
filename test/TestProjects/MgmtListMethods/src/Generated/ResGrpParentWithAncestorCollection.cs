@@ -91,9 +91,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithAncestorRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _resGrpParentWithAncestorRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorResource>(Response.FromValue(new ResGrpParentWithAncestorResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorResource>(Response.FromValue(new ResGrpParentWithAncestorResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -142,9 +140,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithAncestorRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, data, cancellationToken);
-                var uri = _resGrpParentWithAncestorRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorResource>(Response.FromValue(new ResGrpParentWithAncestorResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorResource>(Response.FromValue(new ResGrpParentWithAncestorResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

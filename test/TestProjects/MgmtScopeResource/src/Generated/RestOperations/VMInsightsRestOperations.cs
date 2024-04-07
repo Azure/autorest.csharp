@@ -36,17 +36,6 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateGetOnboardingStatusRequestUri(string resourceUri)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(resourceUri, false);
-            uri.AppendPath("/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetOnboardingStatusRequest(string resourceUri)
         {
             var message = _pipeline.CreateMessage();

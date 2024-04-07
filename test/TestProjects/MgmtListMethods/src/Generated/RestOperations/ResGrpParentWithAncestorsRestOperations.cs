@@ -37,20 +37,6 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorName, ResGrpParentWithAncestorData data)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/", false);
-            uri.AppendPath(resGrpParentWithAncestorName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorName, ResGrpParentWithAncestorData data)
         {
             var message = _pipeline.CreateMessage();
@@ -137,20 +123,6 @@ namespace MgmtListMethods
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/", false);
-            uri.AppendPath(resGrpParentWithAncestorName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorName)
         {
             var message = _pipeline.CreateMessage();
@@ -233,19 +205,6 @@ namespace MgmtListMethods
             }
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -319,17 +278,6 @@ namespace MgmtListMethods
             }
         }
 
-        internal RequestUriBuilder CreateNonPageableListBySubscriptionRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateNonPageableListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -395,14 +343,6 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)

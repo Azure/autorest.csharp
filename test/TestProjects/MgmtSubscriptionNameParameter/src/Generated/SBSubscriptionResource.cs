@@ -200,9 +200,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _sbSubscriptionSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var uri = _sbSubscriptionSubscriptionsRestClient.CreateDeleteRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSubscriptionNameParameterArmOperation(response, rehydrationToken);
+                var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -244,9 +242,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sbSubscriptionSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var uri = _sbSubscriptionSubscriptionsRestClient.CreateDeleteRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSubscriptionNameParameterArmOperation(response, rehydrationToken);
+                var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -292,9 +288,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _sbSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _sbSubscriptionSubscriptionsRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -340,9 +334,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sbSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var uri = _sbSubscriptionSubscriptionsRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -90,9 +90,7 @@ namespace MgmtResourceName
             try
             {
                 var response = await _displayResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _displayResourceRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,9 +138,7 @@ namespace MgmtResourceName
             try
             {
                 var response = _displayResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken);
-                var uri = _displayResourceRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

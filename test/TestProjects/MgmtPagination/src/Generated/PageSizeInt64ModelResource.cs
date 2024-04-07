@@ -201,9 +201,7 @@ namespace MgmtPagination
             try
             {
                 var response = await _pageSizeInt64ModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _pageSizeInt64ModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPaginationArmOperation<PageSizeInt64ModelResource>(Response.FromValue(new PageSizeInt64ModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPaginationArmOperation<PageSizeInt64ModelResource>(Response.FromValue(new PageSizeInt64ModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -248,9 +246,7 @@ namespace MgmtPagination
             try
             {
                 var response = _pageSizeInt64ModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var uri = _pageSizeInt64ModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPaginationArmOperation<PageSizeInt64ModelResource>(Response.FromValue(new PageSizeInt64ModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPaginationArmOperation<PageSizeInt64ModelResource>(Response.FromValue(new PageSizeInt64ModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -90,9 +90,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _carRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, carName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,9 +138,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken);
-                var uri = _carRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, carName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -37,22 +37,6 @@ namespace MgmtSingletonResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string carName, BrakeName @default)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/cars/", false);
-            uri.AppendPath(carName, true);
-            uri.AppendPath("/brakes/", false);
-            uri.AppendPath(@default.ToString(), true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string carName, BrakeName @default)
         {
             var message = _pipeline.CreateMessage();

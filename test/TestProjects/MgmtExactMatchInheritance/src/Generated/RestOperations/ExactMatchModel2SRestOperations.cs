@@ -37,20 +37,6 @@ namespace MgmtExactMatchInheritance
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreatePutRequestUri(string subscriptionId, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/exactMatchModel2s/", false);
-            uri.AppendPath(exactMatchModel2SName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2)
         {
             var message = _pipeline.CreateMessage();

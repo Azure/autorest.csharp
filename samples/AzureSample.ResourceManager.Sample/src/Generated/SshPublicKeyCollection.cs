@@ -91,9 +91,7 @@ namespace AzureSample.ResourceManager.Sample
             try
             {
                 var response = await _sshPublicKeyRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _sshPublicKeyRestClient.CreateCreateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -142,9 +140,7 @@ namespace AzureSample.ResourceManager.Sample
             try
             {
                 var response = _sshPublicKeyRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, data, cancellationToken);
-                var uri = _sshPublicKeyRestClient.CreateCreateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

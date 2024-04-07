@@ -38,17 +38,6 @@ namespace AzureSample.ResourceManager.Sample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateListBySubscriptionRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -114,19 +103,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListByResourceGroupRequestUri(string subscriptionId, string resourceGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
@@ -200,20 +176,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateRequestUri(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyData data)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys/", false);
-            uri.AppendPath(sshPublicKeyName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyData data)
@@ -304,20 +266,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyPatch patch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys/", false);
-            uri.AppendPath(sshPublicKeyName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyPatch patch)
         {
             var message = _pipeline.CreateMessage();
@@ -404,20 +352,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys/", false);
-            uri.AppendPath(sshPublicKeyName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -485,20 +419,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys/", false);
-            uri.AppendPath(sshPublicKeyName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
@@ -583,21 +503,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateGenerateKeyPairRequestUri(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/sshPublicKeys/", false);
-            uri.AppendPath(sshPublicKeyName, true);
-            uri.AppendPath("/generateKeyPair", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGenerateKeyPairRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -677,14 +582,6 @@ namespace AzureSample.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateListBySubscriptionNextPageRequestUri(string nextLink, string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -751,14 +648,6 @@ namespace AzureSample.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListByResourceGroupNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)

@@ -198,9 +198,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = await _artifactRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var uri = _artifactRestClient.CreateDeleteRequestUri(Id.Parent, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -242,9 +240,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = _artifactRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                var uri = _artifactRestClient.CreateDeleteRequestUri(Id.Parent, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -290,9 +286,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = await _artifactRestClient.CreateOrUpdateAsync(Id.Parent, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _artifactRestClient.CreateCreateOrUpdateRequestUri(Id.Parent, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -338,9 +332,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = _artifactRestClient.CreateOrUpdate(Id.Parent, Id.Name, data, cancellationToken);
-                var uri = _artifactRestClient.CreateCreateOrUpdateRequestUri(Id.Parent, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtDiscriminatorArmOperation<ArtifactResource>(Response.FromValue(new ArtifactResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

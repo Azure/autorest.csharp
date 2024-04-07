@@ -90,9 +90,7 @@ namespace MgmtPartialResource
             try
             {
                 var response = await _configurationProfileAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _configurationProfileAssignmentRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -141,9 +139,7 @@ namespace MgmtPartialResource
             try
             {
                 var response = _configurationProfileAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken);
-                var uri = _configurationProfileAssignmentRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

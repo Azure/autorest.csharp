@@ -91,9 +91,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithNonResChWithLocName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _subParentWithNonResChWithLocRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, subParentWithNonResChWithLocName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLocResource>(Response.FromValue(new SubParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLocResource>(Response.FromValue(new SubParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -142,9 +140,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithNonResChWithLocName, data, cancellationToken);
-                var uri = _subParentWithNonResChWithLocRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, subParentWithNonResChWithLocName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLocResource>(Response.FromValue(new SubParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLocResource>(Response.FromValue(new SubParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

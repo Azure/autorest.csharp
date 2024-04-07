@@ -37,20 +37,6 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateGetAtScopeRequestUri(string scope, string deploymentName, string operationId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(scope, false);
-            uri.AppendPath("/providers/Microsoft.Resources/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendPath("/operations/", false);
-            uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateGetAtScopeRequest(string scope, string deploymentName, string operationId)
         {
             var message = _pipeline.CreateMessage();
@@ -127,23 +113,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAtScopeRequestUri(string scope, string deploymentName, int? top)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(scope, false);
-            uri.AppendPath("/providers/Microsoft.Resources/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendPath("/operations", false);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListAtScopeRequest(string scope, string deploymentName, int? top)
@@ -223,14 +192,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAtScopeNextPageRequestUri(string nextLink, string scope, string deploymentName, int? top)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListAtScopeNextPageRequest(string nextLink, string scope, string deploymentName, int? top)

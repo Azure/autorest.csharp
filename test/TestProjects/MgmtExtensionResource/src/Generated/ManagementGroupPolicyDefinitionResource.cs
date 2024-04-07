@@ -199,9 +199,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var uri = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateDeleteAtManagementGroupRequestUri(Id.Parent.Name, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExtensionResourceArmOperation(response, rehydrationToken);
+                var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -243,9 +241,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
-                var uri = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateDeleteAtManagementGroupRequestUri(Id.Parent.Name, Id.Name);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Delete, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExtensionResourceArmOperation(response, rehydrationToken);
+                var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -291,9 +287,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateCreateOrUpdateAtManagementGroupRequestUri(Id.Parent.Name, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExtensionResourceArmOperation<ManagementGroupPolicyDefinitionResource>(Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtExtensionResourceArmOperation<ManagementGroupPolicyDefinitionResource>(Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -339,9 +333,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Parent.Name, Id.Name, data, cancellationToken);
-                var uri = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateCreateOrUpdateAtManagementGroupRequestUri(Id.Parent.Name, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExtensionResourceArmOperation<ManagementGroupPolicyDefinitionResource>(Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtExtensionResourceArmOperation<ManagementGroupPolicyDefinitionResource>(Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -201,9 +201,7 @@ namespace MgmtNoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _noTypeReplacementModel3RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtNoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtNoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -248,9 +246,7 @@ namespace MgmtNoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var uri = _noTypeReplacementModel3RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtNoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtNoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

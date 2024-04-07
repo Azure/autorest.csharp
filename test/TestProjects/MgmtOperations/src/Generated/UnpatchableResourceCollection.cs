@@ -91,9 +91,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _unpatchableResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _unpatchableResourceRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -142,9 +140,7 @@ namespace MgmtOperations
             try
             {
                 var response = _unpatchableResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var uri = _unpatchableResourceRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -90,9 +90,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentRestClient.CreateOrUpdateAsync(Id.Name, tenantParentName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _tenantParentRestClient.CreateCreateOrUpdateRequestUri(Id.Name, tenantParentName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<TenantParentResource>(Response.FromValue(new TenantParentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<TenantParentResource>(Response.FromValue(new TenantParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -141,9 +139,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentRestClient.CreateOrUpdate(Id.Name, tenantParentName, data, cancellationToken);
-                var uri = _tenantParentRestClient.CreateCreateOrUpdateRequestUri(Id.Name, tenantParentName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<TenantParentResource>(Response.FromValue(new TenantParentResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<TenantParentResource>(Response.FromValue(new TenantParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

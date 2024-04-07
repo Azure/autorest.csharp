@@ -37,21 +37,6 @@ namespace MgmtCollectionParent
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateListOrderAtSubscriptionLevelRequestUri(string subscriptionId, string skipToken)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.EdgeOrder/orders", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            if (skipToken != null)
-            {
-                uri.AppendQuery("$skipToken", skipToken, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateListOrderAtSubscriptionLevelRequest(string subscriptionId, string skipToken)
         {
             var message = _pipeline.CreateMessage();
@@ -123,23 +108,6 @@ namespace MgmtCollectionParent
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListOrderAtResourceGroupLevelRequestUri(string subscriptionId, string resourceGroupName, string skipToken)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.EdgeOrder/orders", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            if (skipToken != null)
-            {
-                uri.AppendQuery("$skipToken", skipToken, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateListOrderAtResourceGroupLevelRequest(string subscriptionId, string resourceGroupName, string skipToken)
@@ -219,22 +187,6 @@ namespace MgmtCollectionParent
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetOrderByNameRequestUri(string subscriptionId, string resourceGroupName, string location, string orderName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.EdgeOrder/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/orders/", false);
-            uri.AppendPath(orderName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetOrderByNameRequest(string subscriptionId, string resourceGroupName, string location, string orderName)
@@ -325,14 +277,6 @@ namespace MgmtCollectionParent
             }
         }
 
-        internal RequestUriBuilder CreateListOrderAtSubscriptionLevelNextPageRequestUri(string nextLink, string subscriptionId, string skipToken)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateListOrderAtSubscriptionLevelNextPageRequest(string nextLink, string subscriptionId, string skipToken)
         {
             var message = _pipeline.CreateMessage();
@@ -401,14 +345,6 @@ namespace MgmtCollectionParent
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListOrderAtResourceGroupLevelNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string skipToken)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateListOrderAtResourceGroupLevelNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string skipToken)

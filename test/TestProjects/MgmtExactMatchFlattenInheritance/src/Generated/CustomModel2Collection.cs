@@ -90,9 +90,7 @@ namespace MgmtExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                var uri = _customModel2RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, foo);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,9 +138,7 @@ namespace MgmtExactMatchFlattenInheritance
             try
             {
                 var response = _customModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
-                var uri = _customModel2RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, foo);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
