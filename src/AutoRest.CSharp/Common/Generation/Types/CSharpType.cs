@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Types
         private bool _isEnum;
         private bool _isNullable;
         private bool _isPublic;
-        private bool _isUnion;
+        private bool? _isUnion;
         private IReadOnlyList<CSharpType> _arguments;
         private IReadOnlyList<CSharpType> _unionItemTypes;
 
@@ -178,7 +178,6 @@ namespace AutoRest.CSharp.Generation.Types
         [MemberNotNull(nameof(_namespace))]
         [MemberNotNull(nameof(_arguments))]
         [MemberNotNull(nameof(_isPublic))]
-        [MemberNotNull(nameof(_isUnion))]
         [MemberNotNull(nameof(_unionItemTypes))]
         private void Initialize(string? name, bool isValueType, bool isEnum, bool isNullable, string? ns,
             CSharpType? declaringType, IReadOnlyList<CSharpType>? args, bool isPublic)
@@ -191,8 +190,7 @@ namespace AutoRest.CSharp.Generation.Types
             _declaringType = declaringType;
             _arguments = args ?? Array.Empty<CSharpType>();
             _isPublic = isPublic;
-            _unionItemTypes = Array.Empty<CSharpType>();
-            _isUnion = _unionItemTypes.Count > 0;
+            _unionItemTypes ??= Array.Empty<CSharpType>();
         }
 
         public string Namespace { get { return _namespace; } }
@@ -201,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsValueType { get { return _isValueType; } }
         public bool IsEnum { get { return _isEnum; } }
         public bool IsLiteral => Literal is not null;
-        public bool IsUnion { get { return _isUnion; } }
+        public bool IsUnion => _isUnion ??= UnionItemTypes.Count > 0;
         public bool IsPublic { get { return _isPublic; } }
         public bool IsFrameworkType => _type != null;
         public bool IsNullable { get { return _isNullable; } }

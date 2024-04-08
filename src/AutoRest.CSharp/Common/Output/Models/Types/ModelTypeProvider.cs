@@ -470,7 +470,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     else
                     {
-                        initializationValue = Constant.NewInstanceOf(propertyType.InitializationType);
+                        initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                     }
                 }
                 // [TODO]: Consolidate property initializer generation between HLC and DPG
