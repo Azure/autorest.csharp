@@ -316,7 +316,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = propertyType.GetInputType();
+                    var inputType = propertyType.InputType;
                     if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
@@ -348,7 +348,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         }
                         else
                         {
-                            initializationValue = Constant.NewInstanceOf(propertyType.GetPropertyImplementationType());
+                            initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                         }
                     }
                 }
@@ -367,7 +367,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (AdditionalPropertiesProperty != null &&
                 !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(AdditionalPropertiesProperty.Declaration.Type.GetImplementationType())));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(AdditionalPropertiesProperty.Declaration.Type.InitializationType)));
             }
 
             return new ObjectTypeConstructor(
@@ -586,7 +586,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
                 property.IsReadOnly)
             {
-                valueType = valueType.GetOutputType();
+                valueType = valueType.OutputType;
             }
 
             return valueType;

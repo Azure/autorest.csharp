@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             {
                 throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.SchemaProperty?.Schema}'");
             }
-            ItemType = itemProperty.Declaration.Type.GetElementType();
+            ItemType = itemProperty.Declaration.Type.ElementType;
         }
 
         public CSharpType ResponseType { get; }

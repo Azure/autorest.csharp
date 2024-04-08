@@ -87,8 +87,8 @@ namespace AutoRest.CSharp.Output.Builders
         {
             return inputType switch
             {
-                InputListType listType => new XmlArraySerialization(type.GetImplementationType(), BuildXmlElementSerialization(listType.ElementType, type.GetElementType(), null, false), name ?? inputType.Name, isRoot),
-                InputDictionaryType dictionaryType => new XmlDictionarySerialization(type.GetImplementationType(), BuildXmlElementSerialization(dictionaryType.ValueType, type.GetElementType(), null, false), name ?? inputType.Name),
+                InputListType listType => new XmlArraySerialization(type.InitializationType, BuildXmlElementSerialization(listType.ElementType, type.ElementType, null, false), name ?? inputType.Name, isRoot),
+                InputDictionaryType dictionaryType => new XmlDictionarySerialization(type.InitializationType, BuildXmlElementSerialization(dictionaryType.ValueType, type.ElementType, null, false), name ?? inputType.Name),
                 CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, name, isRoot),
                 _ => new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
             };
@@ -117,15 +117,15 @@ namespace AutoRest.CSharp.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        type.GetImplementationType(),
-                        BuildXmlElementSerialization(arraySchema.ElementType, type.GetElementType(), null, false),
+                        type.InitializationType,
+                        BuildXmlElementSerialization(arraySchema.ElementType, type.ElementType, null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        type.GetImplementationType(),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, type.GetElementType(), null, false),
+                        type.InitializationType,
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, type.ElementType, null, false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
@@ -162,8 +162,8 @@ namespace AutoRest.CSharp.Output.Builders
             return inputType switch
             {
                 CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
-                InputListType listType => new JsonArraySerialization(valueType.GetImplementationType(), BuildJsonSerialization(listType.ElementType, valueType.GetElementType(), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType.GetImplementationType(), BuildJsonSerialization(dictionaryType.ValueType, valueType.GetElementType(), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType => new JsonArraySerialization(valueType.InitializationType, BuildJsonSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType.InitializationType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
@@ -181,13 +181,13 @@ namespace AutoRest.CSharp.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, type, isCollectionElement);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        type.GetImplementationType(),
-                        BuildSerialization(arraySchema.ElementType, type.GetElementType(), true),
+                        type.InitializationType,
+                        BuildSerialization(arraySchema.ElementType, type.ElementType, true),
                         type.IsNullable);
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
-                        type.GetImplementationType(),
-                        BuildSerialization(dictionarySchema.ElementType, type.GetElementType(), true),
+                        type.InitializationType,
+                        BuildSerialization(dictionarySchema.ElementType, type.ElementType, true),
                         type.IsNullable);
                 default:
                     JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;

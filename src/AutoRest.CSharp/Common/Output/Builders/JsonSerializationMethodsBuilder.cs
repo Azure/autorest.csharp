@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(array.Type.GetElementType(), expression)),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(array.Type.ElementType, expression)),
                 JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
                 _ => throw new NotSupportedException()
@@ -644,7 +644,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(serializedType.GetPropertyImplementationType())),
+                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(serializedType.PropertyInitializationType)),
                         Continue
                     };
                 }
@@ -762,7 +762,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return new MethodBodyStatement[]
                     {
                         Declare(index, Int(0)),
-                        Declare(readOnlyMemory, New.Array(jsonReadOnlyMemory.Type.GetElementType(), element.GetArrayLength())),
+                        Declare(readOnlyMemory, New.Array(jsonReadOnlyMemory.Type.ElementType, element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
                             DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), options, index),

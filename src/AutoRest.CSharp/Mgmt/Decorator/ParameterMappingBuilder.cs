@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (requestPath.IsById)
             {
                 var reference = requestPath.First().Reference;
-                if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.EqualsByName(reference.Type))
+                if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.AreNamesEqual(reference.Type))
                 {
                     return parameter with { Type = typeof(Azure.Core.ResourceIdentifier) };
                 }

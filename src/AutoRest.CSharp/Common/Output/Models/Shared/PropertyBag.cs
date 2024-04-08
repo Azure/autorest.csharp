@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(
                 "options",
                 $"A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter.",
-                PackModel.Type.GetInputType(),
+                PackModel.Type.InputType,
                 null,
                 ShouldValidateParameter ? ValidationType.AssertNotNull : ValidationType.None,
                 ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };

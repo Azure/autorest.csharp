@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 BicepArraySerialization array => SerializeArray(
                     stringBuilder,
                     array,
-                    new EnumerableExpression(array.ImplementationType.GetElementType(), expression),
+                    new EnumerableExpression(array.ImplementationType.ElementType, expression),
                     spaces),
                 BicepDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,

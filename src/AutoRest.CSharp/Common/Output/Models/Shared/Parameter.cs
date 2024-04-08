@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = type.GetInputType();
+            var inputType = type.InputType;
             return new Parameter(
                 name,
                 CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = type.GetInputType();
+            var inputType = type.InputType;
             return new Parameter(
                 name,
                 CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             public bool Equals(Parameter? x, Parameter? y)
             {
-                return Object.Equals(x?.Type, y?.Type);
+                return object.Equals(x?.Type, y?.Type);
             }
 
             public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             public bool Equals(Parameter? x, Parameter? y)
             {
-                if (Object.ReferenceEquals(x, y))
+                if (object.ReferenceEquals(x, y))
                 {
                     return true;
                 }
@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 }
 
                 // We can't use CsharpType.Equals here because they can have different implementations from different versions
-                var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
+                var result = x.Type.AreNamesEqual(y.Type) && x.Name == y.Name;
                 return result;
             }
 

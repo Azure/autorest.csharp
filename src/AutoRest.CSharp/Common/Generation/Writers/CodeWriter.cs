@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (argument.IsArray)
                     {
                         AppendRaw(" an array of type ");
-                        argument = argument.GetElementType();
+                        argument = argument.ElementType;
                     }
                     else
                     {

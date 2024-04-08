@@ -239,7 +239,7 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return false;
                 }
-                type = new CSharpType(existingType, false, arguments);
+                type = new CSharpType(existingType, arguments, isNullable: false);
             }
             else
             {
