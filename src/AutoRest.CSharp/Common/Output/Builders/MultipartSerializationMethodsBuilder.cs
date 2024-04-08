@@ -263,9 +263,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(MultipartFormDataExpression mulitpartContent, MultipartValueSerialization valueSerialization, ValueExpression valueExpression, StringExpression name)
         {
-            if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
+            if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(Stream))
             {
                 return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Add(Literal(".wav")));
+            }
+            if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
+            {
+                if (valueSerialization.ContentType != "application/json")
+                {
+                    return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Add(Literal(".wav")));
+                } else
+                {
+                    return mulitpartContent.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
+                }
             }
             if (valueSerialization.Type.IsFrameworkType)
             {
