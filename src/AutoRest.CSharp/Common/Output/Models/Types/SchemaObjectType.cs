@@ -617,7 +617,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return baseType;
             }
 
-            var objectSchemas = InputModel.GetAllBaseModels();
+            var objectSchemas = InputModel.GetImmediateBaseModels().ToArray();
 
             InputModelType? selectedSchema = null;
 

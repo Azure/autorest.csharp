@@ -17,15 +17,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(RequestMethod method, InputParameter bodyParameter, string resourceName, InputOperation operation)
+        internal static void Update(RequestMethod method, InputParameter bodyParameter, string resourceName, InputOperation operation, List<InputType> updatedTypes)
         {
             if (method == RequestMethod.Put)
             {
-                UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation);
+                UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation, updatedTypes);
             }
             else if (method == RequestMethod.Patch)
             {
-                UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation);
+                UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation, updatedTypes);
             }
             else
             {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation)
+        internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, List<InputType> updatedTypes)
         {
             var schemaName = bodyParameter.Type.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Name, schemaName, resourceDataDictionary);
             // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
-            UpdateRequestParameter(bodyParameter, paramName, schemaName, operation);
+            UpdateRequestParameter(bodyParameter, paramName, schemaName, operation, updatedTypes);
         }
 
         internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation)
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 fullSerializedName, "UpdateParameterNameOnly", oriName, bodyParam.Name);
         }
 
-        private static void UpdateRequestParameter(InputParameter parameter, string parameterName, string schemaName, InputOperation operation)
+        private static void UpdateRequestParameter(InputParameter parameter, string parameterName, string schemaName, InputOperation operation, List<InputType> updatedTypes)
         {
             string oriParameterName = parameter.Name;
             parameter.NameInRequest ??= parameter.Name;
@@ -75,6 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             string oriSchemaName = parameter.Type.Name;
             if (oriSchemaName != schemaName)
             {
+                updatedTypes.Add(parameter.Type);
                 parameter.Type.Name = schemaName;
                 parameter.Type.OriginalName = oriSchemaName;
                 fullSerializedName = parameter.Type.GetFullSerializedName();

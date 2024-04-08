@@ -4,16 +4,27 @@
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
-using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
+        private static void TransfromDataPlane(CodeModel codeModel)
+        {
+            SchemaUsageTransformer.Transform(codeModel);
+            ConstantSchemaTransformer.Transform(codeModel);
+            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
+        }
+
         public static void Transform(CodeModel codeModel)
         {
+            if (!Configuration.AzureArm)
+            {
+                TransfromDataPlane(codeModel);
+                return;
+            }
+
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);

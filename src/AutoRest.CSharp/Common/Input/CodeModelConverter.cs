@@ -348,8 +348,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                IsEmpty: schema is EmptyObjectSchema,
-                OriginalName: schema.Language.Default.SerializedName)
+                IsEmpty: schema is EmptyObjectSchema)
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
                 Serialization = GetSerialization(schema, usage)
@@ -543,9 +542,10 @@ namespace AutoRest.CSharp.Common.Input
         private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
+            BooleanSchema => InputPrimitiveType.Boolean,
 
             ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => InputPrimitiveType.BytesBase64Url,
-            ByteArraySchema => InputPrimitiveType.Bytes,
+            ByteArraySchema { Format: ByteArraySchemaFormat.Byte } => InputPrimitiveType.Bytes,
 
             DateSchema => InputPrimitiveType.Date,
             DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTimeISO8601,
@@ -593,6 +593,10 @@ namespace AutoRest.CSharp.Common.Input
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, false),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
             ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
+            StringSchema => InputPrimitiveType.String,
+
+            // TODO: Handle char case
+            CharSchema => InputPrimitiveType.String,
 
             AnySchema => InputIntrinsicType.Unknown,
             AnyObjectSchema => InputIntrinsicType.Unknown,

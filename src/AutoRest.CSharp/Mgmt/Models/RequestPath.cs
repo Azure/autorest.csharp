@@ -107,14 +107,12 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     public static RequestPath FromOperation(InputOperation operation, InputClient inputClient, TypeFactory typeFactory)
     {
-        var inputParameters = operation.Parameters
-            .Where(p => p.Location is RequestLocation.Path or RequestLocation.Uri)
-            .ToDictionary(GetRequestParameterName);
+        var references = new MgmtRestClientBuilder(inputClient).GetReferencesToOperationParameters(operation, operation.Parameters);
 
         var segments = new List<Segment>();
         var segmentIndex = 0;
-        CreateSegments(operation.Uri, inputParameters, segments, typeFactory, ref segmentIndex);
-        CreateSegments(operation.Path, inputParameters, segments, typeFactory, ref segmentIndex);
+        CreateSegments(operation.Uri, references, segments, ref segmentIndex);
+        CreateSegments(operation.Path, references, segments, ref segmentIndex);
 
         return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
 
@@ -432,7 +430,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
     }
 
-    private static void CreateSegments(string path, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<Segment> segments, TypeFactory typeFactory, ref int segmentIndex)
+    private static void CreateSegments(string path, IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> references, ICollection<Segment> segments, ref int segmentIndex)
     {
         foreach ((ReadOnlySpan<char> span, bool isLiteral) in Utilities.StringExtensions.GetPathParts(path))
         {
@@ -463,24 +461,23 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             }
             else
             {
-                if (requestParameters.TryGetValue(span.ToString(), out var inputParameter))
+                if (references.TryGetValue(span.ToString(), out var parameterReference))
                 {
                     segmentIndex++;
+                    var (referenceOrConstant, skipUriEncoding) = parameterReference;
+                    var valueType = referenceOrConstant.Type;
 
-                    // we explicitly skip the `endpoint` variable in the path
-                    if (inputParameter.IsEndpoint)
+                    // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
+                    if (valueType.Equals(typeof(Uri)))
                     {
                         continue;
                     }
 
-                    var type = typeFactory.CreateType(inputParameter.Type);
-                    var reference = CreateReference(inputParameter, type, typeFactory);
-                    var valueType = reference.Type;
-
                     //for now we only assume expand variables are in the key slot which will be an odd slot
-                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsFrameworkType: false, Implementation: EnumType } ? valueType : null;
+                    CSharpType? expandableType = segmentIndex % 2 == 0 && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+
                     // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-                    segments.Add(new Segment(reference, !inputParameter.SkipUrlEncoding, expandableType: expandableType));
+                    segments.Add(new Segment(referenceOrConstant, !skipUriEncoding, expandableType: expandableType));
                 }
                 else
                 {

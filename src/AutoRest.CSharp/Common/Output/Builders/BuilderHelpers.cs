@@ -191,9 +191,6 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this InputOperation operation) =>
             operation.Name.ToCleanName();
 
-        public static string CSharpName(this Operation operation) =>
-            operation.Language.Default.Name.ToCleanName();
-
         public static string CSharpName(this InputType inputType) =>
             inputType.Name.ToCleanName();
 

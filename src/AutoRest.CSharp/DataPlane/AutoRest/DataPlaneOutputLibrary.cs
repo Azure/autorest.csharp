@@ -41,11 +41,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _typeFactory = new TypeFactory(this, typeof(object));
             _sourceInputModel = sourceInputModel;
 
-            // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(codeModel);
-            ConstantSchemaTransformer.Transform(codeModel);
-            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
-
             _input = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
 
             _libraryName = Configuration.LibraryName;

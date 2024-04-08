@@ -61,6 +61,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private static string GetRequestParameterName(InputParameter requestParameter) => requestParameter.NameInRequest ?? requestParameter.Name;
 
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+        }
+
         /// <summary>
         /// Build CmcRestClientMethod for mgmt
         /// </summary>

@@ -9,8 +9,8 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, bool IsEmpty = false, string? OriginalName = default)
-        : InputType(Name, IsNullable, OriginalName)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, bool IsEmpty = false)
+        : InputType(Name, IsNullable)
     {
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
@@ -43,6 +43,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 
+        // TODO: remove the workaround for immediate base models
+        public IReadOnlyList<InputModelType> GetImmediateBaseModels() => EnumerateBase(BaseModel, "AzureResourceBase").ToArray();
+
         public IReadOnlyList<InputModelType> GetAllDerivedModels()
         {
             var list = new List<InputModelType>(DerivedModels);
@@ -54,11 +57,18 @@ namespace AutoRest.CSharp.Common.Input
             return list;
         }
 
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
+        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model, string? skipModelName = null)
         {
             while (model != null)
             {
-                yield return model;
+                if (skipModelName is null)
+                {
+                    yield return model;
+                }
+                else if (model.Name != skipModelName)
+                {
+                    yield return model;
+                }
                 model = model.BaseModel;
             }
         }

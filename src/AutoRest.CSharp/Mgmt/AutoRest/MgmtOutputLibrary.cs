@@ -121,8 +121,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
 
-        private void UpdateBodyParameters()
+        private IReadOnlyList<InputType> UpdateBodyParameters()
         {
+            var updatedTypes = new List<InputType>();
             Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>(ReferenceEqualityComparer.Instance);
 
             // run one pass to get the schema usage count
@@ -186,11 +187,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (requestPath.IsExpandable)
                             throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {client.Key}.{operation.CSharpName()} : {requestPath}");
                         var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
-                        BodyParameterNormalizer.Update(operation.HttpMethod, bodyParam, name, operation);
+                        updatedTypes.Add(bodyParam.Type);
+                        BodyParameterNormalizer.Update(operation.HttpMethod, bodyParam, name, operation, updatedTypes);
                     }
                     else
                     {
-                        BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
+                        BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets, operation, updatedTypes);
                     }
                 }
             }
@@ -219,6 +221,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
+            return updatedTypes;
         }
 
         private static void IncrementCount(Dictionary<InputType, int> usageCounts, InputType schema)
@@ -252,7 +255,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             //this is where we update
-            UpdateBodyParameters();
+            var updatedTypes = UpdateBodyParameters();
+            foreach (var type in updatedTypes)
+            {
+                _schemaToModels[type] = BuildModel(type);
+            }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new Dictionary<InputModelType, TypeProvider>();
