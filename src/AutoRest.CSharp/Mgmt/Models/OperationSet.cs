@@ -6,11 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Input;
 using Azure.Core;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">when trying to add an operation with a different path from <see cref="RequestPath"/></exception>
         public void Add(InputOperation operation)
         {
-            var path = operation.Path;
+            var path = operation.GetHttpPath();
             if (path != RequestPath)
                 throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
             Operations.Add(operation);

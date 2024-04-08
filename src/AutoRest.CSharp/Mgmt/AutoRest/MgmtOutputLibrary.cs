@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // get the request path and operation set
                     RequestPath requestPath = RequestPath.FromOperation(operation, client, MgmtContext.TypeFactory);
                     var operationSet = RawRequestPathToOperationSets[requestPath];
-                    if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                    if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema, _input))
                     {
                         // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
                         BodyParameterNormalizer.MakeRequired(bodyParam, operation.HttpMethod);
@@ -737,7 +737,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var childOperations = new Dictionary<RequestPath, HashSet<InputOperation>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
-                if (operationSet.IsResource())
+                if (operationSet.IsResource(_input))
                     continue;
                 foreach (var operation in operationSet)
                 {
@@ -836,7 +836,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
-                if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema, _input))
                 {
                     // ensure the name of resource data is singular
                     var schemaName = resourceDataSchema.Name;
