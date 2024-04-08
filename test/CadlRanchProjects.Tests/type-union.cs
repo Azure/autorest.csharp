@@ -111,15 +111,15 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetEnumsOnlyClient().GetEnumsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(BinaryData.FromObjectAsJson(LR.Right.ToString()), response.Value.Prop.Lr);
-            AssertEqual(BinaryData.FromObjectAsJson(UD.Up.ToString()), response.Value.Prop.Ud);
+            AssertEqual(BinaryData.FromObjectAsJson(LR.Right.ToSerialString()), response.Value.Prop.Lr);
+            AssertEqual(BinaryData.FromObjectAsJson(UD.Up.ToSerialString()), response.Value.Prop.Ud);
         });
 
         [Test]
         public Task SendEnumsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetEnumsOnlyClient().SendAsync(new EnumsOnlyCases(BinaryData.FromObjectAsJson(LR.Right.ToString()),
-                BinaryData.FromObjectAsJson(UD.Up.ToString())));
+            var response = await new UnionClient(host, null).GetEnumsOnlyClient().SendAsync(new EnumsOnlyCases(BinaryData.FromObjectAsJson(LR.Right.ToSerialString()),
+                BinaryData.FromObjectAsJson(UD.Up.ToSerialString())));
             Assert.AreEqual(204, response.Status);
         });
 

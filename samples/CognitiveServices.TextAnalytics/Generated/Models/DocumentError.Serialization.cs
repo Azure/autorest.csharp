@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -33,6 +34,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new DocumentError(id, error);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DocumentError FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDocumentError(document.RootElement);
         }
     }
 }

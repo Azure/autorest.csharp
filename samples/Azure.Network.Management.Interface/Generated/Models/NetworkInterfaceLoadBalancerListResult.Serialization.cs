@@ -44,5 +44,13 @@ namespace Azure.Network.Management.Interface.Models
             }
             return new NetworkInterfaceLoadBalancerListResult(value ?? new ChangeTrackingList<LoadBalancer>(), nextLink);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static NetworkInterfaceLoadBalancerListResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
+        }
     }
 }

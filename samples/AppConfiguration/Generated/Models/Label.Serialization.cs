@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace AppConfiguration.Models
 {
@@ -27,6 +28,14 @@ namespace AppConfiguration.Models
                 }
             }
             return new Label(name);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Label FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeLabel(document.RootElement);
         }
     }
 }

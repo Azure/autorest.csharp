@@ -383,7 +383,7 @@ model BatchResponseHeaders {
 
     @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
     @header
-    @projectedName("python", "etag")
+    @clientName("etag", "python")
     ETag?: string;
 
     @doc("The time at which the resource was last modified.")
