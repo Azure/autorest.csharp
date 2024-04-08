@@ -633,56 +633,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 shouldExcludeInWireSerialization,
                 new ValueExpression());//TODO: need deserialization for additionalProperties
         }
-        /*
-        private IEnumerable<MultipartPropertySerialization> CreateMultipartPropertySerializations()
-        {
-            foreach (var objType in EnumerateHierarchy())
-            {
-                foreach (var property in objType.Properties)
-                {
-                    if (property.InputModelProperty is not { } inputModelProperty)
-                        continue;
-
-                    var declaredName = property.Declaration.Name;
-                    var serializedName = inputModelProperty.SerializedName;
-                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
-                    var valueSerialization = SerializationBuilder.BuildMultipartSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat, memberValueExpression.NullableStructValue());
-                    TypedMemberExpression? enumerableExpression = null;
-                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
-                    {
-                        enumerableExpression = property.Declaration.Type.IsNullable
-                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
-                    }
-
-                    yield return new MultipartPropertySerialization(
-                        declaredName.ToVariableName(),
-                        memberValueExpression,
-                        serializedName,
-                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
-                        valueSerialization,
-                        property.IsRequired,
-                        ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        enumerableExpression: enumerableExpression);
-                    ;
-                }
-            }
-        }
-        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
-        {
-            if (inputProperty.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InitializationValue is not null)
-            {
-                return false;
-            }
-
-            return inputProperty.IsReadOnly;
-        }
-        */
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
             bool shouldExcludeInWireSerialization = false;
