@@ -128,6 +128,7 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 writer.WriteObjectValue<SystemDataContent>(model);
             }
+
             public override SystemDataContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

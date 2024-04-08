@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace AppConfiguration.Models
 {
@@ -55,6 +56,14 @@ namespace AppConfiguration.Models
                 }
             }
             return new Error(type, title, name, detail, status);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Error FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeError(document.RootElement);
         }
     }
 }

@@ -536,7 +536,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var objAdditionalProperties = serialization.AdditionalProperties;
             if (objAdditionalProperties != null)
             {
-                var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
+                var localVarName = objAdditionalProperties.ShouldExcludeInWireSerialization ? "rawDataDictionary" : "additionalPropertiesDictionary";
+                var dictionary = new VariableReference(objAdditionalProperties.Type, localVarName);
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
