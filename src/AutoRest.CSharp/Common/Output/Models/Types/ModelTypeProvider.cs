@@ -703,14 +703,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return method;
             }
 
-            // [TODO]: Generate FromOperationResponse and ToRequestContent in HLC
-            if (Configuration.Generation1ConvenienceClient)
+            if (Serialization.Json is null)
+            {
                 yield break;
+            }
 
             if (IncludeDeserializer)
+            {
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+            }
+
             if (IncludeSerializer)
+            {
                 yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), Type);
+            }
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

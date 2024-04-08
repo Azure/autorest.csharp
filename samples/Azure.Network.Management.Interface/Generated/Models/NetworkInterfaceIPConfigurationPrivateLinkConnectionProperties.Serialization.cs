@@ -50,5 +50,13 @@ namespace Azure.Network.Management.Interface.Models
             }
             return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns ?? new ChangeTrackingList<string>());
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(document.RootElement);
+        }
     }
 }

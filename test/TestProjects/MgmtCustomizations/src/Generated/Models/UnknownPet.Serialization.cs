@@ -40,6 +40,25 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                SerializeColorProperty(writer);
+            }
+            writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -82,8 +101,10 @@ namespace MgmtCustomizations.Models
             string name = default;
             int size = default;
             DateTimeOffset? dateOfBirth = default;
+            IDictionary<string, string> tags = default;
+            string color = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -110,13 +131,51 @@ namespace MgmtCustomizations.Models
                     dateOfBirth = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("color"u8))
+                        {
+                            DeserializeColorProperty(property0, ref color);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPet(kind, name, size, dateOfBirth, serializedAdditionalRawData);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new UnknownPet(
+                kind,
+                name,
+                size,
+                dateOfBirth,
+                color,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Pet>.Write(ModelReaderWriterOptions options)

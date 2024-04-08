@@ -50,6 +50,8 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ClientOptionsType { get; }
 
         public abstract Type RequestContextType { get; }
+        public abstract string RequestContextName { get; }
+        public abstract string RequestContextDescription { get; }
         public string CancellationTokenName = nameof(RequestOptions.CancellationToken);
 
         public abstract Type HttpPipelineBuilderType { get; }
@@ -68,7 +70,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract FormattableString GetSetMethodString(string requestName, string method);
         public abstract FormattableString GetSetUriString(string requestName, string uriName);
 
-        public abstract Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod { get; }
+        public abstract Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields> WriteHeaderMethod { get; }
 
         public abstract FormattableString GetSetContentString(string requestName, string contentName);
 

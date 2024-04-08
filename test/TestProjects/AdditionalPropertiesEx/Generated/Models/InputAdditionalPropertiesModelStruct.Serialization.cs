@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
@@ -108,5 +109,21 @@ namespace AdditionalPropertiesEx.Models
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
         string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputAdditionalPropertiesModelStruct FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModelStruct>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

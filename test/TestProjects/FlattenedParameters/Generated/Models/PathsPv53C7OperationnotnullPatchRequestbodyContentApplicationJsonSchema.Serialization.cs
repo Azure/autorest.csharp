@@ -27,5 +27,13 @@ namespace FlattenedParameters.Models
             }
             writer.WriteEndObject();
         }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>(this);
+            return content;
+        }
     }
 }

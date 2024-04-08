@@ -219,16 +219,16 @@ describe("Test GetInputType for enum", () => {
         deepStrictEqual(type.IsExtensible, false);
     });
 
-    it("extensible enum", async () => {
+    it("fixed enum", async () => {
         const program = await typeSpecCompile(
             `
-        @doc("Extensible enum")
-        enum ExtensibleEnum {
+        @doc("Fixed enum")
+        enum FixedEnum {
             One: "1",
             Two: "2",
             Four: "4"
         }
-        op test(@body input: ExtensibleEnum): string[];
+        op test(@body input: FixedEnum): string[];
       `,
             runner
         );
@@ -239,18 +239,18 @@ describe("Test GetInputType for enum", () => {
             isEqual(
                 {
                     Kind: InputTypeKind.Enum,
-                    Name: "ExtensibleEnum",
+                    Name: "FixedEnum",
                     Namespace: "Azure.Csharp.Testing",
                     Accessibility: undefined,
                     Deprecated: undefined,
-                    Description: "Extensible enum",
+                    Description: "Fixed enum",
                     EnumValueType: "String",
                     AllowedValues: [
                         { Name: "One", Value: "1", Description: undefined },
                         { Name: "Two", Value: "2", Description: undefined },
                         { Name: "Four", Value: "4", Description: undefined }
                     ],
-                    IsExtensible: true,
+                    IsExtensible: false,
                     IsNullable: false,
                     Usage: "Input"
                 } as InputEnumType,
@@ -260,7 +260,7 @@ describe("Test GetInputType for enum", () => {
         const type = root.Clients[0].Operations[0].Parameters[0]
             .Type as InputEnumType;
         assert(type.EnumValueType !== undefined);
-        deepStrictEqual(type.Name, "ExtensibleEnum");
-        deepStrictEqual((type as InputEnumType).IsExtensible, true);
+        deepStrictEqual(type.Name, "FixedEnum");
+        deepStrictEqual((type as InputEnumType).IsExtensible, false);
     });
 });

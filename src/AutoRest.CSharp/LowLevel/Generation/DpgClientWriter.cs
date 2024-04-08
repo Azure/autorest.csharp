@@ -317,15 +317,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType is null)
                 {
-                    _writer.WriteMethodBodyStatement(Return(response));
+                    Return(response).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
+                    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
                 }
                 else if (TypeFactory.IsCollectionType(responseType))
                 {
@@ -334,16 +334,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
                     var value = new VariableReference(responseType, "value");
 
-                    _writer.WriteMethodBodyStatement(new[]
+                    new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
                         JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                    });
+                    }.AsStatement().Write(_writer);
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
+                    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
                 }
             }
             _writer.Line();
@@ -459,32 +459,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                     {
-                        writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                        WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                     }
                 }
                 else
                 {
-                    writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                    WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
             writer.Line();
 
-            static void writeStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
+            static void WriteStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
             {
                 var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
                 if (headAsBoolean)
                 {
-                    writer.WriteMethodBodyStatement(new[]
-                    {
-                            Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
-                            Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
-                        });
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
+                    Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async).Write(writer);
                 }
                 else
                 {
-                    writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
                     writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
-                    writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
+                    Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)).Write(writer);
                 }
             }
         }
@@ -531,7 +528,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)

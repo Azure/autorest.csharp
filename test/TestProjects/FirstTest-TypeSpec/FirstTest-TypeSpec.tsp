@@ -41,7 +41,6 @@ enum Versions {
   }
 
 @doc("float fixed enum")
-@fixed
 enum FloatFixedEnum {
     One: 1.1,
     Two: 2.2,
@@ -49,7 +48,6 @@ enum FloatFixedEnum {
 }
 
 @doc("int fixed enum")
-@fixed
 enum IntFixedEnum {
     One: 1,
     Two: 2,
@@ -57,7 +55,6 @@ enum IntFixedEnum {
 }
 
 @doc("Simple enum")
-@fixed
 enum StringFixedEnum {
     One: "1",
     Two: "2",
@@ -150,7 +147,7 @@ model NotFriend {
 }
 
 @doc("this is a model with a projected name")
-@projectedName("client", "ProjectedModel")
+@clientName("ProjectedModel")
 model ModelWithProjectedName {
     @doc("name of the ModelWithProjectedName")
     name: string;
@@ -501,10 +498,9 @@ op ContainSelfModels(@body input: ContainSelf): void;
 
 
 @doc("enum with projected name")
-@fixed
-@projectedName("csharp", "CsProjectedEnum")
+@clientName("CsProjectedEnum")
 enum ProjectedEnum {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,
@@ -517,10 +513,9 @@ op enumParameter(@path p1: ProjectedEnum ): void;
 
 
 @doc("enum with projected name used in a model")
-@fixed
-@projectedName("csharp", "CsProjectedEnumInModel")
+@clientName("CsProjectedEnumInModel")
 enum ProjectedEnumInModel {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,
