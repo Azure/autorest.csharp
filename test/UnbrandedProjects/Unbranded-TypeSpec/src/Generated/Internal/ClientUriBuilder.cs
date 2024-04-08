@@ -14,7 +14,6 @@ namespace UnbrandedTypeSpec
         private UriBuilder _uriBuilder;
         private StringBuilder _pathBuilder;
         private StringBuilder _queryBuilder;
-        private const char PathSeparator = '/';
 
         public ClientUriBuilder()
         {
@@ -40,11 +39,6 @@ namespace UnbrandedTypeSpec
             if (escape)
             {
                 value = Uri.EscapeDataString(value);
-            }
-
-            if (value[0] == PathSeparator)
-            {
-                value = value.Substring(1);
             }
 
             PathBuilder.Append(value);
