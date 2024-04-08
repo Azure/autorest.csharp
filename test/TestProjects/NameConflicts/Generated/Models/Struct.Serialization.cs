@@ -6,8 +6,8 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using NameConflicts;
 
 namespace NameConflicts.Models
 {
@@ -106,10 +106,10 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("continue"u8);
                 writer.WriteStringValue(Continue);
             }
-            if (Optional.IsDefined(ClassValue))
+            if (Optional.IsDefined(ClassProperty))
             {
                 writer.WritePropertyName("class"u8);
-                writer.WriteStringValue(ClassValue);
+                writer.WriteStringValue(ClassProperty);
             }
             if (Optional.IsDefined(Decimal))
             {
@@ -301,10 +301,10 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(NullProperty))
+            if (Optional.IsDefined(Null))
             {
                 writer.WritePropertyName("null"u8);
-                writer.WriteStringValue(NullProperty);
+                writer.WriteStringValue(Null);
             }
             if (Optional.IsDefined(Object))
             {
@@ -546,20 +546,20 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("System"u8);
                 writer.WriteStringValue(System.Value.ToString());
             }
-            if (Optional.IsDefined(ToStringValue))
+            if (Optional.IsDefined(ToStringProperty))
             {
                 writer.WritePropertyName("ToString"u8);
-                writer.WriteStringValue(ToStringValue);
+                writer.WriteStringValue(ToStringProperty);
             }
-            if (Optional.IsDefined(EqualsValue))
+            if (Optional.IsDefined(EqualsProperty))
             {
                 writer.WritePropertyName("Equals"u8);
-                writer.WriteStringValue(EqualsValue);
+                writer.WriteStringValue(EqualsProperty);
             }
-            if (Optional.IsDefined(GetHashCodeValue))
+            if (Optional.IsDefined(GetHashCodeProperty))
             {
                 writer.WritePropertyName("GetHashCode"u8);
-                writer.WriteStringValue(GetHashCodeValue);
+                writer.WriteStringValue(GetHashCodeProperty);
             }
             writer.WriteEndObject();
         }
@@ -1341,6 +1341,22 @@ namespace NameConflicts.Models
                 @equals,
                 getHashCode,
                 _1);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new Struct FromResponse(Azure.Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeStruct(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<Struct>(this);
+            return content;
         }
     }
 }

@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -27,7 +26,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
         public static PetStoreData PetStoreData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PetStoreProperties properties = null)
         {
-            return new PetStoreData(id, name, resourceType, systemData, properties);
+            return new PetStoreData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
@@ -37,10 +42,21 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="color"></param>
+        /// <param name="tags"></param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null)
+        public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string color = null, IDictionary<string, string> tags = null)
         {
-            return new UnknownPet(default, name, size, dateOfBirth);
+            tags ??= new Dictionary<string, string>();
+
+            return new UnknownPet(
+                default,
+                name,
+                size,
+                dateOfBirth,
+                color,
+                tags,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -50,17 +66,24 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="color"></param>
+        /// <param name="tags"></param>
         /// <param name="sleep"> A cat can sleep. </param>
         /// <param name="jump"> A cat can jump. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string sleep = null, string jump = null, string meow = null)
+        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string color = null, IDictionary<string, string> tags = null, string sleep = null, string jump = null, string meow = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Cat(
                 PetKind.Cat,
                 name,
                 size,
                 dateOfBirth,
+                color,
+                tags,
+                serializedAdditionalRawData: null,
                 sleep,
                 jump,
                 meow);
@@ -73,18 +96,44 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <param name="color"></param>
+        /// <param name="tags"></param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="jump"> A dog can jump. </param>
+        /// <param name="friend">
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.Cat"/> and <see cref="Models.Dog"/>.
+        /// </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null, string jump = null)
+        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string color = null, IDictionary<string, string> tags = null, string bark = null, string jump = null, Pet friend = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Dog(
                 PetKind.Dog,
                 name,
                 size,
                 dateOfBirth,
+                color,
+                tags,
+                serializedAdditionalRawData: null,
                 bark,
-                jump);
+                jump,
+                friend);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Pet" />. </summary>
+        /// <param name="name"> The name of the pet. </param>
+        /// <param name="size">
+        /// The size of the pet. This property here is mocking the following scenario:
+        /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        /// </param>
+        /// <param name="dateOfBirth"> Pet date of birth. </param>
+        /// <returns> A new <see cref="T:MgmtCustomizations.Models.Pet" /> instance for mocking. </returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Pet Pet(string name, int size, DateTimeOffset? dateOfBirth)
+        {
+            return Pet(name: name, size: size, dateOfBirth: dateOfBirth, color: default, tags: default);
         }
 
         /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Cat" />. </summary>
@@ -99,7 +148,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
-            return Cat(name: name, size: size, dateOfBirth: dateOfBirth, sleep: default, jump: default, meow: meow);
+            return Cat(name: name, size: size, dateOfBirth: dateOfBirth, color: default, tags: default, sleep: default, jump: default, meow: meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Dog" />. </summary>
@@ -114,7 +163,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {
-            return Dog(name: name, size: size, dateOfBirth: dateOfBirth, bark: bark, jump: default);
+            return Dog(name: name, size: size, dateOfBirth: dateOfBirth, color: default, tags: default, bark: bark, jump: default, friend: default);
         }
     }
 }

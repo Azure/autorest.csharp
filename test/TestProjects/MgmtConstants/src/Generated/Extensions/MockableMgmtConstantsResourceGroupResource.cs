@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using MgmtConstants;
 using MgmtConstants.Models;
 
 namespace MgmtConstants.Mocking

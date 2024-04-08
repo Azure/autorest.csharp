@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Encode.Datetime;
 
 namespace Encode.Datetime.Models
 {
@@ -24,7 +23,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnixTimestampDatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace Encode.Datetime.Models
             var format = options.Format == "W" ? ((IPersistableModel<UnixTimestampDatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -70,7 +69,7 @@ namespace Encode.Datetime.Models
             }
             DateTimeOffset value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -80,10 +79,10 @@ namespace Encode.Datetime.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UnixTimestampDatetimeProperty(value, serializedAdditionalRawData);
         }
 
@@ -96,7 +95,7 @@ namespace Encode.Datetime.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace Encode.Datetime.Models
                         return DeserializeUnixTimestampDatetimeProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace Encode.Datetime.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<UnixTimestampDatetimeProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

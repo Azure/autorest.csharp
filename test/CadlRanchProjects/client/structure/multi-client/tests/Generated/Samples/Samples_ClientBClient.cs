@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.Multiple.Client;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Multiple.Client.Samples

@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
@@ -18,7 +19,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             {
                 if (hasJson)
                 {
-                    IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
+                    if (Configuration.IsBranded)
+                    {
+                        IJsonInterface = typeof(IUtf8JsonSerializable);
+                    }
                     if (Configuration.UseModelReaderWriter)
                     {
                         IJsonModelTInterface = new CSharpType(typeof(IJsonModel<>), modelType);

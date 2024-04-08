@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using PaginationParams_LowLevel;
 
 namespace PaginationParams_LowLevel.Samples
 {

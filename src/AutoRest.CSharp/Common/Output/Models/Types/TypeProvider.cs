@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract string DefaultAccessibility { get; }
 
         public bool IsValueType => TypeKind is TypeKind.Struct or TypeKind.Enum;
-        public bool IsEnum { get; protected init; } = false;
+        public virtual bool IsEnum { get; protected init; } = false;
 
         private IReadOnlyList<CSharpType>? _typeArguments;
         protected IReadOnlyList<CSharpType> TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
@@ -71,11 +71,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 isAbstract: IsAbstract);
         }
 
-        public static string GetDefaultModelNamespace(string? namespaceExtension, string defaultNamespace)
+        public static string GetDefaultModelNamespace(string? namespaceOverride, string defaultNamespace)
         {
-            if (namespaceExtension != default)
+            if (namespaceOverride != default)
             {
-                return namespaceExtension;
+                return namespaceOverride;
             }
 
             if (Configuration.ModelNamespace)

@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -23,7 +23,7 @@ namespace ModelShapes.Models
             var format = options.Format == "W" ? ((IPersistableModel<ParametersModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ParametersModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ParametersModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +60,7 @@ namespace ModelShapes.Models
             var format = options.Format == "W" ? ((IPersistableModel<ParametersModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ParametersModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ParametersModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -78,7 +78,7 @@ namespace ModelShapes.Models
             string code = default;
             string status = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Code"u8))
@@ -93,10 +93,10 @@ namespace ModelShapes.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new ParametersModel(code, status, serializedAdditionalRawData);
         }
 
@@ -109,7 +109,7 @@ namespace ModelShapes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ParametersModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ParametersModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -125,10 +125,26 @@ namespace ModelShapes.Models
                         return DeserializeParametersModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ParametersModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ParametersModel)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<ParametersModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ParametersModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeParametersModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ParametersModel>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

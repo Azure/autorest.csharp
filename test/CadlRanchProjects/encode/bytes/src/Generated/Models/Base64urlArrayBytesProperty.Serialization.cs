@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Encode.Bytes;
 
 namespace Encode.Bytes.Models
 {
@@ -24,7 +23,7 @@ namespace Encode.Bytes.Models
             var format = options.Format == "W" ? ((IPersistableModel<Base64urlArrayBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -63,7 +62,7 @@ namespace Encode.Bytes.Models
             var format = options.Format == "W" ? ((IPersistableModel<Base64urlArrayBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -80,7 +79,7 @@ namespace Encode.Bytes.Models
             }
             IList<BinaryData> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -102,10 +101,10 @@ namespace Encode.Bytes.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Base64urlArrayBytesProperty(value, serializedAdditionalRawData);
         }
 
@@ -118,7 +117,7 @@ namespace Encode.Bytes.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -134,7 +133,7 @@ namespace Encode.Bytes.Models
                         return DeserializeBase64urlArrayBytesProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Base64urlArrayBytesProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -152,7 +151,7 @@ namespace Encode.Bytes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<Base64urlArrayBytesProperty>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

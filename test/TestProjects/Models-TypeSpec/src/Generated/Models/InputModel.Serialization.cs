@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -24,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -75,9 +74,9 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            writer.WriteObjectValue<BaseModel>(RequiredModel, options);
             writer.WritePropertyName("requiredModel2"u8);
-            writer.WriteObjectValue(RequiredModel2);
+            writer.WriteObjectValue<BaseModel>(RequiredModel2, options);
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
@@ -96,7 +95,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<CollectionItem>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -104,7 +103,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<RecordItem>(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
@@ -137,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -179,7 +178,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<CollectionItem>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -211,7 +210,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        writer.WriteObjectValue(item);
+                        writer.WriteObjectValue<CollectionItem>(item, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -277,7 +276,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -316,7 +315,7 @@ namespace ModelsTypeSpec.Models
             IList<string> nonRequiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -584,10 +583,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new InputModel(
                 requiredString,
                 requiredInt,
@@ -624,7 +623,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -640,7 +639,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeInputModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -658,7 +657,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<InputModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using validation;
 
 namespace validation.Models
 {
@@ -23,7 +23,7 @@ namespace validation.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -48,9 +48,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            writer.WriteObjectValue(Child);
+            writer.WriteObjectValue<ChildProduct>(Child, options);
             writer.WritePropertyName("constChild"u8);
-            writer.WriteObjectValue(ConstChild);
+            writer.WriteObjectValue<ConstantProduct>(ConstChild, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
@@ -83,7 +83,7 @@ namespace validation.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -107,7 +107,7 @@ namespace validation.Models
             ProductConstString constString = default;
             EnumConst? constStringAsEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"u8))
@@ -169,10 +169,10 @@ namespace validation.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Product(
                 displayNames ?? new ChangeTrackingList<string>(),
                 capacity,
@@ -194,7 +194,7 @@ namespace validation.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -210,10 +210,26 @@ namespace validation.Models
                         return DeserializeProduct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<Product>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Product FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeProduct(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<Product>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

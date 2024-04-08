@@ -6,8 +6,8 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using HlcConstants;
 
 namespace HlcConstants.Models
 {
@@ -89,6 +89,22 @@ namespace HlcConstants.Models
                 }
             }
             return new ModelWithOptionalConstant(optionalStringConstant, optionalIntConstant, optionalBooleanConstant, optionalFloatConstant);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ModelWithOptionalConstant FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelWithOptionalConstant(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ModelWithOptionalConstant>(this);
+            return content;
         }
     }
 }

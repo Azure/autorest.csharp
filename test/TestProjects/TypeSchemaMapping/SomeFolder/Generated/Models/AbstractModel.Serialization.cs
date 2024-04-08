@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace TypeSchemaMapping.Models
@@ -22,7 +23,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<AbstractModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AbstractModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +52,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<AbstractModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AbstractModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +86,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AbstractModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -101,10 +102,26 @@ namespace TypeSchemaMapping.Models
                         return DeserializeAbstractModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AbstractModel)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<AbstractModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static AbstractModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeAbstractModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<AbstractModel>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

@@ -8,8 +8,8 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
-using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -27,7 +27,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue(ModelProperty);
+                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -60,12 +60,29 @@ namespace Inheritance.Models
             return new SeparateClass(stringProperty, modelProperty);
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SeparateClass FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSeparateClass(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<SeparateClass>(this);
+            return content;
+        }
+
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {
             public override void Write(Utf8JsonWriter writer, SeparateClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<SeparateClass>(model);
             }
+
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

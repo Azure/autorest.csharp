@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using _Specs_.Azure.ClientGenerator.Core.Access;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
@@ -24,12 +23,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             var format = options.Format == "W" ? ((IPersistableModel<OuterModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OuterModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OuterModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("inner"u8);
-            writer.WriteObjectValue(Inner);
+            writer.WriteObjectValue<InnerModel>(Inner, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -55,7 +54,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             var format = options.Format == "W" ? ((IPersistableModel<OuterModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(OuterModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(OuterModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -73,7 +72,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             InnerModel inner = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("inner"u8))
@@ -88,10 +87,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new OuterModel(name, serializedAdditionalRawData, inner);
         }
 
@@ -104,7 +103,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(OuterModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OuterModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -120,7 +119,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                         return DeserializeOuterModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(OuterModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OuterModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -138,7 +137,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<OuterModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

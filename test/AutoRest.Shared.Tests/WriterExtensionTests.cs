@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using FirstTestTypeSpec;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests
@@ -42,7 +43,7 @@ namespace Azure.Core.Tests
         {
             using MemoryStream stream = new MemoryStream ();
             using Utf8JsonWriter writer = new Utf8JsonWriter (stream);
-            writer.WriteObjectValue (value);
+            writer.WriteObjectValue<object>(value);
 
             writer.Flush ();
             Assert.AreEqual (expectedJson, System.Text.Encoding.UTF8.GetString(stream.ToArray()));
@@ -57,7 +58,7 @@ namespace Azure.Core.Tests
             string json = @"{""TablesToMove"": [{""TableName"":""TestTable""}]}";
             Dictionary<string, object> content = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
             JsonElement element = (JsonElement)content["TablesToMove"];
-            writer.WriteObjectValue (element);
+            writer.WriteObjectValue<JsonElement>(element);
             writer.Flush ();
 
             Assert.AreEqual (@"[{""TableName"":""TestTable""}]", System.Text.Encoding.UTF8.GetString(stream.ToArray()));
@@ -70,7 +71,7 @@ namespace Azure.Core.Tests
             using Utf8JsonWriter writer = new Utf8JsonWriter (stream);
 
             var content = new TestSerialize ();
-            writer.WriteObjectValue (content);
+            writer.WriteObjectValue<TestSerialize>(content);
             Assert.True (content.didWrite);
         }
 
@@ -81,7 +82,7 @@ namespace Azure.Core.Tests
             using Utf8JsonWriter writer = new Utf8JsonWriter (stream);
 
             TestSerialize content = null;
-            writer.WriteObjectValue(content);
+            writer.WriteObjectValue<TestSerialize>(content);
 
             writer.Flush();
             Assert.AreEqual("null", System.Text.Encoding.UTF8.GetString(stream.ToArray()));

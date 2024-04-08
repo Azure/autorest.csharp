@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -48,11 +47,8 @@ namespace ModelWithConverterUsage.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelProperty"/> is null. </exception>
         public ModelStruct(string modelProperty)
         {
-            Argument.AssertNotNull(modelProperty, nameof(modelProperty));
-
             ModelProperty = modelProperty;
         }
 

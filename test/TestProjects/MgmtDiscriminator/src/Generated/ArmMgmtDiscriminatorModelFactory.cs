@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -29,9 +28,11 @@ namespace MgmtDiscriminator.Models
         /// <param name="duration"> A duration property to verify bicep generation. </param>
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
+        /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
+        /// <param name="nestedName"> A model that will be safe flattened. </param>
         /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, string nestedName = null, DeliveryRuleProperties properties = null)
         {
             return new DeliveryRuleData(
                 id,
@@ -45,6 +46,8 @@ namespace MgmtDiscriminator.Models
                 duration,
                 number,
                 uri,
+                shellProperty,
+                nestedName != null ? new Sku1(new Sku2(nestedName, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null,
                 properties,
                 serializedAdditionalRawData: null);
         }
@@ -92,26 +95,27 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
+        public static DeliveryRuleCondition DeliveryRuleCondition(string name = null, string foo = null)
         {
-            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData: null);
+            return new UnknownDeliveryRuleCondition(name == null ? default : new MatchVariable(name), foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
-        public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
+        public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
         {
-            return new DeliveryRuleAction(name, foo, serializedAdditionalRawData: null);
+            return new DeliveryRuleAction(name == null ? default : new DeliveryRuleActionType(name), foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="petType"> Verify that type is included for non-ResourceData models. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string id = null)
+        public static Pet Pet(string id = null, string petType = null)
         {
-            return new UnknownPet(default, id, serializedAdditionalRawData: null);
+            return new UnknownPet(default, id, petType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtDiscriminator.ArtifactData"/>. </summary>
@@ -121,34 +125,42 @@ namespace MgmtDiscriminator.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="kind"> Specifies the kind of blueprint artifact. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.ArtifactData"/> instance for mocking. </returns>
-        public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = "Unknown")
+        public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = null)
         {
             return new UnknownArtifact(
                 id,
                 name,
                 resourceType,
                 systemData,
-                kind,
+                kind == null ? default : new ArtifactKind(kind),
                 serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="petType"> Verify that type is included for non-ResourceData models. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string id = null, string meow = null)
+        public static Cat Cat(string id = null, string petType = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, id, serializedAdditionalRawData: null, meow);
+            return new Cat(PetKind.Cat, id, petType, serializedAdditionalRawData: null, meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="petType"> Verify that type is included for non-ResourceData models. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="dogKind"> The kind of the dog. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string id = null, string bark = null, DogKind? dogKind = null)
+        public static Dog Dog(string id = null, string petType = null, string bark = null, DogKind? dogKind = null)
         {
-            return new Dog(PetKind.Dog, id, serializedAdditionalRawData: null, bark, dogKind);
+            return new Dog(
+                PetKind.Dog,
+                id,
+                petType,
+                serializedAdditionalRawData: null,
+                bark,
+                dogKind);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRemoteAddressCondition"/>. </summary>

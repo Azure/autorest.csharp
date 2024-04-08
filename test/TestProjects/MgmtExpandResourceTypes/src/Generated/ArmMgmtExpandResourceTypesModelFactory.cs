@@ -10,7 +10,6 @@ using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {

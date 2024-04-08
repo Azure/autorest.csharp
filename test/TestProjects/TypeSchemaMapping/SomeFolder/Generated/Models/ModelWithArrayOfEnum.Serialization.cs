@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -23,7 +23,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithArrayOfEnum>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -75,7 +75,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithArrayOfEnum>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -93,7 +93,7 @@ namespace TypeSchemaMapping.Models
             IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum = default;
             IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ArrayOfEnum"u8))
@@ -133,10 +133,10 @@ namespace TypeSchemaMapping.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new ModelWithArrayOfEnum(arrayOfEnum ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum>(), arrayOfEnumCustomizedToNullable ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum?>(), serializedAdditionalRawData);
         }
 
@@ -149,7 +149,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -165,10 +165,26 @@ namespace TypeSchemaMapping.Models
                         return DeserializeModelWithArrayOfEnum(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<ModelWithArrayOfEnum>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ModelWithArrayOfEnum FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelWithArrayOfEnum(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ModelWithArrayOfEnum>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

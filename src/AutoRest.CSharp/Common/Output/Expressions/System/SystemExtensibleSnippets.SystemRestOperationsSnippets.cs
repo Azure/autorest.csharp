@@ -3,7 +3,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -25,24 +24,24 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
         private class SystemRestOperationsSnippets : RestOperationsSnippets
         {
             public override StreamExpression GetContentStream(TypedValueExpression result)
-                => new ResultExpression(result).GetRawResponse().ContentStream;
+                => new ClientResultExpression(result).GetRawResponse().ContentStream;
 
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression result)
             {
-                return ResultExpression.FromValue(value, GetRawResponse(result));
+                return ClientResultExpression.FromValue(value, GetRawResponse(result));
             }
 
             public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression result)
             {
                 var response = GetRawResponse(result);
                 var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { response });
-                return ResultExpression.FromValue(model, response);
+                return ClientResultExpression.FromValue(model, response);
             }
 
             public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression result)
             {
                 var response = GetRawResponse(result);
-                return ResultExpression.FromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response);
+                return ClientResultExpression.FromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response);
             }
 
             public override TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression result, string? contentType = null)
@@ -50,11 +49,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var rawResponse = GetRawResponse(result);
                 if (responseType == typeof(string) && contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Text)
                 {
-                    return ResultExpression.FromValue(rawResponse.Content.InvokeToString(), rawResponse);
+                    return ClientResultExpression.FromValue(rawResponse.Content.InvokeToString(), rawResponse);
                 }
                 return responseType == typeof(BinaryData)
-                    ? ResultExpression.FromValue(rawResponse.Content, rawResponse)
-                    : ResultExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
+                    ? ClientResultExpression.FromValue(rawResponse.Content, rawResponse)
+                    : ClientResultExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
             }
 
             public override MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message)
@@ -71,22 +70,22 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
 
             public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)
             {
-                var resultVar = new VariableReference(typeof(NullableResult<bool>), "result");
-                var result = new ResultExpression(resultVar);
+                var resultVar = new VariableReference(typeof(ClientResult<bool?>), "result");
+                var result = new ClientResultExpression(resultVar);
                 return new MethodBodyStatement[]
                 {
-                    Snippets.Var(resultVar, new MessagePipelineExpression(pipeline).ProcessHeadAsBoolMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), async)),
-                    Snippets.Return(ResultExpression.FromValue(result.Value, result.GetRawResponse()))
+                    Snippets.Var(resultVar, new ClientPipelineExpression(pipeline).ProcessHeadAsBoolMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), async)),
+                    Snippets.Return(ClientResultExpression.FromValue(result.Value, result.GetRawResponse()))
                 };
             }
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
-                => ResultExpression.FromResponse(new MessagePipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), null, async));
+                => ClientResultExpression.FromResponse(new ClientPipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), null, async));
 
             private static PipelineResponseExpression GetRawResponse(TypedValueExpression result)
                 => result.Type.Equals(typeof(PipelineResponse))
                     ? new PipelineResponseExpression(result)
-                    : new ResultExpression(result).GetRawResponse();
+                    : new ClientResultExpression(result).GetRawResponse();
         }
     }
 }

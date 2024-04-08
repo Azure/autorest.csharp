@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<MultivariateLastDetectionResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -34,7 +33,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<VariableState>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +43,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Results)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<AnomalyState>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +70,7 @@ namespace AnomalyDetector.Models
             var format = options.Format == "W" ? ((IPersistableModel<MultivariateLastDetectionResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -89,7 +88,7 @@ namespace AnomalyDetector.Models
             IReadOnlyList<VariableState> variableStates = default;
             IReadOnlyList<AnomalyState> results = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("variableStates"u8))
@@ -122,10 +121,10 @@ namespace AnomalyDetector.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new MultivariateLastDetectionResult(variableStates ?? new ChangeTrackingList<VariableState>(), results ?? new ChangeTrackingList<AnomalyState>(), serializedAdditionalRawData);
         }
 
@@ -138,7 +137,7 @@ namespace AnomalyDetector.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -154,7 +153,7 @@ namespace AnomalyDetector.Models
                         return DeserializeMultivariateLastDetectionResult(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(MultivariateLastDetectionResult)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -172,7 +171,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<MultivariateLastDetectionResult>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

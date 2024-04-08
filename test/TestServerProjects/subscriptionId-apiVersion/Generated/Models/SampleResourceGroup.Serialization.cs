@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using subscriptionId_apiVersion;
 
 namespace subscriptionId_apiVersion.Models
 {
@@ -23,7 +23,7 @@ namespace subscriptionId_apiVersion.Models
             var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +60,7 @@ namespace subscriptionId_apiVersion.Models
             var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -78,7 +78,7 @@ namespace subscriptionId_apiVersion.Models
             string name = default;
             string location = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -93,10 +93,10 @@ namespace subscriptionId_apiVersion.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SampleResourceGroup(name, location, serializedAdditionalRawData);
         }
 
@@ -109,7 +109,7 @@ namespace subscriptionId_apiVersion.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -125,10 +125,26 @@ namespace subscriptionId_apiVersion.Models
                         return DeserializeSampleResourceGroup(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<SampleResourceGroup>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SampleResourceGroup FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSampleResourceGroup(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<SampleResourceGroup>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

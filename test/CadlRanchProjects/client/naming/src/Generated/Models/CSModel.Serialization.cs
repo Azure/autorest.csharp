@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Client.Naming;
 
 namespace Client.Naming.Models
 {
@@ -24,7 +23,7 @@ namespace Client.Naming.Models
             var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CSModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -53,7 +52,7 @@ namespace Client.Naming.Models
             var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CSModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -70,7 +69,7 @@ namespace Client.Naming.Models
             }
             bool defaultName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultName"u8))
@@ -80,10 +79,10 @@ namespace Client.Naming.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CSModel(defaultName, serializedAdditionalRawData);
         }
 
@@ -96,7 +95,7 @@ namespace Client.Naming.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CSModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -112,7 +111,7 @@ namespace Client.Naming.Models
                         return DeserializeCSModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CSModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -130,7 +129,7 @@ namespace Client.Naming.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<CSModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

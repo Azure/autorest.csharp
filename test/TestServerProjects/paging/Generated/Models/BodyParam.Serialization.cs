@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using paging;
 
 namespace paging.Models
 {
@@ -23,7 +23,7 @@ namespace paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyParam>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyParam)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyParam)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +55,7 @@ namespace paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyParam>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(BodyParam)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyParam)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -72,7 +72,7 @@ namespace paging.Models
             }
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -82,10 +82,10 @@ namespace paging.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new BodyParam(name, serializedAdditionalRawData);
         }
 
@@ -98,7 +98,7 @@ namespace paging.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyParam)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -114,10 +114,26 @@ namespace paging.Models
                         return DeserializeBodyParam(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyParam)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<BodyParam>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static BodyParam FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeBodyParam(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<BodyParam>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

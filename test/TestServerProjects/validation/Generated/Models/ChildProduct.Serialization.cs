@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using validation;
 
 namespace validation.Models
 {
@@ -23,7 +23,7 @@ namespace validation.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChildProduct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChildProduct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChildProduct)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace validation.Models
             var format = options.Format == "W" ? ((IPersistableModel<ChildProduct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ChildProduct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ChildProduct)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -75,7 +75,7 @@ namespace validation.Models
             ChildProductConstProperty constProperty = default;
             int? count = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"u8))
@@ -94,10 +94,10 @@ namespace validation.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new ChildProduct(constProperty, count, serializedAdditionalRawData);
         }
 
@@ -110,7 +110,7 @@ namespace validation.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ChildProduct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChildProduct)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -126,10 +126,26 @@ namespace validation.Models
                         return DeserializeChildProduct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ChildProduct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChildProduct)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<ChildProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ChildProduct FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeChildProduct(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ChildProduct>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

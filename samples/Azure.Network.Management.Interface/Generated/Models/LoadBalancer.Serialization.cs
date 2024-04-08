@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -20,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue<LoadBalancerSku>(Sku);
             }
             if (Optional.IsDefined(Id))
             {
@@ -51,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FrontendIPConfiguration>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<BackendAddressPool>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancingRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<LoadBalancingRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -81,7 +80,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Probes)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<Probe>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -91,7 +90,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InboundNatRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -101,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<InboundNatPool>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -111,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in OutboundRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<OutboundRule>(item);
                 }
                 writer.WriteEndArray();
             }
@@ -333,6 +332,22 @@ namespace Azure.Network.Management.Interface.Models
                 outboundRules ?? new ChangeTrackingList<OutboundRule>(),
                 resourceGuid,
                 provisioningState);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new LoadBalancer FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeLoadBalancer(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<LoadBalancer>(this);
+            return content;
         }
     }
 }

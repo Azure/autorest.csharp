@@ -79,16 +79,15 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var nextLinkOperation = paging.NextLinkOperation;
-            var nextLinkName = paging.NextLinkName;
+            RestClientMethod? nextPageMethod = paging switch
+            {
+                { SelfNextLink: true } => _restClientMethod,
+                { NextLinkOperation: { } nextLinkOperation } => builders[nextLinkOperation]._restClientMethod,
+                { NextLinkName: { } } => RestClientBuilder.BuildNextPageMethod(_restClientMethod),
+                _ => null
+            };
 
-            RestClientMethod? nextPageMethod = nextLinkOperation != null
-                ? builders[nextLinkOperation]._restClientMethod
-                : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
-                    : null;
-
-            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
+            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
         }
 
         public LowLevelClientMethod BuildOperationMethodChain()
@@ -391,7 +390,9 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility |= Internal; // add internal
             }
             var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
-            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
+            var diagnostic = Configuration.IsBranded
+                ? name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null
+                : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, GetReturnedResponseContentType(), diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
 

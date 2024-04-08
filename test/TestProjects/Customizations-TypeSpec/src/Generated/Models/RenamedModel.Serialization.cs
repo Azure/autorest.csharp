@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -24,7 +23,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -58,7 +57,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RenamedModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -76,7 +75,7 @@ namespace CustomizationsInTsp.Models
             int requiredIntOnBase = default;
             int? optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredIntOnBase"u8))
@@ -95,10 +94,10 @@ namespace CustomizationsInTsp.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RenamedModel(requiredIntOnBase, optionalInt, serializedAdditionalRawData);
         }
 
@@ -111,7 +110,7 @@ namespace CustomizationsInTsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -127,7 +126,7 @@ namespace CustomizationsInTsp.Models
                         return DeserializeRenamedModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(RenamedModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedModel)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -145,7 +144,7 @@ namespace CustomizationsInTsp.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<RenamedModel>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

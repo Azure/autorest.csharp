@@ -3,24 +3,21 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class FineTuneHyperparams : IUtf8JsonWriteable, IJsonModel<FineTuneHyperparams>
+    public partial class FineTuneHyperparams : IJsonModel<FineTuneHyperparams>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuneHyperparams>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<FineTuneHyperparams>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<FineTuneHyperparams>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -70,7 +67,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<FineTuneHyperparams>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -93,7 +90,7 @@ namespace OpenAI.Models
             string classificationPositiveClass = default;
             long? classificationNClasses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("n_epochs"u8))
@@ -141,10 +138,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new FineTuneHyperparams(
                 nEpochs,
                 batchSize,
@@ -165,7 +162,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -181,7 +178,7 @@ namespace OpenAI.Models
                         return DeserializeFineTuneHyperparams(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -196,11 +193,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

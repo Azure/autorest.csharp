@@ -17,7 +17,7 @@ namespace MgmtDiscriminator
         private void SerializeLocation(StringBuilder builder)
         {
             // this is the logic we would like to have for the value serialization
-            builder.AppendLine($" '{AzureLocation.BrazilSouth}'");
+            builder.AppendLine($"'{AzureLocation.BrazilSouth}'");
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -47,6 +46,14 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ModelInfo FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelInfo(document.RootElement);
         }
     }
 }

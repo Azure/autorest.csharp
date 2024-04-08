@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -23,7 +23,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<LinkNotFound>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(LinkNotFound)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -67,7 +67,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<LinkNotFound>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(LinkNotFound)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -87,7 +87,7 @@ namespace xms_error_responses.Models
             string whatNotFound = default;
             string someBaseProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("whatSubAddress"u8))
@@ -112,10 +112,10 @@ namespace xms_error_responses.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new LinkNotFound(someBaseProp, serializedAdditionalRawData, reason, whatNotFound, whatSubAddress);
         }
 
@@ -128,7 +128,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(LinkNotFound)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -144,10 +144,26 @@ namespace xms_error_responses.Models
                         return DeserializeLinkNotFound(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(LinkNotFound)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<LinkNotFound>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new LinkNotFound FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeLinkNotFound(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<LinkNotFound>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

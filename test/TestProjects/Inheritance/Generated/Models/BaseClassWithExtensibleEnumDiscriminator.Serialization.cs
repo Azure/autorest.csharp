@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 
 namespace Inheritance.Models
@@ -40,12 +41,29 @@ namespace Inheritance.Models
             return UnknownBaseClassWithExtensibleEnumDiscriminator.DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(element);
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static BaseClassWithExtensibleEnumDiscriminator FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(this);
+            return content;
+        }
+
         internal partial class BaseClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<BaseClassWithExtensibleEnumDiscriminator>
         {
             public override void Write(Utf8JsonWriter writer, BaseClassWithExtensibleEnumDiscriminator model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model);
+                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(model);
             }
+
             public override BaseClassWithExtensibleEnumDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using NamespaceForEnums;
 using TypeSchemaMapping;
@@ -23,7 +24,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<CustomizedModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CustomizedModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -64,7 +65,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<CustomizedModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(CustomizedModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -80,7 +81,7 @@ namespace CustomNamespace
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CustomizedModel)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -96,10 +97,26 @@ namespace CustomNamespace
                         return DeserializeCustomizedModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CustomizedModel)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<CustomizedModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static CustomizedModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCustomizedModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<CustomizedModel>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

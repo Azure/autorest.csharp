@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
@@ -23,7 +22,7 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FakeConfigurationData>(item);
                 }
                 writer.WriteEndArray();
             }

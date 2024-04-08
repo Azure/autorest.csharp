@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using AzureSample.Storage.Tables;
 
 namespace AzureSample.Storage.Tables.Models
 {
@@ -22,6 +21,14 @@ namespace AzureSample.Storage.Tables.Models
                 writer.WriteStringValue(TableName);
             }
             writer.WriteEndObject();
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<TableProperties>(this);
+            return content;
         }
     }
 }

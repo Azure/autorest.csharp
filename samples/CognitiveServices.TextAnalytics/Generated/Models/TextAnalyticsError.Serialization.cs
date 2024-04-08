@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using CognitiveServices.TextAnalytics;
+using Azure;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -66,6 +66,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new TextAnalyticsError(code, message, target, innererror, details ?? new ChangeTrackingList<TextAnalyticsError>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static TextAnalyticsError FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeTextAnalyticsError(document.RootElement);
         }
     }
 }

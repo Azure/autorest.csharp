@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
@@ -22,7 +23,7 @@ namespace AdditionalPropertiesEx.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace AdditionalPropertiesEx.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                writer.WriteObjectValue<object>(item.Value, options);
             }
             writer.WriteEndObject();
         }
@@ -41,7 +42,7 @@ namespace AdditionalPropertiesEx.Models
             var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -81,7 +82,7 @@ namespace AdditionalPropertiesEx.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -97,7 +98,7 @@ namespace AdditionalPropertiesEx.Models
                         return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -108,5 +109,21 @@ namespace AdditionalPropertiesEx.Models
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
         string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputAdditionalPropertiesModelStruct FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModelStruct>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

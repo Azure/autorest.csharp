@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Very))
             {
                 writer.WritePropertyName("very"u8);
-                writer.WriteObjectValue(Very);
+                writer.WriteObjectValue<DeepSinglePropertyModel>(Very);
             }
             writer.WriteEndObject();
         }

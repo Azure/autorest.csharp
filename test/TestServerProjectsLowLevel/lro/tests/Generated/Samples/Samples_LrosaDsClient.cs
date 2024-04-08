@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using lro_LowLevel;
 
 namespace lro_LowLevel.Samples
 {

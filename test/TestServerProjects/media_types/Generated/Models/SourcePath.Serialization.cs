@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using media_types;
 
 namespace media_types.Models
 {
@@ -23,7 +23,7 @@ namespace media_types.Models
             var format = options.Format == "W" ? ((IPersistableModel<SourcePath>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SourcePath)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SourcePath)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +55,7 @@ namespace media_types.Models
             var format = options.Format == "W" ? ((IPersistableModel<SourcePath>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SourcePath)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SourcePath)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -72,7 +72,7 @@ namespace media_types.Models
             }
             string source = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("source"u8))
@@ -82,10 +82,10 @@ namespace media_types.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SourcePath(source, serializedAdditionalRawData);
         }
 
@@ -98,7 +98,7 @@ namespace media_types.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SourcePath)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -114,10 +114,26 @@ namespace media_types.Models
                         return DeserializeSourcePath(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SourcePath)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<SourcePath>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SourcePath FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSourcePath(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<SourcePath>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

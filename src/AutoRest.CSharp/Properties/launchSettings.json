@@ -64,10 +64,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\sdk\\newprojecttypespec\\Azure.NewProject.TypeSpec\\src\\Generated -n"
     },
-    "AzureSample.AI.DocumentTranslation": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.AI.DocumentTranslation\\src\\Generated -n"
-    },
     "AzureSample.Analytics.Purview.Account": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AzureSample.Analytics.Purview.Account\\src\\Generated -n"
@@ -647,6 +643,10 @@
     "typespec-azure/core/lro/standard": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\standard\\src\\Generated -n"
+    },
+    "typespec-azure/core/scalar": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\scalar\\src\\Generated -n"
     },
     "typespec-azure/core/traits": {
       "commandName": "Project",

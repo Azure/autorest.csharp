@@ -40,6 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
+        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library, typeof(BinaryData));
     }
 }

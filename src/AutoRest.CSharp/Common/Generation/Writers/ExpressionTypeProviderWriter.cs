@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -39,8 +40,28 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteType()
         {
-            _writer.WriteClassModifiers(_provider.DeclarationModifiers);
-            _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
+            if (_provider.IsEnum)
+            {
+                WriteEnum();
+            }
+            else
+            {
+                WriteClassOrStruct();
+            }
+        }
+
+        private void WriteClassOrStruct()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            if (_provider.IsStruct)
+            {
+                _writer.AppendRaw(" struct ");
+            }
+            else
+            {
+                _writer.AppendRaw(" class ");
+            }
+            _writer.Append($"{_provider.Type:D}")
                 .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                 .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 
@@ -52,7 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (_provider.WhereClause is not null)
             {
-                _writer.WriteValueExpression(_provider.WhereClause);
+                _provider.WhereClause.Write(_writer);
             }
 
             using (_writer.Scope())
@@ -66,6 +87,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteMethods();
 
                 WriteNestedTypes();
+            }
+        }
+
+        private void WriteEnum()
+        {
+            _writer.WriteTypeModifiers(_provider.DeclarationModifiers);
+            _writer.Append($" enum {_provider.Type:D}")
+                .AppendRawIf(" : ", _provider.Inherits != null)
+                .AppendIf($"{_provider.Inherits}", _provider.Inherits != null);
+
+            using (_writer.Scope())
+            {
+                foreach (var field in _provider.Fields)
+                {
+                    _writer.Append($"{field.Declaration:D}");
+                    if (field.InitializationValue != null)
+                    {
+                        _writer.AppendRaw(" = ");
+                        field.InitializationValue.Write(_writer);
+                    }
+                    _writer.LineRaw(",");
+                }
+                _writer.RemoveTrailingComma();
             }
         }
 

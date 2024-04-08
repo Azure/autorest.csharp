@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Parameters.Spread;
 
 namespace Parameters.Spread.Models
 {
@@ -24,7 +23,7 @@ namespace Parameters.Spread.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -63,7 +62,7 @@ namespace Parameters.Spread.Models
             var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +84,7 @@ namespace Parameters.Spread.Models
             string prop5 = default;
             string prop6 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop1"u8))
@@ -120,10 +119,10 @@ namespace Parameters.Spread.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SpreadWithMultipleParametersRequest(
                 prop1,
                 prop2,
@@ -143,7 +142,7 @@ namespace Parameters.Spread.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -159,7 +158,7 @@ namespace Parameters.Spread.Models
                         return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -177,7 +176,7 @@ namespace Parameters.Spread.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue<SpreadWithMultipleParametersRequest>(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -23,7 +23,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cat>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cat)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cat)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -67,7 +67,7 @@ namespace multiple_inheritance.Models
             var format = options.Format == "W" ? ((IPersistableModel<Cat>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Cat)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Cat)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -87,7 +87,7 @@ namespace multiple_inheritance.Models
             bool? hisses = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("likesMilk"u8))
@@ -124,10 +124,10 @@ namespace multiple_inheritance.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Cat(name, serializedAdditionalRawData, likesMilk, meows, hisses);
         }
 
@@ -140,7 +140,7 @@ namespace multiple_inheritance.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Cat)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cat)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -156,10 +156,26 @@ namespace multiple_inheritance.Models
                         return DeserializeCat(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Cat)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Cat)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<Cat>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new Cat FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCat(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<Cat>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

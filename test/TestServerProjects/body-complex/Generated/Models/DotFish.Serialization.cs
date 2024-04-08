@@ -8,8 +8,8 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using body_complex;
 
 namespace body_complex.Models
 {
@@ -23,7 +23,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFish>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DotFish)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFish)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFish>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DotFish)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFish)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -91,7 +91,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFish)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -107,10 +107,26 @@ namespace body_complex.Models
                         return DeserializeDotFish(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFish)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<DotFish>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DotFish FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDotFish(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<DotFish>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

@@ -4,9 +4,7 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -18,16 +16,13 @@ namespace OpenAI
     public partial class FineTuningJobs
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly KeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
-        private readonly MessagePipeline _pipeline;
+        private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal TelemetrySource ClientDiagnostics { get; }
-
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual MessagePipeline Pipeline => _pipeline;
+        public virtual ClientPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of FineTuningJobs for mocking. </summary>
         protected FineTuningJobs()
@@ -35,13 +30,11 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of FineTuningJobs. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal FineTuningJobs(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        internal FineTuningJobs(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
-            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -58,14 +51,14 @@ namespace OpenAI
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
-        public virtual async Task<Result<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(job, nameof(job));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = job.ToRequestBody();
-            Result result = await CreateAsync(content, context).ConfigureAwait(false);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            using BinaryContent content = job.ToBinaryBody();
+            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -79,14 +72,14 @@ namespace OpenAI
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
-        public virtual Result<FineTuningJob> Create(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTuningJob> Create(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(job, nameof(job));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            using RequestBody content = job.ToRequestBody();
-            Result result = Create(content, context);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            using BinaryContent content = job.ToBinaryBody();
+            ClientResult result = Create(content, options);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -110,26 +103,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -153,46 +136,36 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Create(RequestBody content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<ListPaginatedFineTuningJobsResponse>> GetPaginatedsAsync(string after = null, long? limit = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListPaginatedFineTuningJobsResponse>> GetPaginatedsAsync(string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await GetPaginatedsAsync(after, limit, context).ConfigureAwait(false);
-            return Result.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await GetPaginatedsAsync(after, limit, options).ConfigureAwait(false);
+            return ClientResult.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<ListPaginatedFineTuningJobsResponse> GetPaginateds(string after = null, long? limit = null, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListPaginatedFineTuningJobsResponse> GetPaginateds(string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = GetPaginateds(after, limit, context);
-            return Result.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = GetPaginateds(after, limit, options);
+            return ClientResult.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -212,23 +185,13 @@ namespace OpenAI
         /// </summary>
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> GetPaginatedsAsync(string after, long? limit, RequestOptions context)
+        public virtual async Task<ClientResult> GetPaginatedsAsync(string after, long? limit, RequestOptions options)
         {
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetPaginateds");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -248,23 +211,13 @@ namespace OpenAI
         /// </summary>
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result GetPaginateds(string after, long? limit, RequestOptions context)
+        public virtual ClientResult GetPaginateds(string after, long? limit, RequestOptions options)
         {
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetPaginateds");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -276,13 +229,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<FineTuningJob>> RetrieveAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTuningJob>> RetrieveAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await RetrieveAsync(fineTuningJobId, context).ConfigureAwait(false);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await RetrieveAsync(fineTuningJobId, options).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -294,13 +247,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<FineTuningJob> Retrieve(string fineTuningJobId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTuningJob> Retrieve(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = Retrieve(fineTuningJobId, context);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Retrieve(fineTuningJobId, options);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -321,27 +274,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> RetrieveAsync(string fineTuningJobId, RequestOptions context)
+        public virtual async Task<ClientResult> RetrieveAsync(string fineTuningJobId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateRetrieveRequest(fineTuningJobId, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateRetrieveRequest(fineTuningJobId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -362,27 +305,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Retrieve(string fineTuningJobId, RequestOptions context)
+        public virtual ClientResult Retrieve(string fineTuningJobId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateRetrieveRequest(fineTuningJobId, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateRetrieveRequest(fineTuningJobId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Get status updates for a fine-tuning job. </summary>
@@ -392,13 +325,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await GetEventsAsync(fineTuningJobId, after, limit, context).ConfigureAwait(false);
-            return Result.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await GetEventsAsync(fineTuningJobId, after, limit, options).ConfigureAwait(false);
+            return ClientResult.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get status updates for a fine-tuning job. </summary>
@@ -408,13 +341,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = GetEvents(fineTuningJobId, after, limit, context);
-            return Result.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = GetEvents(fineTuningJobId, after, limit, options);
+            return ClientResult.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -435,27 +368,17 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
         /// <param name="limit"> Number of events to retrieve. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, long? limit, RequestOptions context)
+        public virtual async Task<ClientResult> GetEventsAsync(string fineTuningJobId, string after, long? limit, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetEventsRequest(fineTuningJobId, after, limit, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetEventsRequest(fineTuningJobId, after, limit, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -476,27 +399,17 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
         /// <param name="limit"> Number of events to retrieve. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result GetEvents(string fineTuningJobId, string after, long? limit, RequestOptions context)
+        public virtual ClientResult GetEvents(string fineTuningJobId, string after, long? limit, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateGetEventsRequest(fineTuningJobId, after, limit, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateGetEventsRequest(fineTuningJobId, after, limit, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
@@ -504,13 +417,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<FineTuningJob>> CancelAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<FineTuningJob>> CancelAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CancelAsync(fineTuningJobId, context).ConfigureAwait(false);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await CancelAsync(fineTuningJobId, options).ConfigureAwait(false);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
@@ -518,13 +431,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<FineTuningJob> Cancel(string fineTuningJobId, CancellationToken cancellationToken = default)
+        public virtual ClientResult<FineTuningJob> Cancel(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = Cancel(fineTuningJobId, context);
-            return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Cancel(fineTuningJobId, options);
+            return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -543,27 +456,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> CancelAsync(string fineTuningJobId, RequestOptions context)
+        public virtual async Task<ClientResult> CancelAsync(string fineTuningJobId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCancelRequest(fineTuningJobId, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCancelRequest(fineTuningJobId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -582,50 +485,46 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result Cancel(string fineTuningJobId, RequestOptions context)
+        public virtual ClientResult Cancel(string fineTuningJobId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCancelRequest(fineTuningJobId, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            using PipelineMessage message = CreateCancelRequest(fineTuningJobId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateCreateRequest(RequestBody content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions options)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateGetPaginatedsRequest(string after, long? limit, RequestOptions context)
+        internal PipelineMessage CreateGetPaginatedsRequest(string after, long? limit, RequestOptions options)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
             if (after != null)
@@ -637,30 +536,40 @@ namespace OpenAI
                 uri.AppendQuery("limit", limit.Value, true);
             }
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateRetrieveRequest(string fineTuningJobId, RequestOptions context)
+        internal PipelineMessage CreateRetrieveRequest(string fineTuningJobId, RequestOptions options)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, long? limit, RequestOptions context)
+        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, long? limit, RequestOptions options)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("GET");
-            var uri = new RequestUri();
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
@@ -674,22 +583,31 @@ namespace OpenAI
                 uri.AppendQuery("limit", limit.Value, true);
             }
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateCancelRequest(string fineTuningJobId, RequestOptions context)
+        internal PipelineMessage CreateCancelRequest(string fineTuningJobId, RequestOptions options)
         {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.SetMethod("POST");
-            var uri = new RequestUri();
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
+            request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
@@ -704,7 +622,7 @@ namespace OpenAI
             return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseErrorClassifier _responseErrorClassifier200;
-        private static ResponseErrorClassifier ResponseErrorClassifier200 => _responseErrorClassifier200 ??= new StatusResponseClassifier(stackalloc ushort[] { 200 });
+        private static PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 ??= PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
     }
 }

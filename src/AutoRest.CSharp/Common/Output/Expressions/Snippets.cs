@@ -30,8 +30,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static BoolExpression False { get; } = new(new KeywordExpression("false", null));
 
         public static BoolExpression Bool(bool value) => value ? True : False;
-        public static ValueExpression Int(int value) => new FormattableStringToExpression($"{value}");
-        public static ValueExpression Long(long value) => new FormattableStringToExpression($"{value}L");
+        public static IntExpression Int(int value) => new IntExpression(Literal(value));
+        public static LongExpression Long(long value) => new LongExpression(Literal(value));
         public static ValueExpression Float(float value) => new FormattableStringToExpression($"{value}f");
         public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}d");
 
@@ -77,6 +77,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static MethodBodyStatement EmptyLine => new EmptyLineStatement();
         public static KeywordStatement Continue => new("continue", null);
+        public static KeywordStatement Break => new("break", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Return() => new("return", null);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
@@ -101,10 +102,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
 
-        public static AssignValueIfNullStatement AssignIfNull<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
-        public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
+        public static AssignValueIfNullStatement AssignIfNull(ValueExpression variable, ValueExpression expression) => new(variable, expression);
+        public static AssignValueStatement Assign(ValueExpression variable, ValueExpression expression) => new(variable, expression);
 
-        public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
+        public static MethodBodyStatement AssignOrReturn(ValueExpression? variable, ValueExpression expression)
             => variable != null ? Assign(variable, expression) : Return(expression);
 
         public static MethodBodyStatement InvokeConsoleWriteLine(ValueExpression expression)

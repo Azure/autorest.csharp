@@ -3,24 +3,21 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class FineTune : IUtf8JsonWriteable, IJsonModel<FineTune>
+    public partial class FineTune : IJsonModel<FineTune>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTune>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
         void IJsonModel<FineTune>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<FineTune>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FineTune)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FineTune)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -48,26 +45,26 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparams"u8);
-            writer.WriteObjectValue(Hyperparams);
+            writer.WriteObjectValue<FineTuneHyperparams>(Hyperparams, options);
             writer.WritePropertyName("training_files"u8);
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<OpenAIFile>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("validation_files"u8);
             writer.WriteStartArray();
             foreach (var item in ValidationFiles)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<OpenAIFile>(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("result_files"u8);
             writer.WriteStartArray();
             foreach (var item in ResultFiles)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue<OpenAIFile>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Events))
@@ -76,7 +73,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Events)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue<FineTuneEvent>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -103,7 +100,7 @@ namespace OpenAI.Models
             var format = options.Format == "W" ? ((IPersistableModel<FineTune>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FineTune)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(FineTune)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -132,7 +129,7 @@ namespace OpenAI.Models
             IReadOnlyList<OpenAIFile> resultFiles = default;
             IReadOnlyList<FineTuneEvent> events = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -231,10 +228,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new FineTune(
                 id,
                 @object,
@@ -261,7 +258,7 @@ namespace OpenAI.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FineTune)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FineTune)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -277,7 +274,7 @@ namespace OpenAI.Models
                         return DeserializeFineTune(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FineTune)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(FineTune)} does not support reading '{options.Format}' format.");
             }
         }
 
@@ -292,11 +289,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        internal virtual BinaryContent ToBinaryBody()
         {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }
     }
 }

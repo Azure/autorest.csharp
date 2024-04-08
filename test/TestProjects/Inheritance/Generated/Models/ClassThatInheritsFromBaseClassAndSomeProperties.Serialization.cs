@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
-using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -244,6 +244,22 @@ namespace Inheritance.Models
                 dfeUri,
                 someProperty,
                 someOtherProperty);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new ClassThatInheritsFromBaseClassAndSomeProperties FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeClassThatInheritsFromBaseClassAndSomeProperties(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<ClassThatInheritsFromBaseClassAndSomeProperties>(this);
+            return content;
         }
     }
 }

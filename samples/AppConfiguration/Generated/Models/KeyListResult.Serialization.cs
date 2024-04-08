@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using AppConfiguration;
+using Azure;
 
 namespace AppConfiguration.Models
 {
@@ -44,6 +44,14 @@ namespace AppConfiguration.Models
                 }
             }
             return new KeyListResult(items ?? new ChangeTrackingList<Key>(), nextLink);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static KeyListResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeKeyListResult(document.RootElement);
         }
     }
 }

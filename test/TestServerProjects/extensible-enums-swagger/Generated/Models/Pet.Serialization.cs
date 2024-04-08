@@ -9,8 +9,8 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
-using extensible_enums_swagger;
 
 namespace extensible_enums_swagger.Models
 {
@@ -23,7 +23,7 @@ namespace extensible_enums_swagger.Models
             var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Pet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Pet)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -62,7 +62,7 @@ namespace extensible_enums_swagger.Models
             var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Pet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Pet)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -81,7 +81,7 @@ namespace extensible_enums_swagger.Models
             DaysOfWeekExtensibleEnum? daysOfWeek = default;
             IntEnum intEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -105,10 +105,10 @@ namespace extensible_enums_swagger.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Pet(name, daysOfWeek, intEnum, serializedAdditionalRawData);
         }
 
@@ -121,7 +121,7 @@ namespace extensible_enums_swagger.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Pet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Pet)} does not support writing '{options.Format}' format.");
             }
         }
 
@@ -137,10 +137,26 @@ namespace extensible_enums_swagger.Models
                         return DeserializePet(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Pet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Pet)} does not support reading '{options.Format}' format.");
             }
         }
 
         string IPersistableModel<Pet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Pet FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializePet(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<Pet>(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

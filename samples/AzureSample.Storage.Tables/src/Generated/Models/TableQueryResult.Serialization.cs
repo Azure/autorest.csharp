@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using AzureSample.Storage.Tables;
+using Azure;
 
 namespace AzureSample.Storage.Tables.Models
 {
@@ -44,6 +44,14 @@ namespace AzureSample.Storage.Tables.Models
                 }
             }
             return new TableQueryResult(odataMetadata, value ?? new ChangeTrackingList<TableResponseProperties>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static TableQueryResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeTableQueryResult(document.RootElement);
         }
     }
 }
