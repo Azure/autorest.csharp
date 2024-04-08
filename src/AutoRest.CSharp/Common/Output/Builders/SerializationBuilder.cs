@@ -696,9 +696,7 @@ namespace AutoRest.CSharp.Output.Builders
                 additionalPropertiesProperty,
                 new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
                 valueSerialization,
-                new ValueExpression(),//TODO: need serialization for additionalProperties
-                shouldExcludeInWireSerialization,
-                new ValueExpression());//TODO: need deserialization for additionalProperties
+                shouldExcludeInWireSerialization);
         }
         public static MultipartSerialization BuildMultipartSerialization(InputType? inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat, ValueExpression memberValueExpression)
         {

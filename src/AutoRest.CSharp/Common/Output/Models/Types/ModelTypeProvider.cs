@@ -629,9 +629,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 additionalPropertiesProperty,
                 new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
                 valueSerialization,
-                new ValueExpression(),//TODO: need serialization for additionalProperties
-                shouldExcludeInWireSerialization,
-                new ValueExpression());//TODO: need deserialization for additionalProperties
+                shouldExcludeInWireSerialization);
         }
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {
