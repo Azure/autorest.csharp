@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 ArraySerializationDelimiter: null,
                 HeaderCollectionPrefix: null);
             // mock the type
-            var type = new Mock<CSharpType>(typeProvider.Object, true);
+            var type = new Mock<CSharpType>(typeProvider.Object, null, true);
             type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
             type.Setup(t => t.Name).Returns(inputModel.Name);
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 ArraySerializationDelimiter: null,
                 HeaderCollectionPrefix: null);
             // mock the type
-            var type = new Mock<CSharpType>(typeProvider.Object, true);
+            var type = new Mock<CSharpType>(typeProvider.Object, null, true);
             type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
             type.Setup(t => t.Name).Returns(inputModel.Name);
             // because `WithNullable` returns a new instance of CSharpType when nullability is different, we have to mock it so that we always use this instance
@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 ArraySerializationDelimiter: null,
                 HeaderCollectionPrefix: null);
             // mock the type
-            var type = new Mock<CSharpType>(typeProvider.Object, true);
+            var type = new Mock<CSharpType>(typeProvider.Object, null, true);
             type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
             type.Setup(t => t.Name).Returns(inputModel.Name);
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);

@@ -193,8 +193,8 @@ namespace AutoRest.CSharp.Generation.Types
             _unionItemTypes ??= Array.Empty<CSharpType>();
         }
 
-        public string Namespace { get { return _namespace; } }
-        public string Name { get { return _name; } }
+        public virtual string Namespace { get { return _namespace; } }
+        public virtual string Name { get { return _name; } }
         public CSharpType? DeclaringType { get { return _declaringType; } }
         public bool IsValueType { get { return _isValueType; } }
         public bool IsEnum { get { return _isEnum; } }
@@ -481,7 +481,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="isNullable">Flag to determine if the new type is nullable.</param>
         /// <returns>The existing <see cref="CSharpType"/> if it is nullable, otherwise a new instance of <see cref="CSharpType"/>.</returns>
-        public CSharpType WithNullable(bool isNullable) =>
+        public virtual CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, Arguments, isNullable)
                 : new CSharpType(Implementation, arguments: Arguments, isNullable: isNullable);
