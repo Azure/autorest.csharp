@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
                 var fromResponse = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
-                var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
+                var contentType = ContentTypeFromResponse();
                 var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
                 MethodBodyStatement[] body;
                 if (type.Serialization.Multipart != null)
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 var response = new ResponseExpression(KnownParameters.Response);
                 var valueParameter = new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true);
                 var valueReference = new ParameterReference(valueParameter);
-                return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out var", valueReference) }, null, false);
+                return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out", new KeywordExpression("var", valueReference)) }, null, false);
             }
         }
     }

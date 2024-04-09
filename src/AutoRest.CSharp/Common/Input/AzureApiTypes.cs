@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Common.Input
         public override CSharpType RequestUriType => typeof(RawRequestUriBuilder);
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
+        public override CSharpType MultipartRequestContentType => typeof(MultipartFormDataRequestContent);
         public override string ToMultipartRequestContentName => "ToMultipartRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 

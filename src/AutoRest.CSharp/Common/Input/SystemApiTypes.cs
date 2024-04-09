@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Common.Input
         public override CSharpType RequestUriType => ClientUriBuilderProvider.Instance.Type;
         public override Type RequestContentType => typeof(BinaryContent);
         public override string ToRequestContentName => "ToBinaryBody";
+        public override CSharpType MultipartRequestContentType => typeof(MultipartFormDataBinaryContent);
         public override string ToMultipartRequestContentName => "ToMultipartBinaryBody";
         public override string RequestContentCreateName => nameof(BinaryContent.Create);
 

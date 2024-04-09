@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new MethodBodyStatement[]
                     {
                         Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
-                        UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
+                        UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, new[]{boundary}), out var content),
                         WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                         SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties)
                     };
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new MethodBodyStatement[]
                         {
                             Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
-                            UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
+                            UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, new[]{boundary}), out var content),
                             WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                             SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties),
                             Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new MethodBodyStatement[]
                     {
                         Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
-                        UsingDeclare("content", typeof(MultipartFormDataRequestContent), New.Instance(typeof(MultipartFormDataRequestContent), new[]{boundary}), out var content),
+                        UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, new[] { boundary }), out var content),
                         WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                         SerializeAdditionalProperties(new MultipartFormDataExpression(content), multipart.AdditionalProperties),
                         Return(content)
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new MethodBodyStatement[]
                         {
-                            UsingDeclare("content", typeof(MultipartFormDataRequestContent), MultipartFormDataExpression.Create(data, contentType), out var content),
+                            UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, MultipartFormDataExpression.Create(data, contentType), out var content),
                             InitialObject(multipart, new MultipartFormDataExpression(content)).ToArray()
                         };
         }

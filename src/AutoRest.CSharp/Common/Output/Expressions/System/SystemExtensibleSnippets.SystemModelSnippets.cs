@@ -24,7 +24,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
                 var result = new Parameter("response", $"The result to deserialize the model from.", typeof(PipelineResponse), null, ValidationType.None, null);
-                var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
+                //var contentType = Snippets.Extensible.Model.ContentTypeFromResponse();
+                var contentType = ContentTypeFromResponse();
                 var contentyTypeDeclare = new TernaryConditionalOperator(NotEqual(contentType, Null), new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true)), Null);
                 MethodBodyStatement[] body;
                 if (type.Serialization.Multipart != null)
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                         Declare(typeof(string), "contentType", contentyTypeDeclare, out var contentTypeFromResponse),
                         new IfElseStatement(new IfStatement(And(NotEqual(contentTypeFromResponse, Null),new StringExpression(contentTypeFromResponse).StartsWith(Literal("Multipart/form-data"))))
                         {
-                            Snippets.Return(SerializableObjectTypeExpression.DeserializeFromMultipart(type, new ResponseExpression(result).Content, contentTypeFromResponse))
+                            Snippets.Return(SerializableObjectTypeExpression.DeserializeFromMultipart(type, new PipelineResponseExpression(result).Content, contentTypeFromResponse))
                         },
                         new MethodBodyStatement[]
                         {
@@ -60,10 +61,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new BinaryContentExpression(model.Invoke("ToRequestBody"));
             public override ValueExpression ContentTypeFromResponse()
             {
-                var response = new PipelineResponseExpression(KnownParameters.Response);
+                var result = new Parameter("response", $"The result to deserialize the model from.", typeof(PipelineResponse), null, ValidationType.None, null);
+                var response = new PipelineResponseExpression(result);
                 var valueParameter = new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true);
                 var valueReference = new ParameterReference(valueParameter);
-                return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out var", valueReference) }, null, false);
+                return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out", new KeywordExpression("var", valueReference)) }, null, false);
             }
         }
     }

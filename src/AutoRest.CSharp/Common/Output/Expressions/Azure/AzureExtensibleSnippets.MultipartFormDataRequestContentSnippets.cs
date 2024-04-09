@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Common.Output.Expressions
+namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
-    internal abstract partial class ExtensibleSnippets
+    internal partial class AzureExtensibleSnippets
     {
         internal class MultipartFormDataRequestContentSnippets
         {

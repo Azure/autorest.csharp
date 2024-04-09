@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Method BuildParseToFormDataMethod()
         {
             CSharpType readonlyListType = new CSharpType(typeof(IReadOnlyList<>), new CSharpType[] { FormDataItemProvider.Instance.Type });
-            Parameter multipartParameter = new Parameter("multipart", null, typeof(MultipartFormDataRequestContent), null, ValidationType.None, null);
+            Parameter multipartParameter = new Parameter("multipart", null, Configuration.ApiTypes.MultipartRequestContentType, null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: _parseToFormDataMethodName,
                 Summary: null,
@@ -57,6 +58,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return new Method(signature, body);
         }
         public ValueExpression ParseToFormData(MultipartFormDataExpression multipart)
+            => new InvokeStaticMethodExpression(Type, _parseToFormDataMethodName, new ValueExpression[] { multipart });
+        public ValueExpression ParseToFormData(MultipartFormDataBinaryContentExpression multipart)
             => new InvokeStaticMethodExpression(Type, _parseToFormDataMethodName, new ValueExpression[] { multipart });
     }
 }
