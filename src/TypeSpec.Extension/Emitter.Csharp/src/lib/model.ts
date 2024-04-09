@@ -69,8 +69,7 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
-    getWireName,
-    isInternal
+    getWireName
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
