@@ -48,8 +48,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -62,8 +62,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -132,8 +132,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateEditAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -146,8 +146,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = CreateEdit(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -216,8 +216,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateVariationAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -230,8 +230,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = image.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = CreateVariation(content, options);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
