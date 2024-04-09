@@ -319,8 +319,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -334,8 +334,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AnonymousBody(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -427,8 +427,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -442,8 +442,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FriendlyModel(content, context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -596,8 +596,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return response;
         }
@@ -612,8 +612,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = StringFormat(subscriptionId, content, context);
             return response;
         }
@@ -707,8 +707,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = projectedModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
@@ -722,8 +722,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = projectedModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ProjectedNameModel(content, context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
@@ -978,8 +978,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await StringBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -994,8 +994,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = StringBody(content, context);
             return response;
         }
@@ -1084,8 +1084,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await BoolBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1096,8 +1096,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = BoolBody(content, context);
             return response;
         }
@@ -1186,8 +1186,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DateTimeBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1198,8 +1198,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = DateTimeBody(content, context);
             return response;
         }
@@ -1469,8 +1469,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RecursiveExtensionAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1484,8 +1484,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RecursiveExtension(content, context);
             return response;
         }
@@ -1577,8 +1577,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ThreeLevelRecursiveAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1592,8 +1592,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ThreeLevelRecursive(content, context);
             return response;
         }
@@ -1685,8 +1685,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RecursiveModelsAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1700,8 +1700,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RecursiveModels(content, context);
             return response;
         }
@@ -1793,8 +1793,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ContainSelfModelsAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1808,8 +1808,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ContainSelfModels(content, context);
             return response;
         }
@@ -1995,8 +1995,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await BodyIsModelWithProjectedEnumAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2010,8 +2010,8 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = BodyIsModelWithProjectedEnum(content, context);
             return response;
         }
@@ -2100,8 +2100,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OptionalDictionaryAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2112,8 +2112,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
         public virtual Response OptionalDictionary(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OptionalDictionary(content, context);
             return response;
         }
@@ -2198,8 +2198,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body?.ToRequestContent();
             Response response = await AzureLocationOpAsync(location, regenLocation, content, context).ConfigureAwait(false);
             return response;
         }
@@ -2212,8 +2212,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body?.ToRequestContent();
             Response response = AzureLocationOp(location, regenLocation, content, context);
             return response;
         }

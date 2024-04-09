@@ -301,50 +301,54 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod.ProtocolMethodSignature, async, clientMethod.ResponseBodyType).ToArray();
 
-                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
+                statement.Write(_writer);
 
-                // write whatever we need to convert the parameters
-                converter(_writer);
+                //var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
 
-                var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
-                _writer
-                    .Append($"{response.Type} {response.Declaration:D} = ")
-                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                    .LineRaw(";");
+                //var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
 
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType is null)
-                {
-                    Return(response).Write(_writer);
-                }
-                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
-                {
-                    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
-                }
-                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
-                {
-                    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
-                }
-                else if (responseType.IsCollection)
-                {
-                    var firstResponseBodyType = clientMethod.ResponseBodyType!;
-                    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
-                    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
-                    var value = new VariableReference(responseType, "value");
+                //// write whatever we need to convert the parameters
+                //converter(_writer);
 
-                    new[]
-                    {
-                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
-                        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                    }.AsStatement().Write(_writer);
-                }
-                else if (responseType is { IsFrameworkType: true })
-                {
-                    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
-                }
+                //var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
+                //_writer
+                //    .Append($"{response.Type} {response.Declaration:D} = ")
+                //    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
+                //    .LineRaw(";");
+
+                //var responseType = convenienceMethod.ResponseType;
+                //if (responseType is null)
+                //{
+                //    Return(response).Write(_writer);
+                //}
+                //else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
+                //{
+                //    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
+                //}
+                //else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
+                //{
+                //    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
+                //}
+                //else if (responseType.IsCollection)
+                //{
+                //    var firstResponseBodyType = clientMethod.ResponseBodyType!;
+                //    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
+                //    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
+                //    var value = new VariableReference(responseType, "value");
+
+                //    new[]
+                //    {
+                //        new DeclareVariableStatement(value.Type, value.Declaration, Default),
+                //        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
+                //        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
+                //    }.AsStatement().Write(_writer);
+                //}
+                //else if (responseType is { IsFrameworkType: true })
+                //{
+                //    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
+                //}
             }
             _writer.Line();
         }
