@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 // We can't use CsharpType.Equals here because they could have different implementations from different versions
-                if (previousMethod.ReturnType is not null && !previousMethod.ReturnType.EqualsByName(item.ReturnType))
+                if (previousMethod.ReturnType is not null && !previousMethod.ReturnType.AreNamesEqual(item.ReturnType))
                 {
                     continue;
                 }

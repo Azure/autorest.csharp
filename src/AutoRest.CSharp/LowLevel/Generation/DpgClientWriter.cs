@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
                 }
-                else if (TypeFactory.IsCollectionType(responseType))
+                else if (responseType.IsCollection)
                 {
                     var firstResponseBodyType = clientMethod.ResponseBodyType!;
                     var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
