@@ -159,9 +159,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 case { longRunning: null, pagingInfo: not null }:
                     WriteConveniencePageableMethod(clientMethod, convenienceMethod, pagingInfo, _client.Fields, async);
                     break;
-                case { longRunning: not null, pagingInfo: null }:
-                    WriteConvenienceLroMethod(clientMethod, convenienceMethod, _client.Fields, async);
-                    break;
                 default:
                     WriteConvenienceMethod(clientMethod, convenienceMethod, _client.Fields, async);
                     break;
@@ -301,101 +298,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod.ProtocolMethodSignature, async, clientMethod.ResponseBodyType).ToArray();
+                // This method now builds statements for normal operation and lro operations
+                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod, async, fields.ClientDiagnosticsProperty).ToArray();
 
                 statement.Write(_writer);
-
-                //var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-
-                //var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
-                //// write whatever we need to convert the parameters
-                //converter(_writer);
-
-                //var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
-                //_writer
-                //    .Append($"{response.Type} {response.Declaration:D} = ")
-                //    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                //    .LineRaw(";");
-
-                //var responseType = convenienceMethod.ResponseType;
-                //if (responseType is null)
-                //{
-                //    Return(response).Write(_writer);
-                //}
-                //else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
-                //{
-                //    Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)).Write(_writer);
-                //}
-                //else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
-                //{
-                //    Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
-                //}
-                //else if (responseType.IsCollection)
-                //{
-                //    var firstResponseBodyType = clientMethod.ResponseBodyType!;
-                //    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
-                //    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
-                //    var value = new VariableReference(responseType, "value");
-
-                //    new[]
-                //    {
-                //        new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                //        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
-                //        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                //    }.AsStatement().Write(_writer);
-                //}
-                //else if (responseType is { IsFrameworkType: true })
-                //{
-                //    Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())).Write(_writer);
-                //}
             }
             _writer.Line();
-        }
-
-        private void WriteConvenienceLroMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
-        {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
-            {
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-
-                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
-                // write whatever we need to convert the parameters
-                converter(_writer);
-
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
-                {
-                    // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    _writer
-                        .Append($"return ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                        .LineRaw(";");
-                }
-                else
-                {
-                    // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
-                    _writer
-                        .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                        .LineRaw(";");
-                    // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
-                    var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConversionMethodStatement(clientMethod.LongRunningResultRetrievalMethod, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
-                }
-            }
-            _writer.Line();
-        }
-
-        private FormattableString GetConversionMethodStatement(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
-        {
-            if (convertMethod is null)
-            {
-                return $"{responseType}.FromResponse";
-            }
-            return $"{convertMethod.MethodSignature.Name}";
         }
 
         private void WriteLroResultRetrievalMethod(LongRunningResultRetrievalMethod method)

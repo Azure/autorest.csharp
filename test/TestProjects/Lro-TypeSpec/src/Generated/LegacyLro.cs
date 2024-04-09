@@ -136,8 +136,8 @@ namespace lrotsp
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
             Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = radiologyInsightsData.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = await CreateJobAsync(waitUntil, apiVersion, content, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, FetchRadiologyInsightsInferenceResultFromRadiologyInsightsResult, ClientDiagnostics, "LegacyLro.CreateJob");
         }
@@ -155,8 +155,8 @@ namespace lrotsp
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
             Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = radiologyInsightsData.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = CreateJob(waitUntil, apiVersion, content, context);
             return ProtocolOperationHelpers.Convert(response, FetchRadiologyInsightsInferenceResultFromRadiologyInsightsResult, ClientDiagnostics, "LegacyLro.CreateJob");
         }

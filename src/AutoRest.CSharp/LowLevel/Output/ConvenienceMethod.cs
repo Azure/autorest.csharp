@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -11,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -18,7 +18,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -28,8 +27,9 @@ namespace AutoRest.CSharp.Output.Models
     {
         private record ConvenienceParameterInfo(Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
-        public IEnumerable<MethodBodyStatement> GetConvertStatements(MethodSignature protocolMethod, bool async, InputType? firstResponseBodyType)
+        public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics)
         {
+            var protocolMethod = clientMethod.ProtocolMethodSignature;
             var parametersDict = ProtocolToConvenienceParameterConverters.ToDictionary(converter => converter.Protocol.Name, converter => new ConvenienceParameterInfo(converter.Convenience, converter.ConvenienceSpread));
             var protocolInvocationExpressions = new List<ValueExpression>();
             foreach (var protocol in protocolMethod.Parameters)
@@ -70,7 +70,6 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         // write some statements to put the spread back into a local variable
                         yield return GetSpreadConversion(convenienceSpread, convenience, out var spreadExpression);
-                        // TODO
                         protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
                     }
                 }
@@ -86,39 +85,73 @@ namespace AutoRest.CSharp.Output.Models
 
             // call the protocol method using the expressions we have for the parameters in protocol method
             var invocation = new InvokeInstanceMethodExpression(null, protocolMethod.WithAsync(async), protocolInvocationExpressions);
-            var response = new VariableReference(protocolMethod.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
-            yield return Declare(response, invocation);
 
             // handles the response
-            if (ResponseType is null)
-            {
-                yield return Return(response);
-            }
-            else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType })
-            {
-                yield return Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response));
-            }
-            else if (ResponseType is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                yield return Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response));
-            }
-            else if (ResponseType.IsCollection)
-            {
-                Debug.Assert(firstResponseBodyType is not null);
-                var serializationFormat = SerializationBuilder.GetSerializationFormat(firstResponseBodyType, ResponseType);
-                var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, ResponseType, false, serializationFormat);
-                var value = new VariableReference(ResponseType, "value");
+            // TODO -- currently we only need to build response handling for long running method and normal method
+            if (IsPageable)
+                throw new NotImplementedException("Statements for handling pageable convenience method has not been implemented yet");
 
-                yield return new[]
+            if (IsLongRunning)
+            {
+                if (ResponseType == null)
                 {
+                    // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
+                    Return(invocation);
+                }
+                else
+                {
+                    // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
+                    var response = new VariableReference(protocolMethod.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
+                    yield return Declare(response, invocation);
+                    // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
+                    var diagnostic = Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
+                    yield return Return(new InvokeStaticMethodExpression(
+                        typeof(ProtocolOperationHelpers),
+                        nameof(ProtocolOperationHelpers.Convert),
+                        new ValueExpression[]
+                        {
+                            response,
+                            GetLongRunningConversionMethod(clientMethod.LongRunningResultRetrievalMethod, ResponseType),
+                            clientDiagnostics,
+                            Literal(diagnostic.ScopeName)
+                        }));
+                }
+            }
+            else
+            {
+                var response = new VariableReference(protocolMethod.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
+                yield return Declare(response, invocation);
+                // handle normal responses
+                if (ResponseType is null)
+                {
+                    yield return Return(response);
+                }
+                else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType })
+                {
+                    yield return Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response));
+                }
+                else if (ResponseType is { IsFrameworkType: false, Implementation: EnumType enumType })
+                {
+                    yield return Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response));
+                }
+                else if (ResponseType.IsCollection)
+                {
+                    Debug.Assert(clientMethod.ResponseBodyType is not null);
+                    var serializationFormat = SerializationBuilder.GetSerializationFormat(clientMethod.ResponseBodyType, ResponseType);
+                    var serialization = SerializationBuilder.BuildJsonSerialization(clientMethod.ResponseBodyType, ResponseType, false, serializationFormat);
+                    var value = new VariableReference(ResponseType, "value");
+
+                    yield return new[]
+                    {
                     new DeclareVariableStatement(value.Type, value.Declaration, Default),
                     JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                     Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
                 };
-            }
-            else if (ResponseType is { IsFrameworkType: true })
-            {
-                yield return Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(ResponseType.FrameworkType, response, ResponseMediaTypes?.FirstOrDefault()));
+                }
+                else if (ResponseType is { IsFrameworkType: true })
+                {
+                    yield return Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(ResponseType.FrameworkType, response, ResponseMediaTypes?.FirstOrDefault()));
+                }
             }
         }
 
@@ -203,60 +236,13 @@ namespace AutoRest.CSharp.Output.Models
             return RequestContentHelperProvider.Instance.FromObject(convenience);
         }
 
-        public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
+        private ValueExpression GetLongRunningConversionMethod(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
         {
-            var (parameterValues, contentInfo, spreadVariable) = PrepareConvenienceMethodParameters(contextVariable);
-
-            var converter = EnsureConvenienceBodyConverter(spreadVariable, contextVariable, contentInfo);
-
-            return (parameterValues, converter);
-        }
-
-        private record RequestContentParameterInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
-
-        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
-        {
-            CodeWriterDeclaration? spreadVariable = null;
-            var parameters = new List<FormattableString>();
-            RequestContentParameterInfo? contentInfo = null;
-            foreach (var converter in ProtocolToConvenienceParameterConverters)
+            if (convertMethod is null)
             {
-                var protocolParameter = converter.Protocol;
-                var convenienceParameter = converter.Convenience;
-                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
-                {
-                    parameters.Add($"{contextVariable:I}");
-                }
-                else if (convenienceParameter != null)
-                {
-                    if (converter.ConvenienceSpread == null)
-                    {
-                        // TODO: A temporary solution to only take the fisrt content type if there are multiple
-                        var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type, RequestMediaTypes?.FirstOrDefault());
-                        if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
-                        {
-                            contentInfo = new RequestContentParameterInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
-                            parameters.Add($"{contentInfo.ContentVariable:I}");
-                        }
-                        else
-                        {
-                            parameters.Add(parameter);
-                        }
-                    }
-                    else
-                    {
-                        // we put a declaration here to avoid possible local variable naming collisions
-                        spreadVariable = new CodeWriterDeclaration(convenienceParameter.Name);
-                        parameters.Add($"{spreadVariable:I}{FormattableStringHelpers.GetConversionMethod(convenienceParameter.Type, protocolParameter.Type)}");
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {Signature.Name}");
-                }
+                return new FormattableStringToExpression($"{responseType}.FromResponse");
             }
-
-            return (parameters, contentInfo, spreadVariable);
+            return new FormattableStringToExpression($"{convertMethod.MethodSignature.Name}");
         }
 
         private MethodBodyStatement GetSpreadConversion(ConvenienceParameterSpread convenienceSpread, Parameter convenience, out SerializableObjectTypeExpression spread)
@@ -303,49 +289,6 @@ namespace AutoRest.CSharp.Output.Models
 
             spread = new SerializableObjectTypeExpression(backingModel, spreadVar);
             return Declare(spreadVar, New.Instance(ctorSignature, arguments));
-        }
-
-        private Action<CodeWriter> EnsureConvenienceBodyConverter(CodeWriterDeclaration? spreadVariable, CodeWriterDeclaration contextVariable, RequestContentParameterInfo? contentInfo)
-        {
-            var convenienceSpread = ProtocolToConvenienceParameterConverters.Select(c => c.ConvenienceSpread).WhereNotNull().SingleOrDefault();
-            if (spreadVariable == null || convenienceSpread == null)
-                return writer =>
-                {
-                    WriteCancellationTokenToRequestContext(writer, contextVariable);
-                    if (contentInfo != null)
-                    {
-                        WriteBodyToRequestContent(writer, contentInfo.ContentVariable, contentInfo.ContentValue);
-                    }
-                };
-
-            // we need to get all the property initializers therefore here we use serialization constructor
-            var serializationCtor = convenienceSpread.BackingModel.SerializationConstructor;
-            var initializers = new List<PropertyInitializer>();
-            foreach (var parameter in convenienceSpread.SpreadedParameters)
-            {
-                var property = serializationCtor.FindPropertyInitializedByParameter(parameter);
-                if (property == null)
-                    continue;
-                initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
-            }
-
-            return writer =>
-            {
-                WriteCancellationTokenToRequestContext(writer, contextVariable);
-                // when writing the initialization of the model, since values of the parameters we have here might be null, and the serialization constructor will not have initializers in its implementation, we use initialization constructor to initialize the instance.
-                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, convenienceSpread.BackingModel.InitializationConstructor, initializers);
-            };
-        }
-
-        // RequestContext context = FromCancellationToken(cancellationToken);
-        private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
-        {
-            writer.Line($"{Configuration.ApiTypes.RequestContextType} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-        }
-
-        private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)
-        {
-            writer.Line($"using {Configuration.ApiTypes.RequestContentType} {contentVariable:D} = {requestContentValue};");
         }
     }
 
