@@ -545,7 +545,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i.IsReadOnly && TypeFactory.IsCollectionType(i.Type))
+                .Where(i => i is { IsReadOnly: true, Type.IsCollection: true })
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers
@@ -603,7 +603,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (CSharpType.RequiresToList(from, to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return writer.AppendRaw(from.IsNullable ? "?.ToList()" : ".ToList()");
@@ -614,7 +614,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (CSharpType.RequiresToList(from, to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return from.IsNullable ? "?.ToList()" : ".ToList()";

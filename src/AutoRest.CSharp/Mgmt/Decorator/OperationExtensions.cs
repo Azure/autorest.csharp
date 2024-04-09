@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // then check if this method returns a collection of the corresponding resource data
             // check if valueType is the current resource data type
             var resourceData = MgmtContext.Library.GetResourceData(operationSetOfResource.RequestPath);
-            return valueType.EqualsByName(resourceData.Type);
+            return valueType.AreNamesEqual(resourceData.Type);
         }
 
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)

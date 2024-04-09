@@ -400,10 +400,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     AppendRaw(" where <c>");
                     AppendType(type.Arguments[i], false, false);
                     AppendRaw("</c> is");
-                    if (TypeFactory.IsArray(argument))
+                    if (argument.IsArray)
                     {
                         AppendRaw(" an array of type ");
-                        argument = TypeFactory.GetElementType(argument);
+                        argument = argument.ElementType;
                     }
                     else
                     {
