@@ -164,13 +164,13 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             TypedValueExpression expression = convenience;
-            if (convenience.Parameter.IsOptionalInSignature)
-            {
-                expression = expression.NullConditional();
-            }
             // converting to anything else should be path, query, head parameters
             if (expression.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
+                if (convenience.Parameter.Type.IsNullable)
+                {
+                    expression = expression.NullConditional();
+                }
                 expression = new EnumExpression(enumType, expression).ToSerial();
             }
 
