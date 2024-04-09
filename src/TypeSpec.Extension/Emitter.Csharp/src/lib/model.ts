@@ -596,9 +596,7 @@ export function getInputType(
                 Kind: InputTypeKind.Model,
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m)
-                    ? "internal"
-                    : getAccess(context, m),
+                Accessibility: getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
