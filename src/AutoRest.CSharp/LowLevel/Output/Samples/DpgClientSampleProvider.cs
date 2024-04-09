@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
             else if (responseType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
                 streamVar = responseVar.Property(Configuration.ApiTypes.ContentStreamName);
-            else if (TypeFactory.IsResponseOfT(responseType))
+            else if (responseType.IsResponseOfT)
                 streamVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
             else
                 yield break;
@@ -150,9 +150,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             {
                 // if there is not a schema for us to show, just print status code
                 ValueExpression statusVar = responseVar;
-                if (TypeFactory.IsResponseOfT(responseType))
+                if (responseType.IsResponseOfT)
                     statusVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
-                if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
+                if (responseType.IsResponseOfT || responseType.IsResponse)
                     yield return InvokeConsoleWriteLine(statusVar.Property(Configuration.ApiTypes.StatusName));
             }
         }
