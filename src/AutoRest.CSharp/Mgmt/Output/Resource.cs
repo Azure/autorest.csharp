@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // In the resource class, we need to exclude the List operations
             var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
             if (restClientMethod.IsListMethod(out var valueType))
-                return !valueType.EqualsByName(ResourceData.Type);
+                return !valueType.AreNamesEqual(ResourceData.Type);
             return true;
         }
 

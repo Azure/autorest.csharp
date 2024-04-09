@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (serialization.SerializedType is { IsNullable: true } serializedType)
             {
-                if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
+                if (serializedType.IsCollection && serialization.IsRequired)
                 {
                     return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
                 }
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)
             => serialization switch
             {
-                XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)).AsStatement(),
+                XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(array.Type.ElementType, expression)).AsStatement(),
                 XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 XmlElementValueSerialization value => SerializeElement(xmlWriter, value, expression),
                 _ => throw new NotSupportedException()
