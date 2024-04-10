@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -137,7 +138,7 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest2.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -148,7 +149,7 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual Response Send(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest2.ToRequestContent(), context);
             return response;

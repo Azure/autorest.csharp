@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -140,7 +141,7 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest7 sendRequest7 = new SendRequest7(prop);
+            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest7.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -154,7 +155,7 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest7 sendRequest7 = new SendRequest7(prop);
+            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest7.ToRequestContent(), context);
             return response;
