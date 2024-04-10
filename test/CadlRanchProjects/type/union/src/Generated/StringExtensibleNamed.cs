@@ -137,8 +137,8 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest2 sendRequest2 = new SendRequest2(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest2.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -148,8 +148,8 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual Response Send(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest2 sendRequest2 = new SendRequest2(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest2.ToRequestContent(), context);
             return response;
         }

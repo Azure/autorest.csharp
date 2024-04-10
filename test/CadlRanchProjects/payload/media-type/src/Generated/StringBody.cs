@@ -52,8 +52,8 @@ namespace Payload.MediaType
         {
             Argument.AssertNotNullOrEmpty(text, nameof(text));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = text;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsTextAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -67,8 +67,8 @@ namespace Payload.MediaType
         {
             Argument.AssertNotNullOrEmpty(text, nameof(text));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = text;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SendAsText(content, context);
             return response;
         }
@@ -248,8 +248,8 @@ namespace Payload.MediaType
         {
             Argument.AssertNotNullOrEmpty(text, nameof(text));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(text);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsJsonAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -263,8 +263,8 @@ namespace Payload.MediaType
         {
             Argument.AssertNotNullOrEmpty(text, nameof(text));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(text);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SendAsJson(content, context);
             return response;
         }

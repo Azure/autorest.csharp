@@ -52,8 +52,8 @@ namespace Projection.ProjectedName
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -66,8 +66,8 @@ namespace Projection.ProjectedName
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Client(content, context);
             return response;
         }
@@ -158,8 +158,8 @@ namespace Projection.ProjectedName
         {
             Argument.AssertNotNull(csModel, nameof(csModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -172,8 +172,8 @@ namespace Projection.ProjectedName
         {
             Argument.AssertNotNull(csModel, nameof(csModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
         }

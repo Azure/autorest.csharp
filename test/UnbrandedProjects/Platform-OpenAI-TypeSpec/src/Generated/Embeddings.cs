@@ -48,8 +48,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(embedding, nameof(embedding));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = embedding.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -62,8 +62,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(embedding, nameof(embedding));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = embedding.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
