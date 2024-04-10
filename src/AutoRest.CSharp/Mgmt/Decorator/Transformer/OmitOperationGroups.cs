@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.ContainsKey(sealChoiceSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
+                    codeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
