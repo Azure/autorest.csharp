@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
-            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(value.Type));
+            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || value.Type is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } });
             if (!Configuration.IsBranded)
             {
                 if (value.Type.IsFrameworkType && value.Type.FrameworkType != typeof(string))
@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.Generation.Writers
             string valueStr = GetValueExpression(writer, value);
             ValueExpression valueExpression = new FormattableStringToExpression($"{valueStr}");
             CodeWriterDeclaration changeTrackingList = new CodeWriterDeclaration("changeTrackingList");
-            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
+            if (checkUndefinedCollection && type.IsCollection)
             {
                 writer.Append($"if (");
 

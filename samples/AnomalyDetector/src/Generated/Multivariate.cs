@@ -175,8 +175,8 @@ namespace AnomalyDetector
         {
             Argument.AssertNotNull(modelInfo, nameof(modelInfo));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = modelInfo.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await TrainMultivariateModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(AnomalyDetectionModel.FromResponse(response), response);
         }
@@ -199,8 +199,8 @@ namespace AnomalyDetector
         {
             Argument.AssertNotNull(modelInfo, nameof(modelInfo));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = modelInfo.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = TrainMultivariateModel(content, context);
             return Response.FromValue(AnomalyDetectionModel.FromResponse(response), response);
         }
@@ -493,8 +493,8 @@ namespace AnomalyDetector
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
             Argument.AssertNotNull(options, nameof(options));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DetectMultivariateBatchAnomalyAsync(modelId, content, context).ConfigureAwait(false);
             return Response.FromValue(MultivariateDetectionResult.FromResponse(response), response);
         }
@@ -519,8 +519,8 @@ namespace AnomalyDetector
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
             Argument.AssertNotNull(options, nameof(options));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = DetectMultivariateBatchAnomaly(modelId, content, context);
             return Response.FromValue(MultivariateDetectionResult.FromResponse(response), response);
         }
@@ -627,8 +627,8 @@ namespace AnomalyDetector
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
             Argument.AssertNotNull(options, nameof(options));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DetectMultivariateLastAnomalyAsync(modelId, content, context).ConfigureAwait(false);
             return Response.FromValue(MultivariateLastDetectionResult.FromResponse(response), response);
         }
@@ -651,8 +651,8 @@ namespace AnomalyDetector
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
             Argument.AssertNotNull(options, nameof(options));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = DetectMultivariateLastAnomaly(modelId, content, context);
             return Response.FromValue(MultivariateLastDetectionResult.FromResponse(response), response);
         }

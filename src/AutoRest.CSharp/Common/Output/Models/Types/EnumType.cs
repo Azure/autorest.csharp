@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
+            IsEnum = true;
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
             _deprecated = input.Deprecated;

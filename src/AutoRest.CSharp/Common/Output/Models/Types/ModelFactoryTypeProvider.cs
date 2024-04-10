@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
-                inputType = TypeFactory.GetInputType(inputType);
+                inputType = inputType.InputType;
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // We skip models that don't have read-only properties other than discriminator or collections
             // While discriminator property is generated as read-write, it can be made read-only via customization
-            if (!properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            if (!properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !p.ValueType.IsReadWriteDictionary && !p.ValueType.IsReadWriteList))
             {
                 return false;
             }

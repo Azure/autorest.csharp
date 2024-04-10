@@ -48,8 +48,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = edit.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -62,8 +62,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = edit.ToBinaryBody();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -73,7 +73,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -102,7 +102,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
