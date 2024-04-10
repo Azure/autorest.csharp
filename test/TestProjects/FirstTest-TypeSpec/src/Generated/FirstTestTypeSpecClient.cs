@@ -2198,7 +2198,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = body.ToRequestContent();
+            using RequestContent content = body?.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AzureLocationOpAsync(location, regenLocation, content, context).ConfigureAwait(false);
             return response;
@@ -2212,7 +2212,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = body.ToRequestContent();
+            using RequestContent content = body?.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AzureLocationOp(location, regenLocation, content, context);
             return response;

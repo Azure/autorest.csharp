@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (convenienceSpread == null)
                     {
                         var content = new VariableReference(protocol.Type, protocol.Name);
-                        yield return UsingDeclare(content, GetConversion(new ParameterReference(convenience), protocol.Type, RequestMediaTypes?.FirstOrDefault()));
+                        yield return UsingDeclare(content, GetConversion(convenience, protocol.Type, RequestMediaTypes?.FirstOrDefault()));
                         protocolInvocationExpressions.Add(content);
                     }
                     else
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
                     // process any other parameter
                     // in this case, convenience parameter should never be null
                     Debug.Assert(convenience is not null);
-                    var expression = GetConversion(new ParameterReference(convenience), protocol.Type, RequestMediaTypes?.FirstOrDefault());
+                    var expression = GetConversion(convenience, protocol.Type, RequestMediaTypes?.FirstOrDefault());
                     protocolInvocationExpressions.Add(expression);
                 }
             }
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (ResponseType == null)
                 {
                     // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    Return(invocation);
+                    yield return Return(invocation);
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static ValueExpression GetConversion(ParameterReference convenience, CSharpType toType, string? contentType)
+        private static ValueExpression GetConversion(Parameter convenience, CSharpType toType, string? contentType)
         {
             // deal with the cases of converting to RequestContent
             if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
@@ -163,11 +163,11 @@ namespace AutoRest.CSharp.Output.Models
                 return GetConversionToRequestContent(convenience, contentType);
             }
 
-            TypedValueExpression expression = convenience;
+            TypedValueExpression expression = new ParameterReference(convenience);
             // converting to anything else should be path, query, head parameters
             if (expression.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
-                if (convenience.Parameter.Type.IsNullable)
+                if (convenience.Type.IsNullable)
                 {
                     expression = expression.NullConditional();
                 }
@@ -177,63 +177,72 @@ namespace AutoRest.CSharp.Output.Models
             return expression;
         }
 
-        private static ValueExpression GetConversionToRequestContent(ParameterReference convenience, string? contentType)
+        private static ValueExpression GetConversionToRequestContent(Parameter convenience, string? contentType)
         {
             switch (convenience.Type)
             {
                 case { IsFrameworkType: true }:
                     return GetConversionFromFrameworkToRequestContent(convenience, contentType);
                 case { IsFrameworkType: false, Implementation: EnumType enumType }:
-                    var convenienceEnum = new EnumExpression(enumType, convenience);
+                    TypedValueExpression enumExpression = new ParameterReference(convenience);
+                    if (convenience.IsOptionalInSignature)
+                    {
+                        enumExpression = enumExpression.NullableStructValue();
+                    }
+                    var convenienceEnum = new EnumExpression(enumType, enumExpression);
                     return BinaryDataExpression.FromObjectAsJson(convenienceEnum.ToSerial());
                 case { IsFrameworkType: false, Implementation: ModelTypeProvider model }:
-                    var serializableObjectExpression = new SerializableObjectTypeExpression(model, convenience);
+                    TypedValueExpression modelExpression = new ParameterReference(convenience);
+                    if (convenience.IsOptionalInSignature)
+                    {
+                        modelExpression = modelExpression.NullConditional();
+                    }
+                    var serializableObjectExpression = new SerializableObjectTypeExpression(model, modelExpression);
                     return serializableObjectExpression.ToRequestContent();
                 default:
                     throw new InvalidOperationException($"Unhandled type: {convenience.Type}");
             }
         }
 
-        private static ValueExpression GetConversionFromFrameworkToRequestContent(ParameterReference convenience, string? contentType)
+        private static ValueExpression GetConversionFromFrameworkToRequestContent(Parameter parameter, string? contentType)
         {
-            var parameter = convenience.Parameter;
-            if (convenience.Type.IsReadWriteDictionary)
+            if (parameter.Type.IsReadWriteDictionary)
             {
-                var expression = RequestContentHelperProvider.Instance.FromDictionary(convenience);
+                var expression = RequestContentHelperProvider.Instance.FromDictionary(parameter);
                 if (parameter.IsOptionalInSignature)
                 {
-                    expression = new TernaryConditionalOperator(NotEqual(convenience, Null), expression, Null);
+                    expression = new TernaryConditionalOperator(NotEqual(parameter, Null), expression, Null);
                 }
                 return expression;
             }
 
-            if (convenience.Type.IsList)
+            if (parameter.Type.IsList)
             {
-                var expression = RequestContentHelperProvider.Instance.FromEnumerable(convenience);
+                var expression = RequestContentHelperProvider.Instance.FromEnumerable(parameter);
                 if (parameter.IsOptionalInSignature)
                 {
-                    expression = new TernaryConditionalOperator(NotEqual(convenience, Null), expression, Null);
+                    expression = new TernaryConditionalOperator(NotEqual(parameter, Null), expression, Null);
                 }
                 return expression;
             }
 
-            if (convenience.Type.IsFrameworkType == true && convenience.Type.FrameworkType == typeof(AzureLocation))
+            if (parameter.Type.IsFrameworkType == true && parameter.Type.FrameworkType == typeof(AzureLocation))
             {
-                return RequestContentHelperProvider.Instance.FromObject(convenience.InvokeToString());
+                return RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString());
             }
 
             BodyMediaType? mediaType = contentType == null ? null : FormattableStringHelpers.ToMediaType(contentType);
             if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
             {
-                return convenience;
+                return parameter;
             }
             // TODO: Here we only consider the case when body is string type. We will add support for other types.
-            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && convenience.Type.FrameworkType == typeof(string))
+            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && parameter.Type.FrameworkType == typeof(string))
             {
-                return convenience;
+                return parameter;
             }
 
-            return RequestContentHelperProvider.Instance.FromObject(convenience);
+            return RequestContentHelperProvider.Instance.FromObject(parameter);
         }
 
         private ValueExpression GetLongRunningConversionMethod(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
