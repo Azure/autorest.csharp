@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, new SchemaUsageProvider(codeModel)));
 
             // force trigger the model initialization
             foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)

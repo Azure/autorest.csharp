@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel)).CreateNamespace(), sourceInputModel, false);
+                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace(), sourceInputModel, false);
             }
             return project;
         }

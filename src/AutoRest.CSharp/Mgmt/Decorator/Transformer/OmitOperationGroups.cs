@@ -43,17 +43,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 AddDependantSchemasRecursively(schemasToOmit);
 
-                RemoveSchemas(schemasToOmit, schemasToKeep);
+                RemoveSchemas(schemasToOmit, schemasToKeep, codeModel);
             }
         }
 
-        private static void RemoveSchemas(Dictionary<Schema, HashSet<OperationGroup>> schemasToOmit, Dictionary<Schema, HashSet<OperationGroup>> schemasToKeep)
+        private static void RemoveSchemas(Dictionary<Schema, HashSet<OperationGroup>> schemasToOmit, Dictionary<Schema, HashSet<OperationGroup>> schemasToKeep, CodeModel codeModel)
         {
             foreach (var schema in schemasToOmit.Keys)
             {
                 if (schema is ObjectSchema objSchema && !schemasToKeep.ContainsKey(objSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
+                    codeModel.Schemas.Objects.Remove(objSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.ContainsKey(choiceSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                    codeModel.Schemas.Choices.Remove(choiceSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
