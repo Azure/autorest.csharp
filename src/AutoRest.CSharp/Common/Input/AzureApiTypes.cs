@@ -4,7 +4,11 @@
 using System;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -13,6 +17,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -93,5 +98,30 @@ namespace AutoRest.CSharp.Common.Input
 """;
 
         public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
+        public override ValueExpression GetMultipartFormDataContentCreateExpression(BinaryDataExpression data, ValueExpression contentType)
+        {
+            //return MultipartFormDataExpression.Create(data, contentType);
+            return new InvokeStaticMethodExpression(typeof(MultipartFormDataRequestContent), "Create", new[] { data, contentType });
+        }
+        public override ValueExpression GetMultipartFormDataParseToFormDataExpression(VariableReference multipart)
+        {
+            return Snippets.Extensible.MultipartFormData.ParseToFormData(new MultipartFormDataRequestContentExpression(multipart));
+        }
+        public override ValueExpression GetMultipartFormDataRequestContentExpression(VariableReference content)
+        {
+            return new MultipartFormDataRequestContentExpression(content);
+        }
+        public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName)
+        {
+            var multipartContentExpression = new MultipartFormDataRequestContentExpression(multipartContent);
+            if (fileName != null)
+            {
+                return multipartContentExpression.Add(content, name, fileName);
+            }
+            else
+            {
+                return multipartContentExpression.Add(content, name);
+            }
+        }
     }
 }

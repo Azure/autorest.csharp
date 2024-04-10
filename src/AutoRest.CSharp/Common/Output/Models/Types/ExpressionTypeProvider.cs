@@ -28,12 +28,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return ChangeTrackingDictionaryProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
             yield return FormDataItemProvider.Instance;
-            yield return MultipartFormDataExtensionsProvider.Instance;
+            if (Configuration.IsBranded)
+            {
+                yield return MultipartFormDataRequestContentExtensionsProvider.Instance;
+            }
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
+                yield return MultipartFormDataBinaryContentExtensionsProvider.Instance;
             }
             if (Configuration.EnableBicepSerialization)
             {

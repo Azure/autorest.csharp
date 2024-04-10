@@ -6,8 +6,11 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -99,5 +102,30 @@ namespace AutoRest.CSharp.Common.Input
         public override string LicenseString => string.Empty;
 
         public override string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
+        public override ValueExpression GetMultipartFormDataContentCreateExpression(BinaryDataExpression data, ValueExpression contentType)
+        {
+            //return MultipartFormDataBinaryContentExpression.Create(data, contentType);
+            return new InvokeStaticMethodExpression(typeof(MultipartFormDataBinaryContent), "Create", new[] { data, contentType });
+        }
+        public override ValueExpression GetMultipartFormDataParseToFormDataExpression(VariableReference multipart)
+        {
+            return Snippets.Extensible.MultipartFormDataBinaryContent.ParseToFormData(new MultipartFormDataBinaryContentExpression(multipart));
+        }
+        public override ValueExpression GetMultipartFormDataRequestContentExpression(VariableReference content)
+        {
+            return new MultipartFormDataBinaryContentExpression(content);
+        }
+        public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName)
+        {
+            var multipartContentExpression = new MultipartFormDataBinaryContentExpression(multipartContent);
+            if (fileName != null)
+            {
+                return multipartContentExpression.Add(content, name, fileName);
+            }
+            else
+            {
+                return multipartContentExpression.Add(content, name);
+            }
+        }
     }
 }

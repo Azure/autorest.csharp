@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,7 +20,18 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
         internal class MultipartFormDataBinaryContentSnippets
         {
             public ValueExpression ParseToFormData(MultipartFormDataBinaryContentExpression multipart)
-                => MultipartFormDataExtensionsProvider.Instance.ParseToFormData(multipart);
+                => MultipartFormDataBinaryContentExtensionsProvider.Instance.ParseToFormData(multipart);
+            public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression fileName)
+            {
+                var multipartContentExpression = new MultipartFormDataBinaryContentExpression(multipartContent);
+                if (fileName != null)
+                {
+                    return multipartContentExpression.Add(content, name, fileName);
+                } else
+                {
+                    return multipartContentExpression.Add(content, name);
+                }
+            }
         }
     }
 }

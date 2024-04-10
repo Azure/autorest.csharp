@@ -10,7 +10,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
-    internal sealed record MultipartFormDataExpression(ValueExpression Untyped) : ValueExpression/*TypedValueExpression<MultipartFormDataRequestContent>(Untyped)*/
+    internal sealed record MultipartFormDataRequestContentExpression(ValueExpression Untyped) : TypedValueExpression<MultipartFormDataRequestContent>(Untyped)
     {
         public ValueExpression ContentParts => new MemberExpression(this, nameof(MultipartFormDataRequestContent.ContentParts));
         public MethodBodyStatement Add() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataRequestContent.Add));
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(ModelReaderWriter.Write));
         //public MethodBodyStatement Create(ValueExpression content) => new InvokeStaticMethodStatement(typeof(MultipartFormDataContent), nameof(MultipartFormDataContent.Create), new[] { content });
         //public static MultipartFormDataExpression Create(ValueExpression content, ValueExpression contentType) => new(InvokeStatic(nameof(MultipartFormDataContent.Create), new[] { content, contentType }));
-        public static ValueExpression Create(ValueExpression content, ValueExpression contentType) => new InvokeStaticMethodExpression(Configuration.ApiTypes.MultipartRequestContentType, nameof(MultipartFormDataRequestContent.Create), new[] { content, contentType });
+        public static ValueExpression Create(BinaryDataExpression content, ValueExpression contentType) => new InvokeStaticMethodExpression(Configuration.ApiTypes.MultipartRequestContentType, nameof(MultipartFormDataContent.Create), new[] { content, contentType });
         public ValueExpression ParseToFormData() => Extensible.MultipartFormData.ParseToFormData(this);
     }
 }

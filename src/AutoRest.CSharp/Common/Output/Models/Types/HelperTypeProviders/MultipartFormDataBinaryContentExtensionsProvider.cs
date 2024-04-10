@@ -16,23 +16,22 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
-    internal class MultipartFormDataExtensionsProvider: ExpressionTypeProvider
+    internal class MultipartFormDataBinaryContentExtensionsProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<MultipartFormDataExtensionsProvider> _instance = new Lazy<MultipartFormDataExtensionsProvider>(() => new MultipartFormDataExtensionsProvider());
-        public static MultipartFormDataExtensionsProvider Instance => _instance.Value;
+        private static readonly Lazy<MultipartFormDataBinaryContentExtensionsProvider> _instance = new Lazy<MultipartFormDataBinaryContentExtensionsProvider>(() => new MultipartFormDataBinaryContentExtensionsProvider());
+        public static MultipartFormDataBinaryContentExtensionsProvider Instance => _instance.Value;
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
 
-        public MultipartFormDataExtensionsProvider() : base(Configuration.HelperNamespace, null)
+        public MultipartFormDataBinaryContentExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
         }
-        protected override string DefaultName => "MultipartFormDataExtensions";
+        protected override string DefaultName => "MultipartFormDataBinaryContentExtensions";
         protected override IEnumerable<Method> BuildMethods()
         {
             yield return BuildParseToFormDataMethod();
@@ -57,8 +56,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             };
             return new Method(signature, body);
         }
-        public ValueExpression ParseToFormData(MultipartFormDataExpression multipart)
-            => new InvokeStaticMethodExpression(Type, _parseToFormDataMethodName, new ValueExpression[] { multipart });
         public ValueExpression ParseToFormData(MultipartFormDataBinaryContentExpression multipart)
             => new InvokeStaticMethodExpression(Type, _parseToFormDataMethodName, new ValueExpression[] { multipart });
     }

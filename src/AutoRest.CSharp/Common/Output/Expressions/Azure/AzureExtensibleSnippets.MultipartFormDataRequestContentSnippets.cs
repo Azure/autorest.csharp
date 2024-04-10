@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -18,8 +19,20 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
     {
         internal class MultipartFormDataRequestContentSnippets
         {
-            public ValueExpression ParseToFormData(MultipartFormDataExpression multipart)
-                => MultipartFormDataExtensionsProvider.Instance.ParseToFormData(multipart);
+            public ValueExpression ParseToFormData(MultipartFormDataRequestContentExpression multipart)
+                => MultipartFormDataRequestContentExtensionsProvider.Instance.ParseToFormData(multipart);
+            public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression fileName)
+            {
+                var multipartContentExpression = new MultipartFormDataRequestContentExpression(multipartContent);
+                if (fileName != null)
+                {
+                    return multipartContentExpression.Add(content, name, fileName);
+                }
+                else
+                {
+                    return multipartContentExpression.Add(content, name);
+                }
+            }
         }
     }
 }
