@@ -140,8 +140,8 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutKnownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -152,8 +152,8 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutKnownValue(content, context);
             return response;
         }
@@ -242,8 +242,8 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutUnknownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -254,8 +254,8 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutUnknownValue(content, context);
             return response;
         }
