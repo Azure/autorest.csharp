@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -63,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (convenienceSpread == null)
                     {
                         var content = new VariableReference(protocol.Type, protocol.Name);
-                        yield return UsingDeclare(content, GetConversion(convenience, protocol.Type, RequestMediaTypes?.FirstOrDefault()));
+                        yield return UsingDeclare(content, convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault()));
                         protocolInvocationExpressions.Add(content);
                     }
                     else
@@ -78,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
                     // process any other parameter
                     // in this case, convenience parameter should never be null
                     Debug.Assert(convenience is not null);
-                    var expression = GetConversion(convenience, protocol.Type, RequestMediaTypes?.FirstOrDefault());
+                    var expression = convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault());
                     protocolInvocationExpressions.Add(expression);
                 }
             }
@@ -143,106 +142,16 @@ namespace AutoRest.CSharp.Output.Models
 
                     yield return new[]
                     {
-                    new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                    JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
-                    Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                };
+                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
+                        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
+                    };
                 }
                 else if (ResponseType is { IsFrameworkType: true })
                 {
                     yield return Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(ResponseType.FrameworkType, response, ResponseMediaTypes?.FirstOrDefault()));
                 }
             }
-        }
-
-        private static ValueExpression GetConversion(Parameter convenience, CSharpType toType, string? contentType)
-        {
-            // deal with the cases of converting to RequestContent
-            if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
-            {
-                return GetConversionToRequestContent(convenience, contentType);
-            }
-
-            TypedValueExpression expression = new ParameterReference(convenience);
-            // converting to anything else should be path, query, head parameters
-            if (expression.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                if (convenience.Type.IsNullable)
-                {
-                    expression = expression.NullConditional();
-                }
-                expression = new EnumExpression(enumType, expression).ToSerial();
-            }
-
-            return expression;
-        }
-
-        private static ValueExpression GetConversionToRequestContent(Parameter convenience, string? contentType)
-        {
-            switch (convenience.Type)
-            {
-                case { IsFrameworkType: true }:
-                    return GetConversionFromFrameworkToRequestContent(convenience, contentType);
-                case { IsFrameworkType: false, Implementation: EnumType enumType }:
-                    TypedValueExpression enumExpression = new ParameterReference(convenience);
-                    if (convenience.IsOptionalInSignature)
-                    {
-                        enumExpression = enumExpression.NullableStructValue();
-                    }
-                    var convenienceEnum = new EnumExpression(enumType, enumExpression);
-                    return BinaryDataExpression.FromObjectAsJson(convenienceEnum.ToSerial());
-                case { IsFrameworkType: false, Implementation: ModelTypeProvider model }:
-                    TypedValueExpression modelExpression = new ParameterReference(convenience);
-                    if (convenience.IsOptionalInSignature)
-                    {
-                        modelExpression = modelExpression.NullConditional();
-                    }
-                    var serializableObjectExpression = new SerializableObjectTypeExpression(model, modelExpression);
-                    return serializableObjectExpression.ToRequestContent();
-                default:
-                    throw new InvalidOperationException($"Unhandled type: {convenience.Type}");
-            }
-        }
-
-        private static ValueExpression GetConversionFromFrameworkToRequestContent(Parameter parameter, string? contentType)
-        {
-            if (parameter.Type.IsReadWriteDictionary)
-            {
-                var expression = RequestContentHelperProvider.Instance.FromDictionary(parameter);
-                if (parameter.IsOptionalInSignature)
-                {
-                    expression = new TernaryConditionalOperator(NotEqual(parameter, Null), expression, Null);
-                }
-                return expression;
-            }
-
-            if (parameter.Type.IsList)
-            {
-                var expression = RequestContentHelperProvider.Instance.FromEnumerable(parameter);
-                if (parameter.IsOptionalInSignature)
-                {
-                    expression = new TernaryConditionalOperator(NotEqual(parameter, Null), expression, Null);
-                }
-                return expression;
-            }
-
-            if (parameter.Type.IsFrameworkType == true && parameter.Type.FrameworkType == typeof(AzureLocation))
-            {
-                return RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString());
-            }
-
-            BodyMediaType? mediaType = contentType == null ? null : FormattableStringHelpers.ToMediaType(contentType);
-            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
-            {
-                return parameter;
-            }
-            // TODO: Here we only consider the case when body is string type. We will add support for other types.
-            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && parameter.Type.FrameworkType == typeof(string))
-            {
-                return parameter;
-            }
-
-            return RequestContentHelperProvider.Instance.FromObject(parameter);
         }
 
         private ValueExpression GetLongRunningConversionMethod(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
