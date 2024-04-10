@@ -117,7 +117,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = await HelloAgainAsync(p2, p1, content, options).ConfigureAwait(false);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -136,7 +136,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(action, nameof(action));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = HelloAgain(p2, p1, content, options);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -338,7 +338,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CreateLiteralAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -352,7 +352,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = CreateLiteral(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -642,7 +642,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = await AnonymousBodyAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -656,7 +656,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = AnonymousBody(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -726,7 +726,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = superFriend.ToBinaryBody();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = await FriendlyModelAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -740,7 +740,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = superFriend.ToBinaryBody();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = FriendlyModel(content, options);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -849,7 +849,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await StringFormatAsync(subscriptionId, content, options).ConfigureAwait(false);
             return result;
         }
@@ -864,7 +864,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = StringFormat(subscriptionId, content, options);
             return result;
         }
@@ -936,7 +936,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = await ProjectedNameModelAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -950,7 +950,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = ProjectedNameModel(content, options);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1124,7 +1124,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await InternalProtocolAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1138,7 +1138,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             RequestOptions options = FromCancellationToken(cancellationToken);
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = InternalProtocol(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
