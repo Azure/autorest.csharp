@@ -52,12 +52,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue<WindowsConfiguration>(WindowsConfiguration, options);
+                writer.WriteObjectValue(WindowsConfiguration, options);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue<LinuxConfiguration>(LinuxConfiguration, options);
+                writer.WriteObjectValue(LinuxConfiguration, options);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue<VaultSecretGroup>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

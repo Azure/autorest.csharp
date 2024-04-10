@@ -18,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(TierToCool))
             {
                 writer.WritePropertyName("tierToCool"u8);
-                writer.WriteObjectValue<DateAfterCreation>(TierToCool);
+                writer.WriteObjectValue(TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
                 writer.WritePropertyName("tierToArchive"u8);
-                writer.WriteObjectValue<DateAfterCreation>(TierToArchive);
+                writer.WriteObjectValue(TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
                 writer.WritePropertyName("delete"u8);
-                writer.WriteObjectValue<DateAfterCreation>(Delete);
+                writer.WriteObjectValue(Delete);
             }
             writer.WriteEndObject();
         }

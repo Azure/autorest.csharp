@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                writer.WriteObjectValue<SuperDeepSinglePropertyModel>(Extreme);
+                writer.WriteObjectValue(Extreme);
             }
             writer.WriteEndObject();
         }

@@ -31,12 +31,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailablePatchSummary))
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
-                writer.WriteObjectValue<AvailablePatchSummary>(AvailablePatchSummary, options);
+                writer.WriteObjectValue(AvailablePatchSummary, options);
             }
             if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
-                writer.WriteObjectValue<LastPatchInstallationSummary>(LastPatchInstallationSummary, options);
+                writer.WriteObjectValue(LastPatchInstallationSummary, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
