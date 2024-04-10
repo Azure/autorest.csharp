@@ -140,8 +140,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest4 sendRequest4 = new SendRequest4(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest4.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -154,8 +154,8 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest4 sendRequest4 = new SendRequest4(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest4.ToRequestContent(), context);
             return response;
         }
