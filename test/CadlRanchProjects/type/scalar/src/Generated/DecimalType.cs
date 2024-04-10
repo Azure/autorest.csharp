@@ -136,8 +136,8 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBodyAsync(decimal,CancellationToken)']/*" />
         public virtual async Task<Response> RequestBodyAsync(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -147,8 +147,8 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBody(decimal,CancellationToken)']/*" />
         public virtual Response RequestBody(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RequestBody(content, context);
             return response;
         }
