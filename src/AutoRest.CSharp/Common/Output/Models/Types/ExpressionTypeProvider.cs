@@ -21,7 +21,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return ChangeTrackingListProvider.Instance;
             yield return OptionalTypeProvider.Instance;
-            yield return RequestContentHelperProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
@@ -30,6 +29,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
+            }
+            if (Configuration.IsBranded)
+            {
+                yield return RequestContentHelperProvider.Instance;
                 yield return Utf8JsonRequestContentProvider.Instance;
             }
             if (Configuration.EnableBicepSerialization)
