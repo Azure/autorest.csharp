@@ -79,11 +79,11 @@ namespace AutoRest.CSharp.Output.Models
             if (spreadVariable == null || convenienceSpread == null)
                 return writer =>
                 {
-                    WriteCancellationTokenToRequestContext(writer, contextVariable);
                     if (contentInfo != null)
                     {
                         WriteBodyToRequestContent(writer, contentInfo.ContentVariable, contentInfo.ContentValue);
                     }
+                    WriteCancellationTokenToRequestContext(writer, contextVariable);
                 };
 
             // we need to get all the property initializers therefore here we use serialization constructor
@@ -99,9 +99,9 @@ namespace AutoRest.CSharp.Output.Models
 
             return writer =>
             {
-                WriteCancellationTokenToRequestContext(writer, contextVariable);
                 // when writing the initialization of the model, since values of the parameters we have here might be null, and the serialization constructor will not have initializers in its implementation, we use initialization constructor to initialize the instance.
                 writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable:D} = {v};"), convenienceSpread.BackingModel, convenienceSpread.BackingModel.InitializationConstructor, initializers);
+                WriteCancellationTokenToRequestContext(writer, contextVariable);
             };
         }
 
