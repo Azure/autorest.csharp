@@ -12,26 +12,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class OmitOperationGroups
     {
-        public static void RemoveOperationGroups()
+        public static void RemoveOperationGroups(CodeModel codeModel)
         {
             var omitSet = Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
-            if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
+            if (codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
                 omitSet.Add("Operations");
             }
             if (omitSet.Count > 0)
             {
-                var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
-                var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
+                var omittedOGs = codeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
+                var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
                 omittedOGs.ForEach(og => MgmtReport.Instance.TransformSection.AddTransformLog(
                     new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
                     og.GetFullSerializedName(), $"Omit OperationGroup: '{og.GetFullSerializedName()}'"));
 
-                MgmtContext.CodeModel.OperationGroups = nonOmittedOGs;
+                codeModel.OperationGroups = nonOmittedOGs;
                 var schemasToOmit = new Dictionary<Schema, HashSet<OperationGroup>>();
                 var schemasToKeep = new Dictionary<Schema, HashSet<OperationGroup>>();
-                foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+                foreach (var operationGroup in codeModel.OperationGroups)
                 {
                     DetectSchemas(operationGroup, schemasToKeep);
                 }

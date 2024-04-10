@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -27,6 +28,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+
+            CodeModelTransformer.Transform(codeModel);
 
             if (Configuration.Generation1ConvenienceClient)
             {

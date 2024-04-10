@@ -3,42 +3,66 @@
 
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
+using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform()
+        private static void TransfromForDataPlane(CodeModel codeModel)
         {
+            SchemaUsageTransformer.Transform(codeModel);
+            ConstantSchemaTransformer.Transform(codeModel);
+            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
+        }
+
+        private static void ApplyGlobalConfigurations()
+        {
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
+            {
+                Vocabularies.Default.AddIrregular(word, plural);
+            }
+        }
+
+        public static void Transform(CodeModel codeModel)
+        {
+            if (!Configuration.AzureArm)
+            {
+                TransfromForDataPlane(codeModel);
+                return;
+            }
+
+            ApplyGlobalConfigurations();
+
             // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
-            OmitOperationGroups.RemoveOperationGroups();
-            PartialResourceResolver.Update();
-            SubscriptionIdUpdater.Update();
-            ConstantSchemaTransformer.Transform(MgmtContext.CodeModel);
-            CommonSingleWordModels.Update();
-            SchemaNameAndFormatUpdater.ApplyRenameMapping();
-            SchemaNameAndFormatUpdater.UpdateAcronyms();
-            UrlToUri.UpdateSuffix();
-            FrameworkTypeUpdater.ValidateAndUpdate();
-            SchemaFormatByNameTransformer.Update();
-            SealedChoicesUpdater.UpdateSealChoiceTypes();
-            RenameTimeToOn.Update();
-            RearrangeParameterOrder.Update();
-            RenamePluralEnums.Update();
-            DuplicateSchemaResolver.ResolveDuplicates();
+            SchemaUsageTransformer.Transform(codeModel);
+            OmitOperationGroups.RemoveOperationGroups(codeModel);
+            PartialResourceResolver.Update(codeModel);
+            SubscriptionIdUpdater.Update(codeModel);
+            ConstantSchemaTransformer.Transform(codeModel);
+            CommonSingleWordModels.Update(codeModel);
+            SchemaNameAndFormatUpdater.ApplyRenameMapping(codeModel);
+            SchemaNameAndFormatUpdater.UpdateAcronyms(codeModel);
+            UrlToUri.UpdateSuffix(codeModel);
+            FrameworkTypeUpdater.ValidateAndUpdate(codeModel);
+            SchemaFormatByNameTransformer.Update(codeModel);
+            SealedChoicesUpdater.UpdateSealChoiceTypes(codeModel);
+            RenameTimeToOn.Update(codeModel);
+            RearrangeParameterOrder.Update(codeModel);
+            RenamePluralEnums.Update(codeModel);
+            DuplicateSchemaResolver.ResolveDuplicates(codeModel);
 
             if (Configuration.MgmtConfiguration.MgmtDebug.ShowSerializedNames)
             {
-                SerializedNamesUpdater.Update();
+                SerializedNamesUpdater.Update(codeModel);
             }
             //eliminate client default value from property
-            ModelPropertyClientDefaultValueTransformer.Transform(MgmtContext.CodeModel);
+            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
 
-            CodeModelValidator.Validate();
+            CodeModelValidator.Validate(codeModel);
         }
     }
 }

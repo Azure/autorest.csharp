@@ -102,9 +102,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
-            ApplyGlobalConfigurations();
-            CodeModelTransformer.Transform();
-
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
@@ -136,14 +133,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
-
-        private static void ApplyGlobalConfigurations()
-        {
-            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
-            {
-                Vocabularies.Default.AddIrregular(word, plural);
-            }
-        }
 
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
