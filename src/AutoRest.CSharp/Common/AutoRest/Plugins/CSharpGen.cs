@@ -11,8 +11,10 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -31,6 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             CodeModelTransformer.Transform(codeModel);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
 
             if (Configuration.Generation1ConvenienceClient)
             {
