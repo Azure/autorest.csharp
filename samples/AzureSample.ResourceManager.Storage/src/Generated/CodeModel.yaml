@@ -25073,7 +25073,15 @@ operationGroups:
         extensions:
           x-ms-examples:
             StorageAccountFailover:
-              $ref: ./examples/StorageAccountFailover.json
+              parameters:
+                accountName: sto2434
+                api-version: 2020-08-01-preview
+                monitor: 'true'
+                resourceGroupName: res4228
+                subscriptionId: '{subscription-id}'
+              responses:
+                '200': {}
+                '202': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
