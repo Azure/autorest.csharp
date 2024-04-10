@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             CodeModelTransformer.Transform(codeModel);
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
 
             if (Configuration.Generation1ConvenienceClient)
             {
@@ -49,6 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
+                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
