@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue<ApiError>(Error, options);
+                writer.WriteObjectValue(Error, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

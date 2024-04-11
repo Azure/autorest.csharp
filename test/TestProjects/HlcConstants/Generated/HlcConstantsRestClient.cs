@@ -58,7 +58,7 @@ namespace HlcConstants
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(value);
+            content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
             return message;
         }
@@ -141,7 +141,7 @@ namespace HlcConstants
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(value);
+            content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
             return message;
         }

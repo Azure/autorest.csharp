@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue<VirtualMachineScaleSetData>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

@@ -83,7 +83,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    writer.WriteObjectValue<SubResourceWithColocationStatus>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +93,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachineScaleSets)
                 {
-                    writer.WriteObjectValue<SubResourceWithColocationStatus>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -103,14 +103,14 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in AvailabilitySets)
                 {
-                    writer.WriteObjectValue<SubResourceWithColocationStatus>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue<InstanceViewStatus>(ColocationStatus, options);
+                writer.WriteObjectValue(ColocationStatus, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

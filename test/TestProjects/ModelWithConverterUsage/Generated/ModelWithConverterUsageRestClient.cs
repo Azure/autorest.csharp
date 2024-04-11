@@ -49,7 +49,7 @@ namespace ModelWithConverterUsage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ModelClass>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -120,7 +120,7 @@ namespace ModelWithConverterUsage
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<ModelStruct?>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;

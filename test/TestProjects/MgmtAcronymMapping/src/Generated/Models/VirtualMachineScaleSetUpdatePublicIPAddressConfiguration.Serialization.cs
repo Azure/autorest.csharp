@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>(DnsSettings);
+                writer.WriteObjectValue(DnsSettings);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

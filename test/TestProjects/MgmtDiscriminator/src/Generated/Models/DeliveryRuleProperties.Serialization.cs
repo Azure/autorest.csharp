@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
-                writer.WriteObjectValue<DeliveryRuleCondition>(Conditions, options);
+                writer.WriteObjectValue(Conditions, options);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
@@ -45,7 +45,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    writer.WriteObjectValue<DeliveryRuleAction>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -56,14 +56,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<DeliveryRuleAction>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue<Pet>(Pet, options);
+                writer.WriteObjectValue(Pet, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Foo))
             {

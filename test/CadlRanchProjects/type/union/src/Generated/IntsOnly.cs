@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,20 +47,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse3>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse6>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetIntsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse3.FromResponse(response), response);
+            return Response.FromValue(GetResponse6.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnly(CancellationToken)']/*" />
-        public virtual Response<GetResponse3> GetIntsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse6> GetIntsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetIntsOnly(context);
-            return Response.FromValue(GetResponse3.FromResponse(response), response);
+            return Response.FromValue(GetResponse6.FromResponse(response), response);
         }
 
         /// <summary>
@@ -140,9 +141,9 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SendAsync(sendRequest3.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest6.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -154,9 +155,9 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Send(sendRequest3.ToRequestContent(), context);
+            Response response = Send(sendRequest6.ToRequestContent(), context);
             return response;
         }
 

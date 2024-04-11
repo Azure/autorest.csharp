@@ -29,7 +29,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                writer.WriteObjectValue<CreateModerationResponseResult>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

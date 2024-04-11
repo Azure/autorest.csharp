@@ -50,19 +50,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    writer.WriteObjectValue<AdditionalUnattendContent>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                writer.WriteObjectValue<PatchSettings>(PatchSettings, options);
+                writer.WriteObjectValue(PatchSettings, options);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                writer.WriteObjectValue<WinRMConfiguration>(WinRM, options);
+                writer.WriteObjectValue(WinRM, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

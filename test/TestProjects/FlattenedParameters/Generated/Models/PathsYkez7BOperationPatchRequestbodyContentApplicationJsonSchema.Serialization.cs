@@ -39,7 +39,7 @@ namespace FlattenedParameters.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

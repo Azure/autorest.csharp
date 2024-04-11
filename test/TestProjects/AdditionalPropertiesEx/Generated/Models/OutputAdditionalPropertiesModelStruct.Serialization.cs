@@ -122,7 +122,7 @@ namespace AdditionalPropertiesEx.Models
         internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<OutputAdditionalPropertiesModelStruct>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

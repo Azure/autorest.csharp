@@ -90,7 +90,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<FieldMappingFunction>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

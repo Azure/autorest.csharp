@@ -51,7 +51,7 @@ namespace UnbrandedTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<Thing>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -235,7 +235,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            writer.WriteObjectValue<ModelWithRequiredNullableProperties>(ModelWithRequiredNullable, options);
+            writer.WriteObjectValue(ModelWithRequiredNullable, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

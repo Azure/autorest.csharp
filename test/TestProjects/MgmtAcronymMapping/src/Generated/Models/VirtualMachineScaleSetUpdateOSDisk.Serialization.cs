@@ -33,7 +33,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Image);
+                writer.WriteObjectValue(Image);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk);
+                writer.WriteObjectValue(ManagedDisk);
             }
             writer.WriteEndObject();
         }

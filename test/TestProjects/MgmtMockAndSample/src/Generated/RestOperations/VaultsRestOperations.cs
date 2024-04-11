@@ -55,7 +55,7 @@ namespace MgmtMockAndSample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue<VaultCreateOrUpdateContent>(content);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -133,7 +133,7 @@ namespace MgmtMockAndSample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VaultPatch>(patch);
+            content.JsonWriter.WriteObjectValue(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -602,7 +602,7 @@ namespace MgmtMockAndSample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VaultAccessPolicyParameters>(vaultAccessPolicyParameters);
+            content.JsonWriter.WriteObjectValue(vaultAccessPolicyParameters);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -1057,7 +1057,7 @@ namespace MgmtMockAndSample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue<VaultCheckNameAvailabilityContent>(content);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
