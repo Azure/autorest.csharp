@@ -33,12 +33,12 @@ namespace AnomalyDetector.Models
                 writer.WriteStringValue(ResultId);
             }
             writer.WritePropertyName("summary"u8);
-            writer.WriteObjectValue<MultivariateBatchDetectionResultSummary>(Summary, options);
+            writer.WriteObjectValue(Summary, options);
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                writer.WriteObjectValue<AnomalyState>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -158,7 +158,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MultivariateDetectionResult>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

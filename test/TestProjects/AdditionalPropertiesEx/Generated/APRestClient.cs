@@ -49,7 +49,7 @@ namespace AdditionalPropertiesEx
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModel>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -163,7 +163,7 @@ namespace AdditionalPropertiesEx
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputAdditionalPropertiesModelStruct>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

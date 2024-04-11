@@ -35,7 +35,7 @@ namespace OpenAI.Models
             if (Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
-                writer.WriteObjectValue<ChatCompletionResponseMessageFunctionCall>(FunctionCall, options);
+                writer.WriteObjectValue(FunctionCall, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

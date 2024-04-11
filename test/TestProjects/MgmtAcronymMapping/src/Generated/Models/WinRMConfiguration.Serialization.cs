@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Listeners)
                 {
-                    writer.WriteObjectValue<WinRMListener>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

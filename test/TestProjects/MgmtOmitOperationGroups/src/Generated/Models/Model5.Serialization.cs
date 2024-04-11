@@ -27,7 +27,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    writer.WriteObjectValue<ModelQ>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

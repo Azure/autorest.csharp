@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartArray();
             foreach (var item in AccessPolicies)
             {
-                writer.WriteObjectValue<AccessPolicyEntry>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

@@ -104,7 +104,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<EdgeNGramTokenFilterV2>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

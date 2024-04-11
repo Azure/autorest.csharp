@@ -34,7 +34,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue<MgmtMockAndSamplePrivateLinkServiceConnectionState>(ConnectionState);
+                writer.WriteObjectValue(ConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {

@@ -53,7 +53,7 @@ namespace Azure.Network.Management.Interface.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SubResource>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

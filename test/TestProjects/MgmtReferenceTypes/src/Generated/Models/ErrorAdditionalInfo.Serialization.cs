@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, ErrorAdditionalInfo model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<ErrorAdditionalInfo>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override ErrorAdditionalInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

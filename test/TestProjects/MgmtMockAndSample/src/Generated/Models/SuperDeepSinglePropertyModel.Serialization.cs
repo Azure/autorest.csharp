@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Super))
             {
                 writer.WritePropertyName("super"u8);
-                writer.WriteObjectValue<VeryDeepSinglePropertyModel>(Super);
+                writer.WriteObjectValue(Super);
             }
             writer.WriteEndObject();
         }

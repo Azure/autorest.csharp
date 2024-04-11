@@ -21,7 +21,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue<ConfigurationProfileAssignmentProperties>(Properties);
+                writer.WriteObjectValue(Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

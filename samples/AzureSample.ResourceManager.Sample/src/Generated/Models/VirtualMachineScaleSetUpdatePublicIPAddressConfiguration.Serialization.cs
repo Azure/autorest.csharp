@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>(DnsSettings, options);
+                writer.WriteObjectValue(DnsSettings, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
