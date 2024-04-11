@@ -28,7 +28,7 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop, options);
+            writer.WriteStringValue(Prop.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -67,14 +67,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            MixedTypesCases prop = default;
+            GetResponse9Prop prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value, options);
+                    prop = new GetResponse9Prop(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")

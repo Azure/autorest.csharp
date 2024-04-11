@@ -7,13 +7,13 @@ This sample shows how to call GetEnumsOnlyAsync.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
+Response<GetResponse3> response = await client.GetEnumsOnlyAsync();
 ]]></code>
 This sample shows how to call GetEnumsOnlyAsync with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
+Response<GetResponse3> response = await client.GetEnumsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetEnumsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetEnumsOnly.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<GetResponse6> response = client.GetEnumsOnly();
+Response<GetResponse3> response = client.GetEnumsOnly();
 ]]></code>
 This sample shows how to call GetEnumsOnly with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<GetResponse6> response = client.GetEnumsOnly();
+Response<GetResponse3> response = client.GetEnumsOnly();
 ]]></code></example>
     </member>
     <member name="GetEnumsOnlyAsync(RequestContext)">
