@@ -14,9 +14,9 @@ namespace Scm.Authentication.Http.Custom
         {
             await pipeline.SendAsync(message).ConfigureAwait(false);
 
-            if (message.Response.IsError && options?.ErrorOptions == ClientErrorBehaviors.Default)
+            if (message.Response.IsError && (options?.ErrorOptions & ClientErrorBehaviors.NoThrow) != ClientErrorBehaviors.NoThrow)
             {
-                await ClientResultException.CreateAsync(message.Response).ConfigureAwait(false);
+                throw await ClientResultException.CreateAsync(message.Response).ConfigureAwait(false);
             }
 
             return message.Response;
@@ -26,7 +26,7 @@ namespace Scm.Authentication.Http.Custom
         {
             pipeline.Send(message);
 
-            if (message.Response.IsError && options?.ErrorOptions == ClientErrorBehaviors.Default)
+            if (message.Response.IsError && (options?.ErrorOptions & ClientErrorBehaviors.NoThrow) != ClientErrorBehaviors.NoThrow)
             {
                 throw new ClientResultException(message.Response);
             }
