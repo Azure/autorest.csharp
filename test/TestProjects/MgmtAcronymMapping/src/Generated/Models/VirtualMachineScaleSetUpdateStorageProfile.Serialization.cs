@@ -18,12 +18,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue<ImageReference>(ImageReference);
+                writer.WriteObjectValue(ImageReference);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateOSDisk>(OSDisk);
+                writer.WriteObjectValue(OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue<VirtualMachineScaleSetDataDisk>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

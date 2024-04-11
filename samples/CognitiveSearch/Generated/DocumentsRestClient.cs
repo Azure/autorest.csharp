@@ -256,7 +256,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SearchRequest>(searchRequest);
+            content.JsonWriter.WriteObjectValue(searchRequest);
             request.Content = content;
             return message;
         }
@@ -537,7 +537,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SuggestRequest>(suggestRequest);
+            content.JsonWriter.WriteObjectValue(suggestRequest);
             request.Content = content;
             return message;
         }
@@ -614,7 +614,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<IndexBatch>(batch);
+            content.JsonWriter.WriteObjectValue(batch);
             request.Content = content;
             return message;
         }
@@ -812,7 +812,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AutocompleteRequest>(autocompleteRequest);
+            content.JsonWriter.WriteObjectValue(autocompleteRequest);
             request.Content = content;
             return message;
         }

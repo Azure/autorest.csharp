@@ -59,7 +59,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                writer.WriteObjectValue<ParameterDefinitionsValueMetadata>(Metadata);
+                writer.WriteObjectValue(Metadata);
             }
             writer.WriteEndObject();
         }

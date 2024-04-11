@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, PrivateLinkResourceList model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<PrivateLinkResourceList>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override PrivateLinkResourceList Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

@@ -103,7 +103,7 @@ namespace HlcConstants.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ModelWithOptionalConstant>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

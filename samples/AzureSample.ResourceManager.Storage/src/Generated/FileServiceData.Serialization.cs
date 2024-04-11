@@ -22,17 +22,17 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue<CorsRules>(Cors);
+                writer.WriteObjectValue(Cors);
             }
             if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue<DeleteRetentionPolicy>(ShareDeleteRetentionPolicy);
+                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
             if (Optional.IsDefined(ProtocolSettings))
             {
                 writer.WritePropertyName("protocolSettings"u8);
-                writer.WriteObjectValue<ProtocolSettings>(ProtocolSettings);
+                writer.WriteObjectValue(ProtocolSettings);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

@@ -69,17 +69,17 @@ namespace MgmtDiscriminator
             if (Optional.IsDefined(ShellProperty))
             {
                 writer.WritePropertyName("shellProperty"u8);
-                writer.WriteObjectValue<Shell>(ShellProperty, options);
+                writer.WriteObjectValue(ShellProperty, options);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<Sku1>(Sku, options);
+                writer.WriteObjectValue(Sku, options);
             }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue<DeliveryRuleProperties>(Properties, options);
+                writer.WriteObjectValue(Properties, options);
             }
             if (options.Format != "W")
             {

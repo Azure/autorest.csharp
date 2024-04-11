@@ -20,7 +20,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                writer.WriteObjectValue<ActiveDirectoryProperties>(ActiveDirectoryProperties);
+                writer.WriteObjectValue(ActiveDirectoryProperties);
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {

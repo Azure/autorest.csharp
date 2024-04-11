@@ -28,7 +28,7 @@ namespace OpenAI.Models
             if (Logprobs != null)
             {
                 writer.WritePropertyName("logprobs"u8);
-                writer.WriteObjectValue<CreateCompletionResponseChoiceLogprobs>(Logprobs, options);
+                writer.WriteObjectValue(Logprobs, options);
             }
             else
             {

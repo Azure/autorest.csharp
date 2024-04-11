@@ -418,7 +418,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ValueExpression value;
             Utf8JsonWriterExpression writer;
             ParameterReference options;
-            MethodSignature signature = GetWriteObjectValueMethodSignature(new[] { _t }, out value, out writer, out options);
+            MethodSignature signature = GetWriteObjectValueMethodSignature(_t, out value, out writer, out options);
             List<SwitchCase> cases = new List<SwitchCase>
             {
                 new(Null, new MethodBodyStatement[]
@@ -572,9 +572,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private MethodSignature GetWriteObjectValueMethodSignature(CSharpType[]? genericArguments, out ValueExpression value, out Utf8JsonWriterExpression writer, out ParameterReference options)
+        private MethodSignature GetWriteObjectValueMethodSignature(CSharpType? genericArgument, out ValueExpression value, out Utf8JsonWriterExpression writer, out ParameterReference options)
         {
-            var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
+            var valueParameter = new Parameter("value", null, genericArgument ?? typeof(object), null, ValidationType.None, null);
             var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(new CSharpType(typeof(ModelReaderWriterOptions)).WithNullable(true)), ValidationType.None, null);
             var parameters = Configuration.UseModelReaderWriter
                 ? new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, optionsParameter }
@@ -587,7 +587,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ReturnType: null,
                 ReturnDescription: null,
                 Parameters: parameters,
-                GenericArguments: genericArguments);
+                GenericArguments: genericArgument != null ? new[] { genericArgument } : null);
             value = (ValueExpression)valueParameter;
             writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
             options = new ParameterReference(optionsParameter);

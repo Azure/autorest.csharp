@@ -102,7 +102,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Siamese>(complexBody, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(complexBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

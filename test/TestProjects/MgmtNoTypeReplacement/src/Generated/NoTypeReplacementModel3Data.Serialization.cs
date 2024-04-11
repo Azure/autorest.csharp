@@ -20,7 +20,7 @@ namespace MgmtNoTypeReplacement
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                writer.WriteObjectValue<MiddleResourceModel>(Foo);
+                writer.WriteObjectValue(Foo);
             }
             writer.WriteEndObject();
         }
