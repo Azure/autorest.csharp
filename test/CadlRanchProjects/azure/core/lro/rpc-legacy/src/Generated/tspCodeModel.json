@@ -245,7 +245,7 @@
               },
               {
                "$id": "34",
-               "Name": "InnerErrorObject",
+               "Name": "innererror",
                "SerializedName": "innererror",
                "Description": "Inner error.",
                "Type": {

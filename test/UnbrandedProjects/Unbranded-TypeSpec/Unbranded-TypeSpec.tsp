@@ -327,10 +327,11 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @convenientAPI(true)
 op returnsAnonymousModel(): {};
 
-@get
+// TODO: https://github.com/Azure/typespec-azure/issues/509
+@put
 @route("/unknown-value")
-@doc("get extensible enum")
-op getUnknownValue(): DaysOfWeekExtensibleEnum;
+@doc("create extensible enum")
+op createUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 
 @doc("When set protocol false and convenient true, then the protocol method should be internal")
 @route("internalProtocol")

@@ -47,18 +47,15 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest9"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public SendRequest9(MixedTypesCases prop)
+        public SendRequest9(SendRequest9Prop prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="SendRequest9"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SendRequest9(MixedTypesCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SendRequest9(SendRequest9Prop prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -70,6 +67,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public MixedTypesCases Prop { get; }
+        public SendRequest9Prop Prop { get; }
     }
 }

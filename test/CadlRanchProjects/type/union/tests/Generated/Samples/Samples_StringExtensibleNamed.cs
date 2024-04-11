@@ -48,7 +48,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = client.GetStringExtensibleNamed();
+            Response<GetResponse7> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse7> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = client.GetStringExtensibleNamed();
+            Response<GetResponse7> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse7> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
