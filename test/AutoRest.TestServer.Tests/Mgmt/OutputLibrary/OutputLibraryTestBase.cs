@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var model = await codeModelTask;
             CodeModelTransformer.TransformForMgmt(model);
             var schemaUsageProvider = new SchemaUsageProvider(model);
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(new CodeModelConverter(model, schemaUsageProvider).CreateNamespace(),, sourceInputModel, schemaUsageProvider));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(new CodeModelConverter(model, schemaUsageProvider).CreateNamespace(), sourceInputModel));
         }
 
         [Test]
