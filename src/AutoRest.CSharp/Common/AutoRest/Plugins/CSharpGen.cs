@@ -11,7 +11,10 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -28,9 +31,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             if (Configuration.Generation1ConvenienceClient)
             {
-                DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
+                CodeModelTransformer.TransfromForDataPlane(codeModel);
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel, schemaUsageProvider);
             }
             else if (Configuration.AzureArm)
             {
@@ -38,19 +43,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null, schemaUsageProvider);
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
+                    CodeModelTransformer.TransformForMgmt(codeModel);
+                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                 }
                 GenerateMgmtReport(project);
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel)).CreateNamespace(), sourceInputModel, false);
+                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace(), sourceInputModel, false);
             }
             return project;
         }
