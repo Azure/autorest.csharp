@@ -11,19 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform(CodeModel codeModel)
-        {
-            if (Configuration.AzureArm)
-            {
-                TransformForMgmt(codeModel);
-            }
-            else
-            {
-                TransfromForDataPlane(codeModel);
-            }
-        }
-
-        private static void TransfromForDataPlane(CodeModel codeModel)
+        public static void TransfromForDataPlane(CodeModel codeModel)
         {
             SchemaUsageTransformer.Transform(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
@@ -38,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void TransformForMgmt(CodeModel codeModel)
+        public static void TransformForMgmt(CodeModel codeModel)
         {
             ApplyGlobalConfigurations();
 
