@@ -27,7 +27,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(ModelProperty);
+                writer.WriteObjectValue(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -72,7 +72,7 @@ namespace Inheritance.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SeparateClass>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
 
@@ -80,7 +80,7 @@ namespace Inheritance.Models
         {
             public override void Write(Utf8JsonWriter writer, SeparateClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<SeparateClass>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

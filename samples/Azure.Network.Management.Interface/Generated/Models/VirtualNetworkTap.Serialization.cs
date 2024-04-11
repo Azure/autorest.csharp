@@ -42,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(DestinationNetworkInterfaceIPConfiguration);
+                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue<FrontendIPConfiguration>(DestinationLoadBalancerFrontEndIPConfiguration);
+                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {
@@ -212,7 +212,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VirtualNetworkTap>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

@@ -49,8 +49,8 @@ namespace Client.Naming
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumNameAsync(ClientExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> UnionEnumNameAsync(ClientExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnionEnumNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -60,8 +60,8 @@ namespace Client.Naming
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumName(ClientExtensibleEnum,CancellationToken)']/*" />
         public virtual Response UnionEnumName(ClientExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnionEnumName(content, context);
             return response;
         }
@@ -149,8 +149,8 @@ namespace Client.Naming
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberNameAsync(ExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> UnionEnumMemberNameAsync(ExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnionEnumMemberNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -160,8 +160,8 @@ namespace Client.Naming
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberName(ExtensibleEnum,CancellationToken)']/*" />
         public virtual Response UnionEnumMemberName(ExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnionEnumMemberName(content, context);
             return response;
         }

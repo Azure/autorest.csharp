@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Hosts)
                 {
-                    writer.WriteObjectValue<DedicatedHostInstanceViewWithName>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

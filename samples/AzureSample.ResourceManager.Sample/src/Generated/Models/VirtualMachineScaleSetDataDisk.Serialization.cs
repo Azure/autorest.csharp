@@ -55,7 +55,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {

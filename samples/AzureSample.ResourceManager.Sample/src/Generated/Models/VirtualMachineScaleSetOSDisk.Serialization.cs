@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue<DiffDiskSettings>(DiffDiskSettings, options);
+                writer.WriteObjectValue(DiffDiskSettings, options);
             }
             if (Optional.IsDefined(DiskSizeGB))
             {
@@ -64,7 +64,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Image, options);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -79,7 +79,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

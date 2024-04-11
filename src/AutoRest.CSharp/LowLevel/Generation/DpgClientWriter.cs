@@ -724,13 +724,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
-            List<FormattableString> lines = new()
+            var linkForProtocol = Configuration.IsBranded
+                ? "https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md"
+                : "https://aka.ms/azsdk/net/protocol-methods";
+            List <FormattableString> lines = new()
             {
                 $"[Protocol Method] {methodSignature.SummaryText}",
                 $"<list type=\"bullet\">",
                 $"<item>",
                 $"<description>",
-                $"This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
+                $"This <see href={linkForProtocol:L}>protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
                 $"</description>",
                 $"</item>"
             };

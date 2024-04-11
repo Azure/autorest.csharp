@@ -51,8 +51,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SameAsModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -65,8 +65,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SameAsModel(content, context);
             return response;
         }

@@ -32,12 +32,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue<ImageReference>(ImageReference, options);
+                writer.WriteObjectValue(ImageReference, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetOSDisk>(OSDisk, options);
+                writer.WriteObjectValue(OSDisk, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -45,7 +45,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue<VirtualMachineScaleSetDataDisk>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

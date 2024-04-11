@@ -258,7 +258,7 @@ namespace Inheritance.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ClassThatInheritsFromBaseClassAndSomeProperties>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

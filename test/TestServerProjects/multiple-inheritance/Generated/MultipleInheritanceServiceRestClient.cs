@@ -102,7 +102,7 @@ namespace multiple_inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Horse>(horse, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(horse, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -226,7 +226,7 @@ namespace multiple_inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Pet>(pet, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(pet, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -350,7 +350,7 @@ namespace multiple_inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Feline>(feline, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(feline, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -474,7 +474,7 @@ namespace multiple_inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Cat>(cat, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(cat, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -598,7 +598,7 @@ namespace multiple_inheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Kitten>(kitten, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(kitten, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

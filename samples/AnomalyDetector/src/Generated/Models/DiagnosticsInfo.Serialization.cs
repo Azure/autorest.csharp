@@ -30,7 +30,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
-                writer.WriteObjectValue<ModelState>(ModelState, options);
+                writer.WriteObjectValue(ModelState, options);
             }
             if (Optional.IsCollectionDefined(VariableStates))
             {
@@ -38,7 +38,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue<VariableState>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -161,7 +161,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<DiagnosticsInfo>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WritePropertyName("limit"u8);
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("name"u8);
-            writer.WriteObjectValue<AzureSampleResourceManagerSampleUsageName>(Name, options);
+            writer.WriteObjectValue(Name, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

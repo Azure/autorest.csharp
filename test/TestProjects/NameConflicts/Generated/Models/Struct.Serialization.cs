@@ -1355,7 +1355,7 @@ namespace NameConflicts.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Struct>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

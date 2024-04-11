@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<BaseModelWithDiscriminator>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -105,7 +105,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue<CollectionItem>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -129,7 +129,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<RecordItem>(item.Value, options);
+                writer.WriteObjectValue(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
@@ -683,7 +683,7 @@ namespace ModelsTypeSpec.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

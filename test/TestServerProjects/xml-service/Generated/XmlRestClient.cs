@@ -1713,7 +1713,7 @@ namespace xml_service
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<JsonInput>(properties, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(properties, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

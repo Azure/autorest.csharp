@@ -173,8 +173,8 @@ namespace _Specs_.Azure.Core.Traits
         {
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = userActionParam.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RepeatableActionAsync(id, content, context).ConfigureAwait(false);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
@@ -189,8 +189,8 @@ namespace _Specs_.Azure.Core.Traits
         {
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = userActionParam.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RepeatableAction(id, content, context);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
