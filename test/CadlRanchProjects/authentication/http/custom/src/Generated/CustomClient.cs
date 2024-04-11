@@ -18,7 +18,7 @@ namespace Authentication.Http.Custom
     public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private const string AuthorizationApiKeyPrefix = "SharedAccessKey";
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -53,8 +53,8 @@ namespace Authentication.Http.Custom
             options ??= new CustomClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 

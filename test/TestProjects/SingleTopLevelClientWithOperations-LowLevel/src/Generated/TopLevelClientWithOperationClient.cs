@@ -20,7 +20,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
     public partial class TopLevelClientWithOperationClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -54,8 +54,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             options ??= new TopLevelClientWithOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -175,13 +175,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
         {
-            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient1;
+            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _credential, _endpoint), null) ?? _cachedClient1;
         }
 
         /// <summary> Initializes a new instance of Client2. </summary>
         public virtual Client2 GetClient2Client()
         {
-            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
+            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _credential, _endpoint), null) ?? _cachedClient2;
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
@@ -191,7 +191,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
-            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, clientParameter);
+            return new Client4(ClientDiagnostics, _pipeline, _credential, _endpoint, clientParameter);
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)

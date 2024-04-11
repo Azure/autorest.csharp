@@ -18,7 +18,7 @@ namespace body_complex_LowLevel
     public partial class PolymorphicrecursiveClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -52,8 +52,8 @@ namespace body_complex_LowLevel
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 

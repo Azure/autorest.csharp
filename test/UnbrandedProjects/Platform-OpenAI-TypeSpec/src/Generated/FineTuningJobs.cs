@@ -16,7 +16,7 @@ namespace OpenAI
     public partial class FineTuningJobs
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _credential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -31,12 +31,12 @@ namespace OpenAI
 
         /// <summary> Initializes a new instance of FineTuningJobs. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="credential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal FineTuningJobs(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
+        internal FineTuningJobs(ClientPipeline pipeline, ApiKeyCredential credential, Uri endpoint)
         {
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
+            _credential = credential;
             _endpoint = endpoint;
         }
 

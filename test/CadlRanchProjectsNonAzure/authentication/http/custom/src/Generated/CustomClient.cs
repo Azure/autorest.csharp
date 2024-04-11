@@ -14,7 +14,7 @@ namespace Scm.Authentication.Http.Custom
     public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _credential;
         private const string AuthorizationApiKeyPrefix = "SharedAccessKey";
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -45,8 +45,8 @@ namespace Scm.Authentication.Http.Custom
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CustomClientOptions();
 
-            _keyCredential = credential;
-            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<PipelinePolicy>());
+            _credential = credential;
+            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_credential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<PipelinePolicy>());
             _endpoint = endpoint;
         }
 

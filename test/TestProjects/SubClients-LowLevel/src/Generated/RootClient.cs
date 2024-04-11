@@ -19,7 +19,7 @@ namespace SubClients_LowLevel
     public partial class RootClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private readonly HttpPipeline _pipeline;
         private readonly string _cachedParameter;
         private readonly Uri _endpoint;
@@ -59,8 +59,8 @@ namespace SubClients_LowLevel
             options ??= new RootClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _cachedParameter = cachedParameter;
             _endpoint = endpoint;
         }
@@ -130,7 +130,7 @@ namespace SubClients_LowLevel
         /// <summary> Initializes a new instance of Parameter. </summary>
         public virtual Parameter GetParameterClient()
         {
-            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
+            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _credential, _endpoint), null) ?? _cachedParameter0;
         }
 
         internal HttpMessage CreateGetCachedParameterRequest(RequestContext context)

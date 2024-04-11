@@ -21,7 +21,7 @@ namespace FirstTestTypeSpec
     public partial class FirstTestTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
@@ -66,8 +66,8 @@ namespace FirstTestTypeSpec
             options ??= new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -2303,31 +2303,31 @@ namespace FirstTestTypeSpec
         /// <summary> Initializes a new instance of Hello. </summary>
         public virtual Hello GetHelloClient()
         {
-            return Volatile.Read(ref _cachedHello) ?? Interlocked.CompareExchange(ref _cachedHello, new Hello(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHello;
+            return Volatile.Read(ref _cachedHello) ?? Interlocked.CompareExchange(ref _cachedHello, new Hello(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedHello;
         }
 
         /// <summary> Initializes a new instance of EnumTest. </summary>
         public virtual EnumTest GetEnumTestClient()
         {
-            return Volatile.Read(ref _cachedEnumTest) ?? Interlocked.CompareExchange(ref _cachedEnumTest, new EnumTest(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedEnumTest;
+            return Volatile.Read(ref _cachedEnumTest) ?? Interlocked.CompareExchange(ref _cachedEnumTest, new EnumTest(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedEnumTest;
         }
 
         /// <summary> Initializes a new instance of ProtocolAndConvenient. </summary>
         public virtual ProtocolAndConvenient GetProtocolAndConvenientClient()
         {
-            return Volatile.Read(ref _cachedProtocolAndConvenient) ?? Interlocked.CompareExchange(ref _cachedProtocolAndConvenient, new ProtocolAndConvenient(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedProtocolAndConvenient;
+            return Volatile.Read(ref _cachedProtocolAndConvenient) ?? Interlocked.CompareExchange(ref _cachedProtocolAndConvenient, new ProtocolAndConvenient(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedProtocolAndConvenient;
         }
 
         /// <summary> Initializes a new instance of Entity. </summary>
         public virtual Entity GetEntityClient()
         {
-            return Volatile.Read(ref _cachedEntity) ?? Interlocked.CompareExchange(ref _cachedEntity, new Entity(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedEntity;
+            return Volatile.Read(ref _cachedEntity) ?? Interlocked.CompareExchange(ref _cachedEntity, new Entity(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedEntity;
         }
 
         /// <summary> Initializes a new instance of Glossary. </summary>
         public virtual Glossary GetGlossaryClient()
         {
-            return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
+            return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
         }
 
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)

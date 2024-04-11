@@ -19,7 +19,7 @@ namespace ResourceClients_LowLevel
     public partial class ResourceServiceClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -53,8 +53,8 @@ namespace ResourceClients_LowLevel
             options ??= new ResourceServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -210,7 +210,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, groupId);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, _credential, _endpoint, groupId);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)

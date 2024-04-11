@@ -18,7 +18,7 @@ namespace lrotsp
     public partial class LroClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
@@ -63,8 +63,8 @@ namespace lrotsp
             options ??= new LroClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -90,7 +90,7 @@ namespace lrotsp
         /// <summary> Initializes a new instance of LegacyLro. </summary>
         public virtual LegacyLro GetLegacyLroClient()
         {
-            return Volatile.Read(ref _cachedLegacyLro) ?? Interlocked.CompareExchange(ref _cachedLegacyLro, new LegacyLro(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedLegacyLro;
+            return Volatile.Read(ref _cachedLegacyLro) ?? Interlocked.CompareExchange(ref _cachedLegacyLro, new LegacyLro(ClientDiagnostics, _pipeline, _credential, _tokenCredential, _endpoint), null) ?? _cachedLegacyLro;
         }
     }
 }

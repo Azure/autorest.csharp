@@ -17,7 +17,7 @@ namespace Azure.NewProject.TypeSpec
     public partial class HelloDemo
     {
         private const string AuthorizationHeader = "x-ms-api-key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
@@ -37,14 +37,14 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> Initializes a new instance of HelloDemo. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="credential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        internal HelloDemo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
+        internal HelloDemo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential credential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
+            _credential = credential;
             _tokenCredential = tokenCredential;
             _endpoint = endpoint;
         }

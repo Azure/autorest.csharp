@@ -14,7 +14,7 @@ namespace OpenAI
     public partial class FineTuning
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _credential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,12 +29,12 @@ namespace OpenAI
 
         /// <summary> Initializes a new instance of FineTuning. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="credential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal FineTuning(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
+        internal FineTuning(ClientPipeline pipeline, ApiKeyCredential credential, Uri endpoint)
         {
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
+            _credential = credential;
             _endpoint = endpoint;
         }
 
@@ -43,7 +43,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of FineTuningJobs. </summary>
         public virtual FineTuningJobs GetFineTuningJobsClient()
         {
-            return Volatile.Read(ref _cachedFineTuningJobs) ?? Interlocked.CompareExchange(ref _cachedFineTuningJobs, new FineTuningJobs(_pipeline, _keyCredential, _endpoint), null) ?? _cachedFineTuningJobs;
+            return Volatile.Read(ref _cachedFineTuningJobs) ?? Interlocked.CompareExchange(ref _cachedFineTuningJobs, new FineTuningJobs(_pipeline, _credential, _endpoint), null) ?? _cachedFineTuningJobs;
         }
     }
 }

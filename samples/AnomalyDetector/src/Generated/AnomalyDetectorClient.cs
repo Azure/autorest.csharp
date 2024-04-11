@@ -17,7 +17,7 @@ namespace AnomalyDetector
     public partial class AnomalyDetectorClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
+        private readonly AzureKeyCredential _credential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -58,8 +58,8 @@ namespace AnomalyDetector
             options ??= new AnomalyDetectorClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _credential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_credential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -71,7 +71,7 @@ namespace AnomalyDetector
         {
             Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
 
-            return new Univariate(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, apiVersion);
+            return new Univariate(ClientDiagnostics, _pipeline, _credential, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Multivariate. </summary>
@@ -82,7 +82,7 @@ namespace AnomalyDetector
         {
             Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
 
-            return new Multivariate(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, apiVersion);
+            return new Multivariate(ClientDiagnostics, _pipeline, _credential, _endpoint, apiVersion);
         }
     }
 }
