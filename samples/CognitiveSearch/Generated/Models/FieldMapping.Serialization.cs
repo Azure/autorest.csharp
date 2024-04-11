@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                writer.WriteObjectValue<FieldMappingFunction>(MappingFunction);
+                writer.WriteObjectValue(MappingFunction);
             }
             writer.WriteEndObject();
         }
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<FieldMapping>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

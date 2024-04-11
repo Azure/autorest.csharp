@@ -3,13 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
-using Azure.Core;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {

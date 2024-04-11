@@ -52,7 +52,7 @@ namespace FlattenedParameters
                 Items = items?.ToList()
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>(model);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -107,7 +107,7 @@ namespace FlattenedParameters
             }
             var model = pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema;
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>(model);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -158,7 +158,7 @@ namespace FlattenedParameters
                 NonRequired = nonRequired
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>(model);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -210,7 +210,7 @@ namespace FlattenedParameters
                 NonRequired = nonRequired
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>(model);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }

@@ -63,8 +63,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
@@ -78,8 +78,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTrip(content, context);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
@@ -171,8 +171,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FooAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
@@ -186,8 +186,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Foo(content, context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
@@ -279,8 +279,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await BarAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
@@ -294,8 +294,8 @@ namespace CustomizationsInTsp
         {
             Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Bar(content, context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }

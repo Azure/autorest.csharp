@@ -44,7 +44,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(new CodeModelConverter(model, new SchemaUsageProvider(model)).CreateNamespace(), sourceInputModel));
+            CodeModelTransformer.TransformForMgmt(model);
+            var schemaUsageProvider = new SchemaUsageProvider(model);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(new CodeModelConverter(model, schemaUsageProvider).CreateNamespace(),, sourceInputModel, schemaUsageProvider));
         }
 
         [Test]

@@ -187,8 +187,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -201,8 +201,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Client(content, context);
             return response;
         }
@@ -293,8 +293,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageClientNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -307,8 +307,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageClientNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
         }
@@ -399,8 +399,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CompatibleWithEncodedNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -413,8 +413,8 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = CompatibleWithEncodedName(content, context);
             return response;
         }

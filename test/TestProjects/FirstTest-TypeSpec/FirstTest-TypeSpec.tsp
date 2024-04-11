@@ -348,11 +348,12 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @convenientAPI(true)
 op returnsAnonymousModel(): {};
 
+// TODO: https://github.com/Azure/typespec-azure/issues/509 
 namespace EnumTest {
-    @get
+    @put
     @route("/unknown-value")
     @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
+    op createUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
 namespace ProtocolAndConvenient {

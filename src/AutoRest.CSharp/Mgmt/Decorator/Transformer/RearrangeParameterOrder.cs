@@ -11,7 +11,7 @@ internal static class RearrangeParameterOrder
 {
     public static void Update(CodeModel codeModel)
     {
-        foreach (var operationGroup in codeModel!.OperationGroups)
+        foreach (var operationGroup in codeModel.OperationGroups)
         {
             foreach (var operation in operationGroup.Operations)
             {

@@ -2,19 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
@@ -124,193 +120,7 @@ namespace AutoRest.CSharp.Generation.Types
         //    return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
         //}
 
-        public static CSharpType GetImplementationType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType());
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(typeof(List<>), type.Arguments);
-                }
-
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(typeof(Dictionary<,>), type.Arguments);
-                }
-            }
-
-            return type;
-        }
-
-        public static CSharpType GetPropertyImplementationType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments);
-                }
-
-                if (IsDictionary(type))
-                {
-                    return ChangeTrackingDictionaryProvider.Instance.Type.MakeGenericType(type.Arguments);
-                }
-            }
-
-            return type;
-        }
-
-        public static bool CanBeInitializedInline(CSharpType type, Constant? defaultValue)
-        {
-            Debug.Assert(defaultValue.HasValue);
-
-            if (!type.Equals(defaultValue.Value.Type) && !CanBeInitializedInline(defaultValue.Value.Type, defaultValue))
-            {
-                return false;
-            }
-
-            if (type.Equals(typeof(string)))
-            {
-                return true;
-            }
-
-            if (IsExtendableEnum(type) && defaultValue.Value.Value != null)
-            {
-                return defaultValue.Value.IsNewInstanceSentinel;
-            }
-
-            return type.IsValueType || defaultValue.Value.Value == null;
-        }
-
-        public static bool IsExtendableEnum(CSharpType type)
-        {
-            return !type.IsFrameworkType && type.IsValueType &&
-                type.Implementation is EnumType enumType &&
-                enumType.IsExtensible;
-        }
-
-        public static CSharpType GetElementType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (type.FrameworkType.IsArray)
-                {
-                    return new CSharpType(type.FrameworkType.GetElementType()!);
-                }
-
-                if (IsReadOnlyMemory(type))
-                {
-                    return type.Arguments[0];
-                }
-
-                if (IsList(type))
-                {
-                    return type.Arguments[0];
-                }
-
-                if (IsDictionary(type))
-                {
-                    return type.Arguments[1];
-                }
-            }
-
-            throw new NotSupportedException(type.Name);
-        }
-
-
-        /// <summary>
-        /// Is the type a string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
-        public static bool IsStringLike(CSharpType type) =>
-            type.IsFrameworkType
-                ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtensible;
-
-        internal static bool IsDictionary(CSharpType type)
-            => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
-
-        internal static bool IsDictionary(CSharpType type, [MaybeNullWhen(false)] out CSharpType keyType, [MaybeNullWhen(false)] out CSharpType valueType)
-        {
-            if (IsDictionary(type))
-            {
-                keyType = type.Arguments[0];
-                valueType = type.Arguments[1];
-                return true;
-            }
-
-            keyType = null;
-            valueType = null;
-            return false;
-        }
-
-        internal static bool IsReadOnlyDictionary(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
-
-        internal static bool IsReadWriteDictionary(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
-
-        internal static bool IsList(CSharpType type)
-            => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
-
-        internal static bool IsList(CSharpType type, [MaybeNullWhen(false)] out CSharpType elementType)
-        {
-            if (IsList(type))
-            {
-                elementType = type.Arguments[0];
-                return true;
-            }
-
-            elementType = null;
-            return false;
-        }
-
-        internal static bool IsReadOnlyMemory(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(ReadOnlyMemory<>);
-
-        internal static bool IsReadOnlyList(CSharpType type)
-            => type.IsFrameworkType &&
-               (type.FrameworkType == typeof(IEnumerable<>) ||
-               type.FrameworkType == typeof(IReadOnlyList<>));
-
-        internal static bool IsReadWriteList(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IList<>) || type.FrameworkType == typeof(ICollection<>) || type.FrameworkType == typeof(List<>));
-
-        internal static bool IsIEnumerableType(CSharpType type)
-            => type.IsFrameworkType &&
-            (type.FrameworkType == typeof(IEnumerable) ||
-            type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-
-        internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
-
-        internal static bool IsResponseOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response<>);
-
-        internal static bool IsResponse(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response);
-
-        internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
-
-        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
-
-        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
-
-        internal static bool IsOperationOfAsyncPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
-
-        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
-
-        internal static bool IsOperationOfPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
+        internal Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
         internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
         {
@@ -378,56 +188,6 @@ namespace AutoRest.CSharp.Generation.Types
             }
         };
 
-        public static CSharpType GetInputType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(
-                        typeof(IEnumerable<>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
-            }
-
-            return type;
-        }
-
-        public static CSharpType GetOutputType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(
-                        typeof(IReadOnlyList<>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
-
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(
-                        typeof(IReadOnlyDictionary<,>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
-            }
-
-            return type;
-        }
-
         public CSharpType CreateType(ITypeSymbol symbol)
         {
             if (!TryCreateType(symbol, out var type))
@@ -480,7 +240,7 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return false;
                 }
-                type = new CSharpType(existingType, false, arguments);
+                type = new CSharpType(existingType, arguments, isNullable: false);
             }
             else
             {
@@ -569,30 +329,6 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             builder.Append(symbol.MetadataName);
-        }
-
-        public static bool IsCollectionType(CSharpType type)
-        {
-            return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
-        }
-
-        /// <summary>
-        /// Method checks if object of "<c>from</c>" type can be converted to "<c>to</c>" type by calling `ToList` extension method.
-        /// It returns true if "<c>from</c>" is <see cref="IEnumerable{T}"/> and "<c>to</c>" is <see cref="IReadOnlyList{T}"/> or <see cref="IList{T}"/>.
-        /// </summary>
-        public static bool RequiresToList(CSharpType from, CSharpType to)
-        {
-            if (!to.IsFrameworkType || !from.IsFrameworkType || from.FrameworkType != typeof(IEnumerable<>))
-            {
-                return false;
-            }
-
-            return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
-        }
-
-        internal static bool IsArray(CSharpType type)
-        {
-            return type is { IsFrameworkType: true, FrameworkType.IsArray: true };
         }
     }
 }

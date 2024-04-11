@@ -28,7 +28,7 @@ namespace FirstTestTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("self"u8);
-            writer.WriteObjectValue<ContainSelf>(Self, options);
+            writer.WriteObjectValue(Self, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -129,7 +129,7 @@ namespace FirstTestTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ContainSelf>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

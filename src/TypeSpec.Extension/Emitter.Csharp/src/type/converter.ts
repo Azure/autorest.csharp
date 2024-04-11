@@ -1,10 +1,11 @@
 import {
     SdkContext,
     SdkEnumType,
-    SdkEnumValueType
+    SdkEnumValueType,
+    UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
 import { InputEnumType } from "./inputType.js";
-import { Enum, UsageFlags } from "@typespec/compiler";
+import { Enum } from "@typespec/compiler";
 import { InputTypeKind } from "./inputTypeKind.js";
 import { getFullNamespaceString } from "../lib/utils.js";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
@@ -17,7 +18,7 @@ export function fromSdkEnumType(
     enums: Map<string, InputEnumType>,
     addToCollection: boolean = true
 ): InputEnumType {
-    let enumName = enumType.generatedName || enumType.name;
+    let enumName = enumType.name;
     let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
         const newInputEnumType: InputEnumType = {

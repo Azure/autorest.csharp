@@ -48,7 +48,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = client.GetIntsOnly();
+            Response<GetResponse6> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = await client.GetIntsOnlyAsync();
+            Response<GetResponse6> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = client.GetIntsOnly();
+            Response<GetResponse6> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = await client.GetIntsOnlyAsync();
+            Response<GetResponse6> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]

@@ -233,12 +233,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 typeDescription = $"<see cref=\"{input}\"/>";
             }
 
-            if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+            if (input.IsList || input.IsArray)
             {
-                elementType = TypeFactory.GetElementType(input);
+                elementType = input.ElementType;
                 typeDescription = $"{itemName}";
             }
-            else if (TypeFactory.IsDictionary(input))
+            else if (input.IsDictionary)
             {
                 typeDescription = $"{itemName}{{TKey, TValue}}";
             }
@@ -331,14 +331,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
             }
-                if (TypeFactory.IsList(type) &&
+                if (type.IsList &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
             {
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
             }
-                if (TypeFactory.IsDictionary(type) &&
+                if (type.IsDictionary &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
                 {
@@ -418,14 +418,14 @@ Examples:
             FormattableString? updatedDescription = null;
             if (valueType.IsFrameworkType)
             {
-                if (TypeFactory.IsList(valueType))
+                if (valueType.IsList)
                 {
                     if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
-                else if (TypeFactory.IsDictionary(valueType))
+                else if (valueType.IsDictionary)
                 {
                     var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
                     if (objectTypes.Any())

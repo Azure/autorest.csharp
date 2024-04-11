@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -42,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 null,
                 false);
-            InterimType = new CSharpType(new MgmtObjectType(targetSchema), MgmtContext.Context.DefaultNamespace, TypeName);
+            InterimType = new CSharpType(new MgmtObjectType(targetSchema, TypeName, MgmtContext.DefaultNamespace));
         }
 
         public CSharpType ReturnType { get; }

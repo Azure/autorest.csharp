@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
                     ReferenceOrConstant? defaultValue = null;
-                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value))
+                    if (discriminatorParameter.Type.CanBeInitializedInline(Discriminator.Value))
                     {
                         defaultValue = Discriminator.Value;
                     }
@@ -303,8 +303,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                     }
 
-                    var inputType = TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
+                    var inputType = propertyType.InputType;
+                    if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
@@ -327,15 +327,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     initializationValue = GetPropertyDefaultValue(property);
 
-                    if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                    if (initializationValue == null && propertyType.IsCollection)
                     {
-                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        if (propertyType.IsReadOnlyMemory)
                         {
                             initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                         }
                         else
                         {
-                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                            initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                         }
                     }
                 }
@@ -354,7 +354,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (AdditionalPropertiesProperty != null &&
                 !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(AdditionalPropertiesProperty.Declaration.Type.InitializationType)));
             }
 
             return new ObjectTypeConstructor(
@@ -528,7 +528,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
                                           !property.Type.IsNullable &&
-                                          !TypeFactory.IsCollectionType(propertyType);
+                                          !propertyType.IsCollection;
 
             if (optionalViaNullability)
             {
@@ -550,7 +550,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.WithNullable(false);
             }
 
-            bool isCollection = TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type);
+            bool isCollection = type is { IsCollection: true, IsReadOnlyMemory: false };
 
             bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(InputModelTypeUsage.Input) ||
@@ -597,7 +597,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (!_usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {
-                valueType = TypeFactory.GetOutputType(valueType);
+                valueType = valueType.OutputType;
             }
 
             return valueType;

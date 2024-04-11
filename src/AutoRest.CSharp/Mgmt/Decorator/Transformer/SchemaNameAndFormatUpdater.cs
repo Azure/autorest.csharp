@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
 using static AutoRest.CSharp.Mgmt.Decorator.Transformer.SchemaFormatByNameTransformer;
@@ -216,7 +215,7 @@ internal static class SchemaNameAndFormatUpdater
         if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         // first transform all the name of schemas, properties
-        UpdateAcronyms(codeModel!.AllSchemas);
+        UpdateAcronyms(codeModel.AllSchemas);
         // transform all the parameter names
         UpdateAcronyms(codeModel.OperationGroups);
     }

@@ -7,8 +7,7 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
-    getAccess,
-    isInternal
+    getAccess
 } from "@azure-tools/typespec-client-generator-core";
 import {
     getDeprecated,
@@ -226,9 +225,7 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op)
-            ? "internal"
-            : getAccess(sdkContext, op),
+        Accessibility: getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,

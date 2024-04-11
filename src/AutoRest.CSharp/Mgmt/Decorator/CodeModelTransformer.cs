@@ -5,28 +5,34 @@ using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
+using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        private static void TransfromDataPlane(CodeModel codeModel)
+        public static void TransfromForDataPlane(CodeModel codeModel)
         {
             SchemaUsageTransformer.Transform(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
         }
 
-        public static void Transform(CodeModel codeModel)
+        private static void ApplyGlobalConfigurations()
         {
-            if (!Configuration.AzureArm)
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
             {
-                TransfromDataPlane(codeModel);
-                return;
+                Vocabularies.Default.AddIrregular(word, plural);
             }
+        }
+
+        public static void TransformForMgmt(CodeModel codeModel)
+        {
+            ApplyGlobalConfigurations();
 
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);
             PartialResourceResolver.Update(codeModel);
             SubscriptionIdUpdater.Update(codeModel);

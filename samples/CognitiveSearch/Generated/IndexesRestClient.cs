@@ -52,7 +52,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Models.Index>(index);
+            content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
             return message;
         }
@@ -203,7 +203,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Models.Index>(index);
+            content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
             return message;
         }
@@ -515,7 +515,7 @@ namespace CognitiveSearch
             request0.Headers.Add("Accept", "application/json");
             request0.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AnalyzeRequest>(request);
+            content.JsonWriter.WriteObjectValue(request);
             request0.Content = content;
             return message;
         }

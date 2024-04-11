@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {

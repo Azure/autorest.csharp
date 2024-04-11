@@ -140,8 +140,8 @@ namespace _Specs_.Azure.Core.Scalar
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(AzureLocation,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(AzureLocation body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -152,8 +152,8 @@ namespace _Specs_.Azure.Core.Scalar
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(AzureLocation,CancellationToken)']/*" />
         public virtual Response Put(AzureLocation body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body.ToString());
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }
@@ -245,8 +245,8 @@ namespace _Specs_.Azure.Core.Scalar
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PostAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(AzureLocationModel.FromResponse(response), response);
         }
@@ -260,8 +260,8 @@ namespace _Specs_.Azure.Core.Scalar
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Post(content, context);
             return Response.FromValue(AzureLocationModel.FromResponse(response), response);
         }

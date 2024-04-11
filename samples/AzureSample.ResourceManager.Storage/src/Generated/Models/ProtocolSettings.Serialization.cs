@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Smb))
             {
                 writer.WritePropertyName("smb"u8);
-                writer.WriteObjectValue<SmbSetting>(Smb);
+                writer.WriteObjectValue(Smb);
             }
             writer.WriteEndObject();
         }

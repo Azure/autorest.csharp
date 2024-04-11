@@ -75,7 +75,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue<ImageStorageProfile>(StorageProfile, options);
+                writer.WriteObjectValue(StorageProfile, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {

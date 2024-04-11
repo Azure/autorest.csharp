@@ -49,7 +49,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PetAPTrue>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -120,7 +120,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<CatAPTrue>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -191,7 +191,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PetAPObject>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -262,7 +262,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PetAPString>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -333,7 +333,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PetAPInProperties>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -404,7 +404,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PetAPInPropertiesWithAPString>(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

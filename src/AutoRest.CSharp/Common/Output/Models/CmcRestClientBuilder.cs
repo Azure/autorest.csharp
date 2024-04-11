@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Output.Models
                         {
                             requestBody = new BinaryRequestBody(parameter.Value);
                         }
-                        else if (TypeFactory.IsList(type))
+                        else if (type.IsList)
                         {
                             requestBody = new BinaryCollectionRequestBody(parameter.Value);
                         }
@@ -341,7 +341,7 @@ namespace AutoRest.CSharp.Output.Models
             else if (response.BodyMediaType == BodyMediaType.Json)
             {
                 InputType? schema = response.BodyType;
-                CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema!));
+                CSharpType responseType = _context.TypeFactory.CreateType(schema!).OutputType;
 
                 ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, schema!, responseType, null);
 

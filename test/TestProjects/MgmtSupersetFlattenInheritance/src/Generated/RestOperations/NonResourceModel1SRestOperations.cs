@@ -55,7 +55,7 @@ namespace MgmtSupersetFlattenInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<NonResourceModel1>(nonResourceModel1);
+            content.JsonWriter.WriteObjectValue(nonResourceModel1);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

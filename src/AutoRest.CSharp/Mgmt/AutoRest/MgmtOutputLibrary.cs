@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest

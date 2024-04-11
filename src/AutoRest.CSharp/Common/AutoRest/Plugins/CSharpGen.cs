@@ -11,8 +11,10 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis;
@@ -30,13 +32,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var schemaUsageProvider = new SchemaUsageProvider(codeModel);
-            ApplyGlobalConfigurations();
-            CodeModelTransformer.Transform(codeModel);
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
             if (Configuration.Generation1ConvenienceClient)
             {
-                DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
+                CodeModelTransformer.TransfromForDataPlane(codeModel);
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel, schemaUsageProvider);
             }
             else if (Configuration.AzureArm)
             {
@@ -48,7 +49,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
+                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
+                    CodeModelTransformer.TransformForMgmt(codeModel);
+                    await MgmtTarget.ExecuteAsync(project);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                 }

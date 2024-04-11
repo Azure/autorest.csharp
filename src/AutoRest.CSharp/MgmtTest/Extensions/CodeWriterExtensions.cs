@@ -99,10 +99,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
-            if (TypeFactory.IsList(type))
+            if (type.IsList)
                 return writer.AppendListValue(type, exampleValue as InputExampleListValue, includeCollectionInitialization);
 
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
                 return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
@@ -442,7 +442,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
-                    if (TypeFactory.IsCollectionType(property.Declaration.Type))
+                    if (property.Declaration.Type.IsCollection)
                     {
                         exampleValue = new InputExampleRawValue(property.InputModelProperty!.Type, null);
                     }
@@ -526,7 +526,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
+            => property.Declaration.Accessibility == "public" && (property.Declaration.Type.IsReadWriteDictionary || property.Declaration.Type.IsReadWriteList || !property.IsReadOnly);
 
         private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {

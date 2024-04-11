@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue<HeaderActionParameters>(Parameters, options);
+            writer.WriteObjectValue(Parameters, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))
