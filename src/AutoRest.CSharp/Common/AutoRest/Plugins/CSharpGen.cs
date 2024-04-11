@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null, schemaUsageProvider);
                 }
                 else
                 {
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     CodeModelTransformer.TransformForMgmt(codeModel);
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                 }
                 GenerateMgmtReport(project);
             }
