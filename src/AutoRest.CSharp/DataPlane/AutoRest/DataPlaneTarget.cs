@@ -11,9 +11,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class DataPlaneTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
         {
-            var library = new DataPlaneOutputLibrary(codeModel, sourceInputModel);
+            var library = new DataPlaneOutputLibrary(codeModel, sourceInputModel, schemaUsageProvider);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();

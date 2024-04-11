@@ -112,7 +112,7 @@
   {
    "$id": "15",
    "Kind": "Model",
-   "Name": "OperationStatusneverError",
+   "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
@@ -246,7 +246,7 @@
           },
           {
            "$id": "33",
-           "Name": "InnerErrorObject",
+           "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
