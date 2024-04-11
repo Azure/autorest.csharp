@@ -32,7 +32,7 @@ namespace MultipleInputFiles.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<TestModel>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

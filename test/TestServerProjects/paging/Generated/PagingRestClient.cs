@@ -264,7 +264,7 @@ namespace paging
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<BodyParam>(parameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(parameters, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

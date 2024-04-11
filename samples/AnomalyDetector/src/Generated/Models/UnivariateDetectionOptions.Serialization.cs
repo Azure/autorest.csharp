@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue<TimeSeriesPoint>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Granularity))
@@ -253,7 +253,7 @@ namespace AnomalyDetector.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnivariateDetectionOptions>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

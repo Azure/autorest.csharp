@@ -3392,7 +3392,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue<Widget>(item.Value, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(item.Value, new ModelReaderWriterOptions("W"));
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

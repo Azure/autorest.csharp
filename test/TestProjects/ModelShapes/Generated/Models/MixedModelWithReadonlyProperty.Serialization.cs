@@ -30,7 +30,7 @@ namespace ModelShapes.Models
             if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
-                writer.WriteObjectValue<ReadonlyModel>(ReadonlyProperty, options);
+                writer.WriteObjectValue(ReadonlyProperty, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
@@ -38,7 +38,7 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    writer.WriteObjectValue<ReadonlyModel>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -161,7 +161,7 @@ namespace ModelShapes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedModelWithReadonlyProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

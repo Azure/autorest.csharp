@@ -41,7 +41,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(RollbackError))
             {
                 writer.WritePropertyName("rollbackError"u8);
-                writer.WriteObjectValue<ApiError>(RollbackError, options);
+                writer.WriteObjectValue(RollbackError, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                writer.WriteObjectValue<AccessPolicy>(AccessPolicy);
+                writer.WriteObjectValue(AccessPolicy);
             }
             writer.WriteEndObject();
         }

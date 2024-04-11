@@ -25,12 +25,12 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                writer.WriteObjectValue<PrivateEndpoint>(PrivateEndpoint);
+                writer.WriteObjectValue(PrivateEndpoint);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue<MgmtReferenceTypesPrivateLinkServiceConnectionState>(ConnectionState);
+                writer.WriteObjectValue(ConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, PrivateEndpointConnectionData model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<PrivateEndpointConnectionData>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override PrivateEndpointConnectionData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

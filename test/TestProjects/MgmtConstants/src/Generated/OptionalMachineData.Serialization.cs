@@ -36,12 +36,12 @@ namespace MgmtConstants
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue<ModelWithRequiredConstant>(Listener);
+                writer.WriteObjectValue(Listener);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue<ModelWithOptionalConstant>(Content);
+                writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
