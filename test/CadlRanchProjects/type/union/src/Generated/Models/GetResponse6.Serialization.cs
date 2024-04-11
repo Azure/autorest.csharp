@@ -28,7 +28,14 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop, options);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Prop);
+#else
+            using (JsonDocument document = JsonDocument.Parse(Prop))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -67,14 +74,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            EnumsOnlyCases prop = default;
+            BinaryData prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = EnumsOnlyCases.DeserializeEnumsOnlyCases(property.Value, options);
+                    prop = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (options.Format != "W")

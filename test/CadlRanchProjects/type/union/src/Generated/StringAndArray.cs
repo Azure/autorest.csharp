@@ -47,20 +47,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArrayAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse7>> GetStringAndArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse2>> GetStringAndArrayAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringAndArrayAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse7.FromResponse(response), response);
+            return Response.FromValue(GetResponse2.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArray(CancellationToken)']/*" />
-        public virtual Response<GetResponse7> GetStringAndArray(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse2> GetStringAndArray(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringAndArray(context);
-            return Response.FromValue(GetResponse7.FromResponse(response), response);
+            return Response.FromValue(GetResponse2.FromResponse(response), response);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SendAsync(sendRequest7.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest2.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -155,9 +155,9 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Send(sendRequest7.ToRequestContent(), context);
+            Response response = Send(sendRequest2.ToRequestContent(), context);
             return response;
         }
 

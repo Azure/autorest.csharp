@@ -65,7 +65,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },

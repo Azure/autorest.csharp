@@ -82,10 +82,13 @@ namespace _Type.Union.Models
         /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// <description><see cref="Cat"/></description>
+        /// <description>1.1</description>
         /// </item>
         /// <item>
-        /// <description><see cref="Dog"/></description>
+        /// <description>2.2</description>
+        /// </item>
+        /// <item>
+        /// <description>3.3</description>
         /// </item>
         /// </list>
         /// </remarks>
