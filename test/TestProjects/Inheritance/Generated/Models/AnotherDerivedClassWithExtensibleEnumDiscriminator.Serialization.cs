@@ -54,7 +54,7 @@ namespace Inheritance.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AnotherDerivedClassWithExtensibleEnumDiscriminator>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
 
@@ -62,7 +62,7 @@ namespace Inheritance.Models
         {
             public override void Write(Utf8JsonWriter writer, AnotherDerivedClassWithExtensibleEnumDiscriminator model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<AnotherDerivedClassWithExtensibleEnumDiscriminator>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override AnotherDerivedClassWithExtensibleEnumDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

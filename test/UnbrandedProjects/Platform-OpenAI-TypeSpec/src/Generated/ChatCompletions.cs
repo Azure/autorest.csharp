@@ -47,8 +47,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createChatCompletionRequest.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -60,8 +60,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = createChatCompletionRequest.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

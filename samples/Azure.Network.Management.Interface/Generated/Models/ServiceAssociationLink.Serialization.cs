@@ -173,7 +173,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ServiceAssociationLink>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

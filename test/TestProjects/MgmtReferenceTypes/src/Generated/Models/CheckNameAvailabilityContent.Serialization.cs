@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityContent model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<CheckNameAvailabilityContent>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override CheckNameAvailabilityContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

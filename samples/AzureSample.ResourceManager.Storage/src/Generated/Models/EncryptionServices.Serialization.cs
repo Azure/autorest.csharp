@@ -18,22 +18,22 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Blob))
             {
                 writer.WritePropertyName("blob"u8);
-                writer.WriteObjectValue<EncryptionService>(Blob);
+                writer.WriteObjectValue(Blob);
             }
             if (Optional.IsDefined(File))
             {
                 writer.WritePropertyName("file"u8);
-                writer.WriteObjectValue<EncryptionService>(File);
+                writer.WriteObjectValue(File);
             }
             if (Optional.IsDefined(Table))
             {
                 writer.WritePropertyName("table"u8);
-                writer.WriteObjectValue<EncryptionService>(Table);
+                writer.WriteObjectValue(Table);
             }
             if (Optional.IsDefined(Queue))
             {
                 writer.WritePropertyName("queue"u8);
-                writer.WriteObjectValue<EncryptionService>(Queue);
+                writer.WriteObjectValue(Queue);
             }
             writer.WriteEndObject();
         }

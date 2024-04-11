@@ -51,7 +51,7 @@ namespace Inheritance.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnknownBaseClassWithExtensibleEnumDiscriminator>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

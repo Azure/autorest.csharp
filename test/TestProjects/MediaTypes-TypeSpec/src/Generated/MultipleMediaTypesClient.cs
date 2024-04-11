@@ -63,8 +63,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
@@ -78,8 +78,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
@@ -174,8 +174,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneStringBodyThreeContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
@@ -190,8 +190,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneStringBodyThreeContentTypes(content, contentType, context);
             return response;
         }
@@ -284,8 +284,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneModelBodyOneContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -298,8 +298,8 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneModelBodyOneContentType(content, context);
             return response;
         }

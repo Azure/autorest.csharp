@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Analyzer>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

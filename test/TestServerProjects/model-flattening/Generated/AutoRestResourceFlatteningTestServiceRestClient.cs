@@ -55,7 +55,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue<Resource>(item, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -175,7 +175,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue<WrappedProduct>(item, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -296,7 +296,7 @@ namespace model_flattening
                 foreach (var item in resourceDictionary)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteObjectValue<FlattenedProduct>(item.Value, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item.Value, new ModelReaderWriterOptions("W"));
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -413,7 +413,7 @@ namespace model_flattening
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<ResourceCollection>(resourceComplexObject, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(resourceComplexObject, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -518,7 +518,7 @@ namespace model_flattening
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<SimpleProduct>(simpleBodyProduct, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(simpleBodyProduct, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -586,7 +586,7 @@ namespace model_flattening
                 OdataValue = odataValue
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SimpleProduct>(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -677,7 +677,7 @@ namespace model_flattening
                 OdataValue = flattenParameterGroup.OdataValue
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SimpleProduct>(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

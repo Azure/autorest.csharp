@@ -65,7 +65,7 @@ namespace Inheritance.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SomeProperties>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

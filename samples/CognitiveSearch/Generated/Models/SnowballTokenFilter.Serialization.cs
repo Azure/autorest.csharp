@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SnowballTokenFilter>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

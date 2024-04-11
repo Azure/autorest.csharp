@@ -28,7 +28,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("inner"u8);
-            writer.WriteObjectValue<InnerModel>(Inner, options);
+            writer.WriteObjectValue(Inner, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -137,7 +137,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<OuterModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

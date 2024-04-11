@@ -30,17 +30,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                writer.WriteObjectValue<SubResource>(FrontendIPConfiguration);
+                writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue<SubResource>(BackendAddressPool);
+                writer.WriteObjectValue(BackendAddressPool);
             }
             if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
-                writer.WriteObjectValue<SubResource>(Probe);
+                writer.WriteObjectValue(Probe);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -282,7 +282,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<LoadBalancingRule>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

@@ -19,12 +19,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                writer.WriteObjectValue<ModelWithRequiredConstant>(RequiredConstantModel);
+                writer.WriteObjectValue(RequiredConstantModel);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                writer.WriteObjectValue<ModelWithOptionalConstant>(OptionalConstantModel);
+                writer.WriteObjectValue(OptionalConstantModel);
             }
             writer.WriteEndObject();
         }
@@ -73,7 +73,7 @@ namespace HlcConstants.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

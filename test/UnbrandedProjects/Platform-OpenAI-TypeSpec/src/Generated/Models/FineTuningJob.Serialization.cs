@@ -52,7 +52,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparameters"u8);
-            writer.WriteObjectValue<FineTuningJobHyperparameters>(Hyperparameters, options);
+            writer.WriteObjectValue(Hyperparameters, options);
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
             if (ValidationFile != null)
@@ -83,7 +83,7 @@ namespace OpenAI.Models
             if (Error != null)
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue<FineTuningJobError>(Error, options);
+                writer.WriteObjectValue(Error, options);
             }
             else
             {

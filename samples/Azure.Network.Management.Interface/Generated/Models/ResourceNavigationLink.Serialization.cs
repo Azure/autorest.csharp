@@ -130,7 +130,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ResourceNavigationLink>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

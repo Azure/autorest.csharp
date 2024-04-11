@@ -55,8 +55,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -76,8 +76,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

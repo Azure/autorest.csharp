@@ -35,7 +35,7 @@ namespace _Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    writer.WriteObjectValue<InnerModel>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -159,7 +159,7 @@ namespace _Type.Property.Nullable.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<CollectionsModelProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -140,7 +140,7 @@ namespace ModelWithConverterUsage.Models
         internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ModelStruct>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
 
@@ -148,7 +148,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, ModelStruct model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<ModelStruct>(model, new ModelReaderWriterOptions("W"));
+                writer.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
             }
 
             public override ModelStruct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

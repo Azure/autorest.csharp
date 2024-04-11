@@ -31,7 +31,7 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteStartArray();
             foreach (var item in Property)
             {
-                writer.WriteObjectValue<InnerModel>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -139,7 +139,7 @@ namespace _Type.Property.ValueTypes.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<CollectionsModelProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -246,7 +246,7 @@ namespace Azure.Network.Management.Interface
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<NetworkInterfaceTapConfiguration>(tapConfigurationParameters);
+            content.JsonWriter.WriteObjectValue(tapConfigurationParameters);
             request.Content = content;
             return message;
         }

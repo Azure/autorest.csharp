@@ -24,7 +24,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             writer.WritePropertyName("message"u8);
-            writer.WriteObjectValue<ChatCompletionResponseMessage>(Message, options);
+            writer.WriteObjectValue(Message, options);
             writer.WritePropertyName("finish_reason"u8);
             writer.WriteStringValue(FinishReason.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)

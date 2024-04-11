@@ -27,7 +27,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Messages)
             {
-                writer.WriteObjectValue<ChatCompletionRequestMessage>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Functions))
@@ -36,7 +36,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    writer.WriteObjectValue<ChatCompletionFunctions>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

@@ -29,7 +29,7 @@ namespace OpenAI.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue<ChatCompletionFunctionParameters>(Parameters, options);
+            writer.WriteObjectValue(Parameters, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

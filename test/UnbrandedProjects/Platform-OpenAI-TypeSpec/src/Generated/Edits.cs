@@ -48,8 +48,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = edit.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -62,8 +62,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
             using BinaryContent content = edit.ToBinaryContent();
+            RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

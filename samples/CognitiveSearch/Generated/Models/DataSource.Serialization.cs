@@ -26,18 +26,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue<DataSourceCredentials>(Credentials);
+            writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue<DataContainer>(Container);
+            writer.WriteObjectValue(Container);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                writer.WriteObjectValue<DataChangeDetectionPolicy>(DataChangeDetectionPolicy);
+                writer.WriteObjectValue(DataChangeDetectionPolicy);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                writer.WriteObjectValue<DataDeletionDetectionPolicy>(DataDeletionDetectionPolicy);
+                writer.WriteObjectValue(DataDeletionDetectionPolicy);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -135,7 +135,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<DataSource>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

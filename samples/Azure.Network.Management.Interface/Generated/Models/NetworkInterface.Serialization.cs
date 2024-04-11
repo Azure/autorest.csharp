@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue<NetworkSecurityGroup>(NetworkSecurityGroup);
+                writer.WriteObjectValue(NetworkSecurityGroup);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -50,14 +50,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue<NetworkInterfaceDnsSettings>(DnsSettings);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
@@ -310,7 +310,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<NetworkInterface>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }
