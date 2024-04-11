@@ -13,7 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models.Types
+namespace AutoRest.CSharp.Output.Models.Types.Azure
 {
     internal class RequestContentHelperProvider : ExpressionTypeProvider
     {

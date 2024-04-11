@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Types.Azure;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static System.Net.Mime.MediaTypeNames;

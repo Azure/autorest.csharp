@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Types.Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 

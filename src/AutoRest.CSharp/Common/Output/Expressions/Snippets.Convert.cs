@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Types.Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models

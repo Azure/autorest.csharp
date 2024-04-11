@@ -19,7 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models.Types
+namespace AutoRest.CSharp.Output.Models.Types.Azure
 {
     internal class Utf8JsonRequestContentProvider : ExpressionTypeProvider
     {
