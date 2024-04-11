@@ -123,11 +123,13 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private Method BuildProcessMessage()
         {
             MethodSignature signature = GetProcessMessageSignature(false);
+
+            var clientErrorNoThrow = FrameworkEnumValue(ClientErrorBehaviors.NoThrow);
             return new Method(signature, new MethodBodyStatement[]
             {
                 new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.Send), new[] { _message }, false),
                 EmptyLine,
-                new IfStatement(And(_message.Response.IsError, Equal(_options.Property("ErrorOptions", true), FrameworkEnumValue(ClientErrorBehaviors.Default))))
+                new IfStatement(And(_message.Response.IsError, NotEqual(new BinaryOperatorExpression("&", _options.Property("ErrorOptions", true), clientErrorNoThrow), clientErrorNoThrow)))
                 {
                     Throw(New.Instance(typeof(ClientResultException), _message.Response))
                 },
@@ -156,13 +158,15 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private Method BuildProcessMessageAsync()
         {
             MethodSignature signature = GetProcessMessageSignature(true);
+
+            var clientErrorNoThrow = FrameworkEnumValue(ClientErrorBehaviors.NoThrow);
             return new Method(signature, new MethodBodyStatement[]
             {
                 new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.SendAsync), new[]{ _message }, true),
                 EmptyLine,
-                new IfStatement(And(_message.Response.IsError, Equal(_options.Property("ErrorOptions", true), FrameworkEnumValue(ClientErrorBehaviors.Default))))
+                new IfStatement(And(_message.Response.IsError, NotEqual(new BinaryOperatorExpression("&", _options.Property("ErrorOptions", true), clientErrorNoThrow), clientErrorNoThrow)))
                 {
-                    new InvokeStaticMethodStatement(typeof(ClientResultException), nameof(ClientResultException.CreateAsync), new[] { _message.Response }, CallAsAsync: true)
+                    Throw(new InvokeStaticMethodExpression(typeof(ClientResultException), nameof(ClientResultException.CreateAsync), new[] { _message.Response }, CallAsAsync: true))
                 },
                 EmptyLine,
                 Return(_message.Response)
