@@ -25,7 +25,7 @@ namespace MgmtOmitOperationGroups
             if (Optional.IsDefined(Modelx))
             {
                 writer.WritePropertyName("modelx"u8);
-                writer.WriteObjectValue<ModelX>(Modelx);
+                writer.WriteObjectValue(Modelx);
             }
             writer.WriteEndObject();
         }

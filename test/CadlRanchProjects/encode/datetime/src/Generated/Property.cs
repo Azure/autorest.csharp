@@ -52,8 +52,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
@@ -66,8 +66,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
@@ -158,8 +158,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Rfc3339Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
@@ -172,8 +172,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Rfc3339(content, context);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
@@ -264,8 +264,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Rfc7231Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
@@ -278,8 +278,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Rfc7231(content, context);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
@@ -370,8 +370,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnixTimestampAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
@@ -384,8 +384,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnixTimestamp(content, context);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
@@ -476,8 +476,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnixTimestampArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
@@ -490,8 +490,8 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnixTimestampArray(content, context);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }

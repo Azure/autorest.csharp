@@ -65,7 +65,7 @@ namespace ProtocolMethodsInRestClient.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Resource>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
-                writer.WriteObjectValue<OriginGroupOverride>(OriginGroupOverride, options);
+                writer.WriteObjectValue(OriginGroupOverride, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

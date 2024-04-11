@@ -65,8 +65,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -80,8 +80,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadModel(content, context);
             return response;
         }
@@ -174,8 +174,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasAsync(spreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -190,8 +190,8 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAlias(spreadAliasRequest.ToRequestContent(), context);
             return response;
         }
@@ -288,8 +288,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadMultiTargetAliasAsync(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -308,8 +308,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadMultiTargetAlias(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context);
             return response;
         }
@@ -413,8 +413,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithModelAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
@@ -432,8 +432,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithModel(id, top, content, context);
             return response;
         }
@@ -538,8 +538,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithSpreadAliasAsync(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -558,8 +558,8 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithSpreadAlias(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context);
             return response;
         }
@@ -668,7 +668,6 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
             {
                 Color = color,
@@ -682,6 +681,7 @@ namespace SpreadTypeSpec
                 }
             }
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -704,7 +704,6 @@ namespace SpreadTypeSpec
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
             {
                 Color = color,
@@ -718,6 +717,7 @@ namespace SpreadTypeSpec
                 }
             }
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
             return response;
         }
@@ -818,7 +818,6 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
             if (optionalStringList != null)
             {
@@ -828,6 +827,7 @@ namespace SpreadTypeSpec
                 }
             }
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest0.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -842,7 +842,6 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
             if (optionalStringList != null)
             {
@@ -852,6 +851,7 @@ namespace SpreadTypeSpec
                 }
             }
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest0.ToRequestContent(), context);
             return response;
         }
