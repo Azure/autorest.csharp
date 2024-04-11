@@ -137,8 +137,8 @@ namespace _Type.Union
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequest9Prop,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(SendRequest9Prop prop, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest9 sendRequest9 = new SendRequest9(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest9.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -148,8 +148,8 @@ namespace _Type.Union
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(SendRequest9Prop,CancellationToken)']/*" />
         public virtual Response Send(SendRequest9Prop prop, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest9 sendRequest9 = new SendRequest9(prop);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest9.ToRequestContent(), context);
             return response;
         }

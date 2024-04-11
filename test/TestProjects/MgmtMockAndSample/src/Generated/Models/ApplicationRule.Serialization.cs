@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue<FirewallPolicyRuleApplicationProtocol>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

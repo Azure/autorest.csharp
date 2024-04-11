@@ -18,11 +18,11 @@ namespace AutoRest.CSharp.Output.Models.Requests
             ItemPropertyName = itemName ?? "value";
 
             ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, ItemPropertyName);
-            if (!TypeFactory.IsList(itemProperty.Declaration.Type))
+            if (!itemProperty.Declaration.Type.IsList)
             {
                 throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.SchemaProperty?.Schema}'");
             }
-            ItemType = TypeFactory.GetElementType(itemProperty.Declaration.Type);
+            ItemType = itemProperty.Declaration.Type.ElementType;
         }
 
         public CSharpType ResponseType { get; }

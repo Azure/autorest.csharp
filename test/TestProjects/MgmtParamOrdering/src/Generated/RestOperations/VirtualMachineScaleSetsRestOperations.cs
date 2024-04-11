@@ -59,7 +59,7 @@ namespace MgmtParamOrdering
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -139,7 +139,7 @@ namespace MgmtParamOrdering
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetPatch>(patch);
+            content.JsonWriter.WriteObjectValue(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -383,7 +383,7 @@ namespace MgmtParamOrdering
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetVMInstanceIDs>(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -466,7 +466,7 @@ namespace MgmtParamOrdering
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VirtualMachineScaleSetVMInstanceRequiredIDs>(vmInstanceIDs);
+            content.JsonWriter.WriteObjectValue(vmInstanceIDs);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

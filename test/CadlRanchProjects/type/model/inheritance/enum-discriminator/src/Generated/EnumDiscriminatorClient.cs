@@ -146,8 +146,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutExtensibleModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -161,8 +161,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutExtensibleModel(content, context);
             return response;
         }
@@ -524,8 +524,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutFixedModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -539,8 +539,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutFixedModel(content, context);
             return response;
         }

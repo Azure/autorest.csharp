@@ -25,13 +25,13 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                writer.WriteObjectValue<Skill>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                writer.WriteObjectValue<CognitiveServicesAccount>(CognitiveServicesAccount);
+                writer.WriteObjectValue(CognitiveServicesAccount);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -104,7 +104,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Skillset>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

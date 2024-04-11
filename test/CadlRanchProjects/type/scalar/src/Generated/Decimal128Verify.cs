@@ -154,8 +154,8 @@ namespace _Type.Scalar
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='VerifyAsync(decimal,CancellationToken)']/*" />
         public virtual async Task<Response> VerifyAsync(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await VerifyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -165,8 +165,8 @@ namespace _Type.Scalar
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='Verify(decimal,CancellationToken)']/*" />
         public virtual Response Verify(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Verify(content, context);
             return response;
         }

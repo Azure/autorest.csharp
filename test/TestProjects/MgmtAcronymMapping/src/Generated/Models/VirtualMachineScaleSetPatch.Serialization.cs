@@ -18,12 +18,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<MgmtAcronymMappingSku>(Sku);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue<MgmtAcronymMappingPlan>(Plan);
+                writer.WriteObjectValue(Plan);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -46,17 +46,17 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue<UpgradePolicy>(UpgradePolicy);
+                writer.WriteObjectValue(UpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue<AutomaticRepairsPolicy>(AutomaticRepairsPolicy);
+                writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateVmProfile>(VirtualMachineProfile);
+                writer.WriteObjectValue(VirtualMachineProfile);
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -76,12 +76,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities);
+                writer.WriteObjectValue(AdditionalCapabilities);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue<ScaleInPolicy>(ScaleInPolicy);
+                writer.WriteObjectValue(ScaleInPolicy);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {

@@ -55,7 +55,7 @@ namespace MgmtSupersetInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SupersetModel2>(supersetModel2);
+            content.JsonWriter.WriteObjectValue(supersetModel2);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

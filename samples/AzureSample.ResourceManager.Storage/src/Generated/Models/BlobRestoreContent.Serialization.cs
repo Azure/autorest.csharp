@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in BlobRanges)
             {
-                writer.WriteObjectValue<BlobRestoreRange>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

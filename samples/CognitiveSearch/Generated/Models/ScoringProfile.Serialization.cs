@@ -22,7 +22,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
-                writer.WriteObjectValue<TextWeights>(TextWeights);
+                writer.WriteObjectValue(TextWeights);
             }
             if (Optional.IsCollectionDefined(Functions))
             {
@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    writer.WriteObjectValue<ScoringFunction>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -107,7 +107,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ScoringProfile>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }
