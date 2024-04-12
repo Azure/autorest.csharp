@@ -55,9 +55,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -76,9 +76,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = Create(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Create(content, options);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -91,7 +91,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -102,17 +102,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -135,17 +135,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
@@ -153,8 +153,8 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetFineTunesAsync(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await GetFineTunesAsync(options).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -163,8 +163,8 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTunesResponse> GetFineTunes(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = GetFineTunes(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = GetFineTunes(options);
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -173,7 +173,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -183,14 +183,14 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> GetFineTunesAsync(RequestOptions context)
+        public virtual async Task<ClientResult> GetFineTunesAsync(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetFineTunesRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateGetFineTunesRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -208,14 +208,14 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult GetFineTunes(RequestOptions context)
+        public virtual ClientResult GetFineTunes(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetFineTunesRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateGetFineTunesRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -232,8 +232,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(fineTuneId, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await RetrieveAsync(fineTuneId, options).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -251,8 +251,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(fineTuneId, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Retrieve(fineTuneId, options);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -263,7 +263,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -274,18 +274,18 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> RetrieveAsync(string fineTuneId, RequestOptions context)
+        public virtual async Task<ClientResult> RetrieveAsync(string fineTuneId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -306,18 +306,18 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult Retrieve(string fineTuneId, RequestOptions context)
+        public virtual ClientResult Retrieve(string fineTuneId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateRetrieveRequest(fineTuneId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Get fine-grained status updates for a fine-tune job. </summary>
@@ -339,8 +339,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetEventsAsync(fineTuneId, stream, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await GetEventsAsync(fineTuneId, stream, options).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -363,8 +363,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = GetEvents(fineTuneId, stream, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = GetEvents(fineTuneId, stream, options);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -373,7 +373,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -393,18 +393,18 @@ namespace OpenAI
         ///
         /// If set to false, only events generated so far will be returned.
         /// </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions context)
+        public virtual async Task<ClientResult> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -412,7 +412,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -432,18 +432,18 @@ namespace OpenAI
         ///
         /// If set to false, only events generated so far will be returned.
         /// </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult GetEvents(string fineTuneId, bool? stream, RequestOptions context)
+        public virtual ClientResult GetEvents(string fineTuneId, bool? stream, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateGetEventsRequest(fineTuneId, stream, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
@@ -456,8 +456,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await CancelAsync(fineTuneId, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await CancelAsync(fineTuneId, options).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -471,8 +471,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Cancel(fineTuneId, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Cancel(fineTuneId, options);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -481,7 +481,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -492,18 +492,18 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> CancelAsync(string fineTuneId, RequestOptions context)
+        public virtual async Task<ClientResult> CancelAsync(string fineTuneId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCancelRequest(fineTuneId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -511,7 +511,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -522,27 +522,23 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult Cancel(string fineTuneId, RequestOptions context)
+        public virtual ClientResult Cancel(string fineTuneId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            using PipelineMessage message = CreateCancelRequest(fineTuneId, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCancelRequest(fineTuneId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -553,16 +549,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateGetFineTunesRequest(RequestOptions context)
+        internal PipelineMessage CreateGetFineTunesRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -571,16 +567,16 @@ namespace OpenAI
             uri.AppendPath("/fine-tunes", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateRetrieveRequest(string fineTuneId, RequestOptions context)
+        internal PipelineMessage CreateRetrieveRequest(string fineTuneId, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -590,16 +586,16 @@ namespace OpenAI
             uri.AppendPath(fineTuneId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateGetEventsRequest(string fineTuneId, bool? stream, RequestOptions context)
+        internal PipelineMessage CreateGetEventsRequest(string fineTuneId, bool? stream, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -614,16 +610,16 @@ namespace OpenAI
             }
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateCancelRequest(string fineTuneId, RequestOptions context)
+        internal PipelineMessage CreateCancelRequest(string fineTuneId, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -634,6 +630,10 @@ namespace OpenAI
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 

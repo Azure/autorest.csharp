@@ -71,13 +71,13 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
-    getWireName,
-    isInternal
+    getWireName
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 import { fromSdkEnumType, fromSdkModelType } from "../type/converter.js";
+import { NetEmitterOptions } from "../options.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -289,7 +289,7 @@ export function getDefaultValue(type: Type): any {
 }
 
 export function getInputType(
-    context: SdkContext,
+    context: SdkContext<NetEmitterOptions>,
     formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
@@ -540,7 +540,7 @@ export function getInputType(
                 Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
-                IsExtensible: !isFixed(program, e),
+                IsExtensible: false,
                 IsNullable: false,
                 Usage: "None"
             };
@@ -718,7 +718,7 @@ export function getUsages(
         if (type.kind === "Union") {
             let clientType = getClientType(context, type);
             if (clientType.kind === "enum" && clientType.isFixed === false) {
-                typeName = clientType.generatedName || clientType.name;
+                typeName = clientType.name;
             }
         }
         const affectTypes: Set<string> = new Set<string>();
@@ -931,7 +931,7 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
 
 // This is a temporary solution. After we uptake getAllModels we should delete this.
 export function navigateModels(
-    context: SdkContext,
+    context: SdkContext<NetEmitterOptions>,
     namespace: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>

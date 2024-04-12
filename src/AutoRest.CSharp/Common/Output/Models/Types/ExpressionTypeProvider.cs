@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public;
         }
 
-        public bool IsEnum => TypeKind is TypeKind.Enum;
+        public override bool IsEnum => TypeKind is TypeKind.Enum;
 
         public bool IsStruct => TypeKind is TypeKind.Struct;
 

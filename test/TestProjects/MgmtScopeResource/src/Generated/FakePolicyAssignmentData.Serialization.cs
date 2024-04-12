@@ -58,7 +58,7 @@ namespace MgmtScopeResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<ParameterValuesValue>(item.Value);
+                    writer.WriteObjectValue(item.Value);
                 }
                 writer.WriteEndObject();
             }
@@ -90,7 +90,7 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
-                    writer.WriteObjectValue<NonComplianceMessage>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

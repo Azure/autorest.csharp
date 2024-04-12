@@ -306,7 +306,7 @@ namespace body_string
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RefColorConstant>(enumStringBody, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(enumStringBody, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

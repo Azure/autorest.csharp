@@ -52,6 +52,12 @@ export const $lib = createTypeSpecLibrary({
             messages: {
                 default: paramMessage`Type '${"kind"}' is not found`
             }
+        },
+        "Invalid-Name": {
+            severity: "warning",
+            messages: {
+                default: paramMessage`Invalid interface or operation group name ${"name"} when configuration "model-namespace" is on`
+            }
         }
     },
     emitter: {

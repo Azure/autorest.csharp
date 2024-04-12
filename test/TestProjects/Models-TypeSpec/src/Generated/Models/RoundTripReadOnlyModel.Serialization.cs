@@ -50,12 +50,12 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
-                writer.WriteObjectValue<DerivedModel>(RequiredReadonlyModel, options);
+                writer.WriteObjectValue(RequiredReadonlyModel, options);
             }
             if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
-                writer.WriteObjectValue<DerivedModel>(OptionalReadonlyModel, options);
+                writer.WriteObjectValue(OptionalReadonlyModel, options);
             }
             if (options.Format != "W")
             {
@@ -103,7 +103,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredReadOnlyModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in RequiredReadOnlyModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -166,7 +166,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalReadOnlyModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -193,7 +193,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -287,7 +287,7 @@ namespace ModelsTypeSpec.Models
             IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
             IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredReadonlyString"u8))
@@ -524,10 +524,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RoundTripReadOnlyModel(
                 requiredReadonlyString,
                 requiredReadonlyInt,
@@ -599,7 +599,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripReadOnlyModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(SourceFilter))
             {
                 writer.WritePropertyName("sourceFilter"u8);
-                writer.WriteObjectValue<TrainSourceFilter>(SourceFilter);
+                writer.WriteObjectValue(SourceFilter);
             }
             if (Optional.IsDefined(UseLabelFile))
             {
@@ -28,6 +28,14 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteBooleanValue(UseLabelFile.Value);
             }
             writer.WriteEndObject();
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

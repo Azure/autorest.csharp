@@ -33,13 +33,13 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Choices)
             {
-                writer.WriteObjectValue<CreateCompletionResponseChoice>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
-                writer.WriteObjectValue<CompletionUsage>(Usage, options);
+                writer.WriteObjectValue(Usage, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -86,7 +86,7 @@ namespace OpenAI.Models
             IReadOnlyList<CreateCompletionResponseChoice> choices = default;
             CompletionUsage usage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -130,10 +130,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CreateCompletionResponse(
                 id,
                 @object,

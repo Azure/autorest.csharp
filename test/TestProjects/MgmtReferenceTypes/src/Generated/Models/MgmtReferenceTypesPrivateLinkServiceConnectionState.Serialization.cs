@@ -75,8 +75,9 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, MgmtReferenceTypesPrivateLinkServiceConnectionState model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<MgmtReferenceTypesPrivateLinkServiceConnectionState>(model);
+                writer.WriteObjectValue(model);
             }
+
             public override MgmtReferenceTypesPrivateLinkServiceConnectionState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

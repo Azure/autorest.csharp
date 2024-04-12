@@ -31,17 +31,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue<UpgradeOperationHistoryStatus>(RunningStatus, options);
+                writer.WriteObjectValue(RunningStatus, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue<RollingUpgradeProgressInfo>(Progress, options);
+                writer.WriteObjectValue(Progress, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue<ApiError>(Error, options);
+                writer.WriteObjectValue(Error, options);
             }
             if (options.Format != "W" && Optional.IsDefined(StartedBy))
             {
@@ -51,12 +51,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(TargetImageReference))
             {
                 writer.WritePropertyName("targetImageReference"u8);
-                writer.WriteObjectValue<ImageReference>(TargetImageReference, options);
+                writer.WriteObjectValue(TargetImageReference, options);
             }
             if (options.Format != "W" && Optional.IsDefined(RollbackInfo))
             {
                 writer.WritePropertyName("rollbackInfo"u8);
-                writer.WriteObjectValue<RollbackStatusInfo>(RollbackInfo, options);
+                writer.WriteObjectValue(RollbackInfo, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -103,7 +103,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             ImageReference targetImageReference = default;
             RollbackStatusInfo rollbackInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("runningStatus"u8))
@@ -162,10 +162,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UpgradeOperationHistoricalStatusInfoProperties(
                 runningStatus,
                 progress,

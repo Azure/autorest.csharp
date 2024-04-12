@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<MgmtMockAndSampleSku>(Sku);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue<AccessPolicyEntry>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue<NetworkRuleSet>(NetworkAcls);
+                writer.WriteObjectValue(NetworkAcls);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {

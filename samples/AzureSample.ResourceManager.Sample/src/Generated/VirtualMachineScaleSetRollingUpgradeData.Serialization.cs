@@ -69,22 +69,22 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue<RollingUpgradePolicy>(Policy, options);
+                writer.WriteObjectValue(Policy, options);
             }
             if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue<RollingUpgradeRunningStatus>(RunningStatus, options);
+                writer.WriteObjectValue(RunningStatus, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue<RollingUpgradeProgressInfo>(Progress, options);
+                writer.WriteObjectValue(Progress, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue<ApiError>(Error, options);
+                writer.WriteObjectValue(Error, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -136,7 +136,7 @@ namespace AzureSample.ResourceManager.Sample
             RollingUpgradeProgressInfo progress = default;
             ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -232,10 +232,10 @@ namespace AzureSample.ResourceManager.Sample
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineScaleSetRollingUpgradeData(
                 id,
                 name,

@@ -40,7 +40,7 @@
     {
      "$id": "6",
      "Name": "image",
-     "SerializedName": "image",
+     "SerializedName": "",
      "Description": "",
      "Type": {
       "$id": "7",
@@ -64,7 +64,7 @@
     {
      "$id": "9",
      "Name": "image",
-     "SerializedName": "image",
+     "SerializedName": "",
      "Description": "",
      "Type": {
       "$id": "10",

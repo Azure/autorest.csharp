@@ -51,7 +51,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue<PrivateLinkServiceConnectionState>(PrivateLinkServiceConnectionState);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -159,6 +159,22 @@ namespace Azure.Network.Management.Interface.Models
                 groupIds ?? new ChangeTrackingList<string>(),
                 requestMessage,
                 privateLinkServiceConnectionState);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new PrivateLinkServiceConnection FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializePrivateLinkServiceConnection(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

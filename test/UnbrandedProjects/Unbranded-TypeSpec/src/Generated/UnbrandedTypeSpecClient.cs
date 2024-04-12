@@ -57,7 +57,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -65,17 +65,17 @@ namespace UnbrandedTypeSpec
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -91,17 +91,17 @@ namespace UnbrandedTypeSpec
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Return hi again. </summary>
@@ -117,9 +117,9 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = action.ToBinaryBody();
-            ClientResult result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await HelloAgainAsync(p2, p1, content, options).ConfigureAwait(false);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -136,9 +136,9 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = action.ToBinaryBody();
-            ClientResult result = HelloAgain(p2, p1, content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = HelloAgain(p2, p1, content, options);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -147,7 +147,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -160,19 +160,19 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> HelloAgainAsync(string p2, string p1, BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> HelloAgainAsync(string p2, string p1, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -193,19 +193,19 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult HelloAgain(string p2, string p1, BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult HelloAgain(string p2, string p1, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -221,19 +221,19 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> NoContentTypeAsync(string p2, string p1, BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> NoContentTypeAsync(string p2, string p1, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
@@ -249,27 +249,27 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult NoContentType(string p2, string p1, BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult NoContentType(string p2, string p1, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await HelloDemo2Async(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await HelloDemo2Async(options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -277,8 +277,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = HelloDemo2(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = HelloDemo2(options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -287,7 +287,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -297,13 +297,13 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> HelloDemo2Async(RequestOptions context)
+        public virtual async Task<ClientResult> HelloDemo2Async(RequestOptions options)
         {
-            using PipelineMessage message = CreateHelloDemo2Request(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -321,13 +321,13 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult HelloDemo2(RequestOptions context)
+        public virtual ClientResult HelloDemo2(RequestOptions options)
         {
-            using PipelineMessage message = CreateHelloDemo2Request(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Create with literal value. </summary>
@@ -338,9 +338,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await CreateLiteralAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await CreateLiteralAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -352,9 +352,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = CreateLiteral(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = CreateLiteral(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -363,7 +363,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -374,16 +374,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateLiteralAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateLiteralAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateLiteralRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -402,24 +402,24 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult CreateLiteral(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult CreateLiteral(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateLiteralRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await HelloLiteralAsync(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await HelloLiteralAsync(options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -427,8 +427,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = HelloLiteral(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = HelloLiteral(options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -437,7 +437,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -447,13 +447,13 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> HelloLiteralAsync(RequestOptions context)
+        public virtual async Task<ClientResult> HelloLiteralAsync(RequestOptions options)
         {
-            using PipelineMessage message = CreateHelloLiteralRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -461,7 +461,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -471,13 +471,13 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult HelloLiteral(RequestOptions context)
+        public virtual ClientResult HelloLiteral(RequestOptions options)
         {
-            using PipelineMessage message = CreateHelloLiteralRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> top level method. </summary>
@@ -485,8 +485,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await TopActionAsync(action, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await TopActionAsync(action, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -495,8 +495,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = TopAction(action, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = TopAction(action, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -505,7 +505,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -516,13 +516,13 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions context)
+        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions options)
         {
-            using PipelineMessage message = CreateTopActionRequest(action, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -530,7 +530,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -541,13 +541,13 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions context)
+        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions options)
         {
-            using PipelineMessage message = CreateTopActionRequest(action, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -555,18 +555,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> TopAction2Async(RequestOptions context)
+        public virtual async Task<ClientResult> TopAction2Async(RequestOptions options)
         {
-            using PipelineMessage message = CreateTopAction2Request(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateTopAction2Request(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -574,18 +574,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult TopAction2(RequestOptions context)
+        public virtual ClientResult TopAction2(RequestOptions options)
         {
-            using PipelineMessage message = CreateTopAction2Request(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateTopAction2Request(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -593,22 +593,22 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> PatchActionAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> PatchActionAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreatePatchActionRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -616,22 +616,22 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult PatchAction(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult PatchAction(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreatePatchActionRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> body parameter without body decorator. </summary>
@@ -642,9 +642,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = thing.ToBinaryBody();
-            ClientResult result = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await AnonymousBodyAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -656,9 +656,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = thing.ToBinaryBody();
-            ClientResult result = AnonymousBody(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = AnonymousBody(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -667,7 +667,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -678,16 +678,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> AnonymousBodyAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> AnonymousBodyAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -695,7 +695,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -706,16 +706,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult AnonymousBody(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult AnonymousBody(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateAnonymousBodyRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Model can have its friendly name. </summary>
@@ -726,9 +726,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = friend.ToBinaryBody();
-            ClientResult result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await FriendlyModelAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -740,9 +740,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = friend.ToBinaryBody();
-            ClientResult result = FriendlyModel(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = FriendlyModel(content, options);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -751,7 +751,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -762,16 +762,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> FriendlyModelAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> FriendlyModelAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateFriendlyModelRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -779,7 +779,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -790,16 +790,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult FriendlyModel(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult FriendlyModel(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateFriendlyModelRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -807,18 +807,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> AddTimeHeaderAsync(RequestOptions context = null)
+        public virtual async Task<ClientResult> AddTimeHeaderAsync(RequestOptions options = null)
         {
-            using PipelineMessage message = CreateAddTimeHeaderRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -826,18 +826,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult AddTimeHeader(RequestOptions context = null)
+        public virtual ClientResult AddTimeHeader(RequestOptions options = null)
         {
-            using PipelineMessage message = CreateAddTimeHeaderRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> parameter has string format. </summary>
@@ -849,9 +849,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await StringFormatAsync(subscriptionId, content, options).ConfigureAwait(false);
             return result;
         }
 
@@ -864,9 +864,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = StringFormat(subscriptionId, content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = StringFormat(subscriptionId, content, options);
             return result;
         }
 
@@ -875,7 +875,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -887,16 +887,16 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -904,7 +904,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -916,16 +916,16 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult StringFormat(Guid subscriptionId, BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult StringFormat(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Model can have its projected name. </summary>
@@ -936,9 +936,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = projectedModel.ToBinaryBody();
-            ClientResult result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await ProjectedNameModelAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -950,9 +950,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = projectedModel.ToBinaryBody();
-            ClientResult result = ProjectedNameModel(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = ProjectedNameModel(content, options);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -961,7 +961,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -972,16 +972,16 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ProjectedNameModelAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> ProjectedNameModelAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -989,7 +989,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1000,24 +1000,24 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult ProjectedNameModel(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult ProjectedNameModel(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateProjectedNameModelRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await ReturnsAnonymousModelAsync(options).ConfigureAwait(false);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1025,8 +1025,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = ReturnsAnonymousModel(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = ReturnsAnonymousModel(options);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1035,7 +1035,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1045,13 +1045,13 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ReturnsAnonymousModelAsync(RequestOptions context)
+        public virtual async Task<ClientResult> ReturnsAnonymousModelAsync(RequestOptions options)
         {
-            using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1059,7 +1059,7 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -1069,51 +1069,59 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult ReturnsAnonymousModel(RequestOptions context)
+        public virtual ClientResult ReturnsAnonymousModel(RequestOptions options)
         {
-            using PipelineMessage message = CreateReturnsAnonymousModelRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetUnknownValueAsync(RequestOptions context)
+        public virtual async Task<ClientResult> CreateUnknownValueAsync(BinaryContent content, RequestOptions options = null)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateCreateUnknownValueRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetUnknownValue(RequestOptions context)
+        public virtual ClientResult CreateUnknownValue(BinaryContent content, RequestOptions options = null)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateCreateUnknownValueRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
@@ -1124,9 +1132,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await InternalProtocolAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await InternalProtocolAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1138,9 +1146,9 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = InternalProtocol(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = InternalProtocol(content, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1149,22 +1157,22 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual async Task<ClientResult> InternalProtocolAsync(BinaryContent content, RequestOptions context = null)
+        internal virtual async Task<ClientResult> InternalProtocolAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateInternalProtocolRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1172,30 +1180,30 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual ClientResult InternalProtocol(BinaryContent content, RequestOptions context = null)
+        internal virtual ClientResult InternalProtocol(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateInternalProtocolRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await StillConvenientAsync(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await StillConvenientAsync(options).ConfigureAwait(false);
             return result;
         }
 
@@ -1203,8 +1211,8 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = StillConvenient(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = StillConvenient(options);
             return result;
         }
 
@@ -1213,18 +1221,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual async Task<ClientResult> StillConvenientAsync(RequestOptions context = null)
+        internal virtual async Task<ClientResult> StillConvenientAsync(RequestOptions options = null)
         {
-            using PipelineMessage message = CreateStillConvenientRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -1232,18 +1240,18 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        internal virtual ClientResult StillConvenient(RequestOptions context = null)
+        internal virtual ClientResult StillConvenient(RequestOptions options = null)
         {
-            using PipelineMessage message = CreateStillConvenientRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -1252,23 +1260,23 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult<bool>> HeadAsBooleanAsync(string id, RequestOptions context = null)
+        public virtual async Task<ClientResult<bool>> HeadAsBooleanAsync(string id, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-            var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, context).ConfigureAwait(false);
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
+            var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, options).ConfigureAwait(false);
             return ClientResult.FromValue(result.Value, result.GetRawResponse());
         }
 
@@ -1278,33 +1286,29 @@ namespace UnbrandedTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult<bool> HeadAsBoolean(string id, RequestOptions context = null)
+        public virtual ClientResult<bool> HeadAsBoolean(string id, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
 
-            using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-            var result = _pipeline.ProcessHeadAsBoolMessage(message, context);
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
+            var result = _pipeline.ProcessHeadAsBoolMessage(message, options);
             return ClientResult.FromValue(result.Value, result.GetRawResponse());
         }
 
-        internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1319,16 +1323,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1341,16 +1345,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "text/plain");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1363,16 +1367,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateHelloDemo2Request(RequestOptions context)
+        internal PipelineMessage CreateHelloDemo2Request(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1381,16 +1385,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1401,16 +1405,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateHelloLiteralRequest(RequestOptions context)
+        internal PipelineMessage CreateHelloLiteralRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1422,16 +1426,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", "test");
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions context)
+        internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1441,16 +1445,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(action.ToString("O"), true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateTopAction2Request(RequestOptions context)
+        internal PipelineMessage CreateTopAction2Request(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -1459,16 +1463,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "PATCH";
@@ -1479,16 +1483,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1499,16 +1503,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1519,16 +1523,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions context)
+        internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1538,16 +1542,16 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "POST";
@@ -1559,16 +1563,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1579,16 +1583,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions context)
+        internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1597,34 +1601,36 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions context)
+        internal PipelineMessage CreateCreateUnknownValueRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
-            message.ResponseClassifier = PipelineMessageClassifier200;
+            message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
-            request.Method = "GET";
+            request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -1635,16 +1641,16 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateStillConvenientRequest(RequestOptions context)
+        internal PipelineMessage CreateStillConvenientRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier204;
             var request = message.Request;
             request.Method = "GET";
@@ -1653,16 +1659,16 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions context)
+        internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200To300400To500;
             var request = message.Request;
             request.Method = "HEAD";
@@ -1672,6 +1678,10 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 

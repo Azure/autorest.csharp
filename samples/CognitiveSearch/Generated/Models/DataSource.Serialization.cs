@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -25,18 +26,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue<DataSourceCredentials>(Credentials);
+            writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue<DataContainer>(Container);
+            writer.WriteObjectValue(Container);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                writer.WriteObjectValue<DataChangeDetectionPolicy>(DataChangeDetectionPolicy);
+                writer.WriteObjectValue(DataChangeDetectionPolicy);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                writer.WriteObjectValue<DataDeletionDetectionPolicy>(DataDeletionDetectionPolicy);
+                writer.WriteObjectValue(DataDeletionDetectionPolicy);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -120,6 +121,22 @@ namespace CognitiveSearch.Models
                 dataChangeDetectionPolicy,
                 dataDeletionDetectionPolicy,
                 odataEtag);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DataSource FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDataSource(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

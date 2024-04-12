@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                writer.WriteObjectValue<FirewallPolicyNatRuleCollectionAction>(Action);
+                writer.WriteObjectValue(Action);
             }
             if (Optional.IsCollectionDefined(Rules))
             {
@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue<FirewallPolicyRule>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

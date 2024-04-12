@@ -7,7 +7,7 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "GetResponseProp5",
+   "Name": "GetResponseProp4",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -34,7 +34,7 @@
   {
    "$id": "6",
    "Kind": "Enum",
-   "Name": "GetResponseProp4",
+   "Name": "GetResponseProp3",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -78,7 +78,7 @@
   {
    "$id": "12",
    "Kind": "Enum",
-   "Name": "GetResponseProp3",
+   "Name": "GetResponseProp2",
    "EnumValueType": "Int32",
    "AllowedValues": [
     {
@@ -105,7 +105,7 @@
   {
    "$id": "16",
    "Kind": "Enum",
-   "Name": "GetResponseProp2",
+   "Name": "GetResponseProp1",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -202,7 +202,7 @@
    ],
    "Namespace": "Type.Union",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -225,7 +225,7 @@
    ],
    "Namespace": "Type.Union",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -811,7 +811,7 @@
            "LiteralValueType": {
             "$id": "98",
             "Kind": "Primitive",
-            "Name": "Float64",
+            "Name": "Float32",
             "IsNullable": false
            },
            "Value": 3.3,
@@ -879,7 +879,7 @@
            "LiteralValueType": {
             "$id": "108",
             "Kind": "Primitive",
-            "Name": "Float64",
+            "Name": "Float32",
             "IsNullable": false
            },
            "Value": 3.3,
@@ -947,7 +947,7 @@
            "LiteralValueType": {
             "$id": "118",
             "Kind": "Primitive",
-            "Name": "Float64",
+            "Name": "Float32",
             "IsNullable": false
            },
            "Value": 3.3,
@@ -1015,7 +1015,7 @@
            "LiteralValueType": {
             "$id": "128",
             "Kind": "Primitive",
-            "Name": "Float64",
+            "Name": "Float32",
             "IsNullable": false
            },
            "Value": 3.3,

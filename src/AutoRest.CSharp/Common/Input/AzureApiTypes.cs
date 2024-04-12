@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestContext);
 
+        public override string RequestContextName => "context";
+        public override string RequestContextDescription => "The request context, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
@@ -51,7 +54,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName};";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeader;
+        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields> WriteHeaderMethod => RequestWriterHelpers.WriteHeader;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";

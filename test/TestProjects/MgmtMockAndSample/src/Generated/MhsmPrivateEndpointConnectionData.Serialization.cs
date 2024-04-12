@@ -27,7 +27,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<ManagedHsmSku>(Sku);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -52,7 +52,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue<MhsmPrivateLinkServiceConnectionState>(PrivateLinkServiceConnectionState);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {

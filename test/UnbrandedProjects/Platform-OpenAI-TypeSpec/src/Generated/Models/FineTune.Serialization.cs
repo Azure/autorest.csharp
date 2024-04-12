@@ -45,26 +45,26 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToSerialString());
             writer.WritePropertyName("hyperparams"u8);
-            writer.WriteObjectValue<FineTuneHyperparams>(Hyperparams, options);
+            writer.WriteObjectValue(Hyperparams, options);
             writer.WritePropertyName("training_files"u8);
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("validation_files"u8);
             writer.WriteStartArray();
             foreach (var item in ValidationFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("result_files"u8);
             writer.WriteStartArray();
             foreach (var item in ResultFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Events))
@@ -73,7 +73,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Events)
                 {
-                    writer.WriteObjectValue<FineTuneEvent>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -129,7 +129,7 @@ namespace OpenAI.Models
             IReadOnlyList<OpenAIFile> resultFiles = default;
             IReadOnlyList<FineTuneEvent> events = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -228,10 +228,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new FineTune(
                 id,
                 @object,

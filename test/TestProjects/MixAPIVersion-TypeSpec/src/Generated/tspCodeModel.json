@@ -19,8 +19,7 @@
     }
    ],
    "Namespace": "MixApiVersion",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -82,7 +81,7 @@
   {
    "$id": "11",
    "Kind": "Model",
-   "Name": "PagedToyToy",
+   "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
@@ -166,7 +165,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -233,7 +232,7 @@
     {
      "$id": "30",
      "Name": "body",
-     "SerializedName": "body",
+     "SerializedName": "",
      "Description": "",
      "Type": {
       "$ref": "4"

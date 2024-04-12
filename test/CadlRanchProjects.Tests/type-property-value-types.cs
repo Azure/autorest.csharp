@@ -391,7 +391,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnionEnumValue_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty(ExtendedEnum.EnumValue2));
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty());
             Assert.AreEqual(204, response.Status);
         });
 

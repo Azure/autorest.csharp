@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static ValueExpression GetConversion(this ValueExpression expression, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (CSharpType.RequiresToList(from, to))
             {
                 if (from.IsNullable)
                     expression = new NullConditionalExpression(expression);

@@ -44,8 +44,8 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetFilesAsync(context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await GetFilesAsync(options).ConfigureAwait(false);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -53,8 +53,8 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ClientResult<ListFilesResponse> GetFiles(CancellationToken cancellationToken = default)
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = GetFiles(context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = GetFiles(options);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -63,7 +63,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -73,13 +73,13 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetFilesAsync(RequestOptions context)
+        public virtual async Task<ClientResult> GetFilesAsync(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetFilesRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateGetFilesRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -97,13 +97,13 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetFiles(RequestOptions context)
+        public virtual ClientResult GetFiles(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetFilesRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateGetFilesRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
@@ -114,9 +114,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = file.ToBinaryBody();
-            ClientResult result = await CreateAsync(content, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -128,9 +128,9 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
             using BinaryContent content = file.ToBinaryBody();
-            ClientResult result = Create(content, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Create(content, options);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -139,7 +139,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -150,16 +150,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions context = null)
+        public virtual async Task<ClientResult> CreateAsync(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -178,16 +178,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Create(BinaryContent content, RequestOptions context = null)
+        public virtual ClientResult Create(BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateRequest(content, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateCreateRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Returns information about a specific file. </summary>
@@ -199,8 +199,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(fileId, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await RetrieveAsync(fileId, options).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -213,8 +213,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(fileId, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Retrieve(fileId, options);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -223,7 +223,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -234,17 +234,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> RetrieveAsync(string fileId, RequestOptions context)
+        public virtual async Task<ClientResult> RetrieveAsync(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateRetrieveRequest(fileId, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateRetrieveRequest(fileId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -263,17 +263,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Retrieve(string fileId, RequestOptions context)
+        public virtual ClientResult Retrieve(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateRetrieveRequest(fileId, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateRetrieveRequest(fileId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Delete a file. </summary>
@@ -285,8 +285,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await DeleteAsync(fileId, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await DeleteAsync(fileId, options).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -299,8 +299,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Delete(fileId, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Delete(fileId, options);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -309,7 +309,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -320,17 +320,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> DeleteAsync(string fileId, RequestOptions context)
+        public virtual async Task<ClientResult> DeleteAsync(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateDeleteRequest(fileId, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateDeleteRequest(fileId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -349,17 +349,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Delete(string fileId, RequestOptions context)
+        public virtual ClientResult Delete(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateDeleteRequest(fileId, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateDeleteRequest(fileId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Returns the contents of the specified file. </summary>
@@ -371,8 +371,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await DownloadAsync(fileId, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await DownloadAsync(fileId, options).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
@@ -385,8 +385,8 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Download(fileId, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = Download(fileId, options);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
@@ -395,7 +395,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -406,17 +406,17 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> DownloadAsync(string fileId, RequestOptions context)
+        public virtual async Task<ClientResult> DownloadAsync(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateDownloadRequest(fileId, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateDownloadRequest(fileId, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -435,26 +435,22 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Download(string fileId, RequestOptions context)
+        public virtual ClientResult Download(string fileId, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            using PipelineMessage message = CreateDownloadRequest(fileId, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateDownloadRequest(fileId, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateGetFilesRequest(RequestOptions context)
+        internal PipelineMessage CreateGetFilesRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -463,16 +459,16 @@ namespace OpenAI
             uri.AppendPath("/files", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions context)
+        internal PipelineMessage CreateCreateRequest(BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -483,16 +479,16 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "multipart/form-data");
             request.Content = content;
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateRetrieveRequest(string fileId, RequestOptions context)
+        internal PipelineMessage CreateRetrieveRequest(string fileId, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "POST";
@@ -502,16 +498,16 @@ namespace OpenAI
             uri.AppendPath(fileId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateDeleteRequest(string fileId, RequestOptions context)
+        internal PipelineMessage CreateDeleteRequest(string fileId, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "DELETE";
@@ -521,16 +517,16 @@ namespace OpenAI
             uri.AppendPath(fileId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateDownloadRequest(string fileId, RequestOptions context)
+        internal PipelineMessage CreateDownloadRequest(string fileId, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -541,6 +537,10 @@ namespace OpenAI
             uri.AppendPath("/content", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 

@@ -1,8 +1,6 @@
 import {
     IntrinsicType,
     Program,
-    UsageFlags,
-    getDeprecated,
     getDiscriminator,
     Type,
     DateTimeKnownEncoding,
@@ -25,10 +23,12 @@ import {
     SdkArrayType,
     SdkDatetimeType,
     SdkUnionType,
-    SdkBuiltInKinds,
     SdkContext,
     SdkTupleType,
-    SdkDurationType
+    SdkDurationType,
+    UsageFlags,
+    SdkBuiltInKinds,
+    isSdkBuiltInKind
 } from "@azure-tools/typespec-client-generator-core";
 import {
     InputDictionaryType,
@@ -95,7 +95,7 @@ function fromSdkType(
     // this happens for discriminator type, normally all other primitive types should be handled in scalar above
     // TODO: can we improve the type in TCGC around discriminator
     if (sdkType.__raw?.kind === "Intrinsic") return fromIntrinsicType(sdkType);
-    if (isSdkBuiltInType(sdkType.kind))
+    if (isSdkBuiltInKind(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
     return {} as InputType;
 }
@@ -106,7 +106,7 @@ export function fromSdkModelType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputModelType {
-    var modelTypeName = getModelName(modelType);
+    let modelTypeName = modelType.name;
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
         inputModelType = {
@@ -165,7 +165,7 @@ export function fromSdkModelType(
                 (p) =>
                     !(p as SdkBodyModelPropertyType).discriminator ||
                     !baseModelHasDiscriminator
-            )
+            ).filter((p) => p.kind !== "header" && p.kind !== "query" && p.kind !== "path")
             .map((p) =>
                 fromSdkModelPropertyType(p, context, models, enums, {
                     ModelName: inputModelType?.Name,
@@ -200,26 +200,6 @@ export function fromSdkModelType(
     return inputModelType;
 }
 
-// TODO: remove this after TCGC provide utility to generate templated model
-function getModelName(model: SdkModelType): string {
-    var name = model.generatedName || model.name;
-    var rawModel = model.__raw! as Model;
-    if (
-        name !== "" &&
-        rawModel.templateMapper &&
-        rawModel.templateMapper.args
-    ) {
-        return (
-            name +
-            rawModel.templateMapper.args
-                .map((it) => (it as Model).name)
-                .join("")
-        );
-    }
-
-    return name;
-}
-
 function hasDiscriminator(model?: SdkModelType): boolean {
     if (model == null) return false;
 
@@ -238,7 +218,7 @@ export function fromSdkEnumType(
     enums: Map<string, InputEnumType>,
     addToCollection: boolean = true
 ): InputEnumType {
-    let enumName = enumType.generatedName || enumType.name;
+    let enumName = enumType.name;
     let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
         const newInputEnumType: InputEnumType = {
@@ -379,18 +359,89 @@ function fromStringType(
     };
 }
 
-export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
+function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
     const builtInKind: InputPrimitiveTypeKind =
-        mapTypeSpecTypeToCSharpInputTypeKind(
-            builtInType.__raw!,
-            builtInType.kind,
-            undefined // To-Do: type incompatable
-        );
+        mapTcgcTypeToCSharpInputTypeKind(builtInType);
     return {
         Kind: InputTypeKind.Primitive,
         Name: builtInKind,
-        IsNullable: false
+        IsNullable: builtInType.nullable,
     } as InputPrimitiveType;
+}
+
+function mapTcgcTypeToCSharpInputTypeKind(
+    type: SdkBuiltInType,
+): InputPrimitiveTypeKind {
+    switch (type.kind) {
+        case "numeric":
+            return InputPrimitiveTypeKind.Float128;
+        case "integer":
+            return InputPrimitiveTypeKind.Int64;
+        case "safeint":
+            return InputPrimitiveTypeKind.SafeInt;
+        case "int8":
+            return InputPrimitiveTypeKind.SByte;
+        case "int32":
+            return InputPrimitiveTypeKind.Int32;
+        case "int64":
+            return InputPrimitiveTypeKind.Int64;
+        case "uint8":
+            return InputPrimitiveTypeKind.Byte;
+        case "bytes":
+            switch (type.encode) {
+                case undefined:
+                case "":
+                case "base64":
+                    return InputPrimitiveTypeKind.Bytes;
+                case "base64url":
+                    return InputPrimitiveTypeKind.BytesBase64Url;
+                default:
+                    logger.warn(`invalid encode '${type.encode}' for bytes.`);
+                    return InputPrimitiveTypeKind.Bytes;
+            }
+        case "float":
+            return InputPrimitiveTypeKind.Float64;
+        case "float32":
+            return InputPrimitiveTypeKind.Float32;
+        case "float64":
+            return InputPrimitiveTypeKind.Float64;
+        case "decimal":
+            return InputPrimitiveTypeKind.Decimal;
+        case "decimal128":
+            return InputPrimitiveTypeKind.Decimal128;
+        case "uuid":
+            return InputPrimitiveTypeKind.Guid;
+        case "eTag":
+            return InputPrimitiveTypeKind.String;
+        case "azureLocation":
+            return InputPrimitiveTypeKind.AzureLocation;
+        case "string":
+            return InputPrimitiveTypeKind.String;
+        case "guid": // TODO: is this the same as uuid?
+            return InputPrimitiveTypeKind.Guid;
+        case "uri":
+        case "url":
+            return InputPrimitiveTypeKind.Uri;
+        case "boolean":
+            return InputPrimitiveTypeKind.Boolean;
+        case "plainDate":
+            return InputPrimitiveTypeKind.Date;
+        case "plainTime":
+            return InputPrimitiveTypeKind.Time;
+        case "any":
+            return InputPrimitiveTypeKind.Object;
+        case "int16": // TODO: add support for those types
+        case "uint16":
+        case "uint32":
+        case "uint64":
+        case "ipV4Address":
+        case "ipV6Address":
+        case "password":
+        case "armId":
+        case "ipAddress":
+        default:
+            throw new Error(`Unsupported built-in type kind '${type.kind}'`);
+    }
 }
 
 function fromScalarType(scalarType: SdkType): InputPrimitiveType {
@@ -616,31 +667,6 @@ function fromSdkModelPropertyType(
     };
 
     return modelProperty;
-}
-
-function isSdkBuiltInType(kind: string): boolean {
-    return [
-        "bytes",
-        "boolean",
-        "date",
-        "time",
-        "any",
-        "int32",
-        "int64",
-        "float32",
-        "float64",
-        "decimal",
-        "decimal128",
-        "string",
-        "guid",
-        "url",
-        "uuid",
-        "password",
-        "armId",
-        "ipAddress",
-        "azureLocation",
-        "etag"
-    ].includes(kind);
 }
 
 function getCSharpInputTypeKindByIntrinsic(

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Client.Structure.Service.TwoOperationGroup;
+using Client.Structure.Service.TwoOperationGroup.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -40,37 +41,37 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Client_Structure_Operation_Group1_Client_One() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup1Client("two-operation-group").OneAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup1Client(ClientType.TwoOperationGroup).OneAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group1_Client_Three() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup1Client("two-operation-group").ThreeAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup1Client(ClientType.TwoOperationGroup).ThreeAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group1_Client_Four() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup1Client("two-operation-group").FourAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup1Client(ClientType.TwoOperationGroup).FourAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group2_Client_Two() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup2Client("two-operation-group").TwoAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup2Client(ClientType.TwoOperationGroup).TwoAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group2_Client_Five() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup2Client("two-operation-group").FiveAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup2Client(ClientType.TwoOperationGroup).FiveAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group2_Client_Six() => Test(async (host) =>
         {
-            Response response = await new TwoOperationGroupClient(host).GetGroup2Client("two-operation-group").SixAsync();
+            Response response = await new TwoOperationGroupClient(host).GetGroup2Client(ClientType.TwoOperationGroup).SixAsync();
             Assert.AreEqual(204, response.Status);
         });
     }

@@ -240,7 +240,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/one", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -255,7 +255,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/three", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -270,7 +270,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/four", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

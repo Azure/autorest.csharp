@@ -261,17 +261,16 @@ namespace AutoRest.CSharp.Output.Models
                 if (responseType is { IsFrameworkType: false, Implementation: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
-                    var propertyType = property.ValueType.WithNullable(false);
-                    if (!TypeFactory.IsList(propertyType))
+                    if (!property.ValueType.IsList)
                     {
                         throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
                     }
 
-                    responseType = TypeFactory.GetElementType(property.ValueType);
+                    responseType = property.ValueType.ElementType;
                 }
-                else if (TypeFactory.IsList(responseType))
+                else if (responseType.IsList)
                 {
-                    responseType = TypeFactory.GetElementType(responseType);
+                    responseType = responseType.ElementType;
                 }
 
                 if (Operation.LongRunning != null)
@@ -312,7 +311,7 @@ namespace AutoRest.CSharp.Output.Models
             var inputType = GetReturnedResponseInputType();
             if (inputType != null)
             {
-                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
+                return _typeFactory.CreateType(inputType).OutputType;
             }
             return null;
         }
@@ -419,7 +418,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;
-                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                var inputType = parameter.Type.InputType.WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
                     defaultValue = Constant.Default(inputType);

@@ -32,7 +32,7 @@ namespace ModelsTypeSpec.Models
             if (Optional.IsDefined(Inner))
             {
                 writer.WritePropertyName("inner"u8);
-                writer.WriteObjectValue<InputRecursiveModel>(Inner, options);
+                writer.WriteObjectValue(Inner, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
             string message = default;
             InputRecursiveModel inner = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("message"u8))
@@ -94,10 +94,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new InputRecursiveModel(message, inner, serializedAdditionalRawData);
         }
 
@@ -144,7 +144,7 @@ namespace ModelsTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputRecursiveModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

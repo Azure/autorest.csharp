@@ -24,9 +24,9 @@ namespace OpenAI.Models
             writer.WritePropertyName("flagged"u8);
             writer.WriteBooleanValue(Flagged);
             writer.WritePropertyName("categories"u8);
-            writer.WriteObjectValue<CreateModerationResponseResultCategories>(Categories, options);
+            writer.WriteObjectValue(Categories, options);
             writer.WritePropertyName("category_scores"u8);
-            writer.WriteObjectValue<CreateModerationResponseResultCategoryScores>(CategoryScores, options);
+            writer.WriteObjectValue(CategoryScores, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -69,7 +69,7 @@ namespace OpenAI.Models
             CreateModerationResponseResultCategories categories = default;
             CreateModerationResponseResultCategoryScores categoryScores = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flagged"u8))
@@ -89,10 +89,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CreateModerationResponseResult(flagged, categories, categoryScores, serializedAdditionalRawData);
         }
 

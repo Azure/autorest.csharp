@@ -7,8 +7,7 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
-    getAccess,
-    isInternal
+    getAccess
 } from "@azure-tools/typespec-client-generator-core";
 import {
     getDeprecated,
@@ -225,9 +224,7 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op)
-            ? "internal"
-            : getAccess(sdkContext, op),
+        Accessibility: getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
@@ -246,7 +243,7 @@ export function loadOperation(
     } as InputOperation;
 
     function loadOperationParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
@@ -304,7 +301,7 @@ export function loadOperation(
     }
 
     function loadBodyParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         body: ModelProperty | Model
     ): InputParameter {
         const inputType: InputType = getInputType(
@@ -334,7 +331,7 @@ export function loadOperation(
     }
 
     function loadOperationResponse(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
@@ -386,7 +383,7 @@ export function loadOperation(
     }
 
     function loadLongRunningOperation(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         op: HttpOperation
     ): OperationLongRunning | undefined {
         const metadata = getLroMetadata(program, op.operation);

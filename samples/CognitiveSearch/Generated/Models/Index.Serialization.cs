@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -22,7 +23,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
-                writer.WriteObjectValue<Field>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
@@ -31,7 +32,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
-                    writer.WriteObjectValue<ScoringProfile>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +44,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(CorsOptions))
             {
                 writer.WritePropertyName("corsOptions"u8);
-                writer.WriteObjectValue<CorsOptions>(CorsOptions);
+                writer.WriteObjectValue(CorsOptions);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
@@ -51,7 +52,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
-                    writer.WriteObjectValue<Suggester>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +62,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
-                    writer.WriteObjectValue<Analyzer>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +72,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
-                    writer.WriteObjectValue<Tokenizer>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -81,7 +82,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    writer.WriteObjectValue<TokenFilter>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -91,19 +92,19 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteObjectValue<CharFilter>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue<EncryptionKey>(EncryptionKey);
+                writer.WriteObjectValue(EncryptionKey);
             }
             if (Optional.IsDefined(Similarity))
             {
                 writer.WritePropertyName("similarity"u8);
-                writer.WriteObjectValue<Similarity>(Similarity);
+                writer.WriteObjectValue(Similarity);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -285,6 +286,22 @@ namespace CognitiveSearch.Models
                 encryptionKey,
                 similarity,
                 odataEtag);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Index FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeIndex(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

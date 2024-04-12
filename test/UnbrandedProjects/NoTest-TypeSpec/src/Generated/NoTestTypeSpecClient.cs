@@ -63,8 +63,8 @@ namespace NoTestTypeSpec
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await SayHiAsync(headParameter, queryParameter, optionalQuery, context).ConfigureAwait(false);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = await SayHiAsync(headParameter, queryParameter, optionalQuery, options).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -79,8 +79,8 @@ namespace NoTestTypeSpec
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = SayHi(headParameter, queryParameter, optionalQuery, context);
+            RequestOptions options = FromCancellationToken(cancellationToken);
+            ClientResult result = SayHi(headParameter, queryParameter, optionalQuery, options);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -89,7 +89,7 @@ namespace NoTestTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -102,17 +102,17 @@ namespace NoTestTypeSpec
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace NoTestTypeSpec
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
@@ -133,26 +133,22 @@ namespace NoTestTypeSpec
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
+        internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -167,6 +163,10 @@ namespace NoTestTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 

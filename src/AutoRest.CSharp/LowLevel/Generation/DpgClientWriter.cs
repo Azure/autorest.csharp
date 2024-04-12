@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)).Write(_writer);
                 }
-                else if (TypeFactory.IsCollectionType(responseType))
+                else if (responseType.IsCollection)
                 {
                     var firstResponseBodyType = clientMethod.ResponseBodyType!;
                     var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
@@ -459,17 +459,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                     {
-                        writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                        WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                     }
                 }
                 else
                 {
-                    writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                    WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
             writer.Line();
 
-            static void writeStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
+            static void WriteStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
             {
                 var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
                 if (headAsBoolean)
@@ -528,7 +528,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
@@ -724,13 +724,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
-            List<FormattableString> lines = new()
+            var linkForProtocol = Configuration.IsBranded
+                ? "https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md"
+                : "https://aka.ms/azsdk/net/protocol-methods";
+            List <FormattableString> lines = new()
             {
                 $"[Protocol Method] {methodSignature.SummaryText}",
                 $"<list type=\"bullet\">",
                 $"<item>",
                 $"<description>",
-                $"This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
+                $"This <see href={linkForProtocol:L}>protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
                 $"</description>",
                 $"</item>"
             };

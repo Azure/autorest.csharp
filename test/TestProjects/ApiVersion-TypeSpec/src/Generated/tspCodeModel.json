@@ -46,7 +46,7 @@
     }
    ],
    "Namespace": "ApiVersionInTsp",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

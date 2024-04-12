@@ -22,7 +22,7 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue<FakeConfigurationData>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

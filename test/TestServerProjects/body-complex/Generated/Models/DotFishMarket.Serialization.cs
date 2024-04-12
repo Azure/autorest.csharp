@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace body_complex.Models
@@ -29,7 +30,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue<DotSalmon>(SampleSalmon, options);
+                writer.WriteObjectValue(SampleSalmon, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -37,14 +38,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue<DotSalmon>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue<DotFish>(SampleFish, options);
+                writer.WriteObjectValue(SampleFish, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -52,7 +53,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue<DotFish>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -99,7 +100,7 @@ namespace body_complex.Models
             DotFish sampleFish = default;
             IReadOnlyList<DotFish> fishes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sampleSalmon"u8))
@@ -150,10 +151,10 @@ namespace body_complex.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new DotFishMarket(sampleSalmon, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
         }
 
@@ -187,5 +188,21 @@ namespace body_complex.Models
         }
 
         string IPersistableModel<DotFishMarket>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DotFishMarket FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDotFishMarket(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

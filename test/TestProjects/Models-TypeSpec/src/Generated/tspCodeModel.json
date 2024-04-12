@@ -182,8 +182,7 @@
     }
    ],
    "Namespace": "ModelsTypeSpec",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -2645,7 +2644,7 @@
    "BaseModel": {
     "$id": "346",
     "Kind": "Model",
-    "Name": "NumericValuesFacetint32",
+    "Name": "NumericValuesFacet",
     "Namespace": "ModelsTypeSpec",
     "IsNullable": false,
     "Usage": "Input",

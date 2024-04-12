@@ -32,7 +32,7 @@
     }
    ],
    "Namespace": "Client.Structure.Service",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
   }

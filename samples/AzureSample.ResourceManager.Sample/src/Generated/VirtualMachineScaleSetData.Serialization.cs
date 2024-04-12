@@ -35,12 +35,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<AzureSampleResourceManagerSampleSku>(Sku, options);
+                writer.WriteObjectValue(Sku, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue<AzureSampleResourceManagerSamplePlan>(Plan, options);
+                writer.WriteObjectValue(Plan, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -95,17 +95,17 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue<UpgradePolicy>(UpgradePolicy, options);
+                writer.WriteObjectValue(UpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue<AutomaticRepairsPolicy>(AutomaticRepairsPolicy, options);
+                writer.WriteObjectValue(AutomaticRepairsPolicy, options);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetVmProfile>(VirtualMachineProfile, options);
+                writer.WriteObjectValue(VirtualMachineProfile, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -155,12 +155,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue<AdditionalCapabilities>(AdditionalCapabilities, options);
+                writer.WriteObjectValue(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue<ScaleInPolicy>(ScaleInPolicy, options);
+                writer.WriteObjectValue(ScaleInPolicy, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -226,7 +226,7 @@ namespace AzureSample.ResourceManager.Sample
             AdditionalCapabilities additionalCapabilities = default;
             ScaleInPolicy scaleInPolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -445,10 +445,10 @@ namespace AzureSample.ResourceManager.Sample
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineScaleSetData(
                 id,
                 name,

@@ -18,8 +18,7 @@
     }
    ],
    "Namespace": "ParametersCadl",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

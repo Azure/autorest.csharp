@@ -157,8 +157,8 @@ namespace _Type._Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -171,8 +171,8 @@ namespace _Type._Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }

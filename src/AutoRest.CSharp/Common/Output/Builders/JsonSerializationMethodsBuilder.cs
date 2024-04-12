@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.Value.Type) && !TypeFactory.IsReadOnlyMemory(property.Value.Type) && property.IsRequired
+                    var checkPropertyIsInitialized = property.Value.Type.IsCollection && !property.Value.Type.IsReadOnlyMemory && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -248,14 +248,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static EnumerableExpression GetEnumerableExpression(ValueExpression expression, JsonArraySerialization array)
         {
-            if (expression is TypedValueExpression typed && TypeFactory.IsReadOnlyMemory(typed.Type))
+            if (expression is TypedValueExpression typed && typed.Type.IsReadOnlyMemory)
             {
                 expression = typed
                     .NullableStructValue()
                     .Property(nameof(ReadOnlyMemory<byte>.Span), new CSharpType(typeof(ReadOnlySpan<>), typed.Type.Arguments[0]));
             }
 
-            return new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression);
+            return new EnumerableExpression(array.Type.ElementType, expression);
         }
 
         private static MethodBodyStatement SerializeArray(Utf8JsonWriterExpression utf8JsonWriter, JsonArraySerialization arraySerialization, EnumerableExpression array, ModelReaderWriterOptionsExpression? options)
@@ -536,7 +536,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var objAdditionalProperties = serialization.AdditionalProperties;
             if (objAdditionalProperties != null)
             {
-                var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
+                var localVarName = objAdditionalProperties.ShouldExcludeInWireSerialization ? "rawDataDictionary" : "additionalPropertiesDictionary";
+                var dictionary = new VariableReference(objAdditionalProperties.Type, localVarName);
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
@@ -633,7 +634,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
-                if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
+                if (!serializedType.IsCollection || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
@@ -646,7 +647,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariable, New.Instance(TypeFactory.GetPropertyImplementationType(propertyVariable.Type))),
+                        Assign(propertyVariable, New.Instance(propertyVariable.Type.PropertyInitializationType)),
                         Continue
                     };
                 }
@@ -659,7 +660,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var propertyType = jsonPropertySerialization.ValueSerialization?.Type;
             // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
-            if (jsonPropertySerialization.IsRequired && (propertyType is null || !TypeFactory.IsReadOnlyMemory(propertyType)))
+            if (jsonPropertySerialization.IsRequired && (propertyType is null || !propertyType.IsReadOnlyMemory))
             {
                 return EmptyStatement;
             }
@@ -758,8 +759,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsReadOnlyMemory(jsonReadOnlyMemory.Type):
-                    var array = new VariableReference(TypeFactory.GetImplementationType(jsonReadOnlyMemory.Type), "array");
+                case JsonArraySerialization jsonReadOnlyMemory when jsonReadOnlyMemory.Type.IsReadOnlyMemory:
+                    var array = new VariableReference(jsonReadOnlyMemory.Type.InitializationType, "array");
                     var index = new VariableReference(typeof(int), "index");
                     var deserializeReadOnlyMemory = new MethodBodyStatement[]
                     {

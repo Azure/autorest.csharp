@@ -49,8 +49,7 @@
     }
    ],
    "Namespace": "RenameGetList",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -245,7 +244,7 @@
   {
    "$id": "33",
    "Kind": "Model",
-   "Name": "PagedProjectProject",
+   "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
@@ -280,7 +279,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -311,7 +310,7 @@
   {
    "$id": "41",
    "Kind": "Model",
-   "Name": "PagedDeploymentDeployment",
+   "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
@@ -346,7 +345,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },

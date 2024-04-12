@@ -87,9 +87,9 @@ namespace _Type.Property.Nullable.Models
                 return null;
             }
             string requiredProperty = default;
-            IList<BinaryData> nullableProperty = default;
+            IReadOnlyList<BinaryData> nullableProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredProperty"u8))
@@ -121,10 +121,10 @@ namespace _Type.Property.Nullable.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CollectionsByteProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
@@ -171,7 +171,7 @@ namespace _Type.Property.Nullable.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<CollectionsByteProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

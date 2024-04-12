@@ -46,7 +46,7 @@
    ],
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The version of the API.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -178,7 +178,7 @@
   {
    "$id": "23",
    "Kind": "Model",
-   "Name": "PagedUserUser",
+   "Name": "PagedUser",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
    "IsNullable": false,
@@ -213,7 +213,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -245,7 +245,7 @@
   {
    "$id": "31",
    "Kind": "Model",
-   "Name": "UserListResultsUser",
+   "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
    "Usage": "Output",
@@ -286,7 +286,7 @@
   {
    "$id": "36",
    "Kind": "Model",
-   "Name": "PagedFirstItemFirstItem",
+   "Name": "PagedFirstItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
@@ -343,7 +343,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -353,7 +353,7 @@
   {
    "$id": "44",
    "Kind": "Model",
-   "Name": "PagedSecondItemSecondItem",
+   "Name": "PagedSecondItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,
@@ -410,7 +410,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -439,7 +439,7 @@
     {
      "$id": "54",
      "Name": "bodyInput",
-     "SerializedName": "bodyInput",
+     "SerializedName": "",
      "Description": "The body of the input.",
      "Type": {
       "$ref": "28"

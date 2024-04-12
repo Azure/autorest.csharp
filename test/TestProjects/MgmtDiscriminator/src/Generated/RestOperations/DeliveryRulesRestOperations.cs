@@ -211,7 +211,7 @@ namespace MgmtDiscriminator
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<DeliveryRuleData>(data, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(data, new ModelReaderWriterOptions("W"));
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -366,7 +366,7 @@ namespace MgmtDiscriminator
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<DerivedModel>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             _userAgent.Apply(message);

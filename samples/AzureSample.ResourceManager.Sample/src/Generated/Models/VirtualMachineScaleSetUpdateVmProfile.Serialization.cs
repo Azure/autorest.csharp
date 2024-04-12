@@ -29,32 +29,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateOSProfile>(OSProfile, options);
+                writer.WriteObjectValue(OSProfile, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateStorageProfile>(StorageProfile, options);
+                writer.WriteObjectValue(StorageProfile, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateNetworkProfile>(NetworkProfile, options);
+                writer.WriteObjectValue(NetworkProfile, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue<SecurityProfile>(SecurityProfile, options);
+                writer.WriteObjectValue(SecurityProfile, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue<DiagnosticsProfile>(DiagnosticsProfile, options);
+                writer.WriteObjectValue(DiagnosticsProfile, options);
             }
             if (Optional.IsDefined(ExtensionProfile))
             {
                 writer.WritePropertyName("extensionProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetExtensionProfile>(ExtensionProfile, options);
+                writer.WriteObjectValue(ExtensionProfile, options);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -64,12 +64,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                writer.WriteObjectValue<BillingProfile>(BillingProfile, options);
+                writer.WriteObjectValue(BillingProfile, options);
             }
             if (Optional.IsDefined(ScheduledEventsProfile))
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
-                writer.WriteObjectValue<ScheduledEventsProfile>(ScheduledEventsProfile, options);
+                writer.WriteObjectValue(ScheduledEventsProfile, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             BillingProfile billingProfile = default;
             ScheduledEventsProfile scheduledEventsProfile = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osProfile"u8))
@@ -201,10 +201,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineScaleSetUpdateVmProfile(
                 osProfile,
                 storageProfile,

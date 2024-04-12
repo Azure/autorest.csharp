@@ -11,19 +11,11 @@ namespace _Type.Union.Models
 {
     internal static partial class GetResponseProp2Extensions
     {
-        public static float ToSerialSingle(this GetResponseProp2 value) => value switch
+        public static GetResponseProp2 ToGetResponseProp2(this int value)
         {
-            GetResponseProp2._11 => 1.1F,
-            GetResponseProp2._22 => 2.2F,
-            GetResponseProp2._33 => 3.3F,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp2 value.")
-        };
-
-        public static GetResponseProp2 ToGetResponseProp2(this float value)
-        {
-            if (value == 1.1F) return GetResponseProp2._11;
-            if (value == 2.2F) return GetResponseProp2._22;
-            if (value == 3.3F) return GetResponseProp2._33;
+            if (value == 1) return GetResponseProp2._1;
+            if (value == 2) return GetResponseProp2._2;
+            if (value == 3) return GetResponseProp2._3;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp2 value.");
         }
     }

@@ -81,7 +81,7 @@
    ],
    "Namespace": "TypeSpec.Http",
    "Description": "Describes the OAuth2 flow type",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   },
@@ -136,8 +136,7 @@
     }
    ],
    "Namespace": "Pagination",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -279,7 +278,7 @@
   {
    "$id": "36",
    "Kind": "Model",
-   "Name": "PagedDimensionValueListItemDimensionValueListItem",
+   "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
@@ -341,7 +340,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -351,7 +350,7 @@
   {
    "$id": "45",
    "Kind": "Model",
-   "Name": "PagedLedgerEntryLedgerEntry",
+   "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
@@ -386,14 +385,14 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "50",
    "Kind": "Model",
-   "Name": "PagedTextBlocklistTextBlocklist",
+   "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
@@ -464,7 +463,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -474,7 +473,7 @@
   {
    "$id": "60",
    "Kind": "Model",
-   "Name": "PagedTextBlockItemTextBlockItem",
+   "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
@@ -559,7 +558,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -751,7 +750,7 @@
     {
      "$id": "94",
      "Name": "bodyInput",
-     "SerializedName": "bodyInput",
+     "SerializedName": "",
      "Description": "Body parameter",
      "Type": {
       "$ref": "19"

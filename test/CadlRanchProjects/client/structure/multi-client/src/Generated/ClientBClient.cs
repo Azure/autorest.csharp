@@ -251,7 +251,7 @@ namespace Client.Structure.Service.Multiple.Client
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/two", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -266,7 +266,7 @@ namespace Client.Structure.Service.Multiple.Client
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/four", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -281,7 +281,7 @@ namespace Client.Structure.Service.Multiple.Client
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client.ToString(), true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/six", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

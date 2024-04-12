@@ -1994,7 +1994,7 @@
      "Type": {
       "$id": "272",
       "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
+      "Name": "DateTimeUnix",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -2177,7 +2177,7 @@
       "$id": "297",
       "Kind": "Model",
       "Name": "FineTuningJobError",
-      "Namespace": "OpenAI",
+      "Namespace": "",
       "IsNullable": true,
       "Usage": "Output",
       "Properties": [
@@ -2841,7 +2841,7 @@
           "$id": "388",
           "Kind": "Model",
           "Name": "CreateCompletionResponseChoiceLogprobs",
-          "Namespace": "OpenAI",
+          "Namespace": "",
           "IsNullable": true,
           "Usage": "Output",
           "Properties": [

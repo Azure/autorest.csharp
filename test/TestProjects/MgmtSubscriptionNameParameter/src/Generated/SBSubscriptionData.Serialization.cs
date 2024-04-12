@@ -83,7 +83,7 @@ namespace MgmtSubscriptionNameParameter
             if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
-                writer.WriteObjectValue<SBClientAffineProperties>(ClientAffineProperties);
+                writer.WriteObjectValue(ClientAffineProperties);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

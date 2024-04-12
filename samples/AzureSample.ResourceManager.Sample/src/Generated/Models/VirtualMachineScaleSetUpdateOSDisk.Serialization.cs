@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Image, options);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -106,7 +106,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             IList<string> vhdContainers = default;
             VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("caching"u8))
@@ -170,10 +170,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineScaleSetUpdateOSDisk(
                 caching,
                 writeAcceleratorEnabled,

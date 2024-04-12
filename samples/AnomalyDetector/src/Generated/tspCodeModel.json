@@ -355,7 +355,7 @@
     }
    ],
    "Namespace": "AnomalyDetector",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

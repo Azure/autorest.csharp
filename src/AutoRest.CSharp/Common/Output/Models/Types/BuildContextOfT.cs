@@ -35,8 +35,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(codeModel, sourceInputModel)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
+            : base(codeModel, sourceInputModel, schemaUsageProvider)
         {
         }
 

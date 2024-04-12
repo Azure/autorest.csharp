@@ -3,11 +3,9 @@
 
 using System.Linq;
 using System.Text.Json;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
@@ -25,7 +23,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression FallBackToChangeTrackingCollection(TypedValueExpression collection, CSharpType? paramType)
             {
-                if (!TypeFactory.IsCollectionType(collection.Type) || TypeFactory.IsReadOnlyMemory(collection.Type))
+                if (!collection.Type.IsCollection || collection.Type.IsReadOnlyMemory)
                 {
                     return collection;
                 }
@@ -51,14 +49,14 @@ namespace AutoRest.CSharp.Common.Output.Models
                     }
                 }
 
-                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                return serialization.Value.Type is { IsCollection: true, IsReadOnlyMemory: false }
                     ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
                     : new IfStatement(OptionalTypeProvider.Instance.IsDefined(serialization.Value)) { statement };
             }
 
             public static MethodBodyStatement WrapInIsNotEmpty(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                return serialization.Value.Type is { IsCollection: true, IsReadOnlyMemory: false }
                     ? new IfStatement(new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value))) { statement }
                     : statement;
             }
