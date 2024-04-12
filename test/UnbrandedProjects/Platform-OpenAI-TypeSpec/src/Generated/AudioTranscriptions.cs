@@ -46,7 +46,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            using BinaryContent content = audio.ToBinaryBody();
+            using BinaryContent content = audio.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -58,7 +58,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            using BinaryContent content = audio.ToBinaryBody();
+            using BinaryContent content = audio.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

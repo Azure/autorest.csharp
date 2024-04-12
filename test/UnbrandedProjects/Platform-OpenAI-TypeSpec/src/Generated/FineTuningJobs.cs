@@ -53,7 +53,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(job, nameof(job));
 
-            using BinaryContent content = job.ToBinaryBody();
+            using BinaryContent content = job.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -72,7 +72,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(job, nameof(job));
 
-            using BinaryContent content = job.ToBinaryBody();
+            using BinaryContent content = job.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

@@ -108,7 +108,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryBody();
+            using BinaryContent content = file.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -120,7 +120,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryBody();
+            using BinaryContent content = file.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

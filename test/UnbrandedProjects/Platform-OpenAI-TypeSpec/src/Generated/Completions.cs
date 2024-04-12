@@ -45,7 +45,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
-            using BinaryContent content = createCompletionRequest.ToBinaryBody();
+            using BinaryContent content = createCompletionRequest.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -56,7 +56,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
-            using BinaryContent content = createCompletionRequest.ToBinaryBody();
+            using BinaryContent content = createCompletionRequest.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

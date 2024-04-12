@@ -46,7 +46,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            using BinaryContent content = edit.ToBinaryBody();
+            using BinaryContent content = edit.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -58,7 +58,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
-            using BinaryContent content = edit.ToBinaryBody();
+            using BinaryContent content = edit.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

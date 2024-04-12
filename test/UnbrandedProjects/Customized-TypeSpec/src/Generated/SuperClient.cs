@@ -114,7 +114,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = await HelloAgainAsync(p2, p1, content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -131,7 +131,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = HelloAgain(p2, p1, content, null);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -327,7 +327,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CreateLiteralAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -339,7 +339,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = CreateLiteral(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -619,7 +619,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = await AnonymousBodyAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -631,7 +631,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = AnonymousBody(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -699,7 +699,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
-            using BinaryContent content = superFriend.ToBinaryBody();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -711,7 +711,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
-            using BinaryContent content = superFriend.ToBinaryBody();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -818,7 +818,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
             return result;
         }
@@ -831,7 +831,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = StringFormat(subscriptionId, content, null);
             return result;
         }
@@ -901,7 +901,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = await ProjectedNameModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -913,7 +913,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = ProjectedNameModel(content, null);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1081,7 +1081,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await InternalProtocolAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1093,7 +1093,7 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = InternalProtocol(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

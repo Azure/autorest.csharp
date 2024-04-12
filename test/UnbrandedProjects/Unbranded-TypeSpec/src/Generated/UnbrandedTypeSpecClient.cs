@@ -115,7 +115,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = await HelloAgainAsync(p2, p1, content, null).ConfigureAwait(false);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -132,7 +132,7 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            using BinaryContent content = action.ToBinaryBody();
+            using BinaryContent content = action.ToBinaryContent();
             ClientResult result = HelloAgain(p2, p1, content, null);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -328,7 +328,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CreateLiteralAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -340,7 +340,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = CreateLiteral(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -620,7 +620,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = await AnonymousBodyAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -632,7 +632,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            using BinaryContent content = thing.ToBinaryBody();
+            using BinaryContent content = thing.ToBinaryContent();
             ClientResult result = AnonymousBody(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -700,7 +700,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            using BinaryContent content = friend.ToBinaryBody();
+            using BinaryContent content = friend.ToBinaryContent();
             ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -712,7 +712,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            using BinaryContent content = friend.ToBinaryBody();
+            using BinaryContent content = friend.ToBinaryContent();
             ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -819,7 +819,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
             return result;
         }
@@ -832,7 +832,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = StringFormat(subscriptionId, content, null);
             return result;
         }
@@ -902,7 +902,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = await ProjectedNameModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -914,7 +914,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
-            using BinaryContent content = projectedModel.ToBinaryBody();
+            using BinaryContent content = projectedModel.ToBinaryContent();
             ClientResult result = ProjectedNameModel(content, null);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1090,7 +1090,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await InternalProtocolAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -1102,7 +1102,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = body.ToBinaryBody();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = InternalProtocol(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
