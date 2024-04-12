@@ -34,9 +34,27 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _typeFormattersProvider = new TypeFormattersProvider(this);
+
+            _wireOptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(ModelReaderWriterOptions),
+                name: "WireOptions")
+            {
+                InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W"))
+            };
         }
 
+        private readonly FieldDeclaration _wireOptionsField;
+
+        private ModelReaderWriterOptionsExpression? _wireOptions;
+        public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(_wireOptionsField);
+
         protected override string DefaultName => "ModelSerializationExtensions";
+
+        protected override IEnumerable<FieldDeclaration> BuildFields()
+        {
+            yield return _wireOptionsField;
+        }
 
         protected override IEnumerable<Method> BuildMethods()
         {
