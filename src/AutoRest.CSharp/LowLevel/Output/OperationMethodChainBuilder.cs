@@ -594,20 +594,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public void AddRequestContext()
         {
-            if (Configuration.IsBranded)
-            {
-                _orderedParameters.Add(new ParameterChain(
-                    KnownParameters.CancellationTokenParameter,
-                    ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
-                    KnownParameters.RequestContext));
-            }
-            else
-            {
-                _orderedParameters.Add(new ParameterChain(
-                    null,
-                    KnownParameters.RequestContext,
-                    KnownParameters.RequestContext));
-            }
+            _orderedParameters.Add(new ParameterChain(
+                Configuration.IsBranded ? KnownParameters.CancellationTokenParameter : null, // in non-azure libraries, convenience method no longer takes a `CancellationToken` parameter.
+                ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
+                KnownParameters.RequestContext));
         }
 
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
