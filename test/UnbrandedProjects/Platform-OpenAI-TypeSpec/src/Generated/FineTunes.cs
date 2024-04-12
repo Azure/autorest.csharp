@@ -54,7 +54,7 @@ namespace OpenAI
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -73,7 +73,7 @@ namespace OpenAI
             Argument.AssertNotNull(fineTune, nameof(fineTune));
 
             using BinaryContent content = fineTune.ToBinaryBody();
-            ClientResult result = Create(content);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -147,7 +147,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync()
         {
-            ClientResult result = await GetFineTunesAsync().ConfigureAwait(false);
+            ClientResult result = await GetFineTunesAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -155,7 +155,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTunesResponse> GetFineTunes()
         {
-            ClientResult result = GetFineTunes();
+            ClientResult result = GetFineTunes(null);
             return ClientResult.FromValue(ListFineTunesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -222,7 +222,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = await RetrieveAsync(fineTuneId).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(fineTuneId, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -239,7 +239,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = Retrieve(fineTuneId);
+            ClientResult result = Retrieve(fineTuneId, null);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -325,7 +325,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = await GetEventsAsync(fineTuneId, stream).ConfigureAwait(false);
+            ClientResult result = await GetEventsAsync(fineTuneId, stream, null).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -347,7 +347,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = GetEvents(fineTuneId, stream);
+            ClientResult result = GetEvents(fineTuneId, stream, null);
             return ClientResult.FromValue(ListFineTuneEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -438,7 +438,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = await CancelAsync(fineTuneId).ConfigureAwait(false);
+            ClientResult result = await CancelAsync(fineTuneId, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -451,7 +451,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
-            ClientResult result = Cancel(fineTuneId);
+            ClientResult result = Cancel(fineTuneId, null);
             return ClientResult.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

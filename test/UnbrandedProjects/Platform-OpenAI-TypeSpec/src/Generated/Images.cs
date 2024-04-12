@@ -47,7 +47,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -59,7 +59,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = Create(content);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -127,7 +127,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateEditAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateEditAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -139,7 +139,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateEdit(content);
+            ClientResult result = CreateEdit(content, null);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -207,7 +207,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = await CreateVariationAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateVariationAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -219,7 +219,7 @@ namespace OpenAI
             Argument.AssertNotNull(image, nameof(image));
 
             using BinaryContent content = image.ToBinaryBody();
-            ClientResult result = CreateVariation(content);
+            ClientResult result = CreateVariation(content, null);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

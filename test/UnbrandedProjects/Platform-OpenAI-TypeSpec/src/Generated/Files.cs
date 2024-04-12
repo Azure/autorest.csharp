@@ -42,14 +42,14 @@ namespace OpenAI
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync()
         {
-            ClientResult result = await GetFilesAsync().ConfigureAwait(false);
+            ClientResult result = await GetFilesAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         public virtual ClientResult<ListFilesResponse> GetFiles()
         {
-            ClientResult result = GetFiles();
+            ClientResult result = GetFiles(null);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -109,7 +109,7 @@ namespace OpenAI
             Argument.AssertNotNull(file, nameof(file));
 
             using BinaryContent content = file.ToBinaryBody();
-            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -121,7 +121,7 @@ namespace OpenAI
             Argument.AssertNotNull(file, nameof(file));
 
             using BinaryContent content = file.ToBinaryBody();
-            ClientResult result = Create(content);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -189,7 +189,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = await RetrieveAsync(fileId).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -201,7 +201,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = Retrieve(fileId);
+            ClientResult result = Retrieve(fileId, null);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -271,7 +271,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = await DeleteAsync(fileId).ConfigureAwait(false);
+            ClientResult result = await DeleteAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -283,7 +283,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = Delete(fileId);
+            ClientResult result = Delete(fileId, null);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -353,7 +353,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = await DownloadAsync(fileId).ConfigureAwait(false);
+            ClientResult result = await DownloadAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
@@ -365,7 +365,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            ClientResult result = Download(fileId);
+            ClientResult result = Download(fileId, null);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 

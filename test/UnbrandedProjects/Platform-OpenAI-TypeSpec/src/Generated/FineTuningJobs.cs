@@ -54,7 +54,7 @@ namespace OpenAI
             Argument.AssertNotNull(job, nameof(job));
 
             using BinaryContent content = job.ToBinaryBody();
-            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -73,7 +73,7 @@ namespace OpenAI
             Argument.AssertNotNull(job, nameof(job));
 
             using BinaryContent content = job.ToBinaryBody();
-            ClientResult result = Create(content);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -147,7 +147,7 @@ namespace OpenAI
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         public virtual async Task<ClientResult<ListPaginatedFineTuningJobsResponse>> GetPaginatedsAsync(string after = null, long? limit = null)
         {
-            ClientResult result = await GetPaginatedsAsync(after, limit).ConfigureAwait(false);
+            ClientResult result = await GetPaginatedsAsync(after, limit, null).ConfigureAwait(false);
             return ClientResult.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -155,7 +155,7 @@ namespace OpenAI
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         public virtual ClientResult<ListPaginatedFineTuningJobsResponse> GetPaginateds(string after = null, long? limit = null)
         {
-            ClientResult result = GetPaginateds(after, limit);
+            ClientResult result = GetPaginateds(after, limit, null);
             return ClientResult.FromValue(ListPaginatedFineTuningJobsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -223,7 +223,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = await RetrieveAsync(fineTuningJobId).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(fineTuningJobId, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -239,7 +239,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = Retrieve(fineTuningJobId);
+            ClientResult result = Retrieve(fineTuningJobId, null);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -315,7 +315,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = await GetEventsAsync(fineTuningJobId, after, limit).ConfigureAwait(false);
+            ClientResult result = await GetEventsAsync(fineTuningJobId, after, limit, null).ConfigureAwait(false);
             return ClientResult.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -329,7 +329,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = GetEvents(fineTuningJobId, after, limit);
+            ClientResult result = GetEvents(fineTuningJobId, after, limit, null);
             return ClientResult.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -403,7 +403,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = await CancelAsync(fineTuningJobId).ConfigureAwait(false);
+            ClientResult result = await CancelAsync(fineTuningJobId, null).ConfigureAwait(false);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -415,7 +415,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
-            ClientResult result = Cancel(fineTuningJobId);
+            ClientResult result = Cancel(fineTuningJobId, null);
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

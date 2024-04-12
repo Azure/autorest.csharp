@@ -45,7 +45,7 @@ namespace OpenAI
         /// </summary>
         public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync()
         {
-            ClientResult result = await GetModelsAsync().ConfigureAwait(false);
+            ClientResult result = await GetModelsAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -55,7 +55,7 @@ namespace OpenAI
         /// </summary>
         public virtual ClientResult<ListModelsResponse> GetModels()
         {
-            ClientResult result = GetModels();
+            ClientResult result = GetModels(null);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -120,7 +120,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            ClientResult result = await RetrieveAsync(model).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -135,7 +135,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            ClientResult result = Retrieve(model);
+            ClientResult result = Retrieve(model, null);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -207,7 +207,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            ClientResult result = await DeleteAsync(model).ConfigureAwait(false);
+            ClientResult result = await DeleteAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -219,7 +219,7 @@ namespace OpenAI
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            ClientResult result = Delete(model);
+            ClientResult result = Delete(model, null);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

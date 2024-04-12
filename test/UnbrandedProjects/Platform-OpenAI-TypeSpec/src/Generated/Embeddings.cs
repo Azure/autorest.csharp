@@ -47,7 +47,7 @@ namespace OpenAI
             Argument.AssertNotNull(embedding, nameof(embedding));
 
             using BinaryContent content = embedding.ToBinaryBody();
-            ClientResult result = await CreateAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -59,7 +59,7 @@ namespace OpenAI
             Argument.AssertNotNull(embedding, nameof(embedding));
 
             using BinaryContent content = embedding.ToBinaryBody();
-            ClientResult result = Create(content);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

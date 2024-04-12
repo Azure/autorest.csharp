@@ -115,7 +115,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(action, nameof(action));
 
             using BinaryContent content = action.ToBinaryBody();
-            ClientResult result = await HelloAgainAsync(p2, p1, content).ConfigureAwait(false);
+            ClientResult result = await HelloAgainAsync(p2, p1, content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -132,7 +132,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(action, nameof(action));
 
             using BinaryContent content = action.ToBinaryBody();
-            ClientResult result = HelloAgain(p2, p1, content);
+            ClientResult result = HelloAgain(p2, p1, content, null);
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -261,14 +261,14 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Return hi in demo2. </summary>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
-            ClientResult result = await HelloDemo2Async().ConfigureAwait(false);
+            ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi in demo2. </summary>
         public virtual ClientResult<Thing> HelloDemo2()
         {
-            ClientResult result = HelloDemo2();
+            ClientResult result = HelloDemo2(null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -328,7 +328,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await CreateLiteralAsync(content).ConfigureAwait(false);
+            ClientResult result = await CreateLiteralAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -340,7 +340,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = CreateLiteral(content);
+            ClientResult result = CreateLiteral(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -403,14 +403,14 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Send literal parameters. </summary>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
-            ClientResult result = await HelloLiteralAsync().ConfigureAwait(false);
+            ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Send literal parameters. </summary>
         public virtual ClientResult<Thing> HelloLiteral()
         {
-            ClientResult result = HelloLiteral();
+            ClientResult result = HelloLiteral(null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -466,7 +466,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
-            ClientResult result = await TopActionAsync(action).ConfigureAwait(false);
+            ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -474,7 +474,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
-            ClientResult result = TopAction(action);
+            ClientResult result = TopAction(action, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -620,7 +620,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(thing, nameof(thing));
 
             using BinaryContent content = thing.ToBinaryBody();
-            ClientResult result = await AnonymousBodyAsync(content).ConfigureAwait(false);
+            ClientResult result = await AnonymousBodyAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -632,7 +632,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(thing, nameof(thing));
 
             using BinaryContent content = thing.ToBinaryBody();
-            ClientResult result = AnonymousBody(content);
+            ClientResult result = AnonymousBody(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -700,7 +700,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             using BinaryContent content = superFriend.ToBinaryBody();
-            ClientResult result = await FriendlyModelAsync(content).ConfigureAwait(false);
+            ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -712,7 +712,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(superFriend, nameof(superFriend));
 
             using BinaryContent content = superFriend.ToBinaryBody();
-            ClientResult result = FriendlyModel(content);
+            ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -819,7 +819,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await StringFormatAsync(subscriptionId, content).ConfigureAwait(false);
+            ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
             return result;
         }
 
@@ -832,7 +832,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = StringFormat(subscriptionId, content);
+            ClientResult result = StringFormat(subscriptionId, content, null);
             return result;
         }
 
@@ -902,7 +902,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             using BinaryContent content = projectedModel.ToBinaryBody();
-            ClientResult result = await ProjectedNameModelAsync(content).ConfigureAwait(false);
+            ClientResult result = await ProjectedNameModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -914,7 +914,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             using BinaryContent content = projectedModel.ToBinaryBody();
-            ClientResult result = ProjectedNameModel(content);
+            ClientResult result = ProjectedNameModel(content, null);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -977,14 +977,14 @@ namespace CustomizedTypeSpec.Models
         /// <summary> return anonymous model. </summary>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
-            ClientResult result = await ReturnsAnonymousModelAsync().ConfigureAwait(false);
+            ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
-            ClientResult result = ReturnsAnonymousModel();
+            ClientResult result = ReturnsAnonymousModel(null);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1082,7 +1082,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = await InternalProtocolAsync(content).ConfigureAwait(false);
+            ClientResult result = await InternalProtocolAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1094,7 +1094,7 @@ namespace CustomizedTypeSpec.Models
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryBody();
-            ClientResult result = InternalProtocol(content);
+            ClientResult result = InternalProtocol(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1147,14 +1147,14 @@ namespace CustomizedTypeSpec.Models
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
-            ClientResult result = await StillConvenientAsync().ConfigureAwait(false);
+            ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         public virtual ClientResult StillConvenientValue()
         {
-            ClientResult result = StillConvenient();
+            ClientResult result = StillConvenient(null);
             return result;
         }
 
