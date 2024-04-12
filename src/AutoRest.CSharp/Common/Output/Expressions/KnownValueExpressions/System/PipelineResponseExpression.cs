@@ -11,5 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
         public BinaryDataExpression Content => new(Property(nameof(PipelineResponse.Content)));
 
         public StreamExpression ContentStream => new(Property(nameof(PipelineResponse.ContentStream)));
+
+        public BoolExpression IsError => new(Property(nameof(PipelineResponse.IsError)));
     }
 }

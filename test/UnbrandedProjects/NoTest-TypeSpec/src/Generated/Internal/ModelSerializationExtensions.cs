@@ -257,7 +257,7 @@ namespace NoTestTypeSpec
             public static string ToString(DateTime value, string format) => value.Kind switch
             {
                 DateTimeKind.Utc => ToString((DateTimeOffset)value, format),
-                _ => throw new NotSupportedException($"DateTime {value} has a Kind of {value.Kind}. Azure SDK requires it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.")
+                _ => throw new NotSupportedException($"DateTime {value} has a Kind of {value.Kind}. Generated clients require it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.")
             };
 
             public static string ToString(DateTimeOffset value, string format) => format switch
