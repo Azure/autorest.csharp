@@ -48,7 +48,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            using BinaryContent content = audio.ToBinaryBody();
+            using BinaryContent content = audio.ToBinaryContent();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
@@ -62,7 +62,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(audio, nameof(audio));
 
-            using BinaryContent content = audio.ToBinaryBody();
+            using BinaryContent content = audio.ToBinaryContent();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());

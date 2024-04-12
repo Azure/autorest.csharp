@@ -48,7 +48,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using BinaryContent content0 = content.ToBinaryBody();
+            using BinaryContent content0 = content.ToBinaryContent();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content0, options).ConfigureAwait(false);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
@@ -62,7 +62,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using BinaryContent content0 = content.ToBinaryBody();
+            using BinaryContent content0 = content.ToBinaryContent();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content0, options);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
