@@ -128,7 +128,7 @@ namespace ConvenienceInCadl.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
             return RequestContent.Create(binaryData);
         }
     }
