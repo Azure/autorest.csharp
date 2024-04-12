@@ -5,10 +5,8 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -32,11 +30,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
 
         private Parameter _pipelineParam;
         private Parameter _messageParam;
-        private Parameter _requestContextParam;
-        private ParameterReference _pipeline;
-        private ParameterReference _message;
-        private ParameterReference _requestContext;
-        private MemberExpression _messageResponse;
+        private Parameter _requestOptionsParam;
+        private ClientPipelineExpression _pipeline;
+        private PipelineMessageExpression _message;
+        private RequestOptionsExpression _options;
 
         private ClientPipelineExtensionsProvider()
             : base(Configuration.HelperNamespace, null)
@@ -44,11 +41,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _pipelineParam = new Parameter("pipeline", null, typeof(ClientPipeline), null, ValidationType.None, null);
             _messageParam = new Parameter("message", null, typeof(PipelineMessage), null, ValidationType.None, null);
-            _requestContextParam = new Parameter("requestContext", null, typeof(RequestOptions), null, ValidationType.None, null);
-            _pipeline = new ParameterReference(_pipelineParam);
-            _message = new ParameterReference(_messageParam);
-            _requestContext = new ParameterReference(_requestContextParam);
-            _messageResponse = new MemberExpression(_message, "Response");
+            _requestOptionsParam = new Parameter("options", null, typeof(RequestOptions), null, ValidationType.None, null);
+            _pipeline = new ClientPipelineExpression(_pipelineParam);
+            _message = new PipelineMessageExpression(_messageParam);
+            _options = new RequestOptionsExpression(_requestOptionsParam);
         }
 
         protected override string DefaultName => "ClientPipelineExtensions";
@@ -68,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var response = new PipelineResponseExpression(responseVariable);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Assign(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessage, new[] { _message, _requestContext }, false)),
+                Assign(new DeclarationExpression(responseVariable, false), _pipeline.ProcessMessage(_message, _options, false)),
                 GetProcessHeadAsBoolMessageBody(response)
             });
         }
@@ -80,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var response = new PipelineResponseExpression(responseVariable);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Assign(new DeclarationExpression(responseVariable, false), _pipeline.Invoke(_processMessageAsync, new[] { _message, _requestContext }, true)),
+                Assign(new DeclarationExpression(responseVariable, false), _pipeline.ProcessMessage(_message, _options, true)),
                 GetProcessHeadAsBoolMessageBody(response)
             });
         }
@@ -121,42 +117,29 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 modifiers,
                 isAsync ? typeof(ValueTask<ClientResult<bool>>) : typeof(ClientResult<bool>),
                 null,
-                new[] { _pipelineParam, _messageParam, _requestContextParam });
+                new[] { _pipelineParam, _messageParam, _requestOptionsParam });
         }
 
         private Method BuildProcessMessage()
         {
-            MethodSignature signature = GetProcessMessageSignature(false, out var cancellationTokenParam);
-            var cancellationToken = new ParameterReference(cancellationTokenParam);
+            MethodSignature signature = GetProcessMessageSignature(false);
+
+            var clientErrorNoThrow = FrameworkEnumValue(ClientErrorBehaviors.NoThrow);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.Send), new[]{ _message }, false),
-                GetProcessMessageBody()
+                new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.Send), new[] { _message }, false),
+                EmptyLine,
+                new IfStatement(And(_message.Response.IsError, NotEqual(new BinaryOperatorExpression("&", _options.Property("ErrorOptions", true), clientErrorNoThrow), clientErrorNoThrow)))
+                {
+                    Throw(New.Instance(typeof(ClientResultException), _message.Response))
+                },
+                EmptyLine,
+                Return(_message.Response)
             });
         }
 
-        private MethodBodyStatement GetProcessMessageBody()
+        private MethodSignature GetProcessMessageSignature(bool isAsync)
         {
-            return new MethodBodyStatement[]
-            {
-                EmptyLine,
-                new IfStatement(Equal(_messageResponse, Null))
-                {
-                    Throw(New.InvalidOperationException(Literal("Failed to receive Result.")))
-                },
-                EmptyLine,
-                new IfStatement(Not(new BoolExpression(_messageResponse.Property("IsError"))).Or(Equal(_requestContext.Property("ErrorOptions", true), FrameworkEnumValue(ClientErrorBehaviors.NoThrow))))
-                {
-                    Return(_messageResponse)
-                },
-                EmptyLine,
-                Throw(new NewInstanceExpression(typeof(ClientResultException), new[] { _messageResponse }))
-            };
-        }
-
-        private MethodSignature GetProcessMessageSignature(bool isAsync, out Parameter cancellationTokenParam)
-        {
-            cancellationTokenParam = new Parameter("cancellationToken", null, typeof(CancellationToken), Constant.Default(typeof(CancellationToken)), ValidationType.None, null);
             var modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
             if (isAsync)
             {
@@ -169,17 +152,24 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 modifiers,
                 isAsync ? typeof(ValueTask<PipelineResponse>) : typeof(PipelineResponse),
                 null,
-                new[] { _pipelineParam, _messageParam, _requestContextParam, cancellationTokenParam });
+                new[] { _pipelineParam, _messageParam, _requestOptionsParam });
         }
 
         private Method BuildProcessMessageAsync()
         {
-            MethodSignature signature = GetProcessMessageSignature(true, out var cancellationTokenParam);
-            var cancellationToken = new ParameterReference(cancellationTokenParam);
+            MethodSignature signature = GetProcessMessageSignature(true);
+
+            var clientErrorNoThrow = FrameworkEnumValue(ClientErrorBehaviors.NoThrow);
             return new Method(signature, new MethodBodyStatement[]
             {
                 new InvokeInstanceMethodStatement(_pipeline, nameof(ClientPipeline.SendAsync), new[]{ _message }, true),
-                GetProcessMessageBody()
+                EmptyLine,
+                new IfStatement(And(_message.Response.IsError, NotEqual(new BinaryOperatorExpression("&", _options.Property("ErrorOptions", true), clientErrorNoThrow), clientErrorNoThrow)))
+                {
+                    Throw(new InvokeStaticMethodExpression(typeof(ClientResultException), nameof(ClientResultException.CreateAsync), new[] { _message.Response }, CallAsAsync: true))
+                },
+                EmptyLine,
+                Return(_message.Response)
             });
         }
 
