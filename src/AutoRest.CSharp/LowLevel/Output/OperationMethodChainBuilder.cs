@@ -97,6 +97,7 @@ namespace AutoRest.CSharp.Output.Models
                 : Array.Empty<CSharpAttribute>();
 
             var isRequestContextOptional = _orderedParameters.Any(p => p.Protocol == KnownParameters.RequestContext);
+            // because request context is always the last parameter, when request context is changed to required by some reason, all parameters before it (which means all parameters) should be required
             var protocolMethodParameters = isRequestContextOptional
                 ? _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray()
                 : _orderedParameters.Select(p => p.Protocol?.ToRequired()).WhereNotNull().ToArray();
