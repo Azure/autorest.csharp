@@ -16,7 +16,7 @@ namespace AuthoringTypeSpec.Models
 {
     public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IJsonModel<SwapDeploymentsJob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SwapDeploymentsJob>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SwapDeploymentsJob>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SwapDeploymentsJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -92,7 +92,7 @@ namespace AuthoringTypeSpec.Models
 
         internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -216,7 +216,7 @@ namespace AuthoringTypeSpec.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -14,6 +14,8 @@ namespace OpenAI
 {
     internal static class ModelSerializationExtensions
     {
+        internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
+
         public static object GetObject(this JsonElement element)
         {
             switch (element.ValueKind)
@@ -169,7 +171,7 @@ namespace OpenAI
                     writer.WriteNullValue();
                     break;
                 case IJsonModel<T> jsonModel:
-                    jsonModel.Write(writer, options ?? new ModelReaderWriterOptions("W"));
+                    jsonModel.Write(writer, options ?? WireOptions);
                     break;
                 case byte[] bytes:
                     writer.WriteBase64StringValue(bytes);
