@@ -382,7 +382,7 @@ namespace OpenAI
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions options)
+        public virtual async Task<ClientResult> GetEventsAsync(string fineTuneId, bool? stream = null, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
@@ -421,7 +421,7 @@ namespace OpenAI
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         [Obsolete("deprecated")]
-        public virtual ClientResult GetEvents(string fineTuneId, bool? stream, RequestOptions options)
+        public virtual ClientResult GetEvents(string fineTuneId, bool? stream = null, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
 
