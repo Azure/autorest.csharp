@@ -135,8 +135,8 @@ namespace OpenAI.Models
             return DeserializeCompletionUsage(document.RootElement);
         }
 
-        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
-        internal virtual BinaryContent ToBinaryContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual BinaryContent ToBinaryBody()
         {
             return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }

@@ -114,7 +114,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryContent();
+            using BinaryContent content = file.ToBinaryBody();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
@@ -128,7 +128,7 @@ namespace OpenAI
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryContent();
+            using BinaryContent content = file.ToBinaryBody();
             RequestOptions options = FromCancellationToken(cancellationToken);
             ClientResult result = Create(content, options);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());

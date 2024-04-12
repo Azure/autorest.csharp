@@ -4,7 +4,6 @@
 using System;
 using System.ClientModel;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,9 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Utf8JsonRequestContentProvider() : base(Configuration.HelperNamespace, null)
         {
-            // non-azure libraries do not need this type
-            Debug.Assert(Configuration.IsBranded);
-
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             DefaultName = Configuration.IsBranded ? "Utf8JsonRequestContent" : "Utf8JsonRequestBody";
             Inherits = Configuration.ApiTypes.RequestContentType;

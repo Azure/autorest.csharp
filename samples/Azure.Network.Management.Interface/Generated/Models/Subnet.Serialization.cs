@@ -371,7 +371,7 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeSubnet(document.RootElement);
         }
 
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
