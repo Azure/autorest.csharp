@@ -15,8 +15,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         public abstract RestOperationsSnippets RestOperations { get; }
         public abstract XElementSnippets XElement { get; }
         public abstract XmlWriterSnippets XmlWriter { get; }
-        public virtual MultipartFormDataRequestContentSnippets MultipartFormData { get; } = new MultipartFormDataRequestContentSnippets();
-        public virtual MultipartFormDataBinaryContentSnippets MultipartFormDataBinaryContent { get; } = new MultipartFormDataBinaryContentSnippets();
 
         protected static InvokeStaticMethodExpression InvokeExtension(CSharpType extensionType, ValueExpression instance, string methodName)
             => new(extensionType, methodName, new[] { instance }, CallAsAsync: false, CallAsExtension: true);

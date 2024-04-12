@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types.System;
@@ -27,17 +28,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
-            yield return FormDataItemProvider.Instance;
             if (Configuration.IsBranded)
             {
-                yield return MultipartFormDataRequestContentExtensionsProvider.Instance;
+                yield return MultipartFormDataRequestContentProvider.Instance;
             }
             if (!Configuration.IsBranded)
             {
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
-                yield return MultipartFormDataBinaryContentExtensionsProvider.Instance;
             }
             if (Configuration.EnableBicepSerialization)
             {

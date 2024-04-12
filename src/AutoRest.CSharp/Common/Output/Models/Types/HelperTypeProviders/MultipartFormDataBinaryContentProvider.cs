@@ -2,11 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,31 +13,26 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
-using Humanizer;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using MultipartFormDataContent = System.Net.Http.MultipartFormDataContent;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
 {
-    internal class MultipartFormDataRequestContentProvider: ExpressionTypeProvider
+    internal class MultipartFormDataBinaryContentProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<MultipartFormDataRequestContentProvider> _instance = new(() => new MultipartFormDataRequestContentProvider());
+        private static readonly Lazy<MultipartFormDataBinaryContentProvider> _instance = new(() => new MultipartFormDataBinaryContentProvider());
         private class FormDataItemTemplate<T> { }
-        public static MultipartFormDataRequestContentProvider Instance => _instance.Value;
-        private MultipartFormDataRequestContentProvider() : base(Configuration.HelperNamespace, null)
+        public static MultipartFormDataBinaryContentProvider Instance => _instance.Value;
+        private MultipartFormDataBinaryContentProvider() : base(Configuration.HelperNamespace, null)
         {
             Inherits = Configuration.ApiTypes.RequestContentType;
             _multipartContentField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly,
                 type: typeof(MultipartFormDataContent),
-                name: "_multipartContent");
+                name: "_content");
             _randomField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(Random),
@@ -48,10 +41,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(char[]),
                 name: "_boundaryValues",
-                initializationValue: Literal("0123456789=ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz").ToCharArray(),
+                initializationValue: Snippets.Literal("0123456789=ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz").ToCharArray(),
                 serializationFormat: SerializationFormat.Default);
-            ValueExpression contentTypeHeaderExpression = new UnaryOperatorExpression("!", new MultipartFormDataContentExpression(_multipartContentField).Property("Headers").Property("ContentType"), true);
-            ValueExpression contentTypeHeaderValueExpression = new InvokeInstanceMethodExpression(contentTypeHeaderExpression, nameof(MediaTypeHeaderValue.ToString), Array.Empty<ValueExpression>(), null, false);
             _contentTypeProperty = new PropertyDeclaration(
                 description: null,
                 modifiers: MethodSignatureModifiers.Public,
@@ -60,8 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 propertyBody: new MethodPropertyBody(new MethodBodyStatement[]
                 {
                     /*TODO add parameter validation*/
-                    //ValueExpression ContentDispositionHeaderExpression = ((ValueExpression)_multipartContentField).Property("Headers").Property("ContentType");
-                    Return(contentTypeHeaderValueExpression)
+                    Return(new FormattableStringExpression($"_multipartContent.Headers.ContentType!.ToString()"))
                 }));
             _httpContentProperty = new PropertyDeclaration(
                 description: null,
@@ -81,12 +71,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _httpContentPropertyName = "HttpContent";
         protected override string DefaultName { get; } = "MultipartFormDataRequestContent";
         private const string _createBoundaryMethodName = "CreateBoundary";
-        private const string _addMethodName = "Add";
-        private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
-        //private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(BinaryContent.WriteToAsync);
-        //private static readonly string WriteTo = Configuration.IsBranded ? nameof(RequestContent.WriteTo) : nameof(BinaryContent.WriteTo);
-        //private static readonly string TryComputeLength = Configuration.IsBranded ? nameof(RequestContent.TryComputeLength) : nameof(BinaryContent.TryComputeLength);
-        //private static readonly string Dispose = nameof(IDisposable.Dispose);
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _multipartContentField;
@@ -166,9 +150,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             yield return BuildAddMethod<TimeSpan>();
             yield return BuildAddMethod<Stream>();
             yield return BuildAddMethod<FileInfo>();
-            yield return BuildAddMethod < byte[]>();
+            yield return BuildAddMethod<byte[]>();
             yield return BuildAddMethod<JsonElement>();
-            yield return BuildAddMethod<BinaryData>();
             yield return BuildAddHttpContentMethod();
         }
         private Method BuildAddMethod<T>()
@@ -184,8 +167,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 {
                     new Parameter("content", null, typeof(T), null, ValidationType.None, null),
                     new Parameter("name", null, typeof(string),null, ValidationType.None, null),
-                    new Parameter("filename", null, new CSharpType(typeof(string), true),
-                                Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null),
+                    new Parameter("filename", null, ((CSharpType)typeof(string)).WithNullable(true), Constant.Default(typeof(string)), ValidationType.None, null),
                 });
             var body = new MethodBodyStatement[]
             {
@@ -196,7 +178,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         {
             var contentParam = new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null);
             var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
-            var filenameParam = new Parameter("filename", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+            var filenameParam = new Parameter("filename", null, ((CSharpType)typeof(string)).WithNullable(true), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: "Add",
                 Summary: null,
@@ -213,20 +195,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             var multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
             var body = new MethodBodyStatement[]
             {
-                new IfStatement(NotEqual(filenameParam, Null))
-                {
-                    Argument.AssertNotNullOrEmpty(filenameParam),
-                    AddFilenameHeader(contentParam, nameParam, filenameParam),
-                },
-                multipartContentExpression.Add(contentParam, nameParam)
+                multipartContentExpression.Add(contentParam, nameParam, filenameParam)
             };
             return new Method(signature, body);
         }
         private Method BuildAddFilenameHeaderMethod()
         {
-            var contentParam = new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null);
-            var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
-            var filenameParam = new Parameter("filename", null, typeof(string), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: "AddFilenameHeader",
                 Summary: null,
@@ -236,32 +210,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 ReturnDescription: null,
                 Parameters: new[]
                 {
-                    contentParam,
-                    nameParam,
-                    filenameParam,
-                    /*
                     new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null),
                     new Parameter("name", null, typeof(string),null, ValidationType.None, null),
                     new Parameter("filename", null, typeof(string), null, ValidationType.None, null),
-                    */
                 });
-            var initialProperties = new Dictionary<string, ValueExpression>
-            {
-                { "Name", nameParam },
-                { "FileName", filenameParam },
-            };
-            ValueExpression ContentDispositionHeaderExpression = ((ValueExpression)contentParam).Property("Headers").Property("ContentDisposition");
             var body = new MethodBodyStatement[]
             {
-                Declare(typeof(ContentDispositionHeaderValue), "header", New.Instance(typeof(ContentDispositionHeaderValue), new[]{ Literal("form-data") }, initialProperties), out var header),
-                Assign(ContentDispositionHeaderExpression, header),
             };
             return new Method(signature, body);
         }
 
         private Method BuildTryComputeLengthMethod()
         {
-            var lengthParameter = new Parameter("length", null, typeof(long), null, ValidationType.None, null, IsOut: true);
             var signature = new MethodSignature(
                 Name: "TryComputeLength",
                 Summary: null,
@@ -271,21 +231,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 ReturnDescription: null,
                 Parameters: new[]
                 {
-                    lengthParameter,
+                    new Parameter("length", null, typeof(long), null, ValidationType.None, null, IsOut:true),
                 });
-            ValueExpression contentLengthHeaderExpression = new MultipartFormDataContentExpression(_multipartContentField).Property("Headers").Property("ContentLength");
-            var declaration = new CodeWriterDeclaration("contentLength");
-            VariableReference contentLengthVariable = new VariableReference(typeof(long), declaration);
-            var contentLengthDeclaration = new DeclarationExpression(contentLengthVariable,false);
             var body = new MethodBodyStatement[]
             {
-                new IfStatement(BoolExpression.Is(contentLengthHeaderExpression, contentLengthDeclaration))
-                {
-                    Assign(lengthParameter, contentLengthVariable),
-                    Return(Literal(true)),
-                },
-                Assign(lengthParameter, Literal(0)),
-                Return(Literal(false)),
             };
             return new Method(signature, body);
         }
@@ -345,14 +294,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             return new Method(signature, body);
         }
         public ValueExpression CreateBoundary()
-            => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] {});
-        public MethodBodyStatement AddFilenameHeader(ValueExpression httpContent, ValueExpression name, ValueExpression filename)
-            => new InvokeInstanceMethodStatement (null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
-        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name)
-        {
-            //DeclarationExpression multipartContentDeclarationExpression = new(multipartContent, false);
-            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name }, false);
-            //return new InvokeStaticMethodStatement(Type, _addMethodName, new ValueExpression[] { contentvalue, name });
-        }
+            => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] { });
     }
 }

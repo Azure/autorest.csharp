@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -67,7 +68,7 @@ namespace AutoRest.CSharp.Common.Input
         public override CSharpType RequestUriType => typeof(RawRequestUriBuilder);
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
-        public override CSharpType MultipartRequestContentType => typeof(MultipartFormDataRequestContent);
+        public override CSharpType MultipartRequestContentType => MultipartFormDataRequestContentProvider.Instance.Type;
         public override string ToMultipartRequestContentName => "ToMultipartRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
@@ -98,29 +99,18 @@ namespace AutoRest.CSharp.Common.Input
 """;
 
         public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
-        public override ValueExpression GetMultipartFormDataContentCreateExpression(BinaryDataExpression data, ValueExpression contentType)
-        {
-            //return MultipartFormDataExpression.Create(data, contentType);
-            return new InvokeStaticMethodExpression(typeof(MultipartFormDataRequestContent), "Create", new[] { data, contentType });
-        }
-        public override ValueExpression GetMultipartFormDataParseToFormDataExpression(VariableReference multipart)
-        {
-            return Snippets.Extensible.MultipartFormData.ParseToFormData(new MultipartFormDataRequestContentExpression(multipart));
-        }
-        public override ValueExpression GetMultipartFormDataRequestContentExpression(VariableReference content)
-        {
-            return new MultipartFormDataRequestContentExpression(content);
-        }
         public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName)
         {
-            var multipartContentExpression = new MultipartFormDataRequestContentExpression(multipartContent);
+            //var multipartContentExpression = new MultipartFormDataContentExpression(multipartContent);
             if (fileName != null)
             {
-                return multipartContentExpression.Add(content, name, fileName);
+                //return multipartContentExpression.Add(content, name, fileName);
+                return MultipartFormDataRequestContentProvider.Instance.Add(multipartContent, content, name);
             }
             else
             {
-                return multipartContentExpression.Add(content, name);
+                //return multipartContentExpression.Add(content, name);
+                return MultipartFormDataRequestContentProvider.Instance.Add(multipartContent, content, name);
             }
         }
     }

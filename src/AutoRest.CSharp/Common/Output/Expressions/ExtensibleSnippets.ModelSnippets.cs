@@ -6,6 +6,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -45,6 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public abstract Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers);
             public abstract TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model);
             public abstract ValueExpression ContentTypeFromResponse();
+            public abstract MethodBodyStatement DeclareMultipartContent();
         }
     }
 }

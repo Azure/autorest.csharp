@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -32,5 +33,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new(new InvokeInstanceMethodExpression(this, nameof(string.StartsWith), new[] {value}, null, false));
         public StringExpression Add(StringExpression value)
             => new(new BinaryOperatorExpression(" + ", this, value));
+        public ValueExpression ToCharArray()
+            => new InvokeInstanceMethodExpression(this, nameof(string.ToCharArray), Array.Empty<ValueExpression>(), null, false);
     }
 }

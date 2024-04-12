@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
@@ -66,6 +67,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var valueParameter = new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true);
                 var valueReference = new ParameterReference(valueParameter);
                 return new InvokeInstanceMethodExpression(response.Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out", new KeywordExpression("var", valueReference)) }, null, false);
+            }
+            public override MethodBodyStatement DeclareMultipartContent()
+            {
+                var content = MultipartFormDataRequestContentProvider.Instance;
+                var contentVar = new VariableReference(content.Type, "content");
+                return Var(contentVar, New.Instance(content.Type));
             }
         }
     }
