@@ -38,16 +38,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             _wireOptionsField = new FieldDeclaration(
                 modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(ModelReaderWriterOptions),
-                name: "WireOptions")
+                name: _wireOptionsName)
             {
                 InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W"))
             };
         }
 
+        private const string _wireOptionsName = "WireOptions";
         private readonly FieldDeclaration _wireOptionsField;
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
-        public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(_wireOptionsField);
+        public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
 
         protected override string DefaultName => "ModelSerializationExtensions";
 
