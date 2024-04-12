@@ -18,6 +18,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
+    // TODO -- this class could be a "PageableMethodsBuilder" in the future
     internal static class PageableMethodsWriterExtensions
     {
         private static readonly CSharpType BinaryDataType = typeof(BinaryData);

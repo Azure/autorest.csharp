@@ -365,7 +365,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (convenienceParameter.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider model })
                         {
-                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1).ToArray();
 
                             parameterList.AddRange(parameters);
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
