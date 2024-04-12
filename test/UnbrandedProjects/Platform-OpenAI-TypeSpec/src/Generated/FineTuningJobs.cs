@@ -179,7 +179,7 @@ namespace OpenAI
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetPaginatedsAsync(string after = null, long? limit = null, RequestOptions options)
+        public virtual async Task<ClientResult> GetPaginatedsAsync(string after, long? limit, RequestOptions options)
         {
             using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
@@ -205,7 +205,7 @@ namespace OpenAI
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetPaginateds(string after = null, long? limit = null, RequestOptions options)
+        public virtual ClientResult GetPaginateds(string after, long? limit, RequestOptions options)
         {
             using PipelineMessage message = CreateGetPaginatedsRequest(after, limit, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
@@ -356,7 +356,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null, RequestOptions options)
+        public virtual async Task<ClientResult> GetEventsAsync(string fineTuningJobId, string after, long? limit, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
@@ -387,7 +387,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetEvents(string fineTuningJobId, string after = null, long? limit = null, RequestOptions options)
+        public virtual ClientResult GetEvents(string fineTuningJobId, string after, long? limit, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 

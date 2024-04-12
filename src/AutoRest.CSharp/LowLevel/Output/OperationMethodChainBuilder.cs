@@ -96,12 +96,14 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
-            var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            var isRequestContextOptional = _orderedParameters.Any(p => p.Protocol == KnownParameters.RequestContext);
+            var protocolMethodParameters = isRequestContextOptional
+                ? _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray()
+                : _orderedParameters.Select(p => p.Protocol?.ToRequired()).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
-            var convenienceMethod = BuildConvenienceMethod(shouldRequestContextOptional, convenienceMethodInfo);
+            var convenienceMethod = BuildConvenienceMethod(isRequestContextOptional, convenienceMethodInfo);
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
