@@ -382,6 +382,11 @@ namespace AutoRest.CSharp.Output.Models
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
                 }
+                else if (protocolParameter != null)
+                {
+                    // convenience parameter is null - such as CancellationToken in non-azure library
+                    protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                }
             }
             var accessibility = _restClientMethod.Accessibility | Virtual;
             if (generationInfo.IsConvenienceMethodInternal)
