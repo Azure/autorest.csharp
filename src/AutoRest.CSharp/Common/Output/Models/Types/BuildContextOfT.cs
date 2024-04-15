@@ -38,11 +38,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
             : base(codeModel, sourceInputModel, schemaUsageProvider)
         {
+            // TO-REMOVE: A temporary solution
+            if (Configuration.AzureArm)
+            {
+                MgmtCodeModelConverter = new CodeModelConverter(codeModel, schemaUsageProvider);
+                MgmtCodeModelConverter.CreateNamespace();
+            }
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library, typeof(BinaryData));
 
         // TO-REMOVE: A temporary solution
-        public CodeModelConverter? MgmtCodeModelConverter { get; set; }
+        public CodeModelConverter? MgmtCodeModelConverter { get; private set; }
     }
 }

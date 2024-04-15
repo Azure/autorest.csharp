@@ -813,6 +813,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
+        // TO-DO: After we do below, we could remove _schemaToInputEnumMap, same as other exposed dictionaries introduced by ObjectSchema later
+        // Expected as pesuade code:
+        // private TypeProvider BuildModel(InputType inputType) => inputType switch
+        // {
+        //     InputEnumType enumType => new EnumType(enumType, MgmtContext.Context),
+        //     InputModelType modelType => switch (modelType.[some condition])
+        //     {
+        //         case [some condition]:
+        //             new MgmtObjectType(modelType, MgmtContext.Context),
+        //         case [some condition]:
+        //             new MgmtReferenceType(modelType, MgmtContext.Context),
+        //     };
+        // };
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema or ChoiceSchema => new EnumType(_schemaToInputEnumMap[schema], schema, MgmtContext.Context),
