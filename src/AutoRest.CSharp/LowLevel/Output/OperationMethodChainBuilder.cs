@@ -96,12 +96,15 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
-            var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            var isRequestContextOptional = _orderedParameters.Any(p => p.Protocol == KnownParameters.RequestContext);
+            // because request context is always the last parameter, when request context is changed to required by some reason, all parameters before it (which means all parameters) should be required
+            var protocolMethodParameters = isRequestContextOptional
+                ? _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray()
+                : _orderedParameters.Select(p => p.Protocol?.ToRequired()).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
-            var convenienceMethod = BuildConvenienceMethod(shouldRequestContextOptional, convenienceMethodInfo);
+            var convenienceMethod = BuildConvenienceMethod(isRequestContextOptional, convenienceMethodInfo);
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -202,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models
         // If all the corresponding parameters and return types of convenience method and protocol method have the same type, it does not make sense to generate the convenience method.
         private bool IsConvenienceMethodMeaningful()
         {
-            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+            return _orderedParameters.Where(parameter => parameter.Protocol != KnownParameters.RequestContext && parameter.Protocol != KnownParameters.RequestContextRequired).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !_returnType.Convenience.Equals(_returnType.Protocol);
         }
 
@@ -365,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (convenienceParameter.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider model })
                         {
-                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1).ToArray();
 
                             parameterList.AddRange(parameters);
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
@@ -381,6 +384,11 @@ namespace AutoRest.CSharp.Output.Models
                         if (protocolParameter != null)
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
+                }
+                else if (protocolParameter != null)
+                {
+                    // convenience parameter is null - such as CancellationToken in non-azure library
+                    protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                 }
             }
             var accessibility = _restClientMethod.Accessibility | Virtual;
@@ -590,7 +598,7 @@ namespace AutoRest.CSharp.Output.Models
         public void AddRequestContext()
         {
             _orderedParameters.Add(new ParameterChain(
-                KnownParameters.CancellationTokenParameter,
+                Configuration.IsBranded ? KnownParameters.CancellationTokenParameter : null, // in non-azure libraries, convenience method no longer takes a `CancellationToken` parameter.
                 ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
                 KnownParameters.RequestContext));
         }
