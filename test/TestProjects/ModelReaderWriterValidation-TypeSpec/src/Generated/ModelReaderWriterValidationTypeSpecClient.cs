@@ -59,8 +59,8 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1Async(ModelAsStruct,CancellationToken)']/*" />
         public virtual async Task<Response<ModelAsStruct>> Op1Async(ModelAsStruct body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Op1Async(content, context).ConfigureAwait(false);
             return Response.FromValue(ModelAsStruct.FromResponse(response), response);
         }
@@ -70,8 +70,8 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1(ModelAsStruct,CancellationToken)']/*" />
         public virtual Response<ModelAsStruct> Op1(ModelAsStruct body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Op1(content, context);
             return Response.FromValue(ModelAsStruct.FromResponse(response), response);
         }
@@ -162,8 +162,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Op2Async(content, context).ConfigureAwait(false);
             return Response.FromValue(ModelWithPersistableOnly.FromResponse(response), response);
         }
@@ -176,8 +176,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Op2(content, context);
             return Response.FromValue(ModelWithPersistableOnly.FromResponse(response), response);
         }
@@ -268,8 +268,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Op3Async(content, context).ConfigureAwait(false);
             return Response.FromValue(BaseModel.FromResponse(response), response);
         }
@@ -282,8 +282,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Op3(content, context);
             return Response.FromValue(BaseModel.FromResponse(response), response);
         }
@@ -374,8 +374,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Op4Async(content, context).ConfigureAwait(false);
             return Response.FromValue(AvailabilitySetData.FromResponse(response), response);
         }
@@ -388,8 +388,8 @@ namespace ModelReaderWriterValidationTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Op4(content, context);
             return Response.FromValue(AvailabilitySetData.FromResponse(response), response);
         }

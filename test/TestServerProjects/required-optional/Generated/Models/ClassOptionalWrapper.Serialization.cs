@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace required_optional.Models
@@ -29,7 +30,7 @@ namespace required_optional.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                writer.WriteObjectValue<Product>(Value, options);
+                writer.WriteObjectValue(Value, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -122,5 +123,21 @@ namespace required_optional.Models
         }
 
         string IPersistableModel<ClassOptionalWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ClassOptionalWrapper FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeClassOptionalWrapper(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

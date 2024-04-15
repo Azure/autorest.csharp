@@ -45,26 +45,26 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparams"u8);
-            writer.WriteObjectValue<FineTuneHyperparams>(Hyperparams, options);
+            writer.WriteObjectValue(Hyperparams, options);
             writer.WritePropertyName("training_files"u8);
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("validation_files"u8);
             writer.WriteStartArray();
             foreach (var item in ValidationFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("result_files"u8);
             writer.WriteStartArray();
             foreach (var item in ResultFiles)
             {
-                writer.WriteObjectValue<OpenAIFile>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Events))
@@ -73,7 +73,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Events)
                 {
-                    writer.WriteObjectValue<FineTuneEvent>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -288,8 +288,8 @@ namespace OpenAI.Models
             return DeserializeFineTune(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }

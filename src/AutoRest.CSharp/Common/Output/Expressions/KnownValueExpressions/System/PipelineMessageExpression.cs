@@ -9,5 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
     internal sealed record PipelineMessageExpression(ValueExpression Untyped) : TypedValueExpression<PipelineMessage>(Untyped)
     {
         public PipelineRequestExpression Request => new(Property(nameof(PipelineMessage.Request)));
+
+        public PipelineResponseExpression Response => new(Property(nameof(PipelineMessage.Response)));
     }
 }

@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // if we have an additional properties property, and its value type is also BinaryData, we should not have a raw data field
                 if (AdditionalPropertiesProperty != null)
                 {
-                    var valueType = TypeFactory.GetElementType(AdditionalPropertiesProperty.Declaration.Type);
+                    var valueType = AdditionalPropertiesProperty.Declaration.Type.ElementType;
                     if (valueType.EqualsIgnoreNullable(typeof(BinaryData)) || valueType.EqualsIgnoreNullable(typeof(object)))
                     {
                         return null;
@@ -407,7 +407,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return InitializationConstructor;
 
             // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
-            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+            if (!SerializationConstructorSignature.Parameters.Any(p => p.Type.IsList) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructor;
 
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
@@ -453,8 +453,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
+                    var inputType = parameter?.Type ?? propertyType.InputType;
+                    if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
@@ -472,15 +472,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     initializationValue = defaultCtorParameter;
                 }
-                else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                else if (initializationValue == null && propertyType.IsCollection)
                 {
-                    if (TypeFactory.IsReadOnlyMemory(propertyType))
+                    if (propertyType.IsReadOnlyMemory)
                     {
                         initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                     }
                     else
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                     }
                 }
                 // [TODO]: Consolidate property initializer generation between HLC and DPG
@@ -659,14 +659,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return method;
             }
 
-            // [TODO]: Generate FromOperationResponse and ToRequestContent in HLC
-            if (Configuration.Generation1ConvenienceClient)
+            if (Serialization.Json is null)
+            {
                 yield break;
+            }
 
             if (IncludeDeserializer)
+            {
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+            }
+
             if (IncludeSerializer)
+            {
                 yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), Type);
+            }
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

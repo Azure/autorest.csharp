@@ -52,8 +52,8 @@ namespace Serialization.EncodedName.Json
         {
             Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonEncodedNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -66,8 +66,8 @@ namespace Serialization.EncodedName.Json
         {
             Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonEncodedNameModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(content, context);
             return response;
         }

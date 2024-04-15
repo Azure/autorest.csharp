@@ -30,6 +30,7 @@ namespace _Type.Property.AdditionalProperties.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
+<<<<<<< HEAD
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
@@ -38,6 +39,9 @@ namespace _Type.Property.AdditionalProperties.Models
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
 #endif
+=======
+                writer.WriteObjectValue(item.Value, options);
+>>>>>>> origin/feature/v3
             }
             writer.WriteEndObject();
         }
@@ -111,11 +115,11 @@ namespace _Type.Property.AdditionalProperties.Models
             return DeserializeIsModelAdditionalProperties(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<IsModelAdditionalProperties>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

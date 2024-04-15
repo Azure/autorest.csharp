@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    writer.WriteObjectValue<VirtualMachineScaleSetExtensionData>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

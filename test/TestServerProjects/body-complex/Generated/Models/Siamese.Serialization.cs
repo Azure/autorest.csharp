@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace body_complex.Models
@@ -42,7 +43,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Hates)
                 {
-                    writer.WriteObjectValue<Dog>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -186,5 +187,21 @@ namespace body_complex.Models
         }
 
         string IPersistableModel<Siamese>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new Siamese FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSiamese(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

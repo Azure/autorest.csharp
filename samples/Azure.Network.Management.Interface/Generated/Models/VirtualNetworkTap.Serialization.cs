@@ -42,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(DestinationNetworkInterfaceIPConfiguration);
+                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue<FrontendIPConfiguration>(DestinationLoadBalancerFrontEndIPConfiguration);
+                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {
@@ -198,6 +198,22 @@ namespace Azure.Network.Management.Interface.Models
                 destinationNetworkInterfaceIPConfiguration,
                 destinationLoadBalancerFrontEndIPConfiguration,
                 destinationPort);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new VirtualNetworkTap FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeVirtualNetworkTap(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

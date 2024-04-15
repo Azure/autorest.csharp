@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace HlcConstants.Models
@@ -18,12 +19,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                writer.WriteObjectValue<ModelWithRequiredConstant>(RequiredConstantModel);
+                writer.WriteObjectValue(RequiredConstantModel);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                writer.WriteObjectValue<ModelWithOptionalConstant>(OptionalConstantModel);
+                writer.WriteObjectValue(OptionalConstantModel);
             }
             writer.WriteEndObject();
         }
@@ -58,6 +59,22 @@ namespace HlcConstants.Models
                 }
             }
             return new RoundTripModel(requiredConstantModel, optionalConstantModel);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static RoundTripModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeRoundTripModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

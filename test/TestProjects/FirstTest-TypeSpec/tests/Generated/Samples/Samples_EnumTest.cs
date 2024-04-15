@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
@@ -18,54 +18,54 @@ namespace FirstTestTypeSpec.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_EnumTest_GetUnknownValue_ShortVersion()
+        public void Example_EnumTest_CreateUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-            Response response = client.GetUnknownValue(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = client.CreateUnknownValue(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_EnumTest_GetUnknownValue_ShortVersion_Async()
+        public async Task Example_EnumTest_CreateUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.CreateUnknownValueAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_EnumTest_GetUnknownValue_AllParameters()
+        public void Example_EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-            Response response = client.GetUnknownValue(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = client.CreateUnknownValue(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_EnumTest_GetUnknownValue_AllParameters_Async()
+        public async Task Example_EnumTest_CreateUnknownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.CreateUnknownValueAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
     }
 }

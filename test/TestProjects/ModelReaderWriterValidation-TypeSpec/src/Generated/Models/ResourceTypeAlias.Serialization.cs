@@ -38,7 +38,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Paths)
                 {
-                    writer.WriteObjectValue<ResourceTypeAliasPath>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -55,12 +55,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(DefaultPattern))
             {
                 writer.WritePropertyName("defaultPattern"u8);
-                writer.WriteObjectValue<ResourceTypeAliasPattern>(DefaultPattern, options);
+                writer.WriteObjectValue(DefaultPattern, options);
             }
             if (Optional.IsDefined(DefaultMetadata))
             {
                 writer.WritePropertyName("defaultMetadata"u8);
-                writer.WriteObjectValue<ResourceTypeAliasPathMetadata>(DefaultMetadata, options);
+                writer.WriteObjectValue(DefaultMetadata, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -216,11 +216,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             return DeserializeResourceTypeAlias(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ResourceTypeAlias>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

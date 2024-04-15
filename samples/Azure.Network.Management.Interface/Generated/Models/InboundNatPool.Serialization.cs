@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                writer.WriteObjectValue<SubResource>(FrontendIPConfiguration);
+                writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -220,6 +220,22 @@ namespace Azure.Network.Management.Interface.Models
                 enableFloatingIP,
                 enableTcpReset,
                 provisioningState);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new InboundNatPool FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInboundNatPool(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

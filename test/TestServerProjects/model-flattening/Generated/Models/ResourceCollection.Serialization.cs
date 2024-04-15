@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -29,7 +30,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                writer.WriteObjectValue<FlattenedProduct>(Productresource, options);
+                writer.WriteObjectValue(Productresource, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -37,7 +38,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    writer.WriteObjectValue<FlattenedProduct>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -48,7 +49,7 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<FlattenedProduct>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -173,5 +174,21 @@ namespace model_flattening.Models
         }
 
         string IPersistableModel<ResourceCollection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ResourceCollection FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeResourceCollection(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            return content;
+        }
     }
 }

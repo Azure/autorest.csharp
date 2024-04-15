@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -24,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                writer.WriteObjectValue<AzureActiveDirectoryApplicationCredentials>(AccessCredentials);
+                writer.WriteObjectValue(AccessCredentials);
             }
             writer.WriteEndObject();
         }
@@ -67,6 +68,22 @@ namespace CognitiveSearch.Models
                 }
             }
             return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static EncryptionKey FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeEncryptionKey(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

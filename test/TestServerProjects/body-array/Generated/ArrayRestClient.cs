@@ -3626,7 +3626,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteObjectValue<Product>(item, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

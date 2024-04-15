@@ -40,7 +40,7 @@ namespace OpenAI.Models
             if (Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
-                writer.WriteObjectValue<ChatCompletionRequestMessageFunctionCall>(FunctionCall, options);
+                writer.WriteObjectValue(FunctionCall, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -165,8 +165,8 @@ namespace OpenAI.Models
             return DeserializeChatCompletionRequestMessage(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }

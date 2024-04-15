@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 
 namespace AzureSample.Storage.Tables.Models
 {
@@ -62,6 +63,14 @@ namespace AzureSample.Storage.Tables.Models
                 }
             }
             return new TableEntityQueryResult(odataMetadata, value ?? new ChangeTrackingList<IDictionary<string, object>>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static TableEntityQueryResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeTableEntityQueryResult(document.RootElement);
         }
     }
 }

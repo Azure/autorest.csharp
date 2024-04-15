@@ -51,7 +51,7 @@ export function getTypeName(
         var templateName = getNameForTemplate(type);
         if (templateName === "") {
             const sdkModel = getSdkModel(context, type as Model);
-            return sdkModel.generatedName || sdkModel.name;
+            return sdkModel.name;
         }
         return templateName;
     }

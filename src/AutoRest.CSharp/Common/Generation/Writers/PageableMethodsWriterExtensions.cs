@@ -18,6 +18,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
+    // TODO -- this class could be a "PageableMethodsBuilder" in the future
     internal static class PageableMethodsWriterExtensions
     {
         private static readonly CSharpType BinaryDataType = typeof(BinaryData);
@@ -218,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     continue;
                 }
 
-                var convenienceParameter = ProtocolToConvenienceParameterConverters.FirstOrDefault(convert => convert.Convenience.Name == parameter.Name)?.Convenience;
+                var convenienceParameter = ProtocolToConvenienceParameterConverters.FirstOrDefault(convert => convert.Convenience?.Name == parameter.Name)?.Convenience;
                 if (convenienceParameter == null)
                 {
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
