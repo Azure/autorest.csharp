@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(typeof(ClientDiagnostics)), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);
-        public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(Configuration.ApiTypes.KeyCredentialType), null, ValidationType.None, null);
-        public static readonly Parameter TokenAuth = new("tokenCredential", $"The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
+        public static readonly Parameter KeyAuth = new("credential", $"The key credential to copy", new CSharpType(Configuration.ApiTypes.KeyCredentialType), null, ValidationType.None, null);
+        public static readonly Parameter TokenAuth = new("credential", $"The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
         public static readonly Parameter Endpoint = new("endpoint", $"Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri, IsEndpoint: true);
 
         public static readonly Parameter PageSizeHint = new("pageSizeHint", $"The number of items per {typeof(Page<>):C} that should be requested (from service operations that support it). It's not guaranteed that the value will be respected.", new CSharpType(typeof(int), true), null, ValidationType.None, null);
