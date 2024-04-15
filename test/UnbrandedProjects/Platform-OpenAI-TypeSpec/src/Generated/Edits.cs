@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -41,30 +40,26 @@ namespace OpenAI
         }
 
         /// <param name="edit"> The <see cref="CreateEditRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual async Task<ClientResult<CreateEditResponse>> CreateAsync(CreateEditRequest edit, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateEditResponse>> CreateAsync(CreateEditRequest edit)
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
             using BinaryContent content = edit.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <param name="edit"> The <see cref="CreateEditRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
         [Obsolete("deprecated")]
-        public virtual ClientResult<CreateEditResponse> Create(CreateEditRequest edit, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateEditResponse> Create(CreateEditRequest edit)
         {
             Argument.AssertNotNull(edit, nameof(edit));
 
             using BinaryContent content = edit.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +73,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateEditRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -107,7 +102,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateEditRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -144,17 +139,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;
