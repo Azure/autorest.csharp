@@ -374,8 +374,13 @@ export function getInputType(
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
         } else if (
-            isRecordModelType(program, m) &&
-            m.sourceModel === undefined
+            // not all these checks are necessary, but we just put them here because this just works.
+            // when we adopt `getAllModels` method from TCGC, all these checks will go away therefore it should be fine now.
+            m.sourceModel === undefined &&
+            m.indexer !== undefined &&
+            m.properties.size === 0 &&
+            m.name === "Record" &&
+            isRecordModelType(program, m)
         ) {
             // only when the model does not have a source model, it is really a record type
             // when we have `model Foo is Record<string>` this should be a model with additional properties therefore it should not be parsed into a dictionary type

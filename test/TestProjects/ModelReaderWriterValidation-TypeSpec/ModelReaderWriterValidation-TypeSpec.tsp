@@ -371,3 +371,20 @@ union ResourceTypeAliasPathAttributes {
 @route("/api/ResourceProvider")
 @convenientAPI(true)
 op op5(): ResourceProviderData;
+
+model ModelWithStringAdditionalProperties {
+    @doc("The id property.")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<string>;
+}
+
+@route("/api/AdditionalProperties/string")
+@convenientAPI(true)
+op op6(@body body: ModelWithStringAdditionalProperties): ModelWithStringAdditionalProperties;

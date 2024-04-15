@@ -803,5 +803,135 @@ Id = new ResourceIdentifier("<id>"),
 
             Response<ResourceProviderData> response = await client.Op5Async();
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                name = "<name>",
+            });
+            Response response = client.Op6(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                name = "<name>",
+            });
+            Response response = await client.Op6Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<id>", "<name>");
+            Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<id>", "<name>");
+            Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                name = "<name>",
+                age = 1234,
+            });
+            Response response = client.Op6(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                name = "<name>",
+                age = 1234,
+            });
+            Response response = await client.Op6Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<id>", "<name>")
+            {
+                Age = 1234,
+            };
+            Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<id>", "<name>")
+            {
+                Age = 1234,
+            };
+            Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(body);
+        }
     }
 }
