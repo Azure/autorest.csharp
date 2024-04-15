@@ -33,7 +33,6 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-<<<<<<< HEAD
                     if (item0 == null)
                     {
                         writer.WriteNullValue();
@@ -47,9 +46,6 @@ namespace _Type.Property.AdditionalProperties.Models
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
 #endif
-=======
-                    writer.WriteObjectValue(item0, options);
->>>>>>> origin/feature/v3
                 }
                 writer.WriteEndArray();
             }

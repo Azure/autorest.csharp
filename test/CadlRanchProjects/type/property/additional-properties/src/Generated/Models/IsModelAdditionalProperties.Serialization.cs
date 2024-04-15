@@ -30,7 +30,6 @@ namespace _Type.Property.AdditionalProperties.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-<<<<<<< HEAD
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
@@ -39,9 +38,6 @@ namespace _Type.Property.AdditionalProperties.Models
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
 #endif
-=======
-                writer.WriteObjectValue(item.Value, options);
->>>>>>> origin/feature/v3
             }
             writer.WriteEndObject();
         }
