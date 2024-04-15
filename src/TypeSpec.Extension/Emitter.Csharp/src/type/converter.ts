@@ -165,7 +165,13 @@ export function fromSdkModelType(
                 (p) =>
                     !(p as SdkBodyModelPropertyType).discriminator ||
                     !baseModelHasDiscriminator
-            ).filter((p) => p.kind !== "header" && p.kind !== "query" && p.kind !== "path")
+            )
+            .filter(
+                (p) =>
+                    p.kind !== "header" &&
+                    p.kind !== "query" &&
+                    p.kind !== "path"
+            )
             .map((p) =>
                 fromSdkModelPropertyType(p, context, models, enums, {
                     ModelName: inputModelType?.Name,
@@ -365,12 +371,12 @@ function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
     return {
         Kind: InputTypeKind.Primitive,
         Name: builtInKind,
-        IsNullable: builtInType.nullable,
+        IsNullable: builtInType.nullable
     } as InputPrimitiveType;
 }
 
 function mapTcgcTypeToCSharpInputTypeKind(
-    type: SdkBuiltInType,
+    type: SdkBuiltInType
 ): InputPrimitiveTypeKind {
     switch (type.kind) {
         case "numeric":
