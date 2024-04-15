@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     continue;
                 }
 
-                var convenienceParameter = ProtocolToConvenienceParameterConverters.FirstOrDefault(convert => convert.Convenience.Name == parameter.Name)?.Convenience;
+                var convenienceParameter = ProtocolToConvenienceParameterConverters.FirstOrDefault(convert => convert.Convenience?.Name == parameter.Name)?.Convenience;
                 if (convenienceParameter == null)
                 {
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
