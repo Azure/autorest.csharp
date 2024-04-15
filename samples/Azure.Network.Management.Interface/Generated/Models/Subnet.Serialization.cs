@@ -46,17 +46,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue<NetworkSecurityGroup>(NetworkSecurityGroup);
+                writer.WriteObjectValue(NetworkSecurityGroup);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                writer.WriteObjectValue<RouteTable>(RouteTable);
+                writer.WriteObjectValue(RouteTable);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                writer.WriteObjectValue<SubResource>(NatGateway);
+                writer.WriteObjectValue(NatGateway);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    writer.WriteObjectValue<ServiceEndpointPropertiesFormat>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    writer.WriteObjectValue<ServiceEndpointPolicy>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -84,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    writer.WriteObjectValue<Delegation>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -371,11 +371,11 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeSubnet(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Subnet>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

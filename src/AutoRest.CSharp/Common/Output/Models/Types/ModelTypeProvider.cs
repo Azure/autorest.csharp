@@ -399,7 +399,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return InitializationConstructor;
 
             // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
-            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+            if (!SerializationConstructorSignature.Parameters.Any(p => p.Type.IsList) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructor;
 
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
@@ -445,8 +445,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
+                    var inputType = parameter?.Type ?? propertyType.InputType;
+                    if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
@@ -464,15 +464,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     initializationValue = defaultCtorParameter;
                 }
-                else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                else if (initializationValue == null && propertyType.IsCollection)
                 {
-                    if (TypeFactory.IsReadOnlyMemory(propertyType))
+                    if (propertyType.IsReadOnlyMemory)
                     {
                         initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                     }
                     else
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                     }
                 }
                 // [TODO]: Consolidate property initializer generation between HLC and DPG

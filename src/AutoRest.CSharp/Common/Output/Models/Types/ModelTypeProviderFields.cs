@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
                 var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
-                                             !TypeFactory.IsCollectionType(propertyType);
+                                             !propertyType.IsCollection;
 
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputModelProperty.Type);
@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // [TODO]: Provide a flag to add read/write properties to the public model constructor
                     if (Configuration.Generation1ConvenienceClient || !inputModelProperty.IsReadOnly)
                     {
-                        publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                        publicParameters.Add(parameter with { Type = parameter.Type.InputType });
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var type = typeFactory.CreateType(additionalPropertiesType);
                 if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    type = type.OutputType;
                 }
 
                 var name = existingMember is null ? "AdditionalProperties" : existingMember.Name;
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type))
+            if (type.IsCollection && !type.IsReadOnlyMemory)
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.
@@ -324,10 +324,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
-            if (!usage.HasFlag(InputModelTypeUsage.Input) ||
-                property.IsReadOnly)
+            if (!usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly)
             {
-                propertyType = TypeFactory.GetOutputType(propertyType);
+                propertyType = propertyType.OutputType;
             }
 
             return propertyType;

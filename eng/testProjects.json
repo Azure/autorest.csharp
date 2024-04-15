@@ -30,7 +30,6 @@
         "encode/bytes",
         "encode/datetime",
         "encode/duration",
-        "projection/projected-name",
         "payload/content-negotiation",
         "payload/media-type",
         "payload/pageable",

@@ -13,5 +13,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 
         public StreamExpression ContentStream => new(Property(nameof(PipelineResponse.ContentStream)));
         public ValueExpression Headers => new InvokeInstanceMethodExpression(Untyped, nameof(PipelineResponse.Headers), Array.Empty<ValueExpression>(), null, false);
+        public BoolExpression IsError => new(Property(nameof(PipelineResponse.IsError)));
     }
 }

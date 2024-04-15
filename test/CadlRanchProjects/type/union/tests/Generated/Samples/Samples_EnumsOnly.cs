@@ -50,7 +50,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<GetResponse6> response = client.GetEnumsOnly();
+            Response<GetResponse3> response = client.GetEnumsOnly();
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
+            Response<GetResponse3> response = await client.GetEnumsOnlyAsync();
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<GetResponse6> response = client.GetEnumsOnly();
+            Response<GetResponse3> response = client.GetEnumsOnly();
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
+            Response<GetResponse3> response = await client.GetEnumsOnlyAsync();
         }
 
         [Test]

@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             }
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
-                => ClientResultExpression.FromResponse(new ClientPipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), null, async));
+                => ClientResultExpression.FromResponse(new ClientPipelineExpression(pipeline).ProcessMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), async));
 
             private static PipelineResponseExpression GetRawResponse(TypedValueExpression result)
                 => result.Type.Equals(typeof(PipelineResponse))

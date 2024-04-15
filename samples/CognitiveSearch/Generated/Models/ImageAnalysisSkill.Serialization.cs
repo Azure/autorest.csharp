@@ -63,14 +63,14 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Inputs)
             {
-                writer.WriteObjectValue<InputFieldMappingEntry>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("outputs"u8);
             writer.WriteStartArray();
             foreach (var item in Outputs)
             {
-                writer.WriteObjectValue<OutputFieldMappingEntry>(item);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -191,11 +191,11 @@ namespace CognitiveSearch.Models
             return DeserializeImageAnalysisSkill(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ImageAnalysisSkill>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

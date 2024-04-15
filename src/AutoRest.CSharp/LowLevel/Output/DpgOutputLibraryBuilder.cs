@@ -390,7 +390,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        //Assgin parent according to the customized inputModel
+        //Assign parent according to the customized inputModel
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;

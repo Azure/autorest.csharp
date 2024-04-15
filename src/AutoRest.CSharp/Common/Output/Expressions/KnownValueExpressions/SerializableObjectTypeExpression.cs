@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             return new(model, new InvokeStaticMethodExpression(model.Type, $"DeserializeMultipart", arguments));
         }
 
-        public RequestContentExpression ToRequestContent() => new(Untyped.Invoke("ToRequestContent"));
+        public RequestContentExpression ToRequestContent() => new(Untyped.Invoke(Configuration.ApiTypes.ToRequestContentName));
 
     }
 }

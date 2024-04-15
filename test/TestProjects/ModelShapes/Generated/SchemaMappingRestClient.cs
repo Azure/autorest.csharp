@@ -49,7 +49,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputModel>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -108,7 +108,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedModel>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -228,7 +228,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedModelWithReadonlyProperty>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }
@@ -301,7 +301,7 @@ namespace ModelShapes
                 Status = status
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ParametersModel>(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
             request.Content = content;
             return message;
         }

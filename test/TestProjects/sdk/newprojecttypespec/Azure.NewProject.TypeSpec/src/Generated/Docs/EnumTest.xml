@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetUnknownValueAsync(RequestContext)">
+    <member name="GetUnknownValueAsync(RequestContent,RequestContext)">
       <example>
-This sample shows how to call GetUnknownValueAsync and parse the result.
+This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-Response response = await client.GetUnknownValueAsync(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = await client.GetUnknownValueAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
+This sample shows how to call GetUnknownValueAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-Response response = await client.GetUnknownValueAsync(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = await client.GetUnknownValueAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="GetUnknownValue(RequestContext)">
+    <member name="GetUnknownValue(RequestContent,RequestContext)">
       <example>
-This sample shows how to call GetUnknownValue and parse the result.
+This sample shows how to call GetUnknownValue.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-Response response = client.GetUnknownValue(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = client.GetUnknownValue(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call GetUnknownValue with all parameters and parse the result.
+This sample shows how to call GetUnknownValue with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-Response response = client.GetUnknownValue(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = client.GetUnknownValue(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

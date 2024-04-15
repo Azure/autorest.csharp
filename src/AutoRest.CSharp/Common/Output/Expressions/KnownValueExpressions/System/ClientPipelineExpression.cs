@@ -11,20 +11,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
     internal sealed record ClientPipelineExpression(ValueExpression Untyped) : TypedValueExpression<ClientPipeline>(Untyped)
     {
-        public PipelineMessageExpression CreateMessage(RequestOptionsExpression requestContext, ValueExpression responseClassifier) => new(Invoke(nameof(ClientPipeline.CreateMessage), requestContext, responseClassifier));
-        public PipelineResponseExpression ProcessMessage(TypedValueExpression message, RequestOptionsExpression? requestContext, CancellationTokenExpression? cancellationToken, bool async)
+        public PipelineMessageExpression CreateMessage(RequestOptionsExpression requestOptions, ValueExpression responseClassifier) => new(Invoke(nameof(ClientPipeline.CreateMessage), requestOptions, responseClassifier));
+
+        public PipelineResponseExpression ProcessMessage(TypedValueExpression message, RequestOptionsExpression? requestOptions, bool async)
         {
             var arguments = new List<ValueExpression>
             {
                 Untyped,
                 message,
-                requestContext ?? Snippets.Null
+                requestOptions ?? Snippets.Null
             };
-
-            if (cancellationToken != null)
-            {
-                arguments.Add(cancellationToken);
-            }
 
             return ClientPipelineExtensionsProvider.Instance.ProcessMessage(arguments, async);
         }

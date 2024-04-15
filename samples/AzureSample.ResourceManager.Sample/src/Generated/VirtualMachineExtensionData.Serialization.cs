@@ -128,7 +128,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue<VirtualMachineExtensionInstanceView>(InstanceView, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

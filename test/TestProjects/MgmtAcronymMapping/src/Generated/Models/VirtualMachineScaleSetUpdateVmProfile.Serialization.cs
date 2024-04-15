@@ -18,32 +18,32 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateOSProfile>(OSProfile);
+                writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateStorageProfile>(StorageProfile);
+                writer.WriteObjectValue(StorageProfile);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetUpdateNetworkProfile>(NetworkProfile);
+                writer.WriteObjectValue(NetworkProfile);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue<SecurityProfile>(SecurityProfile);
+                writer.WriteObjectValue(SecurityProfile);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue<DiagnosticsProfile>(DiagnosticsProfile);
+                writer.WriteObjectValue(DiagnosticsProfile);
             }
             if (Optional.IsDefined(ExtensionProfile))
             {
                 writer.WritePropertyName("extensionProfile"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetExtensionProfile>(ExtensionProfile);
+                writer.WriteObjectValue(ExtensionProfile);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -53,12 +53,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                writer.WriteObjectValue<BillingProfile>(BillingProfile);
+                writer.WriteObjectValue(BillingProfile);
             }
             if (Optional.IsDefined(ScheduledEventsProfile))
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
-                writer.WriteObjectValue<ScheduledEventsProfile>(ScheduledEventsProfile);
+                writer.WriteObjectValue(ScheduledEventsProfile);
             }
             writer.WriteEndObject();
         }

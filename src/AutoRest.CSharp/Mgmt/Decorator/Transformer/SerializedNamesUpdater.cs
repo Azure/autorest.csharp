@@ -2,16 +2,14 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class SerializedNamesUpdater
     {
-        public static void Update()
+        public static void Update(CodeModel codeModel)
         {
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 switch (schema)
                 {

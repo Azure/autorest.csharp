@@ -74,9 +74,9 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<BaseModel>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             writer.WritePropertyName("requiredModel2"u8);
-            writer.WriteObjectValue<BaseModel>(RequiredModel2, options);
+            writer.WriteObjectValue(RequiredModel2, options);
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
@@ -95,7 +95,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                writer.WriteObjectValue<CollectionItem>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -103,7 +103,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<RecordItem>(item.Value, options);
+                writer.WriteObjectValue(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -178,7 +178,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -210,7 +210,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        writer.WriteObjectValue<CollectionItem>(item, options);
+                        writer.WriteObjectValue(item, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -653,11 +653,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -51,8 +51,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAndAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -65,8 +65,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAnd(content, context);
             return response;
         }
@@ -157,8 +157,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAsAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -171,8 +171,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAs(content, context);
             return response;
         }
@@ -263,8 +263,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAssertAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -277,8 +277,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAssert(content, context);
             return response;
         }
@@ -369,8 +369,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAsyncAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -383,8 +383,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAsync(content, context);
             return response;
         }
@@ -475,8 +475,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAwaitAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -489,8 +489,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAwait(content, context);
             return response;
         }
@@ -581,8 +581,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithBreakAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -595,8 +595,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithBreak(content, context);
             return response;
         }
@@ -687,8 +687,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithClassAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -701,8 +701,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithClass(content, context);
             return response;
         }
@@ -793,8 +793,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithConstructorAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -807,8 +807,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithConstructor(content, context);
             return response;
         }
@@ -899,8 +899,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithContinueAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -913,8 +913,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithContinue(content, context);
             return response;
         }
@@ -1005,8 +1005,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithDefAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1019,8 +1019,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithDef(content, context);
             return response;
         }
@@ -1111,8 +1111,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithDelAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1125,8 +1125,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithDel(content, context);
             return response;
         }
@@ -1217,8 +1217,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithElifAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1231,8 +1231,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithElif(content, context);
             return response;
         }
@@ -1323,8 +1323,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithElseAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1337,8 +1337,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithElse(content, context);
             return response;
         }
@@ -1429,8 +1429,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithExceptAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1443,8 +1443,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithExcept(content, context);
             return response;
         }
@@ -1535,8 +1535,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithExecAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1549,8 +1549,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithExec(content, context);
             return response;
         }
@@ -1641,8 +1641,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithFinallyAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1655,8 +1655,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFinally(content, context);
             return response;
         }
@@ -1747,8 +1747,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithForAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1761,8 +1761,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFor(content, context);
             return response;
         }
@@ -1853,8 +1853,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithFromAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1867,8 +1867,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFrom(content, context);
             return response;
         }
@@ -1959,8 +1959,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithGlobalAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -1973,8 +1973,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithGlobal(content, context);
             return response;
         }
@@ -2065,8 +2065,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithIfAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2079,8 +2079,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIf(content, context);
             return response;
         }
@@ -2171,8 +2171,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithImportAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2185,8 +2185,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithImport(content, context);
             return response;
         }
@@ -2277,8 +2277,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithInAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2291,8 +2291,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIn(content, context);
             return response;
         }
@@ -2383,8 +2383,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithIsAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2397,8 +2397,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIs(content, context);
             return response;
         }
@@ -2489,8 +2489,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithLambdaAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2503,8 +2503,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithLambda(content, context);
             return response;
         }
@@ -2595,8 +2595,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithNotAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2609,8 +2609,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithNot(content, context);
             return response;
         }
@@ -2701,8 +2701,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithOrAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2715,8 +2715,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithOr(content, context);
             return response;
         }
@@ -2807,8 +2807,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithPassAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2821,8 +2821,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithPass(content, context);
             return response;
         }
@@ -2913,8 +2913,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithRaiseAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -2927,8 +2927,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithRaise(content, context);
             return response;
         }
@@ -3019,8 +3019,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithReturnAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -3033,8 +3033,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithReturn(content, context);
             return response;
         }
@@ -3125,8 +3125,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithTryAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -3139,8 +3139,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithTry(content, context);
             return response;
         }
@@ -3231,8 +3231,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithWhileAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -3245,8 +3245,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithWhile(content, context);
             return response;
         }
@@ -3337,8 +3337,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithWithAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -3351,8 +3351,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithWith(content, context);
             return response;
         }
@@ -3443,8 +3443,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithYieldAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -3457,8 +3457,8 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithYield(content, context);
             return response;
         }

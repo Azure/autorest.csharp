@@ -33,13 +33,13 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Choices)
             {
-                writer.WriteObjectValue<CreateChatCompletionResponseChoice>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
-                writer.WriteObjectValue<CompletionUsage>(Usage, options);
+                writer.WriteObjectValue(Usage, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -183,8 +183,8 @@ namespace OpenAI.Models
             return DeserializeCreateChatCompletionResponse(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }

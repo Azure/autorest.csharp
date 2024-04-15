@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -25,14 +26,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
         private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
+            // non-azure libraries do not need this type
+            Debug.Assert(Configuration.IsBranded);
+
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _requestBodyType = Configuration.ApiTypes.RequestContentType;
             _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
 
         protected override string DefaultName => "RequestContentHelper";
-
-        protected override string DefaultAccessibility { get; } = "internal";
 
         protected override IEnumerable<Method> BuildMethods()
         {
