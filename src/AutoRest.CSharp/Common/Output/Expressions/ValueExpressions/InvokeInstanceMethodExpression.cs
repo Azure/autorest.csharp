@@ -7,11 +7,12 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
     // [TODO]: AddConfigureAwaitFalse is needed only in docs. Consider removing.
-    internal record InvokeInstanceMethodExpression(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, IReadOnlyList<CSharpType>? TypeArguments, bool CallAsAsync, bool AddConfigureAwaitFalse = true, bool EnsureCompleted = false) : ValueExpression
+    internal record InvokeInstanceMethodExpression(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, IReadOnlyList<CSharpType>? TypeArguments, bool CallAsAsync, bool AddConfigureAwaitFalse = true) : ValueExpression
     {
         public InvokeInstanceMethodExpression(ValueExpression? instanceReference, MethodSignature signature, IReadOnlyList<ValueExpression> arguments, bool addConfigureAwaitFalse = true)
             : this(instanceReference, signature.Name, arguments, signature.GenericArguments, signature.Modifiers.HasFlag(MethodSignatureModifiers.Async), addConfigureAwaitFalse) { }
@@ -35,7 +36,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             writer.WriteTypeArguments(TypeArguments);
             writer.WriteArguments(Arguments);
             writer.AppendRawIf(".ConfigureAwait(false)", CallAsAsync && AddConfigureAwaitFalse);
-            writer.AppendRawIf(".EnsureCompleted()", !CallAsAsync && EnsureCompleted);
         }
     }
 }

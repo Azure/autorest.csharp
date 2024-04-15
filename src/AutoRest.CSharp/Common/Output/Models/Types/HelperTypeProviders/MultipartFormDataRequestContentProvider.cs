@@ -2,14 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
@@ -18,15 +15,10 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
-using Humanizer;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using YamlDotNet.Core.Tokens;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using MultipartFormDataContent = System.Net.Http.MultipartFormDataContent;
 
@@ -39,6 +31,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         public static MultipartFormDataRequestContentProvider Instance => _instance.Value;
         private MultipartFormDataRequestContentProvider() : base(Configuration.HelperNamespace, null)
         {
+            DeclarationModifiers = TypeSignatureModifiers.Internal;
             Inherits = Configuration.ApiTypes.RequestContentType;
             _multipartContentField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly,
@@ -47,7 +40,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             _randomField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(Random),
-                name: "_random");
+                name: "_random",
+                initializationValue: New.Instance(typeof(Random), Array.Empty<ValueExpression>()),
+                serializationFormat: SerializationFormat.Default);
             _boundaryValuesFields = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(char[]),
@@ -63,8 +58,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 name: _contentTypePropertyName,
                 propertyBody: new MethodPropertyBody(new MethodBodyStatement[]
                 {
-                    /*TODO add parameter validation*/
-                    //ValueExpression ContentDispositionHeaderExpression = ((ValueExpression)_multipartContentField).Property("Headers").Property("ContentType");
                     Return(contentTypeHeaderValueExpression)
                 }));
             _httpContentProperty = new PropertyDeclaration(
@@ -74,6 +67,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 name: _httpContentPropertyName,
                 propertyBody: new ExpressionPropertyBody(_multipartContentField)
                 );
+            _multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
         }
         private readonly FieldDeclaration _multipartContentField;
         private readonly FieldDeclaration _randomField;
@@ -87,6 +81,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _createBoundaryMethodName = "CreateBoundary";
         private const string _addMethodName = "Add";
         private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
+
+        private readonly MultipartFormDataContentExpression _multipartContentExpression;
         //private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(BinaryContent.WriteToAsync);
         //private static readonly string WriteTo = Configuration.IsBranded ? nameof(RequestContent.WriteTo) : nameof(BinaryContent.WriteTo);
         //private static readonly string TryComputeLength = Configuration.IsBranded ? nameof(RequestContent.TryComputeLength) : nameof(BinaryContent.TryComputeLength);
@@ -194,7 +190,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     nameParam,
                     filenameParam,
                 });
-            ValueExpression? valueExpression = null;
             MethodBodyStatement? valueDelareStatement = null;
             ValueExpression contentExpression;
             contentExpression = New.Instance(typeof(ByteArrayContent), contentParam);
@@ -206,16 +201,20 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 case Type type when type == typeof(string):
                     contentExpression = New.Instance(typeof(StringContent), contentParam);
                     break;
+                case Type btype when btype == typeof(bool):
+                    var boolToStringValue = new TernaryConditionalOperator(contentParam, Literal("true"), Literal("false"));
+                    valueDelareStatement = Declare(typeof(string), "value", boolToStringValue, out TypedValueExpression boolVariable);
+                    contentExpression = New.Instance(typeof(StringContent), boolVariable);
+                    break;
                 case Type itype when itype == typeof(int):
                 case Type ftype when ftype == typeof(float):
                 case Type ltype when ltype == typeof(long):
                 case Type dtype when dtype == typeof(double):
                 case Type detype when detype == typeof(decimal):
                     ValueExpression invariantCulture = new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture));
-                    var sta = new InvokeInstanceMethodExpression(contentParam, nameof(Int32.ToString), new[] {Literal("G"), invariantCulture }, null, false);
-                    valueDelareStatement = Declare(typeof(string), "value", sta, out TypedValueExpression variable);
-                    valueExpression = variable;
-                    contentExpression = New.Instance(typeof(ByteArrayContent), valueExpression);
+                    var invariantCultureValue = new InvokeInstanceMethodExpression(contentParam, nameof(Int32.ToString), new[] {Literal("G"), invariantCulture }, null, false);
+                    valueDelareStatement = Declare(typeof(string), "value", invariantCultureValue, out TypedValueExpression variable);
+                    contentExpression = New.Instance(typeof(StringContent), variable);
                     break;
                 case Type bdtype when bdtype == typeof(BinaryData):
                     contentExpression = New.Instance(typeof(ByteArrayContent), new BinaryDataExpression(contentParam).ToArray());
@@ -233,7 +232,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 Argument.AssertNotNullOrEmpty(nameParam),
                 new EmptyLineStatement(),
                 addContentStatements.ToArray(),
-                //new InvokeInstanceMethodStatement(null, _addMethodName, new[]{contentExpression, nameParam, filenameParam}, false)
             };
             return new Method(signature, body);
         }
@@ -284,11 +282,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     contentParam,
                     nameParam,
                     filenameParam,
-                    /*
-                    new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null),
-                    new Parameter("name", null, typeof(string),null, ValidationType.None, null),
-                    new Parameter("filename", null, typeof(string), null, ValidationType.None, null),
-                    */
                 });
             var initialProperties = new Dictionary<string, ValueExpression>
             {
@@ -337,7 +330,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private Method BuildWriteToMethod()
         {
             var streamParam = new Parameter("stream", null, typeof(Stream), null, ValidationType.None, null);
-            var cancellationTokenParam = new Parameter("cancellationToken ", null, typeof(CancellationToken), null, ValidationType.None, null);
+            var streamExpression = (ValueExpression)streamParam;
+            var cancellationTokenParam = KnownParameters.CancellationTokenParameter;
+            var cancellatinTokenExpression = (ValueExpression)cancellationTokenParam;
             var signature = new MethodSignature(
                 Name: "WriteTo",
                 Summary: null,
@@ -354,11 +349,13 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             {
                 new IfElsePreprocessorDirective(
                     "NET6_0_OR_GREATER",
-                    new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyTo), new[] { (ValueExpression)streamParam, Snippets.Default ,cancellationTokenParam }, false),
+                    /*_multipartContent.CopyTo(stream, default, cancellationToken );*/
+                    new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyTo), new[] { streamExpression, Snippets.Default ,cancellatinTokenExpression }, false),
                     new MethodBodyStatement[]
                     {
                         new PragmaWarningPreprocessorDirective("disable", "AZC0107"),
-                        new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyToAsync), new[] { (ValueExpression)streamParam}, false, true),
+                        /*_multipartContent.CopyToAsync(stream).EnsureCompleted();*/
+                        new InvokeStaticMethodStatement(typeof(Azure.Core.Pipeline.TaskExtensions), "EnsureCompleted",new[]{ _multipartContentExpression.CopyToAsyncExpression(streamParam) }, CallAsExtension: false),
                         new PragmaWarningPreprocessorDirective("restore", "AZC0107")
                     }
                     ),
@@ -369,7 +366,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private Method BuildWriteToAsyncMethod()
         {
             var streamParam = new Parameter("stream", null, typeof(Stream), null, ValidationType.None, null);
-            var cancellationTokenParam = new Parameter("cancellationToken ", null, typeof(CancellationToken), null, ValidationType.None, null);
+            var streamExpression = (ValueExpression)streamParam;
+            var cancellationTokenParam = KnownParameters.CancellationTokenParameter;
+            var cancellatinTokenExpression = (ValueExpression)cancellationTokenParam;
+            //var multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
             var signature = new MethodSignature(
                 Name: "WriteToAsync",
                 Summary: null,
@@ -386,8 +386,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             {
                 new IfElsePreprocessorDirective(
                     "NET6_0_OR_GREATER",
-                    new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyToAsync), new[] { (ValueExpression)streamParam,cancellationTokenParam }, true),
-                    new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyToAsync), new[] { (ValueExpression)streamParam }, true))
+                    /*await _multipartContent.CopyToAsync(stream, cancellationToken).ConfigureAwait(false);,*/
+                    _multipartContentExpression.CopyToAsync(streamExpression, cancellatinTokenExpression, true),
+                    /*await _multipartContent.CopyToAsync(stream).ConfigureAwait(false);*/
+                    _multipartContentExpression.CopyToAsync(streamExpression, true)
+                    )
             };
             return new Method(signature, body);
         }
@@ -414,15 +417,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             => new InvokeInstanceMethodStatement (null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
         public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name)
         {
-            //DeclarationExpression multipartContentDeclarationExpression = new(multipartContent, false);
             return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name }, false);
-            //return new InvokeStaticMethodStatement(Type, _addMethodName, new ValueExpression[] { contentvalue, name });
         }
         public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename)
         {
-            //DeclarationExpression multipartContentDeclarationExpression = new(multipartContent, false);
             return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename }, false);
-            //return new InvokeStaticMethodStatement(Type, _addMethodName, new ValueExpression[] { contentvalue, name });
         }
+        public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
     }
 }
