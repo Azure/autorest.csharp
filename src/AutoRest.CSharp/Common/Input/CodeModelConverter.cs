@@ -23,6 +23,9 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
 
+        // TO-REMOVE: A temporary solution
+        public Dictionary<Schema, InputEnumType> EnumsCache => _enumsCache;
+
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
             _codeModel = codeModel;

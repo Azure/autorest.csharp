@@ -47,8 +47,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
                     CodeModelTransformer.TransformForMgmt(codeModel);
+                    var codeModelConverter = new CodeModelConverter(codeModel, schemaUsageProvider);
+                    codeModelConverter.CreateNamespace();
+                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider) { MgmtCodeModelConverter = codeModelConverter });
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel, schemaUsageProvider);
