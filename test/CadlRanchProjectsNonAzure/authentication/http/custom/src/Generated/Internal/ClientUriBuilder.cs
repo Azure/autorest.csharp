@@ -14,6 +14,7 @@ namespace Scm.Authentication.Http.Custom
         private UriBuilder _uriBuilder;
         private StringBuilder _pathBuilder;
         private StringBuilder _queryBuilder;
+        private const char PathSeparator = '/';
 
         public ClientUriBuilder()
         {
@@ -39,6 +40,11 @@ namespace Scm.Authentication.Http.Custom
             if (escape)
             {
                 value = Uri.EscapeDataString(value);
+            }
+
+            if (value[0] == PathSeparator && PathBuilder.Length > 0 && PathBuilder[PathBuilder.Length - 1] == PathSeparator)
+            {
+                value = value.Substring(1);
             }
 
             PathBuilder.Append(value);
