@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -41,28 +40,24 @@ namespace OpenAI
         }
 
         /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest)
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
             using BinaryContent content = createCompletionRequest.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest)
         {
             Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
             using BinaryContent content = createCompletionRequest.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Create(content, options);
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -76,7 +71,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -104,7 +99,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateCompletionRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -140,17 +135,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

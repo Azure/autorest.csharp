@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -42,29 +41,25 @@ namespace OpenAI
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));
 
             using BinaryContent content0 = content.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateAsync(content0, options).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(content0, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)
+        public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));
 
             using BinaryContent content0 = content.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Create(content0, options);
+            ClientResult result = Create(content0, null);
             return ClientResult.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +73,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateModerationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateModerationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +101,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateModerationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateModerationRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -142,17 +137,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

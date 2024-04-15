@@ -6,7 +6,6 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;
 
@@ -109,18 +108,16 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
             using BinaryContent content = action.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await HelloAgainAsync(p2, p1, content, options).ConfigureAwait(false);
+            ClientResult result = await HelloAgainAsync(p2, p1, content, null).ConfigureAwait(false);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -128,18 +125,16 @@ namespace UnbrandedTypeSpec
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        public virtual ClientResult<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
             using BinaryContent content = action.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = HelloAgain(p2, p1, content, options);
+            ClientResult result = HelloAgain(p2, p1, content, null);
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -153,7 +148,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -186,7 +181,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -266,20 +261,16 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await HelloDemo2Async(options).ConfigureAwait(false);
+            ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<Thing> HelloDemo2(CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> HelloDemo2()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = HelloDemo2(options);
+            ClientResult result = HelloDemo2(null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -293,7 +284,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloDemo2Async()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -317,7 +308,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloDemo2()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -333,29 +324,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateLiteralAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await CreateLiteralAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> CreateLiteral(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = CreateLiteral(content, options);
+            ClientResult result = CreateLiteral(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -369,7 +356,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateLiteralAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateLiteralAsync(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -397,7 +384,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateLiteral(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -416,20 +403,16 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await HelloLiteralAsync(options).ConfigureAwait(false);
+            ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<Thing> HelloLiteral(CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> HelloLiteral()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = HelloLiteral(options);
+            ClientResult result = HelloLiteral(null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -443,7 +426,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloLiteralAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloLiteralAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -467,7 +450,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloLiteral()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -483,21 +466,17 @@ namespace UnbrandedTypeSpec
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await TopActionAsync(action, options).ConfigureAwait(false);
+            ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = TopAction(action, options);
+            ClientResult result = TopAction(action, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -511,7 +490,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -536,7 +515,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopAction(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopAction(DateTimeOffset)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -637,29 +616,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
             using BinaryContent content = thing.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await AnonymousBodyAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await AnonymousBodyAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        public virtual ClientResult<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> AnonymousBody(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
             using BinaryContent content = thing.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = AnonymousBody(content, options);
+            ClientResult result = AnonymousBody(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -673,7 +648,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -701,7 +676,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -721,29 +696,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual async Task<ClientResult<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Friend>> FriendlyModelAsync(Friend friend)
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
             using BinaryContent content = friend.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await FriendlyModelAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual ClientResult<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Friend> FriendlyModel(Friend friend)
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
             using BinaryContent content = friend.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = FriendlyModel(content, options);
+            ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -757,7 +728,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(Friend)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -785,7 +756,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(Friend)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -844,30 +815,26 @@ namespace UnbrandedTypeSpec
         /// <summary> parameter has string format. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await StringFormatAsync(subscriptionId, content, options).ConfigureAwait(false);
+            ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> parameter has string format. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = StringFormat(subscriptionId, content, options);
+            ClientResult result = StringFormat(subscriptionId, content, null);
             return result;
         }
 
@@ -881,7 +848,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StringFormatAsync(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -910,7 +877,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StringFormat(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StringFormat(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -931,29 +898,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             using BinaryContent content = projectedModel.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await ProjectedNameModelAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await ProjectedNameModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        public virtual ClientResult<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        public virtual ClientResult<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
 
             using BinaryContent content = projectedModel.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = ProjectedNameModel(content, options);
+            ClientResult result = ProjectedNameModel(content, null);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -967,7 +930,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModelAsync(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProjectedNameModelAsync(ProjectedModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -995,7 +958,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModel(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProjectedNameModel(ProjectedModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1014,20 +977,16 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> return anonymous model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await ReturnsAnonymousModelAsync(options).ConfigureAwait(false);
+            ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = ReturnsAnonymousModel(options);
+            ClientResult result = ReturnsAnonymousModel(null);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1041,7 +1000,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ReturnsAnonymousModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ReturnsAnonymousModelAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1065,7 +1024,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ReturnsAnonymousModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ReturnsAnonymousModel()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1127,29 +1086,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await InternalProtocolAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await InternalProtocolAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Thing> InternalProtocol(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = body.ToBinaryContent();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = InternalProtocol(content, options);
+            ClientResult result = InternalProtocol(content, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1200,20 +1155,16 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult> StillConvenientValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await StillConvenientAsync(options).ConfigureAwait(false);
+            ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult StillConvenientValue(CancellationToken cancellationToken = default)
+        public virtual ClientResult StillConvenientValue()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = StillConvenient(options);
+            ClientResult result = StillConvenient(null);
             return result;
         }
 
@@ -1309,29 +1260,25 @@ namespace UnbrandedTypeSpec
 
         /// <summary> put array. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> PutArrayAsync(IEnumerable<string> body, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult> PutArrayAsync(IEnumerable<string> body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await PutArrayAsync(content, options).ConfigureAwait(false);
+            ClientResult result = await PutArrayAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> put array. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult PutArray(IEnumerable<string> body, CancellationToken cancellationToken = default)
+        public virtual ClientResult PutArray(IEnumerable<string> body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = PutArray(content, options);
+            ClientResult result = PutArray(content, null);
             return result;
         }
 
@@ -1345,7 +1292,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutArrayAsync(IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutArrayAsync(IEnumerable{string})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1373,7 +1320,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutArray(IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutArray(IEnumerable{string})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1788,17 +1735,6 @@ namespace UnbrandedTypeSpec
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;
