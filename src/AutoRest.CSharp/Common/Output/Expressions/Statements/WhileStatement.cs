@@ -4,12 +4,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record ForStatement(AssignmentExpression? IndexerAssignment, BoolExpression? Condition, ValueExpression? IncrementExpression) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
+    internal record WhileStatement(BoolExpression Condition) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
     {
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
@@ -22,16 +21,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         {
             using (writer.AmbientScope())
             {
-                writer.AppendRaw("for (");
-                IndexerAssignment?.Write(writer);
-                writer.AppendRaw("; ");
-                Condition?.Write(writer);
-                writer.AppendRaw("; ");
-                IncrementExpression?.Write(writer);
+                writer.AppendRaw("while (");
+                Condition.Write(writer);
                 writer.LineRaw(")");
 
                 writer.LineRaw("{");
-                writer.LineRaw("");
                 foreach (var bodyStatement in Body)
                 {
                     bodyStatement.Write(writer);
