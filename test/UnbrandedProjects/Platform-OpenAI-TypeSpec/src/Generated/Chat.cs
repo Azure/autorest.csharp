@@ -14,7 +14,7 @@ namespace OpenAI
     public partial class Chat
     {
         private const string AuthorizationHeader = "Authorization";
-        private readonly ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _credential;
         private const string AuthorizationApiKeyPrefix = "Bearer";
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,12 +29,12 @@ namespace OpenAI
 
         /// <summary> Initializes a new instance of Chat. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="credential"> The key credential to copy. </param>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        internal Chat(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
+        internal Chat(ClientPipeline pipeline, ApiKeyCredential credential, Uri endpoint)
         {
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
+            _credential = credential;
             _endpoint = endpoint;
         }
 
@@ -43,7 +43,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of ChatCompletions. </summary>
         public virtual ChatCompletions GetChatCompletionsClient()
         {
-            return Volatile.Read(ref _cachedChatCompletions) ?? Interlocked.CompareExchange(ref _cachedChatCompletions, new ChatCompletions(_pipeline, _keyCredential, _endpoint), null) ?? _cachedChatCompletions;
+            return Volatile.Read(ref _cachedChatCompletions) ?? Interlocked.CompareExchange(ref _cachedChatCompletions, new ChatCompletions(_pipeline, _credential, _endpoint), null) ?? _cachedChatCompletions;
         }
     }
 }

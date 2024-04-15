@@ -15,7 +15,7 @@ namespace UnbrandedTypeSpec
     public partial class UnbrandedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
-        private readonly ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _credential;
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -46,8 +46,8 @@ namespace UnbrandedTypeSpec
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new UnbrandedTypeSpecClientOptions();
 
-            _keyCredential = credential;
-            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
+            _credential = credential;
+            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_credential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
             _endpoint = endpoint;
         }
 
