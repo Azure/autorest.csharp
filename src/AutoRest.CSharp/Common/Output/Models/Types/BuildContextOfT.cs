@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library, typeof(BinaryData));
 
+        // TO-REMOVE: A temporary solution
         public CodeModelConverter? MgmtCodeModelConverter { get; set; }
     }
 }
