@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, IReadOnlyList<string>? RequestMediaTypes, IReadOnlyList<string>? ResponseMediaTypes, Diagnostic? Diagnostic, bool IsPageable, bool IsLongRunning, string? Deprecated)
     {
-        private record ConvenienceParameterInfo(Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
+        private record ConvenienceParameterInfo(Parameter? Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
         public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics)
         {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models
             var protocolInvocationExpressions = new List<ValueExpression>();
             foreach (var protocol in protocolMethod.Parameters)
             {
-                var (convenience, convenienceSpread) = parametersDict[protocol.Name]; // TODO -- maybe change it to name as keys?
+                var (convenience, convenienceSpread) = parametersDict[protocol.Name];
                 if (protocol == KnownParameters.RequestContext || protocol == KnownParameters.RequestContextRequired)
                 {
                     // convert cancellationToken to request context
@@ -46,18 +46,15 @@ namespace AutoRest.CSharp.Output.Models
                         yield return Declare(context, new InvokeStaticMethodExpression(null, "FromCancellationToken", new ValueExpression[] { convenience }));
                         protocolInvocationExpressions.Add(context);
                     }
-                    else if (!protocol.IsOptionalInSignature)
-                    {
-                        // when we do not have a cancellationToken, and the requestContext parameter is required in protocol signature, we pass a null
-                        protocolInvocationExpressions.Add(Null.CastTo(protocol.Type));
-                    }
                     else
                     {
-                        // do nothing
+                        // if convenience parameter is null here, we just use the default value of the protocol parameter as value (we always do this even if the parameter is optional just in case there is an ordering issue)
+                        protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
                     }
                 }
                 else if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.RequestContentNullable)
                 {
+                    Debug.Assert(convenience is not null);
                     // convert body to request content
                     if (convenienceSpread == null)
                     {
@@ -75,10 +72,17 @@ namespace AutoRest.CSharp.Output.Models
                 else
                 {
                     // process any other parameter
-                    // in this case, convenience parameter should never be null
-                    Debug.Assert(convenience is not null);
-                    var expression = convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault());
-                    protocolInvocationExpressions.Add(expression);
+                    if (convenience != null)
+                    {
+                        // if convenience parameter is not null here, we convert it to protocol parameter value properly
+                        var expression = convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault());
+                        protocolInvocationExpressions.Add(expression);
+                    }
+                    else
+                    {
+                        // if convenience parameter is null here, we just use the default value of the protocol parameter as value (we always do this even if the parameter is optional just in case there is an ordering issue)
+                        protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
+                    }
                 }
             }
 
@@ -210,7 +214,7 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
-    internal record ProtocolToConvenienceParameterConverter(Parameter Protocol, Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
+    internal record ProtocolToConvenienceParameterConverter(Parameter Protocol, Parameter? Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
     internal record ConvenienceParameterSpread(ModelTypeProvider BackingModel, IReadOnlyList<Parameter> SpreadedParameters);
 }
