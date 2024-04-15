@@ -400,6 +400,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (method.ConvenienceMethod is not null)
             {
                 if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
+                    method.ConvenienceMethod.Signature.Parameters.Count > 0 &&
                     !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
                 {
                     bool allEqual = true;
