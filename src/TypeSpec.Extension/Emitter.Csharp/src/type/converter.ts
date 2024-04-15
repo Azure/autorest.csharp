@@ -233,7 +233,8 @@ export function fromSdkEnumType(
             EnumValueType: fromScalarType(enumType.valueType).Name,
             AllowedValues: enumType.values.map((v) => fromSdkEnumValueType(v)),
             Namespace: getFullNamespaceString(
-                (enumType.__raw! as Enum).namespace
+                // Enum and Union have optional namespace property
+                (enumType.__raw! as any).namespace
             ),
             Accessibility: enumType.access,
             Deprecated: enumType.deprecation,
