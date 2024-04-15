@@ -65,13 +65,15 @@ namespace CadlRanchProjects.Tests
             var response = await new NamingClient(host, null).ResponseAsync();
             var results = response.Headers.Contains("default-name");
             Assert.AreEqual(true, results);
-            var list = response.Headers.GetEnumerator();
-            list.MoveNext();
-            list.MoveNext();
-            var key = list.Current.Name;
-            Assert.AreEqual("default-name", key);
-            var name = list.Current.Value;
-            Assert.AreEqual("true", name);
+            foreach (var header in response.Headers)
+            {
+                var key = header.Name;
+                if (key == "default-name")
+                {
+                    var value = header.Value;
+                    Assert.AreEqual("true", value);
+                }
+            }
         });
 
         [Test]
