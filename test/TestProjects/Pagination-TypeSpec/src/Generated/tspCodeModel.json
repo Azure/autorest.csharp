@@ -428,7 +428,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": false
         },
         {
          "$id": "56",
@@ -509,7 +509,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": false
         },
         {
          "$id": "66",

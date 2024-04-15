@@ -46,12 +46,15 @@ namespace Pagination.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextBlockItem"/>. </summary>
+        /// <param name="blockItemId"> Block Item Id. It will be uuid. </param>
         /// <param name="text"> Block item content. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        internal TextBlockItem(string text)
+        /// <exception cref="ArgumentNullException"> <paramref name="blockItemId"/> or <paramref name="text"/> is null. </exception>
+        internal TextBlockItem(string blockItemId, string text)
         {
+            Argument.AssertNotNull(blockItemId, nameof(blockItemId));
             Argument.AssertNotNull(text, nameof(text));
 
+            BlockItemId = blockItemId;
             Text = text;
         }
 

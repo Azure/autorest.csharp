@@ -28,7 +28,8 @@ import {
     SdkDurationType,
     UsageFlags,
     SdkBuiltInKinds,
-    isSdkBuiltInKind
+    isSdkBuiltInKind,
+    isReadOnly
 } from "@azure-tools/typespec-client-generator-core";
 import {
     InputDictionaryType,
@@ -646,11 +647,6 @@ function fromSdkModelPropertyType(
         propertyType.kind === "path" || propertyType.kind === "body"
             ? true
             : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
-    const isReadOnly =
-        propertyType.kind === "property" &&
-        propertyType.visibility?.includes(Visibility.Read)
-            ? true
-            : false;
     const isDiscriminator =
         propertyType.kind === "property" && propertyType.discriminator
             ? true
@@ -669,7 +665,7 @@ function fromSdkModelPropertyType(
             literalTypeContext
         ),
         IsRequired: isRequired,
-        IsReadOnly: isReadOnly,
+        IsReadOnly: propertyType.kind === "property" && isReadOnly(propertyType),
         IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
     };
 

@@ -46,8 +46,13 @@ namespace Pagination.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextBlocklist"/>. </summary>
-        internal TextBlocklist()
+        /// <param name="blocklistName"> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="blocklistName"/> is null. </exception>
+        internal TextBlocklist(string blocklistName)
         {
+            Argument.AssertNotNull(blocklistName, nameof(blocklistName));
+
+            BlocklistName = blocklistName;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextBlocklist"/>. </summary>
@@ -59,6 +64,11 @@ namespace Pagination.Models
             BlocklistName = blocklistName;
             Description = description;
             _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TextBlocklist"/> for deserialization. </summary>
+        internal TextBlocklist()
+        {
         }
 
         /// <summary> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </summary>
