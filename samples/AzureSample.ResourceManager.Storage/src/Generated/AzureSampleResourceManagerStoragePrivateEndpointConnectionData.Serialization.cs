@@ -28,7 +28,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue<AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState>(ConnectionState);
+                writer.WriteObjectValue(ConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

@@ -52,7 +52,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<CustomizedModel>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -102,7 +102,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<RenamedModelStruct?>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -162,7 +162,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<SecondModel>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -222,7 +222,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<RenamedThirdModel>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;
@@ -282,7 +282,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<ModelWithArrayOfEnum>(body, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(body, new ModelReaderWriterOptions("W"));
                 request.Content = content;
             }
             return message;

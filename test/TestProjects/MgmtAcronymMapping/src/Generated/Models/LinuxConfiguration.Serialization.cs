@@ -23,7 +23,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                writer.WriteObjectValue<SshConfiguration>(Ssh);
+                writer.WriteObjectValue(Ssh);
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {

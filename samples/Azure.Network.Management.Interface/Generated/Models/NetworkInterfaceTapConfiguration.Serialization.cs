@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
-                writer.WriteObjectValue<VirtualNetworkTap>(VirtualNetworkTap);
+                writer.WriteObjectValue(VirtualNetworkTap);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -118,11 +118,11 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<NetworkInterfaceTapConfiguration>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

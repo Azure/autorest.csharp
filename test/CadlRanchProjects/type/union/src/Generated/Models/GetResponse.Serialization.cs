@@ -28,7 +28,7 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop.ToString());
+            writer.WriteObjectValue(Prop, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -67,14 +67,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            GetResponseProp prop = default;
+            MixedTypesCases prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = new GetResponseProp(property.Value.GetString());
+                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -125,11 +125,11 @@ namespace _Type.Union.Models
             return DeserializeGetResponse(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<GetResponse>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

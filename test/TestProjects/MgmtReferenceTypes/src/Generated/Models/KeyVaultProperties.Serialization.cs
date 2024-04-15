@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, KeyVaultProperties model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<KeyVaultProperties>(model);
+                writer.WriteObjectValue(model);
             }
 
             public override KeyVaultProperties Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue<VaultAccessPolicyProperties>(Properties);
+            writer.WriteObjectValue(Properties);
             writer.WriteEndObject();
         }
 

@@ -48,9 +48,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            writer.WriteObjectValue<ChildProduct>(Child, options);
+            writer.WriteObjectValue(Child, options);
             writer.WritePropertyName("constChild"u8);
-            writer.WriteObjectValue<ConstantProduct>(ConstChild, options);
+            writer.WriteObjectValue(ConstChild, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
@@ -224,11 +224,11 @@ namespace validation.Models
             return DeserializeProduct(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Product>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
     }

@@ -39,7 +39,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                writer.WriteObjectValue<Product>(ObjProperty, options);
+                writer.WriteObjectValue(ObjProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -153,11 +153,11 @@ namespace ModelWithConverterUsage.Models
             return DeserializeModelClass(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ModelClass>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
             return content;
         }
 
@@ -165,7 +165,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, ModelClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<ModelClass>(model, new ModelReaderWriterOptions("W"));
+                writer.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
             }
 
             public override ModelClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

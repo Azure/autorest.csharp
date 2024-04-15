@@ -36,12 +36,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                writer.WriteObjectValue<IndexingSchedule>(Schedule);
+                writer.WriteObjectValue(Schedule);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                writer.WriteObjectValue<IndexingParameters>(Parameters);
+                writer.WriteObjectValue(Parameters);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    writer.WriteObjectValue<FieldMapping>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    writer.WriteObjectValue<FieldMapping>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -203,11 +203,11 @@ namespace CognitiveSearch.Models
             return DeserializeIndexer(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Indexer>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

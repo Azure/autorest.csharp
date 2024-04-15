@@ -31,7 +31,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue<BootDiagnostics>(BootDiagnostics, options);
+                writer.WriteObjectValue(BootDiagnostics, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

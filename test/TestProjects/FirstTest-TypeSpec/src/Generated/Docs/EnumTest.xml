@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetUnknownValueAsync(RequestContext)">
+    <member name="CreateUnknownValueAsync(RequestContent,RequestContext)">
       <example>
-This sample shows how to call GetUnknownValueAsync and parse the result.
+This sample shows how to call CreateUnknownValueAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-Response response = await client.GetUnknownValueAsync(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = await client.CreateUnknownValueAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
+This sample shows how to call CreateUnknownValueAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-Response response = await client.GetUnknownValueAsync(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = await client.CreateUnknownValueAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="GetUnknownValue(RequestContext)">
+    <member name="CreateUnknownValue(RequestContent,RequestContext)">
       <example>
-This sample shows how to call GetUnknownValue and parse the result.
+This sample shows how to call CreateUnknownValue.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-Response response = client.GetUnknownValue(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = client.CreateUnknownValue(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call GetUnknownValue with all parameters and parse the result.
+This sample shows how to call CreateUnknownValue with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
-Response response = client.GetUnknownValue(null);
+using RequestContent content = RequestContent.Create("Monday");
+Response response = client.CreateUnknownValue(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

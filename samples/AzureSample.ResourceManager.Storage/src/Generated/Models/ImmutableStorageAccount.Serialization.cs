@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ImmutabilityPolicy))
             {
                 writer.WritePropertyName("immutabilityPolicy"u8);
-                writer.WriteObjectValue<AccountImmutabilityPolicyProperties>(ImmutabilityPolicy);
+                writer.WriteObjectValue(ImmutabilityPolicy);
             }
             writer.WriteEndObject();
         }

@@ -28,7 +28,7 @@ namespace OpenAI.Models
             if (Logprobs != null)
             {
                 writer.WritePropertyName("logprobs"u8);
-                writer.WriteObjectValue<CreateCompletionResponseChoiceLogprobs>(Logprobs, options);
+                writer.WriteObjectValue(Logprobs, options);
             }
             else
             {
@@ -155,8 +155,8 @@ namespace OpenAI.Models
             return DeserializeCreateCompletionResponseChoice(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
         }

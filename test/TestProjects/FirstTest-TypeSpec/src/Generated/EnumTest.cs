@@ -60,17 +60,21 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValueAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> CreateUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("EnumTest.GetUnknownValue");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("EnumTest.CreateUnknownValue");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                using HttpMessage message = CreateCreateUnknownValueRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -90,17 +94,21 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Response GetUnknownValue(RequestContext context)
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValue(RequestContent,RequestContext)']/*" />
+        public virtual Response CreateUnknownValue(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("EnumTest.GetUnknownValue");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("EnumTest.CreateUnknownValue");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                using HttpMessage message = CreateCreateUnknownValueRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -110,20 +118,22 @@ namespace FirstTestTypeSpec
             }
         }
 
-        internal HttpMessage CreateGetUnknownValueRequest(RequestContext context)
+        internal HttpMessage CreateCreateUnknownValueRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
-        private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier204;
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
     }
 }

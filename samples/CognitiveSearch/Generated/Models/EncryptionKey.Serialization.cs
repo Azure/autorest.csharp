@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                writer.WriteObjectValue<AzureActiveDirectoryApplicationCredentials>(AccessCredentials);
+                writer.WriteObjectValue(AccessCredentials);
             }
             writer.WriteEndObject();
         }
@@ -78,11 +78,11 @@ namespace CognitiveSearch.Models
             return DeserializeEncryptionKey(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<EncryptionKey>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

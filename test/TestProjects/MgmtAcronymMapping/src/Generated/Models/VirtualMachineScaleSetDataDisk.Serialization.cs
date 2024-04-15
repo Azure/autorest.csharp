@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<VirtualMachineScaleSetManagedDiskParameters>(ManagedDisk);
+                writer.WriteObjectValue(ManagedDisk);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {
