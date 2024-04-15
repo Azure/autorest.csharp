@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private const string MOCK_TEST_DEFAULT_OUTPUT_PATH = "/tests/Generated";
         private const string SAMPLE_DEFAULT_OUTPUT_PATH = "/samples/Generated";
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var sourceFolder = GetSourceFolder();
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
-                InitializeMgmtContext(codeModel, sourceInputModel);
+                InitializeMgmtContext(codeModel, sourceInputModel, schemaUsageProvider);
                 library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
                 project.AddDirectory(sourceFolder);
             }
@@ -63,9 +63,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel)
+        private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel, SchemaUsageProvider schemaUsageProvider)
         {
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel, schemaUsageProvider));
 
             // force trigger the model initialization
             foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)
