@@ -16,7 +16,7 @@ namespace _Specs_.Azure.Core.Traits.Models
 {
     public partial class UserActionResponse : IUtf8JsonSerializable, IJsonModel<UserActionResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionResponse>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UserActionResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         internal static UserActionResponse DeserializeUserActionResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +129,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

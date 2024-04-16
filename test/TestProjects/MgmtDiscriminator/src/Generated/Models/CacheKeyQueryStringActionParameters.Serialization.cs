@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class CacheKeyQueryStringActionParameters : IUtf8JsonSerializable, IJsonModel<CacheKeyQueryStringActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CacheKeyQueryStringActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CacheKeyQueryStringActionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<CacheKeyQueryStringActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -76,7 +76,7 @@ namespace MgmtDiscriminator.Models
 
         internal static CacheKeyQueryStringActionParameters DeserializeCacheKeyQueryStringActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

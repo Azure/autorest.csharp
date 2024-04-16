@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RemoteAddressMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RemoteAddressMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RemoteAddressMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RemoteAddressMatchConditionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RemoteAddressMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RemoteAddressMatchConditionParameters DeserializeRemoteAddressMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
