@@ -338,12 +338,11 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return new StringResponseBody();
             }
-            else if (response.BodyMediaType == BodyMediaType.Json)
-            {
-                InputType? schema = response.BodyType;
-                CSharpType responseType = _context.TypeFactory.CreateType(schema!).OutputType;
+            else if (response.BodyType != null)
+            {;
+                CSharpType responseType = _context.TypeFactory.CreateType(response.BodyType).OutputType;
 
-                ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, schema!, responseType, null);
+                ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, response.BodyType, responseType, null);
 
                 return new ObjectResponseBody(responseType, serialization);
             }

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
@@ -19,12 +18,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context, string? newName = default)
-            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel, newName)
+        public EnumType(InputEnumType enumType, BuildContext context)
+            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
         {
         }
 
-        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default)
+        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             : base(Configuration.Generation1ConvenienceClient ? input.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
         {
             IsEnum = true;
