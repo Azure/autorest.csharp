@@ -401,7 +401,7 @@ namespace CadlRanchProjects.Tests
             var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().GetUnionFloatLiteralAsync();
             var expected = BinaryData.FromObjectAsJson(46.875);
             var actual = response.Value.Property;
-            Assert.AreEqual(expected.ToString(), actual.ToString());
+            BinaryDataAssert.AreEqual(expected, actual);
         });
 
         [Test]
