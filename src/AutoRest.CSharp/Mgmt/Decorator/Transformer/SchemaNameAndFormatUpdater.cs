@@ -391,7 +391,6 @@ internal static class SchemaNameAndFormatUpdater
                 tempName = applyStep.NewName.Name;
             });
             choiceValue.Name = result.Name;
-            choiceValue.OriginalName ??= originalName;
         }
     }
 

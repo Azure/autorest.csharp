@@ -616,13 +616,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 shouldExcludeInWireSerialization);
         }
 
-        // TODO
-        protected override XmlObjectSerialization? BuildXmlSerialization() => null;
-        //{
-        //    return _inputModelSerialization.Xml is {} xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
-        //}
+        protected override XmlObjectSerialization? BuildXmlSerialization()
+        {
+            return _inputModelSerialization.Xml is {} xml? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
+        }
 
-        protected override bool EnsureIncludeSerializer()
+    protected override bool EnsureIncludeSerializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.
             return Configuration.UseModelReaderWriter || _inputModelUsage.HasFlag(InputModelTypeUsage.Input);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, false, Array.Empty<string>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, false, Array.Empty<string>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, false, Array.Empty<string>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 

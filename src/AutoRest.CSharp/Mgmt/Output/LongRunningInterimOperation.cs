@@ -40,7 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 null,
                 null,
-                false);
+                false,
+                Array.Empty<string>());
             InterimType = new CSharpType(new MgmtObjectType(targetSchema, TypeName, MgmtContext.DefaultNamespace));
         }
 

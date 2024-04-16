@@ -348,6 +348,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
+                Formats: CreateFormats(schema),
                 IsEmpty: schema is EmptyObjectSchema,
                 OriginalName: schema.Language.Default.SerializedName)
             {
@@ -360,6 +361,23 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache[schema] = derived;
 
             return model;
+        }
+
+        private string[] CreateFormats(ObjectSchema objectSchema)
+        {
+            var formats = objectSchema.SerializationFormats.Select(x => x.ToString()).ToList();
+            if (Configuration.SkipSerializationFormatXml)
+            {
+                formats.Remove("xml");
+            }
+            if (objectSchema.Extensions != null)
+            {
+                foreach (var format in objectSchema.Extensions.Formats)
+                {
+                    formats.Add(format);
+                }
+            }
+            return formats.ToArray();
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)

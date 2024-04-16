@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var derivedModels = new List<InputModelType>();
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable, Formats: Array.Empty<string>());
 
             if (id is not null)
             {

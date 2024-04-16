@@ -241,79 +241,78 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        // TODO
-        //public static XmlObjectSerialization BuildXmlObjectSerialization(string serializationName, SerializableObjectType model, TypeFactory typeFactory)
-        //{
-        //    var elements = new List<XmlObjectElementSerialization>();
-        //    var attributes = new List<XmlObjectAttributeSerialization>();
-        //    var embeddedArrays = new List<XmlObjectArraySerialization>();
-        //    XmlObjectContentSerialization? contentSerialization = null;
+        public static XmlObjectSerialization BuildXmlObjectSerialization(string serializationName, SerializableObjectType model, TypeFactory typeFactory)
+        {
+            var elements = new List<XmlObjectElementSerialization>();
+            var attributes = new List<XmlObjectAttributeSerialization>();
+            var embeddedArrays = new List<XmlObjectArraySerialization>();
+            XmlObjectContentSerialization? contentSerialization = null;
 
-        //    foreach (var objectTypeLevel in model.EnumerateHierarchy())
-        //    {
-        //        foreach (ObjectTypeProperty objectProperty in objectTypeLevel.Properties)
-        //        {
-        //            if (IsSerializable(objectProperty, typeFactory, out var isAttribute, out var isContent, out var format, out var serializedName, out var serializedType))
-        //            {
-        //                if (isContent)
-        //                {
-        //                    contentSerialization = new XmlObjectContentSerialization(serializedName, serializedType, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format));
-        //                }
-        //                else if (isAttribute)
-        //                {
-        //                    attributes.Add(new XmlObjectAttributeSerialization(serializedName, serializedType, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format)));
-        //                }
-        //                else
-        //                {
-        //                    var valueSerialization = objectProperty.InputModelProperty is { } inputModelProperty
-        //                        ? BuildXmlElementSerialization(inputModelProperty.Type, objectProperty.Declaration.Type, serializedName, false)
-        //                        : BuildXmlElementSerialization(objectProperty.InputModelProperty!.Type, objectProperty.Declaration.Type, serializedName, false);
+            foreach (var objectTypeLevel in model.EnumerateHierarchy())
+            {
+                foreach (ObjectTypeProperty objectProperty in objectTypeLevel.Properties)
+                {
+                    if (IsSerializable(objectProperty, typeFactory, out var isAttribute, out var isContent, out var format, out var serializedName, out var serializedType))
+                    {
+                        if (isContent)
+                        {
+                            contentSerialization = new XmlObjectContentSerialization(serializedName, serializedType, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format));
+                        }
+                        else if (isAttribute)
+                        {
+                            attributes.Add(new XmlObjectAttributeSerialization(serializedName, serializedType, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format)));
+                        }
+                        else
+                        {
+                            var valueSerialization = objectProperty.InputModelProperty is { } inputModelProperty
+                                ? BuildXmlElementSerialization(inputModelProperty.Type, objectProperty.Declaration.Type, serializedName, false)
+                                : BuildXmlElementSerialization(objectProperty.InputModelProperty!.Type, objectProperty.Declaration.Type, serializedName, false);
 
-        //                    if (valueSerialization is XmlArraySerialization arraySerialization)
-        //                    {
-        //                        embeddedArrays.Add(new XmlObjectArraySerialization(serializedName, serializedType, objectProperty, arraySerialization));
-        //                    }
-        //                    else
-        //                    {
-        //                        elements.Add(new XmlObjectElementSerialization(serializedName, serializedType, objectProperty, valueSerialization));
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
+                            if (valueSerialization is XmlArraySerialization arraySerialization)
+                            {
+                                embeddedArrays.Add(new XmlObjectArraySerialization(serializedName, serializedType, objectProperty, arraySerialization));
+                            }
+                            else
+                            {
+                                elements.Add(new XmlObjectElementSerialization(serializedName, serializedType, objectProperty, valueSerialization));
+                            }
+                        }
+                    }
+                }
+            }
 
-        //    return new XmlObjectSerialization(serializationName, model, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(), contentSerialization);
+            return new XmlObjectSerialization(serializationName, model, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(), contentSerialization);
 
-        //    static bool IsSerializable(ObjectTypeProperty objectProperty, TypeFactory typeFactory, out bool isAttribute, out bool isContent, out SerializationFormat format, out string serializedName, out CSharpType serializedType)
-        //    {
-        //        if (objectProperty.InputModelProperty is { } inputModelProperty)
-        //        {
-        //            isAttribute = inputModelProperty.Type.Serialization.Xml?.IsAttribute == true;
-        //            isContent = inputModelProperty.Type.Serialization.Xml?.IsContent == true;
-        //            format = GetSerializationFormat(inputModelProperty.Type);
-        //            serializedName = inputModelProperty.SerializedName;
-        //            serializedType = typeFactory.CreateType(inputModelProperty.Type);
-        //            return true;
-        //        }
+            static bool IsSerializable(ObjectTypeProperty objectProperty, TypeFactory typeFactory, out bool isAttribute, out bool isContent, out SerializationFormat format, out string serializedName, out CSharpType serializedType)
+            {
+                if (objectProperty.InputModelProperty is { } inputModelProperty)
+                {
+                    isAttribute = inputModelProperty.Type.Serialization.Xml?.IsAttribute == true;
+                    isContent = inputModelProperty.Type.Serialization.Xml?.IsContent == true;
+                    format = GetSerializationFormat(inputModelProperty.Type);
+                    serializedName = inputModelProperty.SerializedName;
+                    serializedType = typeFactory.CreateType(inputModelProperty.Type);
+                    return true;
+                }
 
-        //        if (objectProperty.InputModelProperty is { } property)
-        //        {
-        //            isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
-        //            isContent = property.Schema.Serialization?.Xml?.Text == true;
-        //            format = BuilderHelpers.GetSerializationFormat(property.Schema);
-        //            serializedName = property.SerializedName;
-        //            serializedType = objectProperty.ValueType;
-        //            return true;
-        //        }
+                if (objectProperty.InputModelProperty is { } property)
+                {
+                    isAttribute = property.Type.Serialization?.Xml?.IsAttribute == true;
+                    isContent = property.Type.Serialization?.Xml?.IsContent == true;
+                    format = GetSerializationFormat(property.Type);
+                    serializedName = property.SerializedName;
+                    serializedType = objectProperty.ValueType;
+                    return true;
+                }
 
-        //        isAttribute = false;
-        //        isContent = false;
-        //        format = default;
-        //        serializedName = string.Empty;
-        //        serializedType = typeof(object);
-        //        return false;
-        //    }
-        //}
+                isAttribute = false;
+                isContent = false;
+                format = default;
+                serializedName = string.Empty;
+                serializedType = typeof(object);
+                return false;
+            }
+        }
 
         public BicepObjectSerialization? BuildBicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
             => new BicepObjectSerialization(objectType, jsonObjectSerialization);

@@ -9,13 +9,14 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, bool IsEmpty = false, string? OriginalName = null)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, string[] Formats, bool IsEmpty = false, string? OriginalName = null)
         : InputType(Name, IsNullable, OriginalName)
     {
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
         /// </summary>
         public bool IsUnknownDiscriminatorModel { get; init; } = false;
+
         /// <summary>
         /// Indicates if this model is a property bag
         /// </summary>
@@ -88,7 +89,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue,
                 DiscriminatorPropertyName,
                 InheritedDictionaryType,
-                IsNullable);
+                IsNullable,
+                Formats);
         }
 
         private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)

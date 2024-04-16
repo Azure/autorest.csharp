@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public BuildContext(InputNamespace inputNamespace, SourceInputModel? sourceInputModel) : this(inputNamespace, sourceInputModel,Configuration.LibraryName, Configuration.Namespace)
         { }
 
-        public BuildContext(InputNamespace inputNamespace, SourceInputModel ? sourceInputModel, string defaultLibraryName, string defaultNamespace)
+        public BuildContext(InputNamespace inputNamespace, SourceInputModel? sourceInputModel, string defaultLibraryName, string defaultNamespace)
         {
             SourceInputModel = sourceInputModel;
             DefaultLibraryName = defaultLibraryName;
