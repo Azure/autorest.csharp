@@ -4,7 +4,6 @@
 
 using System;
 using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -19,7 +18,7 @@ namespace UnbrandedTypeSpec
             content.JsonWriter.WriteStartArray();
             foreach (var item in enumerable)
             {
-                content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(item, ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndArray();
 
@@ -61,7 +60,7 @@ namespace UnbrandedTypeSpec
             foreach (var item in dictionary)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(item.Value, ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndObject();
 
@@ -99,7 +98,7 @@ namespace UnbrandedTypeSpec
         public static BinaryContent FromObject(object value)
         {
             Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
-            content.JsonWriter.WriteObjectValue<object>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue<object>(value, ModelSerializationExtensions.WireOptions);
             return content;
         }
 
