@@ -16,7 +16,7 @@ namespace Client.Naming.Models
 {
     public partial class ClientNameAndJsonEncodedNameModel : IUtf8JsonSerializable, IJsonModel<ClientNameAndJsonEncodedNameModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClientNameAndJsonEncodedNameModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClientNameAndJsonEncodedNameModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ClientNameAndJsonEncodedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace Client.Naming.Models
 
         internal static ClientNameAndJsonEncodedNameModel DeserializeClientNameAndJsonEncodedNameModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +129,7 @@ namespace Client.Naming.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -16,7 +16,7 @@ namespace xms_error_responses.Models
 {
     public partial class PetHungryOrThirstyError : IUtf8JsonSerializable, IJsonModel<PetHungryOrThirstyError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetHungryOrThirstyError>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetHungryOrThirstyError>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<PetHungryOrThirstyError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -81,7 +81,7 @@ namespace xms_error_responses.Models
 
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -179,7 +179,7 @@ namespace xms_error_responses.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
