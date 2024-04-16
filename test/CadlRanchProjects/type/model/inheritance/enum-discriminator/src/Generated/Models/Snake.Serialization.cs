@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     [PersistableModelProxy(typeof(UnknownSnake))]
     public partial class Snake : IUtf8JsonSerializable, IJsonModel<Snake>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Snake>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         internal static Snake DeserializeSnake(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

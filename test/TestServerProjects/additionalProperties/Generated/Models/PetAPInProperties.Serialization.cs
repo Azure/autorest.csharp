@@ -16,7 +16,7 @@ namespace additionalProperties.Models
 {
     public partial class PetAPInProperties : IUtf8JsonSerializable, IJsonModel<PetAPInProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<PetAPInProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -82,7 +82,7 @@ namespace additionalProperties.Models
 
         internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -181,7 +181,7 @@ namespace additionalProperties.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -19,7 +19,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class ManagedDiskParameters : IUtf8JsonSerializable, IJsonModel<ManagedDiskParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedDiskParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedDiskParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ManagedDiskParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -77,7 +77,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

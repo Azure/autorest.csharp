@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class Dog : IUtf8JsonSerializable, IJsonModel<Dog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dog>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dog>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Dog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -82,7 +82,7 @@ namespace MgmtDiscriminator.Models
 
         internal static Dog DeserializeDog(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
