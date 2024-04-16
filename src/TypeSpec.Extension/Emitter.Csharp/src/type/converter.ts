@@ -665,7 +665,8 @@ function fromSdkModelPropertyType(
             literalTypeContext
         ),
         IsRequired: isRequired,
-        IsReadOnly: propertyType.kind === "property" && isReadOnly(propertyType),
+        IsReadOnly:
+            propertyType.kind === "property" && isReadOnly(propertyType),
         IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
     };
 
