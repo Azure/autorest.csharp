@@ -194,15 +194,6 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             return new ResourceTypeAliasPattern(phrase, variable, patternType, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAliasPathMetadata"/>. </summary>
-        /// <param name="tokenType"> The type of the token that the alias path is referring to. </param>
-        /// <param name="attributes"> The attributes of the token that the alias path is referring to. </param>
-        /// <returns> A new <see cref="Models.ResourceTypeAliasPathMetadata"/> instance for mocking. </returns>
-        public static ResourceTypeAliasPathMetadata ResourceTypeAliasPathMetadata(ResourceTypeAliasPathTokenType? tokenType = null, ResourceTypeAliasPathAttributes? attributes = null)
-        {
-            return new ResourceTypeAliasPathMetadata(tokenType, attributes, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.ZoneMapping"/>. </summary>
         /// <param name="location"> The location of the zone mapping. </param>
         /// <param name="zones"> The zones. </param>
@@ -234,6 +225,19 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             additionalProperties ??= new Dictionary<string, string>();
 
             return new ModelWithStringAdditionalProperties(id, name, age, additionalProperties, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithArrayAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithArrayAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithArrayAdditionalProperties ModelWithArrayAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, IList<BinaryData>> additionalProperties = null)
+        {
+            additionalProperties ??= new Dictionary<string, IList<BinaryData>>();
+
+            return new ModelWithArrayAdditionalProperties(id, name, age, additionalProperties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithUnknownAdditionalProperties"/>. </summary>

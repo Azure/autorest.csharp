@@ -88,7 +88,7 @@
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "14",
@@ -113,7 +113,7 @@
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "17",
@@ -954,7 +954,7 @@
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The ResourceTypeAliasPathMetadata.",
                   "IsNullable": false,
-                  "Usage": "Output",
+                  "Usage": "RoundTrip",
                   "Properties": [
                    {
                     "$id": "130",
@@ -1346,7 +1346,7 @@
   {
    "$id": "174",
    "Kind": "Model",
-   "Name": "ModelWithUnknownAdditionalProperties",
+   "Name": "ModelWithArrayAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -1362,8 +1362,11 @@
     },
     "ValueType": {
      "$id": "177",
-     "Kind": "Intrinsic",
-     "Name": "unknown",
+     "Kind": "Array",
+     "Name": "Array",
+     "ElementType": {
+      "$ref": "129"
+     },
      "IsNullable": false
     },
     "IsNullable": false
@@ -1416,6 +1419,76 @@
   {
    "$id": "184",
    "Kind": "Model",
+   "Name": "ModelWithUnknownAdditionalProperties",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "185",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "186",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "187",
+     "Kind": "Intrinsic",
+     "Name": "unknown",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": [
+    {
+     "$id": "188",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id property.",
+     "Type": {
+      "$id": "189",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "190",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property.",
+     "Type": {
+      "$id": "191",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "192",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age property.",
+     "Type": {
+      "$id": "193",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "194",
+   "Kind": "Model",
    "Name": "ModelX",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelX in the discriminated set",
@@ -1427,16 +1500,16 @@
    },
    "Properties": [
     {
-     "$id": "185",
+     "$id": "195",
      "Name": "fields",
      "SerializedName": "fields",
      "Description": "Optional list.",
      "Type": {
-      "$id": "186",
+      "$id": "196",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "187",
+       "$id": "197",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -1447,12 +1520,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "188",
+     "$id": "198",
      "Name": "nullProperty",
      "SerializedName": "nullProperty",
      "Description": "Nullable integer.",
      "Type": {
-      "$id": "189",
+      "$id": "199",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -1461,22 +1534,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "190",
+     "$id": "200",
      "Name": "keyValuePairs",
      "SerializedName": "keyValuePairs",
      "Description": "Optional dictionary.",
      "Type": {
-      "$id": "191",
+      "$id": "201",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "192",
+       "$id": "202",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "193",
+       "$id": "203",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -1487,12 +1560,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "194",
+     "$id": "204",
      "Name": "xProperty",
      "SerializedName": "xProperty",
      "Description": "The XProperty property.",
      "Type": {
-      "$id": "195",
+      "$id": "205",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -1503,7 +1576,7 @@
    ]
   },
   {
-   "$id": "196",
+   "$id": "206",
    "Kind": "Model",
    "Name": "ModelY",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
@@ -1516,12 +1589,12 @@
    },
    "Properties": [
     {
-     "$id": "197",
+     "$id": "207",
      "Name": "yProperty",
      "SerializedName": "yProperty",
      "Description": "The YProperty property.",
      "Type": {
-      "$id": "198",
+      "$id": "208",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1534,21 +1607,21 @@
  ],
  "Clients": [
   {
-   "$id": "199",
+   "$id": "209",
    "Name": "ModelReaderWriterValidationTypeSpecClient",
    "Description": "This is a typespec project to validation the model reader writer functionalities.",
    "Operations": [
     {
-     "$id": "200",
+     "$id": "210",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$id": "201",
+       "$id": "211",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "202",
+        "$id": "212",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -1564,7 +1637,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "203",
+       "$id": "213",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1581,11 +1654,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "204",
+       "$id": "214",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "205",
+        "$id": "215",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1600,19 +1673,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "206",
+        "$id": "216",
         "Type": {
-         "$ref": "205"
+         "$ref": "215"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "207",
+       "$id": "217",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "208",
+        "$id": "218",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1627,9 +1700,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "209",
+        "$id": "219",
         "Type": {
-         "$ref": "208"
+         "$ref": "218"
         },
         "Value": "application/json"
        }
@@ -1637,7 +1710,7 @@
      ],
      "Responses": [
       {
-       "$id": "210",
+       "$id": "220",
        "StatusCodes": [
         200
        ],
@@ -1664,15 +1737,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "211",
+     "$id": "221",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "212",
+       "$id": "222",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1689,11 +1762,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "213",
+       "$id": "223",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "214",
+        "$id": "224",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1708,19 +1781,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "215",
+        "$id": "225",
         "Type": {
-         "$ref": "214"
+         "$ref": "224"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "216",
+       "$id": "226",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "217",
+        "$id": "227",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1735,9 +1808,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "218",
+        "$id": "228",
         "Type": {
-         "$ref": "217"
+         "$ref": "227"
         },
         "Value": "application/json"
        }
@@ -1745,7 +1818,7 @@
      ],
      "Responses": [
       {
-       "$id": "219",
+       "$id": "229",
        "StatusCodes": [
         200
        ],
@@ -1772,15 +1845,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "220",
+     "$id": "230",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "221",
+       "$id": "231",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1797,11 +1870,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "222",
+       "$id": "232",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "223",
+        "$id": "233",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1816,19 +1889,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "224",
+        "$id": "234",
         "Type": {
-         "$ref": "223"
+         "$ref": "233"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "225",
+       "$id": "235",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "226",
+        "$id": "236",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1843,9 +1916,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "227",
+        "$id": "237",
         "Type": {
-         "$ref": "226"
+         "$ref": "236"
         },
         "Value": "application/json"
        }
@@ -1853,7 +1926,7 @@
      ],
      "Responses": [
       {
-       "$id": "228",
+       "$id": "238",
        "StatusCodes": [
         200
        ],
@@ -1880,15 +1953,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "229",
+     "$id": "239",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "230",
+       "$id": "240",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1905,11 +1978,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "231",
+       "$id": "241",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "232",
+        "$id": "242",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1924,19 +1997,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "233",
+        "$id": "243",
         "Type": {
-         "$ref": "232"
+         "$ref": "242"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "234",
+       "$id": "244",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "235",
+        "$id": "245",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1951,9 +2024,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "236",
+        "$id": "246",
         "Type": {
-         "$ref": "235"
+         "$ref": "245"
         },
         "Value": "application/json"
        }
@@ -1961,7 +2034,7 @@
      ],
      "Responses": [
       {
-       "$id": "237",
+       "$id": "247",
        "StatusCodes": [
         200
        ],
@@ -1988,19 +2061,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "238",
+     "$id": "248",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "239",
+       "$id": "249",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "240",
+        "$id": "250",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2015,9 +2088,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "241",
+        "$id": "251",
         "Type": {
-         "$ref": "240"
+         "$ref": "250"
         },
         "Value": "application/json"
        }
@@ -2025,7 +2098,7 @@
      ],
      "Responses": [
       {
-       "$id": "242",
+       "$id": "252",
        "StatusCodes": [
         200
        ],
@@ -2049,15 +2122,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "243",
+     "$id": "253",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "244",
+       "$id": "254",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2074,11 +2147,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "245",
+       "$id": "255",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "246",
+        "$id": "256",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2093,19 +2166,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "247",
+        "$id": "257",
         "Type": {
-         "$ref": "246"
+         "$ref": "256"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "248",
+       "$id": "258",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "249",
+        "$id": "259",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2120,9 +2193,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "260",
         "Type": {
-         "$ref": "249"
+         "$ref": "259"
         },
         "Value": "application/json"
        }
@@ -2130,7 +2203,7 @@
      ],
      "Responses": [
       {
-       "$id": "251",
+       "$id": "261",
        "StatusCodes": [
         200
        ],
@@ -2157,15 +2230,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "252",
+     "$id": "262",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "201"
+       "$ref": "211"
       },
       {
-       "$id": "253",
+       "$id": "263",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2182,11 +2255,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "254",
+       "$id": "264",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "255",
+        "$id": "265",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2201,19 +2274,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "256",
+        "$id": "266",
         "Type": {
-         "$ref": "255"
+         "$ref": "265"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "257",
+       "$id": "267",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "258",
+        "$id": "268",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2228,9 +2301,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "259",
+        "$id": "269",
         "Type": {
-         "$ref": "258"
+         "$ref": "268"
         },
         "Value": "application/json"
        }
@@ -2238,12 +2311,120 @@
      ],
      "Responses": [
       {
-       "$id": "260",
+       "$id": "270",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "174"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/api/AdditionalProperties/array",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "271",
+     "Name": "op8",
+     "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Parameters": [
+      {
+       "$ref": "211"
+      },
+      {
+       "$id": "272",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "184"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "273",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "274",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "275",
+        "Type": {
+         "$ref": "274"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "276",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "277",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "278",
+        "Type": {
+         "$ref": "277"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "279",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "184"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2266,7 +2447,7 @@
     }
    ],
    "Protocol": {
-    "$id": "261"
+    "$id": "280"
    },
    "Creatable": true
   }
