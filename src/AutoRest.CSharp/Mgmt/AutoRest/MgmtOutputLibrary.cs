@@ -476,7 +476,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.TypeFactory, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
 
         private IEnumerable<TypeProvider>? _models;
         public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Value.Values.Where(m => m is not SystemObjectType);
@@ -813,7 +813,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(InputType inputType, MgmtObjectType? defaultDerivedType = null) => inputType switch
         {
-            InputEnumType enumType => new EnumType(enumType, MgmtContext.TypeFactory, MgmtContext.Context),
+            InputEnumType enumType => new EnumType(enumType, MgmtContext.Context),
             // TODO: handle this when regen resource manager
             // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
             InputModelType inputModel => new MgmtObjectType(inputModel, defaultDerivedType: defaultDerivedType),
