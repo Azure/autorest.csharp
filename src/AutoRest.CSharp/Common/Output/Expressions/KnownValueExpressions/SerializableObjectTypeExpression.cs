@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         }
 
         public RequestContentExpression ToRequestContent() => new(Untyped.Invoke(Configuration.ApiTypes.ToRequestContentName));
+        public RequestContentExpression ToMultipartRequestContent() => new(Untyped.Invoke(Configuration.ApiTypes.ToMultipartRequestContentName));
 
     }
 }

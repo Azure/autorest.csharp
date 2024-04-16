@@ -292,10 +292,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
+            bool isMultipartOperation = convenienceMethod.RequestMediaTypes != null && convenienceMethod.RequestMediaTypes.Count == 1 && convenienceMethod.RequestMediaTypes.Contains("multipart/form-data");
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
                 // This method now builds statements for normal operation and lro operations
-                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod, async, fields.ClientDiagnosticsProperty).ToArray();
+                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod, async, fields.ClientDiagnosticsProperty, isMultipartOperation).ToArray();
 
                 statement.Write(_writer);
             }

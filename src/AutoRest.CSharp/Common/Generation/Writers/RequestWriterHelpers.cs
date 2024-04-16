@@ -44,17 +44,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                /* write parameter validation */
-                var contentTypeHeader = clientMethod.Request.Headers.FirstOrDefault(p => p.IsContentHeader);
-                if (contentTypeHeader != null && !contentTypeHeader.Value.IsConstant)
-                {
-                    var contentParameter = parameters.FirstOrDefault(p => p.Name == "content");
-                    if (contentParameter != null)
-                    {
-                        var validationStatement = Snippets.Argument.AssertNotNullOrEmpty(((ValueExpression)contentParameter).Property(nameof(RequestContent.ContentType)));
-                        validationStatement.Write(writer);
-                    }
-                }
                 var message = new CodeWriterDeclaration("message");
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");

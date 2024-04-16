@@ -711,8 +711,8 @@ namespace AutoRest.CSharp.Output.Builders
             return inputType switch
             {
                 CodeModelType codeModelType => BuildMultipartSerialization(codeModelType.Schema, valueType, isCollectionElement),
-                InputListType listType => new MultipartArraySerialization(TypeFactory.GetImplementationType(valueType), BuildMultipartSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat, new VariableReference(TypeFactory.GetElementType(valueType), "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputDictionaryType dictionaryType => new MultipartDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildMultipartSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType => new MultipartDictionarySerialization(valueType, BuildMultipartSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
@@ -728,9 +728,9 @@ namespace AutoRest.CSharp.Output.Builders
                 case ConstantSchema constantSchema:
                     return BuildMultipartSerialization(constantSchema.ValueType, type, isCollectionElement);
                 case ArraySchema arraySchema:
-                    return new MultipartArraySerialization(type, BuildMultipartSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                    return new MultipartArraySerialization(type, BuildMultipartSerialization(arraySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 case DictionarySchema dictionarySchema:
-                    return new MultipartDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                    return new MultipartDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 default:
                     return new MultipartValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType));
             }
@@ -749,7 +749,7 @@ namespace AutoRest.CSharp.Output.Builders
                     var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
                     var valueSerialization = BuildMultipartSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat, memberValueExpression.NullableStructValue());
                     TypedMemberExpression? enumerableExpression = null;
-                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
+                    if (property.Declaration.Type.IsReadOnlyMemory)
                     {
                         enumerableExpression = property.Declaration.Type.IsNullable
                             ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))

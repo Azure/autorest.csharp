@@ -43,8 +43,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
             public abstract Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers);
             public abstract TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model);
-            public abstract ValueExpression ContentTypeFromResponse();
-            public abstract MethodBodyStatement DeclareMultipartContent();
         }
     }
 }

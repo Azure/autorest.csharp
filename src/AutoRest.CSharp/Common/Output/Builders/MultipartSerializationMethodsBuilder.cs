@@ -49,10 +49,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Configuration.ApiTypes.ToMultipartRequestContentName,
                     null,
                     null,
-                    MethodSignatureModifiers.Public,
-                    typeof(RequestContent),
+                    MethodSignatureModifiers.Internal,
+                    Configuration.ApiTypes.MultipartRequestContentType,
                     null,
-                    new Parameter[] {KnownParameters.Serializations.Options }),
+                    Array.Empty<Parameter>()),
                 BuildToMultipartRequestContentMethodBody(multipart).ToArray());
         }
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
@@ -79,32 +79,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        public static SwitchCase BuildMultipartReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
-        {
-            var contentType = data.Property("MediaType");
-            return new SwitchCase(
-                Serializations.MultipartFormat,
-                Return(
-                    new InvokeInstanceMethodExpression(
-                        null,
-                        new MethodSignature(
-                            $"DeserializeMultipart",
-                            null,
-                            null,
-                            MethodSignatureModifiers.Private,
-                            typeof(BinaryData),
-                            null,
-                            new[]
-                            {
-                                KnownParameters.Serializations.Data,
-                                KnownParameters.Serializations.contentType
-                            }),
-                        new ValueExpression[]
-                        {
-                            data,
-                            contentType
-                        })));
-        }
         public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationBody(MultipartObjectSerialization? multipart)
         {
             var contentVar = new VariableReference(Configuration.ApiTypes.MultipartRequestContentType, "content");
@@ -156,7 +130,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = property.SerializedType.IsCollection && !property.SerializedType.IsReadOnlyMemory && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -216,7 +190,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[]
             {
                 //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
-                new ForeachStatement(TypeFactory.GetElementType(serialization.Type), "item", value, false, out var item)
+                new ForeachStatement(serialization.Type.ElementType, "item", value, false, out var item)
                 {
                     SerializationExression(mulitpartContent, serialization.ValueSerialization, item, name)
                 }
@@ -284,22 +258,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
         {
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { valueExpression }),
-            //_ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(valueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => valueExpression,
+            _ when valueType.IsFrameworkType => valueExpression,
+            _ when valueType.Implementation is SerializableObjectType serializableObjectType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType }),
             _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType })
-        };
-
-        private static ValueExpression BuildValueDeserializationExpression(CSharpType valueType, ValueExpression valueExpression) => valueType switch
-        {
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToString), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToArray), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToStream), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => valueExpression,
-            _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { valueExpression }, new[] { valueType})
-
         };
     }
 }

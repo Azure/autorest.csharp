@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -26,11 +27,12 @@ namespace AutoRest.CSharp.Output.Models
     {
         private record ConvenienceParameterInfo(Parameter? Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
-        public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics)
+        public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics, bool isMultipartOperation = false)
         {
             var protocolMethod = clientMethod.ProtocolMethodSignature;
             var parametersDict = ProtocolToConvenienceParameterConverters.ToDictionary(converter => converter.Protocol.Name, converter => new ConvenienceParameterInfo(converter.Convenience, converter.ConvenienceSpread));
             var protocolInvocationExpressions = new List<ValueExpression>();
+            VariableReference? content = null;
             foreach (var protocol in protocolMethod.Parameters)
             {
                 var (convenience, convenienceSpread) = parametersDict[protocol.Name];
@@ -52,13 +54,13 @@ namespace AutoRest.CSharp.Output.Models
                         protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
                     }
                 }
-                else if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.RequestContentNullable)
+                else if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.MultipartRequestContent || protocol == KnownParameters.RequestContentNullable)
                 {
                     Debug.Assert(convenience is not null);
                     // convert body to request content
                     if (convenienceSpread == null)
                     {
-                        var content = new VariableReference(protocol.Type, protocol.Name);
+                        content = new VariableReference(isMultipartOperation ? KnownParameters.MultipartRequestContent.Type : protocol.Type, protocol.Name);
                         yield return UsingDeclare(content, convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault()));
                         protocolInvocationExpressions.Add(content);
                     }
@@ -81,7 +83,13 @@ namespace AutoRest.CSharp.Output.Models
                     else
                     {
                         // if convenience parameter is null here, we just use the default value of the protocol parameter as value (we always do this even if the parameter is optional just in case there is an ordering issue)
-                        protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
+                        if (isMultipartOperation && protocol.Name == "contentType" && content != null)
+                        {
+                            protocolInvocationExpressions.Add(MultipartFormDataRequestContentProvider.Instance.ContentTypeProperty(content));
+                        } else
+                        {
+                            protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
+                        }
                     }
                 }
             }

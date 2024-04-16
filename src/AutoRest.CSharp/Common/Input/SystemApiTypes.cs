@@ -105,14 +105,13 @@ namespace AutoRest.CSharp.Common.Input
         public override string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
         public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName)
         {
-            var multipartContentExpression = new MultipartFormDataContentExpression(multipartContent);
             if (fileName != null)
             {
-                return multipartContentExpression.Add(content, name, fileName);
+                return MultipartFormDataBinaryContentProvider.Instance.Add(multipartContent, content, name, fileName);
             }
             else
             {
-                return multipartContentExpression.Add(content, name);
+                return MultipartFormDataBinaryContentProvider.Instance.Add(multipartContent, content, name);
             }
         }
     }

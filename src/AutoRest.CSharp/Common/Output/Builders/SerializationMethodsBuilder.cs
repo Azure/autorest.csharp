@@ -210,12 +210,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 switchStatement.Add(XmlSerializationMethodsBuilder.BuildXmlCreateSwitchCase(model, data, options));
             }
 
-
-            if (serialization.Multipart is not null)
-            {
-                switchStatement.Add(MultipartSerializationMethodsBuilder.BuildMultipartReadSwitchCase(model, data, options));
-            }
-
             // default case
             /*
              * throw new FormatException($"The model {nameof(T)} does not support reading in '{options.Format}' format.");

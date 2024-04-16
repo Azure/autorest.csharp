@@ -71,6 +71,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _httpContentPropertyName = "HttpContent";
         protected override string DefaultName { get; } = "MultipartFormDataRequestContent";
         private const string _createBoundaryMethodName = "CreateBoundary";
+        private const string _addMethodName = "Add";
+        private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _multipartContentField;
@@ -295,5 +297,16 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         }
         public ValueExpression CreateBoundary()
             => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] { });
+        public MethodBodyStatement AddFilenameHeader(ValueExpression httpContent, ValueExpression name, ValueExpression filename)
+            => new InvokeInstanceMethodStatement(null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
+        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name)
+        {
+            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name }, false);
+        }
+        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename)
+        {
+            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename }, false);
+        }
+        public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
     }
 }

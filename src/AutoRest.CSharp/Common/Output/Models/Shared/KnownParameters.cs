@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType MatchConditionsType = new(typeof(MatchConditions), true);
         private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);
         private static readonly CSharpType RequestContentType = new(Configuration.ApiTypes.RequestContentType);
+        private static readonly CSharpType MultipartRequestContentType = Configuration.ApiTypes.MultipartRequestContentType;
         private static readonly CSharpType RequestContentNullableType = new(Configuration.ApiTypes.RequestContentType, true);
         private static readonly string RequestContextName = Configuration.ApiTypes.RequestContextName;
         private static readonly string RequestContextDescription = Configuration.ApiTypes.RequestContextDescription;
@@ -36,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter NextLink = new("nextLink", $"Continuation token", typeof(string), null, ValidationType.None, null);
 
         public static readonly Parameter RequestContent = new("content", $"The content to send as the body of the request.", RequestContentType, null, ValidationType.AssertNotNull, null, RequestLocation: RequestLocation.Body);
+        public static readonly Parameter MultipartRequestContent = new("content", $"The content to send as the body of the request.", MultipartRequestContentType, null, ValidationType.AssertNotNull, null, RequestLocation: RequestLocation.Body);
         public static readonly Parameter RequestContentNullable = new("content", $"The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, ValidationType.None, null, RequestLocation: RequestLocation.Body);
 
         public static readonly Parameter MatchConditionsParameter = new("matchConditions", $"The content to send as the request conditions of the request.", MatchConditionsType, Constant.Default(RequestConditionsType), ValidationType.None, null, RequestLocation: RequestLocation.Header);
