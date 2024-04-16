@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     internal partial class VirtualMachineScaleSetListResult : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<VirtualMachineScaleSetListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetListResult DeserializeVirtualMachineScaleSetListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

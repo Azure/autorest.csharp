@@ -219,17 +219,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ReturnType: _requestBodyType,
                 Summary: null, Description: null, ReturnDescription: null);
 
-            var body = new List<MethodBodyStatement>
+            var body = new MethodBodyStatement[]
             {
-                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
-            };
-            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
-            var value = (TypedValueExpression)valueParameter;
-            body.Add(new MethodBodyStatement[]
-            {
-                writer.WriteObjectValue(value, ModelReaderWriterOptionsExpression.Wire),
+                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content),
+                Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content).WriteObjectValue(valueParameter, ModelReaderWriterOptionsExpression.Wire),
                 Return(content)
-            });
+            };
 
             return new Method(signature, body);
         }

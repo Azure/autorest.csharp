@@ -16,7 +16,7 @@ namespace AdditionalPropertiesEx.Models
 {
     public partial class OutputAdditionalPropertiesModel : IUtf8JsonSerializable, IJsonModel<OutputAdditionalPropertiesModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputAdditionalPropertiesModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -51,7 +51,7 @@ namespace AdditionalPropertiesEx.Models
 
         internal static OutputAdditionalPropertiesModel DeserializeOutputAdditionalPropertiesModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,7 +116,7 @@ namespace AdditionalPropertiesEx.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

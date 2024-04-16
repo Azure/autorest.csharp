@@ -19,7 +19,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class OriginGroupOverride : IUtf8JsonSerializable, IJsonModel<OriginGroupOverride>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverride>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverride>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OriginGroupOverride>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -72,7 +72,7 @@ namespace MgmtDiscriminator.Models
 
         internal static OriginGroupOverride DeserializeOriginGroupOverride(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

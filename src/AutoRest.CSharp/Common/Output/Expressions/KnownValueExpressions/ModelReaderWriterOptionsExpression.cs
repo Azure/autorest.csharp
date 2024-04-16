@@ -3,13 +3,13 @@
 
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal record ModelReaderWriterOptionsExpression(ValueExpression Untyped) : TypedValueExpression<ModelReaderWriterOptions>(Untyped)
     {
-        public static readonly ModelReaderWriterOptionsExpression Wire = new(New.Instance(typeof(ModelReaderWriterOptions), Literal("W")));
+        public static readonly ModelReaderWriterOptionsExpression Wire = ModelSerializationExtensionsProvider.Instance.WireOptions;
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));
     }
