@@ -227,10 +227,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 // we need to apply the RequestOptions in non-branded case as a last step
                 if (!Configuration.IsBranded && clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
-                    using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
-                    {
-                        writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
-                    }
+                    writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
                 }
 
                 writer.Line($"return {message};");
