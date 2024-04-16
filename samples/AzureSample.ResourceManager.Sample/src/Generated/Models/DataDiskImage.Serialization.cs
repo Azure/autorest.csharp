@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class DataDiskImage : IUtf8JsonSerializable, IJsonModel<DataDiskImage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDiskImage>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDiskImage>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DataDiskImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static DataDiskImage DeserializeDataDiskImage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

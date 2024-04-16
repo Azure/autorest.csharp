@@ -16,7 +16,7 @@ namespace SpecialWords
 {
     public partial class Exec : IUtf8JsonSerializable, IJsonModel<Exec>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Exec>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Exec>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Exec>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace SpecialWords
 
         internal static Exec DeserializeExec(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +129,7 @@ namespace SpecialWords
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

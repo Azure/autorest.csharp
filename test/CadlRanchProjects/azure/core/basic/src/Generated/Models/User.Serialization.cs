@@ -16,7 +16,7 @@ namespace _Specs_.Azure.Core.Basic.Models
 {
     public partial class User : IUtf8JsonSerializable, IJsonModel<User>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<User>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<User>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<User>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -81,7 +81,7 @@ namespace _Specs_.Azure.Core.Basic.Models
 
         internal static User DeserializeUser(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -176,7 +176,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

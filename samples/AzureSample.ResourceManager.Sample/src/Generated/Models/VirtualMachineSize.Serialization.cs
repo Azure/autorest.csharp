@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineSize : IUtf8JsonSerializable, IJsonModel<VirtualMachineSize>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineSize>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineSize>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<VirtualMachineSize>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

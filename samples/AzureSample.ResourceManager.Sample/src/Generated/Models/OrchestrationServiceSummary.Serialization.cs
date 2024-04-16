@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class OrchestrationServiceSummary : IUtf8JsonSerializable, IJsonModel<OrchestrationServiceSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrchestrationServiceSummary>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrchestrationServiceSummary>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OrchestrationServiceSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -70,7 +70,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static OrchestrationServiceSummary DeserializeOrchestrationServiceSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

@@ -16,7 +16,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     internal partial class RealModel : IUtf8JsonSerializable, IJsonModel<RealModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RealModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RealModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RealModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static RealModel DeserializeRealModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,7 +137,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
