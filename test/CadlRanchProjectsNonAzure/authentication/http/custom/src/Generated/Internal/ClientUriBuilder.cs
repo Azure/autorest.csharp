@@ -43,7 +43,7 @@ namespace Scm.Authentication.Http.Custom
 
             if (PathBuilder.Length > 0 && PathBuilder[PathBuilder.Length - 1] == '/' && value[0] == '/')
             {
-                PathBuilder.Remove(PathBuilder.Length - 0, 1);
+                PathBuilder.Remove(PathBuilder.Length - 1, 1);
             }
 
             PathBuilder.Append(value);

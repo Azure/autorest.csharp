@@ -153,9 +153,9 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Assign(value, new InvokeStaticMethodExpression(typeof(Uri), nameof(Uri.EscapeDataString), new[]{ value }))
                 },
                 EmptyLine,
-                new IfStatement(And(And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, new BinaryOperatorExpression("-", pathBuilder.Length, Int(1))), Literal('/'))), Equal(new IndexerExpression(value, Int(0)), Literal('/'))))
+                new IfStatement(And(And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, pathBuilder.Length - Int(1)), Literal('/'))), Equal(new IndexerExpression(value, Int(0)), Literal('/'))))
                 {
-                    pathBuilder.Remove(new BinaryOperatorExpression("-", pathBuilder.Length, Int(0)), Int(1))
+                    pathBuilder.Remove(pathBuilder.Length - Int(1), Int(1))
                 },
                 EmptyLine,
                 pathBuilder.Append(value),
