@@ -27,5 +27,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public MethodBodyStatement Append(FormattableStringExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.Append), value);
 
         public MethodBodyStatement AppendLine(FormattableStringExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.AppendLine), value);
+
+        public MethodBodyStatement Remove(ValueExpression startIndex, ValueExpression length) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.Remove), startIndex, length);
     }
 }

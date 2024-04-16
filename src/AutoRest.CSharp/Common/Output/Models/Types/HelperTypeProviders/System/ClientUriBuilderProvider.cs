@@ -31,17 +31,12 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private readonly FieldDeclaration _uriBuilderField = new(FieldModifiers.Private, typeof(UriBuilder), "_uriBuilder");
         private readonly FieldDeclaration _pathBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_pathBuilder");
         private readonly FieldDeclaration _queryBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_queryBuilder");
-        private readonly FieldDeclaration _pathSeparatorField = new(FieldModifiers.Private | FieldModifiers.Const, typeof(char), "PathSeparator")
-        {
-            InitializationValue = Literal('/')
-        };
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _uriBuilderField;
             yield return _pathBuilderField;
             yield return _queryBuilderField;
-            yield return _pathSeparatorField;
         }
 
         private PropertyDeclaration? _uriBuilderProperty;
@@ -149,7 +144,6 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             var value = new StringExpression(valueParameter);
             var escape = new BoolExpression(escapeParameter);
             var pathBuilder = new StringBuilderExpression(PathBuilderProperty);
-            var pathSeparator = new CharExpression(_pathSeparatorField);
             MethodBodyStatement body = new MethodBodyStatement[]
             {
                 Argument.AssertNotNullOrWhiteSpace(value),
@@ -159,9 +153,9 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Assign(value, new InvokeStaticMethodExpression(typeof(Uri), nameof(Uri.EscapeDataString), new[]{ value }))
                 },
                 EmptyLine,
-                new IfStatement(And(Equal(new IndexerExpression(value, Literal(0)), _pathSeparatorField), And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, new BinaryOperatorExpression("-", pathBuilder.Length, Int(1))), _pathSeparatorField))))
+                new IfStatement(And(And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, new BinaryOperatorExpression("-", pathBuilder.Length, Int(1))), Literal('/'))), Equal(new IndexerExpression(value, Int(0)), Literal('/'))))
                 {
-                    Assign(value, value.Substring(Literal(1)))
+                    pathBuilder.Remove(new BinaryOperatorExpression("-", pathBuilder.Length, Int(0)), Int(1))
                 },
                 EmptyLine,
                 pathBuilder.Append(value),
