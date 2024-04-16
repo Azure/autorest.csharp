@@ -227,7 +227,8 @@ namespace AutoRest.CSharp.Common.Input
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             FlattenedBodyProperty: input is VirtualParameter vp and ({ Schema: not ConstantSchema } or { Required: not true })
                 ? CreateProperty(vp.TargetProperty)
-                : null
+                : null,
+            Format: input.Extensions?.Format
         );
 
         private OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -348,7 +349,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                Formats: CreateFormats(schema),
+                SerializationFormats: CreateFormats(schema),
                 IsEmpty: schema is EmptyObjectSchema,
                 OriginalName: schema.Language.Default.SerializedName)
             {
@@ -381,14 +382,26 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
-            => (usage & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+        {
+            var result = InputModelTypeUsage.None;
+            if (usage.HasFlag(SchemaTypeUsage.Input))
             {
-                SchemaTypeUsage.Input => InputModelTypeUsage.Input,
-                SchemaTypeUsage.Output => InputModelTypeUsage.Output,
-                SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
-                SchemaTypeUsage.Converter => InputModelTypeUsage.Converter,
-                _ => InputModelTypeUsage.None
-            };
+                result |= InputModelTypeUsage.Input;
+            }
+            if (usage.HasFlag(SchemaTypeUsage.Output))
+            {
+                result |= InputModelTypeUsage.Output;
+            }
+            if (usage.HasFlag(SchemaTypeUsage.RoundTrip))
+            {
+                result |= InputModelTypeUsage.RoundTrip;
+            }
+            if (usage.HasFlag(SchemaTypeUsage.Converter))
+            {
+                result |= InputModelTypeUsage.Converter;
+            }
+            return result;
+        }
 
         private static ObjectSchema? GetBaseModelSchema(ObjectSchema schema)
             => schema.Parents?.Immediate is { } parents
@@ -404,8 +417,23 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
-            FlattenedNames: property.FlattenedNames.ToList()
+            FlattenedNames: property.FlattenedNames.ToList(),
+            Format: property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format,
+            ElementTypeFormat: GetElementType(property)
         );
+
+        private string? GetElementType(Property property)
+        {
+            if (property.Extensions is null)
+            {
+                return null;
+            }
+            if (!property.Extensions.TryGetValue("x-ms-format-element-type", out object? value))
+            {
+                return null;
+            }
+            return value.ToString();
+        }
 
         private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {

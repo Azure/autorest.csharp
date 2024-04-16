@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IReadOnlyList<string> GetSupportedSerializationFormats()
         {
-            var formats = InputModel.Formats.ToList();
+            var formats = InputModel.SerializationFormats.ToList();
             if (ModelTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
@@ -582,7 +582,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(InputModelProperty property)
         {
-            var valueType = _typeFactory.CreateType(property.Type);
+            var valueType = _typeFactory.CreateType(property.Type, property.Format, property);
             if (!_usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {

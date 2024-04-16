@@ -37,10 +37,10 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="inputType">The input type to convert.</param>
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
-        public CSharpType CreateType(InputType inputType) => inputType switch
+        public CSharpType CreateType(InputType inputType, string? format = null, InputModelProperty? property = null) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
-            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
+            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(x => CreateType(x)).ToArray(), unionType.IsNullable),
             InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
@@ -84,64 +84,19 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
                 InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
-                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
+                InputTypeKind.String => ToXMsFormatType(format) ?? new CSharpType(typeof(string), inputType.IsNullable),
                 InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
+            _ when property?.Format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+                typeof(DataFactoryElement<>),
+                isNullable: inputType.IsNullable,
+                new CSharpType(typeof(IList<>), _library.FindTypeByName(property!.ElementTypeFormat!)!)),
+            _ when ToXMsFormatType(format) is Type type => new CSharpType(type, inputType.IsNullable),
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => _unknownType,
             _ => throw new Exception("Unknown type")
-        };
-
-        //public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
-
-        // TODO: how to handle DFE for data factory?
-        //// This function provide the capability to support the extensions is coming from outside, like parameter.
-        //private CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
-        //{
-        //    ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
-        //    BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
-        //    ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-        //    ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
-        //    DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-        //    CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
-        //    NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-        //    AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
-        //        typeof(DataFactoryElement<>),
-        //        isNullable: isNullable,
-        //        new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
-        //    _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
-        //    _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
-        //};
-
-        //private Type GetListType(Schema schema)
-        //{
-        //    return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
-        //}
-
-        internal Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
-
-        internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
-        {
-            AllSchemaTypes.Integer => typeof(int),
-            AllSchemaTypes.Boolean => typeof(bool),
-            AllSchemaTypes.ByteArray => null,
-            AllSchemaTypes.Char => typeof(char),
-            AllSchemaTypes.Date => typeof(DateTimeOffset),
-            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
-            AllSchemaTypes.Duration => typeof(TimeSpan),
-            AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.ArmId => typeof(ResourceIdentifier),
-            AllSchemaTypes.String => ToXMsFormatType(format) ?? typeof(string),
-            AllSchemaTypes.Time => typeof(TimeSpan),
-            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
-            AllSchemaTypes.Uri => typeof(Uri),
-            AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => _unknownType,
-            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? _unknownType,
-            AllSchemaTypes.Binary => typeof(byte[]),
-            _ => null
         };
 
         internal static Type? ToXMsFormatType(string? format) => format switch

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, string[] Formats, bool IsEmpty = false, string? OriginalName = null)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, string[] SerializationFormats, bool IsEmpty = false, string? OriginalName = null)
         : InputType(Name, IsNullable, OriginalName)
     {
         /// <summary>
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName,
                 InheritedDictionaryType,
                 IsNullable,
-                Formats);
+                SerializationFormats);
         }
 
         private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)

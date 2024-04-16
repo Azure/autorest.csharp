@@ -12,6 +12,5 @@ internal enum InputModelTypeUsage
     Input = 1,
     Output = 2,
     RoundTrip = Input | Output,
-    // TODO: remove it
-    Converter = RoundTrip << 1
+    Converter
 }
