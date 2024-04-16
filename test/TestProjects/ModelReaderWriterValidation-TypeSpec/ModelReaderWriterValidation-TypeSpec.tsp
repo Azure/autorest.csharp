@@ -374,6 +374,7 @@ op op5(): ResourceProviderData;
 
 model ModelWithStringAdditionalProperties {
     @doc("The id property.")
+    @visibility("read")
     id: string;
 
     @doc("The name property.")
@@ -388,3 +389,21 @@ model ModelWithStringAdditionalProperties {
 @route("/api/AdditionalProperties/string")
 @convenientAPI(true)
 op op6(@body body: ModelWithStringAdditionalProperties): ModelWithStringAdditionalProperties;
+
+model ModelWithUnknownAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<unknown>;
+}
+
+@route("/api/AdditionalProperties/unknown")
+@convenientAPI(true)
+op op7(@body body: ModelWithUnknownAdditionalProperties): ModelWithUnknownAdditionalProperties;

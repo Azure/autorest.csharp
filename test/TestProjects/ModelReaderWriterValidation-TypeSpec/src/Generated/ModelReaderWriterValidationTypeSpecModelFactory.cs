@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -220,6 +221,32 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         public static ApiProfile ApiProfile(string profileVersion = null, string apiVersion = null)
         {
             return new ApiProfile(profileVersion, apiVersion, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithStringAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithStringAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithStringAdditionalProperties ModelWithStringAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, string> additionalProperties = null)
+        {
+            additionalProperties ??= new Dictionary<string, string>();
+
+            return new ModelWithStringAdditionalProperties(id, name, age, additionalProperties, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithUnknownAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithUnknownAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithUnknownAdditionalProperties ModelWithUnknownAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, BinaryData> additionalProperties = null)
+        {
+            additionalProperties ??= new Dictionary<string, BinaryData>();
+
+            return new ModelWithUnknownAdditionalProperties(id, name, age, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelX"/>. </summary>

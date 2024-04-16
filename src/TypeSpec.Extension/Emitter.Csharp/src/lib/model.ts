@@ -765,6 +765,15 @@ export function getInputType(
             };
         }
 
+        if (m.indexer !== undefined) {
+            return {
+                inheritedDictionaryType: getInputTypeForMap(
+                    m.indexer.key,
+                    m.indexer.value
+                )
+            };
+        }
+
         if (baseModel) {
             const baseModelType = getInputModelType(baseModel);
 
