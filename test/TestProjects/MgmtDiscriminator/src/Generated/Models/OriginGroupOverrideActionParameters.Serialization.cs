@@ -19,7 +19,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IJsonModel<OriginGroupOverrideActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverrideActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverrideActionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OriginGroupOverrideActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -66,7 +66,7 @@ namespace MgmtDiscriminator.Models
 
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

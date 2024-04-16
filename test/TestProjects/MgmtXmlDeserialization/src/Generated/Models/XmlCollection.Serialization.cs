@@ -43,11 +43,11 @@ namespace MgmtXmlDeserialization.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
 
         internal static XmlCollection DeserializeXmlCollection(XElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             long? count = default;
             string nextLink = default;
@@ -69,7 +69,7 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(value, count, nextLink, serializedAdditionalRawData: null);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlCollection>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlCollection>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<XmlCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -132,7 +132,7 @@ namespace MgmtXmlDeserialization.Models
 
         internal static XmlCollection DeserializeXmlCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

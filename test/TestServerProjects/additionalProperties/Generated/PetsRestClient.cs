@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,7 +48,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -120,7 +119,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -191,7 +190,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -262,7 +261,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -333,7 +332,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -404,7 +403,7 @@ namespace additionalProperties
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(createParameters, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(createParameters, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }

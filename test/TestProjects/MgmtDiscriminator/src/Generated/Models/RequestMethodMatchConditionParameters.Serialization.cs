@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RequestMethodMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RequestMethodMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestMethodMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestMethodMatchConditionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RequestMethodMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RequestMethodMatchConditionParameters DeserializeRequestMethodMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
