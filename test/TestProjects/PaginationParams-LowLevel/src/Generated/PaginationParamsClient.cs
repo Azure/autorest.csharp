@@ -60,7 +60,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetPaginationParams method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -84,7 +84,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetPaginationParams method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -108,7 +108,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get2s method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,7 +132,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get2s method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -156,7 +156,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get3s method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +180,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get3s method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get4s method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -228,7 +228,7 @@ namespace PaginationParams_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Get4s method
         /// <list type="bullet">
         /// <item>
         /// <description>

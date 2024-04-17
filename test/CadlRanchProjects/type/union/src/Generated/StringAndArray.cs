@@ -45,6 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetStringAndArray method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArrayAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse2>> GetStringAndArrayAsync(CancellationToken cancellationToken = default)
@@ -54,6 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse2.FromResponse(response), response);
         }
 
+        /// <summary> The GetStringAndArray method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArray(CancellationToken)']/*" />
         public virtual Response<GetResponse2> GetStringAndArray(CancellationToken cancellationToken = default)
@@ -64,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetStringAndArray method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetStringAndArray method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,6 +135,7 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> The Send method. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -147,6 +150,7 @@ namespace _Type.Union
             return response;
         }
 
+        /// <summary> The Send method. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -162,7 +166,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Send method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -201,7 +205,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Send method
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -47,6 +47,7 @@ namespace ParametersCadl
             _apiVersion = apiVersion;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="start"> The <see cref="int"/> to use. </param>
         /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -58,6 +59,7 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="start"> The <see cref="int"/> to use. </param>
         /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -70,7 +72,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -107,7 +109,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -143,6 +145,7 @@ namespace ParametersCadl
             }
         }
 
+        /// <summary> The Operation2 method. </summary>
         /// <param name="end"> The <see cref="int"/> to use. </param>
         /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -154,6 +157,7 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
+        /// <summary> The Operation2 method. </summary>
         /// <param name="end"> The <see cref="int"/> to use. </param>
         /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -166,7 +170,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation2 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +207,7 @@ namespace ParametersCadl
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation2 method
         /// <list type="bullet">
         /// <item>
         /// <description>

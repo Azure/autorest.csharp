@@ -38,6 +38,7 @@ namespace FlattenedParameters
             _pipeline = pipeline;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="items"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
@@ -55,6 +56,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="items"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
@@ -72,6 +74,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationNotNull method. </summary>
         /// <param name="items"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
@@ -89,6 +92,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationNotNull method. </summary>
         /// <param name="items"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
@@ -106,6 +110,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationNotRequired method. </summary>
         /// <param name="required"> The <see cref="string"/> to use. </param>
         /// <param name="nonRequired"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -124,6 +129,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationNotRequired method. </summary>
         /// <param name="required"> The <see cref="string"/> to use. </param>
         /// <param name="nonRequired"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -142,6 +148,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationRequired method. </summary>
         /// <param name="required"> The <see cref="string"/> to use. </param>
         /// <param name="nonRequired"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -160,6 +167,7 @@ namespace FlattenedParameters
             }
         }
 
+        /// <summary> The OperationRequired method. </summary>
         /// <param name="required"> The <see cref="string"/> to use. </param>
         /// <param name="nonRequired"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

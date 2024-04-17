@@ -43,6 +43,7 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
+        /// <summary> The WithAnd method. </summary>
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -57,6 +58,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithAnd method. </summary>
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -72,7 +74,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAnd method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +113,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAnd method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithAs method. </summary>
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -163,6 +166,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithAs method. </summary>
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -178,7 +182,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAs method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAs method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,6 +259,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithAssert method. </summary>
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -269,6 +274,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithAssert method. </summary>
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -284,7 +290,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAssert method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -323,7 +329,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAssert method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -361,6 +367,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithAsync method. </summary>
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -375,6 +382,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithAsync method. </summary>
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -390,7 +398,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAsync method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -429,7 +437,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAsync method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -467,6 +475,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithAwait method. </summary>
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -481,6 +490,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithAwait method. </summary>
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -496,7 +506,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAwait method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -535,7 +545,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithAwait method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -573,6 +583,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithBreak method. </summary>
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -587,6 +598,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithBreak method. </summary>
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -602,7 +614,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithBreak method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -641,7 +653,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithBreak method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -679,6 +691,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithClass method. </summary>
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -693,6 +706,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithClass method. </summary>
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -708,7 +722,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithClass method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -747,7 +761,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithClass method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -785,6 +799,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithConstructor method. </summary>
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -799,6 +814,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithConstructor method. </summary>
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -814,7 +830,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithConstructor method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -853,7 +869,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithConstructor method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -891,6 +907,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithContinue method. </summary>
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -905,6 +922,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithContinue method. </summary>
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -920,7 +938,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithContinue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -959,7 +977,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithContinue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -997,6 +1015,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithDef method. </summary>
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1011,6 +1030,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithDef method. </summary>
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1026,7 +1046,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithDef method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1065,7 +1085,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithDef method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1103,6 +1123,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithDel method. </summary>
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1117,6 +1138,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithDel method. </summary>
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1132,7 +1154,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithDel method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1171,7 +1193,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithDel method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1209,6 +1231,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithElif method. </summary>
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1223,6 +1246,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithElif method. </summary>
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1238,7 +1262,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithElif method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1277,7 +1301,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithElif method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1315,6 +1339,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithElse method. </summary>
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1329,6 +1354,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithElse method. </summary>
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1344,7 +1370,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithElse method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1383,7 +1409,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithElse method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1421,6 +1447,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithExcept method. </summary>
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1435,6 +1462,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithExcept method. </summary>
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1450,7 +1478,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithExcept method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1489,7 +1517,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithExcept method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1527,6 +1555,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithExec method. </summary>
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1541,6 +1570,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithExec method. </summary>
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1556,7 +1586,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithExec method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1595,7 +1625,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithExec method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1633,6 +1663,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithFinally method. </summary>
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1647,6 +1678,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithFinally method. </summary>
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1662,7 +1694,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFinally method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1701,7 +1733,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFinally method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1739,6 +1771,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithFor method. </summary>
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1753,6 +1786,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithFor method. </summary>
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1768,7 +1802,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFor method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1807,7 +1841,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFor method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1845,6 +1879,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithFrom method. </summary>
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1859,6 +1894,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithFrom method. </summary>
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1874,7 +1910,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFrom method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1913,7 +1949,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithFrom method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1951,6 +1987,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithGlobal method. </summary>
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1965,6 +2002,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithGlobal method. </summary>
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1980,7 +2018,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithGlobal method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2019,7 +2057,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithGlobal method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2057,6 +2095,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithIf method. </summary>
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2071,6 +2110,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithIf method. </summary>
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2086,7 +2126,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIf method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2125,7 +2165,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIf method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2163,6 +2203,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithImport method. </summary>
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2177,6 +2218,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithImport method. </summary>
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2192,7 +2234,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithImport method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2231,7 +2273,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithImport method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2269,6 +2311,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithIn method. </summary>
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2283,6 +2326,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithIn method. </summary>
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2298,7 +2342,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIn method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2337,7 +2381,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIn method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2375,6 +2419,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithIs method. </summary>
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2389,6 +2434,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithIs method. </summary>
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2404,7 +2450,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIs method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2443,7 +2489,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithIs method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2481,6 +2527,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithLambda method. </summary>
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2495,6 +2542,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithLambda method. </summary>
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2510,7 +2558,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithLambda method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2549,7 +2597,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithLambda method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2587,6 +2635,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithNot method. </summary>
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2601,6 +2650,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithNot method. </summary>
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2616,7 +2666,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithNot method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2655,7 +2705,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithNot method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2693,6 +2743,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithOr method. </summary>
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2707,6 +2758,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithOr method. </summary>
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2722,7 +2774,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithOr method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2761,7 +2813,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithOr method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2799,6 +2851,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithPass method. </summary>
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2813,6 +2866,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithPass method. </summary>
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2828,7 +2882,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithPass method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2867,7 +2921,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithPass method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2905,6 +2959,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithRaise method. </summary>
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2919,6 +2974,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithRaise method. </summary>
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2934,7 +2990,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithRaise method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2973,7 +3029,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithRaise method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3011,6 +3067,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithReturn method. </summary>
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3025,6 +3082,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithReturn method. </summary>
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3040,7 +3098,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithReturn method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3079,7 +3137,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithReturn method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3117,6 +3175,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithTry method. </summary>
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3131,6 +3190,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithTry method. </summary>
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3146,7 +3206,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithTry method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3185,7 +3245,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithTry method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3223,6 +3283,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithWhile method. </summary>
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3237,6 +3298,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithWhile method. </summary>
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3252,7 +3314,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithWhile method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3291,7 +3353,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithWhile method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3329,6 +3391,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithWith method. </summary>
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3343,6 +3406,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithWith method. </summary>
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3358,7 +3422,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithWith method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3397,7 +3461,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithWith method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3435,6 +3499,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> The WithYield method. </summary>
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3449,6 +3514,7 @@ namespace SpecialWords
             return response;
         }
 
+        /// <summary> The WithYield method. </summary>
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3464,7 +3530,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithYield method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3503,7 +3569,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The WithYield method
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -57,6 +57,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
@@ -72,6 +73,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
@@ -107,6 +109,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -127,6 +130,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -167,6 +171,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationSecondModel method. </summary>
         /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
@@ -187,6 +192,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationSecondModel method. </summary>
         /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
@@ -227,6 +233,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationThirdModel method. </summary>
         /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<RenamedThirdModel>> OperationThirdModelAsync(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
@@ -247,6 +254,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationThirdModel method. </summary>
         /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedThirdModel> OperationThirdModel(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
@@ -287,6 +295,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationModelWithArrayOfEnum method. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelWithArrayOfEnum>> OperationModelWithArrayOfEnumAsync(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
@@ -307,6 +316,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationModelWithArrayOfEnum method. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelWithArrayOfEnum> OperationModelWithArrayOfEnum(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
@@ -340,6 +350,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationWithInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelWithInternalModel>> OperationWithInternalModelAsync(CancellationToken cancellationToken = default)
         {
@@ -359,6 +370,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationWithInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelWithInternalModel> OperationWithInternalModel(CancellationToken cancellationToken = default)
         {
@@ -391,6 +403,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationWithAbstractModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelWithAbstractModel>> OperationWithAbstractModelAsync(CancellationToken cancellationToken = default)
         {
@@ -410,6 +423,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationWithAbstractModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelWithAbstractModel> OperationWithAbstractModel(CancellationToken cancellationToken = default)
         {
@@ -442,6 +456,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationWithListOfInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelWithListOfInternalModel>> OperationWithListOfInternalModelAsync(CancellationToken cancellationToken = default)
         {
@@ -461,6 +476,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationWithListOfInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelWithListOfInternalModel> OperationWithListOfInternalModel(CancellationToken cancellationToken = default)
         {
@@ -493,6 +509,7 @@ namespace TypeSchemaMapping
             return message;
         }
 
+        /// <summary> The OperationWithPublicModelWithInternalProperty method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<PublicModelWithInternalProperty>> OperationWithPublicModelWithInternalPropertyAsync(CancellationToken cancellationToken = default)
         {
@@ -512,6 +529,7 @@ namespace TypeSchemaMapping
             }
         }
 
+        /// <summary> The OperationWithPublicModelWithInternalProperty method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<PublicModelWithInternalProperty> OperationWithPublicModelWithInternalProperty(CancellationToken cancellationToken = default)
         {

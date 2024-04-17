@@ -44,6 +44,7 @@ namespace Encode.Datetime
             _endpoint = endpoint;
         }
 
+        /// <summary> The Default method. </summary>
         /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Encode.Datetime
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> The Default method. </summary>
         /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -73,7 +75,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Default method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Default method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> The Rfc3339 method. </summary>
         /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -164,6 +167,7 @@ namespace Encode.Datetime
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> The Rfc3339 method. </summary>
         /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -179,7 +183,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Rfc3339 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Rfc3339 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,6 +260,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> The Rfc7231 method. </summary>
         /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -270,6 +275,7 @@ namespace Encode.Datetime
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> The Rfc7231 method. </summary>
         /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -285,7 +291,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Rfc7231 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +330,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Rfc7231 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -362,6 +368,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> The UnixTimestamp method. </summary>
         /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -376,6 +383,7 @@ namespace Encode.Datetime
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> The UnixTimestamp method. </summary>
         /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -391,7 +399,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The UnixTimestamp method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +438,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The UnixTimestamp method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -468,6 +476,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> The UnixTimestampArray method. </summary>
         /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -482,6 +491,7 @@ namespace Encode.Datetime
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> The UnixTimestampArray method. </summary>
         /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -497,7 +507,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The UnixTimestampArray method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -536,7 +546,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The UnixTimestampArray method
         /// <list type="bullet">
         /// <item>
         /// <description>

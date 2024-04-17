@@ -43,6 +43,7 @@ namespace Payload.MediaType
             _endpoint = endpoint;
         }
 
+        /// <summary> The SendAsText method. </summary>
         /// <param name="text"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Payload.MediaType
             return response;
         }
 
+        /// <summary> The SendAsText method. </summary>
         /// <param name="text"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
@@ -74,7 +76,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SendAsText method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +115,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SendAsText method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -151,6 +153,7 @@ namespace Payload.MediaType
             }
         }
 
+        /// <summary> The GetAsText method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='GetAsTextAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> GetAsTextAsync(CancellationToken cancellationToken = default)
@@ -160,6 +163,7 @@ namespace Payload.MediaType
             return Response.FromValue(response.Content.ToString(), response);
         }
 
+        /// <summary> The GetAsText method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='GetAsText(CancellationToken)']/*" />
         public virtual Response<string> GetAsText(CancellationToken cancellationToken = default)
@@ -170,7 +174,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetAsText method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -205,7 +209,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetAsText method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -239,6 +243,7 @@ namespace Payload.MediaType
             }
         }
 
+        /// <summary> The SendAsJson method. </summary>
         /// <param name="text"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
@@ -254,6 +259,7 @@ namespace Payload.MediaType
             return response;
         }
 
+        /// <summary> The SendAsJson method. </summary>
         /// <param name="text"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
@@ -270,7 +276,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SendAsJson method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -309,7 +315,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SendAsJson method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -347,6 +353,7 @@ namespace Payload.MediaType
             }
         }
 
+        /// <summary> The GetAsJson method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='GetAsJsonAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> GetAsJsonAsync(CancellationToken cancellationToken = default)
@@ -356,6 +363,7 @@ namespace Payload.MediaType
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
+        /// <summary> The GetAsJson method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='GetAsJson(CancellationToken)']/*" />
         public virtual Response<string> GetAsJson(CancellationToken cancellationToken = default)
@@ -366,7 +374,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetAsJson method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -401,7 +409,7 @@ namespace Payload.MediaType
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetAsJson method
         /// <list type="bullet">
         /// <item>
         /// <description>

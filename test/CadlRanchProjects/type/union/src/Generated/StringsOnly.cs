@@ -45,6 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetStringsOnly method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse9>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
@@ -54,6 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse9.FromResponse(response), response);
         }
 
+        /// <summary> The GetStringsOnly method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnly(CancellationToken)']/*" />
         public virtual Response<GetResponse9> GetStringsOnly(CancellationToken cancellationToken = default)
@@ -64,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetStringsOnly method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetStringsOnly method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,6 +135,7 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> The Send method. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequest9Prop,CancellationToken)']/*" />
@@ -144,6 +147,7 @@ namespace _Type.Union
             return response;
         }
 
+        /// <summary> The Send method. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(SendRequest9Prop,CancellationToken)']/*" />
@@ -156,7 +160,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Send method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -195,7 +199,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Send method
         /// <list type="bullet">
         /// <item>
         /// <description>

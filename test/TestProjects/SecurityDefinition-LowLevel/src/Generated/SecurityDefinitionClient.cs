@@ -89,7 +89,7 @@ namespace SecurityDefinition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -123,7 +123,7 @@ namespace SecurityDefinition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>

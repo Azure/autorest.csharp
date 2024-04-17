@@ -38,6 +38,7 @@ namespace ModelWithConverterUsage
             _pipeline = pipeline;
         }
 
+        /// <summary> The OperationModel method. </summary>
         /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelClass>> OperationModelAsync(ModelClass value, CancellationToken cancellationToken = default)
@@ -55,6 +56,7 @@ namespace ModelWithConverterUsage
             }
         }
 
+        /// <summary> The OperationModel method. </summary>
         /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelClass> OperationModel(ModelClass value, CancellationToken cancellationToken = default)
@@ -72,6 +74,7 @@ namespace ModelWithConverterUsage
             }
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -89,6 +92,7 @@ namespace ModelWithConverterUsage
             }
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)

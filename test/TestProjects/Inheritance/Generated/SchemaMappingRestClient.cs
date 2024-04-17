@@ -53,6 +53,7 @@ namespace Inheritance
             return message;
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -79,6 +80,7 @@ namespace Inheritance
             }
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>

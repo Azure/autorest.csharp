@@ -525,7 +525,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The AddTimeHeader method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -555,7 +555,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The AddTimeHeader method
         /// <list type="bullet">
         /// <item>
         /// <description>

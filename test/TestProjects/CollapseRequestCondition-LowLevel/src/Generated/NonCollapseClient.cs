@@ -58,7 +58,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The IfMatchPut method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The IfMatchPut method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -122,7 +122,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The IfNoneMatchPut method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -154,7 +154,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The IfNoneMatchPut method
         /// <list type="bullet">
         /// <item>
         /// <description>

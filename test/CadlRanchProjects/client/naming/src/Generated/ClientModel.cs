@@ -44,6 +44,7 @@ namespace Client.Naming
             _endpoint = endpoint;
         }
 
+        /// <summary> The Client method. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Client.Naming
             return response;
         }
 
+        /// <summary> The Client method. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -73,7 +75,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Client method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Client method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Client.Naming
             }
         }
 
+        /// <summary> The Language method. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -164,6 +167,7 @@ namespace Client.Naming
             return response;
         }
 
+        /// <summary> The Language method. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -179,7 +183,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Language method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Language method
         /// <list type="bullet">
         /// <item>
         /// <description>

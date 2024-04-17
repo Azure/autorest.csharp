@@ -53,6 +53,7 @@ namespace Accessibility
             return message;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
@@ -68,6 +69,7 @@ namespace Accessibility
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Operation(string body = null, CancellationToken cancellationToken = default)
@@ -102,6 +104,7 @@ namespace Accessibility
             return message;
         }
 
+        /// <summary> The OperationInternal method. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationInternalAsync(string body = null, CancellationToken cancellationToken = default)
@@ -117,6 +120,7 @@ namespace Accessibility
             }
         }
 
+        /// <summary> The OperationInternal method. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response OperationInternal(string body = null, CancellationToken cancellationToken = default)

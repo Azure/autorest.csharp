@@ -47,6 +47,7 @@ namespace _Type.Model.Usage
             _endpoint = endpoint;
         }
 
+        /// <summary> The Input method. </summary>
         /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -61,6 +62,7 @@ namespace _Type.Model.Usage
             return response;
         }
 
+        /// <summary> The Input method. </summary>
         /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -76,7 +78,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Input method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Input method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,6 +155,7 @@ namespace _Type.Model.Usage
             }
         }
 
+        /// <summary> The Output method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputRecord>> OutputAsync(CancellationToken cancellationToken = default)
@@ -162,6 +165,7 @@ namespace _Type.Model.Usage
             return Response.FromValue(OutputRecord.FromResponse(response), response);
         }
 
+        /// <summary> The Output method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(CancellationToken)']/*" />
         public virtual Response<OutputRecord> Output(CancellationToken cancellationToken = default)
@@ -172,7 +176,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Output method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +211,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Output method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,6 +245,7 @@ namespace _Type.Model.Usage
             }
         }
 
+        /// <summary> The InputAndOutput method. </summary>
         /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -255,6 +260,7 @@ namespace _Type.Model.Usage
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 
+        /// <summary> The InputAndOutput method. </summary>
         /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -270,7 +276,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The InputAndOutput method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -309,7 +315,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The InputAndOutput method
         /// <list type="bullet">
         /// <item>
         /// <description>

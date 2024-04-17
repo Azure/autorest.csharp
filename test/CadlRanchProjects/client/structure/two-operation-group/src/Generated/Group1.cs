@@ -47,7 +47,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The One method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -78,7 +78,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The One method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +109,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Three method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -140,7 +140,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Three method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -171,7 +171,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Four method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -202,7 +202,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Four method
         /// <list type="bullet">
         /// <item>
         /// <description>

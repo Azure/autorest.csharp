@@ -44,6 +44,7 @@ namespace _Type._Enum.Extensible
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetKnownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
@@ -53,6 +54,7 @@ namespace _Type._Enum.Extensible
             return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
         }
 
+        /// <summary> The GetKnownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekExtensibleEnum> GetKnownValue(CancellationToken cancellationToken = default)
@@ -63,7 +65,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetKnownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +100,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetKnownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,6 +134,7 @@ namespace _Type._Enum.Extensible
             }
         }
 
+        /// <summary> The GetUnknownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
@@ -141,6 +144,7 @@ namespace _Type._Enum.Extensible
             return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
         }
 
+        /// <summary> The GetUnknownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekExtensibleEnum> GetUnknownValue(CancellationToken cancellationToken = default)
@@ -151,7 +155,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetUnknownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +190,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetUnknownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,6 +224,7 @@ namespace _Type._Enum.Extensible
             }
         }
 
+        /// <summary> The PutKnownValue method. </summary>
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
@@ -231,6 +236,7 @@ namespace _Type._Enum.Extensible
             return response;
         }
 
+        /// <summary> The PutKnownValue method. </summary>
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
@@ -243,7 +249,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PutKnownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -282,7 +288,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PutKnownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -320,6 +326,7 @@ namespace _Type._Enum.Extensible
             }
         }
 
+        /// <summary> The PutUnknownValue method. </summary>
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
@@ -331,6 +338,7 @@ namespace _Type._Enum.Extensible
             return response;
         }
 
+        /// <summary> The PutUnknownValue method. </summary>
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
@@ -343,7 +351,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PutUnknownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -382,7 +390,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PutUnknownValue method
         /// <list type="bullet">
         /// <item>
         /// <description>

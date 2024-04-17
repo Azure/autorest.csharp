@@ -38,6 +38,7 @@ namespace HlcConstants
             _pipeline = pipeline;
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="optionalStringQuery"> The <see cref="StringConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalBooleanQuery"> The <see cref="bool"/>? to use. The default value is True. </param>
@@ -57,6 +58,7 @@ namespace HlcConstants
             }
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="optionalStringQuery"> The <see cref="StringConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalBooleanQuery"> The <see cref="bool"/>? to use. The default value is True. </param>
@@ -76,6 +78,7 @@ namespace HlcConstants
             }
         }
 
+        /// <summary> The PostSomething method. </summary>
         /// <param name="value"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
@@ -95,6 +98,7 @@ namespace HlcConstants
             }
         }
 
+        /// <summary> The PostSomething method. </summary>
         /// <param name="value"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>

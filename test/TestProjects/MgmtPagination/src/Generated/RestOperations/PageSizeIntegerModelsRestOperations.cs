@@ -60,6 +60,7 @@ namespace MgmtPagination
             return message;
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -87,6 +88,7 @@ namespace MgmtPagination
             }
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -138,6 +140,7 @@ namespace MgmtPagination
             return message;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -168,6 +171,7 @@ namespace MgmtPagination
             }
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -218,6 +222,7 @@ namespace MgmtPagination
             return message;
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -248,6 +253,7 @@ namespace MgmtPagination
             }
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -292,6 +298,7 @@ namespace MgmtPagination
             return message;
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -321,6 +328,7 @@ namespace MgmtPagination
             }
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

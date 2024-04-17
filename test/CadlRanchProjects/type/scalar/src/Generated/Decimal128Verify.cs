@@ -45,6 +45,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
+        /// <summary> The PrepareVerify method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerifyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<decimal>>> PrepareVerifyAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type.Scalar
             return Response.FromValue(value, response);
         }
 
+        /// <summary> The PrepareVerify method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerify(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<decimal>> PrepareVerify(CancellationToken cancellationToken = default)
@@ -80,7 +82,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PrepareVerify method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The PrepareVerify method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace _Type.Scalar
             }
         }
 
+        /// <summary> The Verify method. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='VerifyAsync(decimal,CancellationToken)']/*" />
@@ -160,6 +163,7 @@ namespace _Type.Scalar
             return response;
         }
 
+        /// <summary> The Verify method. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='Verify(decimal,CancellationToken)']/*" />
@@ -172,7 +176,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Verify method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +215,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Verify method
         /// <list type="bullet">
         /// <item>
         /// <description>

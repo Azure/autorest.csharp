@@ -51,6 +51,7 @@ namespace HeaderCollectionPrefix
             return message;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="metadata"> Optional. Include this parameter to specify that the queue's metadata be returned as part of the response body. Note that metadata requested with this parameter must be stored in accordance with the naming restrictions imposed by the 2009-09-19 version of the Queue service. Beginning with this version, all metadata names must adhere to the naming conventions for C# identifiers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<HeaderCollectionPrefixOperationHeaders>> OperationAsync(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
@@ -67,6 +68,7 @@ namespace HeaderCollectionPrefix
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="metadata"> Optional. Include this parameter to specify that the queue's metadata be returned as part of the response body. Note that metadata requested with this parameter must be stored in accordance with the naming restrictions imposed by the 2009-09-19 version of the Queue service. Beginning with this version, all metadata names must adhere to the naming conventions for C# identifiers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HeaderCollectionPrefixOperationHeaders> Operation(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)

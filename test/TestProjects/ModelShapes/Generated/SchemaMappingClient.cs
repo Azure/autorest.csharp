@@ -38,6 +38,7 @@ namespace ModelShapes
             _pipeline = pipeline;
         }
 
+        /// <summary> The Input method. </summary>
         /// <param name="value"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
@@ -55,6 +56,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Input method. </summary>
         /// <param name="value"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Input(InputModel value, CancellationToken cancellationToken = default)
@@ -72,6 +74,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="MixedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
@@ -89,6 +92,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="MixedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MixedModel> Mixed(MixedModel value, CancellationToken cancellationToken = default)
@@ -106,6 +110,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Output method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<OutputModel>> OutputAsync(CancellationToken cancellationToken = default)
         {
@@ -122,6 +127,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Output method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<OutputModel> Output(CancellationToken cancellationToken = default)
         {
@@ -138,6 +144,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Mixedreadonly method. </summary>
         /// <param name="value"> The <see cref="MixedModelWithReadonlyProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<MixedModelWithReadonlyProperty>> MixedreadonlyAsync(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
@@ -155,6 +162,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The Mixedreadonly method. </summary>
         /// <param name="value"> The <see cref="MixedModelWithReadonlyProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MixedModelWithReadonlyProperty> Mixedreadonly(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
@@ -172,6 +180,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The FlattenedParameterOperation method. </summary>
         /// <param name="code"> The <see cref="string"/> to use. </param>
         /// <param name="status"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -190,6 +199,7 @@ namespace ModelShapes
             }
         }
 
+        /// <summary> The FlattenedParameterOperation method. </summary>
         /// <param name="code"> The <see cref="string"/> to use. </param>
         /// <param name="status"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

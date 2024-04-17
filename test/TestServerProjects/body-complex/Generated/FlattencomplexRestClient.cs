@@ -49,6 +49,7 @@ namespace body_complex
             return message;
         }
 
+        /// <summary> The GetValid method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
@@ -68,6 +69,7 @@ namespace body_complex
             }
         }
 
+        /// <summary> The GetValid method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {

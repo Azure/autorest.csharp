@@ -216,6 +216,7 @@ namespace MgmtSingletonResource
             return message;
         }
 
+        /// <summary> The CreateOrUpdate method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="parentName"> The <see cref="string"/> to use. </param>
@@ -246,6 +247,7 @@ namespace MgmtSingletonResource
             }
         }
 
+        /// <summary> The CreateOrUpdate method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="parentName"> The <see cref="string"/> to use. </param>

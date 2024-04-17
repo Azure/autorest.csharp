@@ -216,6 +216,7 @@ namespace validation
             return message;
         }
 
+        /// <summary> The GetWithConstantInPath method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
@@ -230,6 +231,7 @@ namespace validation
             }
         }
 
+        /// <summary> The GetWithConstantInPath method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
@@ -266,6 +268,7 @@ namespace validation
             return message;
         }
 
+        /// <summary> The PostWithConstantInBody method. </summary>
         /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
@@ -286,6 +289,7 @@ namespace validation
             }
         }
 
+        /// <summary> The PostWithConstantInBody method. </summary>
         /// <param name="body"> The <see cref="Product"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body = null, CancellationToken cancellationToken = default)

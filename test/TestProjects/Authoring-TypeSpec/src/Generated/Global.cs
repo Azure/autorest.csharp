@@ -46,7 +46,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetSupportedLanguages method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -70,7 +70,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetSupportedLanguages method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -94,7 +94,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetTrainingConfigVersions method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetTrainingConfigVersions method
         /// <list type="bullet">
         /// <item>
         /// <description>

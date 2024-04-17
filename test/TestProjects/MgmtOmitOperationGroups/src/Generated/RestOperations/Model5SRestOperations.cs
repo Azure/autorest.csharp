@@ -56,6 +56,7 @@ namespace MgmtOmitOperationGroups
             return message;
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -82,6 +83,7 @@ namespace MgmtOmitOperationGroups
             }
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -132,6 +134,7 @@ namespace MgmtOmitOperationGroups
             return message;
         }
 
+        /// <summary> The CreateOrUpdate method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>
@@ -162,6 +165,7 @@ namespace MgmtOmitOperationGroups
             }
         }
 
+        /// <summary> The CreateOrUpdate method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>
@@ -212,6 +216,7 @@ namespace MgmtOmitOperationGroups
             return message;
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>
@@ -240,6 +245,7 @@ namespace MgmtOmitOperationGroups
             }
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>

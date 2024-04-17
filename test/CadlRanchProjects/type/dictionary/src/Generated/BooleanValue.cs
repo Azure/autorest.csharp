@@ -45,6 +45,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetBooleanValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanValueAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
+        /// <summary> The GetBooleanValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, bool>> GetBooleanValue(CancellationToken cancellationToken = default)
@@ -80,7 +82,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetBooleanValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetBooleanValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace _Type._Dictionary
             }
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -163,6 +166,7 @@ namespace _Type._Dictionary
             return response;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -178,7 +182,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Put method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Put method
         /// <list type="bullet">
         /// <item>
         /// <description>

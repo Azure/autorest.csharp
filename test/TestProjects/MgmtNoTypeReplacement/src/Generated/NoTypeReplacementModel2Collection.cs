@@ -55,6 +55,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -103,6 +104,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -151,6 +153,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -195,6 +198,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -239,6 +243,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -267,6 +272,7 @@ namespace MgmtNoTypeReplacement
         }
 
         /// <summary>
+        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

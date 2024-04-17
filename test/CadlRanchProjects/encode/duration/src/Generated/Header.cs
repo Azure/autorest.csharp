@@ -45,7 +45,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Default method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +77,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Default method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +109,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Iso8601 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -141,7 +141,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Iso8601 method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -173,7 +173,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Iso8601Array method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -208,7 +208,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Iso8601Array method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -243,7 +243,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Int32Seconds method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -275,7 +275,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Int32Seconds method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,7 +307,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The FloatSeconds method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -339,7 +339,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The FloatSeconds method
         /// <list type="bullet">
         /// <item>
         /// <description>

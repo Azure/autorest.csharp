@@ -58,6 +58,7 @@ namespace MgmtOmitOperationGroups
             return message;
         }
 
+        /// <summary> The GetDefault method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model2SName"> The <see cref="string"/> to use. </param>
@@ -86,6 +87,7 @@ namespace MgmtOmitOperationGroups
             }
         }
 
+        /// <summary> The GetDefault method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="model2SName"> The <see cref="string"/> to use. </param>

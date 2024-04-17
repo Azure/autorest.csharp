@@ -45,6 +45,7 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
+        /// <summary> The SpreadAsRequestBody method. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -59,6 +60,7 @@ namespace Parameters.Spread
             return response;
         }
 
+        /// <summary> The SpreadAsRequestBody method. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -74,7 +76,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestBody method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +115,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestBody method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -151,6 +153,7 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> The SpreadAsRequestParameter method. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -170,6 +173,7 @@ namespace Parameters.Spread
             return response;
         }
 
+        /// <summary> The SpreadAsRequestParameter method. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -190,7 +194,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestParameter method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -234,7 +238,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestParameter method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -277,6 +281,7 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> The SpreadWithMultipleParameters method. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -313,6 +318,7 @@ namespace Parameters.Spread
             return response;
         }
 
+        /// <summary> The SpreadWithMultipleParameters method. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -350,7 +356,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadWithMultipleParameters method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -394,7 +400,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadWithMultipleParameters method
         /// <list type="bullet">
         /// <item>
         /// <description>

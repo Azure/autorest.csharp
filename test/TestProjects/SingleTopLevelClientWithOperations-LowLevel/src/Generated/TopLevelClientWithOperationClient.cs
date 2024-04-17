@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Operation method
         /// <list type="bullet">
         /// <item>
         /// <description>

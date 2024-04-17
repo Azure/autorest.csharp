@@ -53,6 +53,7 @@ namespace ModelWithConverterUsage
             return message;
         }
 
+        /// <summary> The OperationModel method. </summary>
         /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -79,6 +80,7 @@ namespace ModelWithConverterUsage
             }
         }
 
+        /// <summary> The OperationModel method. </summary>
         /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -125,6 +127,7 @@ namespace ModelWithConverterUsage
             return message;
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -145,6 +148,7 @@ namespace ModelWithConverterUsage
             }
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)

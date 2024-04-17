@@ -47,7 +47,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetSubParameter method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -82,7 +82,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetSubParameter method
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -39,6 +39,7 @@ namespace CustomNamespace
             _pipeline = pipeline;
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -56,6 +57,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationStruct method. </summary>
         /// <param name="body"> The <see cref="RenamedModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -73,6 +75,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationSecondModel method. </summary>
         /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
@@ -90,6 +93,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationSecondModel method. </summary>
         /// <param name="body"> The <see cref="SecondModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
@@ -107,6 +111,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationThirdModel method. </summary>
         /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedThirdModel>> OperationThirdModelAsync(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
@@ -124,6 +129,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationThirdModel method. </summary>
         /// <param name="body"> The <see cref="RenamedThirdModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedThirdModel> OperationThirdModel(RenamedThirdModel body = null, CancellationToken cancellationToken = default)
@@ -141,6 +147,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationModelWithArrayOfEnum method. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelWithArrayOfEnum>> OperationModelWithArrayOfEnumAsync(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
@@ -158,6 +165,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationModelWithArrayOfEnum method. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayOfEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelWithArrayOfEnum> OperationModelWithArrayOfEnum(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
@@ -175,6 +183,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelWithInternalModel>> OperationWithInternalModelAsync(CancellationToken cancellationToken = default)
         {
@@ -191,6 +200,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelWithInternalModel> OperationWithInternalModel(CancellationToken cancellationToken = default)
         {
@@ -207,6 +217,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithAbstractModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelWithAbstractModel>> OperationWithAbstractModelAsync(CancellationToken cancellationToken = default)
         {
@@ -223,6 +234,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithAbstractModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelWithAbstractModel> OperationWithAbstractModel(CancellationToken cancellationToken = default)
         {
@@ -239,6 +251,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithListOfInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelWithListOfInternalModel>> OperationWithListOfInternalModelAsync(CancellationToken cancellationToken = default)
         {
@@ -255,6 +268,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithListOfInternalModel method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelWithListOfInternalModel> OperationWithListOfInternalModel(CancellationToken cancellationToken = default)
         {
@@ -271,6 +285,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithPublicModelWithInternalProperty method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PublicModelWithInternalProperty>> OperationWithPublicModelWithInternalPropertyAsync(CancellationToken cancellationToken = default)
         {
@@ -287,6 +302,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The OperationWithPublicModelWithInternalProperty method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PublicModelWithInternalProperty> OperationWithPublicModelWithInternalProperty(CancellationToken cancellationToken = default)
         {
@@ -303,6 +319,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
@@ -321,6 +338,7 @@ namespace CustomNamespace
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual MainOperation StartOperation(CustomizedModel body = null, CancellationToken cancellationToken = default)

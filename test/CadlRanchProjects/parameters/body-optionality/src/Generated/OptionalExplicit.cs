@@ -44,6 +44,7 @@ namespace Parameters.BodyOptionality
             _endpoint = endpoint;
         }
 
+        /// <summary> The Set method. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='SetAsync(BodyModel,CancellationToken)']/*" />
@@ -55,6 +56,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
+        /// <summary> The Set method. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Set(BodyModel,CancellationToken)']/*" />
@@ -67,7 +69,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Set method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -103,7 +105,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Set method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -138,6 +140,7 @@ namespace Parameters.BodyOptionality
             }
         }
 
+        /// <summary> The Omit method. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='OmitAsync(BodyModel,CancellationToken)']/*" />
@@ -149,6 +152,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
+        /// <summary> The Omit method. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Omit(BodyModel,CancellationToken)']/*" />
@@ -161,7 +165,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Omit method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -197,7 +201,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Omit method
         /// <list type="bullet">
         /// <item>
         /// <description>

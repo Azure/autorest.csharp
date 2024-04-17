@@ -44,6 +44,7 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
+        /// <summary> The SpreadAsRequestBody method. </summary>
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Parameters.Spread
             return response;
         }
 
+        /// <summary> The SpreadAsRequestBody method. </summary>
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
@@ -73,7 +75,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestBody method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The SpreadAsRequestBody method
         /// <list type="bullet">
         /// <item>
         /// <description>

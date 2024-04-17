@@ -60,6 +60,7 @@ namespace NameConflicts
             return message0;
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="request"> The <see cref="string"/> to use. </param>
         /// <param name="message"> The <see cref="string"/> to use. </param>
         /// <param name="scope"> The <see cref="string"/> to use. </param>
@@ -116,6 +117,7 @@ namespace NameConflicts
             }
         }
 
+        /// <summary> The Operation method. </summary>
         /// <param name="request"> The <see cref="string"/> to use. </param>
         /// <param name="message"> The <see cref="string"/> to use. </param>
         /// <param name="scope"> The <see cref="string"/> to use. </param>
@@ -292,6 +294,7 @@ namespace NameConflicts
             return message;
         }
 
+        /// <summary> The HttpMessage method. </summary>
         /// <param name="httpMessage"> The <see cref="Models.HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
@@ -312,6 +315,7 @@ namespace NameConflicts
             }
         }
 
+        /// <summary> The HttpMessage method. </summary>
         /// <param name="httpMessage"> The <see cref="Models.HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.HttpMessage> HttpMessage(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
@@ -352,6 +356,7 @@ namespace NameConflicts
             return message;
         }
 
+        /// <summary> The Request method. </summary>
         /// <param name="request"> The <see cref="Models.Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
@@ -372,6 +377,7 @@ namespace NameConflicts
             }
         }
 
+        /// <summary> The Request method. </summary>
         /// <param name="request"> The <see cref="Models.Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Request> Request(Models.Request request = null, CancellationToken cancellationToken = default)
@@ -412,6 +418,7 @@ namespace NameConflicts
             return message;
         }
 
+        /// <summary> The Response method. </summary>
         /// <param name="response"> The <see cref="Models.Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
@@ -432,6 +439,7 @@ namespace NameConflicts
             }
         }
 
+        /// <summary> The Response method. </summary>
         /// <param name="response"> The <see cref="Models.Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)

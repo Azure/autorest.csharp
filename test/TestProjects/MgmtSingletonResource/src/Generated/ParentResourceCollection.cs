@@ -55,6 +55,7 @@ namespace MgmtSingletonResource
         }
 
         /// <summary>
+        /// The CreateOrUpdate method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -103,6 +104,7 @@ namespace MgmtSingletonResource
         }
 
         /// <summary>
+        /// The CreateOrUpdate method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

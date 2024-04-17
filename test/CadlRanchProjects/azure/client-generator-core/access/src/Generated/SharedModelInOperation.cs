@@ -44,6 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
+        /// <summary> The Public method. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -57,6 +58,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
+        /// <summary> The Public method. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -71,7 +73,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Public method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -110,7 +112,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Public method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -148,6 +150,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
+        /// <summary> The Internal method. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -160,6 +163,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
+        /// <summary> The Internal method. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -173,7 +177,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Internal method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +215,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Internal method
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -774,7 +774,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The AddTimeHeader method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -793,7 +793,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The AddTimeHeader method
         /// <list type="bullet">
         /// <item>
         /// <description>

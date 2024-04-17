@@ -56,6 +56,7 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -82,6 +83,7 @@ namespace MgmtNoTypeReplacement
             }
         }
 
+        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -132,6 +134,7 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
@@ -162,6 +165,7 @@ namespace MgmtNoTypeReplacement
             }
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
@@ -212,6 +216,7 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
@@ -242,6 +247,7 @@ namespace MgmtNoTypeReplacement
             }
         }
 
+        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
