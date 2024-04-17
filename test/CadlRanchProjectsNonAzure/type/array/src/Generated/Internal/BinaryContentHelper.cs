@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace UnbrandedTypeSpec
+namespace Type.Array
 {
     internal static class BinaryContentHelper
     {

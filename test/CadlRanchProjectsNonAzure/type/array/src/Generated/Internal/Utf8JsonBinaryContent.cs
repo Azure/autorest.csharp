@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UnbrandedTypeSpec
+namespace Type.Array
 {
     internal class Utf8JsonBinaryContent : BinaryContent
     {

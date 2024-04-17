@@ -352,9 +352,3 @@ op stillConvenient(): void;
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
-
-@route("/putArray")
-@doc("put array.")
-@put
-@convenientAPI(true)
-op putArray(@body body: string[]): void;

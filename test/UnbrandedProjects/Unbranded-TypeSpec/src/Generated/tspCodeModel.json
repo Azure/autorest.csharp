@@ -3076,130 +3076,18 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "316",
-     "Name": "putArray",
-     "ResourceName": "UnbrandedTypeSpec",
-     "Description": "put array.",
-     "Parameters": [
-      {
-       "$ref": "145"
-      },
-      {
-       "$id": "317",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$id": "318",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "319",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "320",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "321",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "322",
-        "Type": {
-         "$ref": "321"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "323",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "324",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "325",
-        "Type": {
-         "$ref": "324"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "326",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{unbrandedTypeSpecUrl}",
-     "Path": "/putArray",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "327"
+    "$id": "316"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "328",
+  "$id": "317",
   "ApiKey": {
-   "$id": "329",
+   "$id": "318",
    "Name": "my-api-key"
   }
  }
