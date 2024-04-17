@@ -114,6 +114,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (initializeOverridedProperty)
             {
                 data.NestedName = "someSku";
+                data.Unflattened = new Unflattened
+                {
+                    UnflattenedName = "unflattened",
+                    Value = "value"
+                };
             }
 
             var options = new BicepModelReaderWriterOptions
@@ -126,6 +131,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                 { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
                                 { nameof(DeliveryRuleData.Location), "locationParameter" },
                                 { nameof(DeliveryRuleData.NestedName), "'overridenSku'" },
+                                { nameof(DeliveryRuleData.UnflattenedName), "'unflattenedOverride'"}
                             }
                         },
                         {
@@ -143,7 +149,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     }
             };
             var bicep = ModelReaderWriter.Write(data, options).ToString();
-            var expected = File.ReadAllText(TestData.GetLocation("BicepData/Overrides.bicep"));
+            var file = initializeOverridedProperty ? "BicepData/OverridesWithInitialization.bicep" : "BicepData/Overrides.bicep";
+            var expected = File.ReadAllText(TestData.GetLocation(file));
             Assert.AreEqual(expected, bicep);
         }
 

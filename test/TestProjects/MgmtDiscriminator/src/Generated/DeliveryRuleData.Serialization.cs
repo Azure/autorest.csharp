@@ -75,6 +75,11 @@ namespace MgmtDiscriminator
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue<Sku1>(Sku, options);
             }
+            if (Optional.IsDefined(Unflattened))
+            {
+                writer.WritePropertyName("unflattened"u8);
+                writer.WriteObjectValue<Unflattened>(Unflattened, options);
+            }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
@@ -147,6 +152,7 @@ namespace MgmtDiscriminator
             Uri uri = default;
             Shell shellProperty = default;
             Sku1 sku = default;
+            Unflattened unflattened = default;
             DeliveryRuleProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -237,6 +243,15 @@ namespace MgmtDiscriminator
                     sku = Sku1.DeserializeSku1(property.Value, options);
                     continue;
                 }
+                if (property.NameEquals("unflattened"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    unflattened = Unflattened.DeserializeUnflattened(property.Value, options);
+                    continue;
+                }
                 if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -290,6 +305,7 @@ namespace MgmtDiscriminator
                 uri,
                 shellProperty,
                 sku,
+                unflattened,
                 properties,
                 serializedAdditionalRawData);
         }
@@ -458,6 +474,33 @@ namespace MgmtDiscriminator
                 else
                 {
                     BicepSerializationHelpers.AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride);
+            if (Optional.IsDefined(Unflattened) || hasPropertyOverride)
+            {
+                builder.Append("  unflattened: ");
+                if (hasPropertyOverride)
+                {
+                    if (Unflattened == null)
+                    {
+                        builder.AppendLine("{");
+                        builder.Append("    unflattenedName: ");
+                        builder.AppendLine(propertyOverride);
+                        builder.AppendLine("  }");
+                    }
+                    else
+                    {
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("UnflattenedName", propertyOverride);
+                        bicepOptions.PropertyOverrides.Add(Unflattened, propertyDictionary);
+                        BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
+                    }
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
                 }
             }
 

@@ -445,6 +445,11 @@
                     "type": "object",
                     "$ref": "#/definitions/Sku1"
                 },
+                "unflattened": {
+                    "description": "The unflattened property.",
+                    "type": "object",
+                    "$ref": "#/definitions/Unflattened"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
@@ -595,6 +600,20 @@
             "properties": {
                 "nestedName": {
                     "description": "The childmost sku property",
+                    "type": "string"
+                }
+            }
+        },
+        "Unflattened": {
+            "description": "A model for testing unflattening",
+            "type": "object",
+            "properties": {
+                "unflattenedName": {
+                    "description": "The name",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value",
                     "type": "string"
                 }
             }
