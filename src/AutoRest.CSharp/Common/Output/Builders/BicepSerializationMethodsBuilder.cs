@@ -369,7 +369,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         return false;
                     }));
 
-                    //p => p != property && p.GetWirePath().Contains($"{property.GetWirePath()}."));
             wirePath = path;
             previouslyFlattenedProperty = previous?.Name;
             return previouslyFlattenedProperty != null;
