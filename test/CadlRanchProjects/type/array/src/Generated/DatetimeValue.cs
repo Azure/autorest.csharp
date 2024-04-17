@@ -82,7 +82,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetDatetimeValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The GetDatetimeValue method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -182,7 +182,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Put method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -221,7 +221,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] The Put method
         /// <list type="bullet">
         /// <item>
         /// <description>
