@@ -397,7 +397,7 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility &= ~Public; // removes public if any
                 accessibility |= Internal; // add internal
             }
-            var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
+            var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary ?? $"The {name} method"), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = Configuration.IsBranded
                 ? name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null
                 : null;
