@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Type.Array
+namespace _Type._Array
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

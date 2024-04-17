@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Type.Array
+namespace _Type._Array
 {
     /// <summary> Client options for ArrayClient. </summary>
     public partial class ArrayClientOptions : ClientPipelineOptions

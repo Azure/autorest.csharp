@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Type.Array.Tests")]
+[assembly: InternalsVisibleTo("_Type._Array.Tests")]

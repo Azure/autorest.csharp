@@ -8,9 +8,9 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Type.Array.Models;
+using _Type._Array.Models;
 
-namespace Type.Array
+namespace _Type._Array
 {
     // Data plane generated sub-client.
     /// <summary> Array of model values. </summary>

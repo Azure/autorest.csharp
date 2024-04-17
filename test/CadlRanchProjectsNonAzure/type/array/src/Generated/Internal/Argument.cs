@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Type.Array
+namespace _Type._Array
 {
     internal static class Argument
     {
@@ -94,7 +94,7 @@ namespace Type.Array
             }
         }
 
-        public static void AssertEnumDefined(System.Type enumType, object value, string name)
+        public static void AssertEnumDefined(Type enumType, object value, string name)
         {
             if (!Enum.IsDefined(enumType, value))
             {

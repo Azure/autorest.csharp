@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Type.Array
+namespace _Type._Array
 {
     // Data plane generated client.
     /// <summary> The Array service client. </summary>
@@ -32,7 +32,7 @@ namespace Type.Array
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ArrayClientOptions();
 
-            _pipeline = ClientPipeline.Create(options, System.Array.Empty<PipelinePolicy>(), System.Array.Empty<PipelinePolicy>(), System.Array.Empty<PipelinePolicy>());
+            _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), Array.Empty<PipelinePolicy>(), Array.Empty<PipelinePolicy>());
             _endpoint = endpoint;
         }
 

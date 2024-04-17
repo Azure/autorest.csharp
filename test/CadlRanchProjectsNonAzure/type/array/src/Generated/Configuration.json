@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Type.Array",
-  "library-name": "Type.Array",
+  "namespace": "_Type._Array",
+  "library-name": "_Type._Array",
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"

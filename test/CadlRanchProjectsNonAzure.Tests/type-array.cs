@@ -12,9 +12,9 @@ using NUnit.Framework;
 using _Type._Array;
 using _Type._Array.Models;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeArrayTests : CadlRanchTestBase
+    public class TypeArrayTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Array_Int32Value_get() => Test(async (host) =>
@@ -27,7 +27,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Int32Value_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetInt32ValueClient().PutAsync(new List<int> { 1, 2 });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -41,7 +41,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Int64Value_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetInt64ValueClient().PutAsync(new List<long> { 9007199254740991, -9007199254740991 });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -55,7 +55,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_BooleanValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetBooleanValueClient().PutAsync(new List<bool> { true, false });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -69,7 +69,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_StringValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetStringValueClient().PutAsync(new List<string> { "hello", "" });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -83,7 +83,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Float32Value_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 43.125f });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -98,7 +98,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_DatetimeValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetDatetimeValueClient().PutAsync(new List<DateTimeOffset> { DateTimeOffset.Parse("2022-08-26T18:38:00Z") });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -113,7 +113,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_DurationValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetDurationValueClient().PutAsync(new List<TimeSpan> { XmlConvert.ToTimeSpan("P123DT22H14M12.011S") });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -129,7 +129,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_UnknownValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetUnknownValueClient().PutAsync(new List<BinaryData> { new BinaryData(1), new BinaryData("\"hello\""), null });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -145,7 +145,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_ModelValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetModelValueClient().PutAsync(new List<InnerModel> { new InnerModel("hello"), new InnerModel("world") });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -159,7 +159,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_NullableFloatValue_put() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetNullableFloatValueClient().PutAsync(new List<float?> { 1.25f, null, 3.0f });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
 }

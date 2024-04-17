@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Array.Models
+namespace _Type._Array.Models
 {
     /// <summary> Array inner model. </summary>
     public partial class InnerModel

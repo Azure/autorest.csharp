@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Type.Array
+namespace _Type._Array
 {
     internal class ChangeTrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
@@ -44,9 +44,9 @@ namespace Type.Array
 
         public bool IsReadOnly => IsUndefined ? false : EnsureDictionary().IsReadOnly;
 
-        public ICollection<TKey> Keys => IsUndefined ? System.Array.Empty<TKey>() : EnsureDictionary().Keys;
+        public ICollection<TKey> Keys => IsUndefined ? Array.Empty<TKey>() : EnsureDictionary().Keys;
 
-        public ICollection<TValue> Values => IsUndefined ? System.Array.Empty<TValue>() : EnsureDictionary().Values;
+        public ICollection<TValue> Values => IsUndefined ? Array.Empty<TValue>() : EnsureDictionary().Values;
 
         public TValue this[TKey key]
         {

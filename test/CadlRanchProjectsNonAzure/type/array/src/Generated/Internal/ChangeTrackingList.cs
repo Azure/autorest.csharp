@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Type.Array
+namespace _Type._Array
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
