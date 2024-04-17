@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray()
                 : _orderedParameters.Select(p => p.Protocol?.ToRequired()).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : Internal) | Virtual;
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary ?? $"The {_restClientMethod.Name} method"), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
             var convenienceMethod = BuildConvenienceMethod(isRequestContextOptional, convenienceMethodInfo);
 
@@ -397,7 +397,7 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility &= ~Public; // removes public if any
                 accessibility |= Internal; // add internal
             }
-            var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary ?? $"The {name} method"), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
+            var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = Configuration.IsBranded
                 ? name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null
                 : null;
