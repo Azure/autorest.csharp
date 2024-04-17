@@ -78,7 +78,7 @@ namespace MgmtDiscriminator
             if (Optional.IsDefined(Unflattened))
             {
                 writer.WritePropertyName("unflattened"u8);
-                writer.WriteObjectValue<Unflattened>(Unflattened, options);
+                writer.WriteObjectValue(Unflattened, options);
             }
             if (Optional.IsDefined(Properties))
             {

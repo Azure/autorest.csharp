@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     internal partial class Sku1 : IUtf8JsonSerializable, IJsonModel<Sku1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku1>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku1>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Sku1>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -31,7 +31,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Name1))
             {
                 writer.WritePropertyName("name1"u8);
-                writer.WriteObjectValue<Sku2>(Name1, options);
+                writer.WriteObjectValue(Name1, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -65,7 +65,7 @@ namespace MgmtDiscriminator.Models
 
         internal static Sku1 DeserializeSku1(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -73,7 +73,7 @@ namespace MgmtDiscriminator.Models
             }
             Sku2 name1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name1"u8))
@@ -87,10 +87,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Sku1(name1, serializedAdditionalRawData);
         }
 
