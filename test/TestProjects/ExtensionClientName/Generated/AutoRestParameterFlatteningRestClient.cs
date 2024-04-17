@@ -55,7 +55,6 @@ namespace ExtensionClientName
             return message;
         }
 
-        /// <summary> The RenamedOperation method. </summary>
         /// <param name="renamedPathParameter"> The <see cref="string"/> to use. </param>
         /// <param name="renamedQueryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="renamedBodyParameter"> The <see cref="RenamedSchema"/> to use. </param>
@@ -93,7 +92,6 @@ namespace ExtensionClientName
             }
         }
 
-        /// <summary> The RenamedOperation method. </summary>
         /// <param name="renamedPathParameter"> The <see cref="string"/> to use. </param>
         /// <param name="renamedQueryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="renamedBodyParameter"> The <see cref="RenamedSchema"/> to use. </param>

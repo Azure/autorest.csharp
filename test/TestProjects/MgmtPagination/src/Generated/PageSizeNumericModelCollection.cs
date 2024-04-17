@@ -55,7 +55,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -104,7 +103,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -153,7 +151,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -198,7 +195,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -243,7 +239,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -274,7 +269,6 @@ namespace MgmtPagination
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

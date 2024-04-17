@@ -86,7 +86,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -124,7 +123,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -179,7 +177,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -217,7 +214,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -255,7 +251,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -289,7 +284,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -323,7 +317,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -355,7 +348,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -387,7 +379,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -421,7 +412,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -455,7 +445,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -488,7 +477,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -521,7 +509,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -555,7 +542,6 @@ namespace MgmtExactMatchInheritance
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

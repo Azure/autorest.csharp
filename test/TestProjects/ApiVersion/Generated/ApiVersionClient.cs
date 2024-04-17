@@ -39,7 +39,6 @@ namespace ApiVersion
             _pipeline = pipeline;
         }
 
-        /// <summary> The Operation method. </summary>
         /// <param name="notApiVersionEnum"> The <see cref="Models.ApiVersion"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(Models.ApiVersion notApiVersionEnum, CancellationToken cancellationToken = default)
@@ -57,7 +56,6 @@ namespace ApiVersion
             }
         }
 
-        /// <summary> The Operation method. </summary>
         /// <param name="notApiVersionEnum"> The <see cref="Models.ApiVersion"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(Models.ApiVersion notApiVersionEnum, CancellationToken cancellationToken = default)

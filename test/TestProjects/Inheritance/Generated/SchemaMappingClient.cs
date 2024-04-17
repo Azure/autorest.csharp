@@ -38,7 +38,6 @@ namespace Inheritance
             _pipeline = pipeline;
         }
 
-        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BaseClass>> MixedAsync(BaseClass value, CancellationToken cancellationToken = default)
@@ -56,7 +55,6 @@ namespace Inheritance
             }
         }
 
-        /// <summary> The Mixed method. </summary>
         /// <param name="value"> The <see cref="BaseClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BaseClass> Mixed(BaseClass value, CancellationToken cancellationToken = default)

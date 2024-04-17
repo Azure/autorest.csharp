@@ -166,7 +166,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -204,7 +203,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -259,7 +257,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -297,7 +294,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -352,7 +348,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -390,7 +385,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -445,7 +439,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -483,7 +476,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -538,7 +530,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -576,7 +567,6 @@ namespace MgmtResourceName
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

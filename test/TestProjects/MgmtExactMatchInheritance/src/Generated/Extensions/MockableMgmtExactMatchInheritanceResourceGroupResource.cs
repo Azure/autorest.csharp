@@ -60,7 +60,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -91,7 +90,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -129,7 +127,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -160,7 +157,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -191,7 +187,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -232,7 +227,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -273,7 +267,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -298,7 +291,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The List method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -323,7 +315,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -364,7 +355,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -405,7 +395,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -444,7 +433,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -483,7 +471,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -524,7 +511,6 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// The Put method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

@@ -38,7 +38,6 @@ namespace body_complex
             _pipeline = pipeline;
         }
 
-        /// <summary> The GetValid method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
@@ -55,7 +54,6 @@ namespace body_complex
             }
         }
 
-        /// <summary> The GetValid method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {

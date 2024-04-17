@@ -56,7 +56,6 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -83,7 +82,6 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <summary> The List method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -134,7 +132,6 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="trackedResourceModel2SName"> The <see cref="string"/> to use. </param>
@@ -165,7 +162,6 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="trackedResourceModel2SName"> The <see cref="string"/> to use. </param>
@@ -216,7 +212,6 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="trackedResourceModel2SName"> The <see cref="string"/> to use. </param>
@@ -245,7 +240,6 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="trackedResourceModel2SName"> The <see cref="string"/> to use. </param>

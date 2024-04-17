@@ -57,7 +57,6 @@ namespace MgmtSingletonResource
             return message;
         }
 
-        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="carName"> The <see cref="string"/> to use. </param>
@@ -88,7 +87,6 @@ namespace MgmtSingletonResource
             }
         }
 
-        /// <summary> The Get method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="carName"> The <see cref="string"/> to use. </param>

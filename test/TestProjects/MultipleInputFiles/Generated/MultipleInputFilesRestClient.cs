@@ -53,7 +53,6 @@ namespace MultipleInputFiles
             return message;
         }
 
-        /// <summary> The Operation1 method. </summary>
         /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -75,7 +74,6 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <summary> The Operation1 method. </summary>
         /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -115,7 +113,6 @@ namespace MultipleInputFiles
             return message;
         }
 
-        /// <summary> The Operation2 method. </summary>
         /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -137,7 +134,6 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <summary> The Operation2 method. </summary>
         /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>

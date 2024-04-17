@@ -96,7 +96,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -136,7 +135,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The Get method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -176,7 +174,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The CreateOrUpdate method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -222,7 +219,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The CreateOrUpdate method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -268,7 +264,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The GetDefault method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -302,7 +297,6 @@ namespace MgmtOmitOperationGroups
         }
 
         /// <summary>
-        /// The GetDefault method
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

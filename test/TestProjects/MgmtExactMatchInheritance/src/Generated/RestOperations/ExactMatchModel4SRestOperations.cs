@@ -61,7 +61,6 @@ namespace MgmtExactMatchInheritance
             return message;
         }
 
-        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
@@ -92,7 +91,6 @@ namespace MgmtExactMatchInheritance
             }
         }
 
-        /// <summary> The Put method. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
