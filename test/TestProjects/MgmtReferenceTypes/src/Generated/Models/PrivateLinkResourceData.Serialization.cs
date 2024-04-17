@@ -126,8 +126,9 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, PrivateLinkResourceData model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<PrivateLinkResourceData>(model);
+                writer.WriteObjectValue(model);
             }
+
             public override PrivateLinkResourceData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

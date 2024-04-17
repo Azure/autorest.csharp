@@ -22,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue<BlobInventoryPolicyDefinition>(Definition);
+            writer.WriteObjectValue(Definition);
             writer.WriteEndObject();
         }
 

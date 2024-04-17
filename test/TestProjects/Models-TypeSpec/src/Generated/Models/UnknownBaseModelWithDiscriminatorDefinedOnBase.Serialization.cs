@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     internal partial class UnknownBaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
 
         internal static UnknownBaseModelWithDiscriminatorDefinedOnBase DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
             string optionalString = default;
             string kind = "Unknown";
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalString"u8))
@@ -90,10 +90,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString);
         }
 
@@ -136,11 +136,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnknownBaseModelWithDiscriminatorDefinedOnBase>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

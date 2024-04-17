@@ -65,8 +65,8 @@ namespace Azure.NewProject.TypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = action.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -85,8 +85,8 @@ namespace Azure.NewProject.TypeSpec
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = action.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = HelloAgain(p2, p1, content, context);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -266,8 +266,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CreateLiteralAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -281,8 +281,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = CreateLiteral(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }

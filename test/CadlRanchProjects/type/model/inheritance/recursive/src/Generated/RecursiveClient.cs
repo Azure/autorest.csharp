@@ -55,8 +55,8 @@ namespace _Type.Model.Inheritance.Recursive
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -69,8 +69,8 @@ namespace _Type.Model.Inheritance.Recursive
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }

@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace body_complex.Models
@@ -15,7 +16,7 @@ namespace body_complex.Models
     [PersistableModelProxy(typeof(UnknownMyBaseType))]
     public partial class MyBaseType : IUtf8JsonSerializable, IJsonModel<MyBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<MyBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -73,7 +74,7 @@ namespace body_complex.Models
 
         internal static MyBaseType DeserializeMyBaseType(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,5 +120,21 @@ namespace body_complex.Models
         }
 
         string IPersistableModel<MyBaseType>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static MyBaseType FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeMyBaseType(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

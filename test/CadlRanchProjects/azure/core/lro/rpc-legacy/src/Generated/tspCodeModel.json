@@ -70,7 +70,7 @@
    ],
    "Namespace": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
    "Description": "Versions of the service",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -245,7 +245,7 @@
               },
               {
                "$id": "34",
-               "Name": "InnerErrorObject",
+               "Name": "innererror",
                "SerializedName": "innererror",
                "Description": "Inner error.",
                "Type": {

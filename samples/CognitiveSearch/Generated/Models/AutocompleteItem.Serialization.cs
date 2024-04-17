@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveSearch.Models
 {
@@ -33,6 +34,14 @@ namespace CognitiveSearch.Models
                 }
             }
             return new AutocompleteItem(text, queryPlusText);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static AutocompleteItem FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeAutocompleteItem(document.RootElement);
         }
     }
 }

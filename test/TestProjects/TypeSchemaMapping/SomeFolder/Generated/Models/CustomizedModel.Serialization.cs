@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using NamespaceForEnums;
 using TypeSchemaMapping;
@@ -16,7 +17,7 @@ namespace CustomNamespace
 {
     internal partial class CustomizedModel : IUtf8JsonSerializable, IJsonModel<CustomizedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<CustomizedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -101,5 +102,21 @@ namespace CustomNamespace
         }
 
         string IPersistableModel<CustomizedModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static CustomizedModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCustomizedModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

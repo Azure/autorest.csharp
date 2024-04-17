@@ -21,7 +21,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue<DeploymentProperties>(Properties);
+            writer.WriteObjectValue(Properties);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

@@ -8,6 +8,7 @@
 using System;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
@@ -21,24 +22,26 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_GetUnknownValue_ShortVersion()
+        public async Task EnumTest_CreateUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.CreateUnknownValueAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_GetUnknownValue_AllParameters()
+        public async Task EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.CreateUnknownValueAsync(content);
         }
     }
 }

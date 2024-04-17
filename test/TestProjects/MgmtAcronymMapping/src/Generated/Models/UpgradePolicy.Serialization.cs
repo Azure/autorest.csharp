@@ -23,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue<RollingUpgradePolicy>(RollingUpgradePolicy);
+                writer.WriteObjectValue(RollingUpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue<AutomaticOSUpgradePolicy>(AutomaticOSUpgradePolicy);
+                writer.WriteObjectValue(AutomaticOSUpgradePolicy);
             }
             writer.WriteEndObject();
         }

@@ -7,7 +7,7 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "GetResponseProp1",
+   "Name": "GetResponseProp3",
    "EnumValueType": "string",
    "AllowedValues": [
     {
@@ -67,7 +67,7 @@
    ],
    "Namespace": "Type.Union",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -90,7 +90,7 @@
    ],
    "Namespace": "Type.Union",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -99,7 +99,7 @@
   {
    "$id": "14",
    "Kind": "Model",
-   "Name": "GetResponse",
+   "Name": "GetResponse9",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -164,7 +164,7 @@
   {
    "$id": "23",
    "Kind": "Model",
-   "Name": "SendRequest",
+   "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -229,7 +229,7 @@
   {
    "$id": "32",
    "Kind": "Model",
-   "Name": "GetResponse1",
+   "Name": "GetResponse8",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -250,7 +250,7 @@
   {
    "$id": "34",
    "Kind": "Model",
-   "Name": "SendRequest1",
+   "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -271,7 +271,7 @@
   {
    "$id": "36",
    "Kind": "Model",
-   "Name": "GetResponse2",
+   "Name": "GetResponse7",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -292,7 +292,7 @@
   {
    "$id": "38",
    "Kind": "Model",
-   "Name": "SendRequest2",
+   "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -313,7 +313,7 @@
   {
    "$id": "40",
    "Kind": "Model",
-   "Name": "GetResponse3",
+   "Name": "GetResponse6",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -378,7 +378,7 @@
   {
    "$id": "49",
    "Kind": "Model",
-   "Name": "SendRequest3",
+   "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -443,7 +443,7 @@
   {
    "$id": "58",
    "Kind": "Model",
-   "Name": "GetResponse4",
+   "Name": "GetResponse5",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -508,7 +508,7 @@
   {
    "$id": "67",
    "Kind": "Model",
-   "Name": "SendRequest4",
+   "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -573,7 +573,7 @@
   {
    "$id": "76",
    "Kind": "Model",
-   "Name": "GetResponse5",
+   "Name": "GetResponse4",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -653,7 +653,7 @@
   {
    "$id": "85",
    "Kind": "Model",
-   "Name": "SendRequest5",
+   "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -685,7 +685,7 @@
   {
    "$id": "88",
    "Kind": "Model",
-   "Name": "GetResponse6",
+   "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -760,7 +760,7 @@
   {
    "$id": "95",
    "Kind": "Model",
-   "Name": "SendRequest6",
+   "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -781,7 +781,7 @@
   {
    "$id": "97",
    "Kind": "Model",
-   "Name": "GetResponse7",
+   "Name": "GetResponse2",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -880,7 +880,7 @@
   {
    "$id": "110",
    "Kind": "Model",
-   "Name": "SendRequest7",
+   "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -901,7 +901,7 @@
   {
    "$id": "112",
    "Kind": "Model",
-   "Name": "GetResponse8",
+   "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -1204,7 +1204,7 @@
   {
    "$id": "155",
    "Kind": "Model",
-   "Name": "SendRequest8",
+   "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -1225,7 +1225,7 @@
   {
    "$id": "157",
    "Kind": "Model",
-   "Name": "GetResponse9",
+   "Name": "GetResponse",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
@@ -1432,7 +1432,7 @@
   {
    "$id": "184",
    "Kind": "Model",
-   "Name": "SendRequest9",
+   "Name": "SendRequest",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
@@ -1566,7 +1566,7 @@
       },
       {
        "$id": "199",
-       "Name": "SendRequest",
+       "Name": "SendRequest9",
        "NameInRequest": "",
        "Type": {
         "$ref": "23"
@@ -1741,7 +1741,7 @@
       },
       {
        "$id": "215",
-       "Name": "SendRequest1",
+       "Name": "SendRequest8",
        "NameInRequest": "",
        "Type": {
         "$ref": "34"
@@ -1916,7 +1916,7 @@
       },
       {
        "$id": "231",
-       "Name": "SendRequest2",
+       "Name": "SendRequest7",
        "NameInRequest": "",
        "Type": {
         "$ref": "38"
@@ -2091,7 +2091,7 @@
       },
       {
        "$id": "247",
-       "Name": "SendRequest3",
+       "Name": "SendRequest6",
        "NameInRequest": "",
        "Type": {
         "$ref": "49"
@@ -2266,7 +2266,7 @@
       },
       {
        "$id": "263",
-       "Name": "SendRequest4",
+       "Name": "SendRequest5",
        "NameInRequest": "",
        "Type": {
         "$ref": "67"
@@ -2441,7 +2441,7 @@
       },
       {
        "$id": "279",
-       "Name": "SendRequest5",
+       "Name": "SendRequest4",
        "NameInRequest": "",
        "Type": {
         "$ref": "85"
@@ -2616,7 +2616,7 @@
       },
       {
        "$id": "295",
-       "Name": "SendRequest6",
+       "Name": "SendRequest3",
        "NameInRequest": "",
        "Type": {
         "$ref": "95"
@@ -2791,7 +2791,7 @@
       },
       {
        "$id": "311",
-       "Name": "SendRequest7",
+       "Name": "SendRequest2",
        "NameInRequest": "",
        "Type": {
         "$ref": "110"
@@ -2966,7 +2966,7 @@
       },
       {
        "$id": "327",
-       "Name": "SendRequest8",
+       "Name": "SendRequest1",
        "NameInRequest": "",
        "Type": {
         "$ref": "155"
@@ -3141,7 +3141,7 @@
       },
       {
        "$id": "343",
-       "Name": "SendRequest9",
+       "Name": "SendRequest",
        "NameInRequest": "",
        "Type": {
         "$ref": "184"

@@ -18,12 +18,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                writer.WriteObjectValue<KeyVaultSecretReference>(DiskEncryptionKey);
+                writer.WriteObjectValue(DiskEncryptionKey);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                writer.WriteObjectValue<KeyVaultKeyReference>(KeyEncryptionKey);
+                writer.WriteObjectValue(KeyEncryptionKey);
             }
             if (Optional.IsDefined(Enabled))
             {

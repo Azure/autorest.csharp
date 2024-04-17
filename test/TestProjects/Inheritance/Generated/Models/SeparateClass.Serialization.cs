@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 
 namespace Inheritance.Models
@@ -26,7 +27,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue<BaseClassWithExtensibleEnumDiscriminator>(ModelProperty);
+                writer.WriteObjectValue(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -59,12 +60,29 @@ namespace Inheritance.Models
             return new SeparateClass(stringProperty, modelProperty);
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SeparateClass FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSeparateClass(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
+        }
+
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {
             public override void Write(Utf8JsonWriter writer, SeparateClass model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<SeparateClass>(model);
+                writer.WriteObjectValue(model);
             }
+
             public override SeparateClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

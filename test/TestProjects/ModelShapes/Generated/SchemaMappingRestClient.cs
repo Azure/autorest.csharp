@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,7 +48,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputModel>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -108,7 +107,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedModel>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -228,7 +227,7 @@ namespace ModelShapes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedModelWithReadonlyProperty>(value, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(value, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -301,7 +300,7 @@ namespace ModelShapes
                 Status = status
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ParametersModel>(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }

@@ -16,7 +16,7 @@ namespace _Type.Property.AdditionalProperties.Models
 {
     public partial class ExtendsStringAdditionalProperties : IUtf8JsonSerializable, IJsonModel<ExtendsStringAdditionalProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtendsStringAdditionalProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtendsStringAdditionalProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ExtendsStringAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -51,7 +51,7 @@ namespace _Type.Property.AdditionalProperties.Models
 
         internal static ExtendsStringAdditionalProperties DeserializeExtendsStringAdditionalProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -112,11 +112,11 @@ namespace _Type.Property.AdditionalProperties.Models
             return DeserializeExtendsStringAdditionalProperties(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ExtendsStringAdditionalProperties>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

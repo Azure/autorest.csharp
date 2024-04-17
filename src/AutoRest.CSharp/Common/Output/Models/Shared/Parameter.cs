@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var initializer = (FormattableString?)null;
 
-            if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !type.CanBeInitializedInline(defaultValue))
             {
                 initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = TypeFactory.GetInputType(type);
+            var inputType = type.InputType;
             return new Parameter(
                 name,
                 CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 : ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && !type.CanBeInitializedInline(defaultValue))
             {
                 initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = TypeFactory.GetInputType(type);
+            var inputType = type.InputType;
             return new Parameter(
                 name,
                 CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
@@ -237,11 +237,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             static FormattableString AddAllowedValues(FormattableString description, ICollection<ChoiceValue> choices)
             {
-                var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
+                var allowedValues = choices.Select(c => (FormattableString)$"{c.Value:L}").ToArray().Join(" | ");
 
-                return string.IsNullOrEmpty(allowedValues)
+                return allowedValues.IsNullOrEmpty()
                     ? description
-                    : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+                    : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues.ToString())}";
             }
         }
 
@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             public bool Equals(Parameter? x, Parameter? y)
             {
-                return Object.Equals(x?.Type, y?.Type);
+                return object.Equals(x?.Type, y?.Type);
             }
 
             public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             public bool Equals(Parameter? x, Parameter? y)
             {
-                if (Object.ReferenceEquals(x, y))
+                if (object.ReferenceEquals(x, y))
                 {
                     return true;
                 }
@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 }
 
                 // We can't use CsharpType.Equals here because they can have different implementations from different versions
-                var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
+                var result = x.Type.AreNamesEqual(y.Type) && x.Name == y.Name;
                 return result;
             }
 

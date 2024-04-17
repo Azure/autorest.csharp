@@ -389,7 +389,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     stringBuilder,
                     formattedPropertyName,
                     array,
-                    new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression),
+                    new EnumerableExpression(array.ImplementationType.ElementType, expression),
                     spaces),
                 BicepDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,
@@ -613,14 +613,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return statement;
             }
 
-            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+            return serialization.Value.Type.IsCollection && !serialization.Value.Type.IsReadOnlyMemory
                 ? new IfStatement(Or(InvokeOptional.IsCollectionDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement }
                 : new IfStatement(Or(OptionalTypeProvider.Instance.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
         }
 
         public static MethodBodyStatement WrapInIsNotEmptyOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
         {
-            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+            return serialization.Value.Type.IsCollection && !serialization.Value.Type.IsReadOnlyMemory
                 ? new IfStatement(Or(
                     new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value)),
                     new BoolExpression(propertyOverride)))

@@ -545,7 +545,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i.IsReadOnly && TypeFactory.IsCollectionType(i.Type))
+                .Where(i => i is { IsReadOnly: true, Type.IsCollection: true })
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers
@@ -603,7 +603,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (CSharpType.RequiresToList(from, to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return writer.AppendRaw(from.IsNullable ? "?.ToList()" : ".ToList()");
@@ -614,7 +614,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (CSharpType.RequiresToList(from, to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return from.IsNullable ? "?.ToList()" : ".ToList()";
@@ -658,8 +658,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        // TODO -- remove the writeEmptyLine optional flag here
-        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
+        public static void WriteMethod(this CodeWriter writer, Method method)
         {
             if (method.Body is { } body)
             {
@@ -678,9 +677,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            // TODO -- temporary to minimize the code changes, will remove after the consolidation
-            if (writeEmptyLine)
-                writer.Line();
+            writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)

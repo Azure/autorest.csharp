@@ -52,7 +52,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparameters"u8);
-            writer.WriteObjectValue<FineTuningJobHyperparameters>(Hyperparameters, options);
+            writer.WriteObjectValue(Hyperparameters, options);
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
             if (ValidationFile != null)
@@ -83,7 +83,7 @@ namespace OpenAI.Models
             if (Error != null)
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue<FineTuningJobError>(Error, options);
+                writer.WriteObjectValue(Error, options);
             }
             else
             {
@@ -121,7 +121,7 @@ namespace OpenAI.Models
 
         internal static FineTuningJob DeserializeFineTuningJob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,7 +142,7 @@ namespace OpenAI.Models
             long? trainedTokens = default;
             FineTuningJobError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -247,10 +247,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new FineTuningJob(
                 id,
                 @object,
@@ -308,10 +308,10 @@ namespace OpenAI.Models
             return DeserializeFineTuningJob(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

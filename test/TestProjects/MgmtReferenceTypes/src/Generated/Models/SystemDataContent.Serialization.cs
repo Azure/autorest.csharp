@@ -126,8 +126,9 @@ namespace Azure.ResourceManager.Fake.Models
         {
             public override void Write(Utf8JsonWriter writer, SystemDataContent model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue<SystemDataContent>(model);
+                writer.WriteObjectValue(model);
             }
+
             public override SystemDataContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

@@ -18,7 +18,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
-                writer.WriteObjectValue<SubResource>(DdosCustomPolicy);
+                writer.WriteObjectValue(DdosCustomPolicy);
             }
             if (Optional.IsDefined(ProtectionCoverage))
             {
@@ -73,6 +73,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DdosSettings FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDdosSettings(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

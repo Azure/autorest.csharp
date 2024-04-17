@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace body_complex.Models
@@ -15,7 +16,7 @@ namespace body_complex.Models
     [PersistableModelProxy(typeof(UnknownFish))]
     public partial class Fish : IUtf8JsonSerializable, IJsonModel<Fish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Fish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -41,7 +42,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    writer.WriteObjectValue<Fish>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -77,7 +78,7 @@ namespace body_complex.Models
 
         internal static Fish DeserializeFish(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,5 +129,21 @@ namespace body_complex.Models
         }
 
         string IPersistableModel<Fish>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Fish FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeFish(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

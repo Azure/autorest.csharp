@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -44,11 +43,9 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync()
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetModelsAsync(context).ConfigureAwait(false);
+            ClientResult result = await GetModelsAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -56,11 +53,9 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<ListModelsResponse> GetModels(CancellationToken cancellationToken = default)
+        public virtual ClientResult<ListModelsResponse> GetModels()
         {
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = GetModels(context);
+            ClientResult result = GetModels(null);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -70,23 +65,23 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModelsAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelsAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetModelsAsync(RequestOptions context)
+        public virtual async Task<ClientResult> GetModelsAsync(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetModelsRequest(context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateGetModelsRequest(options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -95,23 +90,23 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModels(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModels()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetModels(RequestOptions context)
+        public virtual ClientResult GetModels(RequestOptions options)
         {
-            using PipelineMessage message = CreateGetModelsRequest(context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateGetModelsRequest(options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -119,15 +114,13 @@ namespace OpenAI
         /// permissioning.
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<Model>> RetrieveAsync(string model, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<Model>> RetrieveAsync(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(model, context).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -136,15 +129,13 @@ namespace OpenAI
         /// permissioning.
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<Model> Retrieve(string model, CancellationToken cancellationToken = default)
+        public virtual ClientResult<Model> Retrieve(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(model, context);
+            ClientResult result = Retrieve(model, null);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -154,28 +145,28 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RetrieveAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> RetrieveAsync(string model, RequestOptions context)
+        public virtual async Task<ClientResult> RetrieveAsync(string model, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            using PipelineMessage message = CreateRetrieveRequest(model, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateRetrieveRequest(model, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -184,55 +175,51 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Retrieve(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Retrieve(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Retrieve(string model, RequestOptions context)
+        public virtual ClientResult Retrieve(string model, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            using PipelineMessage message = CreateRetrieveRequest(model, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateRetrieveRequest(model, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<DeleteModelResponse>> DeleteAsync(string model, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<DeleteModelResponse>> DeleteAsync(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = await DeleteAsync(model, context).ConfigureAwait(false);
+            ClientResult result = await DeleteAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<DeleteModelResponse> Delete(string model, CancellationToken cancellationToken = default)
+        public virtual ClientResult<DeleteModelResponse> Delete(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            ClientResult result = Delete(model, context);
+            ClientResult result = Delete(model, null);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -241,28 +228,28 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> DeleteAsync(string model, RequestOptions context)
+        public virtual async Task<ClientResult> DeleteAsync(string model, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            using PipelineMessage message = CreateDeleteRequest(model, context);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            using PipelineMessage message = CreateDeleteRequest(model, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -270,37 +257,33 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Delete(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Delete(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Delete(string model, RequestOptions context)
+        public virtual ClientResult Delete(string model, RequestOptions options)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            using PipelineMessage message = CreateDeleteRequest(model, context);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, context));
+            using PipelineMessage message = CreateDeleteRequest(model, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        internal PipelineMessage CreateGetModelsRequest(RequestOptions context)
+        internal PipelineMessage CreateGetModelsRequest(RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -309,16 +292,16 @@ namespace OpenAI
             uri.AppendPath("/models", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateRetrieveRequest(string model, RequestOptions context)
+        internal PipelineMessage CreateRetrieveRequest(string model, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "GET";
@@ -328,16 +311,16 @@ namespace OpenAI
             uri.AppendPath(model, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
             return message;
         }
 
-        internal PipelineMessage CreateDeleteRequest(string model, RequestOptions context)
+        internal PipelineMessage CreateDeleteRequest(string model, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
-            if (context != null)
-            {
-                message.Apply(context);
-            }
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
             request.Method = "DELETE";
@@ -347,18 +330,11 @@ namespace OpenAI
             uri.AppendPath(model, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
+            if (options != null)
             {
-                return DefaultRequestContext;
+                message.Apply(options);
             }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
+            return message;
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

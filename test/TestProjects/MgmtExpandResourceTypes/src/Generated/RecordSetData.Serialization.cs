@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ARecords)
                 {
-                    writer.WriteObjectValue<ARecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in AaaaRecords)
                 {
-                    writer.WriteObjectValue<AaaaRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -73,7 +73,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in MxRecords)
                 {
-                    writer.WriteObjectValue<MxRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in NsRecords)
                 {
-                    writer.WriteObjectValue<NsRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +93,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in PtrRecords)
                 {
-                    writer.WriteObjectValue<PtrRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -103,7 +103,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in SrvRecords)
                 {
-                    writer.WriteObjectValue<SrvRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -113,19 +113,19 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in TxtRecords)
                 {
-                    writer.WriteObjectValue<TxtRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(CnameRecord))
             {
                 writer.WritePropertyName("CNAMERecord"u8);
-                writer.WriteObjectValue<CnameRecord>(CnameRecord);
+                writer.WriteObjectValue(CnameRecord);
             }
             if (Optional.IsDefined(SoaRecord))
             {
                 writer.WritePropertyName("SOARecord"u8);
-                writer.WriteObjectValue<SoaRecord>(SoaRecord);
+                writer.WriteObjectValue(SoaRecord);
             }
             if (Optional.IsCollectionDefined(CaaRecords))
             {
@@ -133,7 +133,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in CaaRecords)
                 {
-                    writer.WriteObjectValue<CaaRecord>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

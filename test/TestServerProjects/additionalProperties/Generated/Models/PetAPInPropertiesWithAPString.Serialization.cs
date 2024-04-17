@@ -9,13 +9,14 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace additionalProperties.Models
 {
     public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable, IJsonModel<PetAPInPropertiesWithAPString>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInPropertiesWithAPString>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInPropertiesWithAPString>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<PetAPInPropertiesWithAPString>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -73,7 +74,7 @@ namespace additionalProperties.Models
 
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,5 +169,21 @@ namespace additionalProperties.Models
         }
 
         string IPersistableModel<PetAPInPropertiesWithAPString>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static PetAPInPropertiesWithAPString FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializePetAPInPropertiesWithAPString(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

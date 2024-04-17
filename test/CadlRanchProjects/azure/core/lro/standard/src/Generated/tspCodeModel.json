@@ -45,7 +45,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
   },
@@ -64,7 +64,7 @@
    ],
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "The API version.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -112,7 +112,7 @@
   {
    "$id": "15",
    "Kind": "Model",
-   "Name": "OperationStatusneverError",
+   "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
@@ -246,7 +246,7 @@
           },
           {
            "$id": "33",
-           "Name": "InnerErrorObject",
+           "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {

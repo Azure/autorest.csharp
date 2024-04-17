@@ -37,19 +37,19 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    writer.WriteObjectValue<AdditionalUnattendContent>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                writer.WriteObjectValue<PatchSettings>(PatchSettings);
+                writer.WriteObjectValue(PatchSettings);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                writer.WriteObjectValue<WinRMConfiguration>(WinRM);
+                writer.WriteObjectValue(WinRM);
             }
             writer.WriteEndObject();
         }

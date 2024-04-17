@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue<PublicIPAddressSku>(Sku);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -67,12 +67,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue<PublicIPAddressDnsSettings>(DnsSettings);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsDefined(DdosSettings))
             {
                 writer.WritePropertyName("ddosSettings"u8);
-                writer.WriteObjectValue<DdosSettings>(DdosSettings);
+                writer.WriteObjectValue(DdosSettings);
             }
             if (Optional.IsCollectionDefined(IpTags))
             {
@@ -80,7 +80,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpTags)
                 {
-                    writer.WriteObjectValue<IpTag>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -92,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                writer.WriteObjectValue<SubResource>(PublicIPPrefix);
+                writer.WriteObjectValue(PublicIPPrefix);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
@@ -321,6 +321,22 @@ namespace Azure.Network.Management.Interface.Models
                 idleTimeoutInMinutes,
                 resourceGuid,
                 provisioningState);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new PublicIPAddress FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializePublicIPAddress(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

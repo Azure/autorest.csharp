@@ -75,7 +75,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   },
@@ -141,7 +141,7 @@
    ],
    "Namespace": "AuthoringTypeSpec",
    "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -336,7 +336,7 @@
   {
    "$id": "47",
    "Kind": "Model",
-   "Name": "OperationStatusneverError",
+   "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
@@ -470,7 +470,7 @@
           },
           {
            "$id": "65",
-           "Name": "InnerErrorObject",
+           "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
@@ -535,7 +535,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -626,7 +626,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -1019,7 +1019,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },
@@ -1100,7 +1100,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": false
     }
    ]
   },

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,20 +47,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamedAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse2>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse7>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringExtensibleNamedAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse2.FromResponse(response), response);
+            return Response.FromValue(GetResponse7.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamed(CancellationToken)']/*" />
-        public virtual Response<GetResponse2> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse7> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringExtensibleNamed(context);
-            return Response.FromValue(GetResponse2.FromResponse(response), response);
+            return Response.FromValue(GetResponse7.FromResponse(response), response);
         }
 
         /// <summary>
@@ -137,9 +138,9 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
+            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
-            Response response = await SendAsync(sendRequest2.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest7.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -148,9 +149,9 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(StringExtensibleNamedUnion,CancellationToken)']/*" />
         public virtual Response Send(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
+            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
-            Response response = Send(sendRequest2.ToRequestContent(), context);
+            Response response = Send(sendRequest7.ToRequestContent(), context);
             return response;
         }
 

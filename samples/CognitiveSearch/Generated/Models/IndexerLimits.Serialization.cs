@@ -7,6 +7,7 @@
 
 using System;
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveSearch.Models
 {
@@ -52,6 +53,14 @@ namespace CognitiveSearch.Models
                 }
             }
             return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static IndexerLimits FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeIndexerLimits(document.RootElement);
         }
     }
 }

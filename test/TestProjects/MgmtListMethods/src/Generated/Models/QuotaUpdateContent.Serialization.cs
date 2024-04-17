@@ -21,7 +21,7 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue<QuotaBaseProperties>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

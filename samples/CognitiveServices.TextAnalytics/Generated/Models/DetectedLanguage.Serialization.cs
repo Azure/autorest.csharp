@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -39,6 +40,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new DetectedLanguage(name, iso6391Name, confidenceScore);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static DetectedLanguage FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDetectedLanguage(document.RootElement);
         }
     }
 }

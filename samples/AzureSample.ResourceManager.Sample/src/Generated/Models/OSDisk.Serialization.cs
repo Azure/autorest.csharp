@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class OSDisk : IUtf8JsonSerializable, IJsonModel<OSDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSDisk>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSDisk>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OSDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -36,7 +36,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue<DiskEncryptionSettings>(EncryptionSettings, options);
+                writer.WriteObjectValue(EncryptionSettings, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -46,12 +46,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Vhd, options);
+                writer.WriteObjectValue(Vhd, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Image, options);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue<DiffDiskSettings>(DiffDiskSettings, options);
+                writer.WriteObjectValue(DiffDiskSettings, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -78,7 +78,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<ManagedDiskParameters>(ManagedDisk, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -112,7 +112,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static OSDisk DeserializeOSDisk(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,7 +130,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             int? diskSizeGB = default;
             ManagedDiskParameters managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osType"u8))
@@ -226,10 +226,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new OSDisk(
                 osType,
                 encryptionSettings,

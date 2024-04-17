@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Workspaces)
                 {
-                    writer.WriteObjectValue<FirewallPolicyLogAnalyticsWorkspace>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

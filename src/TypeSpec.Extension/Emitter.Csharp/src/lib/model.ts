@@ -69,8 +69,7 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
-    getWireName,
-    isInternal
+    getWireName
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
@@ -530,7 +529,7 @@ export function getInputType(
                 Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
-                IsExtensible: !isFixed(program, e),
+                IsExtensible: false,
                 IsNullable: false,
                 Usage: "None"
             };
@@ -596,9 +595,7 @@ export function getInputType(
                 Kind: InputTypeKind.Model,
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m)
-                    ? "internal"
-                    : getAccess(context, m),
+                Accessibility: getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -902,7 +899,7 @@ export function getUsages(
         if (type.kind === "Union") {
             let clientType = getClientType(context, type);
             if (clientType.kind === "enum" && clientType.isFixed === false) {
-                typeName = clientType.generatedName || clientType.name;
+                typeName = clientType.name;
             }
         }
         const affectTypes: Set<string> = new Set<string>();

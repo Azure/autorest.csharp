@@ -57,7 +57,7 @@ namespace ProtocolMethodsInRestClient
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<Resource>(resource);
+                content.JsonWriter.WriteObjectValue(resource);
                 request.Content = content;
             }
             return message;

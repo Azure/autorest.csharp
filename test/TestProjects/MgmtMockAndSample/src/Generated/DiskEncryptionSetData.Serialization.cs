@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                writer.WriteObjectValue<KeyForDiskEncryptionSet>(ActiveKey);
+                writer.WriteObjectValue(ActiveKey);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {

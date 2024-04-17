@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue<Subnet>(Subnet);
+                writer.WriteObjectValue(Subnet);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue<PrivateLinkServiceConnection>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -211,6 +211,22 @@ namespace Azure.Network.Management.Interface.Models
                 provisioningState,
                 privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
                 manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new PrivateEndpoint FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializePrivateEndpoint(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }
