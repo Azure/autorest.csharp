@@ -5,6 +5,8 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;
 
@@ -103,12 +105,13 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> The HelloAgain method. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Return hi again. </remarks>
         public virtual async Task<ClientResult<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -120,12 +123,13 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> The HelloAgain method. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Return hi again. </remarks>
         public virtual ClientResult<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -259,14 +263,16 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> The HelloDemo2 method. </summary>
+        /// <remarks> Return hi in demo2. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
             ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> The HelloDemo2 method. </summary>
+        /// <remarks> Return hi in demo2. </remarks>
         public virtual ClientResult<Thing> HelloDemo2()
         {
             ClientResult result = HelloDemo2(null);
@@ -321,9 +327,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> The CreateLiteral method. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create with literal value. </remarks>
         public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -333,9 +340,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> The CreateLiteral method. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create with literal value. </remarks>
         public virtual ClientResult<Thing> CreateLiteral(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -401,14 +409,16 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> The HelloLiteral method. </summary>
+        /// <remarks> Send literal parameters. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
             ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> The HelloLiteral method. </summary>
+        /// <remarks> Send literal parameters. </remarks>
         public virtual ClientResult<Thing> HelloLiteral()
         {
             ClientResult result = HelloLiteral(null);
@@ -463,16 +473,18 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary> The TopAction method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> top level method. </remarks>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
             ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary> The TopAction method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> top level method. </remarks>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
             ClientResult result = TopAction(action, null);
@@ -613,9 +625,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> The AnonymousBody method. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> body parameter without body decorator. </remarks>
         public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -625,9 +638,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> The AnonymousBody method. </summary>
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> body parameter without body decorator. </remarks>
         public virtual ClientResult<Thing> AnonymousBody(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -693,9 +707,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary> The FriendlyModel method. </summary>
         /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        /// <remarks> Model can have its friendly name. </remarks>
         public virtual async Task<ClientResult<Friend>> FriendlyModelAsync(Friend friend)
         {
             Argument.AssertNotNull(friend, nameof(friend));
@@ -705,9 +720,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary> The FriendlyModel method. </summary>
         /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        /// <remarks> Model can have its friendly name. </remarks>
         public virtual ClientResult<Friend> FriendlyModel(Friend friend)
         {
             Argument.AssertNotNull(friend, nameof(friend));
@@ -811,10 +827,11 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> parameter has string format. </summary>
+        /// <summary> The StringFormat method. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> parameter has string format. </remarks>
         public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -824,10 +841,11 @@ namespace UnbrandedTypeSpec
             return result;
         }
 
-        /// <summary> parameter has string format. </summary>
+        /// <summary> The StringFormat method. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> parameter has string format. </remarks>
         public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -895,9 +913,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Model can have its projected name. </summary>
+        /// <summary> The ProjectedNameModel method. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        /// <remarks> Model can have its projected name. </remarks>
         public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -907,9 +926,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Model can have its projected name. </summary>
+        /// <summary> The ProjectedNameModel method. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        /// <remarks> Model can have its projected name. </remarks>
         public virtual ClientResult<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -975,14 +995,16 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> return anonymous model. </summary>
+        /// <summary> The ReturnsAnonymousModel method. </summary>
+        /// <remarks> return anonymous model. </remarks>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
             ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> return anonymous model. </summary>
+        /// <summary> The ReturnsAnonymousModel method. </summary>
+        /// <remarks> return anonymous model. </remarks>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
             ClientResult result = ReturnsAnonymousModel(null);
@@ -1083,9 +1105,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary> The InternalProtocol method. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> When set protocol false and convenient true, then the protocol method should be internal. </remarks>
         public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1095,9 +1118,10 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary> The InternalProtocol method. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> When set protocol false and convenient true, then the protocol method should be internal. </remarks>
         public virtual ClientResult<Thing> InternalProtocol(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1153,14 +1177,16 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary> The StillConvenientValue method. </summary>
+        /// <remarks> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </remarks>
         public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
             ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
             return result;
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary> The StillConvenientValue method. </summary>
+        /// <remarks> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </remarks>
         public virtual ClientResult StillConvenientValue()
         {
             ClientResult result = StillConvenient(null);
@@ -1255,6 +1281,104 @@ namespace UnbrandedTypeSpec
             using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
             var result = _pipeline.ProcessHeadAsBoolMessage(message, options);
             return ClientResult.FromValue(result.Value, result.GetRawResponse());
+        }
+
+        /// <summary> The HandleArray method. </summary>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> head as boolean. </remarks>
+        public virtual async Task<ClientResult<IReadOnlyList<string>>> HandleArrayAsync(IEnumerable<string> body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
+            ClientResult result = await HandleArrayAsync(content, null).ConfigureAwait(false);
+            IReadOnlyList<string> value = default;
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
+            {
+                array.Add(item.GetString());
+            }
+            value = array;
+            return ClientResult.FromValue(value, result.GetRawResponse());
+        }
+
+        /// <summary> The HandleArray method. </summary>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> head as boolean. </remarks>
+        public virtual ClientResult<IReadOnlyList<string>> HandleArray(IEnumerable<string> body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
+            ClientResult result = HandleArray(content, null);
+            IReadOnlyList<string> value = default;
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
+            {
+                array.Add(item.GetString());
+            }
+            value = array;
+            return ClientResult.FromValue(value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HandleArrayAsync(IEnumerable{string})"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<ClientResult> HandleArrayAsync(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHandleArrayRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HandleArray(IEnumerable{string})"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual ClientResult HandleArray(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHandleArrayRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
@@ -1629,6 +1753,26 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
+            if (options != null)
+            {
+                message.Apply(options);
+            }
+            return message;
+        }
+
+        internal PipelineMessage CreateHandleArrayRequest(BinaryContent content, RequestOptions options)
+        {
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
+            var request = message.Request;
+            request.Method = "PUT";
+            var uri = new ClientUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/headAsBoolean", false);
+            request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
             if (options != null)
             {
                 message.Apply(options);

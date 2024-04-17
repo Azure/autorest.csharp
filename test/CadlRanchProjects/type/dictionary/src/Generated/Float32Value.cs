@@ -45,6 +45,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetFloat32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetFloat32ValueAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
+        /// <summary> The GetFloat32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, float>> GetFloat32Value(CancellationToken cancellationToken = default)
@@ -149,6 +151,7 @@ namespace _Type._Dictionary
             }
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -163,6 +166,7 @@ namespace _Type._Dictionary
             return response;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
