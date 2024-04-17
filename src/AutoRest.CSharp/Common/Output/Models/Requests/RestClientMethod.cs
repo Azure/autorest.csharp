@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             Parameters = parameters;
             Responses = responses;
             Summary = summary;
-            Description = string.IsNullOrEmpty(description) ? $"The {name} method" : description;
+            Description = description;
             ReturnType = returnType;
             HeaderModel = headerModel;
             BufferResponse = bufferResponse;
