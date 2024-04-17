@@ -35,11 +35,12 @@ namespace Type.Array
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetInt32Value method. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<int>>> GetInt32ValueAsync()
         {
             ClientResult result = await GetInt32ValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<int> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
             List<int> array = new List<int>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -49,6 +50,7 @@ namespace Type.Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
+        /// <summary> The GetInt32Value method. </summary>
         public virtual ClientResult<IReadOnlyList<int>> GetInt32Value()
         {
             ClientResult result = GetInt32Value(null);
@@ -111,6 +113,7 @@ namespace Type.Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<int> body)
@@ -122,6 +125,7 @@ namespace Type.Array
             return result;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(IEnumerable<int> body)

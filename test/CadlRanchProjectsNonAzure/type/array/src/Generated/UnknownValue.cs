@@ -35,11 +35,12 @@ namespace Type.Array
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetUnknownValue method. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<BinaryData>>> GetUnknownValueAsync()
         {
             ClientResult result = await GetUnknownValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<BinaryData> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
             List<BinaryData> array = new List<BinaryData>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -56,6 +57,7 @@ namespace Type.Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
+        /// <summary> The GetUnknownValue method. </summary>
         public virtual ClientResult<IReadOnlyList<BinaryData>> GetUnknownValue()
         {
             ClientResult result = GetUnknownValue(null);
@@ -125,6 +127,7 @@ namespace Type.Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<BinaryData> body)
@@ -136,6 +139,7 @@ namespace Type.Array
             return result;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(IEnumerable<BinaryData> body)

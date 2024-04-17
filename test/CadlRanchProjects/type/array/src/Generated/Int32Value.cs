@@ -45,6 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetInt32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<int>>> GetInt32ValueAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
+        /// <summary> The GetInt32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<int>> GetInt32Value(CancellationToken cancellationToken = default)
@@ -149,6 +151,7 @@ namespace _Type._Array
             }
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -163,6 +166,7 @@ namespace _Type._Array
             return response;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>

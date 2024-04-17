@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -21,7 +22,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         {
             // Sync and async methods have different set of parameters
             return async
-                ? new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.ParseAsync), new[] { stream, Snippets.Default, KnownParameters.CancellationTokenParameter }, true))
+                // non-azure libraries do not have cancellationToken parameter
+                ? new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.ParseAsync), new[] { stream, Snippets.Default, Configuration.IsBranded ? KnownParameters.CancellationTokenParameter : Snippets.Default }, true))
                 : new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.Parse), stream));
         }
     }

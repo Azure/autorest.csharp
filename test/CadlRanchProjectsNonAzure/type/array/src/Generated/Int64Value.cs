@@ -35,11 +35,12 @@ namespace Type.Array
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetInt64Value method. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<long>>> GetInt64ValueAsync()
         {
             ClientResult result = await GetInt64ValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<long> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
             List<long> array = new List<long>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -49,6 +50,7 @@ namespace Type.Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
+        /// <summary> The GetInt64Value method. </summary>
         public virtual ClientResult<IReadOnlyList<long>> GetInt64Value()
         {
             ClientResult result = GetInt64Value(null);
@@ -111,6 +113,7 @@ namespace Type.Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<long> body)
@@ -122,6 +125,7 @@ namespace Type.Array
             return result;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(IEnumerable<long> body)

@@ -35,11 +35,12 @@ namespace Type.Array
             _endpoint = endpoint;
         }
 
+        /// <summary> The GetBooleanValue method. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<bool>>> GetBooleanValueAsync()
         {
             ClientResult result = await GetBooleanValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<bool> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
             List<bool> array = new List<bool>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -49,6 +50,7 @@ namespace Type.Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
+        /// <summary> The GetBooleanValue method. </summary>
         public virtual ClientResult<IReadOnlyList<bool>> GetBooleanValue()
         {
             ClientResult result = GetBooleanValue(null);
@@ -111,6 +113,7 @@ namespace Type.Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="bool"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<bool> body)
@@ -122,6 +125,7 @@ namespace Type.Array
             return result;
         }
 
+        /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="bool"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(IEnumerable<bool> body)
