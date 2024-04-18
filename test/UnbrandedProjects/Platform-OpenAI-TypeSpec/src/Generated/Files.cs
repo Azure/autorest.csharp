@@ -40,6 +40,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
+        /// <remarks> List. </remarks>
         public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync()
         {
             ClientResult result = await GetFilesAsync(null).ConfigureAwait(false);
@@ -47,6 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
+        /// <remarks> List. </remarks>
         public virtual ClientResult<ListFilesResponse> GetFiles()
         {
             ClientResult result = GetFiles(null);
@@ -104,6 +106,7 @@ namespace OpenAI
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<OpenAIFile>> CreateAsync(CreateFileRequest file)
         {
             Argument.AssertNotNull(file, nameof(file));
@@ -116,6 +119,7 @@ namespace OpenAI
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual ClientResult<OpenAIFile> Create(CreateFileRequest file)
         {
             Argument.AssertNotNull(file, nameof(file));
@@ -185,6 +189,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Retrieve. </remarks>
         public virtual async Task<ClientResult<OpenAIFile>> RetrieveAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -197,6 +202,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Retrieve. </remarks>
         public virtual ClientResult<OpenAIFile> Retrieve(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -267,6 +273,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Delete. </remarks>
         public virtual async Task<ClientResult<DeleteFileResponse>> DeleteAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -279,6 +286,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Delete. </remarks>
         public virtual ClientResult<DeleteFileResponse> Delete(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -349,6 +357,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Download. </remarks>
         public virtual async Task<ClientResult<string>> DownloadAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -361,6 +370,7 @@ namespace OpenAI
         /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Download. </remarks>
         public virtual ClientResult<string> Download(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
