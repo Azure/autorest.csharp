@@ -11,9 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -45,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!typeToReplace.ShouldNotReplaceForProperty())
             {
-                foreach (Type replacementType in ReferenceClassFinder.GetPropertyReferenceClassCollection())
+                foreach (Type replacementType in ReferenceClassFinder.GetPropertyReferenceClassCollection().Concat(ReferenceClassFinder.GetTypeReferenceTypes()))
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceClassFinder.PropertyReferenceTypeAttributeName).First();
