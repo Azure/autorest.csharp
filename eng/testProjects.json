@@ -53,7 +53,8 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
-        "authentication/http/custom"
+        "authentication/http/custom",
+        "payload/multipart"
     ],
     "TestServerProjects": [
         "additionalProperties",

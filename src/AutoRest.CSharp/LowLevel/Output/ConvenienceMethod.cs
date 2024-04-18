@@ -85,7 +85,14 @@ namespace AutoRest.CSharp.Output.Models
                         // if convenience parameter is null here, we just use the default value of the protocol parameter as value (we always do this even if the parameter is optional just in case there is an ordering issue)
                         if (isMultipartOperation && protocol.Name == "contentType" && content != null)
                         {
-                            protocolInvocationExpressions.Add(MultipartFormDataRequestContentProvider.Instance.ContentTypeProperty(content));
+                            /*TODO: need to switch provider based on azure, non-azure.*/
+                            if (Configuration.IsBranded)
+                            {
+                                protocolInvocationExpressions.Add(MultipartFormDataRequestContentProvider.Instance.ContentTypeProperty(content));
+                            } else
+                            {
+                                protocolInvocationExpressions.Add(MultipartFormDataBinaryContentProvider.Instance.ContentTypeProperty(content));
+                            }
                         } else
                         {
                             protocolInvocationExpressions.Add(DefaultOf(protocol.Type));

@@ -605,16 +605,16 @@ namespace AutoRest.CSharp.Output.Models
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
         {
             var name = operationParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
             if (requestMediaTypes.Count == 1 && requestMediaTypes.Contains("multipart/form-data"))
             {
+                var description = Parameter.CreateDescription(operationParameter, typeof(string), requestMediaTypes);
                 var parameter = new Parameter(name, description, typeof(string), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-                //_orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
                 _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
                 AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
                 return;
             } else
             {
+                var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
                 var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
                 _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
 

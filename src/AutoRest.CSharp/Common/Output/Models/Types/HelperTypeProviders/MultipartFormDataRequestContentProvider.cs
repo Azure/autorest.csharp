@@ -407,7 +407,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             var streamExpression = (ValueExpression)streamParam;
             var cancellationTokenParam = KnownParameters.CancellationTokenParameter;
             var cancellatinTokenExpression = (ValueExpression)cancellationTokenParam;
-            //var multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
+
             var signature = new MethodSignature(
                 Name: "WriteToAsync",
                 Summary: null,
