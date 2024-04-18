@@ -137,8 +137,8 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new ArrayClient(host, null).GetModelValueClient().GetModelValueAsync();
             Assert.AreEqual(2, response.Value.Count);
-            Assert.AreEqual("hello", response.Value.First().Property);
-            Assert.AreEqual("world", response.Value.Last().Property);
+            Assert.AreEqual("hello", response.Value[0].Property);
+            Assert.AreEqual("world", response.Value[1].Property);
         });
 
         [Test]
