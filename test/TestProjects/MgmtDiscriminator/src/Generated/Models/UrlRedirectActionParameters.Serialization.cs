@@ -173,7 +173,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  typeName: ");
@@ -185,7 +185,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride) || propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  redirectType: ");
@@ -197,7 +197,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{RedirectType.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride) || propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  destinationProtocol: ");
@@ -212,7 +212,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  customPath: ");
@@ -235,7 +235,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  customHostname: ");
@@ -258,7 +258,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  customQueryString: ");
@@ -281,7 +281,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  customFragment: ");

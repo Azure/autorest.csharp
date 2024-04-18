@@ -205,7 +205,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Name), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Name), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
@@ -228,7 +228,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  kind: ");
@@ -240,7 +240,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{Kind.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Id), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Id), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
@@ -255,7 +255,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride) || propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  systemData: ");
@@ -272,7 +272,7 @@ namespace MgmtDiscriminator.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(RoleDefinitionId), out propertyOverride) || propertyOverrides.TryGetValue(nameof(RoleDefinitionId), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RoleDefinitionId), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("    roleDefinitionId: ");
@@ -295,7 +295,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(PrincipalIds), out propertyOverride) || propertyOverrides.TryGetValue(nameof(PrincipalIds), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PrincipalIds), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("    principalIds: ");
@@ -310,7 +310,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ResourceGroup), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ResourceGroup), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ResourceGroup), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("    resourceGroup: ");

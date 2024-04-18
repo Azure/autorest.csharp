@@ -321,7 +321,7 @@ namespace MgmtDiscriminator
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Name), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Name), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
@@ -344,7 +344,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Location), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Location), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  location: ");
@@ -359,7 +359,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(BoolProperty), out propertyOverride) || propertyOverrides.TryGetValue(nameof(BoolProperty), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BoolProperty), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  boolProperty: ");
@@ -375,7 +375,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(LocationWithCustomSerialization), out propertyOverride) || propertyOverrides.TryGetValue(nameof(LocationWithCustomSerialization), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LocationWithCustomSerialization), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  locationWithCustomSerialization: ");
@@ -390,7 +390,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(DateTimeProperty), out propertyOverride) || propertyOverrides.TryGetValue(nameof(DateTimeProperty), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DateTimeProperty), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  dateTimeProperty: ");
@@ -406,7 +406,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Duration), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Duration), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Duration), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  duration: ");
@@ -422,7 +422,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Number), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Number), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Number), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  number: ");
@@ -437,7 +437,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Uri), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Uri), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Uri), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  uri: ");
@@ -452,7 +452,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ShellProperty), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ShellProperty), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ShellProperty), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  shellProperty: ");
@@ -467,7 +467,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("NestedName", out propertyOverride) || propertyOverrides.TryGetValue("NestedName", out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  sku: ");
@@ -487,7 +487,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride) || propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  unflattened: ");
@@ -515,7 +515,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  properties: ");
@@ -530,7 +530,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Id), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Id), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
@@ -545,7 +545,7 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride) || propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  systemData: ");

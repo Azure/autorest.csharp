@@ -205,7 +205,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Order), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Order), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Order), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  order: ");
@@ -220,7 +220,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  conditions: ");
@@ -235,7 +235,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  actions: ");
@@ -258,7 +258,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  extraMappingInfo: ");
@@ -282,7 +282,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  pet: ");
@@ -297,7 +297,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  foo: ");

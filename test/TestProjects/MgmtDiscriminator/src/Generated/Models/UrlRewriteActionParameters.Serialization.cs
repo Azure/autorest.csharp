@@ -129,7 +129,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  typeName: ");
@@ -141,7 +141,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride) || propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  sourcePattern: ");
@@ -164,7 +164,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  destination: ");
@@ -187,7 +187,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride) || propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  preserveUnmatchedPath: ");

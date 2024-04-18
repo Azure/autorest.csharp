@@ -137,7 +137,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  typeName: ");
@@ -149,7 +149,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  cacheBehavior: ");
@@ -161,7 +161,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{CacheBehavior.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  cacheType: ");
@@ -173,7 +173,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{CacheType.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride) || propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  cacheDuration: ");

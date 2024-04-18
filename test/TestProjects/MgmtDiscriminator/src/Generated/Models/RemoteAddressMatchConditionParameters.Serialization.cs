@@ -178,7 +178,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  typeName: ");
@@ -190,7 +190,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  operator: ");
@@ -202,7 +202,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{Operator.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride) || propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  negateCondition: ");
@@ -218,7 +218,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride) || propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  matchValues: ");
@@ -254,7 +254,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  transforms: ");

@@ -127,7 +127,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Value), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Value), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  value: ");
@@ -150,7 +150,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(NextLink), out propertyOverride) || propertyOverrides.TryGetValue(nameof(NextLink), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NextLink), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  nextLink: ");

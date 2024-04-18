@@ -101,7 +101,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride) || propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");

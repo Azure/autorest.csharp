@@ -105,7 +105,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("NestedName", out propertyOverride) || propertyOverrides.TryGetValue("NestedName", out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  name1: ");

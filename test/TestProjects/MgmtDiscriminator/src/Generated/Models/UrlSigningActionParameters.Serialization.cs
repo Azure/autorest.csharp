@@ -139,7 +139,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  typeName: ");
@@ -151,7 +151,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  algorithm: ");
@@ -166,7 +166,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ParameterNameOverride), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ParameterNameOverride), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParameterNameOverride), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  parameterNameOverride: ");

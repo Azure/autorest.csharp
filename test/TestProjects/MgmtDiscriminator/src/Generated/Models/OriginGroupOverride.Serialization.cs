@@ -121,7 +121,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride) || propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  originGroup: ");
@@ -139,7 +139,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  forwardingProtocol: ");

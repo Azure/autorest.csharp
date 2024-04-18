@@ -120,7 +120,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride) || propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  requiredCollection: ");
@@ -156,7 +156,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride) || propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");

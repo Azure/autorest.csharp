@@ -101,7 +101,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  kind: ");
@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{Kind.ToSerialString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Id), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Id), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
@@ -136,7 +136,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(PetType), out propertyOverride) || propertyOverrides.TryGetValue(nameof(PetType), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PetType), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  type: ");

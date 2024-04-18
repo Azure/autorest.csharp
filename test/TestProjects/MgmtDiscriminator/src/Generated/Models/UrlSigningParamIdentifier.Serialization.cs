@@ -106,7 +106,7 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  paramIndicator: ");
@@ -118,7 +118,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($"'{ParamIndicator.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride));
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  paramName: ");
