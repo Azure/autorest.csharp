@@ -278,11 +278,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new BoolExpression(
                     And(
                         new BoolExpression(propertyOverrideVariables.HasObjectOverride),
-                        Or(
                         new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", overridePropertyName,
-                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))),
-                        new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", overridePropertyName,
-                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride)))))));
+                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
 
             var formattedPropertyName = $"{indent}{property.SerializedName}: ";
             var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
