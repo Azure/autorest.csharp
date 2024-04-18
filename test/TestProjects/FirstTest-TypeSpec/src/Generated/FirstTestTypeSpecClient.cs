@@ -527,7 +527,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The AddTimeHeader method
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -557,7 +557,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The AddTimeHeader method
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1372,7 +1372,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> The ReturnUnknown method. </summary>
+        /// <summary> Return unknown. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> ReturnUnknownAsync(CancellationToken cancellationToken = default)
@@ -1382,7 +1382,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary> The ReturnUnknown method. </summary>
+        /// <summary> Return unknown. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> ReturnUnknown(CancellationToken cancellationToken = default)
@@ -1393,7 +1393,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The ReturnUnknown method
+        /// [Protocol Method] Return unknown.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1428,7 +1428,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The ReturnUnknown method
+        /// [Protocol Method] Return unknown.
         /// <list type="bullet">
         /// <item>
         /// <description>
