@@ -609,6 +609,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -652,6 +653,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {

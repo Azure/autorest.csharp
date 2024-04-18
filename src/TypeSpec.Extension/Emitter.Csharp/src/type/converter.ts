@@ -4,7 +4,6 @@
 import {
     IntrinsicType,
     Program,
-    getDiscriminator,
     Type,
     DateTimeKnownEncoding,
     Model,
@@ -59,6 +58,7 @@ import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
 import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
 import { logger } from "../lib/logger.js";
+import { get } from "http";
 
 function fromSdkType(
     sdkType: SdkType,
@@ -123,10 +123,7 @@ export function fromSdkModelType(
             Deprecated: modelType.deprecation,
             Description: modelType.description,
             IsNullable: modelType.nullable,
-            DiscriminatorPropertyName: getDiscriminator(
-                context.program,
-                modelType.__raw!
-            )?.propertyName, // TO-DO: SdkModelType lacks of DiscriminatorPropertyName
+            DiscriminatorPropertyName: getDiscriminatorPropertyName(modelType),
             DiscriminatorValue: modelType.discriminatorValue,
             Usage: fromUsageFlags(modelType.usage)
         } as InputModelType;
@@ -182,44 +179,26 @@ export function fromSdkModelType(
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
             );
-
-        // TODO: remove workaround for backward compatible with previous emitter behavior: https://github.com/Azure/autorest.csharp/blob/879233de12000f68916609e00f4431c604b7c1c5/src/TypeSpec.Extension/Emitter.Csharp/src/lib/model.ts#L717-L739
-        // Previously emitter will insert discriminator property at the beginning if it's implicitly defined
-        // Now TCGC will append implicit discriminator property at the end, so we need to tune the sequence
-        // Will follow up with TCGC team to see if they can change the logic to insert discriminator property at the beginning, which seems more reasonable
-        // Then we can remove the following codes
-        if (
-            inputModelType.DiscriminatorPropertyName &&
-            !(modelType.__raw! as Model).properties.has(
-                inputModelType?.DiscriminatorPropertyName
-            )
-        ) {
-            const index = inputModelType.Properties.findIndex(
-                (p) => p.IsDiscriminator
-            );
-            if (index !== 0 && index !== -1) {
-                const discriminator = inputModelType.Properties.splice(
-                    index,
-                    1
-                )[0];
-                inputModelType.Properties.unshift(discriminator);
-            }
-        }
     }
 
     return inputModelType;
 }
 
-function hasDiscriminator(model?: SdkModelType): boolean {
-    if (model == null) return false;
+function getDiscriminatorPropertyName(
+    model?: SdkModelType
+): string | undefined {
+    if (model == null) return undefined;
 
-    if (
-        model!.properties.some((p) => {
-            return (p as SdkBodyModelPropertyType).discriminator;
-        })
-    )
-        return true;
-    return hasDiscriminator(model!.baseModel);
+    const discriminatorProperty = model.properties.find(
+        (p) => (p as SdkBodyModelPropertyType).discriminator
+    );
+    if (discriminatorProperty) return discriminatorProperty.name;
+
+    return getDiscriminatorPropertyName(model.baseModel);
+}
+
+function hasDiscriminator(model?: SdkModelType): boolean {
+    return getDiscriminatorPropertyName(model) !== undefined;
 }
 
 export function fromSdkEnumType(

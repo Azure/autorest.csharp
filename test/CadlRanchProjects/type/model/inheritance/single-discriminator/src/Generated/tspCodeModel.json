@@ -94,6 +94,7 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "seagull",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -108,6 +109,7 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "sparrow",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -122,6 +124,7 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "goose",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -136,6 +139,7 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "eagle",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -202,6 +206,7 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level legacy model in polymorphic single level inheritance.",
    "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "t-rex",
    "Usage": "Output",
    "BaseModel": {
