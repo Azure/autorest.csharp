@@ -44,6 +44,7 @@ namespace Client.Naming
             _endpoint = endpoint;
         }
 
+        /// <summary> Client. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Client.Naming
             return response;
         }
 
+        /// <summary> Client. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -73,7 +75,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Client.Naming
             }
         }
 
+        /// <summary> Language. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -164,6 +167,7 @@ namespace Client.Naming
             return response;
         }
 
+        /// <summary> Language. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -179,7 +183,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>
