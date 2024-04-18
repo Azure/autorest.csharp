@@ -548,3 +548,13 @@ model AzureLocationModel
 @put
 @convenientAPI(true)
 op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;
+
+model EncodedUnionProperty{
+    @encode("unixTimestamp", int32)
+    started_at: utcDateTime | null;
+}
+@route("/encodedUnionProperty")
+@doc("test nullableTime.")
+@put
+@convenientAPI(true)
+op EncodedUnionPropertyOp(@body body: EncodedUnionProperty):EncodedUnionProperty;

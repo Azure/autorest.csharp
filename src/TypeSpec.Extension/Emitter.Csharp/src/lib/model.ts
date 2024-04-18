@@ -348,7 +348,7 @@ export function getInputType(
                 } as InputPrimitiveType;
         }
     } else if (type.kind === "Union") {
-        return getInputTypeForUnion(type);
+        return getInputTypeForUnion(type, formattedType.encode);
     } else if (type.kind === "UnionVariant") {
         return getInputType(
             context,
@@ -808,7 +808,10 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+    function getInputTypeForUnion(
+        union: Union,
+        encodeData: EncodeData | undefined = undefined
+    ): InputUnionType | InputType {
         var clientType = getClientType(context, union);
         if (clientType.kind === "enum" && clientType.isFixed === false) {
             return fromSdkEnumType(clientType, context, enums);
@@ -819,9 +822,12 @@ export function getInputType(
 
         let hasNullType = false;
         for (const variant of variants) {
+            var formattedType = getFormattedType(program, variant.type);
+            // propagate the encode data from parent.
+            if (!formattedType.encode) formattedType.encode = encodeData;
             const inputType = getInputType(
                 context,
-                getFormattedType(program, variant.type),
+                formattedType,
                 models,
                 enums
             );

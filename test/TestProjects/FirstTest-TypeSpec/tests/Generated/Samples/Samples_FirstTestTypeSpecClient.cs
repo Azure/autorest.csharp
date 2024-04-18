@@ -2492,5 +2492,117 @@ new BaseModel(123)
             AzureLocationModel body = new AzureLocationModel(default);
             Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = client.EncodedUnionPropertyOp(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("started_at").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = await client.EncodedUnionPropertyOpAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("started_at").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = client.EncodedUnionPropertyOp(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = client.EncodedUnionPropertyOp(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("started_at").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = await client.EncodedUnionPropertyOpAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("started_at").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = client.EncodedUnionPropertyOp(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+        }
     }
 }

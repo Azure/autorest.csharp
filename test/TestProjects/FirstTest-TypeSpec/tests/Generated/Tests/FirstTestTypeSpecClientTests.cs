@@ -1156,5 +1156,59 @@ new BaseModel(123)
             AzureLocationModel body = new AzureLocationModel(default);
             Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = await client.EncodedUnionPropertyOpAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EncodedUnionPropertyOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                started_at = 1652209051,
+            });
+            Response response = await client.EncodedUnionPropertyOpAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EncodedUnionPropertyOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+            Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+        }
     }
 }

@@ -2223,5 +2223,105 @@ Response response = client.AzureLocationOp(default, default, content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="EncodedUnionPropertyOpAsync(EncodedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call EncodedUnionPropertyOpAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+]]></code>
+This sample shows how to call EncodedUnionPropertyOpAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+Response<EncodedUnionProperty> response = await client.EncodedUnionPropertyOpAsync(body);
+]]></code></example>
+    </member>
+    <member name="EncodedUnionPropertyOp(EncodedUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call EncodedUnionPropertyOp.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+Response<EncodedUnionProperty> response = client.EncodedUnionPropertyOp(body);
+]]></code>
+This sample shows how to call EncodedUnionPropertyOp with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+EncodedUnionProperty body = new EncodedUnionProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
+Response<EncodedUnionProperty> response = client.EncodedUnionPropertyOp(body);
+]]></code></example>
+    </member>
+    <member name="EncodedUnionPropertyOpAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call EncodedUnionPropertyOpAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    started_at = 1652209051,
+});
+Response response = await client.EncodedUnionPropertyOpAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("started_at").ToString());
+]]></code>
+This sample shows how to call EncodedUnionPropertyOpAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    started_at = 1652209051,
+});
+Response response = await client.EncodedUnionPropertyOpAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("started_at").ToString());
+]]></code></example>
+    </member>
+    <member name="EncodedUnionPropertyOp(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call EncodedUnionPropertyOp and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    started_at = 1652209051,
+});
+Response response = client.EncodedUnionPropertyOp(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("started_at").ToString());
+]]></code>
+This sample shows how to call EncodedUnionPropertyOp with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    started_at = 1652209051,
+});
+Response response = client.EncodedUnionPropertyOp(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("started_at").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>
