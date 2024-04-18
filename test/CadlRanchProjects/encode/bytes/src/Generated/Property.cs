@@ -44,6 +44,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -58,6 +59,7 @@ namespace Encode.Bytes
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -73,7 +75,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -164,6 +167,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -179,7 +183,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,6 +260,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -270,6 +275,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -285,7 +291,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +330,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -362,6 +368,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url array. </summary>
         /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -376,6 +383,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64url array. </summary>
         /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -391,7 +399,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +438,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>

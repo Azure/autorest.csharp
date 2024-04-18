@@ -56,6 +56,7 @@ namespace ModelsTypeSpec
             _apiVersion = options.Version;
         }
 
+        /// <summary> Put base model with discriminator defined on base. </summary>
         /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -70,6 +71,7 @@ namespace ModelsTypeSpec
             return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
         }
 
+        /// <summary> Put base model with discriminator defined on base. </summary>
         /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -85,7 +87,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put base model with discriminator defined on base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -124,7 +126,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put base model with discriminator defined on base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -162,6 +164,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Get output discriminator model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetOutputDiscriminatorModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputBaseModelWithDiscriminator>> GetOutputDiscriminatorModelAsync(CancellationToken cancellationToken = default)
@@ -171,6 +174,7 @@ namespace ModelsTypeSpec
             return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
         }
 
+        /// <summary> Get output discriminator model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetOutputDiscriminatorModel(CancellationToken)']/*" />
         public virtual Response<OutputBaseModelWithDiscriminator> GetOutputDiscriminatorModel(CancellationToken cancellationToken = default)
@@ -181,7 +185,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get output discriminator model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -216,7 +220,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get output discriminator model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1482,6 +1486,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Get single base. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBaseAsync(CancellationToken)']/*" />
         public virtual async Task<Response<SingleBase>> GetSingleBaseAsync(CancellationToken cancellationToken = default)
@@ -1491,6 +1496,7 @@ namespace ModelsTypeSpec
             return Response.FromValue(SingleBase.FromResponse(response), response);
         }
 
+        /// <summary> Get single base. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBase(CancellationToken)']/*" />
         public virtual Response<SingleBase> GetSingleBase(CancellationToken cancellationToken = default)
@@ -1501,7 +1507,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get single base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1536,7 +1542,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get single base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1570,6 +1576,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Generic type. </summary>
         /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1584,6 +1591,7 @@ namespace ModelsTypeSpec
             return response;
         }
 
+        /// <summary> Generic type. </summary>
         /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1599,7 +1607,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Generic type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1638,7 +1646,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Generic type.
         /// <list type="bullet">
         /// <item>
         /// <description>

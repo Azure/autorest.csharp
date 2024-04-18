@@ -44,6 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
+        /// <summary> No decorator in public. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -57,6 +58,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(NoDecoratorModelInPublic.FromResponse(response), response);
         }
 
+        /// <summary> No decorator in public. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -71,7 +73,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] No decorator in public.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -110,7 +112,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] No decorator in public.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -148,6 +150,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
+        /// <summary> Public decorator in public. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -161,6 +164,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(PublicDecoratorModelInPublic.FromResponse(response), response);
         }
 
+        /// <summary> Public decorator in public. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -175,7 +179,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Public decorator in public.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -214,7 +218,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Public decorator in public.
         /// <list type="bullet">
         /// <item>
         /// <description>
