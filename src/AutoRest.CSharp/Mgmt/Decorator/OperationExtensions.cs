@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         internal static string GetFullSerializedName(this InputOperation operation)
         {
-            return operation.OriginalName ?? operation.Name;
+            return operation.SpecName;
         }
 
         internal static string GetFullSerializedName(this InputOperation operation, InputParameter parameter)

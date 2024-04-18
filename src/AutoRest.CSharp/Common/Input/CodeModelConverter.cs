@@ -132,28 +132,30 @@ namespace AutoRest.CSharp.Common.Input
         {
             var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
             var inputOperation = new InputOperation(
-                Name: operation.Language.Default.Name,
-                ResourceName: null,
-                Summary: operation.Language.Default.Summary,
-                Deprecated: operation.Deprecated?.Reason,
-                Description: operation.Language.Default.Description,
-                Accessibility: operation.Accessibility,
-                Parameters: parameters,
-                Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
-                HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
-                RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
-                Uri: httpRequest.Uri,
-                Path: httpRequest.Path,
-                ExternalDocsUrl: operation.ExternalDocs?.Url,
-                RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
-                BufferResponse: operation.Extensions?.BufferResponse ?? true,
-                LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(serviceRequest, operation),
-                GenerateProtocolMethod: true,
-                GenerateConvenienceMethod: false,
-                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
-                OperationId: operation.OperationId,
-                OriginalName: operation.Language.Default.SerializedName);
+                name: operation.Language.Default.Name,
+                resourceName: null,
+                summary: operation.Language.Default.Summary,
+                deprecated: operation.Deprecated?.Reason,
+                description: operation.Language.Default.Description,
+                accessibility: operation.Accessibility,
+                parameters: parameters,
+                responses: operation.Responses.Select(CreateOperationResponse).ToList(),
+                httpMethod: httpRequest.Method.ToCoreRequestMethod(),
+                requestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
+                uri: httpRequest.Uri,
+                path: httpRequest.Path,
+                externalDocsUrl: operation.ExternalDocs?.Url,
+                requestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
+                bufferResponse: operation.Extensions?.BufferResponse ?? true,
+                longRunning: CreateLongRunning(operation),
+                paging: CreateOperationPaging(serviceRequest, operation),
+                generateProtocolMethod: true,
+                generateConvenienceMethod: false,
+                keepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
+                operationId: operation.OperationId)
+            {
+                SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
+            };
             inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
             return inputOperation;
         }
