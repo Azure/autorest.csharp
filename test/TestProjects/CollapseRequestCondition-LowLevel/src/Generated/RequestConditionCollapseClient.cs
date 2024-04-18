@@ -58,7 +58,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The CollapsePut method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The CollapsePut method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -122,7 +122,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The CollapseGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,7 +153,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The CollapseGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -184,7 +184,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfNoneMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +220,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfNoneMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,7 +256,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -292,7 +292,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -328,7 +328,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfModifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -364,7 +364,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfModifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -400,7 +400,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfUnmodifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -436,7 +436,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfUnmodifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -472,7 +472,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfMatchIfNoneMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -512,7 +512,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The MissIfMatchIfNoneMatchGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -552,7 +552,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The IfModifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -596,7 +596,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The IfModifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -640,7 +640,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The IfUnmodifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -684,7 +684,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The IfUnmodifiedSinceGet method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

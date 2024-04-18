@@ -43,7 +43,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> The ResponseBody method. </summary>
+        /// <summary> Response body. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='ResponseBodyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<decimal>> ResponseBodyAsync(CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace _Type.Scalar
             return Response.FromValue(response.Content.ToObjectFromJson<decimal>(), response);
         }
 
-        /// <summary> The ResponseBody method. </summary>
+        /// <summary> Response body. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='ResponseBody(CancellationToken)']/*" />
         public virtual Response<decimal> ResponseBody(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] The ResponseBody method
+        /// [Protocol Method] Response body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +99,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] The ResponseBody method
+        /// [Protocol Method] Response body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,7 +133,7 @@ namespace _Type.Scalar
             }
         }
 
-        /// <summary> The RequestBody method. </summary>
+        /// <summary> Request body. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBodyAsync(decimal,CancellationToken)']/*" />
@@ -145,7 +145,7 @@ namespace _Type.Scalar
             return response;
         }
 
-        /// <summary> The RequestBody method. </summary>
+        /// <summary> Request body. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBody(decimal,CancellationToken)']/*" />
@@ -158,7 +158,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] The RequestBody method
+        /// [Protocol Method] Request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -197,7 +197,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] The RequestBody method
+        /// [Protocol Method] Request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -237,7 +237,7 @@ namespace _Type.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RequestParameter method
+        /// [Protocol Method] Request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -269,7 +269,7 @@ namespace _Type.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RequestParameter method
+        /// [Protocol Method] Request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>

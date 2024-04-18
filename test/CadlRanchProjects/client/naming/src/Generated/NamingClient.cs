@@ -49,7 +49,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The ClientName method
+        /// [Protocol Method] Client name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -80,7 +80,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The ClientName method
+        /// [Protocol Method] Client name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +111,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Parameter method
+        /// [Protocol Method] Parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -146,7 +146,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Parameter method
+        /// [Protocol Method] Parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -179,7 +179,7 @@ namespace Client.Naming
             }
         }
 
-        /// <summary> The Client method. </summary>
+        /// <summary> Client. </summary>
         /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
@@ -194,7 +194,7 @@ namespace Client.Naming
             return response;
         }
 
-        /// <summary> The Client method. </summary>
+        /// <summary> Client. </summary>
         /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
@@ -210,7 +210,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The Client method
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -249,7 +249,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The Client method
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -287,7 +287,7 @@ namespace Client.Naming
             }
         }
 
-        /// <summary> The Language method. </summary>
+        /// <summary> Language. </summary>
         /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
@@ -302,7 +302,7 @@ namespace Client.Naming
             return response;
         }
 
-        /// <summary> The Language method. </summary>
+        /// <summary> Language. </summary>
         /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
@@ -318,7 +318,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The Language method
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -357,7 +357,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The Language method
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -395,7 +395,7 @@ namespace Client.Naming
             }
         }
 
-        /// <summary> The CompatibleWithEncodedName method. </summary>
+        /// <summary> Compatible with encoded name. </summary>
         /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
@@ -410,7 +410,7 @@ namespace Client.Naming
             return response;
         }
 
-        /// <summary> The CompatibleWithEncodedName method. </summary>
+        /// <summary> Compatible with encoded name. </summary>
         /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
@@ -426,7 +426,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The CompatibleWithEncodedName method
+        /// [Protocol Method] Compatible with encoded name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -465,7 +465,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The CompatibleWithEncodedName method
+        /// [Protocol Method] Compatible with encoded name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -505,7 +505,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Request method
+        /// [Protocol Method] Request.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -540,7 +540,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Request method
+        /// [Protocol Method] Request.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -575,7 +575,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Response method
+        /// [Protocol Method] Response.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -606,7 +606,7 @@ namespace Client.Naming
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The Response method
+        /// [Protocol Method] Response.
         /// <list type="bullet">
         /// <item>
         /// <description>

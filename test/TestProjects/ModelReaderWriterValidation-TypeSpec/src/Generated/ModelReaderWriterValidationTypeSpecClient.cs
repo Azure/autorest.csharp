@@ -54,7 +54,7 @@ namespace ModelReaderWriterValidationTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> The Op1 method. </summary>
+        /// <summary> Op 1. </summary>
         /// <param name="body"> The <see cref="ModelAsStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1Async(ModelAsStruct,CancellationToken)']/*" />
@@ -66,7 +66,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ModelAsStruct.FromResponse(response), response);
         }
 
-        /// <summary> The Op1 method. </summary>
+        /// <summary> Op 1. </summary>
         /// <param name="body"> The <see cref="ModelAsStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1(ModelAsStruct,CancellationToken)']/*" />
@@ -79,7 +79,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op1 method
+        /// [Protocol Method] Op 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op1 method
+        /// [Protocol Method] Op 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -156,7 +156,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
-        /// <summary> The Op2 method. </summary>
+        /// <summary> Op 2. </summary>
         /// <param name="body"> The <see cref="ModelWithPersistableOnly"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -171,7 +171,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ModelWithPersistableOnly.FromResponse(response), response);
         }
 
-        /// <summary> The Op2 method. </summary>
+        /// <summary> Op 2. </summary>
         /// <param name="body"> The <see cref="ModelWithPersistableOnly"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -187,7 +187,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op2 method
+        /// [Protocol Method] Op 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -226,7 +226,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op2 method
+        /// [Protocol Method] Op 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -264,7 +264,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
-        /// <summary> The Op3 method. </summary>
+        /// <summary> Op 3. </summary>
         /// <param name="body"> The <see cref="BaseModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -279,7 +279,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(BaseModel.FromResponse(response), response);
         }
 
-        /// <summary> The Op3 method. </summary>
+        /// <summary> Op 3. </summary>
         /// <param name="body"> The <see cref="BaseModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -295,7 +295,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op3 method
+        /// [Protocol Method] Op 3.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -334,7 +334,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op3 method
+        /// [Protocol Method] Op 3.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -372,7 +372,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
-        /// <summary> The Op4 method. </summary>
+        /// <summary> Op 4. </summary>
         /// <param name="body"> The <see cref="AvailabilitySetData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -387,7 +387,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(AvailabilitySetData.FromResponse(response), response);
         }
 
-        /// <summary> The Op4 method. </summary>
+        /// <summary> Op 4. </summary>
         /// <param name="body"> The <see cref="AvailabilitySetData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -403,7 +403,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op4 method
+        /// [Protocol Method] Op 4.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -442,7 +442,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op4 method
+        /// [Protocol Method] Op 4.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -480,7 +480,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
-        /// <summary> The Op5 method. </summary>
+        /// <summary> Op 5. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op5Async(CancellationToken)']/*" />
         public virtual async Task<Response<ResourceProviderData>> Op5Async(CancellationToken cancellationToken = default)
@@ -490,7 +490,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ResourceProviderData.FromResponse(response), response);
         }
 
-        /// <summary> The Op5 method. </summary>
+        /// <summary> Op 5. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op5(CancellationToken)']/*" />
         public virtual Response<ResourceProviderData> Op5(CancellationToken cancellationToken = default)
@@ -501,7 +501,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op5 method
+        /// [Protocol Method] Op 5.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -536,7 +536,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The Op5 method
+        /// [Protocol Method] Op 5.
         /// <list type="bullet">
         /// <item>
         /// <description>

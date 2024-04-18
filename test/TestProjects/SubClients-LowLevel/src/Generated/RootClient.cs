@@ -66,7 +66,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The GetCachedParameter method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,7 +96,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] The GetCachedParameter method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

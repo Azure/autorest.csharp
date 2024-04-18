@@ -45,7 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetModelsOnly method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse4>> GetModelsOnlyAsync(CancellationToken cancellationToken = default)
@@ -55,7 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse4.FromResponse(response), response);
         }
 
-        /// <summary> The GetModelsOnly method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnly(CancellationToken)']/*" />
         public virtual Response<GetResponse4> GetModelsOnly(CancellationToken cancellationToken = default)
@@ -66,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] The GetModelsOnly method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] The GetModelsOnly method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,7 +135,7 @@ namespace _Type.Union
             }
         }
 
-        /// <summary> The Send method. </summary>
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -150,7 +150,7 @@ namespace _Type.Union
             return response;
         }
 
-        /// <summary> The Send method. </summary>
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -166,7 +166,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] The Send method
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -205,7 +205,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] The Send method
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>

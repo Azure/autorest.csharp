@@ -45,7 +45,7 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
-        /// <summary> The SpreadAsRequestBody method. </summary>
+        /// <summary> Spread as request body. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -60,7 +60,7 @@ namespace Parameters.Spread
             return response;
         }
 
-        /// <summary> The SpreadAsRequestBody method. </summary>
+        /// <summary> Spread as request body. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -76,7 +76,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadAsRequestBody method
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadAsRequestBody method
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,7 +153,7 @@ namespace Parameters.Spread
             }
         }
 
-        /// <summary> The SpreadAsRequestParameter method. </summary>
+        /// <summary> Spread as request parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -173,7 +173,7 @@ namespace Parameters.Spread
             return response;
         }
 
-        /// <summary> The SpreadAsRequestParameter method. </summary>
+        /// <summary> Spread as request parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -194,7 +194,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadAsRequestParameter method
+        /// [Protocol Method] Spread as request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -238,7 +238,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadAsRequestParameter method
+        /// [Protocol Method] Spread as request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -281,7 +281,7 @@ namespace Parameters.Spread
             }
         }
 
-        /// <summary> The SpreadWithMultipleParameters method. </summary>
+        /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -318,7 +318,7 @@ namespace Parameters.Spread
             return response;
         }
 
-        /// <summary> The SpreadWithMultipleParameters method. </summary>
+        /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -356,7 +356,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadWithMultipleParameters method
+        /// [Protocol Method] Spread with multiple parameters.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -400,7 +400,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] The SpreadWithMultipleParameters method
+        /// [Protocol Method] Spread with multiple parameters.
         /// <list type="bullet">
         /// <item>
         /// <description>

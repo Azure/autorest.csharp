@@ -43,7 +43,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Four method
+        /// [Protocol Method] Four.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Four method
+        /// [Protocol Method] Four.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -103,7 +103,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Five method
+        /// [Protocol Method] Five.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,7 +133,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Five method
+        /// [Protocol Method] Five.
         /// <list type="bullet">
         /// <item>
         /// <description>

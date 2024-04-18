@@ -43,7 +43,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Two method
+        /// [Protocol Method] Two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Two method
+        /// [Protocol Method] Two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -103,7 +103,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Three method
+        /// [Protocol Method] Three.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,7 +133,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method] The Three method
+        /// [Protocol Method] Three.
         /// <list type="bullet">
         /// <item>
         /// <description>

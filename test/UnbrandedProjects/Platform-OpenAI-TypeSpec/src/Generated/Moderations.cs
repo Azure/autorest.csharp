@@ -42,7 +42,7 @@ namespace OpenAI
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks> The Create method. </remarks>
+        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<CreateModerationResponse>> CreateAsync(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -55,7 +55,7 @@ namespace OpenAI
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
         /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks> The Create method. </remarks>
+        /// <remarks> Create. </remarks>
         public virtual ClientResult<CreateModerationResponse> Create(CreateModerationRequest content)
         {
             Argument.AssertNotNull(content, nameof(content));

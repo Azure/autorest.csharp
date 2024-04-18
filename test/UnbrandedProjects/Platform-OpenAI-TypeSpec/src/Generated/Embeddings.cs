@@ -42,7 +42,7 @@ namespace OpenAI
         /// <summary> Creates an embedding vector representing the input text. </summary>
         /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        /// <remarks> The Create method. </remarks>
+        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<CreateEmbeddingResponse>> CreateAsync(CreateEmbeddingRequest embedding)
         {
             Argument.AssertNotNull(embedding, nameof(embedding));
@@ -55,7 +55,7 @@ namespace OpenAI
         /// <summary> Creates an embedding vector representing the input text. </summary>
         /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        /// <remarks> The Create method. </remarks>
+        /// <remarks> Create. </remarks>
         public virtual ClientResult<CreateEmbeddingResponse> Create(CreateEmbeddingRequest embedding)
         {
             Argument.AssertNotNull(embedding, nameof(embedding));

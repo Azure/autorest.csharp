@@ -44,7 +44,7 @@ namespace Serialization.EncodedName.Json
             _endpoint = endpoint;
         }
 
-        /// <summary> The Send method. </summary>
+        /// <summary> Send. </summary>
         /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace Serialization.EncodedName.Json
             return response;
         }
 
-        /// <summary> The Send method. </summary>
+        /// <summary> Send. </summary>
         /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
@@ -75,7 +75,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] The Send method
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -114,7 +114,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] The Send method
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace Serialization.EncodedName.Json
             }
         }
 
-        /// <summary> The GetProperty method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='GetPropertyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<JsonEncodedNameModel>> GetPropertyAsync(CancellationToken cancellationToken = default)
@@ -162,7 +162,7 @@ namespace Serialization.EncodedName.Json
             return Response.FromValue(JsonEncodedNameModel.FromResponse(response), response);
         }
 
-        /// <summary> The GetProperty method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='GetProperty(CancellationToken)']/*" />
         public virtual Response<JsonEncodedNameModel> GetProperty(CancellationToken cancellationToken = default)
@@ -173,7 +173,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] The GetProperty method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -208,7 +208,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] The GetProperty method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>

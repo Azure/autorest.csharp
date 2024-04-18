@@ -39,7 +39,7 @@ namespace OpenAI
             _endpoint = endpoint;
         }
 
-        /// <summary> The Create method. </summary>
+        /// <summary> Create. </summary>
         /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest)
@@ -51,7 +51,7 @@ namespace OpenAI
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> The Create method. </summary>
+        /// <summary> Create. </summary>
         /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest)
@@ -64,7 +64,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// [Protocol Method] The Create method
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -92,7 +92,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// [Protocol Method] The Create method
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>

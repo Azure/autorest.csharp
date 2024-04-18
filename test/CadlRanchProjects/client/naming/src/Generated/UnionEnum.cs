@@ -44,7 +44,7 @@ namespace Client.Naming
             _endpoint = endpoint;
         }
 
-        /// <summary> The UnionEnumName method. </summary>
+        /// <summary> Union enum name. </summary>
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumNameAsync(ClientExtensibleEnum,CancellationToken)']/*" />
@@ -56,7 +56,7 @@ namespace Client.Naming
             return response;
         }
 
-        /// <summary> The UnionEnumName method. </summary>
+        /// <summary> Union enum name. </summary>
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumName(ClientExtensibleEnum,CancellationToken)']/*" />
@@ -69,7 +69,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The UnionEnumName method
+        /// [Protocol Method] Union enum name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -108,7 +108,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The UnionEnumName method
+        /// [Protocol Method] Union enum name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -146,7 +146,7 @@ namespace Client.Naming
             }
         }
 
-        /// <summary> The UnionEnumMemberName method. </summary>
+        /// <summary> Union enum member name. </summary>
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberNameAsync(ExtensibleEnum,CancellationToken)']/*" />
@@ -158,7 +158,7 @@ namespace Client.Naming
             return response;
         }
 
-        /// <summary> The UnionEnumMemberName method. </summary>
+        /// <summary> Union enum member name. </summary>
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberName(ExtensibleEnum,CancellationToken)']/*" />
@@ -171,7 +171,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The UnionEnumMemberName method
+        /// [Protocol Method] Union enum member name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -210,7 +210,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method] The UnionEnumMemberName method
+        /// [Protocol Method] Union enum member name.
         /// <list type="bullet">
         /// <item>
         /// <description>

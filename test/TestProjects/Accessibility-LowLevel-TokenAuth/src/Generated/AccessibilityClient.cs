@@ -58,7 +58,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <summary>
-        /// [Protocol Method] The Operation method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -89,7 +89,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <summary>
-        /// [Protocol Method] The Operation method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -120,7 +120,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <summary>
-        /// [Protocol Method] The OperationInternal method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,7 +150,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <summary>
-        /// [Protocol Method] The OperationInternal method
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

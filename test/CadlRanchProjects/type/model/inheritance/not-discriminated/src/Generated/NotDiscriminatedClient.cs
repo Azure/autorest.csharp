@@ -47,7 +47,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             _endpoint = endpoint;
         }
 
-        /// <summary> The PostValid method. </summary>
+        /// <summary> Post valid. </summary>
         /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -62,7 +62,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             return response;
         }
 
-        /// <summary> The PostValid method. </summary>
+        /// <summary> Post valid. </summary>
         /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -78,7 +78,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The PostValid method
+        /// [Protocol Method] Post valid.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The PostValid method
+        /// [Protocol Method] Post valid.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -155,7 +155,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             }
         }
 
-        /// <summary> The GetValid method. </summary>
+        /// <summary> Get valid. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='GetValidAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -165,7 +165,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
-        /// <summary> The GetValid method. </summary>
+        /// <summary> Get valid. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='GetValid(CancellationToken)']/*" />
         public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
@@ -176,7 +176,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The GetValid method
+        /// [Protocol Method] Get valid.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The GetValid method
+        /// [Protocol Method] Get valid.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -245,7 +245,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             }
         }
 
-        /// <summary> The PutValid method. </summary>
+        /// <summary> Put valid. </summary>
         /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -260,7 +260,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
-        /// <summary> The PutValid method. </summary>
+        /// <summary> Put valid. </summary>
         /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -276,7 +276,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The PutValid method
+        /// [Protocol Method] Put valid.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -315,7 +315,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary>
-        /// [Protocol Method] The PutValid method
+        /// [Protocol Method] Put valid.
         /// <list type="bullet">
         /// <item>
         /// <description>

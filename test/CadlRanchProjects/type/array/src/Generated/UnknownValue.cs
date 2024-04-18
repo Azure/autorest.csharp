@@ -45,7 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetUnknownValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
@@ -70,7 +70,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetUnknownValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValue(CancellationToken cancellationToken = default)
@@ -96,7 +96,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] The GetUnknownValue method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,7 +131,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] The GetUnknownValue method
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -165,7 +165,7 @@ namespace _Type._Array
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -180,7 +180,7 @@ namespace _Type._Array
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -196,7 +196,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] The Put method
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -235,7 +235,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] The Put method
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

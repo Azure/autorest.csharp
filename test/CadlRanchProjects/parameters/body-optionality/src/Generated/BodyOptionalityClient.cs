@@ -47,7 +47,7 @@ namespace Parameters.BodyOptionality
             _endpoint = endpoint;
         }
 
-        /// <summary> The RequiredExplicit method. </summary>
+        /// <summary> Required explicit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -62,7 +62,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
-        /// <summary> The RequiredExplicit method. </summary>
+        /// <summary> Required explicit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -78,7 +78,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method] The RequiredExplicit method
+        /// [Protocol Method] Required explicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method] The RequiredExplicit method
+        /// [Protocol Method] Required explicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -155,7 +155,7 @@ namespace Parameters.BodyOptionality
             }
         }
 
-        /// <summary> The RequiredImplicit method. </summary>
+        /// <summary> Required implicit. </summary>
         /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
@@ -170,7 +170,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
-        /// <summary> The RequiredImplicit method. </summary>
+        /// <summary> Required implicit. </summary>
         /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
@@ -186,7 +186,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method] The RequiredImplicit method
+        /// [Protocol Method] Required implicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -225,7 +225,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method] The RequiredImplicit method
+        /// [Protocol Method] Required implicit.
         /// <list type="bullet">
         /// <item>
         /// <description>

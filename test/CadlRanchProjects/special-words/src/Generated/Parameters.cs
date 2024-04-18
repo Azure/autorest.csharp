@@ -44,7 +44,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAnd method
+        /// [Protocol Method] With and.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,7 +79,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAnd method
+        /// [Protocol Method] With and.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -114,7 +114,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAs method
+        /// [Protocol Method] With as.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAs method
+        /// [Protocol Method] With as.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -184,7 +184,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAssert method
+        /// [Protocol Method] With assert.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,7 +219,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAssert method
+        /// [Protocol Method] With assert.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -254,7 +254,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAsync method
+        /// [Protocol Method] With async.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -289,7 +289,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAsync method
+        /// [Protocol Method] With async.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +324,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAwait method
+        /// [Protocol Method] With await.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -359,7 +359,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithAwait method
+        /// [Protocol Method] With await.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -394,7 +394,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithBreak method
+        /// [Protocol Method] With break.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -429,7 +429,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithBreak method
+        /// [Protocol Method] With break.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -464,7 +464,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithClass method
+        /// [Protocol Method] With class.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -499,7 +499,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithClass method
+        /// [Protocol Method] With class.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -534,7 +534,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithConstructor method
+        /// [Protocol Method] With constructor.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -569,7 +569,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithConstructor method
+        /// [Protocol Method] With constructor.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -604,7 +604,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithContinue method
+        /// [Protocol Method] With continue.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -639,7 +639,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithContinue method
+        /// [Protocol Method] With continue.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -674,7 +674,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithDef method
+        /// [Protocol Method] With def.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -709,7 +709,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithDef method
+        /// [Protocol Method] With def.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -744,7 +744,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithDel method
+        /// [Protocol Method] With del.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -779,7 +779,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithDel method
+        /// [Protocol Method] With del.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -814,7 +814,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithElif method
+        /// [Protocol Method] With elif.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -849,7 +849,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithElif method
+        /// [Protocol Method] With elif.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -884,7 +884,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithElse method
+        /// [Protocol Method] With else.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -919,7 +919,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithElse method
+        /// [Protocol Method] With else.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -954,7 +954,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithExcept method
+        /// [Protocol Method] With except.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -989,7 +989,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithExcept method
+        /// [Protocol Method] With except.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1024,7 +1024,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithExec method
+        /// [Protocol Method] With exec.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1059,7 +1059,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithExec method
+        /// [Protocol Method] With exec.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1094,7 +1094,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFinally method
+        /// [Protocol Method] With finally.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1129,7 +1129,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFinally method
+        /// [Protocol Method] With finally.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1164,7 +1164,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFor method
+        /// [Protocol Method] With for.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1199,7 +1199,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFor method
+        /// [Protocol Method] With for.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1234,7 +1234,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFrom method
+        /// [Protocol Method] With from.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1269,7 +1269,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithFrom method
+        /// [Protocol Method] With from.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1304,7 +1304,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithGlobal method
+        /// [Protocol Method] With global.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1339,7 +1339,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithGlobal method
+        /// [Protocol Method] With global.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1374,7 +1374,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIf method
+        /// [Protocol Method] With if.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1409,7 +1409,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIf method
+        /// [Protocol Method] With if.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1444,7 +1444,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithImport method
+        /// [Protocol Method] With import.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1479,7 +1479,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithImport method
+        /// [Protocol Method] With import.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1514,7 +1514,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIn method
+        /// [Protocol Method] With in.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1549,7 +1549,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIn method
+        /// [Protocol Method] With in.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1584,7 +1584,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIs method
+        /// [Protocol Method] With is.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1619,7 +1619,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithIs method
+        /// [Protocol Method] With is.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1654,7 +1654,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithLambda method
+        /// [Protocol Method] With lambda.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1689,7 +1689,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithLambda method
+        /// [Protocol Method] With lambda.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1724,7 +1724,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithNot method
+        /// [Protocol Method] With not.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1759,7 +1759,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithNot method
+        /// [Protocol Method] With not.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1794,7 +1794,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithOr method
+        /// [Protocol Method] With or.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1829,7 +1829,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithOr method
+        /// [Protocol Method] With or.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1864,7 +1864,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithPass method
+        /// [Protocol Method] With pass.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1899,7 +1899,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithPass method
+        /// [Protocol Method] With pass.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1934,7 +1934,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithRaise method
+        /// [Protocol Method] With raise.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1969,7 +1969,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithRaise method
+        /// [Protocol Method] With raise.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2004,7 +2004,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithReturn method
+        /// [Protocol Method] With return.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2039,7 +2039,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithReturn method
+        /// [Protocol Method] With return.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2074,7 +2074,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithTry method
+        /// [Protocol Method] With try.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2109,7 +2109,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithTry method
+        /// [Protocol Method] With try.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2144,7 +2144,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithWhile method
+        /// [Protocol Method] With while.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2179,7 +2179,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithWhile method
+        /// [Protocol Method] With while.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2214,7 +2214,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithWith method
+        /// [Protocol Method] With with.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2249,7 +2249,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithWith method
+        /// [Protocol Method] With with.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2284,7 +2284,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithYield method
+        /// [Protocol Method] With yield.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2319,7 +2319,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithYield method
+        /// [Protocol Method] With yield.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2354,7 +2354,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithCancellationToken method
+        /// [Protocol Method] With cancellation token.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2389,7 +2389,7 @@ namespace SpecialWords
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithCancellationToken method
+        /// [Protocol Method] With cancellation token.
         /// <list type="bullet">
         /// <item>
         /// <description>

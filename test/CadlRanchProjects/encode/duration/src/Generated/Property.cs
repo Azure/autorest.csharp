@@ -44,7 +44,7 @@ namespace Encode.Duration
             _endpoint = endpoint;
         }
 
-        /// <summary> The Default method. </summary>
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace Encode.Duration
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
-        /// <summary> The Default method. </summary>
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -75,7 +75,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Default method
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -114,7 +114,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Default method
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <summary> The Iso8601 method. </summary>
+        /// <summary> Iso 8601. </summary>
         /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -167,7 +167,7 @@ namespace Encode.Duration
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
-        /// <summary> The Iso8601 method. </summary>
+        /// <summary> Iso 8601. </summary>
         /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -183,7 +183,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Iso8601 method
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -222,7 +222,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Iso8601 method
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -260,7 +260,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <summary> The Int32Seconds method. </summary>
+        /// <summary> Int 32 seconds. </summary>
         /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -275,7 +275,7 @@ namespace Encode.Duration
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <summary> The Int32Seconds method. </summary>
+        /// <summary> Int 32 seconds. </summary>
         /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -291,7 +291,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Int32Seconds method
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -330,7 +330,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The Int32Seconds method
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -368,7 +368,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <summary> The FloatSeconds method. </summary>
+        /// <summary> Float seconds. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -383,7 +383,7 @@ namespace Encode.Duration
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <summary> The FloatSeconds method. </summary>
+        /// <summary> Float seconds. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -399,7 +399,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The FloatSeconds method
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -438,7 +438,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The FloatSeconds method
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -476,7 +476,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <summary> The FloatSecondsArray method. </summary>
+        /// <summary> Float seconds array. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -491,7 +491,7 @@ namespace Encode.Duration
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 
-        /// <summary> The FloatSecondsArray method. </summary>
+        /// <summary> Float seconds array. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -507,7 +507,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The FloatSecondsArray method
+        /// [Protocol Method] Float seconds array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -546,7 +546,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method] The FloatSecondsArray method
+        /// [Protocol Method] Float seconds array.
         /// <list type="bullet">
         /// <item>
         /// <description>

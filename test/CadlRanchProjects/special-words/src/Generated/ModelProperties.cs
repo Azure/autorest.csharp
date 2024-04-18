@@ -43,7 +43,7 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
-        /// <summary> The SameAsModel method. </summary>
+        /// <summary> Same as model. </summary>
         /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -58,7 +58,7 @@ namespace SpecialWords
             return response;
         }
 
-        /// <summary> The SameAsModel method. </summary>
+        /// <summary> Same as model. </summary>
         /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -74,7 +74,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method] The SameAsModel method
+        /// [Protocol Method] Same as model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +113,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method] The SameAsModel method
+        /// [Protocol Method] Same as model.
         /// <list type="bullet">
         /// <item>
         /// <description>

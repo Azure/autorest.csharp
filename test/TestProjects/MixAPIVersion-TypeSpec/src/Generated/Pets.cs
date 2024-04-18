@@ -178,7 +178,7 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method] The Create method
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -212,7 +212,7 @@ namespace MixApiVersion
         }
 
         /// <summary>
-        /// [Protocol Method] The Create method
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -54,7 +54,7 @@ namespace Server.Path.SingleHeadAsBoolean
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The MyOp method
+        /// [Protocol Method] My op.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -85,7 +85,7 @@ namespace Server.Path.SingleHeadAsBoolean
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The MyOp method
+        /// [Protocol Method] My op.
         /// <list type="bullet">
         /// <item>
         /// <description>

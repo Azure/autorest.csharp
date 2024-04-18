@@ -54,7 +54,7 @@ namespace MultipleMediaTypes
             _endpoint = endpoint;
         }
 
-        /// <summary> The OneBinaryBodyTwoContentTypes method. </summary>
+        /// <summary> One binary body two content types. </summary>
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -70,7 +70,7 @@ namespace MultipleMediaTypes
             return response;
         }
 
-        /// <summary> The OneBinaryBodyTwoContentTypes method. </summary>
+        /// <summary> One binary body two content types. </summary>
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -87,7 +87,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneBinaryBodyTwoContentTypes method
+        /// [Protocol Method] One binary body two content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -127,7 +127,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneBinaryBodyTwoContentTypes method
+        /// [Protocol Method] One binary body two content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -166,7 +166,7 @@ namespace MultipleMediaTypes
             }
         }
 
-        /// <summary> The OneStringBodyThreeContentTypes method. </summary>
+        /// <summary> One string body three content types. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -183,7 +183,7 @@ namespace MultipleMediaTypes
             return response;
         }
 
-        /// <summary> The OneStringBodyThreeContentTypes method. </summary>
+        /// <summary> One string body three content types. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -201,7 +201,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneStringBodyThreeContentTypes method
+        /// [Protocol Method] One string body three content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,7 +241,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneStringBodyThreeContentTypes method
+        /// [Protocol Method] One string body three content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -280,7 +280,7 @@ namespace MultipleMediaTypes
             }
         }
 
-        /// <summary> The OneModelBodyOneContentType method. </summary>
+        /// <summary> One model body one content type. </summary>
         /// <param name="body"> The <see cref="Body"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -295,7 +295,7 @@ namespace MultipleMediaTypes
             return response;
         }
 
-        /// <summary> The OneModelBodyOneContentType method. </summary>
+        /// <summary> One model body one content type. </summary>
         /// <param name="body"> The <see cref="Body"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -311,7 +311,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneModelBodyOneContentType method
+        /// [Protocol Method] One model body one content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -350,7 +350,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method] The OneModelBodyOneContentType method
+        /// [Protocol Method] One model body one content type.
         /// <list type="bullet">
         /// <item>
         /// <description>

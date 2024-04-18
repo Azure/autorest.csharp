@@ -56,7 +56,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithoutApiVersion method
+        /// [Protocol Method] Without api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -87,7 +87,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithoutApiVersion method
+        /// [Protocol Method] Without api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithQueryApiVersion method
+        /// [Protocol Method] With query api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithQueryApiVersion method
+        /// [Protocol Method] With query api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +180,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithPathApiVersion method
+        /// [Protocol Method] With path api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The WithPathApiVersion method
+        /// [Protocol Method] With path api version.
         /// <list type="bullet">
         /// <item>
         /// <description>

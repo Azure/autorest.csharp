@@ -43,7 +43,7 @@ namespace Payload.ContentNegotiation
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetAvatarAsPng method. </summary>
+        /// <summary> Get avatar as png. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SameBody.xml" path="doc/members/member[@name='GetAvatarAsPngAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> GetAvatarAsPngAsync(CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace Payload.ContentNegotiation
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary> The GetAvatarAsPng method. </summary>
+        /// <summary> Get avatar as png. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SameBody.xml" path="doc/members/member[@name='GetAvatarAsPng(CancellationToken)']/*" />
         public virtual Response<BinaryData> GetAvatarAsPng(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary>
-        /// [Protocol Method] The GetAvatarAsPng method
+        /// [Protocol Method] Get avatar as png.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +99,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary>
-        /// [Protocol Method] The GetAvatarAsPng method
+        /// [Protocol Method] Get avatar as png.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,7 +133,7 @@ namespace Payload.ContentNegotiation
             }
         }
 
-        /// <summary> The GetAvatarAsJpeg method. </summary>
+        /// <summary> Get avatar as jpeg. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SameBody.xml" path="doc/members/member[@name='GetAvatarAsJpegAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> GetAvatarAsJpegAsync(CancellationToken cancellationToken = default)
@@ -143,7 +143,7 @@ namespace Payload.ContentNegotiation
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary> The GetAvatarAsJpeg method. </summary>
+        /// <summary> Get avatar as jpeg. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SameBody.xml" path="doc/members/member[@name='GetAvatarAsJpeg(CancellationToken)']/*" />
         public virtual Response<BinaryData> GetAvatarAsJpeg(CancellationToken cancellationToken = default)
@@ -154,7 +154,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary>
-        /// [Protocol Method] The GetAvatarAsJpeg method
+        /// [Protocol Method] Get avatar as jpeg.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -189,7 +189,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary>
-        /// [Protocol Method] The GetAvatarAsJpeg method
+        /// [Protocol Method] Get avatar as jpeg.
         /// <list type="bullet">
         /// <item>
         /// <description>

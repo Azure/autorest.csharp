@@ -47,7 +47,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedTwo method
+        /// [Protocol Method] Renamed two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -78,7 +78,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedTwo method
+        /// [Protocol Method] Renamed two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +109,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedFour method
+        /// [Protocol Method] Renamed four.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -140,7 +140,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedFour method
+        /// [Protocol Method] Renamed four.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -171,7 +171,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedSix method
+        /// [Protocol Method] Renamed six.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -202,7 +202,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] The RenamedSix method
+        /// [Protocol Method] Renamed six.
         /// <list type="bullet">
         /// <item>
         /// <description>

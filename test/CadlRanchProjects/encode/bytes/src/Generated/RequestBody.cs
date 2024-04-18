@@ -43,7 +43,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
-        /// <summary> The Default method. </summary>
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -58,7 +58,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <summary> The Default method. </summary>
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -74,7 +74,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Default method
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +113,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Default method
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -151,7 +151,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <summary> The OctetStream method. </summary>
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -166,7 +166,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <summary> The OctetStream method. </summary>
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -182,7 +182,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The OctetStream method
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -221,7 +221,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The OctetStream method
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -259,7 +259,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <summary> The CustomContentType method. </summary>
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -274,7 +274,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <summary> The CustomContentType method. </summary>
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -290,7 +290,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The CustomContentType method
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -329,7 +329,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The CustomContentType method
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -367,7 +367,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <summary> The Base64 method. </summary>
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -382,7 +382,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <summary> The Base64 method. </summary>
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -398,7 +398,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Base64 method
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -437,7 +437,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Base64 method
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -475,7 +475,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <summary> The Base64url method. </summary>
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -490,7 +490,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <summary> The Base64url method. </summary>
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -506,7 +506,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Base64url method
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -545,7 +545,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method] The Base64url method
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
