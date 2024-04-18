@@ -127,7 +127,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "Golden dog model",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "golden",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -142,7 +141,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "Cobra model",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "cobra",
    "Usage": "RoundTrip",
    "BaseModel": {

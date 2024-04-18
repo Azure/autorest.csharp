@@ -110,9 +110,10 @@ export function fromSdkModelType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputModelType {
-    let modelTypeName = modelType.name;
+    const modelTypeName = modelType.name;
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
+        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType = {
             Kind: InputTypeKind.Model,
             Name: modelTypeName,
@@ -123,7 +124,9 @@ export function fromSdkModelType(
             Deprecated: modelType.deprecation,
             Description: modelType.description,
             IsNullable: modelType.nullable,
-            DiscriminatorPropertyName: getDiscriminatorPropertyName(modelType),
+            DiscriminatorPropertyName: baseModelHasDiscriminator
+                ? undefined
+                : getDiscriminatorPropertyNameFromCurrentModel(modelType),
             DiscriminatorValue: modelType.discriminatorValue,
             Usage: fromUsageFlags(modelType.usage)
         } as InputModelType;
@@ -160,7 +163,6 @@ export function fromSdkModelType(
                   IsNullable: false
               } as InputDictionaryType)
             : undefined;
-        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType.Properties = modelType.properties
             .filter(
                 (p) =>
@@ -184,7 +186,7 @@ export function fromSdkModelType(
     return inputModelType;
 }
 
-function getDiscriminatorPropertyName(
+function getDiscriminatorPropertyNameFromCurrentModel(
     model?: SdkModelType
 ): string | undefined {
     if (model == null) return undefined;
@@ -194,11 +196,20 @@ function getDiscriminatorPropertyName(
     );
     if (discriminatorProperty) return discriminatorProperty.name;
 
-    return getDiscriminatorPropertyName(model.baseModel);
+    return undefined;
 }
 
 function hasDiscriminator(model?: SdkModelType): boolean {
-    return getDiscriminatorPropertyName(model) !== undefined;
+    if (model == null) return false;
+
+    if (
+        model.properties.some(
+            (p) => (p as SdkBodyModelPropertyType).discriminator
+        )
+    )
+        return true;
+
+    return hasDiscriminator(model.baseModel);
 }
 
 export function fromSdkEnumType(

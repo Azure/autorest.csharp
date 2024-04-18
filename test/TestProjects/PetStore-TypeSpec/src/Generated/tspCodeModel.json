@@ -229,7 +229,6 @@
    "Namespace": "PetStore",
    "Description": "Shark is a fish",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "shark",
    "Usage": "Output",
    "BaseModel": {
@@ -259,7 +258,6 @@
    "Namespace": "PetStore",
    "Description": "Tuna is a fish",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "tuna",
    "Usage": "Output",
    "BaseModel": {

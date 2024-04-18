@@ -1280,7 +1280,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelX in the discriminated set",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "X",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1370,7 +1369,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelY in the discriminated set",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "Y",
    "Usage": "RoundTrip",
    "BaseModel": {

@@ -289,7 +289,6 @@
    "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "real",
    "Usage": "Output",
    "BaseModel": {

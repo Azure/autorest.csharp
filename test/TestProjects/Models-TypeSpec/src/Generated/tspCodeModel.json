@@ -2744,7 +2744,6 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -2788,7 +2787,6 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "discriminatorProperty",
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -2818,7 +2816,6 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "discriminatorProperty",
    "DiscriminatorValue": "B",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -2848,7 +2845,6 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "First derived model as an output",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "first",
    "Usage": "Output",
    "BaseModel": {
@@ -2878,7 +2874,6 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Second derived model as an output",
    "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
    "DiscriminatorValue": "second",
    "Usage": "Output",
    "BaseModel": {
