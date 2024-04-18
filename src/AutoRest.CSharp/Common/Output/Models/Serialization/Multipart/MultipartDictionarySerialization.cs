@@ -13,10 +13,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
     internal class MultipartDictionarySerialization: MultipartSerialization
     {
-        public MultipartDictionarySerialization(CSharpType type, ObjectSerialization valueSerialization, bool isNullable): base(isNullable, type)
+        public MultipartDictionarySerialization(CSharpType type, MultipartSerialization valueSerialization, bool isNullable): base(isNullable, type)
         {
             ValueSerialization = valueSerialization;
         }
-        public ObjectSerialization ValueSerialization { get; }
+        public MultipartSerialization ValueSerialization { get; }
     }
 }

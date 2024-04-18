@@ -622,7 +622,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 // build a simple one from its type when there is not an input type corresponding to it (indicating it is a raw data field)
-                valueSerialization = new MultipartDictionarySerialization(dictionaryValueType, SerializationBuilder.BuildMultipartSerialization(null, dictionaryValueType, false, SerializationFormat.Default, memberValueExpression), true);//TODO support dictionary type
+                valueSerialization = new MultipartValueSerialization(dictionaryValueType, SerializationFormat.Default, true);//TODO support dictionary type
             }
 
             return new MultipartAdditionalPropertiesSerialization(

@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="BasicAsync(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call BasicAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.BasicAsync(body);
+]]></code>
+This sample shows how to call BasicAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.BasicAsync(body);
+]]></code></example>
+    </member>
+    <member name="Basic(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call Basic.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.Basic(body);
+]]></code>
+This sample shows how to call Basic with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.Basic(body);
+]]></code></example>
+    </member>
+    <member name="BasicAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call BasicAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.BasicAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BasicAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.BasicAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Basic(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call Basic.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.Basic(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Basic with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.Basic(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ComplexAsync(ComplexPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call ComplexAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    default
+}, new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = await client.ComplexAsync(body);
+]]></code>
+This sample shows how to call ComplexAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    default
+}, new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = await client.ComplexAsync(body);
+]]></code></example>
+    </member>
+    <member name="Complex(ComplexPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call Complex.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    default
+}, new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = client.Complex(body);
+]]></code>
+This sample shows how to call Complex with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    default
+}, new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = client.Complex(body);
+]]></code></example>
+    </member>
+    <member name="ComplexAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call ComplexAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = await client.ComplexAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ComplexAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = await client.ComplexAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Complex(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call Complex.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = client.Complex(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Complex with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = client.Complex(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="JsonPartAsync(JsonPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonPartAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+Response response = await client.JsonPartAsync(body);
+]]></code>
+This sample shows how to call JsonPartAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+Response response = await client.JsonPartAsync(body);
+]]></code></example>
+    </member>
+    <member name="JsonPart(JsonPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonPart.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+Response response = client.JsonPart(body);
+]]></code>
+This sample shows how to call JsonPart with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+Response response = client.JsonPart(body);
+]]></code></example>
+    </member>
+    <member name="JsonPartAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonPartAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+});
+Response response = await client.JsonPartAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonPartAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+});
+Response response = await client.JsonPartAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="JsonPart(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonPart.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+});
+Response response = client.JsonPart(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonPart with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new object(),
+});
+Response response = client.JsonPart(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="BinaryArrayPartsAsync(BinaryArrayPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call BinaryArrayPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = await client.BinaryArrayPartsAsync(body);
+]]></code>
+This sample shows how to call BinaryArrayPartsAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = await client.BinaryArrayPartsAsync(body);
+]]></code></example>
+    </member>
+    <member name="BinaryArrayParts(BinaryArrayPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call BinaryArrayParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = client.BinaryArrayParts(body);
+]]></code>
+This sample shows how to call BinaryArrayParts with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response response = client.BinaryArrayParts(body);
+]]></code></example>
+    </member>
+    <member name="BinaryArrayPartsAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call BinaryArrayPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BinaryArrayPartsAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="BinaryArrayParts(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call BinaryArrayParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = client.BinaryArrayParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BinaryArrayParts with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    pictures = new object[]
+    {
+        new object()
+    },
+});
+Response response = client.BinaryArrayParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="JsonArrayPartsAsync(JsonArrayPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonArrayPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    new Address("<city>")
+});
+Response response = await client.JsonArrayPartsAsync(body);
+]]></code>
+This sample shows how to call JsonArrayPartsAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    new Address("<city>")
+});
+Response response = await client.JsonArrayPartsAsync(body);
+]]></code></example>
+    </member>
+    <member name="JsonArrayParts(JsonArrayPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonArrayParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    new Address("<city>")
+});
+Response response = client.JsonArrayParts(body);
+]]></code>
+This sample shows how to call JsonArrayParts with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+{
+    new Address("<city>")
+});
+Response response = client.JsonArrayParts(body);
+]]></code></example>
+    </member>
+    <member name="JsonArrayPartsAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonArrayPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        new
+        {
+            city = "<city>",
+        }
+    },
+});
+Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonArrayPartsAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        new
+        {
+            city = "<city>",
+        }
+    },
+});
+Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="JsonArrayParts(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonArrayParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        new
+        {
+            city = "<city>",
+        }
+    },
+});
+Response response = client.JsonArrayParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonArrayParts with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    previousAddresses = new object[]
+    {
+        new
+        {
+            city = "<city>",
+        }
+    },
+});
+Response response = client.JsonArrayParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="MultiBinaryPartsAsync(MultiBinaryPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call MultiBinaryPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()));
+Response response = await client.MultiBinaryPartsAsync(body);
+]]></code>
+This sample shows how to call MultiBinaryPartsAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()))
+{
+    Picture = BinaryData.FromObjectAsJson(new object()),
+};
+Response response = await client.MultiBinaryPartsAsync(body);
+]]></code></example>
+    </member>
+    <member name="MultiBinaryParts(MultiBinaryPartsRequest,CancellationToken)">
+      <example>
+This sample shows how to call MultiBinaryParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()));
+Response response = client.MultiBinaryParts(body);
+]]></code>
+This sample shows how to call MultiBinaryParts with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()))
+{
+    Picture = BinaryData.FromObjectAsJson(new object()),
+};
+Response response = client.MultiBinaryParts(body);
+]]></code></example>
+    </member>
+    <member name="MultiBinaryPartsAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call MultiBinaryPartsAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+});
+Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call MultiBinaryPartsAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    picture = new object(),
+});
+Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="MultiBinaryParts(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call MultiBinaryParts.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+});
+Response response = client.MultiBinaryParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call MultiBinaryParts with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new object(),
+    picture = new object(),
+});
+Response response = client.MultiBinaryParts(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="CheckFileNameAndContentTypeAsync(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call CheckFileNameAndContentTypeAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.CheckFileNameAndContentTypeAsync(body);
+]]></code>
+This sample shows how to call CheckFileNameAndContentTypeAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.CheckFileNameAndContentTypeAsync(body);
+]]></code></example>
+    </member>
+    <member name="CheckFileNameAndContentType(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call CheckFileNameAndContentType.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.CheckFileNameAndContentType(body);
+]]></code>
+This sample shows how to call CheckFileNameAndContentType with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.CheckFileNameAndContentType(body);
+]]></code></example>
+    </member>
+    <member name="CheckFileNameAndContentTypeAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call CheckFileNameAndContentTypeAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CheckFileNameAndContentTypeAsync with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="CheckFileNameAndContentType(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call CheckFileNameAndContentType.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CheckFileNameAndContentType with all parameters and request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

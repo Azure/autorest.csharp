@@ -81,6 +81,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _createBoundaryMethodName = "CreateBoundary";
         private const string _addMethodName = "Add";
         private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
+        private const string _addContentTypeHeaderMethodName = "AddContentTypeHeader";
 
         private readonly MultipartFormDataContentExpression _multipartContentExpression;
         //private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(BinaryContent.WriteToAsync);
@@ -119,6 +120,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 yield return method;
             }
             yield return BuildAddFilenameHeaderMethod();
+            yield return BuildAddContentTypeHeaderMethod();
             yield return BuildTryComputeLengthMethod();
             yield return BuildWriteToMethod();
             yield return BuildWriteToAsyncMethod();
@@ -177,8 +179,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
             var filenameParam = new Parameter("filename", null, new CSharpType(typeof(string), true),
                         Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
+            var contentTypeParam = new Parameter("contentType", null, new CSharpType(typeof(string), true),
+                        Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: "Add",
+                Name: _addMethodName,
                 Summary: null,
                 Description: null,
                 Modifiers: MethodSignatureModifiers.Public,
@@ -189,6 +193,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     contentParam,
                     nameParam,
                     filenameParam,
+                    contentTypeParam
                 });
             MethodBodyStatement? valueDelareStatement = null;
             ValueExpression contentExpression;
@@ -225,7 +230,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             {
                 addContentStatements.Add(valueDelareStatement);
             }
-            addContentStatements.Add(new InvokeInstanceMethodStatement(null, _addMethodName, new[] { contentExpression, nameParam, filenameParam }, false));
+            addContentStatements.Add(new InvokeInstanceMethodStatement(null, _addMethodName, new[] { contentExpression, nameParam, filenameParam, contentTypeParam }, false));
             var body = new MethodBodyStatement[]
             {
                 Argument.AssertNotNull(contentParam),
@@ -240,6 +245,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             var contentParam = new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null);
             var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
             var filenameParam = new Parameter("filename", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+            var contentTypeParam = new Parameter("contentType", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: "Add",
                 Summary: null,
@@ -252,6 +258,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     contentParam,
                     nameParam,
                     filenameParam,
+                    contentTypeParam,
                 });
             var multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
             var body = new MethodBodyStatement[]
@@ -260,6 +267,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 {
                     Argument.AssertNotNullOrEmpty(filenameParam),
                     AddFilenameHeader(contentParam, nameParam, filenameParam),
+                },
+                new IfStatement(NotEqual(contentTypeParam, Null))
+                {
+                    Argument.AssertNotNullOrEmpty(contentTypeParam),
+                    AddContentTypeHeader(contentParam, contentTypeParam),
                 },
                 multipartContentExpression.Add(contentParam, nameParam)
             };
@@ -293,6 +305,32 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             {
                 Declare(typeof(ContentDispositionHeaderValue), "header", New.Instance(typeof(ContentDispositionHeaderValue), new[]{ Literal("form-data") }, initialProperties), out var header),
                 Assign(ContentDispositionHeaderExpression, header),
+            };
+            return new Method(signature, body);
+        }
+
+        private Method BuildAddContentTypeHeaderMethod()
+        {
+            var contentParam = new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null);
+            var contentTypeParam = new Parameter("contentType", null, typeof(string), null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: _addContentTypeHeaderMethodName,
+                Summary: null,
+                Description: null,
+                Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
+                ReturnType: null,
+                ReturnDescription: null,
+                Parameters: new[]
+                {
+                    contentParam,
+                    contentTypeParam,
+                });
+            var contentTypeExpression = (ValueExpression)contentTypeParam;
+            ValueExpression ContentTypeHeaderExpression = ((ValueExpression)contentParam).Property("Headers").Property("ContentType");
+            var body = new MethodBodyStatement[]
+            {
+                Declare(typeof(MediaTypeHeaderValue), "header", New.Instance(typeof(MediaTypeHeaderValue), new[]{ contentTypeExpression }), out var header),
+                Assign(ContentTypeHeaderExpression, header),
             };
             return new Method(signature, body);
         }
@@ -415,6 +453,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] {});
         public MethodBodyStatement AddFilenameHeader(ValueExpression httpContent, ValueExpression name, ValueExpression filename)
             => new InvokeInstanceMethodStatement (null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
+        public MethodBodyStatement AddContentTypeHeader(ValueExpression httpContent, ValueExpression contentType)
+            => new InvokeInstanceMethodStatement(null, _addContentTypeHeaderMethodName, new[] { httpContent, contentType}, false);
         public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name)
         {
             return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name }, false);
@@ -422,6 +462,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename)
         {
             return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename }, false);
+        }
+        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename, ValueExpression contentType)
+        {
+            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename, contentType }, false);
         }
         public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
     }

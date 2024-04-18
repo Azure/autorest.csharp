@@ -102,6 +102,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract ExtensibleSnippets ExtensibleSnippets { get; }
 
         public abstract string LicenseString { get; }
-        public abstract MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName);
+        public abstract MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName, ValueExpression? contentType);
     }
 }
