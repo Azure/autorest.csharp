@@ -608,7 +608,7 @@
             "description": "A model for testing unflattening",
             "type": "object",
             "properties": {
-                "unflattenedName": {
+                "name": {
                     "description": "The name",
                     "type": "string"
                 },

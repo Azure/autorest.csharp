@@ -121,33 +121,35 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride);
-            if (Optional.IsDefined(OriginGroup) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride) || propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  originGroup: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(OriginGroup))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  originGroup: ");
                     BicepSerializationHelpers.AppendChildObject(builder, OriginGroup, options, 2, false, "  originGroup: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride);
-            if (Optional.IsDefined(ForwardingProtocol) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ForwardingProtocol), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  forwardingProtocol: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ForwardingProtocol))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  forwardingProtocol: ");
                     builder.AppendLine($"'{ForwardingProtocol.Value.ToString()}'");
                 }
             }

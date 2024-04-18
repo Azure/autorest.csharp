@@ -116,7 +116,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 data.NestedName = "someSku";
                 data.Unflattened = new Unflattened
                 {
-                    UnflattenedName = "unflattened",
+                    Name = "unflattened",
                     Value = "value"
                 };
             }

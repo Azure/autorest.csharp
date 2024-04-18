@@ -205,46 +205,49 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Order), out propertyOverride);
-            if (Optional.IsDefined(Order) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Order), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Order), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  order: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Order))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  order: ");
                     builder.AppendLine($"{Order.Value}");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride);
-            if (Optional.IsDefined(Conditions) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  conditions: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Conditions))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  conditions: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride);
-            if (Optional.IsCollectionDefined(Actions) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                if (Actions.Any() || hasPropertyOverride)
+                builder.Append("  actions: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Actions))
                 {
-                    builder.Append("  actions: ");
-                    if (hasPropertyOverride)
+                    if (Actions.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  actions: ");
                         builder.AppendLine("[");
                         foreach (var item in Actions)
                         {
@@ -255,18 +258,19 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride);
-            if (Optional.IsCollectionDefined(ExtraMappingInfo) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride) || propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                if (ExtraMappingInfo.Any() || hasPropertyOverride)
+                builder.Append("  extraMappingInfo: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(ExtraMappingInfo))
                 {
-                    builder.Append("  extraMappingInfo: ");
-                    if (hasPropertyOverride)
+                    if (ExtraMappingInfo.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  extraMappingInfo: ");
                         builder.AppendLine("{");
                         foreach (var item in ExtraMappingInfo)
                         {
@@ -278,30 +282,32 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride);
-            if (Optional.IsDefined(Pet) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  pet: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Pet))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  pet: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (Optional.IsDefined(Foo) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  foo: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Foo))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  foo: ");
                     if (Foo.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

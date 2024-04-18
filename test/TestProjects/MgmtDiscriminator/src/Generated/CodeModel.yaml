@@ -2584,10 +2584,10 @@ schemas: !Schemas
                     properties:
                       - !Property 
                         schema: *ref_60
-                        serializedName: unflattenedName
+                        serializedName: name
                         language: !Languages 
                           default:
-                            name: unflattenedName
+                            name: name
                             description: The name
                         protocol: !Protocols {}
                       - !Property 

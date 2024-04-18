@@ -51,19 +51,19 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Unflattened"/>. </summary>
-        /// <param name="unflattenedName"> The name. </param>
+        /// <param name="name"> The name. </param>
         /// <param name="value"> The value. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Unflattened(string unflattenedName, string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Unflattened(string name, string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            UnflattenedName = unflattenedName;
+            Name = name;
             Value = value;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name. </summary>
-        [WirePath("unflattenedName")]
-        public string UnflattenedName { get; set; }
+        [WirePath("name")]
+        public string Name { get; set; }
         /// <summary> The value. </summary>
         [WirePath("value")]
         public string Value { get; set; }

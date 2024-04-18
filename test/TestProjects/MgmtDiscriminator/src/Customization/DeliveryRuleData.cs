@@ -26,15 +26,15 @@ namespace MgmtDiscriminator
         /// The unflattened name property.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [WirePath("unflattened.unflattenedName")]
+        [WirePath("unflattened.name")]
         public string UnflattenedName
         {
-            get => Unflattened is null ? default : Unflattened.UnflattenedName;
+            get => Unflattened is null ? default : Unflattened.Name;
             set
             {
                 if (Unflattened is null)
                     Unflattened = new Unflattened();
-                Unflattened.UnflattenedName = value;
+                Unflattened.Name = value;
             }
         }
     }

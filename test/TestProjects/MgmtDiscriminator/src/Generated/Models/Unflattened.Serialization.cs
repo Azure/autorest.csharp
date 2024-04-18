@@ -28,10 +28,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(UnflattenedName))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("unflattenedName"u8);
-                writer.WriteStringValue(UnflattenedName);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(Value))
             {
@@ -76,15 +76,15 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            string unflattenedName = default;
+            string name = default;
             string value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("unflattenedName"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    unflattenedName = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"u8))
@@ -98,7 +98,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new Unflattened(unflattenedName, value, serializedAdditionalRawData);
+            return new Unflattened(name, value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -112,38 +112,40 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UnflattenedName), out propertyOverride);
-            if (Optional.IsDefined(UnflattenedName) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Name), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Name), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                builder.Append("  unflattenedName: ");
-                if (hasPropertyOverride)
+                builder.Append("  name: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
-                    if (UnflattenedName.Contains(Environment.NewLine))
+                    builder.Append("  name: ");
+                    if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{UnflattenedName}'''");
+                        builder.AppendLine($"{Name}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{UnflattenedName}'");
+                        builder.AppendLine($"'{Name}'");
                     }
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (Optional.IsDefined(Value) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Value), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Value), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  value: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Value))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  value: ");
                     if (Value.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

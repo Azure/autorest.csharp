@@ -120,18 +120,19 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride);
-            if (Optional.IsCollectionDefined(RequiredCollection) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride) || propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                if (RequiredCollection.Any() || hasPropertyOverride)
+                builder.Append("  requiredCollection: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(RequiredCollection))
                 {
-                    builder.Append("  requiredCollection: ");
-                    if (hasPropertyOverride)
+                    if (RequiredCollection.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  requiredCollection: ");
                         builder.AppendLine("[");
                         foreach (var item in RequiredCollection)
                         {
@@ -155,16 +156,17 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
-            if (Optional.IsDefined(OptionalString) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride) || propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OptionalString))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  optionalString: ");
                     if (OptionalString.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

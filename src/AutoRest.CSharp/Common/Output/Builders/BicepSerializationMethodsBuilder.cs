@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
@@ -253,6 +254,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             bool isFlattened = false;
             bool wasFlattened = false;
             string? wirePath = null;
+            string? childPropertyName = null;
 
             // is the property that we are trying to serialize a flattened property? If so, we need to use the name of the childmost property for overrides.
             ValueExpression overridePropertyName = Nameof(property.Value);
@@ -265,6 +267,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 overridePropertyName = Literal(previouslyFlattenedProperty);
                 wasFlattened = true;
+                childPropertyName = ((SerializableObjectType)property.Property.ValueType.Implementation).Properties
+                    .Single(
+                        // find the property of the child object that corresponds to the next piece of the wirepath
+                        p => p.GetWirePath() == string.Join(".", wirePath!.Split('.').Skip(1))).Declaration.Name;
             }
 
             yield return Assign(
@@ -272,8 +278,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new BoolExpression(
                     And(
                         new BoolExpression(propertyOverrideVariables.HasObjectOverride),
+                        Or(
                         new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", overridePropertyName,
-                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
+                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))),
+                        new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", overridePropertyName,
+                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride)))))));
 
             var formattedPropertyName = $"{indent}{property.SerializedName}: ";
             var propertyDictionary = new VariableReference(typeof(Dictionary<string, string>), "propertyDictionary");
@@ -282,44 +291,45 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             wirePath = isFlattened ? property.Property.FlattenedProperty!.GetWirePath() : wirePath;
 
-            yield return WrapInIsDefinedOrPropertyOverride(
-                property,
-                propertyOverrideVariables.HasPropertyOverride,
-                WrapInIsNotEmptyOrPropertyOverride(
-                    property,
-                    propertyOverrideVariables.HasPropertyOverride,
+            yield return new IfElseStatement(
+                new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
                     new[]
                     {
                         stringBuilder.Append(formattedPropertyName),
-                        new IfElseStatement(new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
-                                new[]
-                                {
-                                    wasFlattened
-                                        ?
-                                        new IfElseStatement(
-                                            Equal(property.Value, Null),
-                                            WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces),
-                                            new[]
-                                            {
-                                                Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
-                                                propertyDictionary.Invoke(
-                                                    "Add",
-                                                    Literal(overridePropertyName),
-                                                    propertyOverrideVariables.PropertyOverride).ToStatement(),
-                                                propertyOverrideVariables.BicepOptions.Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
-                                                    "Add",
-                                                    property.Value,
-                                                    propertyDictionary).ToStatement(),
-                                                InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                                            })
-                                        : isFlattened ? WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces)
-                                        : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride)
-                                },
-                                new[]
-                                {
-                                    InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                                })
-                    }));
+                        new[]
+                        {
+                            wasFlattened
+                                ?
+                                new IfElseStatement(
+                                    Equal(property.Value, Null),
+                                    WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces),
+                                    new[]
+                                    {
+                                        Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
+                                        propertyDictionary.Invoke(
+                                            "Add",
+                                            Literal(childPropertyName),
+                                            propertyOverrideVariables.PropertyOverride).ToStatement(),
+                                        propertyOverrideVariables.BicepOptions.Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
+                                            "Add",
+                                            property.Value,
+                                            propertyDictionary).ToStatement(),
+                                        InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
+                                    })
+                                : isFlattened ? WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces)
+                                : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride)
+                        }
+
+                    },
+                    WrapInIsDefined(property, new[]
+                    {
+                        WrapInIsNotEmpty(property, new[]
+                        {
+                            stringBuilder.Append(formattedPropertyName),
+                            InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
+                        })
+                    })
+                );
 
             yield return EmptyLine;
         }
@@ -360,7 +370,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                             // strip enclosing quotes
                             path = path.Substring(1, path.Length - 2);
-                            if (path.Contains($".{property.GetWirePath()}"))
+                            if (path.Contains($"{property.GetWirePath()}."))
                             {
                                 return true;
                             }
@@ -605,7 +615,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // framework reference type, e.g. byte[]
             serialization is BicepValueSerialization { Type: { IsValueType: false, IsFrameworkType: true } };
 
-        public static MethodBodyStatement WrapInIsDefinedOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        public static MethodBodyStatement WrapInIsDefined(BicepPropertySerialization serialization, MethodBodyStatement statement)
         {
             if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
             {
@@ -613,16 +623,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             return serialization.Value.Type.IsCollection && !serialization.Value.Type.IsReadOnlyMemory
-                ? new IfStatement(Or(InvokeOptional.IsCollectionDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement }
-                : new IfStatement(Or(OptionalTypeProvider.Instance.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
+                ? new IfStatement(InvokeOptional.IsCollectionDefined(serialization.Value)) { statement }
+                : new IfStatement(OptionalTypeProvider.Instance.IsDefined(serialization.Value)) { statement };
         }
 
-        public static MethodBodyStatement WrapInIsNotEmptyOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        public static MethodBodyStatement WrapInIsNotEmpty(BicepPropertySerialization serialization, MethodBodyStatement statement)
         {
             return serialization.Value.Type.IsCollection && !serialization.Value.Type.IsReadOnlyMemory
-                ? new IfStatement(Or(
-                    new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value)),
-                    new BoolExpression(propertyOverride)))
+                ? new IfStatement(
+                    new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value)))
                 {
                     statement
                 }

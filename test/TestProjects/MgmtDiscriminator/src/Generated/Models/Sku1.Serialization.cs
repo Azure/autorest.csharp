@@ -105,19 +105,20 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
-            if (Optional.IsDefined(Name1) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue("NestedName", out propertyOverride) || propertyOverrides.TryGetValue("NestedName", out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  name1: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    nestedName: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(Name1))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    nestedName: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  name1: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Name1, options, 2, false, "  name1: ");
                 }
             }

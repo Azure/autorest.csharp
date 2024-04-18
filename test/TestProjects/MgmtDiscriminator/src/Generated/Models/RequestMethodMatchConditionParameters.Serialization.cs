@@ -178,55 +178,59 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
             if (hasPropertyOverride)
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride);
-            builder.Append("  operator: ");
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride));
             if (hasPropertyOverride)
             {
+                builder.Append("  operator: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  operator: ");
                 builder.AppendLine($"'{Operator.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride);
-            if (Optional.IsDefined(NegateCondition) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride) || propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  negateCondition: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NegateCondition))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  negateCondition: ");
                     var boolValue = NegateCondition.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride);
-            if (Optional.IsCollectionDefined(Transforms) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride) || propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                if (Transforms.Any() || hasPropertyOverride)
+                builder.Append("  transforms: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Transforms))
                 {
-                    builder.Append("  transforms: ");
-                    if (hasPropertyOverride)
+                    if (Transforms.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  transforms: ");
                         builder.AppendLine("[");
                         foreach (var item in Transforms)
                         {
@@ -237,18 +241,19 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride);
-            if (Optional.IsCollectionDefined(MatchValues) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride) || propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride));
+            if (hasPropertyOverride)
             {
-                if (MatchValues.Any() || hasPropertyOverride)
+                builder.Append("  matchValues: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(MatchValues))
                 {
-                    builder.Append("  matchValues: ");
-                    if (hasPropertyOverride)
+                    if (MatchValues.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  matchValues: ");
                         builder.AppendLine("[");
                         foreach (var item in MatchValues)
                         {

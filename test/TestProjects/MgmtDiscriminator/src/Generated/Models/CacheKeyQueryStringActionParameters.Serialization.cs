@@ -129,38 +129,41 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride) || propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride));
             if (hasPropertyOverride)
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride);
-            builder.Append("  queryStringBehavior: ");
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride) || propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride));
             if (hasPropertyOverride)
             {
+                builder.Append("  queryStringBehavior: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  queryStringBehavior: ");
                 builder.AppendLine($"'{QueryStringBehavior.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride);
-            if (Optional.IsDefined(QueryParameters) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && (propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride) || propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride));
+            if (hasPropertyOverride)
             {
                 builder.Append("  queryParameters: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(QueryParameters))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  queryParameters: ");
                     if (QueryParameters.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

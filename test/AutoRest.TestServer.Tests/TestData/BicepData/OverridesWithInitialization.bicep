@@ -11,7 +11,7 @@
     }
   }
   unflattened: {
-    unflattenedName: 'unflattenedOverride'
+    name: 'unflattenedOverride'
     value: 'value'
   }
   properties: {
