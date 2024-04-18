@@ -106,7 +106,7 @@ internal static class SchemaExtensions
         return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
     }
 
-    internal static string GetOriginalName(this InputType inputType) => inputType.OriginalName ?? inputType.Name;
+    internal static string GetOriginalName(this InputType inputType) => inputType.SpecName ?? inputType.Name;
 
     internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
 

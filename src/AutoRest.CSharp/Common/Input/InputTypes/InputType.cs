@@ -5,8 +5,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = null)
+internal abstract record InputType
 {
+    protected InputType(string name, bool isNullable)
+    {
+        Name = name;
+        SpecName = name;
+        IsNullable = isNullable;
+    }
+
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
 
     internal InputType GetCollectionEquivalent(InputType inputType)
@@ -30,7 +37,7 @@ internal abstract record InputType(string Name, bool IsNullable, string? Origina
         }
     }
 
-    public string Name { get; internal set; } = Name;
-
-    public string? OriginalName { get; internal set; } = OriginalName;
+    public bool IsNullable { get; init; }
+    public string Name { get; internal set; }
+    public string? SpecName { get; init; }
 }

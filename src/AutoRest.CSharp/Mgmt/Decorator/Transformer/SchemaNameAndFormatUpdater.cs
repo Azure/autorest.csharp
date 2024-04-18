@@ -405,7 +405,6 @@ internal static class SchemaNameAndFormatUpdater
             tempName = applyStep.NewName.Name;
         });
         inputType.Name = result.Name;
-        inputType.OriginalName ??= originalName;
     }
 
     private static void TransformInputModel(InputModelType inputModel)

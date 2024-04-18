@@ -428,6 +428,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<string> GetSupportedSerializationFormats()
         {
             var formats = InputModel.SerializationFormats.ToList();
+            if (Configuration.SkipSerializationFormatXml)
+            {
+                formats.Remove("Xml");
+            }
             if (ModelTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)

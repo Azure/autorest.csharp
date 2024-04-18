@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Input;
-
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputParameter(
@@ -49,6 +47,5 @@ internal record InputParameter(
     { }
 
     public string Name { get; internal set; } = Name;
-    public string NameInRequest { get; internal set; } = NameInRequest;
     public bool IsRequired { get; internal set; } = IsRequired;
 }

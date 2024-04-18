@@ -54,7 +54,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation)
         {
             string oriName = bodyParam.Name;
-            bodyParam.NameInRequest ??= bodyParam.Name;
             bodyParam.Name = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.Name, resourceDataDictionary);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
@@ -65,7 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void UpdateRequestParameter(InputParameter parameter, string parameterName, string schemaName, InputOperation operation, List<InputType> updatedTypes)
         {
             string oriParameterName = parameter.Name;
-            parameter.NameInRequest ??= parameter.Name;
             parameter.Name = parameterName;
             string fullSerializedName = operation.GetFullSerializedName(parameter);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
@@ -77,7 +75,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 updatedTypes.Add(parameter.Type);
                 parameter.Type.Name = schemaName;
-                parameter.Type.OriginalName = oriSchemaName;
                 fullSerializedName = parameter.Type.GetFullSerializedName();
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
