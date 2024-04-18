@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
-            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();
             return _schemaToModels;
         }
 
