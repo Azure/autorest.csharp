@@ -31,9 +31,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
-            foreach (Type parentType in ReferenceClassFinder.GetReferenceClassCollection().Concat(ReferenceClassFinder.GetTypeReferenceTypes()))
+
+            foreach (var parentType in ReferenceClassFinder.ReferenceTypes.Concat(ReferenceClassFinder.TypeReferenceTypes))
             {
-                List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
+                var parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(parentType);
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection().Concat(ReferenceClassFinder.GetTypeReferenceTypes()))
+            foreach (var parentType in ReferenceClassFinder.ReferenceTypes) // we do not use TypeReferenceType as superset match
             {
                 if (IsSuperset(parentType, originalType, properties))
                 {
@@ -65,8 +66,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)
         {
             var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
-            var attributeObj = parentType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceAttributeName).First();
-            var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty(OptionalPropertiesName)?.GetValue(attributeObj) as string[])!);
+            var attributeObj = parentType.GetCustomAttributes().Where(a => a.GetType().Name == ReferenceAttributeName).FirstOrDefault();
+            var optionalPropertiesForMatch = (attributeObj?.GetType().GetProperty(OptionalPropertiesName)?.GetValue(attributeObj) as string[] ?? Array.Empty<string>()).ToHashSet();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.Name) || propertyNames.Contains(p.Name)).ToList();
             return parentProperties;
         }

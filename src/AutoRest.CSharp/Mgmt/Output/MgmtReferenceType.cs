@@ -3,11 +3,9 @@
 
 using System;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
@@ -27,23 +25,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            ObjectTypeProperty propertyTypeToUse = objectTypeProperty;
-
             if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
             {
-                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
+                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType);
                 if (newProperty != null)
                 {
                     string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                        fullSerializedName,
-                        "ReplacePropertyType", propertyTypeToUse.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
-                    propertyTypeToUse = newProperty;
+                        "ReplacePropertyType", objectTypeProperty.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
+                    return newProperty;
                 }
             }
 
-            return propertyTypeToUse;
+            return base.CreatePropertyType(objectTypeProperty);
         }
 
         protected override CSharpType? CreateInheritedType()

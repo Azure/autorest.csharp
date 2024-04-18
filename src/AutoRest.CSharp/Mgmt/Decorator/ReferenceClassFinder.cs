@@ -142,9 +142,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool GetRequired(ConstructorInfo publicCtor, PropertyInfo property)
             => publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
 
-        private static IList<Type>? _externalTypes;
-        private static IList<Type>? _referenceTypes;
-
         internal class Node
         {
             public Type Type { get; }
@@ -157,29 +154,35 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        private static IReadOnlyList<Type>? _referenceTypes;
+        internal static IReadOnlyList<Type> ReferenceTypes => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
+
+        private static IReadOnlyList<Type>? _propertyReferenceTypes;
+        internal static IReadOnlyList<Type> PropertyReferenceTypes => _propertyReferenceTypes ??= GetExternalTypes(!Configuration.MgmtConfiguration.IsArmCore).Where(t => IsPropertyReferenceType(t) && !IsObsolete(t)).ToArray();
+
+        private static IReadOnlyList<Type>? _typeReferenceTypes;
+        internal static IReadOnlyList<Type> TypeReferenceTypes
+            // we only include armcore types when we are not generating armCore
+            => _typeReferenceTypes ??= GetExternalTypes(!Configuration.MgmtConfiguration.IsArmCore).Where(IsTypeReferenceType).ToList();
+
         /// <summary>
         /// All external types, right now they are all defined in Azure.Core, Azure.Core.Expressions.DataFactory, and Azure.ResourceManager.
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core.Expressions.DataFactory/src
         /// </summary>
-        internal static IList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
-        internal static IList<Type> GetReferenceClassCollection() => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
-
-        internal static IEnumerable<Type> GetPropertyReferenceClassCollection()
-            => ExternalTypes.Where(t => IsPropertyReferenceType(t) && !IsObsolete(t));
-
-        internal static IReadOnlyList<System.Type> GetTypeReferenceTypes()
-            => ExternalTypes.Where(t => IsTypeReferenceType(t)).ToList();
-
-        private static IList<Type> GetExternalTypes()
+        private static IReadOnlyList<Type> GetExternalTypes(bool includeArmCore)
         {
-            var assembly = Assembly.GetAssembly(typeof(ArmClient));
             List<Type> types = new List<Type>();
-            if (assembly != null)
-                types.AddRange(assembly.GetTypes());
+            // we only include the armcore types to replace when we are NOT generating armCore.
+            if (includeArmCore)
+            {
+                var armCoreAssembly = Assembly.GetAssembly(typeof(ArmClient));
+                if (armCoreAssembly != null)
+                    types.AddRange(armCoreAssembly.GetTypes());
+            }
 
-            assembly = Assembly.GetAssembly(typeof(Operation));
+            var assembly = Assembly.GetAssembly(typeof(Operation));
             if (assembly != null)
                 types.AddRange(assembly.GetTypes());
 
@@ -194,7 +197,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         private static IList<Type> GetReferenceClassCollectionInternal()
-            => ExternalTypes.Where(t => IsReferenceType(t) && !IsObsolete(t)).ToList();
+            // For ReferenceType we always include armcore types because types in armcore we also need to replace
+            => GetExternalTypes(true).Where(t => IsReferenceType(t) && !IsObsolete(t)).ToArray();
 
         internal static bool HasAttribute(Type type, string attributeName)
             => type.GetCustomAttributes(false).Where(a => a.GetType().Name == attributeName).Any();
