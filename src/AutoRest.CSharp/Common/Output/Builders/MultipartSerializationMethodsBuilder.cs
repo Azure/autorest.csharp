@@ -255,67 +255,66 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(VariableReference mulitpartContent, MultipartValueSerialization valueSerialization, ValueExpression valueExpression, StringExpression name)
         {
+            ValueExpression? contentExpression = null;
+            ValueExpression? fileNameExpression = null;
+            ValueExpression? contentTypeExpression = null;
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(Stream))
             {
-                //return multipartContentExpression.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Add(Literal(".wav")));
-                return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                    BuildValueSerizationExpression(valueSerialization.Type, valueExpression),
-                    name, name.Add(Literal(".wav")), null);
+                contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
+                fileNameExpression = name.Add(Literal(".wav"));
             }
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
             {
-                if (valueSerialization.ContentType != "application/json")
+                contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
+                //fileNameExpression = name.Add(Literal(".wav"));
+                if (valueSerialization.FileName != null)
                 {
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, name.Add(Literal(".wav")));
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                                               BuildValueSerizationExpression(valueSerialization.Type, valueExpression),
-                                                                      name, name.Add(Literal(".wav")), Literal(valueSerialization.ContentType));
+                    fileNameExpression = Literal(valueSerialization.FileName);
                 } else
                 {
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                                                                      BuildValueSerizationExpression(valueSerialization.Type, valueExpression),
-                                                                      name, null, null);
+                    fileNameExpression = name.Add(Literal(".wav"));
+                }
+                if (valueSerialization.ContentType != "application/json")
+                {
+                    contentTypeExpression = Literal(valueSerialization.ContentType);
                 }
             }
             if (valueSerialization.Type.IsFrameworkType)
             {
-                //return multipartContentExpression.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
-                return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                    BuildValueSerizationExpression(valueSerialization.Type, valueExpression),
-                    name, null, null);
+                contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
             }
+            if (contentExpression != null)
+            {
+                return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
+            }
+
             switch (valueSerialization.Type.Implementation)
             {
                 case SerializableObjectType serializableObjectType:
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(serializableObjectType.Type, valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                        BuildValueSerizationExpression(serializableObjectType.Type, valueExpression),name, null, null);
+                    contentExpression = BuildValueSerizationExpression(serializableObjectType.Type, valueExpression);
+                    break;
                 case ObjectType:
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                        BuildValueSerizationExpression(valueSerialization.Type, valueExpression), name, null, null);
+                    contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
+                    break;
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(typeof(int), valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                        BuildValueSerizationExpression(typeof(int), valueExpression), name, null, null);
+                    contentExpression = BuildValueSerizationExpression(typeof(int), valueExpression);
+                    break;
                 case EnumType { IsNumericValueType: true } enumType:
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(typeof(float), valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                        BuildValueSerizationExpression(typeof(float), valueExpression), name, null, null);
+                    contentExpression = BuildValueSerizationExpression(typeof(float), valueExpression);
+                    break;
                 case EnumType enumType:
-                    //return multipartContentExpression.Add(BuildValueSerizationExpression(typeof(string), valueExpression), name);
-                    return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent,
-                        BuildValueSerizationExpression(typeof(string), valueExpression), name, null, null);
+                    contentExpression = BuildValueSerizationExpression(typeof(string), valueExpression);
+                    break;
                 default:
                     throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
             }
+            return Configuration.ApiTypes.GetMultipartFormDataRequestContentAddStatment(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
         }
 
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
         {
             _ when valueType.IsFrameworkType => valueExpression,
-            _ when valueType.Implementation is SerializableObjectType serializableObjectType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType }),
+            _ when valueType.Implementation is SerializableObjectType serializableObjectType => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire }, new[] { valueType }),
             _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType })
         };
     }

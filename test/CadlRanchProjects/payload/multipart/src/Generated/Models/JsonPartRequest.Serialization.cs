@@ -98,7 +98,7 @@ namespace Payload.MultiPart.Models
         private MultipartFormDataRequestContent SerializeToMultipartContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(BinaryData.FromObjectAsJson(Address), "address");
+            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             return content;
         }

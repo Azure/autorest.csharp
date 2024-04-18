@@ -111,7 +111,7 @@ namespace Payload.MultiPart.Models
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
-                content.Add(BinaryData.FromObjectAsJson(item), "previousAddresses");
+                content.Add(ModelReaderWriter.Write(item, new ModelReaderWriterOptions("W")), "previousAddresses");
             }
             return content;
         }

@@ -161,11 +161,11 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            content.Add(BinaryData.FromObjectAsJson(Address), "address");
+            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
-                content.Add(BinaryData.FromObjectAsJson(item), "previousAddresses");
+                content.Add(ModelReaderWriter.Write(item, new ModelReaderWriterOptions("W")), "previousAddresses");
             }
             foreach (BinaryData item in Pictures)
             {

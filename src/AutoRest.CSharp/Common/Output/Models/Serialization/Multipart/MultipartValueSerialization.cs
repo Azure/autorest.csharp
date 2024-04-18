@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
             Format = format;
         }
         public string ContentType { get; set; } = "application/json";
+        public string? FileName { get; set; }
         public SerializationFormat Format { get; }
     }
 }

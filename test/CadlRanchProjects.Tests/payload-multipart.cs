@@ -19,5 +19,18 @@ namespace CadlRanchProjects.Tests
             var response1 = await new MultiPartClient(host, null).GetFormDataClient().BasicAsync(body);
             Assert.AreEqual(204, response1.Status);
         });
+        [Test]
+        public Task Payload_Multipart_FormData_Complex() => Test(async (host) =>
+        {
+            Address addressX = new Address("X");
+            Address[] addresses = new Address[] { new Address("Y"), new Address("Z") };
+            var pictures = new BinaryData[]
+            {
+                BinaryData.FromBytes(File.ReadAllBytes(SamplePngPath))
+            };
+            ComplexPartsRequest body = new ComplexPartsRequest("123", addressX, BinaryData.FromBytes(File.ReadAllBytes(SamplePngPath)), addresses, pictures);
+            var response1 = await new MultiPartClient(host, null).GetFormDataClient().ComplexAsync(body);
+            Assert.AreEqual(204, response1.Status);
+        });
     }
 }

@@ -455,17 +455,19 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             => new InvokeInstanceMethodStatement (null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
         public MethodBodyStatement AddContentTypeHeader(ValueExpression httpContent, ValueExpression contentType)
             => new InvokeInstanceMethodStatement(null, _addContentTypeHeaderMethodName, new[] { httpContent, contentType}, false);
-        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name)
+        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? filename, ValueExpression? contentType)
         {
-            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name }, false);
-        }
-        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename)
-        {
-            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename }, false);
-        }
-        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression filename, ValueExpression contentType)
-        {
-            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, new[] { content, name, filename, contentType }, false);
+            var arguments = new List<ValueExpression>() { content, name };
+            if (filename != null)
+            {
+                arguments.Add(filename);
+            }
+            if (contentType != null)
+            {
+                if (filename == null) arguments.Add(Null);
+                arguments.Add(contentType);
+            }
+            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, arguments.ToArray(), false);
         }
         public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
     }
