@@ -790,7 +790,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -809,7 +809,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>

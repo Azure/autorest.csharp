@@ -36,6 +36,7 @@ namespace _Type._Array
         }
 
         /// <summary> The GetDurationValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<IReadOnlyList<TimeSpan>>> GetDurationValueAsync()
         {
             ClientResult result = await GetDurationValueAsync(null).ConfigureAwait(false);
@@ -51,6 +52,7 @@ namespace _Type._Array
         }
 
         /// <summary> The GetDurationValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<IReadOnlyList<TimeSpan>> GetDurationValue()
         {
             ClientResult result = GetDurationValue(null);
@@ -66,7 +68,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +92,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,6 +118,7 @@ namespace _Type._Array
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<TimeSpan> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -128,6 +131,7 @@ namespace _Type._Array
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IEnumerable<TimeSpan> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -138,7 +142,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -166,7 +170,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

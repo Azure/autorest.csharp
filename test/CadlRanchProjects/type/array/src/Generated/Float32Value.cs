@@ -47,6 +47,7 @@ namespace _Type._Array
 
         /// <summary> The GetFloat32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<float>>> GetFloat32ValueAsync(CancellationToken cancellationToken = default)
         {
@@ -65,6 +66,7 @@ namespace _Type._Array
 
         /// <summary> The GetFloat32Value method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<float>> GetFloat32Value(CancellationToken cancellationToken = default)
         {
@@ -82,7 +84,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +119,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -155,6 +157,7 @@ namespace _Type._Array
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='PutAsync(IEnumerable{float},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IEnumerable<float> body, CancellationToken cancellationToken = default)
         {
@@ -170,6 +173,7 @@ namespace _Type._Array
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='Put(IEnumerable{float},CancellationToken)']/*" />
         public virtual Response Put(IEnumerable<float> body, CancellationToken cancellationToken = default)
         {
@@ -182,7 +186,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -221,7 +225,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

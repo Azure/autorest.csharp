@@ -36,6 +36,7 @@ namespace Type.Dictionary
         }
 
         /// <summary> The GetNullableFloatValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<IReadOnlyDictionary<string, float?>>> GetNullableFloatValueAsync()
         {
             ClientResult result = await GetNullableFloatValueAsync(null).ConfigureAwait(false);
@@ -58,6 +59,7 @@ namespace Type.Dictionary
         }
 
         /// <summary> The GetNullableFloatValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<IReadOnlyDictionary<string, float?>> GetNullableFloatValue()
         {
             ClientResult result = GetNullableFloatValue(null);
@@ -80,7 +82,7 @@ namespace Type.Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -104,7 +106,7 @@ namespace Type.Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -130,6 +132,7 @@ namespace Type.Dictionary
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IDictionary<string, float?> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -142,6 +145,7 @@ namespace Type.Dictionary
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IDictionary<string, float?> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,7 +156,7 @@ namespace Type.Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +184,7 @@ namespace Type.Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

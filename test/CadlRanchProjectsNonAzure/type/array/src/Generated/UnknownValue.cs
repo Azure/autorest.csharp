@@ -36,6 +36,7 @@ namespace _Type._Array
         }
 
         /// <summary> The GetUnknownValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<IReadOnlyList<BinaryData>>> GetUnknownValueAsync()
         {
             ClientResult result = await GetUnknownValueAsync(null).ConfigureAwait(false);
@@ -58,6 +59,7 @@ namespace _Type._Array
         }
 
         /// <summary> The GetUnknownValue method. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<IReadOnlyList<BinaryData>> GetUnknownValue()
         {
             ClientResult result = GetUnknownValue(null);
@@ -80,7 +82,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -104,7 +106,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -130,6 +132,7 @@ namespace _Type._Array
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<BinaryData> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -142,6 +145,7 @@ namespace _Type._Array
         /// <summary> The Put method. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IEnumerable<BinaryData> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -152,7 +156,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +184,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

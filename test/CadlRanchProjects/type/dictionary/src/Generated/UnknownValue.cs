@@ -47,6 +47,7 @@ namespace _Type._Dictionary
 
         /// <summary> The GetUnknownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, BinaryData>>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
         {
@@ -72,6 +73,7 @@ namespace _Type._Dictionary
 
         /// <summary> The GetUnknownValue method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, BinaryData>> GetUnknownValue(CancellationToken cancellationToken = default)
         {
@@ -96,7 +98,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,7 +133,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -169,6 +171,7 @@ namespace _Type._Dictionary
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,BinaryData},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, BinaryData> body, CancellationToken cancellationToken = default)
         {
@@ -184,6 +187,7 @@ namespace _Type._Dictionary
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(IDictionary{string,BinaryData},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, BinaryData> body, CancellationToken cancellationToken = default)
         {
@@ -196,7 +200,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -235,7 +239,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
