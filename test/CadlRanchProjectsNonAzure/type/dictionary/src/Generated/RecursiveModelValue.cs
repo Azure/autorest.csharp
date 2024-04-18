@@ -8,9 +8,9 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Type.Dictionary.Models;
+using _Type._Dictionary.Models;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
     /// <summary> Dictionary of model values. </summary>

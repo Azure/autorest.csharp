@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal static class Argument
     {
@@ -94,7 +94,7 @@ namespace Type.Dictionary
             }
         }
 
-        public static void AssertEnumDefined(System.Type enumType, object value, string name)
+        public static void AssertEnumDefined(Type enumType, object value, string name)
         {
             if (!Enum.IsDefined(enumType, value))
             {

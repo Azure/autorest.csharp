@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal static class ClientPipelineExtensions
     {

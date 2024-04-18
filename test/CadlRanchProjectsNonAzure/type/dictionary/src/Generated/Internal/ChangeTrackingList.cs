@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

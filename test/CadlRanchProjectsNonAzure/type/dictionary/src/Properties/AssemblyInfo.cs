@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Type.Dictionary.Tests")]
+[assembly: InternalsVisibleTo("_Type._Dictionary.Tests")]

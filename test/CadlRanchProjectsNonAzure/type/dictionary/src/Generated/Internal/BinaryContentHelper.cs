@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal static class BinaryContentHelper
     {

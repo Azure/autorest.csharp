@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

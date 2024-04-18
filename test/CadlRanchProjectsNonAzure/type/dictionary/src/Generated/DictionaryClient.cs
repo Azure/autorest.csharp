@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     // Data plane generated client.
     /// <summary> The Dictionary service client. </summary>

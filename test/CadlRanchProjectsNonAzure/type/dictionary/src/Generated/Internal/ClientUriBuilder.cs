@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal class ClientUriBuilder
     {

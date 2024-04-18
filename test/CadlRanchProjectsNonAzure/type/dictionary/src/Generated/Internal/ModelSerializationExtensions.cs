@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     internal static class ModelSerializationExtensions
     {

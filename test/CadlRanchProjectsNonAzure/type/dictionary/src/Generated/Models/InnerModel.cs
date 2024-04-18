@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Dictionary.Models
+namespace _Type._Dictionary.Models
 {
     /// <summary> Dictionary inner model. </summary>
     public partial class InnerModel

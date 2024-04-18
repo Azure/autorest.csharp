@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     /// <summary> Client options for DictionaryClient. </summary>
     public partial class DictionaryClientOptions : ClientPipelineOptions

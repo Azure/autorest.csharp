@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Type.Dictionary
+namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
     /// <summary> Dictionary of duration values. </summary>
