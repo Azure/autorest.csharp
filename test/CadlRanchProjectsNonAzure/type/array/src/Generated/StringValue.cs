@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace _Type._Array
+namespace Scm._Type._Array
 {
     // Data plane generated sub-client.
     /// <summary> Array of string values. </summary>

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\_Type._Array.csproj" />
+    <ProjectReference Include="..\src\Scm._Type._Array.csproj" />
   </ItemGroup>
 
   <ItemGroup>

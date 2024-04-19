@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _Type._Array
+namespace Scm._Type._Array
 {
     internal static class Argument
     {

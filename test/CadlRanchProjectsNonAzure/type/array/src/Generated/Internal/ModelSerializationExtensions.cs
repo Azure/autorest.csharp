@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace _Type._Array
+namespace Scm._Type._Array
 {
     internal static class ModelSerializationExtensions
     {

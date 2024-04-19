@@ -9,8 +9,8 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using _Type._Array;
-using _Type._Array.Models;
+using Scm._Type._Array;
+using Scm._Type._Array.Models;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {

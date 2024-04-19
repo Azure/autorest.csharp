@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace _Type._Array
+namespace Scm._Type._Array
 {
     // Data plane generated client.
     /// <summary> The Array service client. </summary>

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
-using _Type._Dictionary;
-using _Type._Dictionary.Models;
+using Scm._Type._Dictionary;
+using Scm._Type._Dictionary.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
