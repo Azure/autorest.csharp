@@ -110,25 +110,37 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  name: ");
-            builder.AppendLine(propertyOverride);
-else builder.Append("  name: ");
-            builder.AppendLine($"'{Name.ToString()}'");
+            if (hasPropertyOverride)
+            {
+                builder.Append("  name: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                builder.Append("  name: ");
+                builder.AppendLine($"'{Name.ToString()}'");
+            }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  foo: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Foo))
+            if (hasPropertyOverride)
             {
                 builder.Append("  foo: ");
-                if (Foo.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Foo))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{Foo}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Foo}'");
+                    builder.Append("  foo: ");
+                    if (Foo.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Foo}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Foo}'");
+                    }
                 }
             }
 

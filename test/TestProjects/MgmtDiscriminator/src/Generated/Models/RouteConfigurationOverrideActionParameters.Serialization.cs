@@ -114,18 +114,30 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  typeName: ");
-            builder.AppendLine(propertyOverride);
-else builder.Append("  typeName: ");
-            builder.AppendLine($"'{TypeName.ToString()}'");
+            if (hasPropertyOverride)
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine($"'{TypeName.ToString()}'");
+            }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroupOverride), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  originGroupOverride: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(OriginGroupOverride))
+            if (hasPropertyOverride)
             {
                 builder.Append("  originGroupOverride: ");
-                BicepSerializationHelpers.AppendChildObject(builder, OriginGroupOverride, options, 2, false, "  originGroupOverride: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OriginGroupOverride))
+                {
+                    builder.Append("  originGroupOverride: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, OriginGroupOverride, options, 2, false, "  originGroupOverride: ");
+                }
             }
 
             builder.AppendLine("}");

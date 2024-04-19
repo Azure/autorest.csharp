@@ -113,36 +113,48 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  name: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Name))
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (Name.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{Name}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Name}'");
+                    builder.Append("  name: ");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ShellType), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  type: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(ShellType))
+            if (hasPropertyOverride)
             {
                 builder.Append("  type: ");
-                if (ShellType.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ShellType))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{ShellType}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{ShellType}'");
+                    builder.Append("  type: ");
+                    if (ShellType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ShellType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{ShellType}'");
+                    }
                 }
             }
 

@@ -128,36 +128,48 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  value: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsCollectionDefined(Value))
+            if (hasPropertyOverride)
             {
-                if (Value.Any())
+                builder.Append("  value: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Value))
                 {
-                    builder.Append("  value: ");
-                    builder.AppendLine("[");
-                    foreach (var item in Value)
+                    if (Value.Any())
                     {
-                        BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  value: ");
+                        builder.Append("  value: ");
+                        builder.AppendLine("[");
+                        foreach (var item in Value)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  value: ");
+                        }
+                        builder.AppendLine("  ]");
                     }
-                    builder.AppendLine("  ]");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NextLink), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  nextLink: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(NextLink))
+            if (hasPropertyOverride)
             {
                 builder.Append("  nextLink: ");
-                if (NextLink.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NextLink))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{NextLink}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{NextLink}'");
+                    builder.Append("  nextLink: ");
+                    if (NextLink.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{NextLink}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{NextLink}'");
+                    }
                 }
             }
 

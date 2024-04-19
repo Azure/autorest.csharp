@@ -237,94 +237,136 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  name: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Name))
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (Name.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{Name}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Name}'");
+                    builder.Append("  name: ");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  kind: ");
-            builder.AppendLine(propertyOverride);
-else builder.Append("  kind: ");
-            builder.AppendLine($"'{Kind.ToString()}'");
+            if (hasPropertyOverride)
+            {
+                builder.Append("  kind: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                builder.Append("  kind: ");
+                builder.AppendLine($"'{Kind.ToString()}'");
+            }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  id: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Id))
+            if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                builder.AppendLine($"'{Id.ToString()}'");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Id))
+                {
+                    builder.Append("  id: ");
+                    builder.AppendLine($"'{Id.ToString()}'");
+                }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  systemData: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(SystemData))
+            if (hasPropertyOverride)
             {
                 builder.Append("  systemData: ");
-                builder.AppendLine($"'{SystemData.ToString()}'");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SystemData))
+                {
+                    builder.Append("  systemData: ");
+                    builder.AppendLine($"'{SystemData.ToString()}'");
+                }
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Template), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("    template: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Template))
+            if (hasPropertyOverride)
             {
                 builder.Append("    template: ");
-                builder.AppendLine($"'{Template.ToString()}'");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Template))
+                {
+                    builder.Append("    template: ");
+                    builder.AppendLine($"'{Template.ToString()}'");
+                }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ResourceGroup), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("    resourceGroup: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(ResourceGroup))
+            if (hasPropertyOverride)
             {
                 builder.Append("    resourceGroup: ");
-                if (ResourceGroup.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ResourceGroup))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{ResourceGroup}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{ResourceGroup}'");
+                    builder.Append("    resourceGroup: ");
+                    if (ResourceGroup.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ResourceGroup}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{ResourceGroup}'");
+                    }
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Parameters), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("    parameters: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsCollectionDefined(Parameters))
+            if (hasPropertyOverride)
             {
-                if (Parameters.Any())
+                builder.Append("    parameters: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Parameters))
                 {
-                    builder.Append("    parameters: ");
-                    builder.AppendLine("{");
-                    foreach (var item in Parameters)
+                    if (Parameters.Any())
                     {
-                        builder.Append($"        '{item.Key}': ");
-                        if (item.Value == null)
+                        builder.Append("    parameters: ");
+                        builder.AppendLine("{");
+                        foreach (var item in Parameters)
                         {
-                            builder.Append("null");
-                            continue;
+                            builder.Append($"        '{item.Key}': ");
+                            if (item.Value == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            builder.AppendLine($"'{item.Value.ToString()}'");
                         }
-                        builder.AppendLine($"'{item.Value.ToString()}'");
+                        builder.AppendLine("    }");
                     }
-                    builder.AppendLine("    }");
                 }
             }
 

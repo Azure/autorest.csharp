@@ -102,19 +102,25 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  optionalString: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(OptionalString))
+            if (hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");
-                if (OptionalString.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OptionalString))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{OptionalString}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{OptionalString}'");
+                    builder.Append("  optionalString: ");
+                    if (OptionalString.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{OptionalString}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{OptionalString}'");
+                    }
                 }
             }
 

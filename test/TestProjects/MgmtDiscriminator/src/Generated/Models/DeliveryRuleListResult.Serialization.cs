@@ -117,19 +117,25 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  value: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsCollectionDefined(Value))
+            if (hasPropertyOverride)
             {
-                if (Value.Any())
+                builder.Append("  value: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Value))
                 {
-                    builder.Append("  value: ");
-                    builder.AppendLine("[");
-                    foreach (var item in Value)
+                    if (Value.Any())
                     {
-                        BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  value: ");
+                        builder.Append("  value: ");
+                        builder.AppendLine("[");
+                        foreach (var item in Value)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  value: ");
+                        }
+                        builder.AppendLine("  ]");
                     }
-                    builder.AppendLine("  ]");
                 }
             }
 

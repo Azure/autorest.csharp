@@ -140,34 +140,52 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  typeName: ");
-            builder.AppendLine(propertyOverride);
-else builder.Append("  typeName: ");
-            builder.AppendLine($"'{TypeName.ToString()}'");
+            if (hasPropertyOverride)
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine($"'{TypeName.ToString()}'");
+            }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  algorithm: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Algorithm))
+            if (hasPropertyOverride)
             {
                 builder.Append("  algorithm: ");
-                builder.AppendLine($"'{Algorithm.Value.ToString()}'");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Algorithm))
+                {
+                    builder.Append("  algorithm: ");
+                    builder.AppendLine($"'{Algorithm.Value.ToString()}'");
+                }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParameterNameOverride), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  parameterNameOverride: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsCollectionDefined(ParameterNameOverride))
+            if (hasPropertyOverride)
             {
-                if (ParameterNameOverride.Any())
+                builder.Append("  parameterNameOverride: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(ParameterNameOverride))
                 {
-                    builder.Append("  parameterNameOverride: ");
-                    builder.AppendLine("[");
-                    foreach (var item in ParameterNameOverride)
+                    if (ParameterNameOverride.Any())
                     {
-                        BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  parameterNameOverride: ");
+                        builder.Append("  parameterNameOverride: ");
+                        builder.AppendLine("[");
+                        foreach (var item in ParameterNameOverride)
+                        {
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  parameterNameOverride: ");
+                        }
+                        builder.AppendLine("  ]");
                     }
-                    builder.AppendLine("  ]");
                 }
             }
 

@@ -130,53 +130,77 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  typeName: ");
-            builder.AppendLine(propertyOverride);
-else builder.Append("  typeName: ");
-            builder.AppendLine($"'{TypeName.ToString()}'");
+            if (hasPropertyOverride)
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                builder.Append("  typeName: ");
+                builder.AppendLine($"'{TypeName.ToString()}'");
+            }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  sourcePattern: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(SourcePattern))
+            if (hasPropertyOverride)
             {
                 builder.Append("  sourcePattern: ");
-                if (SourcePattern.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SourcePattern))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{SourcePattern}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{SourcePattern}'");
+                    builder.Append("  sourcePattern: ");
+                    if (SourcePattern.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{SourcePattern}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{SourcePattern}'");
+                    }
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  destination: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(Destination))
+            if (hasPropertyOverride)
             {
                 builder.Append("  destination: ");
-                if (Destination.Contains(Environment.NewLine))
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Destination))
                 {
-                    builder.AppendLine("'''");
-                    builder.AppendLine($"{Destination}'''");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Destination}'");
+                    builder.Append("  destination: ");
+                    if (Destination.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Destination}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Destination}'");
+                    }
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride);
-            if (hasPropertyOverride) builder.Append("  preserveUnmatchedPath: ");
-            builder.AppendLine(propertyOverride);
-else if (Optional.IsDefined(PreserveUnmatchedPath))
+            if (hasPropertyOverride)
             {
                 builder.Append("  preserveUnmatchedPath: ");
-                var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
-                builder.AppendLine($"{boolValue}");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PreserveUnmatchedPath))
+                {
+                    builder.Append("  preserveUnmatchedPath: ");
+                    var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
