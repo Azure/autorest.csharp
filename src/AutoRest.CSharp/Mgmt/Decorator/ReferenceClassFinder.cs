@@ -154,24 +154,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static IReadOnlyList<Type>? _referenceTypes;
-        internal static IReadOnlyList<Type> ReferenceTypes => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
-
-        private static IReadOnlyList<Type>? _propertyReferenceTypes;
-        internal static IReadOnlyList<Type> PropertyReferenceTypes
-            => _propertyReferenceTypes ??= GetExternalTypes().Where(t => IsPropertyReferenceType(t) && !IsObsolete(t)).ToArray();
-
-        private static IReadOnlyList<Type>? _typeReferenceTypes;
-        internal static IReadOnlyList<Type> TypeReferenceTypes
-            // we only include armcore types when we are not generating armCore
-            => _typeReferenceTypes ??= GetExternalTypes().Where(IsTypeReferenceType).ToList();
-
+        private static IReadOnlyList<Type>? _externalTypes;
         /// <summary>
         /// All external types, right now they are all defined in Azure.Core, Azure.Core.Expressions.DataFactory, and Azure.ResourceManager.
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core.Expressions.DataFactory/src
         /// </summary>
+        private static IReadOnlyList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
+
+        private static IReadOnlyList<Type>? _referenceTypes;
+        internal static IReadOnlyList<Type> ReferenceTypes => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
+
+        private static IReadOnlyList<Type>? _propertyReferenceTypes;
+        internal static IReadOnlyList<Type> PropertyReferenceTypes
+            => _propertyReferenceTypes ??= ExternalTypes.Where(t => IsPropertyReferenceType(t) && !IsObsolete(t)).ToArray();
+
+        private static IReadOnlyList<Type>? _typeReferenceTypes;
+        internal static IReadOnlyList<Type> TypeReferenceTypes
+            // we only include armcore types when we are not generating armCore
+            => _typeReferenceTypes ??= ExternalTypes.Where(IsTypeReferenceType).ToList();
+
         private static IReadOnlyList<Type> GetExternalTypes()
         {
             List<Type> types = new List<Type>();
@@ -195,7 +198,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<Type> GetReferenceClassCollectionInternal()
             // For ReferenceType we always include armcore types because types in armcore we also need to replace
-            => GetExternalTypes().Where(t => IsReferenceType(t) && !IsObsolete(t)).ToArray();
+            => ExternalTypes.Where(t => IsReferenceType(t) && !IsObsolete(t)).ToArray();
 
         internal static bool HasAttribute(Type type, string attributeName)
             => type.GetCustomAttributes(false).Where(a => a.GetType().Name == attributeName).Any();
