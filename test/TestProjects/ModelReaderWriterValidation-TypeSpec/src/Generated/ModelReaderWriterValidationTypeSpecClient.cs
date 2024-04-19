@@ -570,6 +570,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
+        /// <summary> Op 6. </summary>
         /// <param name="body"> The <see cref="ModelWithStringAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -584,6 +585,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ModelWithStringAdditionalProperties.FromResponse(response), response);
         }
 
+        /// <summary> Op 6. </summary>
         /// <param name="body"> The <see cref="ModelWithStringAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -599,7 +601,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 6.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -638,7 +640,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 6.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -676,6 +678,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
+        /// <summary> Op 7. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -690,6 +693,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ModelWithArrayAdditionalProperties.FromResponse(response), response);
         }
 
+        /// <summary> Op 7. </summary>
         /// <param name="body"> The <see cref="ModelWithArrayAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -705,7 +709,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 7.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -744,7 +748,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 7.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -782,6 +786,7 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
+        /// <summary> Op 8. </summary>
         /// <param name="body"> The <see cref="ModelWithUnknownAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -796,6 +801,7 @@ namespace ModelReaderWriterValidationTypeSpec
             return Response.FromValue(ModelWithUnknownAdditionalProperties.FromResponse(response), response);
         }
 
+        /// <summary> Op 8. </summary>
         /// <param name="body"> The <see cref="ModelWithUnknownAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -811,7 +817,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 8.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -850,7 +856,7 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Op 8.
         /// <list type="bullet">
         /// <item>
         /// <description>
