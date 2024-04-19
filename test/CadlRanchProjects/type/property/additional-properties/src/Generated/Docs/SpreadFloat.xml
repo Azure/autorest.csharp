@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetSpreadFloatAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadFloatAsync.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response<SpreadFloatRecord> response = await client.GetSpreadFloatAsync();
+]]></code>
+This sample shows how to call GetSpreadFloatAsync with all parameters.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response<SpreadFloatRecord> response = await client.GetSpreadFloatAsync();
+]]></code></example>
+    </member>
+    <member name="GetSpreadFloat(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadFloat.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response<SpreadFloatRecord> response = client.GetSpreadFloat();
+]]></code>
+This sample shows how to call GetSpreadFloat with all parameters.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response<SpreadFloatRecord> response = client.GetSpreadFloat();
+]]></code></example>
+    </member>
+    <member name="GetSpreadFloatAsync(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadFloatAsync and parse the result.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response response = await client.GetSpreadFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call GetSpreadFloatAsync with all parameters and parse the result.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response response = await client.GetSpreadFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code></example>
+    </member>
+    <member name="GetSpreadFloat(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadFloat and parse the result.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response response = client.GetSpreadFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call GetSpreadFloat with all parameters and parse the result.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+Response response = client.GetSpreadFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(SpreadFloatRecord,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(SpreadFloatRecord,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = 123.45F,
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = 123.45F,
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = 123.45F,
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = 123.45F,
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

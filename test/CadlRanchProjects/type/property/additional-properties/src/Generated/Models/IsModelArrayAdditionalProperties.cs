@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -46,20 +47,34 @@ namespace _Type.Property.AdditionalProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IsModelArrayAdditionalProperties"/>. </summary>
-        public IsModelArrayAdditionalProperties()
+        /// <param name="knownProp"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> is null. </exception>
+        public IsModelArrayAdditionalProperties(IEnumerable<ModelForRecord> knownProp)
         {
+            Argument.AssertNotNull(knownProp, nameof(knownProp));
+
+            KnownProp = knownProp.ToList();
             AdditionalProperties = new ChangeTrackingDictionary<string, IList<BinaryData>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="IsModelArrayAdditionalProperties"/>. </summary>
+        /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal IsModelArrayAdditionalProperties(IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal IsModelArrayAdditionalProperties(IList<ModelForRecord> knownProp, IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
+            KnownProp = knownProp;
             AdditionalProperties = additionalProperties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IsModelArrayAdditionalProperties"/> for deserialization. </summary>
+        internal IsModelArrayAdditionalProperties()
+        {
+        }
+
+        /// <summary> Gets the known prop. </summary>
+        public IList<ModelForRecord> KnownProp { get; }
         /// <summary>
         /// Additional Properties
         /// <para>

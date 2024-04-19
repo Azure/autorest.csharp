@@ -78,7 +78,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_ExtendsModel_put() => Test(async (host) =>
         {
-            var value = new ExtendsModelAdditionalProperties()
+            var value = new ExtendsModelAdditionalProperties(new ModelForRecord("ok"))
             {
                 AdditionalProperties =
                 {
@@ -96,14 +96,14 @@ namespace CadlRanchProjects.Tests
             var value = response.Value;
             Assert.AreEqual(1, value.AdditionalProperties.Count);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop"));
-            var model = ModelReaderWriter.Read<ModelForRecord>( value.AdditionalProperties["prop"]);
+            var model = ModelReaderWriter.Read<ModelForRecord>(value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", model.State);
         });
 
         [Test]
         public Task Type_Property_AdditionalProperties_IsModel_put() => Test(async (host) =>
         {
-            var value = new IsModelAdditionalProperties()
+            var value = new IsModelAdditionalProperties(new ModelForRecord("ok"))
             {
                 AdditionalProperties =
                 {
@@ -130,7 +130,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_ExtendsModelArray_put() => Test(async (host) =>
         {
-            var value = new ExtendsModelArrayAdditionalProperties()
+            var value = new ExtendsModelArrayAdditionalProperties(new[] { new ModelForRecord("ok"), new ModelForRecord("ok") })
             {
                 AdditionalProperties =
                 {
@@ -161,7 +161,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_IsModelArray_put() => Test(async (host) =>
         {
-            var value = new IsModelArrayAdditionalProperties()
+            var value = new IsModelArrayAdditionalProperties(new[] { new ModelForRecord("ok"), new ModelForRecord("ok") })
             {
                 AdditionalProperties =
                 {
@@ -423,6 +423,111 @@ namespace CadlRanchProjects.Tests
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDiscriminatedClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadFloat_get() => Test(async host =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadFloatClient().GetExtendsDifferentSpreadFloatAsync();
+            Assert.AreEqual("abc", response.Value.Name);
+            Assert.AreEqual(43.125f, response.Value.DerivedProp);
+            Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
+            Assert.AreEqual(43.125f, response.Value.AdditionalProperties["prop"]);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadFloat_put() => Test(async host =>
+        {
+            var value = new DifferentSpreadFloatDerived("abc", 43.125f)
+            {
+                AdditionalProperties =
+                {
+                    ["prop"] = 43.125f
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadFloatClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadModel_get() => Test(async host =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelClient().GetExtendsDifferentSpreadModelAsync();
+            Assert.AreEqual("abc", response.Value.KnownProp);
+            Assert.IsNotNull(response.Value.DerivedProp);
+            Assert.AreEqual("ok", response.Value.DerivedProp.State);
+            Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
+            var prop = ModelReaderWriter.Read<ModelForRecord>(response.Value.AdditionalProperties["prop"]);
+            Assert.AreEqual("ok", prop.State);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadModel_put() => Test(async host =>
+        {
+            var value = new DifferentSpreadModelDerived("abc", new ModelForRecord("ok"))
+            {
+                AdditionalProperties =
+                {
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadModelArray_get() => Test(async host =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelArrayClient().GetExtendsDifferentSpreadModelArrayAsync();
+            Assert.AreEqual("abc", response.Value.KnownProp);
+            Assert.AreEqual(2, response.Value.DerivedProp.Count);
+            Assert.AreEqual("ok", response.Value.DerivedProp[0].State);
+            Assert.AreEqual("ok", response.Value.DerivedProp[1].State);
+            Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
+            var list = response.Value.AdditionalProperties["prop"];
+            Assert.AreEqual(2, list.Count);
+            var prop1 = ModelReaderWriter.Read<ModelForRecord>(list[0]);
+            Assert.AreEqual("ok", prop1.State);
+            var prop2 = ModelReaderWriter.Read<ModelForRecord>(list[1]);
+            Assert.AreEqual("ok", prop2.State);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadModelArray_put() => Test(async host =>
+        {
+            var value = new DifferentSpreadModelArrayDerived("abc", new[] { new ModelForRecord("ok"), new ModelForRecord("ok") })
+            {
+                AdditionalProperties =
+                {
+                    ["prop"] = new[] { ModelReaderWriter.Write(new ModelForRecord("ok")), ModelReaderWriter.Write(new ModelForRecord("ok")) }
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelArrayClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadString_get() => Test(async host =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadStringClient().GetExtendsDifferentSpreadStringAsync();
+            Assert.AreEqual(43.125f, response.Value.Id);
+            Assert.AreEqual("abc", response.Value.DerivedProp);
+            Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
+            Assert.AreEqual("abc", response.Value.AdditionalProperties["prop"]);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsDifferentSpreadString_put() => Test(async host =>
+        {
+            var value = new DifferentSpreadStringDerived(43.125f, "abc")
+            {
+                AdditionalProperties =
+                {
+                    ["prop"] = "abc"
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadStringClient().PutAsync(value);
             Assert.AreEqual(204, response.Status);
         });
     }

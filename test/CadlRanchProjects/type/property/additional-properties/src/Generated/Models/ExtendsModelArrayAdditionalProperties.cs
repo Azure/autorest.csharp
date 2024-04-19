@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -46,20 +47,34 @@ namespace _Type.Property.AdditionalProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ExtendsModelArrayAdditionalProperties"/>. </summary>
-        public ExtendsModelArrayAdditionalProperties()
+        /// <param name="knownProp"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> is null. </exception>
+        public ExtendsModelArrayAdditionalProperties(IEnumerable<ModelForRecord> knownProp)
         {
+            Argument.AssertNotNull(knownProp, nameof(knownProp));
+
+            KnownProp = knownProp.ToList();
             AdditionalProperties = new ChangeTrackingDictionary<string, IList<BinaryData>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsModelArrayAdditionalProperties"/>. </summary>
+        /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExtendsModelArrayAdditionalProperties(IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ExtendsModelArrayAdditionalProperties(IList<ModelForRecord> knownProp, IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
+            KnownProp = knownProp;
             AdditionalProperties = additionalProperties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ExtendsModelArrayAdditionalProperties"/> for deserialization. </summary>
+        internal ExtendsModelArrayAdditionalProperties()
+        {
+        }
+
+        /// <summary> Gets the known prop. </summary>
+        public IList<ModelForRecord> KnownProp { get; }
         /// <summary>
         /// Additional Properties
         /// <para>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetSpreadRecordNonDiscriminatedUnionAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnionAsync.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response<SpreadRecordForNonDiscriminatedUnion> response = await client.GetSpreadRecordNonDiscriminatedUnionAsync();
+]]></code>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnionAsync with all parameters.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response<SpreadRecordForNonDiscriminatedUnion> response = await client.GetSpreadRecordNonDiscriminatedUnionAsync();
+]]></code></example>
+    </member>
+    <member name="GetSpreadRecordNonDiscriminatedUnion(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnion.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response<SpreadRecordForNonDiscriminatedUnion> response = client.GetSpreadRecordNonDiscriminatedUnion();
+]]></code>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnion with all parameters.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response<SpreadRecordForNonDiscriminatedUnion> response = client.GetSpreadRecordNonDiscriminatedUnion();
+]]></code></example>
+    </member>
+    <member name="GetSpreadRecordNonDiscriminatedUnionAsync(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnionAsync and parse the result.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response response = await client.GetSpreadRecordNonDiscriminatedUnionAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnionAsync with all parameters and parse the result.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response response = await client.GetSpreadRecordNonDiscriminatedUnionAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
+    </member>
+    <member name="GetSpreadRecordNonDiscriminatedUnion(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnion and parse the result.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response response = client.GetSpreadRecordNonDiscriminatedUnion(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetSpreadRecordNonDiscriminatedUnion with all parameters and parse the result.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+Response response = client.GetSpreadRecordNonDiscriminatedUnion(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(SpreadRecordForNonDiscriminatedUnion,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+SpreadRecordForNonDiscriminatedUnion body = new SpreadRecordForNonDiscriminatedUnion("<name>");
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+SpreadRecordForNonDiscriminatedUnion body = new SpreadRecordForNonDiscriminatedUnion("<name>");
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(SpreadRecordForNonDiscriminatedUnion,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+SpreadRecordForNonDiscriminatedUnion body = new SpreadRecordForNonDiscriminatedUnion("<name>");
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+SpreadRecordForNonDiscriminatedUnion body = new SpreadRecordForNonDiscriminatedUnion("<name>");
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+SpreadRecordNonDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnionClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

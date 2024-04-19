@@ -27,6 +27,8 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteObjectValue(KnownProp, options);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -62,14 +64,20 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
+            ModelForRecord knownProp = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("knownProp"u8))
+                {
+                    knownProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
+                    continue;
+                }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsModelAdditionalProperties(additionalProperties);
+            return new ExtendsModelAdditionalProperties(knownProp, additionalProperties);
         }
 
         BinaryData IPersistableModel<ExtendsModelAdditionalProperties>.Write(ModelReaderWriterOptions options)

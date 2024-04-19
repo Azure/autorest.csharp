@@ -14,18 +14,32 @@ namespace _Type.Property.AdditionalProperties.Models
     public partial class ExtendsModelAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/>. </summary>
-        public ExtendsModelAdditionalProperties()
+        /// <param name="knownProp"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> is null. </exception>
+        public ExtendsModelAdditionalProperties(ModelForRecord knownProp)
         {
+            Argument.AssertNotNull(knownProp, nameof(knownProp));
+
+            KnownProp = knownProp;
             AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/>. </summary>
+        /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal ExtendsModelAdditionalProperties(IDictionary<string, BinaryData> additionalProperties)
+        internal ExtendsModelAdditionalProperties(ModelForRecord knownProp, IDictionary<string, BinaryData> additionalProperties)
         {
+            KnownProp = knownProp;
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/> for deserialization. </summary>
+        internal ExtendsModelAdditionalProperties()
+        {
+        }
+
+        /// <summary> Gets or sets the known prop. </summary>
+        public ModelForRecord KnownProp { get; set; }
         /// <summary>
         /// Additional Properties
         /// <para>
