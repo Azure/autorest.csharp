@@ -285,6 +285,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             return base.CreateInheritedType();
         }
 
+        public override ObjectTypeProperty GetPropertyForSchemaProperty(InputModelProperty property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                if (Inherits?.Implementation is SystemObjectType)
+                {
+                    return GetPropertyBySerializedName(property.SerializedName, includeParents);
+                }
+                throw new InvalidOperationException($"Unable to find object property for schema property '{property.SerializedName}' in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
         protected override FormattableString CreateDescription()
         {
             return $"{InputModel.Description}";

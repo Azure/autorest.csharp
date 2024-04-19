@@ -648,6 +648,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
+        public virtual ObjectTypeProperty GetPropertyForSchemaProperty(InputModelProperty property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))

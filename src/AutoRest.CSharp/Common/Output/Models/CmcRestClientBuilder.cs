@@ -42,11 +42,13 @@ namespace AutoRest.CSharp.Output.Models
         };
 
         protected readonly BuildContext _context;
+        private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
         public CmcRestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
             _context = context;
+            _library = context.BaseLibrary!;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -297,7 +299,30 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type,
                             null);
 
-                        body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        // This method has a flattened body
+                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
+                        {
+                            var objectType = (SchemaObjectType)_library.ResolveModel((InputModelType)bodyRequestParameter.Type).Implementation;
+
+                            var initializationMap = new List<ObjectPropertyInitializer>();
+                            foreach (var (parameter, _) in allParameters.Values)
+                            {
+                                if (parameter?.FlattenedBodyProperty is null)
+                                {
+                                    continue;
+                                }
+
+                                initializationMap.Add(new ObjectPropertyInitializer(
+                                    objectType.GetPropertyForSchemaProperty(parameter.FlattenedBodyProperty, true),
+                                    allParameters[GetRequestParameterName(parameter!)].Reference));
+                            }
+
+                            body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        }
+                        else
+                        {
+                            body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        }
                     }
                 }
             }
