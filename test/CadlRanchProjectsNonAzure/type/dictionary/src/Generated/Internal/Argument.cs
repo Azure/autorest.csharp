@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _Type._Dictionary
+namespace Scm._Type._Dictionary
 {
     internal static class Argument
     {

@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace _Type._Dictionary
+namespace Scm._Type._Dictionary
 {
     internal class Utf8JsonBinaryContent : BinaryContent
     {

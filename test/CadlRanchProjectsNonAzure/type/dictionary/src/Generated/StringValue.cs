@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace _Type._Dictionary
+namespace Scm._Type._Dictionary
 {
     // Data plane generated sub-client.
     /// <summary> Dictionary of string values. </summary>

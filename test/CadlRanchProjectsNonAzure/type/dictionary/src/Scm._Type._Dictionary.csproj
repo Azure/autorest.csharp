@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the _Type._Dictionary client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>SDK Code Generation _Type._Dictionary</AssemblyTitle>
+    <Description>This is the Scm._Type._Dictionary client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation Scm._Type._Dictionary</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>_Type._Dictionary</PackageTags>
+    <PackageTags>Scm._Type._Dictionary</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

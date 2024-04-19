@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace _Type._Dictionary
+namespace Scm._Type._Dictionary
 {
     internal static class Optional
     {
