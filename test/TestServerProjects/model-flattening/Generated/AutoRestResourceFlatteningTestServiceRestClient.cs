@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -55,7 +54,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item, ModelSerializationExtensions.WireOptions);
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -175,7 +174,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item, ModelSerializationExtensions.WireOptions);
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -296,7 +295,7 @@ namespace model_flattening
                 foreach (var item in resourceDictionary)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteObjectValue(item.Value, new ModelReaderWriterOptions("W"));
+                    content.JsonWriter.WriteObjectValue(item.Value, ModelSerializationExtensions.WireOptions);
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -413,7 +412,7 @@ namespace model_flattening
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resourceComplexObject, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(resourceComplexObject, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -518,7 +517,7 @@ namespace model_flattening
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(simpleBodyProduct, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(simpleBodyProduct, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -586,7 +585,7 @@ namespace model_flattening
                 OdataValue = odataValue
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -677,7 +676,7 @@ namespace model_flattening
                 OdataValue = flattenParameterGroup.OdataValue
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }

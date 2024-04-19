@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -42,29 +41,27 @@ namespace OpenAI
 
         /// <summary> Creates an embedding vector representing the input text. </summary>
         /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateEmbeddingResponse>> CreateAsync(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
+        /// <remarks> Create. </remarks>
+        public virtual async Task<ClientResult<CreateEmbeddingResponse>> CreateAsync(CreateEmbeddingRequest embedding)
         {
             Argument.AssertNotNull(embedding, nameof(embedding));
 
-            using BinaryContent content = embedding.ToBinaryBody();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            using BinaryContent content = embedding.ToBinaryContent();
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Creates an embedding vector representing the input text. </summary>
         /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        public virtual ClientResult<CreateEmbeddingResponse> Create(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
+        /// <remarks> Create. </remarks>
+        public virtual ClientResult<CreateEmbeddingResponse> Create(CreateEmbeddingRequest embedding)
         {
             Argument.AssertNotNull(embedding, nameof(embedding));
 
-            using BinaryContent content = embedding.ToBinaryBody();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Create(content, options);
+            using BinaryContent content = embedding.ToBinaryContent();
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -78,7 +75,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateEmbeddingRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateEmbeddingRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -106,7 +103,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateEmbeddingRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateEmbeddingRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -142,17 +139,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

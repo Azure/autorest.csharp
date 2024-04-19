@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,6 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensibleAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse8>> GetStringExtensibleAsync(CancellationToken cancellationToken = default)
@@ -53,6 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse8.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensible(CancellationToken)']/*" />
         public virtual Response<GetResponse8> GetStringExtensible(CancellationToken cancellationToken = default)
@@ -63,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,30 +135,32 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='SendAsync(GetResponseProp3,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(GetResponseProp3 prop, CancellationToken cancellationToken = default)
         {
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
+            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest8.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='Send(GetResponseProp3,CancellationToken)']/*" />
         public virtual Response Send(GetResponseProp3 prop, CancellationToken cancellationToken = default)
         {
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
+            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest8.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -194,7 +199,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>

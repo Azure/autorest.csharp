@@ -43,6 +43,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -57,6 +58,7 @@ namespace Encode.Bytes
             return response;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -72,7 +74,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +113,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -163,6 +166,7 @@ namespace Encode.Bytes
             return response;
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -178,7 +182,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,6 +259,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -269,6 +274,7 @@ namespace Encode.Bytes
             return response;
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -284,7 +290,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -323,7 +329,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -361,6 +367,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -375,6 +382,7 @@ namespace Encode.Bytes
             return response;
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -390,7 +398,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -429,7 +437,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -467,6 +475,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -481,6 +490,7 @@ namespace Encode.Bytes
             return response;
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -496,7 +506,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -535,7 +545,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>

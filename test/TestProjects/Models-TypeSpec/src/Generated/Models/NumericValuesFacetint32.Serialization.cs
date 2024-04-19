@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class NumericValuesFacetint32 : IUtf8JsonSerializable, IJsonModel<NumericValuesFacetint32>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NumericValuesFacetint32>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NumericValuesFacetint32>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<NumericValuesFacetint32>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -70,7 +70,7 @@ namespace ModelsTypeSpec.Models
 
         internal static NumericValuesFacetint32 DeserializeNumericValuesFacetint32(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -151,11 +151,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeNumericValuesFacetint32(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

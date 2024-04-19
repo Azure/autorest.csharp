@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -41,20 +40,18 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync(CancellationToken cancellationToken = default)
+        /// <remarks> List. </remarks>
+        public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetFilesAsync(options).ConfigureAwait(false);
+            ClientResult result = await GetFilesAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<ListFilesResponse> GetFiles(CancellationToken cancellationToken = default)
+        /// <remarks> List. </remarks>
+        public virtual ClientResult<ListFilesResponse> GetFiles()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = GetFiles(options);
+            ClientResult result = GetFiles(null);
             return ClientResult.FromValue(ListFilesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -68,7 +65,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFilesAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFilesAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -92,7 +89,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFiles(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFiles()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -108,29 +105,27 @@ namespace OpenAI
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
-        public virtual async Task<ClientResult<OpenAIFile>> CreateAsync(CreateFileRequest file, CancellationToken cancellationToken = default)
+        /// <remarks> Create. </remarks>
+        public virtual async Task<ClientResult<OpenAIFile>> CreateAsync(CreateFileRequest file)
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryBody();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await CreateAsync(content, options).ConfigureAwait(false);
+            using BinaryContent content = file.ToBinaryContent();
+            ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
-        public virtual ClientResult<OpenAIFile> Create(CreateFileRequest file, CancellationToken cancellationToken = default)
+        /// <remarks> Create. </remarks>
+        public virtual ClientResult<OpenAIFile> Create(CreateFileRequest file)
         {
             Argument.AssertNotNull(file, nameof(file));
 
-            using BinaryContent content = file.ToBinaryBody();
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Create(content, options);
+            using BinaryContent content = file.ToBinaryContent();
+            ClientResult result = Create(content, null);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -144,7 +139,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateFileRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateFileRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -172,7 +167,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateFileRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateFileRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -192,29 +187,27 @@ namespace OpenAI
 
         /// <summary> Returns information about a specific file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<OpenAIFile>> RetrieveAsync(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Retrieve. </remarks>
+        public virtual async Task<ClientResult<OpenAIFile>> RetrieveAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(fileId, options).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Returns information about a specific file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<OpenAIFile> Retrieve(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Retrieve. </remarks>
+        public virtual ClientResult<OpenAIFile> Retrieve(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(fileId, options);
+            ClientResult result = Retrieve(fileId, null);
             return ClientResult.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -228,7 +221,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RetrieveAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -257,7 +250,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Retrieve(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Retrieve(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -278,29 +271,27 @@ namespace OpenAI
 
         /// <summary> Delete a file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<DeleteFileResponse>> DeleteAsync(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Delete. </remarks>
+        public virtual async Task<ClientResult<DeleteFileResponse>> DeleteAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await DeleteAsync(fileId, options).ConfigureAwait(false);
+            ClientResult result = await DeleteAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Delete a file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<DeleteFileResponse> Delete(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Delete. </remarks>
+        public virtual ClientResult<DeleteFileResponse> Delete(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Delete(fileId, options);
+            ClientResult result = Delete(fileId, null);
             return ClientResult.FromValue(DeleteFileResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -314,7 +305,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -343,7 +334,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Delete(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Delete(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -364,29 +355,27 @@ namespace OpenAI
 
         /// <summary> Returns the contents of the specified file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<string>> DownloadAsync(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Download. </remarks>
+        public virtual async Task<ClientResult<string>> DownloadAsync(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await DownloadAsync(fileId, options).ConfigureAwait(false);
+            ClientResult result = await DownloadAsync(fileId, null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
         /// <summary> Returns the contents of the specified file. </summary>
         /// <param name="fileId"> The ID of the file to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<string> Download(string fileId, CancellationToken cancellationToken = default)
+        /// <remarks> Download. </remarks>
+        public virtual ClientResult<string> Download(string fileId)
         {
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Download(fileId, options);
+            ClientResult result = Download(fileId, null);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
@@ -400,7 +389,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DownloadAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DownloadAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -429,7 +418,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Download(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Download(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -542,17 +531,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

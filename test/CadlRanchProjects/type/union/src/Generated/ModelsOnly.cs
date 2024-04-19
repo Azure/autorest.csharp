@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,6 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse4>> GetModelsOnlyAsync(CancellationToken cancellationToken = default)
@@ -53,6 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse4.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnly(CancellationToken)']/*" />
         public virtual Response<GetResponse4> GetModelsOnly(CancellationToken cancellationToken = default)
@@ -63,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,6 +135,7 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -140,12 +144,13 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest4 sendRequest4 = new SendRequest4(prop);
+            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(sendRequest4.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -154,14 +159,14 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest4 sendRequest4 = new SendRequest4(prop);
+            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(sendRequest4.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -200,7 +205,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>

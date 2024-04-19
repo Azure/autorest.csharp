@@ -16,7 +16,7 @@ namespace Pagination.Models
 {
     public partial class ListLedgerEntryInputBody : IUtf8JsonSerializable, IJsonModel<ListLedgerEntryInputBody>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListLedgerEntryInputBody>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListLedgerEntryInputBody>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ListLedgerEntryInputBody>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace Pagination.Models
 
         internal static ListLedgerEntryInputBody DeserializeListLedgerEntryInputBody(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,11 +133,11 @@ namespace Pagination.Models
             return DeserializeListLedgerEntryInputBody(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

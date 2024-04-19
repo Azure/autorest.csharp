@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     internal partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Sku2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -65,7 +65,7 @@ namespace MgmtDiscriminator.Models
 
         internal static Sku2 DeserializeSku2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
