@@ -632,10 +632,7 @@ function fromSdkModelPropertyType(
 ): InputModelProperty {
     const serializedName =
         propertyType.kind === "property"
-            ? (propertyType as SdkBodyModelPropertyType).serializedName == ""
-                ? // workaround for https://github.com/Azure/azure-rest-api-specs/blob/2405b7ed0c5c9170995121e0b436504657688b7c/specification/communication/Communication.Messages/models.tsp#L336-L338
-                  propertyType.name
-                : (propertyType as SdkBodyModelPropertyType).serializedName
+            ? (propertyType as SdkBodyModelPropertyType).serializedName
             : "";
     literalTypeContext.PropertyName = serializedName;
 
@@ -648,7 +645,7 @@ function fromSdkModelPropertyType(
             ? true
             : false;
     const modelProperty: InputModelProperty = {
-        Name: propertyType.name,
+        Name: propertyType.nameInClient,
         SerializedName: serializedName,
         Description:
             propertyType.description ??
