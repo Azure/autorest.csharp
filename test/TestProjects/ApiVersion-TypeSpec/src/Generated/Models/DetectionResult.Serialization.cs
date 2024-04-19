@@ -16,7 +16,7 @@ namespace ApiVersionInTsp.Models
 {
     public partial class DetectionResult : IUtf8JsonSerializable, IJsonModel<DetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DetectionResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DetectionResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace ApiVersionInTsp.Models
 
         internal static DetectionResult DeserializeDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace ApiVersionInTsp.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

@@ -16,7 +16,7 @@ namespace validation.Models
 {
     public partial class ConstantProduct : IUtf8JsonSerializable, IJsonModel<ConstantProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConstantProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConstantProduct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ConstantProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace validation.Models
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace validation.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

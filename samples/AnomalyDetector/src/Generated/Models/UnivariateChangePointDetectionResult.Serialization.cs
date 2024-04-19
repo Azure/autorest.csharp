@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateChangePointDetectionResult : IUtf8JsonSerializable, IJsonModel<UnivariateChangePointDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UnivariateChangePointDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -84,7 +84,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateChangePointDetectionResult DeserializeUnivariateChangePointDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -185,7 +185,7 @@ namespace AnomalyDetector.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

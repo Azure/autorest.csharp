@@ -16,7 +16,7 @@ namespace _Type.Property.AdditionalProperties.Models
 {
     public partial class ExtendsModelAdditionalProperties : IUtf8JsonSerializable, IJsonModel<ExtendsModelAdditionalProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtendsModelAdditionalProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtendsModelAdditionalProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ExtendsModelAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -49,7 +49,7 @@ namespace _Type.Property.AdditionalProperties.Models
 
         internal static ExtendsModelAdditionalProperties DeserializeExtendsModelAdditionalProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

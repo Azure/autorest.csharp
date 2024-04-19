@@ -16,7 +16,7 @@ namespace Encode.Datetime.Models
 {
     public partial class Rfc3339DatetimeProperty : IUtf8JsonSerializable, IJsonModel<Rfc3339DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc3339DatetimeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc3339DatetimeProperty>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Rfc3339DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace Encode.Datetime.Models
 
         internal static Rfc3339DatetimeProperty DeserializeRfc3339DatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace Encode.Datetime.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

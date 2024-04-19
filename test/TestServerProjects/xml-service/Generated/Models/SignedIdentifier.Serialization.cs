@@ -26,11 +26,11 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             string id = default;
             AccessPolicy accessPolicy = default;

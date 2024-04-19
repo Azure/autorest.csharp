@@ -341,14 +341,16 @@ namespace AutoRest.TestServer.Tests
         public Task LROErrorDelete202RetryInvalidHeader() => Test(async (host, pipeline) =>
         {
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete202RetryInvalidHeaderAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            var response = await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task LROErrorDelete202RetryInvalidHeader_Sync() => Test((host, pipeline) =>
         {
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete202RetryInvalidHeader();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var response = WaitForCompletion(operation);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]

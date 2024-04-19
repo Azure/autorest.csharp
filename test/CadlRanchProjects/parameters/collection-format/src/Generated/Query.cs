@@ -45,7 +45,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Multi.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -80,7 +80,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Multi.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Ssv.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,7 +150,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Ssv.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -185,7 +185,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Tsv.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +220,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Tsv.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,7 +255,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Pipes.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -290,7 +290,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Pipes.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -325,7 +325,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Csv.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -360,7 +360,7 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Csv.
         /// <list type="bullet">
         /// <item>
         /// <description>

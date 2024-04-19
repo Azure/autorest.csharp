@@ -43,6 +43,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='DefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> DefaultAsync(CancellationToken cancellationToken = default)
@@ -52,6 +53,7 @@ namespace Encode.Bytes
             return Response.FromValue(response.Content, response);
         }
 
+        /// <summary> Default. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='Default(CancellationToken)']/*" />
         public virtual Response<BinaryData> Default(CancellationToken cancellationToken = default)
@@ -62,7 +64,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -97,7 +99,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,6 +133,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='OctetStreamAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> OctetStreamAsync(CancellationToken cancellationToken = default)
@@ -140,6 +143,7 @@ namespace Encode.Bytes
             return Response.FromValue(response.Content, response);
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='OctetStream(CancellationToken)']/*" />
         public virtual Response<BinaryData> OctetStream(CancellationToken cancellationToken = default)
@@ -150,7 +154,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -185,7 +189,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,6 +223,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='CustomContentTypeAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> CustomContentTypeAsync(CancellationToken cancellationToken = default)
@@ -228,6 +233,7 @@ namespace Encode.Bytes
             return Response.FromValue(response.Content, response);
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='CustomContentType(CancellationToken)']/*" />
         public virtual Response<BinaryData> CustomContentType(CancellationToken cancellationToken = default)
@@ -238,7 +244,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -273,7 +279,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,6 +313,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='Base64Async(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> Base64Async(CancellationToken cancellationToken = default)
@@ -316,6 +323,7 @@ namespace Encode.Bytes
             return Response.FromValue(response.Content, response);
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='Base64(CancellationToken)']/*" />
         public virtual Response<BinaryData> Base64(CancellationToken cancellationToken = default)
@@ -326,7 +334,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -361,7 +369,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -395,6 +403,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='Base64urlAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> Base64urlAsync(CancellationToken cancellationToken = default)
@@ -404,6 +413,7 @@ namespace Encode.Bytes
             return Response.FromValue(response.Content, response);
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ResponseBody.xml" path="doc/members/member[@name='Base64url(CancellationToken)']/*" />
         public virtual Response<BinaryData> Base64url(CancellationToken cancellationToken = default)
@@ -414,7 +424,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -449,7 +459,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -60,10 +60,20 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/2493")]
         public Task Client_Naming_Header_response() => Test(async (host) =>
         {
             var response = await new NamingClient(host, null).ResponseAsync();
+            var results = response.Headers.Contains("default-name");
+            Assert.AreEqual(true, results);
+            foreach (var header in response.Headers)
+            {
+                var key = header.Name;
+                if (key == "default-name")
+                {
+                    var value = header.Value;
+                    Assert.AreEqual("true", value);
+                }
+            }
         });
 
         [Test]

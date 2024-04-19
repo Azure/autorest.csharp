@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<QueryStringMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<QueryStringMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace MgmtDiscriminator.Models
 
         internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

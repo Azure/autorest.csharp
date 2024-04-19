@@ -18,7 +18,7 @@ namespace CustomNamespace
 {
     internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IJsonModel<RenamedModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RenamedModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -88,7 +88,7 @@ namespace CustomNamespace
 
         internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             string modelProperty = default;
             string propertyToField = default;
@@ -195,7 +195,7 @@ namespace CustomNamespace
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

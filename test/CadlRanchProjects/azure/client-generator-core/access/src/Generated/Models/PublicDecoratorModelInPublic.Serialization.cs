@@ -16,7 +16,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     public partial class PublicDecoratorModelInPublic : IUtf8JsonSerializable, IJsonModel<PublicDecoratorModelInPublic>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicDecoratorModelInPublic>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicDecoratorModelInPublic>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<PublicDecoratorModelInPublic>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static PublicDecoratorModelInPublic DeserializePublicDecoratorModelInPublic(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

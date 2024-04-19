@@ -773,7 +773,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -792,7 +792,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>

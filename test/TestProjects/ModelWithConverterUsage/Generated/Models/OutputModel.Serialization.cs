@@ -18,7 +18,7 @@ namespace ModelWithConverterUsage.Models
     [JsonConverter(typeof(OutputModelConverter))]
     public partial class OutputModel : IUtf8JsonSerializable, IJsonModel<OutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -66,7 +66,7 @@ namespace ModelWithConverterUsage.Models
 
         internal static OutputModel DeserializeOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,7 +133,7 @@ namespace ModelWithConverterUsage.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
 
@@ -141,7 +141,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model, new ModelReaderWriterOptions("W"));
+                writer.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
             }
 
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

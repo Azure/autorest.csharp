@@ -16,7 +16,7 @@ namespace AdditionalPropertiesEx.Models
 {
     public partial struct OutputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<OutputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -55,7 +55,7 @@ namespace AdditionalPropertiesEx.Models
 
         internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
@@ -121,7 +121,7 @@ namespace AdditionalPropertiesEx.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

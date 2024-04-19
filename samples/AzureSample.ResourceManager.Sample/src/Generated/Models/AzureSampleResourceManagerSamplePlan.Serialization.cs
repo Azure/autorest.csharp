@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class AzureSampleResourceManagerSamplePlan : IUtf8JsonSerializable, IJsonModel<AzureSampleResourceManagerSamplePlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerSamplePlan>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerSamplePlan>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<AzureSampleResourceManagerSamplePlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -80,7 +80,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static AzureSampleResourceManagerSamplePlan DeserializeAzureSampleResourceManagerSamplePlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

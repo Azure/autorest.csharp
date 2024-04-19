@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     internal partial class UnknownSnake : IUtf8JsonSerializable, IJsonModel<Snake>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Snake>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Snake>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         internal static UnknownSnake DeserializeUnknownSnake(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

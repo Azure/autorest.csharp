@@ -16,7 +16,7 @@ namespace CustomizationsInTsp.Models
 {
     public partial struct ModelStruct : IUtf8JsonSerializable, IJsonModel<ModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelStruct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -75,7 +75,7 @@ namespace CustomizationsInTsp.Models
 
         internal static ModelStruct DeserializeModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             int requiredInt = default;
             int? optionalInt = default;
@@ -160,7 +160,7 @@ namespace CustomizationsInTsp.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

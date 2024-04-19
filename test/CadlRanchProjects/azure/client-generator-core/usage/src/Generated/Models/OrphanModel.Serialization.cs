@@ -16,7 +16,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 {
     public partial class OrphanModel : IUtf8JsonSerializable, IJsonModel<OrphanModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrphanModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrphanModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OrphanModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 
         internal static OrphanModel DeserializeOrphanModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }

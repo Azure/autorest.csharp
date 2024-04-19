@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class Shell : IUtf8JsonSerializable, IJsonModel<Shell>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shell>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shell>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Shell>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
 
         internal static Shell DeserializeShell(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

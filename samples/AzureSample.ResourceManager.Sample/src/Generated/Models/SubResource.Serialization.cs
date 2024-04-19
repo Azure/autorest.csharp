@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class SubResource : IUtf8JsonSerializable, IJsonModel<SubResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResource>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResource>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SubResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static SubResource DeserializeSubResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

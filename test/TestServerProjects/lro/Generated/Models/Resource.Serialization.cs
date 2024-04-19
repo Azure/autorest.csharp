@@ -16,7 +16,7 @@ namespace lro.Models
 {
     public partial class Resource : IUtf8JsonSerializable, IJsonModel<Resource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Resource>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Resource>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Resource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace lro.Models
 
         internal static Resource DeserializeResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -196,7 +196,7 @@ namespace lro.Models
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            BinaryData binaryData = ModelReaderWriter.Write(this, new ModelReaderWriterOptions("W"));
+            BinaryData binaryData = ModelReaderWriter.Write(this, ModelSerializationExtensions.WireOptions);
             return RequestContent.Create(binaryData);
         }
     }
