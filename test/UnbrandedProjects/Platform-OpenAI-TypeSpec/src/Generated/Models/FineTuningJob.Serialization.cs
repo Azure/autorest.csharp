@@ -30,7 +30,7 @@ namespace OpenAI.Models
             if (FinishedAt != null)
             {
                 writer.WritePropertyName("finished_at"u8);
-                writer.WriteStringValue(FinishedAt.Value, "O");
+                writer.WriteNumberValue(FinishedAt.Value, "U");
             }
             else
             {
@@ -167,7 +167,7 @@ namespace OpenAI.Models
                         finishedAt = null;
                         continue;
                     }
-                    finishedAt = property.Value.GetDateTimeOffset("O");
+                    finishedAt = DateTimeOffset.FromUnixTimeSeconds(property.Value.GetInt64());
                     continue;
                 }
                 if (property.NameEquals("model"u8))
