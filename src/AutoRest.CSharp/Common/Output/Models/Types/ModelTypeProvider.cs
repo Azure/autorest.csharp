@@ -48,9 +48,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.DiscriminatorValue is null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
-
-        public string? Namespace => _inputModel.Namespace;
-
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 

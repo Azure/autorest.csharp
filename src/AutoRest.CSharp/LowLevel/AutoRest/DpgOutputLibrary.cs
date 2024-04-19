@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<string>? _accessOverriddenModels;
         public IEnumerable<string> AccessOverriddenModels => _accessOverriddenModels ??= Enums.Where(e => e.IsAccessibilityOverridden).Select(e => e.Declaration.Name)
-            .Concat(Models.Where(m => m.IsAccessibilityOverridden && (m.Namespace == null || !m.Namespace.StartsWith("Azure.Core"))).Select(m => m.Declaration.Name));
+            .Concat(Models.Where(m => m.IsAccessibilityOverridden).Select(m => m.Declaration.Name));
 
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
