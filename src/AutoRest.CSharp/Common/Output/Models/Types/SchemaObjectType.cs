@@ -642,7 +642,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return new CSharpType(
                         _usage.HasFlag(InputModelTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
-                        _typeFactory.CreateType(InputModel.InheritedDictionaryType));
+                        _typeFactory.CreateType(InputModel.InheritedDictionaryType.ValueType));
             }
 
             return null;

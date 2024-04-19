@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
         {
-            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache);
+            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache, false);
             if (exampleValue.RawValue != null)
             {
                 return new InputExampleRawValue(inputType, exampleValue.RawValue);
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Common.Input
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
             var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
-            var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
+            var dictionarySchema = schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
                 Name: schema.Language.Default.Name,
@@ -389,7 +389,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static ObjectSchema? GetBaseModelSchema(ObjectSchema schema)
-            => schema.Parents?.Immediate is { } parents
+        => schema.Parents?.Immediate is { } parents
                 ? parents.OfType<ObjectSchema>().FirstOrDefault(s => s.Discriminator is not null) ?? parents.OfType<ObjectSchema>().FirstOrDefault()
                 : null;
 
@@ -398,7 +398,7 @@ namespace AutoRest.CSharp.Common.Input
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
             Type: GetOrCreateType(property),
-            ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, _modelsCache) : null,
+            ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, _modelsCache, property.IsNullable) : null,
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
@@ -555,7 +555,7 @@ namespace AutoRest.CSharp.Common.Input
                 return enumType with { IsNullable = isNullable };
             }
 
-            var type = CreateType(schema, format, modelsCache);
+            var type = CreateType(schema, format, modelsCache, isNullable);
             if (type.Serialization == InputTypeSerialization.Default)
             {
                 return type with
@@ -565,67 +565,64 @@ namespace AutoRest.CSharp.Common.Input
                 };
             }
 
-            return type with
-            {
-                IsNullable = isNullable,
-            };
+            return type;
         }
 
-        private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
+        private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable) => schema switch
         {
-            BinarySchema => InputPrimitiveType.Stream,
-            BooleanSchema => InputPrimitiveType.Boolean,
+            BinarySchema => new InputPrimitiveType(InputTypeKind.Stream, isNullable),
+            BooleanSchema => new InputPrimitiveType(InputTypeKind.Boolean, isNullable),
 
-            ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => InputPrimitiveType.BytesBase64Url,
-            ByteArraySchema { Format: ByteArraySchemaFormat.Byte } => InputPrimitiveType.Bytes,
+            ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => new InputPrimitiveType(InputTypeKind.BytesBase64Url, isNullable),
+            ByteArraySchema { Format: ByteArraySchemaFormat.Byte } => new InputPrimitiveType(InputTypeKind.Bytes, isNullable),
 
             DateSchema => InputPrimitiveType.Date,
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTimeISO8601,
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => InputPrimitiveType.DateTimeRFC1123,
-            DateTimeSchema => InputPrimitiveType.DateTime,
-            UnixTimeSchema => InputPrimitiveType.DateTimeUnix,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => new InputPrimitiveType(InputTypeKind.DateTimeISO8601, isNullable),
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => new InputPrimitiveType(InputTypeKind.DateTimeRFC1123, isNullable),
+            DateTimeSchema => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
+            UnixTimeSchema => new InputPrimitiveType(InputTypeKind.DateTimeUnix, isNullable),
 
-            TimeSchema => InputPrimitiveType.Time,
-            DurationSchema when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
-            DurationSchema => InputPrimitiveType.DurationISO8601,
+            TimeSchema => new InputPrimitiveType(InputTypeKind.Time, isNullable),
+            DurationSchema when format == XMsFormat.DurationConstant => new InputPrimitiveType(InputTypeKind.DurationConstant, isNullable),
+            DurationSchema => new InputPrimitiveType(InputTypeKind.DurationISO8601, isNullable),
 
-            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => InputPrimitiveType.Float32,
-            NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Float128,
-            NumberSchema { Type: AllSchemaTypes.Number } => InputPrimitiveType.Float64,
-            NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64,
-            NumberSchema { Type: AllSchemaTypes.Integer } => InputPrimitiveType.Int32,
+            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => new InputPrimitiveType(InputTypeKind.Float32, isNullable),
+            NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => new InputPrimitiveType(InputTypeKind.Float128, isNullable),
+            NumberSchema { Type: AllSchemaTypes.Number } => new InputPrimitiveType(InputTypeKind.Float64, isNullable),
+            NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => new InputPrimitiveType(InputTypeKind.Int64, isNullable),
+            NumberSchema { Type: AllSchemaTypes.Integer } => new InputPrimitiveType(InputTypeKind.Int32, isNullable),
 
-            ArmIdSchema => InputPrimitiveType.ResourceIdentifier,
-            { Type: AllSchemaTypes.ArmId } => InputPrimitiveType.ResourceIdentifier,
+            ArmIdSchema => new InputPrimitiveType(InputTypeKind.ResourceIdentifier, isNullable),
+            { Type: AllSchemaTypes.ArmId } => new InputPrimitiveType(InputTypeKind.ResourceIdentifier, isNullable),
 
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => InputPrimitiveType.ResourceIdentifier,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation => InputPrimitiveType.AzureLocation,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType => InputPrimitiveType.ContentType,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => InputPrimitiveType.RequestMethod,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => new InputPrimitiveType(InputTypeKind.DateTimeISO8601, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => new InputPrimitiveType(InputTypeKind.DateTimeRFC1123, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => new InputPrimitiveType(InputTypeKind.DateTimeUnix, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => new InputPrimitiveType(InputTypeKind.DurationConstant, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => new InputPrimitiveType(InputTypeKind.ResourceIdentifier, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation => new InputPrimitiveType(InputTypeKind.AzureLocation, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType => new InputPrimitiveType(InputTypeKind.ContentType, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => new InputPrimitiveType(InputTypeKind.ETag, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => new InputPrimitiveType(InputTypeKind.ResourceType, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => new InputPrimitiveType(InputTypeKind.RequestMethod, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => new InputPrimitiveType(InputTypeKind.Object, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => new InputPrimitiveType(InputTypeKind.IPAddress, isNullable),
 
-            ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache).Type,
+            ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache, isNullable).Type,
 
-            CredentialSchema => InputPrimitiveType.String,
-            { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
-            { Type: AllSchemaTypes.Boolean } => InputPrimitiveType.Boolean,
-            { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Guid,
-            { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Uri,
+            CredentialSchema => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            { Type: AllSchemaTypes.String } => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            { Type: AllSchemaTypes.Boolean } => new InputPrimitiveType(InputTypeKind.Boolean, isNullable),
+            { Type: AllSchemaTypes.Uuid } => new InputPrimitiveType(InputTypeKind.Guid, isNullable),
+            { Type: AllSchemaTypes.Uri } => new InputPrimitiveType(InputTypeKind.Uri, isNullable),
 
             ChoiceSchema choiceSchema => _enumsCache[choiceSchema],
             SealedChoiceSchema choiceSchema => _enumsCache[choiceSchema],
 
-            ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, false),
-            DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
+            ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, isNullable),
+            DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), isNullable),
             ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
-            StringSchema => InputPrimitiveType.String,
+            StringSchema stringSchema => CreateTypeForStringSchema(stringSchema, format, isNullable),
 
             // TODO: Handle char case
             CharSchema => InputPrimitiveType.String,
@@ -636,9 +633,51 @@ namespace AutoRest.CSharp.Common.Input
             _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
 
-        private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
+        private InputType CreateTypeForStringSchema(StringSchema schema, string? format, bool isNullable) => schema.Type switch
         {
-            var valueType = CreateType(constantSchema.ValueType, format, modelsCache);
+            // TODO: Handle char case
+            AllSchemaTypes.Char => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            AllSchemaTypes.Date => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
+            AllSchemaTypes.DateTime => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
+            AllSchemaTypes.Duration => new InputPrimitiveType(InputTypeKind.DurationConstant, isNullable),
+            AllSchemaTypes.OdataQuery => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            AllSchemaTypes.ArmId => new InputPrimitiveType(InputTypeKind.ResourceIdentifier, isNullable),
+            AllSchemaTypes.String => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            AllSchemaTypes.Time => new InputPrimitiveType(InputTypeKind.DurationConstant, isNullable),
+            AllSchemaTypes.Unixtime => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
+            AllSchemaTypes.Uri => new InputPrimitiveType(InputTypeKind.Uri, isNullable),
+            AllSchemaTypes.Uuid => new InputPrimitiveType(InputTypeKind.Guid, isNullable),
+            AllSchemaTypes.Binary => new InputPrimitiveType(InputTypeKind.Bytes, isNullable),
+            AllSchemaTypes.Integer => new InputPrimitiveType(InputTypeKind.Int32, isNullable),
+            AllSchemaTypes.Boolean => new InputPrimitiveType(InputTypeKind.Boolean, isNullable),
+            AllSchemaTypes.AnyObject => InputIntrinsicType.Unknown,
+            AllSchemaTypes.Any => InputIntrinsicType.Unknown,
+            _ => InputIntrinsicType.Null
+        };
+
+        private InputType? ToXMsFormatType(string? format, bool isNullable)
+        {
+            var type = typeof(DataFactoryElement<>);
+            return format switch
+            {
+                XMsFormat.DataFactoryElementOfObject => new InputGenericType(type, InputPrimitiveType.BinaryData, isNullable),
+                XMsFormat.DataFactoryElementOfString => new InputGenericType(type, InputPrimitiveType.String, isNullable),
+                XMsFormat.DataFactoryElementOfInt => new InputGenericType(type, InputPrimitiveType.Int32, isNullable),
+                XMsFormat.DataFactoryElementOfDouble => new InputGenericType(type, InputPrimitiveType.Float64, isNullable),
+                XMsFormat.DataFactoryElementOfBool => new InputGenericType(type, InputPrimitiveType.Boolean, isNullable),
+                //XMsFormat.DataFactoryElementOfListOfT => new InputGenericType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, false), isNullable),
+                //XMsFormat.DataFactoryElementOfListOfString => new InputGenericType(type, new InputListType(name, InputPrimitiveType.String, false, false), isNullable),
+                //XMsFormat.DataFactoryElementOfKeyValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), isNullable),
+                XMsFormat.DataFactoryElementOfDateTime => new InputGenericType(type, InputPrimitiveType.DateTime, isNullable),
+                XMsFormat.DataFactoryElementOfDuration => new InputGenericType(type, InputPrimitiveType.Time, isNullable),
+                XMsFormat.DataFactoryElementOfUri => new InputGenericType(type, InputPrimitiveType.Uri, isNullable),
+                _ => null
+            };
+        }
+
+        private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+        {
+            var valueType = CreateType(constantSchema.ValueType, format, modelsCache, isNullable);
             // normalize the value, because the "value" coming from the code model is always a string
             var kind = valueType switch
             {
@@ -671,7 +710,7 @@ namespace AutoRest.CSharp.Common.Input
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
                 Usage: GetUsage(usage),
-                EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
+                EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null, false),
                 AllowedValues: choices.Select(CreateEnumValue).ToList(),
                 IsExtensible: isExtensible,
                 IsNullable: false
