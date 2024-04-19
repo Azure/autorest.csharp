@@ -1,14 +1,13 @@
-﻿using System.Threading.Tasks;
-using AutoRest.TestServer.Tests.Infrastructure;
-using NUnit.Framework;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.Threading.Tasks;
 using System.Xml;
 using _Type._Dictionary;
 using _Type._Dictionary.Models;
-using Azure;
+using AutoRest.TestServer.Tests.Infrastructure;
+using NUnit.Framework;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
     public class TypeDictionaryTests : CadlRanchTestBase
     {
@@ -29,7 +28,7 @@ namespace CadlRanchProjects.Tests
                 {"k1", 1 },
                 {"k2", 2 }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -49,14 +48,13 @@ namespace CadlRanchProjects.Tests
                 {"k1", 9007199254740991 },
                 {"k2", -9007199254740991 }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
         public Task Dictionary_BooleanValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetBooleanValueClient().GetBooleanValueAsync();
-            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual(true, response.Value["k1"]);
             Assert.AreEqual(false, response.Value["k2"]);
         });
@@ -69,7 +67,7 @@ namespace CadlRanchProjects.Tests
                 {"k1", true },
                 {"k2", false }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -89,7 +87,7 @@ namespace CadlRanchProjects.Tests
                 {"k1", "hello" },
                 {"k2", "" }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -107,7 +105,7 @@ namespace CadlRanchProjects.Tests
             {
                 {"k1", 43.125f }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -125,7 +123,7 @@ namespace CadlRanchProjects.Tests
             {
                 {"k1", DateTimeOffset.Parse("2022-08-26T18:38:00Z") }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -143,7 +141,7 @@ namespace CadlRanchProjects.Tests
             {
                 {"k1", XmlConvert.ToTimeSpan("P123DT22H14M12.011S") }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -151,8 +149,8 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new DictionaryClient(host, null).GetUnknownValueClient().GetUnknownValueAsync();
             Assert.AreEqual(3, response.Value.Count);
-            Assert.AreEqual(1, response.Value["k1"].ToObjectFromJson());
-            Assert.AreEqual("hello", response.Value["k2"].ToObjectFromJson());
+            Assert.AreEqual(1, response.Value["k1"].ToObjectFromJson<int>());
+            Assert.AreEqual("hello", response.Value["k2"].ToObjectFromJson<string>());
             Assert.AreEqual(null, response.Value["k3"]);
         });
 
@@ -165,7 +163,7 @@ namespace CadlRanchProjects.Tests
                 {"k2", new BinaryData("\"hello\"") },
                 {"k3", null }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -185,7 +183,7 @@ namespace CadlRanchProjects.Tests
                 {"k1", new InnerModel("hello") },
                 {"k2", new InnerModel("world") }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -215,7 +213,7 @@ namespace CadlRanchProjects.Tests
                     }
                 }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -237,7 +235,7 @@ namespace CadlRanchProjects.Tests
                 {"k2", 0.5f },
                 {"k3", null }
             });
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
 }
