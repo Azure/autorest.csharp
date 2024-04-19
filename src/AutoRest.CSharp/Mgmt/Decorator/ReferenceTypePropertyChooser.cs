@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!typeToReplace.ShouldNotReplaceForProperty())
             {
-                foreach (Type replacementType in ReferenceClassFinder.PropertyReferenceTypes.Concat(ReferenceClassFinder.TypeReferenceTypes))
+                foreach (Type replacementType in ReferenceClassFinder.PropertyReferenceTypes)
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceClassFinder.PropertyReferenceTypeAttributeName).FirstOrDefault();

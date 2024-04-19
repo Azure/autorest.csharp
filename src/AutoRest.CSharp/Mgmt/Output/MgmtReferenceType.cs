@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            return base.CreatePropertyType(objectTypeProperty);
+            return objectTypeProperty;
         }
 
         protected override CSharpType? CreateInheritedType()

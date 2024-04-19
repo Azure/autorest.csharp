@@ -283,6 +283,46 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _schemaToModels[schema] = BuildModel(schema);
             }
 
+            // second, collect any model which can be replaced as whole (not as a property or as a base class)
+            var replacedTypes = new Dictionary<ObjectSchema, TypeProvider>();
+            foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
+            {
+                if (_schemaToModels.TryGetValue(schema, out var type))
+                {
+                    if (type is MgmtObjectType mgmtObjectType)
+                    {
+                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
+                        if (csharpType != null)
+                        {
+                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
+                            switch (mgmtObjectType)
+                            {
+                                case MgmtReferenceType referenceType:
+                                    // when we get a reference type, we should still wrap it into a reference type
+                                    replacedTypes.Add(schema, new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                default:
+                                    // other types will go into SystemObjectType
+                                    replacedTypes.Add(schema, csharpType.Implementation);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // third, update the entries in cache maps with the new model instances
+            foreach (var (schema, replacedType) in replacedTypes)
+            {
+                var originalModel = _schemaToModels[schema];
+                _schemaToModels[schema] = replacedType;
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
+                    schema.GetFullSerializedName(),
+                    "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
+            }
+
+
             var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
             (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();
             return _schemaToModels;

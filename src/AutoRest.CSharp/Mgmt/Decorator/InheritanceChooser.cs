@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
 
-            foreach (var parentType in ReferenceClassFinder.ReferenceTypes.Concat(ReferenceClassFinder.TypeReferenceTypes))
+            foreach (var parentType in ReferenceClassFinder.ReferenceTypes)
             {
                 var parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            foreach (var parentType in ReferenceClassFinder.ReferenceTypes) // we do not use TypeReferenceType as superset match
+            foreach (var parentType in ReferenceClassFinder.ReferenceTypes)
             {
                 if (IsSuperset(parentType, originalType, properties))
                 {

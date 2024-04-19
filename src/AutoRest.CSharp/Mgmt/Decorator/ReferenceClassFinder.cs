@@ -158,12 +158,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static IReadOnlyList<Type> ReferenceTypes => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
 
         private static IReadOnlyList<Type>? _propertyReferenceTypes;
-        internal static IReadOnlyList<Type> PropertyReferenceTypes => _propertyReferenceTypes ??= GetExternalTypes(!Configuration.MgmtConfiguration.IsArmCore).Where(t => IsPropertyReferenceType(t) && !IsObsolete(t)).ToArray();
+        internal static IReadOnlyList<Type> PropertyReferenceTypes
+            => _propertyReferenceTypes ??= GetExternalTypes().Where(t => IsPropertyReferenceType(t) && !IsObsolete(t)).ToArray();
 
         private static IReadOnlyList<Type>? _typeReferenceTypes;
         internal static IReadOnlyList<Type> TypeReferenceTypes
             // we only include armcore types when we are not generating armCore
-            => _typeReferenceTypes ??= GetExternalTypes(!Configuration.MgmtConfiguration.IsArmCore).Where(IsTypeReferenceType).ToList();
+            => _typeReferenceTypes ??= GetExternalTypes().Where(IsTypeReferenceType).ToList();
 
         /// <summary>
         /// All external types, right now they are all defined in Azure.Core, Azure.Core.Expressions.DataFactory, and Azure.ResourceManager.
@@ -171,18 +172,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src
         ///      https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core.Expressions.DataFactory/src
         /// </summary>
-        private static IReadOnlyList<Type> GetExternalTypes(bool includeArmCore)
+        private static IReadOnlyList<Type> GetExternalTypes()
         {
             List<Type> types = new List<Type>();
-            // we only include the armcore types to replace when we are NOT generating armCore.
-            if (includeArmCore)
-            {
-                var armCoreAssembly = Assembly.GetAssembly(typeof(ArmClient));
-                if (armCoreAssembly != null)
-                    types.AddRange(armCoreAssembly.GetTypes());
-            }
+            var assembly = Assembly.GetAssembly(typeof(ArmClient));
+            if (assembly != null)
+                types.AddRange(assembly.GetTypes());
 
-            var assembly = Assembly.GetAssembly(typeof(Operation));
+            assembly = Assembly.GetAssembly(typeof(Operation));
             if (assembly != null)
                 types.AddRange(assembly.GetTypes());
 
@@ -198,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<Type> GetReferenceClassCollectionInternal()
             // For ReferenceType we always include armcore types because types in armcore we also need to replace
-            => GetExternalTypes(true).Where(t => IsReferenceType(t) && !IsObsolete(t)).ToArray();
+            => GetExternalTypes().Where(t => IsReferenceType(t) && !IsObsolete(t)).ToArray();
 
         internal static bool HasAttribute(Type type, string attributeName)
             => type.GetCustomAttributes(false).Where(a => a.GetType().Name == attributeName).Any();
