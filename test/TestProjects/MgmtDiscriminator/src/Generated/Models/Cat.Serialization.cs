@@ -132,83 +132,59 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Meow), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  meow: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Meow))
             {
                 builder.Append("  meow: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Meow))
+                if (Meow.Contains(Environment.NewLine))
                 {
-                    builder.Append("  meow: ");
-                    if (Meow.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Meow}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Meow}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Meow}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Meow}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  kind: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  kind: ");
-                builder.AppendLine($"'{Kind.ToSerialString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  kind: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  kind: ");
+            builder.AppendLine($"'{Kind.ToSerialString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  id: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Id))
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
+                if (Id.Contains(Environment.NewLine))
                 {
-                    builder.Append("  id: ");
-                    if (Id.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Id}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Id}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Id}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Id}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PetType), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  type: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(PetType))
             {
                 builder.Append("  type: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PetType))
+                if (PetType.Contains(Environment.NewLine))
                 {
-                    builder.Append("  type: ");
-                    if (PetType.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{PetType}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{PetType}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{PetType}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{PetType}'");
                 }
             }
 

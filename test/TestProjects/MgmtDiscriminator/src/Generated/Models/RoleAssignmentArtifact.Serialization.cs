@@ -206,130 +206,88 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  name: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Name))
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (Name.Contains(Environment.NewLine))
                 {
-                    builder.Append("  name: ");
-                    if (Name.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Name}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Name}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Name}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Name}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  kind: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  kind: ");
-                builder.AppendLine($"'{Kind.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  kind: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  kind: ");
+            builder.AppendLine($"'{Kind.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  id: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Id))
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
-                {
-                    builder.Append("  id: ");
-                    builder.AppendLine($"'{Id.ToString()}'");
-                }
+                builder.AppendLine($"'{Id.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  systemData: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(SystemData))
-                {
-                    builder.Append("  systemData: ");
-                    builder.AppendLine($"'{SystemData.ToString()}'");
-                }
+                builder.AppendLine($"'{SystemData.ToString()}'");
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RoleDefinitionId), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("    roleDefinitionId: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(RoleDefinitionId))
             {
                 builder.Append("    roleDefinitionId: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(RoleDefinitionId))
+                if (RoleDefinitionId.Contains(Environment.NewLine))
                 {
-                    builder.Append("    roleDefinitionId: ");
-                    if (RoleDefinitionId.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{RoleDefinitionId}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{RoleDefinitionId}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{RoleDefinitionId}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{RoleDefinitionId}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PrincipalIds), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("    principalIds: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(PrincipalIds))
             {
                 builder.Append("    principalIds: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PrincipalIds))
-                {
-                    builder.Append("    principalIds: ");
-                    builder.AppendLine($"'{PrincipalIds.ToString()}'");
-                }
+                builder.AppendLine($"'{PrincipalIds.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ResourceGroup), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("    resourceGroup: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("    resourceGroup: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ResourceGroup))
+                if (ResourceGroup.Contains(Environment.NewLine))
                 {
-                    builder.Append("    resourceGroup: ");
-                    if (ResourceGroup.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ResourceGroup}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ResourceGroup}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{ResourceGroup}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ResourceGroup}'");
                 }
             }
 

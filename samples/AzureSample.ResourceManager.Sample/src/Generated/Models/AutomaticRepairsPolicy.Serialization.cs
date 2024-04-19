@@ -117,30 +117,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
-            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enabled: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Enabled))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  enabled: ");
                     var boolValue = Enabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(GracePeriod), out propertyOverride);
-            if (Optional.IsDefined(GracePeriod) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  gracePeriod: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(GracePeriod))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  gracePeriod: ");
                     if (GracePeriod.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

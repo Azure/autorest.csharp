@@ -121,30 +121,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticOSUpgrade), out propertyOverride);
-            if (Optional.IsDefined(EnableAutomaticOSUpgrade) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enableAutomaticOSUpgrade: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EnableAutomaticOSUpgrade))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  enableAutomaticOSUpgrade: ");
                     var boolValue = EnableAutomaticOSUpgrade.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisableAutomaticRollback), out propertyOverride);
-            if (Optional.IsDefined(DisableAutomaticRollback) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  disableAutomaticRollback: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DisableAutomaticRollback))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  disableAutomaticRollback: ");
                     var boolValue = DisableAutomaticRollback.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

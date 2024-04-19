@@ -252,15 +252,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -274,116 +275,124 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Caching), out propertyOverride);
-            if (Optional.IsDefined(Caching) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  caching: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Caching))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  caching: ");
                     builder.AppendLine($"'{Caching.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WriteAcceleratorEnabled), out propertyOverride);
-            if (Optional.IsDefined(WriteAcceleratorEnabled) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  writeAcceleratorEnabled: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(WriteAcceleratorEnabled))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  writeAcceleratorEnabled: ");
                     var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CreateOption), out propertyOverride);
-            builder.Append("  createOption: ");
             if (hasPropertyOverride)
             {
+                builder.Append("  createOption: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  createOption: ");
                 builder.AppendLine($"'{CreateOption.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiffDiskSettings), out propertyOverride);
-            if (Optional.IsDefined(DiffDiskSettings) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  diffDiskSettings: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DiffDiskSettings))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  diffDiskSettings: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DiffDiskSettings, options, 2, false, "  diffDiskSettings: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskSizeGB), out propertyOverride);
-            if (Optional.IsDefined(DiskSizeGB) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  diskSizeGB: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DiskSizeGB))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  diskSizeGB: ");
                     builder.AppendLine($"{DiskSizeGB.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSType), out propertyOverride);
-            if (Optional.IsDefined(OSType) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  osType: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OSType))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  osType: ");
                     builder.AppendLine($"'{OSType.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ImageUri", out propertyOverride);
-            if (Optional.IsDefined(Image) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  image: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    uri: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(Image))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    uri: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  image: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Image, options, 2, false, "  image: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VhdContainers), out propertyOverride);
-            if (Optional.IsCollectionDefined(VhdContainers) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (VhdContainers.Any() || hasPropertyOverride)
+                builder.Append("  vhdContainers: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(VhdContainers))
                 {
-                    builder.Append("  vhdContainers: ");
-                    if (hasPropertyOverride)
+                    if (VhdContainers.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  vhdContainers: ");
                         builder.AppendLine("[");
                         foreach (var item in VhdContainers)
                         {
@@ -408,15 +417,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ManagedDisk), out propertyOverride);
-            if (Optional.IsDefined(ManagedDisk) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  managedDisk: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ManagedDisk))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  managedDisk: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ManagedDisk, options, 2, false, "  managedDisk: ");
                 }
             }

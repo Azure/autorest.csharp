@@ -126,72 +126,48 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  typeName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  typeName: ");
-                builder.AppendLine($"'{TypeName.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  typeName: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  typeName: ");
+            builder.AppendLine($"'{TypeName.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderAction), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  headerAction: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  headerAction: ");
-                builder.AppendLine($"'{HeaderAction.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  headerAction: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  headerAction: ");
+            builder.AppendLine($"'{HeaderAction.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  headerName: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(HeaderName))
             {
                 builder.Append("  headerName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(HeaderName))
+                if (HeaderName.Contains(Environment.NewLine))
                 {
-                    builder.Append("  headerName: ");
-                    if (HeaderName.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{HeaderName}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{HeaderName}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{HeaderName}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{HeaderName}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  value: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Value))
             {
                 builder.Append("  value: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Value))
+                if (Value.Contains(Environment.NewLine))
                 {
-                    builder.Append("  value: ");
-                    if (Value.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Value}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Value}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Value}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Value}'");
                 }
             }
 

@@ -264,105 +264,112 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSProfile), out propertyOverride);
-            if (Optional.IsDefined(OSProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  osProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OSProfile))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  osProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, OSProfile, options, 2, false, "  osProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageProfile), out propertyOverride);
-            if (Optional.IsDefined(StorageProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  storageProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(StorageProfile))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  storageProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, StorageProfile, options, 2, false, "  storageProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NetworkProfile), out propertyOverride);
-            if (Optional.IsDefined(NetworkProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  networkProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NetworkProfile))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  networkProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, NetworkProfile, options, 2, false, "  networkProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("EncryptionAtHost", out propertyOverride);
-            if (Optional.IsDefined(SecurityProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  securityProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    encryptionAtHost: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(SecurityProfile))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    encryptionAtHost: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  securityProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, SecurityProfile, options, 2, false, "  securityProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("BootDiagnostics", out propertyOverride);
-            if (Optional.IsDefined(DiagnosticsProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  diagnosticsProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    bootDiagnostics: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(DiagnosticsProfile))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    bootDiagnostics: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  diagnosticsProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DiagnosticsProfile, options, 2, false, "  diagnosticsProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionProfile), out propertyOverride);
-            if (Optional.IsDefined(ExtensionProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  extensionProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ExtensionProfile))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  extensionProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ExtensionProfile, options, 2, false, "  extensionProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LicenseType), out propertyOverride);
-            if (Optional.IsDefined(LicenseType) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  licenseType: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(LicenseType))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  licenseType: ");
                     if (LicenseType.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -376,63 +383,67 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Priority), out propertyOverride);
-            if (Optional.IsDefined(Priority) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  priority: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Priority))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  priority: ");
                     builder.AppendLine($"'{Priority.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EvictionPolicy), out propertyOverride);
-            if (Optional.IsDefined(EvictionPolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  evictionPolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EvictionPolicy))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  evictionPolicy: ");
                     builder.AppendLine($"'{EvictionPolicy.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("BillingMaxPrice", out propertyOverride);
-            if (Optional.IsDefined(BillingProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  billingProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    maxPrice: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(BillingProfile))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    maxPrice: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  billingProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, BillingProfile, options, 2, false, "  billingProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ScheduledEventsTerminateNotificationProfile", out propertyOverride);
-            if (Optional.IsDefined(ScheduledEventsProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  scheduledEventsProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    terminateNotificationProfile: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(ScheduledEventsProfile))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    terminateNotificationProfile: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  scheduledEventsProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ScheduledEventsProfile, options, 2, false, "  scheduledEventsProfile: ");
                 }
             }

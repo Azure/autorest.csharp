@@ -113,15 +113,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Path), out propertyOverride);
-            if (Optional.IsDefined(Path) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  path: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Path))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  path: ");
                     if (Path.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -135,15 +136,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyData), out propertyOverride);
-            if (Optional.IsDefined(KeyData) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  keyData: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(KeyData))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  keyData: ");
                     if (KeyData.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

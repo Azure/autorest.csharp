@@ -122,32 +122,34 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageAccountType), out propertyOverride);
-            if (Optional.IsDefined(StorageAccountType) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  storageAccountType: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(StorageAccountType))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  storageAccountType: ");
                     builder.AppendLine($"'{StorageAccountType.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DiskEncryptionSetId", out propertyOverride);
-            if (Optional.IsDefined(DiskEncryptionSet) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  diskEncryptionSet: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(DiskEncryptionSet))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  diskEncryptionSet: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DiskEncryptionSet, options, 2, false, "  diskEncryptionSet: ");
                 }
             }

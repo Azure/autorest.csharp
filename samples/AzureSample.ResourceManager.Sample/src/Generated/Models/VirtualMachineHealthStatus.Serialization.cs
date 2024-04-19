@@ -106,15 +106,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Status), out propertyOverride);
-            if (Optional.IsDefined(Status) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  status: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Status))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  status: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Status, options, 2, false, "  status: ");
                 }
             }

@@ -117,17 +117,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicKeys), out propertyOverride);
-            if (Optional.IsCollectionDefined(PublicKeys) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (PublicKeys.Any() || hasPropertyOverride)
+                builder.Append("  publicKeys: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(PublicKeys))
                 {
-                    builder.Append("  publicKeys: ");
-                    if (hasPropertyOverride)
+                    if (PublicKeys.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  publicKeys: ");
                         builder.AppendLine("[");
                         foreach (var item in PublicKeys)
                         {

@@ -206,117 +206,81 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Order), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  order: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Order))
             {
                 builder.Append("  order: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Order))
-                {
-                    builder.Append("  order: ");
-                    builder.AppendLine($"{Order.Value}");
-                }
+                builder.AppendLine($"{Order.Value}");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  conditions: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Conditions))
             {
                 builder.Append("  conditions: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Conditions))
-                {
-                    builder.Append("  conditions: ");
-                    BicepSerializationHelpers.AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
-                }
+                BicepSerializationHelpers.AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  actions: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsCollectionDefined(Actions))
             {
-                builder.Append("  actions: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(Actions))
+                if (Actions.Any())
                 {
-                    if (Actions.Any())
+                    builder.Append("  actions: ");
+                    builder.AppendLine("[");
+                    foreach (var item in Actions)
                     {
-                        builder.Append("  actions: ");
-                        builder.AppendLine("[");
-                        foreach (var item in Actions)
-                        {
-                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  actions: ");
-                        }
-                        builder.AppendLine("  ]");
+                        BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  actions: ");
                     }
+                    builder.AppendLine("  ]");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  extraMappingInfo: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsCollectionDefined(ExtraMappingInfo))
             {
-                builder.Append("  extraMappingInfo: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(ExtraMappingInfo))
+                if (ExtraMappingInfo.Any())
                 {
-                    if (ExtraMappingInfo.Any())
+                    builder.Append("  extraMappingInfo: ");
+                    builder.AppendLine("{");
+                    foreach (var item in ExtraMappingInfo)
                     {
-                        builder.Append("  extraMappingInfo: ");
-                        builder.AppendLine("{");
-                        foreach (var item in ExtraMappingInfo)
-                        {
-                            builder.Append($"    '{item.Key}': ");
-                            BicepSerializationHelpers.AppendChildObject(builder, item.Value, options, 4, false, "  extraMappingInfo: ");
-                        }
-                        builder.AppendLine("  }");
+                        builder.Append($"    '{item.Key}': ");
+                        BicepSerializationHelpers.AppendChildObject(builder, item.Value, options, 4, false, "  extraMappingInfo: ");
                     }
+                    builder.AppendLine("  }");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  pet: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Pet))
             {
                 builder.Append("  pet: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Pet))
-                {
-                    builder.Append("  pet: ");
-                    BicepSerializationHelpers.AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
-                }
+                BicepSerializationHelpers.AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  foo: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Foo))
+                if (Foo.Contains(Environment.NewLine))
                 {
-                    builder.Append("  foo: ");
-                    if (Foo.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Foo}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Foo}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Foo}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Foo}'");
                 }
             }
 

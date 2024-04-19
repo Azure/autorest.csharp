@@ -117,29 +117,31 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CertificateUri), out propertyOverride);
-            if (Optional.IsDefined(CertificateUri) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  certificateUrl: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CertificateUri))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  certificateUrl: ");
                     builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CertificateStore), out propertyOverride);
-            if (Optional.IsDefined(CertificateStore) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  certificateStore: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CertificateStore))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  certificateStore: ");
                     if (CertificateStore.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

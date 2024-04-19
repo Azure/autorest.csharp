@@ -128,15 +128,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachineExtensionHandlerInstanceViewType), out propertyOverride);
-            if (Optional.IsDefined(VirtualMachineExtensionHandlerInstanceViewType) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  type: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(VirtualMachineExtensionHandlerInstanceViewType))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  type: ");
                     if (VirtualMachineExtensionHandlerInstanceViewType.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -150,15 +151,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeHandlerVersion), out propertyOverride);
-            if (Optional.IsDefined(TypeHandlerVersion) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  typeHandlerVersion: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(TypeHandlerVersion))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  typeHandlerVersion: ");
                     if (TypeHandlerVersion.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -172,15 +174,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Status), out propertyOverride);
-            if (Optional.IsDefined(Status) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  status: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Status))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  status: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Status, options, 2, false, "  status: ");
                 }
             }

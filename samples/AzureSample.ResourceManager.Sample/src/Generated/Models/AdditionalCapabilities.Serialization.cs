@@ -106,15 +106,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UltraSSDEnabled), out propertyOverride);
-            if (Optional.IsDefined(UltraSSDEnabled) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  ultraSSDEnabled: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(UltraSSDEnabled))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  ultraSSDEnabled: ");
                     var boolValue = UltraSSDEnabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

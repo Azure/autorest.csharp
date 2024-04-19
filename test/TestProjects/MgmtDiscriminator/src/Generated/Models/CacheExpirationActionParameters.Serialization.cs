@@ -138,55 +138,31 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  typeName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  typeName: ");
-                builder.AppendLine($"'{TypeName.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  typeName: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  typeName: ");
+            builder.AppendLine($"'{TypeName.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  cacheBehavior: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  cacheBehavior: ");
-                builder.AppendLine($"'{CacheBehavior.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  cacheBehavior: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  cacheBehavior: ");
+            builder.AppendLine($"'{CacheBehavior.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  cacheType: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  cacheType: ");
-                builder.AppendLine($"'{CacheType.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  cacheType: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  cacheType: ");
+            builder.AppendLine($"'{CacheType.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  cacheDuration: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(CacheDuration))
             {
                 builder.Append("  cacheDuration: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(CacheDuration))
-                {
-                    builder.Append("  cacheDuration: ");
-                    var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
-                    builder.AppendLine($"'{formattedTimeSpan}'");
-                }
+                var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
+                builder.AppendLine($"'{formattedTimeSpan}'");
             }
 
             builder.AppendLine("}");

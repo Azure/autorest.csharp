@@ -195,45 +195,48 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
-            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  provisionVMAgent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ProvisionVmAgent))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  provisionVMAgent: ");
                     var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticUpdates), out propertyOverride);
-            if (Optional.IsDefined(EnableAutomaticUpdates) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enableAutomaticUpdates: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EnableAutomaticUpdates))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  enableAutomaticUpdates: ");
                     var boolValue = EnableAutomaticUpdates.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TimeZone), out propertyOverride);
-            if (Optional.IsDefined(TimeZone) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  timeZone: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(TimeZone))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  timeZone: ");
                     if (TimeZone.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -247,17 +250,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdditionalUnattendContent), out propertyOverride);
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (AdditionalUnattendContent.Any() || hasPropertyOverride)
+                builder.Append("  additionalUnattendContent: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(AdditionalUnattendContent))
                 {
-                    builder.Append("  additionalUnattendContent: ");
-                    if (hasPropertyOverride)
+                    if (AdditionalUnattendContent.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  additionalUnattendContent: ");
                         builder.AppendLine("[");
                         foreach (var item in AdditionalUnattendContent)
                         {
@@ -269,35 +273,37 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("PatchMode", out propertyOverride);
-            if (Optional.IsDefined(PatchSettings) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  patchSettings: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    patchMode: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(PatchSettings))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    patchMode: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  patchSettings: ");
                     BicepSerializationHelpers.AppendChildObject(builder, PatchSettings, options, 2, false, "  patchSettings: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("WinRMListeners", out propertyOverride);
-            if (Optional.IsDefined(WinRM) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  winRM: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    listeners: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(WinRM))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    listeners: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  winRM: ");
                     BicepSerializationHelpers.AppendChildObject(builder, WinRM, options, 2, false, "  winRM: ");
                 }
             }

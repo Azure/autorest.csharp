@@ -145,15 +145,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -167,28 +168,30 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
-            builder.Append("  location: ");
             if (hasPropertyOverride)
             {
+                builder.Append("  location: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  location: ");
                 builder.AppendLine($"'{Location.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tags), out propertyOverride);
-            if (Optional.IsCollectionDefined(Tags) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Tags.Any() || hasPropertyOverride)
+                builder.Append("  tags: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Tags))
                 {
-                    builder.Append("  tags: ");
-                    if (hasPropertyOverride)
+                    if (Tags.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  tags: ");
                         builder.AppendLine("{");
                         foreach (var item in Tags)
                         {
@@ -214,15 +217,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Id))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  id: ");
                     if (Id.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

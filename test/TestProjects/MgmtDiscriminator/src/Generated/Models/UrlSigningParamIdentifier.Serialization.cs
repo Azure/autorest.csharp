@@ -107,37 +107,25 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  paramIndicator: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                builder.Append("  paramIndicator: ");
-                builder.AppendLine($"'{ParamIndicator.ToString()}'");
-            }
+            if (hasPropertyOverride) builder.Append("  paramIndicator: ");
+            builder.AppendLine(propertyOverride);
+else builder.Append("  paramIndicator: ");
+            builder.AppendLine($"'{ParamIndicator.ToString()}'");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  paramName: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(ParamName))
             {
                 builder.Append("  paramName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ParamName))
+                if (ParamName.Contains(Environment.NewLine))
                 {
-                    builder.Append("  paramName: ");
-                    if (ParamName.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ParamName}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ParamName}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{ParamName}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ParamName}'");
                 }
             }
 

@@ -121,30 +121,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WalkPerformed), out propertyOverride);
-            if (Optional.IsDefined(WalkPerformed) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  walkPerformed: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(WalkPerformed))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  walkPerformed: ");
                     var boolValue = WalkPerformed.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NextPlatformUpdateDomain), out propertyOverride);
-            if (Optional.IsDefined(NextPlatformUpdateDomain) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  nextPlatformUpdateDomain: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NextPlatformUpdateDomain))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  nextPlatformUpdateDomain: ");
                     builder.AppendLine($"{NextPlatformUpdateDomain.Value}");
                 }
             }

@@ -128,17 +128,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Extensions), out propertyOverride);
-            if (Optional.IsCollectionDefined(Extensions) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Extensions.Any() || hasPropertyOverride)
+                builder.Append("  extensions: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Extensions))
                 {
-                    builder.Append("  extensions: ");
-                    if (hasPropertyOverride)
+                    if (Extensions.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  extensions: ");
                         builder.AppendLine("[");
                         foreach (var item in Extensions)
                         {
@@ -150,15 +151,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionsTimeBudget), out propertyOverride);
-            if (Optional.IsDefined(ExtensionsTimeBudget) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  extensionsTimeBudget: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ExtensionsTimeBudget))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  extensionsTimeBudget: ");
                     if (ExtensionsTimeBudget.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

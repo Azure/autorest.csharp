@@ -136,47 +136,50 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisablePasswordAuthentication), out propertyOverride);
-            if (Optional.IsDefined(DisablePasswordAuthentication) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  disablePasswordAuthentication: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DisablePasswordAuthentication))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  disablePasswordAuthentication: ");
                     var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SshPublicKeys", out propertyOverride);
-            if (Optional.IsDefined(Ssh) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  ssh: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    publicKeys: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(Ssh))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    publicKeys: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  ssh: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Ssh, options, 2, false, "  ssh: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
-            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  provisionVMAgent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ProvisionVmAgent))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  provisionVMAgent: ");
                     var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

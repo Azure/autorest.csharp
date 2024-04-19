@@ -239,15 +239,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -261,15 +262,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Id))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  id: ");
                     if (Id.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -285,85 +287,90 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  properties:");
             builder.AppendLine(" {");
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Primary), out propertyOverride);
-            if (Optional.IsDefined(Primary) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    primary: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Primary))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    primary: ");
                     var boolValue = Primary.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAcceleratedNetworking), out propertyOverride);
-            if (Optional.IsDefined(EnableAcceleratedNetworking) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    enableAcceleratedNetworking: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EnableAcceleratedNetworking))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    enableAcceleratedNetworking: ");
                     var boolValue = EnableAcceleratedNetworking.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NetworkSecurityGroupId", out propertyOverride);
-            if (Optional.IsDefined(NetworkSecurityGroup) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    networkSecurityGroup: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      networkSecurityGroup: {");
+                builder.Append("        id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(NetworkSecurityGroup))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      networkSecurityGroup: {");
-                    builder.Append("        id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    networkSecurityGroup: ");
                     BicepSerializationHelpers.AppendChildObject(builder, NetworkSecurityGroup, options, 4, false, "    networkSecurityGroup: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DnsServers", out propertyOverride);
-            if (Optional.IsDefined(DnsSettings) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    dnsSettings: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      dnsSettings: {");
+                builder.Append("        dnsServers: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(DnsSettings))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      dnsSettings: {");
-                    builder.Append("        dnsServers: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    dnsSettings: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DnsSettings, options, 4, false, "    dnsSettings: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPConfigurations), out propertyOverride);
-            if (Optional.IsCollectionDefined(IPConfigurations) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (IPConfigurations.Any() || hasPropertyOverride)
+                builder.Append("    ipConfigurations: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(IPConfigurations))
                 {
-                    builder.Append("    ipConfigurations: ");
-                    if (hasPropertyOverride)
+                    if (IPConfigurations.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("    ipConfigurations: ");
                         builder.AppendLine("[");
                         foreach (var item in IPConfigurations)
                         {
@@ -375,15 +382,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableIPForwarding), out propertyOverride);
-            if (Optional.IsDefined(EnableIPForwarding) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    enableIPForwarding: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EnableIPForwarding))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    enableIPForwarding: ");
                     var boolValue = EnableIPForwarding.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

@@ -106,18 +106,19 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("LogAnalyticsOutput", out propertyOverride);
-            if (Optional.IsDefined(Properties) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  properties: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    output: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(Properties))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    output: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  properties: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Properties, options, 2, false, "  properties: ");
                 }
             }

@@ -121,61 +121,49 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  requiredCollection: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsCollectionDefined(RequiredCollection))
             {
-                builder.Append("  requiredCollection: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(RequiredCollection))
+                if (RequiredCollection.Any())
                 {
-                    if (RequiredCollection.Any())
+                    builder.Append("  requiredCollection: ");
+                    builder.AppendLine("[");
+                    foreach (var item in RequiredCollection)
                     {
-                        builder.Append("  requiredCollection: ");
-                        builder.AppendLine("[");
-                        foreach (var item in RequiredCollection)
+                        if (item == null)
                         {
-                            if (item == null)
-                            {
-                                builder.Append("null");
-                                continue;
-                            }
-                            if (item.Contains(Environment.NewLine))
-                            {
-                                builder.AppendLine("    '''");
-                                builder.AppendLine($"{item}'''");
-                            }
-                            else
-                            {
-                                builder.AppendLine($"    '{item}'");
-                            }
+                            builder.Append("null");
+                            continue;
                         }
-                        builder.AppendLine("  ]");
+                        if (item.Contains(Environment.NewLine))
+                        {
+                            builder.AppendLine("    '''");
+                            builder.AppendLine($"{item}'''");
+                        }
+                        else
+                        {
+                            builder.AppendLine($"    '{item}'");
+                        }
                     }
+                    builder.AppendLine("  ]");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  optionalString: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(OptionalString))
+                if (OptionalString.Contains(Environment.NewLine))
                 {
-                    builder.Append("  optionalString: ");
-                    if (OptionalString.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{OptionalString}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{OptionalString}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{OptionalString}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{OptionalString}'");
                 }
             }
 

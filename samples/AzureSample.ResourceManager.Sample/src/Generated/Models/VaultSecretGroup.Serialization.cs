@@ -133,34 +133,36 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SourceVaultId", out propertyOverride);
-            if (Optional.IsDefined(SourceVault) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  sourceVault: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(SourceVault))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  sourceVault: ");
                     BicepSerializationHelpers.AppendChildObject(builder, SourceVault, options, 2, false, "  sourceVault: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VaultCertificates), out propertyOverride);
-            if (Optional.IsCollectionDefined(VaultCertificates) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (VaultCertificates.Any() || hasPropertyOverride)
+                builder.Append("  vaultCertificates: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(VaultCertificates))
                 {
-                    builder.Append("  vaultCertificates: ");
-                    if (hasPropertyOverride)
+                    if (VaultCertificates.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  vaultCertificates: ");
                         builder.AppendLine("[");
                         foreach (var item in VaultCertificates)
                         {

@@ -121,29 +121,31 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailablePatchSummary), out propertyOverride);
-            if (Optional.IsDefined(AvailablePatchSummary) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  availablePatchSummary: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AvailablePatchSummary))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  availablePatchSummary: ");
                     BicepSerializationHelpers.AppendChildObject(builder, AvailablePatchSummary, options, 2, false, "  availablePatchSummary: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastPatchInstallationSummary), out propertyOverride);
-            if (Optional.IsDefined(LastPatchInstallationSummary) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  lastPatchInstallationSummary: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(LastPatchInstallationSummary))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  lastPatchInstallationSummary: ");
                     BicepSerializationHelpers.AppendChildObject(builder, LastPatchInstallationSummary, options, 2, false, "  lastPatchInstallationSummary: ");
                 }
             }

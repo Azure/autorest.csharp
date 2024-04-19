@@ -113,48 +113,36 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  name: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Name))
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (Name.Contains(Environment.NewLine))
                 {
-                    builder.Append("  name: ");
-                    if (Name.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Name}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Name}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Name}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Name}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  value: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(Value))
             {
                 builder.Append("  value: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Value))
+                if (Value.Contains(Environment.NewLine))
                 {
-                    builder.Append("  value: ");
-                    if (Value.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Value}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Value}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{Value}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Value}'");
                 }
             }
 

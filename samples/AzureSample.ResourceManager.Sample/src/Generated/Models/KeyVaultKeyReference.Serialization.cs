@@ -108,32 +108,34 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyUri), out propertyOverride);
-            if (Optional.IsDefined(KeyUri) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  keyUrl: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(KeyUri))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  keyUrl: ");
                     builder.AppendLine($"'{KeyUri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("SourceVaultId", out propertyOverride);
-            if (Optional.IsDefined(SourceVault) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  sourceVault: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(SourceVault))
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
+                    builder.Append("  sourceVault: ");
                     BicepSerializationHelpers.AppendChildObject(builder, SourceVault, options, 2, false, "  sourceVault: ");
                 }
             }

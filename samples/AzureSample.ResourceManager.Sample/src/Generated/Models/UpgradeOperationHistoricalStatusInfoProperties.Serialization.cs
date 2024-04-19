@@ -188,85 +188,91 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RunningStatus), out propertyOverride);
-            if (Optional.IsDefined(RunningStatus) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  runningStatus: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(RunningStatus))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  runningStatus: ");
                     BicepSerializationHelpers.AppendChildObject(builder, RunningStatus, options, 2, false, "  runningStatus: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Progress), out propertyOverride);
-            if (Optional.IsDefined(Progress) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  progress: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Progress))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  progress: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Progress, options, 2, false, "  progress: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Error), out propertyOverride);
-            if (Optional.IsDefined(Error) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  error: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Error))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  error: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Error, options, 2, false, "  error: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartedBy), out propertyOverride);
-            if (Optional.IsDefined(StartedBy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  startedBy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(StartedBy))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  startedBy: ");
                     builder.AppendLine($"'{StartedBy.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TargetImageReference), out propertyOverride);
-            if (Optional.IsDefined(TargetImageReference) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  targetImageReference: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(TargetImageReference))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  targetImageReference: ");
                     BicepSerializationHelpers.AppendChildObject(builder, TargetImageReference, options, 2, false, "  targetImageReference: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollbackInfo), out propertyOverride);
-            if (Optional.IsDefined(RollbackInfo) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  rollbackInfo: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(RollbackInfo))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  rollbackInfo: ");
                     BicepSerializationHelpers.AppendChildObject(builder, RollbackInfo, options, 2, false, "  rollbackInfo: ");
                 }
             }

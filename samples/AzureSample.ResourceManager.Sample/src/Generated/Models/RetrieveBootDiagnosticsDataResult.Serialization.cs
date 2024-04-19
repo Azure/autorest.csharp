@@ -121,29 +121,31 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ConsoleScreenshotBlobUri), out propertyOverride);
-            if (Optional.IsDefined(ConsoleScreenshotBlobUri) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  consoleScreenshotBlobUri: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ConsoleScreenshotBlobUri))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  consoleScreenshotBlobUri: ");
                     builder.AppendLine($"'{ConsoleScreenshotBlobUri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SerialConsoleLogBlobUri), out propertyOverride);
-            if (Optional.IsDefined(SerialConsoleLogBlobUri) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  serialConsoleLogBlobUri: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SerialConsoleLogBlobUri))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  serialConsoleLogBlobUri: ");
                     builder.AppendLine($"'{SerialConsoleLogBlobUri.AbsoluteUri}'");
                 }
             }

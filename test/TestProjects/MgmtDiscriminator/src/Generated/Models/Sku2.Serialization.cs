@@ -99,25 +99,19 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NestedName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (hasPropertyOverride) builder.Append("  nestedName: ");
+            builder.AppendLine(propertyOverride);
+else if (Optional.IsDefined(NestedName))
             {
                 builder.Append("  nestedName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(NestedName))
+                if (NestedName.Contains(Environment.NewLine))
                 {
-                    builder.Append("  nestedName: ");
-                    if (NestedName.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{NestedName}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{NestedName}'");
-                    }
+                    builder.AppendLine("'''");
+                    builder.AppendLine($"{NestedName}'''");
+                }
+                else
+                {
+                    builder.AppendLine($"'{NestedName}'");
                 }
             }
 

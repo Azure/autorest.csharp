@@ -147,57 +147,61 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxBatchInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxBatchInstancePercent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  maxBatchInstancePercent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(MaxBatchInstancePercent))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  maxBatchInstancePercent: ");
                     builder.AppendLine($"{MaxBatchInstancePercent.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxUnhealthyInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxUnhealthyInstancePercent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  maxUnhealthyInstancePercent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(MaxUnhealthyInstancePercent))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  maxUnhealthyInstancePercent: ");
                     builder.AppendLine($"{MaxUnhealthyInstancePercent.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxUnhealthyUpgradedInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  maxUnhealthyUpgradedInstancePercent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  maxUnhealthyUpgradedInstancePercent: ");
                     builder.AppendLine($"{MaxUnhealthyUpgradedInstancePercent.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PauseTimeBetweenBatches), out propertyOverride);
-            if (Optional.IsDefined(PauseTimeBetweenBatches) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  pauseTimeBetweenBatches: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PauseTimeBetweenBatches))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  pauseTimeBetweenBatches: ");
                     if (PauseTimeBetweenBatches.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

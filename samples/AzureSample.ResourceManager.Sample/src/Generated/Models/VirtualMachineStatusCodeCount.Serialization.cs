@@ -117,15 +117,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
-            if (Optional.IsDefined(Code) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  code: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Code))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  code: ");
                     if (Code.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -139,15 +140,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Count), out propertyOverride);
-            if (Optional.IsDefined(Count) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  count: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Count))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  count: ");
                     builder.AppendLine($"{Count.Value}");
                 }
             }

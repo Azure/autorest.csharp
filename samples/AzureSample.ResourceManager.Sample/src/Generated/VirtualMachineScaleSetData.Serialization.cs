@@ -489,15 +489,16 @@ namespace AzureSample.ResourceManager.Sample
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -511,28 +512,30 @@ namespace AzureSample.ResourceManager.Sample
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
-            builder.Append("  location: ");
             if (hasPropertyOverride)
             {
+                builder.Append("  location: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  location: ");
                 builder.AppendLine($"'{Location.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tags), out propertyOverride);
-            if (Optional.IsCollectionDefined(Tags) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Tags.Any() || hasPropertyOverride)
+                builder.Append("  tags: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Tags))
                 {
-                    builder.Append("  tags: ");
-                    if (hasPropertyOverride)
+                    if (Tags.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  tags: ");
                         builder.AppendLine("{");
                         foreach (var item in Tags)
                         {
@@ -558,59 +561,63 @@ namespace AzureSample.ResourceManager.Sample
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Sku), out propertyOverride);
-            if (Optional.IsDefined(Sku) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  sku: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Sku))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  sku: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Plan), out propertyOverride);
-            if (Optional.IsDefined(Plan) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  plan: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Plan))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  plan: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Plan, options, 2, false, "  plan: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Identity), out propertyOverride);
-            if (Optional.IsDefined(Identity) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  identity: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Identity))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  identity: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Identity, options, 2, false, "  identity: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Zones), out propertyOverride);
-            if (Optional.IsCollectionDefined(Zones) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Zones.Any() || hasPropertyOverride)
+                builder.Append("  zones: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Zones))
                 {
-                    builder.Append("  zones: ");
-                    if (hasPropertyOverride)
+                    if (Zones.Any())
                     {
-                        builder.AppendLine(propertyOverride);
-                    }
-                    else
-                    {
+                        builder.Append("  zones: ");
                         builder.AppendLine("[");
                         foreach (var item in Zones)
                         {
@@ -635,29 +642,31 @@ namespace AzureSample.ResourceManager.Sample
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Id))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  id: ");
                     builder.AppendLine($"'{Id.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
-            if (Optional.IsDefined(SystemData) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  systemData: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SystemData))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("  systemData: ");
                     builder.AppendLine($"'{SystemData.ToString()}'");
                 }
             }
@@ -665,57 +674,61 @@ namespace AzureSample.ResourceManager.Sample
             builder.Append("  properties:");
             builder.AppendLine(" {");
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UpgradePolicy), out propertyOverride);
-            if (Optional.IsDefined(UpgradePolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    upgradePolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(UpgradePolicy))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    upgradePolicy: ");
                     BicepSerializationHelpers.AppendChildObject(builder, UpgradePolicy, options, 4, false, "    upgradePolicy: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticRepairsPolicy), out propertyOverride);
-            if (Optional.IsDefined(AutomaticRepairsPolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    automaticRepairsPolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AutomaticRepairsPolicy))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    automaticRepairsPolicy: ");
                     BicepSerializationHelpers.AppendChildObject(builder, AutomaticRepairsPolicy, options, 4, false, "    automaticRepairsPolicy: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachineProfile), out propertyOverride);
-            if (Optional.IsDefined(VirtualMachineProfile) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    virtualMachineProfile: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(VirtualMachineProfile))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    virtualMachineProfile: ");
                     BicepSerializationHelpers.AppendChildObject(builder, VirtualMachineProfile, options, 4, false, "    virtualMachineProfile: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisioningState), out propertyOverride);
-            if (Optional.IsDefined(ProvisioningState) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    provisioningState: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ProvisioningState))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    provisioningState: ");
                     if (ProvisioningState.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -729,45 +742,48 @@ namespace AzureSample.ResourceManager.Sample
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Overprovision), out propertyOverride);
-            if (Optional.IsDefined(Overprovision) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    overprovision: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Overprovision))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    overprovision: ");
                     var boolValue = Overprovision.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DoNotRunExtensionsOnOverprovisionedVms), out propertyOverride);
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    doNotRunExtensionsOnOverprovisionedVMs: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    doNotRunExtensionsOnOverprovisionedVMs: ");
                     var boolValue = DoNotRunExtensionsOnOverprovisionedVms.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UniqueId), out propertyOverride);
-            if (Optional.IsDefined(UniqueId) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    uniqueId: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(UniqueId))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    uniqueId: ");
                     if (UniqueId.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -781,121 +797,128 @@ namespace AzureSample.ResourceManager.Sample
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SinglePlacementGroup), out propertyOverride);
-            if (Optional.IsDefined(SinglePlacementGroup) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    singlePlacementGroup: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SinglePlacementGroup))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    singlePlacementGroup: ");
                     var boolValue = SinglePlacementGroup.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ZoneBalance), out propertyOverride);
-            if (Optional.IsDefined(ZoneBalance) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    zoneBalance: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ZoneBalance))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    zoneBalance: ");
                     var boolValue = ZoneBalance.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PlatformFaultDomainCount), out propertyOverride);
-            if (Optional.IsDefined(PlatformFaultDomainCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    platformFaultDomainCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PlatformFaultDomainCount))
                 {
-                    builder.AppendLine(propertyOverride);
-                }
-                else
-                {
+                    builder.Append("    platformFaultDomainCount: ");
                     builder.AppendLine($"{PlatformFaultDomainCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ProximityPlacementGroupId", out propertyOverride);
-            if (Optional.IsDefined(ProximityPlacementGroup) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    proximityPlacementGroup: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      proximityPlacementGroup: {");
+                builder.Append("        id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(ProximityPlacementGroup))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      proximityPlacementGroup: {");
-                    builder.Append("        id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    proximityPlacementGroup: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ProximityPlacementGroup, options, 4, false, "    proximityPlacementGroup: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("HostGroupId", out propertyOverride);
-            if (Optional.IsDefined(HostGroup) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    hostGroup: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      hostGroup: {");
+                builder.Append("        id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(HostGroup))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      hostGroup: {");
-                    builder.Append("        id: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    hostGroup: ");
                     BicepSerializationHelpers.AppendChildObject(builder, HostGroup, options, 4, false, "    hostGroup: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UltraSSDEnabled", out propertyOverride);
-            if (Optional.IsDefined(AdditionalCapabilities) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    additionalCapabilities: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      additionalCapabilities: {");
+                builder.Append("        ultraSSDEnabled: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(AdditionalCapabilities))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      additionalCapabilities: {");
-                    builder.Append("        ultraSSDEnabled: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    additionalCapabilities: ");
                     BicepSerializationHelpers.AppendChildObject(builder, AdditionalCapabilities, options, 4, false, "    additionalCapabilities: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("ScaleInRules", out propertyOverride);
-            if (Optional.IsDefined(ScaleInPolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    scaleInPolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      scaleInPolicy: {");
+                builder.Append("        rules: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(ScaleInPolicy))
                 {
-                    builder.AppendLine("{");
-                    builder.AppendLine("      scaleInPolicy: {");
-                    builder.Append("        rules: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("      }");
-                    builder.AppendLine("    }");
-                }
-                else
-                {
+                    builder.Append("    scaleInPolicy: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ScaleInPolicy, options, 4, false, "    scaleInPolicy: ");
                 }
             }
