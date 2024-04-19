@@ -36,8 +36,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetModelValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<InnerModel>>> GetModelValueAsync()
         {
             ClientResult result = await GetModelValueAsync(null).ConfigureAwait(false);
@@ -52,8 +51,7 @@ namespace _Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> The GetModelValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual ClientResult<IReadOnlyList<InnerModel>> GetModelValue()
         {
             ClientResult result = GetModelValue(null);
@@ -116,10 +114,9 @@ namespace _Type._Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<InnerModel> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -129,10 +126,9 @@ namespace _Type._Array
             return result;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IEnumerable<InnerModel> body)
         {
             Argument.AssertNotNull(body, nameof(body));

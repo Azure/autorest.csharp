@@ -35,8 +35,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetNullableFloatValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual async Task<ClientResult<IReadOnlyDictionary<string, float?>>> GetNullableFloatValueAsync()
         {
             ClientResult result = await GetNullableFloatValueAsync(null).ConfigureAwait(false);
@@ -58,8 +57,7 @@ namespace _Type._Dictionary
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> The GetNullableFloatValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual ClientResult<IReadOnlyDictionary<string, float?>> GetNullableFloatValue()
         {
             ClientResult result = GetNullableFloatValue(null);
@@ -129,10 +127,9 @@ namespace _Type._Dictionary
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IDictionary<string, float?> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -142,10 +139,9 @@ namespace _Type._Dictionary
             return result;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IDictionary<string, float?> body)
         {
             Argument.AssertNotNull(body, nameof(body));

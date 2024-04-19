@@ -45,9 +45,8 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetNullableFloatValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, float?>>> GetNullableFloatValueAsync(CancellationToken cancellationToken = default)
         {
@@ -71,9 +70,8 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetNullableFloatValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, float?>> GetNullableFloatValue(CancellationToken cancellationToken = default)
         {
@@ -167,11 +165,10 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,float?},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, float?> body, CancellationToken cancellationToken = default)
         {
@@ -183,11 +180,10 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(IDictionary{string,float?},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, float?> body, CancellationToken cancellationToken = default)
         {

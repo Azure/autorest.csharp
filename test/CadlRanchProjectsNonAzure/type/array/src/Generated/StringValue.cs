@@ -35,8 +35,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetStringValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<string>>> GetStringValueAsync()
         {
             ClientResult result = await GetStringValueAsync(null).ConfigureAwait(false);
@@ -51,8 +50,7 @@ namespace _Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> The GetStringValue method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual ClientResult<IReadOnlyList<string>> GetStringValue()
         {
             ClientResult result = GetStringValue(null);
@@ -115,10 +113,9 @@ namespace _Type._Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<string> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -128,10 +125,9 @@ namespace _Type._Array
             return result;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IEnumerable<string> body)
         {
             Argument.AssertNotNull(body, nameof(body));

@@ -35,8 +35,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetInt64Value method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<long>>> GetInt64ValueAsync()
         {
             ClientResult result = await GetInt64ValueAsync(null).ConfigureAwait(false);
@@ -51,8 +50,7 @@ namespace _Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> The GetInt64Value method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual ClientResult<IReadOnlyList<long>> GetInt64Value()
         {
             ClientResult result = GetInt64Value(null);
@@ -115,10 +113,9 @@ namespace _Type._Array
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IEnumerable<long> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -128,10 +125,9 @@ namespace _Type._Array
             return result;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IEnumerable<long> body)
         {
             Argument.AssertNotNull(body, nameof(body));

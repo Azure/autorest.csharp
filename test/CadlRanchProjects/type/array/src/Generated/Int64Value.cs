@@ -45,9 +45,8 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetInt64Value method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<long>>> GetInt64ValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetInt64Value method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<long>> GetInt64Value(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Array
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='PutAsync(IEnumerable{long},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IEnumerable<long> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Array
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="long"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='Put(IEnumerable{long},CancellationToken)']/*" />
         public virtual Response Put(IEnumerable<long> body, CancellationToken cancellationToken = default)
         {

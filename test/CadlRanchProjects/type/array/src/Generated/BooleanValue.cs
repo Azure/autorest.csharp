@@ -45,9 +45,8 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetBooleanValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<bool>>> GetBooleanValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetBooleanValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<bool>> GetBooleanValue(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Array
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{bool},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IEnumerable<bool> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Array
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(IEnumerable{bool},CancellationToken)']/*" />
         public virtual Response Put(IEnumerable<bool> body, CancellationToken cancellationToken = default)
         {

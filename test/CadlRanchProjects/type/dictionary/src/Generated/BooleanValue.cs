@@ -45,9 +45,8 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetBooleanValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetBooleanValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, bool>> GetBooleanValue(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,bool},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, bool> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(IDictionary{string,bool},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, bool> body, CancellationToken cancellationToken = default)
         {

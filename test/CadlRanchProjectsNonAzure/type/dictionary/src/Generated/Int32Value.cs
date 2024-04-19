@@ -35,8 +35,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetInt32Value method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual async Task<ClientResult<IReadOnlyDictionary<string, int>>> GetInt32ValueAsync()
         {
             ClientResult result = await GetInt32ValueAsync(null).ConfigureAwait(false);
@@ -51,8 +50,7 @@ namespace _Type._Dictionary
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> The GetInt32Value method. </summary>
-        /// <remarks> Get. </remarks>
+        /// <summary> Get. </summary>
         public virtual ClientResult<IReadOnlyDictionary<string, int>> GetInt32Value()
         {
             ClientResult result = GetInt32Value(null);
@@ -115,10 +113,9 @@ namespace _Type._Dictionary
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(IDictionary<string, int> body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -128,10 +125,9 @@ namespace _Type._Dictionary
             return result;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(IDictionary<string, int> body)
         {
             Argument.AssertNotNull(body, nameof(body));

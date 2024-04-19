@@ -45,9 +45,8 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetInt32Value method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetInt32ValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetInt32Value method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, int>> GetInt32Value(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,int},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, int> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='Put(IDictionary{string,int},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, int> body, CancellationToken cancellationToken = default)
         {

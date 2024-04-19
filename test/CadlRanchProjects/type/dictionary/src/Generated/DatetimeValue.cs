@@ -45,9 +45,8 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetDatetimeValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDatetimeValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetDatetimeValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDatetimeValue(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,DateTimeOffset},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, DateTimeOffset> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='Put(IDictionary{string,DateTimeOffset},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, DateTimeOffset> body, CancellationToken cancellationToken = default)
         {

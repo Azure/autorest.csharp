@@ -45,9 +45,8 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> The GetDurationValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValueAsync(CancellationToken cancellationToken = default)
         {
@@ -64,9 +63,8 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> The GetDurationValue method. </summary>
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<TimeSpan>> GetDurationValue(CancellationToken cancellationToken = default)
         {
@@ -153,11 +151,10 @@ namespace _Type._Array
             }
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{TimeSpan},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IEnumerable<TimeSpan> body, CancellationToken cancellationToken = default)
         {
@@ -169,11 +166,10 @@ namespace _Type._Array
             return response;
         }
 
-        /// <summary> The Put method. </summary>
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(IEnumerable{TimeSpan},CancellationToken)']/*" />
         public virtual Response Put(IEnumerable<TimeSpan> body, CancellationToken cancellationToken = default)
         {
