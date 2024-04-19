@@ -163,13 +163,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             var keyType = arguments[0];
             var valueType = arguments[1];
 
-            return type.MakeGenericType(new[] { ReplaceUnverifiableType(keyType), ReplaceUnverifiableType(valueType) });
+            return type.MakeGenericType(new[] { ReplaceUnverifiableType(keyType, typeFactory), ReplaceUnverifiableType(valueType, typeFactory) });
         }
 
-        private static CSharpType ReplaceUnverifiableType(CSharpType type)
+        private static CSharpType ReplaceUnverifiableType(CSharpType type, TypeFactory typeFactory)
         {
             // when the type is System.Object
-            if (type.EqualsIgnoreNullable(typeof(object)))
+            if (type.EqualsIgnoreNullable(typeFactory.UnknownType))
             {
                 return type;
             }
@@ -190,12 +190,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             // replace for list
             if (type.IsList)
             {
-                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0]) });
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], typeFactory) });
             }
             // replace for dictionary
             if (type.IsDictionary)
             {
-                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0]), ReplaceUnverifiableType(type.Arguments[1]) });
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], typeFactory), ReplaceUnverifiableType(type.Arguments[1], typeFactory) });
             }
             // for the other cases, wrap them in a union
             return CSharpType.FromUnion(new[] { type }, type.IsNullable);
