@@ -12,8 +12,8 @@ if(Test-Path $clonedPath)
     Remove-Item $clonedPath -Recurse -Force
 }
 
-Write-Host "git clone --no-checkout --filter=tree:0 https://github.com/live1206/azure-sdk-for-net.git $clonedPath"
-git clone --no-checkout --filter=tree:0 https://github.com/live1206/azure-sdk-for-net.git/ -b rehydration-static-method $clonedPath
+Write-Host "git clone --no-checkout --filter=tree:0 https://github.com/Azure/azure-sdk-for-net.git $clonedPath"
+git clone --no-checkout --filter=tree:0 https://github.com/Azure/azure-sdk-for-net.git $clonedPath
 Push-Location $clonedPath
 Write-Host "git sparse-checkout init"
 git sparse-checkout init
