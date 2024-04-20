@@ -42,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue<NetworkInterfaceIPConfiguration>(DestinationNetworkInterfaceIPConfiguration);
+                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue<FrontendIPConfiguration>(DestinationLoadBalancerFrontEndIPConfiguration);
+                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {
@@ -208,11 +208,11 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeVirtualNetworkTap(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<VirtualNetworkTap>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

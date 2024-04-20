@@ -16,7 +16,7 @@ namespace SpreadTypeSpec.Models
 {
     internal partial class SpreadMultiTargetAliasRequest : IUtf8JsonSerializable, IJsonModel<SpreadMultiTargetAliasRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadMultiTargetAliasRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadMultiTargetAliasRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SpreadMultiTargetAliasRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace SpreadTypeSpec.Models
 
         internal static SpreadMultiTargetAliasRequest DeserializeSpreadMultiTargetAliasRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,11 +133,11 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadMultiTargetAliasRequest(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SpreadMultiTargetAliasRequest>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

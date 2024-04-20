@@ -44,6 +44,7 @@ namespace Encode.Duration
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -52,12 +53,13 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -66,14 +68,14 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Iso 8601. </summary>
         /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -158,12 +161,13 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Iso8601Async(content, context).ConfigureAwait(false);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
+        /// <summary> Iso 8601. </summary>
         /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -172,14 +176,14 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Iso8601(content, context);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,6 +260,7 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Int 32 seconds. </summary>
         /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -264,12 +269,13 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Int32SecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
+        /// <summary> Int 32 seconds. </summary>
         /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -278,14 +284,14 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Int32Seconds(content, context);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +330,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -362,6 +368,7 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Float seconds. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -370,12 +377,13 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FloatSecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
+        /// <summary> Float seconds. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -384,14 +392,14 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FloatSeconds(content, context);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +438,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -468,6 +476,7 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Float seconds array. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -476,12 +485,13 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FloatSecondsArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 
+        /// <summary> Float seconds array. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -490,14 +500,14 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FloatSecondsArray(content, context);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -536,7 +546,7 @@ namespace Encode.Duration
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds array.
         /// <list type="bullet">
         /// <item>
         /// <description>

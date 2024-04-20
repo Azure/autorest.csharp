@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class InputRecursiveModel : IUtf8JsonSerializable, IJsonModel<InputRecursiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<InputRecursiveModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -32,7 +32,7 @@ namespace ModelsTypeSpec.Models
             if (Optional.IsDefined(Inner))
             {
                 writer.WritePropertyName("inner"u8);
-                writer.WriteObjectValue<InputRecursiveModel>(Inner, options);
+                writer.WriteObjectValue(Inner, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
 
         internal static InputRecursiveModel DeserializeInputRecursiveModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -140,11 +140,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputRecursiveModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<InputRecursiveModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

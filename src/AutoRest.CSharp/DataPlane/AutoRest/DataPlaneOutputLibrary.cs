@@ -34,17 +34,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
 
-        public DataPlaneOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public DataPlaneOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
         {
-            var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
-
             _typeFactory = new TypeFactory(this, typeof(object));
             _sourceInputModel = sourceInputModel;
-
-            // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(codeModel);
-            ConstantSchemaTransformer.Transform(codeModel);
-            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
 
             _input = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
 

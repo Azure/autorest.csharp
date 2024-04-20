@@ -16,7 +16,7 @@ namespace FirstTestTypeSpec.Models
 {
     public partial class ContainSelf : IUtf8JsonSerializable, IJsonModel<ContainSelf>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ContainSelf>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ContainSelf>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ContainSelf>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -28,7 +28,7 @@ namespace FirstTestTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("self"u8);
-            writer.WriteObjectValue<ContainSelf>(Self, options);
+            writer.WriteObjectValue(Self, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,7 +61,7 @@ namespace FirstTestTypeSpec.Models
 
         internal static ContainSelf DeserializeContainSelf(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -125,11 +125,11 @@ namespace FirstTestTypeSpec.Models
             return DeserializeContainSelf(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ContainSelf>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

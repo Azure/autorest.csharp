@@ -16,7 +16,7 @@ namespace body_complex.Models
 {
     public partial class DotFishMarket : IUtf8JsonSerializable, IJsonModel<DotFishMarket>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFishMarket>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFishMarket>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DotFishMarket>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -30,7 +30,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue<DotSalmon>(SampleSalmon, options);
+                writer.WriteObjectValue(SampleSalmon, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -38,14 +38,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue<DotSalmon>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue<DotFish>(SampleFish, options);
+                writer.WriteObjectValue(SampleFish, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -53,7 +53,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue<DotFish>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -89,7 +89,7 @@ namespace body_complex.Models
 
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,11 +197,11 @@ namespace body_complex.Models
             return DeserializeDotFishMarket(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<DotFishMarket>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

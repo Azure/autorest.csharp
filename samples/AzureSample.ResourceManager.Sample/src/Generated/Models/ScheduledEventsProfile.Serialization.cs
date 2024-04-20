@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     internal partial class ScheduledEventsProfile : IUtf8JsonSerializable, IJsonModel<ScheduledEventsProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScheduledEventsProfile>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScheduledEventsProfile>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ScheduledEventsProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -31,7 +31,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue<TerminateNotificationProfile>(TerminateNotificationProfile, options);
+                writer.WriteObjectValue(TerminateNotificationProfile, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

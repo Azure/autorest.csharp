@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateDetectionOptions : IUtf8JsonSerializable, IJsonModel<UnivariateDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateDetectionOptions>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateDetectionOptions>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UnivariateDetectionOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue<TimeSeriesPoint>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Granularity))
@@ -101,7 +101,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateDetectionOptions DeserializeUnivariateDetectionOptions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -249,11 +249,11 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateDetectionOptions(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnivariateDetectionOptions>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

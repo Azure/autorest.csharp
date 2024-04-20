@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable, IJsonModel<RoundTripReadOnlyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripReadOnlyModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripReadOnlyModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RoundTripReadOnlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -50,12 +50,12 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
-                writer.WriteObjectValue<DerivedModel>(RequiredReadonlyModel, options);
+                writer.WriteObjectValue(RequiredReadonlyModel, options);
             }
             if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
-                writer.WriteObjectValue<DerivedModel>(OptionalReadonlyModel, options);
+                writer.WriteObjectValue(OptionalReadonlyModel, options);
             }
             if (options.Format != "W")
             {
@@ -103,7 +103,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredReadOnlyModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in RequiredReadOnlyModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -166,7 +166,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalReadOnlyModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -193,7 +193,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -256,7 +256,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -595,11 +595,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripReadOnlyModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripReadOnlyModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

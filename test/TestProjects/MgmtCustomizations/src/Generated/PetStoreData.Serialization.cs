@@ -17,7 +17,7 @@ namespace MgmtCustomizations
 {
     public partial class PetStoreData : IUtf8JsonSerializable, IJsonModel<PetStoreData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<PetStoreData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -31,7 +31,7 @@ namespace MgmtCustomizations
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue<PetStoreProperties>(Properties, options);
+                writer.WriteObjectValue(Properties, options);
             }
             if (options.Format != "W")
             {
@@ -85,7 +85,7 @@ namespace MgmtCustomizations
 
         internal static PetStoreData DeserializePetStoreData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

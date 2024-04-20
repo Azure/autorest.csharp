@@ -47,6 +47,7 @@ namespace _Type.Model.Empty
             _endpoint = endpoint;
         }
 
+        /// <summary> Put empty. </summary>
         /// <param name="input"> The <see cref="EmptyInput"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -55,12 +56,13 @@ namespace _Type.Model.Empty
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutEmptyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Put empty. </summary>
         /// <param name="input"> The <see cref="EmptyInput"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -69,14 +71,14 @@ namespace _Type.Model.Empty
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutEmpty(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put empty.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put empty.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,6 +155,7 @@ namespace _Type.Model.Empty
             }
         }
 
+        /// <summary> Get empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='GetEmptyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<EmptyOutput>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -162,6 +165,7 @@ namespace _Type.Model.Empty
             return Response.FromValue(EmptyOutput.FromResponse(response), response);
         }
 
+        /// <summary> Get empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='GetEmpty(CancellationToken)']/*" />
         public virtual Response<EmptyOutput> GetEmpty(CancellationToken cancellationToken = default)
@@ -172,7 +176,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get empty.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +211,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get empty.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,6 +245,7 @@ namespace _Type.Model.Empty
             }
         }
 
+        /// <summary> Post round trip empty. </summary>
         /// <param name="body"> The <see cref="EmptyInputOutput"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -249,12 +254,13 @@ namespace _Type.Model.Empty
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PostRoundTripEmptyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(EmptyInputOutput.FromResponse(response), response);
         }
 
+        /// <summary> Post round trip empty. </summary>
         /// <param name="body"> The <see cref="EmptyInputOutput"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -263,14 +269,14 @@ namespace _Type.Model.Empty
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PostRoundTripEmpty(content, context);
             return Response.FromValue(EmptyInputOutput.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Post round trip empty.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -309,7 +315,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Post round trip empty.
         /// <list type="bullet">
         /// <item>
         /// <description>

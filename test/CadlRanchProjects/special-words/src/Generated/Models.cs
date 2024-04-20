@@ -43,6 +43,7 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
+        /// <summary> With and. </summary>
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -51,12 +52,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAndAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With and. </summary>
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -65,14 +67,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAnd(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With and.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +113,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With and.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With as. </summary>
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -157,12 +160,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAsAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With as. </summary>
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -171,14 +175,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAs(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With as.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With as.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,6 +259,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With assert. </summary>
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -263,12 +268,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAssertAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With assert. </summary>
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -277,14 +283,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAssert(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With assert.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -323,7 +329,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With assert.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -361,6 +367,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With async. </summary>
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -369,12 +376,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAsyncAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With async. </summary>
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -383,14 +391,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAsync(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With async.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -429,7 +437,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With async.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -467,6 +475,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With await. </summary>
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -475,12 +484,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithAwaitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With await. </summary>
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -489,14 +499,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithAwait(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With await.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -535,7 +545,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With await.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -573,6 +583,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With break. </summary>
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -581,12 +592,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithBreakAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With break. </summary>
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -595,14 +607,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithBreak(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With break.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -641,7 +653,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With break.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -679,6 +691,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With class. </summary>
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -687,12 +700,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithClassAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With class. </summary>
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -701,14 +715,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithClass(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With class.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -747,7 +761,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With class.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -785,6 +799,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With constructor. </summary>
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -793,12 +808,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithConstructorAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With constructor. </summary>
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -807,14 +823,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithConstructor(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With constructor.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -853,7 +869,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With constructor.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -891,6 +907,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With continue. </summary>
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -899,12 +916,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithContinueAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With continue. </summary>
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -913,14 +931,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithContinue(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With continue.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -959,7 +977,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With continue.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -997,6 +1015,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With def. </summary>
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1005,12 +1024,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithDefAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With def. </summary>
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1019,14 +1039,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithDef(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With def.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1065,7 +1085,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With def.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1103,6 +1123,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With del. </summary>
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1111,12 +1132,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithDelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With del. </summary>
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1125,14 +1147,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithDel(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With del.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1171,7 +1193,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With del.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1209,6 +1231,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With elif. </summary>
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1217,12 +1240,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithElifAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With elif. </summary>
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1231,14 +1255,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithElif(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With elif.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1277,7 +1301,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With elif.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1315,6 +1339,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With else. </summary>
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1323,12 +1348,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithElseAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With else. </summary>
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1337,14 +1363,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithElse(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With else.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1383,7 +1409,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With else.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1421,6 +1447,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With except. </summary>
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1429,12 +1456,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithExceptAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With except. </summary>
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1443,14 +1471,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithExcept(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With except.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1489,7 +1517,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With except.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1527,6 +1555,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With exec. </summary>
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1535,12 +1564,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithExecAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With exec. </summary>
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1549,14 +1579,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithExec(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With exec.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1595,7 +1625,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With exec.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1633,6 +1663,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With finally. </summary>
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1641,12 +1672,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithFinallyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With finally. </summary>
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1655,14 +1687,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFinally(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With finally.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1701,7 +1733,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With finally.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1739,6 +1771,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With for. </summary>
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1747,12 +1780,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithForAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With for. </summary>
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1761,14 +1795,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFor(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With for.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1807,7 +1841,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With for.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1845,6 +1879,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With from. </summary>
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1853,12 +1888,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithFromAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With from. </summary>
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1867,14 +1903,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithFrom(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With from.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1913,7 +1949,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With from.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1951,6 +1987,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With global. </summary>
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1959,12 +1996,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithGlobalAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With global. </summary>
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1973,14 +2011,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithGlobal(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With global.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2019,7 +2057,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With global.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2057,6 +2095,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With if. </summary>
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2065,12 +2104,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithIfAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With if. </summary>
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2079,14 +2119,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIf(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With if.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2125,7 +2165,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With if.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2163,6 +2203,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With import. </summary>
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2171,12 +2212,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithImportAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With import. </summary>
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2185,14 +2227,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithImport(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With import.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2231,7 +2273,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With import.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2269,6 +2311,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With in. </summary>
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2277,12 +2320,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithInAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With in. </summary>
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2291,14 +2335,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIn(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With in.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2337,7 +2381,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With in.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2375,6 +2419,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With is. </summary>
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2383,12 +2428,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithIsAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With is. </summary>
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2397,14 +2443,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithIs(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With is.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2443,7 +2489,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With is.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2481,6 +2527,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With lambda. </summary>
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2489,12 +2536,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithLambdaAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With lambda. </summary>
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2503,14 +2551,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithLambda(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With lambda.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2549,7 +2597,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With lambda.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2587,6 +2635,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With not. </summary>
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2595,12 +2644,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithNotAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With not. </summary>
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2609,14 +2659,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithNot(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With not.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2655,7 +2705,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With not.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2693,6 +2743,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With or. </summary>
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2701,12 +2752,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithOrAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With or. </summary>
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2715,14 +2767,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithOr(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With or.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2761,7 +2813,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With or.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2799,6 +2851,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With pass. </summary>
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2807,12 +2860,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithPassAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With pass. </summary>
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2821,14 +2875,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithPass(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With pass.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2867,7 +2921,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With pass.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2905,6 +2959,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With raise. </summary>
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2913,12 +2968,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithRaiseAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With raise. </summary>
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2927,14 +2983,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithRaise(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With raise.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2973,7 +3029,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With raise.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3011,6 +3067,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With return. </summary>
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3019,12 +3076,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithReturnAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With return. </summary>
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3033,14 +3091,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithReturn(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With return.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3079,7 +3137,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With return.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3117,6 +3175,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With try. </summary>
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3125,12 +3184,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithTryAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With try. </summary>
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3139,14 +3199,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithTry(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With try.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3185,7 +3245,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With try.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3223,6 +3283,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With while. </summary>
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3231,12 +3292,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithWhileAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With while. </summary>
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3245,14 +3307,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithWhile(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With while.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3291,7 +3353,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With while.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3329,6 +3391,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With with. </summary>
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3337,12 +3400,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithWithAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With with. </summary>
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3351,14 +3415,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithWith(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With with.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3397,7 +3461,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With with.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3435,6 +3499,7 @@ namespace SpecialWords
             }
         }
 
+        /// <summary> With yield. </summary>
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3443,12 +3508,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await WithYieldAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> With yield. </summary>
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -3457,14 +3523,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = WithYield(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With yield.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3503,7 +3569,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With yield.
         /// <list type="bullet">
         /// <item>
         /// <description>

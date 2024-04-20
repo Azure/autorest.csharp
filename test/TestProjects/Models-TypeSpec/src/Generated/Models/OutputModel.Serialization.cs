@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class OutputModel : IUtf8JsonSerializable, IJsonModel<OutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -32,12 +32,12 @@ namespace ModelsTypeSpec.Models
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<DerivedModel>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue<CollectionItem>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -45,7 +45,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<RecordItem>(item.Value, options);
+                writer.WriteObjectValue(item.Value, options);
             }
             writer.WriteEndObject();
             if (Optional.IsCollectionDefined(OptionalList))
@@ -54,7 +54,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in OptionalNullableList)
                     {
-                        writer.WriteObjectValue<CollectionItem>(item, options);
+                        writer.WriteObjectValue(item, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -82,7 +82,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -95,7 +95,7 @@ namespace ModelsTypeSpec.Models
                     foreach (var item in OptionalNullableRecord)
                     {
                         writer.WritePropertyName(item.Key);
-                        writer.WriteObjectValue<RecordItem>(item.Value, options);
+                        writer.WriteObjectValue(item.Value, options);
                     }
                     writer.WriteEndObject();
                 }
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
 
         internal static OutputModel DeserializeOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -304,11 +304,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeOutputModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<OutputModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

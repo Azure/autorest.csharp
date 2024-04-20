@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class DeliveryRuleRequestHeaderAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRequestHeaderAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleRequestHeaderAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleRequestHeaderAction>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DeliveryRuleRequestHeaderAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue<HeaderActionParameters>(Parameters, options);
+            writer.WriteObjectValue(Parameters, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleRequestHeaderAction DeserializeDeliveryRuleRequestHeaderAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

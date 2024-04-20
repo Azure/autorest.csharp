@@ -30,17 +30,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                writer.WriteObjectValue<SubResource>(FrontendIPConfiguration);
+                writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue<SubResource>(BackendAddressPool);
+                writer.WriteObjectValue(BackendAddressPool);
             }
             if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
-                writer.WriteObjectValue<SubResource>(Probe);
+                writer.WriteObjectValue(Probe);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -278,11 +278,11 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeLoadBalancingRule(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<LoadBalancingRule>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

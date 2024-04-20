@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlRedirectAction : IUtf8JsonSerializable, IJsonModel<UrlRedirectAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRedirectAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRedirectAction>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UrlRedirectAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue<UrlRedirectActionParameters>(Parameters, options);
+            writer.WriteObjectValue(Parameters, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRedirectAction DeserializeUrlRedirectAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

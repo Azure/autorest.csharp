@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class AzureSampleResourceManagerSampleUsage : IUtf8JsonSerializable, IJsonModel<AzureSampleResourceManagerSampleUsage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerSampleUsage>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerSampleUsage>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<AzureSampleResourceManagerSampleUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WritePropertyName("limit"u8);
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("name"u8);
-            writer.WriteObjectValue<AzureSampleResourceManagerSampleUsageName>(Name, options);
+            writer.WriteObjectValue(Name, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static AzureSampleResourceManagerSampleUsage DeserializeAzureSampleResourceManagerSampleUsage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

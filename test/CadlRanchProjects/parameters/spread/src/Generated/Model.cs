@@ -44,6 +44,7 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
+        /// <summary> Spread as request body. </summary>
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
@@ -52,12 +53,13 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyParameter.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Spread as request body. </summary>
         /// <param name="bodyParameter"> This is a simple model. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
@@ -66,14 +68,14 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyParameter.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAsRequestBody(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>

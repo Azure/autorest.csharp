@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
 {
     internal partial class ModelWithNullableObjectProperty : IUtf8JsonSerializable, IJsonModel<ModelWithNullableObjectProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithNullableObjectProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithNullableObjectProperty>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ModelWithNullableObjectProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -64,7 +64,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithNullableObjectProperty DeserializeModelWithNullableObjectProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,11 +128,11 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithNullableObjectProperty(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ModelWithNullableObjectProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

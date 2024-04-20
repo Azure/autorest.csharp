@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     public partial class Cobra : IUtf8JsonSerializable, IJsonModel<Cobra>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cobra>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cobra>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Cobra>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         internal static Cobra DeserializeCobra(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,11 +133,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return DeserializeCobra(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Cobra>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

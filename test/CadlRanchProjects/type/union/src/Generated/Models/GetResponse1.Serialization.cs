@@ -16,7 +16,7 @@ namespace _Type.Union.Models
 {
     public partial class GetResponse1 : IUtf8JsonSerializable, IJsonModel<GetResponse1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GetResponse1>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GetResponse1>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<GetResponse1>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -28,7 +28,7 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop.ToString());
+            writer.WriteObjectValue(Prop, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,20 +61,20 @@ namespace _Type.Union.Models
 
         internal static GetResponse1 DeserializeGetResponse1(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            GetResponseProp1 prop = default;
+            MixedLiteralsCases prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = new GetResponseProp1(property.Value.GetString());
+                    prop = MixedLiteralsCases.DeserializeMixedLiteralsCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -125,11 +125,11 @@ namespace _Type.Union.Models
             return DeserializeGetResponse1(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<GetResponse1>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

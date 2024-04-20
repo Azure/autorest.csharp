@@ -25,12 +25,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Vhd);
+                writer.WriteObjectValue(Vhd);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue<VirtualHardDisk>(Image);
+                writer.WriteObjectValue(Image);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue<ManagedDiskParameters>(ManagedDisk);
+                writer.WriteObjectValue(ManagedDisk);
             }
             if (Optional.IsDefined(ToBeDetached))
             {

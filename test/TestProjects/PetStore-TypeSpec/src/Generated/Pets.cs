@@ -202,6 +202,7 @@ namespace PetStore
             }
         }
 
+        /// <summary> Create. </summary>
         /// <param name="pet"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
@@ -210,12 +211,13 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = pet.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CreateAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary> Create. </summary>
         /// <param name="pet"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
@@ -224,14 +226,14 @@ namespace PetStore
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = pet.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Create(content, context);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -270,7 +272,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -308,6 +310,7 @@ namespace PetStore
             }
         }
 
+        /// <summary> Get pet by kind. </summary>
         /// <param name="kind"> The <see cref="PetKind"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetPetByKindAsync(PetKind,CancellationToken)']/*" />
@@ -318,6 +321,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary> Get pet by kind. </summary>
         /// <param name="kind"> The <see cref="PetKind"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetPetByKind(PetKind,CancellationToken)']/*" />
@@ -329,7 +333,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get pet by kind.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -369,7 +373,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get pet by kind.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -408,6 +412,7 @@ namespace PetStore
             }
         }
 
+        /// <summary> Get first pet. </summary>
         /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,CancellationToken)']/*" />
@@ -418,6 +423,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
+        /// <summary> Get first pet. </summary>
         /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetFirstPet(int?,CancellationToken)']/*" />
@@ -429,7 +435,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get first pet.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -465,7 +471,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get first pet.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -500,6 +506,7 @@ namespace PetStore
             }
         }
 
+        /// <summary> Get fish. </summary>
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetFishAsync(string,CancellationToken)']/*" />
@@ -510,6 +517,7 @@ namespace PetStore
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
+        /// <summary> Get fish. </summary>
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetFish(string,CancellationToken)']/*" />
@@ -521,7 +529,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get fish.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -557,7 +565,7 @@ namespace PetStore
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get fish.
         /// <list type="bullet">
         /// <item>
         /// <description>

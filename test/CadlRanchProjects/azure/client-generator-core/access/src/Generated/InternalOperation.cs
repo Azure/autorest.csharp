@@ -44,6 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
+        /// <summary> No decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -56,6 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(NoDecoratorModelInInternal.FromResponse(response), response);
         }
 
+        /// <summary> No decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -69,7 +71,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] No decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -107,7 +109,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] No decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,6 +146,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
+        /// <summary> Internal decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -156,6 +159,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(InternalDecoratorModelInInternal.FromResponse(response), response);
         }
 
+        /// <summary> Internal decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -169,7 +173,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Internal decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +211,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Internal decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -244,6 +248,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
+        /// <summary> Public decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -256,6 +261,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(PublicDecoratorModelInInternal.FromResponse(response), response);
         }
 
+        /// <summary> Public decorator in internal. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -269,7 +275,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Public decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,7 +313,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Public decorator in internal.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -43,6 +43,7 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
+        /// <summary> Same as model. </summary>
         /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -51,12 +52,13 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SameAsModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Same as model. </summary>
         /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -65,14 +67,14 @@ namespace SpecialWords
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SameAsModel(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Same as model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +113,7 @@ namespace SpecialWords
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Same as model.
         /// <list type="bullet">
         /// <item>
         /// <description>

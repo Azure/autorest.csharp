@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripOptionalModel : IUtf8JsonSerializable, IJsonModel<RoundTripOptionalModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOptionalModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOptionalModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RoundTripOptionalModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,19 +63,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    writer.WriteObjectValue<CollectionItem>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                writer.WriteObjectValue<DerivedModel>(OptionalModel, options);
+                writer.WriteObjectValue(OptionalModel, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                writer.WriteObjectValue<DerivedModelWithProperties>(OptionalModelWithPropertiesOnBase, options);
+                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<RecordItem>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
@@ -177,7 +177,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripOptionalModel DeserializeRoundTripOptionalModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -439,11 +439,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOptionalModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripOptionalModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

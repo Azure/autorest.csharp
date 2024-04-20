@@ -16,7 +16,7 @@ namespace Parameters.Spread.Models
 {
     internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IJsonModel<SpreadWithMultipleParametersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -71,7 +71,7 @@ namespace Parameters.Spread.Models
 
         internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -172,11 +172,11 @@ namespace Parameters.Spread.Models
             return DeserializeSpreadWithMultipleParametersRequest(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SpreadWithMultipleParametersRequest>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

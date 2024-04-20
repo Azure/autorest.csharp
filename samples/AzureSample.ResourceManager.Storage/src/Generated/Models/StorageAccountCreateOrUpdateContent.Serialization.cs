@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue<AzureSampleResourceManagerStorageSku>(Sku);
+            writer.WriteObjectValue(Sku);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("location"u8);
@@ -54,27 +54,27 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(SasPolicy))
             {
                 writer.WritePropertyName("sasPolicy"u8);
-                writer.WriteObjectValue<SasPolicy>(SasPolicy);
+                writer.WriteObjectValue(SasPolicy);
             }
             if (Optional.IsDefined(KeyPolicy))
             {
                 writer.WritePropertyName("keyPolicy"u8);
-                writer.WriteObjectValue<KeyPolicy>(KeyPolicy);
+                writer.WriteObjectValue(KeyPolicy);
             }
             if (Optional.IsDefined(CustomDomain))
             {
                 writer.WritePropertyName("customDomain"u8);
-                writer.WriteObjectValue<CustomDomain>(CustomDomain);
+                writer.WriteObjectValue(CustomDomain);
             }
             if (Optional.IsDefined(Encryption))
             {
                 writer.WritePropertyName("encryption"u8);
-                writer.WriteObjectValue<Encryption>(Encryption);
+                writer.WriteObjectValue(Encryption);
             }
             if (Optional.IsDefined(NetworkRuleSet))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue<NetworkRuleSet>(NetworkRuleSet);
+                writer.WriteObjectValue(NetworkRuleSet);
             }
             if (Optional.IsDefined(AccessTier))
             {
@@ -84,7 +84,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                writer.WriteObjectValue<AzureFilesIdentityBasedAuthentication>(AzureFilesIdentityBasedAuthentication);
+                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                writer.WriteObjectValue<RoutingPreference>(RoutingPreference);
+                writer.WriteObjectValue(RoutingPreference);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -139,7 +139,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue<ImmutableStorageAccount>(ImmutableStorageWithVersioning);
+                writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

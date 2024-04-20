@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue<EncryptionKey>(EncryptionKey);
+                writer.WriteObjectValue(EncryptionKey);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -89,11 +89,11 @@ namespace CognitiveSearch.Models
             return DeserializeSynonymMap(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SynonymMap>(this);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

@@ -44,30 +44,32 @@ namespace Parameters.BodyOptionality
             _endpoint = endpoint;
         }
 
+        /// <summary> Set. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='SetAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> SetAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SetAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Set. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Set(BodyModel,CancellationToken)']/*" />
         public virtual Response Set(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Set(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Set.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -103,7 +105,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Set.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -138,30 +140,32 @@ namespace Parameters.BodyOptionality
             }
         }
 
+        /// <summary> Omit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='OmitAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> OmitAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OmitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Omit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Omit(BodyModel,CancellationToken)']/*" />
         public virtual Response Omit(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Omit(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Omit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -197,7 +201,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Omit.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -5,7 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
 
@@ -44,11 +43,10 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync(CancellationToken cancellationToken = default)
+        /// <remarks> List. </remarks>
+        public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await GetModelsAsync(options).ConfigureAwait(false);
+            ClientResult result = await GetModelsAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -56,11 +54,10 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ClientResult<ListModelsResponse> GetModels(CancellationToken cancellationToken = default)
+        /// <remarks> List. </remarks>
+        public virtual ClientResult<ListModelsResponse> GetModels()
         {
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = GetModels(options);
+            ClientResult result = GetModels(null);
             return ClientResult.FromValue(ListModelsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -70,12 +67,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModelsAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelsAsync()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -95,12 +92,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModels(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModels()"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -119,15 +116,14 @@ namespace OpenAI
         /// permissioning.
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<Model>> RetrieveAsync(string model, CancellationToken cancellationToken = default)
+        /// <remarks> Retrieve. </remarks>
+        public virtual async Task<ClientResult<Model>> RetrieveAsync(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await RetrieveAsync(model, options).ConfigureAwait(false);
+            ClientResult result = await RetrieveAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -136,15 +132,14 @@ namespace OpenAI
         /// permissioning.
         /// </summary>
         /// <param name="model"> The ID of the model to use for this request. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<Model> Retrieve(string model, CancellationToken cancellationToken = default)
+        /// <remarks> Retrieve. </remarks>
+        public virtual ClientResult<Model> Retrieve(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Retrieve(model, options);
+            ClientResult result = Retrieve(model, null);
             return ClientResult.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -154,12 +149,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RetrieveAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -184,12 +179,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Retrieve(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Retrieve(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -210,29 +205,27 @@ namespace OpenAI
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<DeleteModelResponse>> DeleteAsync(string model, CancellationToken cancellationToken = default)
+        /// <remarks> Delete. </remarks>
+        public virtual async Task<ClientResult<DeleteModelResponse>> DeleteAsync(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = await DeleteAsync(model, options).ConfigureAwait(false);
+            ClientResult result = await DeleteAsync(model, null).ConfigureAwait(false);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
         /// <param name="model"> The model to delete. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<DeleteModelResponse> Delete(string model, CancellationToken cancellationToken = default)
+        /// <remarks> Delete. </remarks>
+        public virtual ClientResult<DeleteModelResponse> Delete(string model)
         {
             Argument.AssertNotNullOrEmpty(model, nameof(model));
 
-            RequestOptions options = FromCancellationToken(cancellationToken);
-            ClientResult result = Delete(model, options);
+            ClientResult result = Delete(model, null);
             return ClientResult.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -241,12 +234,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -270,12 +263,12 @@ namespace OpenAI
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Delete(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Delete(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -348,17 +341,6 @@ namespace OpenAI
                 message.Apply(options);
             }
             return message;
-        }
-
-        private static RequestOptions DefaultRequestContext = new RequestOptions();
-        internal static RequestOptions FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestOptions() { CancellationToken = cancellationToken };
         }
 
         private static PipelineMessageClassifier _pipelineMessageClassifier200;

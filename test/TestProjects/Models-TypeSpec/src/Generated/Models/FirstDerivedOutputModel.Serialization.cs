@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class FirstDerivedOutputModel : IUtf8JsonSerializable, IJsonModel<FirstDerivedOutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstDerivedOutputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstDerivedOutputModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<FirstDerivedOutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
 
         internal static FirstDerivedOutputModel DeserializeFirstDerivedOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,11 +133,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeFirstDerivedOutputModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<FirstDerivedOutputModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     internal partial class UnknownOutputBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModel<OutputBaseModelWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputBaseModelWithDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
 
         internal static UnknownOutputBaseModelWithDiscriminator DeserializeUnknownOutputBaseModelWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -125,11 +125,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnknownOutputBaseModelWithDiscriminator>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

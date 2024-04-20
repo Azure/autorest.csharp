@@ -24,9 +24,9 @@ namespace OpenAI.Models
             writer.WritePropertyName("flagged"u8);
             writer.WriteBooleanValue(Flagged);
             writer.WritePropertyName("categories"u8);
-            writer.WriteObjectValue<CreateModerationResponseResultCategories>(Categories, options);
+            writer.WriteObjectValue(Categories, options);
             writer.WritePropertyName("category_scores"u8);
-            writer.WriteObjectValue<CreateModerationResponseResultCategoryScores>(CategoryScores, options);
+            writer.WriteObjectValue(CategoryScores, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -59,7 +59,7 @@ namespace OpenAI.Models
 
         internal static CreateModerationResponseResult DeserializeCreateModerationResponseResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -135,10 +135,10 @@ namespace OpenAI.Models
             return DeserializeCreateModerationResponseResult(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

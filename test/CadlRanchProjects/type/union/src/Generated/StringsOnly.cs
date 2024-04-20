@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,26 +45,28 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse9>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse.FromResponse(response), response);
+            return Response.FromValue(GetResponse9.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnly(CancellationToken)']/*" />
-        public virtual Response<GetResponse> GetStringsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse9> GetStringsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringsOnly(context);
-            return Response.FromValue(GetResponse.FromResponse(response), response);
+            return Response.FromValue(GetResponse9.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,30 +135,32 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequestProp,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequest9Prop,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(SendRequest9Prop prop, CancellationToken cancellationToken = default)
         {
+            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest9.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(SendRequestProp,CancellationToken)']/*" />
-        public virtual Response Send(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(SendRequest9Prop,CancellationToken)']/*" />
+        public virtual Response Send(SendRequest9Prop prop, CancellationToken cancellationToken = default)
         {
+            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = Send(sendRequest.ToRequestContent(), context);
+            Response response = Send(sendRequest9.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -164,7 +169,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(SendRequest9Prop,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -194,7 +199,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +208,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(SendRequest9Prop,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

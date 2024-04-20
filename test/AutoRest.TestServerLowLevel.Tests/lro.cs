@@ -385,23 +385,19 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROErrorDelete202RetryInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        public Task LROErrorDelete202RetryInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () =>
-            {
-                var operation = await new LrosaDsClient(endpoint, Key, null).Delete202RetryInvalidHeaderAsync(waitUntil);
-                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
-            });
+            var operation = await new LrosaDsClient(endpoint, Key, null).Delete202RetryInvalidHeaderAsync(waitUntil);
+            var response = await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task LROErrorDelete202RetryInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            Assert.Throws<RequestFailedException>(() =>
-            {
-                var operation = new LrosaDsClient(endpoint, Key, null).Delete202RetryInvalidHeader(waitUntil);
-                WaitForCompletion(operation, waitUntil);
-            });
+            var operation = new LrosaDsClient(endpoint, Key, null).Delete202RetryInvalidHeader(waitUntil);
+            var response = WaitForCompletion(operation, waitUntil);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]

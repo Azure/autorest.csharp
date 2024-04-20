@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     internal partial class ImageListResult : IUtf8JsonSerializable, IJsonModel<ImageListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ImageListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Images)
             {
-                writer.WriteObjectValue<ImageData>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static ImageListResult DeserializeImageListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
