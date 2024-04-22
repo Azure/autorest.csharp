@@ -99,7 +99,22 @@ namespace Payload.MultiPart.Models
             return new JsonArrayPartsRequest(profileImage, previousAddresses, serializedAdditionalRawData);
         }
 
-        private MultipartFormDataBinaryContent SerializeToMultipartContent()
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
@@ -108,26 +123,6 @@ namespace Payload.MultiPart.Models
                 content.Add(ModelReaderWriter.Write(item, new ModelReaderWriterOptions("W")), "previousAddresses");
             }
             return content;
-        }
-
-        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
-        {
-            using MultipartFormDataBinaryContent content = SerializeToMultipartContent();
-            using MemoryStream stream = new MemoryStream();
-
-            if (stream.Position > int.MaxValue)
-            {
-                return BinaryData.FromStream(stream);
-            }
-            else
-            {
-                return new BinaryData(stream.GetBuffer().AsMemory());
-            }
-        }
-
-        internal MultipartFormDataBinaryContent ToMultipartBinaryBody()
-        {
-            return SerializeToMultipartContent();
         }
 
         BinaryData IPersistableModel<JsonArrayPartsRequest>.Write(ModelReaderWriterOptions options)

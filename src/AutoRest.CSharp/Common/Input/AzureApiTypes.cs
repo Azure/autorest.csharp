@@ -103,5 +103,13 @@ namespace AutoRest.CSharp.Common.Input
         {
             return MultipartFormDataRequestContentProvider.Instance.Add(multipartContent, content, name, fileName, contentType);
         }
+        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        {
+            return MultipartFormDataRequestContentProvider.Instance.WriteTo(multipartContent, stream, cancellationToken);
+        }
+        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToAsyncStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        {
+            return MultipartFormDataRequestContentProvider.Instance.WriteToAsync(multipartContent, stream, cancellationToken);
+        }
     }
 }

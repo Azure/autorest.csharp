@@ -103,5 +103,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract string LicenseString { get; }
         public abstract MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName, ValueExpression? contentType);
+        public abstract MethodBodyStatement GetMultipartFormDataRequestContentWriteToStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken);
+        public abstract MethodBodyStatement GetMultipartFormDataRequestContentWriteToAsyncStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken);
     }
 }

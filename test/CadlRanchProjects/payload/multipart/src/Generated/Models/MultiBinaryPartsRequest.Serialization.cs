@@ -102,7 +102,22 @@ namespace Payload.MultiPart.Models
             return new MultiBinaryPartsRequest(profileImage, picture, serializedAdditionalRawData);
         }
 
-        private MultipartFormDataRequestContent SerializeToMultipartContent()
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataRequestContent content = ToMultipartRequestContent();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
@@ -111,26 +126,6 @@ namespace Payload.MultiPart.Models
                 content.Add(Picture, "picture", "picture" + ".wav", "application/octet-stream");
             }
             return content;
-        }
-
-        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
-        {
-            using MultipartFormDataRequestContent content = SerializeToMultipartContent();
-            using MemoryStream stream = new MemoryStream();
-
-            if (stream.Position > int.MaxValue)
-            {
-                return BinaryData.FromStream(stream);
-            }
-            else
-            {
-                return new BinaryData(stream.GetBuffer().AsMemory());
-            }
-        }
-
-        internal MultipartFormDataRequestContent ToMultipartRequestContent()
-        {
-            return SerializeToMultipartContent();
         }
 
         BinaryData IPersistableModel<MultiBinaryPartsRequest>.Write(ModelReaderWriterOptions options)

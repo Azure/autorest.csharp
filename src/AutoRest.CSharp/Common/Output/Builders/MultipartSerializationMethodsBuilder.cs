@@ -3,31 +3,21 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -36,17 +26,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
-            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            yield return new Method(
-                new MethodSignature(
-                    "SerializeToMultipartContent",
-                    null,
-                    null,
-                    MethodSignatureModifiers.Private,
-                    Configuration.ApiTypes.MultipartRequestContentType,
-                    null,
-                    new Parameter[] { }),
-                BuildSerializeToMultipartContentMethodBody(multipart).ToArray());
             yield return new Method(
                 new MethodSignature(
                     "SerializeMultipart",
@@ -56,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     typeof(BinaryData),
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                BuildMultipartSerializationMethodBody(multipart).ToArray());
+                BuildMultipartSerializationMethodBody().ToArray());
             yield return new Method(
                 new MethodSignature(
                     Configuration.ApiTypes.ToMultipartRequestContentName,
@@ -92,27 +71,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })));
         }
 
-        public static IEnumerable<MethodBodyStatement> BuildSerializeToMultipartContentMethodBody(MultipartObjectSerialization? multipart)
+        public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody()
         {
-            var contentVar = new VariableReference(Configuration.ApiTypes.MultipartRequestContentType, "content");
-            return new MethodBodyStatement[]
-                    {
-                        //UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, Array.Empty<ValueExpression>()), out var content),
-                        Declare(Configuration.ApiTypes.MultipartRequestContentType, "content", New.Instance(Configuration.ApiTypes.MultipartRequestContentType), out var content),
-                        WriteMultiParts((VariableReference)content, multipart!.Properties/*, options*/).ToArray(),
-                        SerializeAdditionalProperties((VariableReference)content, multipart.AdditionalProperties),
-                        Return(content)
-                    };
-        }
-        public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody(MultipartObjectSerialization? multipart)
-        {
-            //var declaration = new CodeWriterDeclaration(name);
-            //variable = new VariableReference(type, declaration);
-            //var contentVar = new VariableReference(Configuration.ApiTypes.MultipartRequestContentType, new CodeWriterDeclaration("content"));
             var serializeCallExpression = new InvokeInstanceMethodExpression(
                         null,
                         new MethodSignature(
-                            $"SerializeToMultipartContent",
+                            Configuration.ApiTypes.ToMultipartRequestContentName,
                             null,
                             null,
                             MethodSignatureModifiers.Private,
@@ -122,48 +86,27 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             Array.Empty<ValueExpression>());
             return new MethodBodyStatement[]
                         {
-                            /*
-                            UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, Array.Empty<ValueExpression>()), out var content),
-                            WriteMultiParts(content, multipart!.Properties).ToArray(),
-                            SerializeAdditionalProperties(content, multipart.AdditionalProperties),
-                            Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
-                            Snippets.Return(binaryData)
-                            */
                             UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, serializeCallExpression, out var content),
                             /*using MemoryStream stream = new MemoryStream();*/
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
                             /*content.WriteTo(stream, cancellationToken);*/
-                            new EmptyLineStatement(),//TODO
+                            Configuration.ApiTypes.GetMultipartFormDataRequestContentWriteToStatment(content, stream, null),
                             new IfElseStatement(GreaterThan(stream.Property("Position"), new MemberExpression(typeof(int), nameof(int.MaxValue))),
                             /*return BinaryData.FromStream(stream);*/
                             Return(BinaryDataExpression.FromStream(stream, false)),
                             /*return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));*/
-                            Return(New.Instance(typeof(BinaryData), new[]{ new InvokeInstanceMethodExpression((new StreamExpression(stream)).GetBuffer, "AsMemory",Array.Empty<ValueExpression>(), null, false) }))
+                            Return(New.Instance(typeof(BinaryData), new[]{ new InvokeInstanceMethodExpression((new StreamExpression(stream)).GetBuffer, "AsMemory", new[] { Literal(0), new CastExpression(stream.Property("Position"), typeof(int)) }, null, false) }))
                             ),
                         };
         }
         public static IEnumerable<MethodBodyStatement> BuildToMultipartRequestContentMethodBody(MultipartObjectSerialization? multipart)
         {
-            var serializeCallExpression = new InvokeInstanceMethodExpression(
-                        null,
-                        new MethodSignature(
-                            $"SerializeToMultipartContent",
-                            null,
-                            null,
-                            MethodSignatureModifiers.Private,
-                            Configuration.ApiTypes.MultipartRequestContentType,
-                            null,
-                            Array.Empty<Parameter>()),
-                            Array.Empty<ValueExpression>());
             return new MethodBodyStatement[]
                     {
-                        /*
-                        UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, New.Instance(Configuration.ApiTypes.MultipartRequestContentType, Array.Empty<ValueExpression>()), out var content),
-                        WriteMultiParts(content, multipart!.Properties).ToArray(),
-                        SerializeAdditionalProperties(content, multipart.AdditionalProperties),
+                        Declare(Configuration.ApiTypes.MultipartRequestContentType, "content", New.Instance(Configuration.ApiTypes.MultipartRequestContentType), out var content),
+                        WriteMultiParts((VariableReference)content, multipart!.Properties).ToArray(),
+                        SerializeAdditionalProperties((VariableReference)content, multipart.AdditionalProperties),
                         Return(content)
-                        */
-                        Return(serializeCallExpression)
                     };
         }
         /*TODO: handle additionalProperties. */

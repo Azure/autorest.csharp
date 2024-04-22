@@ -83,6 +83,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _addMethodName = "Add";
         private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
         private const string _addContentTypeHeaderMethodName = "AddContentTypeHeader";
+        private const string _writeToMethodName = "WriteTo";
+        private const string _writeToAsyncMethodName = "WriteToAsync";
 
         private readonly MultipartFormDataContentExpression _multipartContentExpression;
         protected override IEnumerable<FieldDeclaration> BuildFields()
@@ -467,6 +469,27 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 arguments.Add(contentType);
             }
             return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, arguments.ToArray(), false);
+        }
+        public MethodBodyStatement WriteTo(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        {
+            if (cancellationToken == null)
+            {
+                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToMethodName, new[] { stream }, false);
+            } else
+            {
+                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToMethodName, new[] { stream, cancellationToken }, false);
+            }
+        }
+        public MethodBodyStatement WriteToAsync(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        {
+            if (cancellationToken == null)
+            {
+                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToAsyncMethodName, new[] { stream }, false);
+            }
+            else
+            {
+                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToAsyncMethodName, new[] { stream, cancellationToken }, false);
+            }
         }
         public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
     }

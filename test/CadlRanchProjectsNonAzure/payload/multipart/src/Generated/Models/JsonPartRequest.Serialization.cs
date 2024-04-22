@@ -89,32 +89,27 @@ namespace Payload.MultiPart.Models
             return new JsonPartRequest(address, profileImage, serializedAdditionalRawData);
         }
 
-        private MultipartFormDataBinaryContent SerializeToMultipartContent()
-        {
-            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
-            return content;
-        }
-
         private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
         {
-            using MultipartFormDataBinaryContent content = SerializeToMultipartContent();
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
             using MemoryStream stream = new MemoryStream();
-
+            content.WriteTo(stream);
             if (stream.Position > int.MaxValue)
             {
                 return BinaryData.FromStream(stream);
             }
             else
             {
-                return new BinaryData(stream.GetBuffer().AsMemory());
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
             }
         }
 
         internal MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
-            return SerializeToMultipartContent();
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
+            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            return content;
         }
 
         BinaryData IPersistableModel<JsonPartRequest>.Write(ModelReaderWriterOptions options)
