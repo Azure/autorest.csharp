@@ -127,5 +127,47 @@ Response response = client.WithPathApiVersion();
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="WithQueryOldApiVersionAsync(RequestContext)">
+      <example>
+This sample shows how to call WithQueryOldApiVersionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = await client.WithQueryOldApiVersionAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call WithQueryOldApiVersionAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = await client.WithQueryOldApiVersionAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="WithQueryOldApiVersion(RequestContext)">
+      <example>
+This sample shows how to call WithQueryOldApiVersion.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = client.WithQueryOldApiVersion();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call WithQueryOldApiVersion with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = client.WithQueryOldApiVersion();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>
