@@ -1544,6 +1544,7 @@
          "Kind": "Model",
          "Name": "ModelForUnion",
          "Namespace": "FirstTestTypeSpec",
+         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "IsNullable": false,
          "Usage": "RoundTrip",
          "Properties": [

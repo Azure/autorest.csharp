@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The ModelForUnion. </summary>
+    /// <summary> This is a model only used in union types, please do not use it anywhere else. </summary>
     public partial class ModelForUnion
     {
         /// <summary>
