@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class ModelForUnion : IUtf8JsonSerializable, IJsonModel<ModelForUnion>
+    public partial class ModelForUnion : IUtf8JsonSerializable, IJsonModel<ModelForUnion>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelForUnion>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

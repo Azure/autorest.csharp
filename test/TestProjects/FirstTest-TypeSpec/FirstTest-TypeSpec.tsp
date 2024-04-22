@@ -221,7 +221,7 @@ model RoundTripModel {
     modelWithRequiredNullable: ModelWithRequiredNullableProperties;
 
     @doc("this is a list of union types")
-    unionList: (string | int32 | ModelForUnion)[];
+    unionList: (string | int32 | ModelForUnion | ModelForUnion[])[];
 }
 
 model ModelForUnion {

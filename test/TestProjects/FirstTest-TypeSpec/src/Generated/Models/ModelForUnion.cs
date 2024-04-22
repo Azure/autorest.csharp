@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> The ModelForUnion. </summary>
-    internal partial class ModelForUnion
+    public partial class ModelForUnion
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

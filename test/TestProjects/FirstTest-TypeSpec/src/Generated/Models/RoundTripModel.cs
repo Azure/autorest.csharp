@@ -379,6 +379,9 @@ namespace FirstTestTypeSpec.Models
         /// <item>
         /// <description><see cref="ModelForUnion"/></description>
         /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="ModelForUnion"/></description>
+        /// </item>
         /// </list>
         /// </remarks>
         /// Examples:
