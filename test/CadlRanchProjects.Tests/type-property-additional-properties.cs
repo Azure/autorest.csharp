@@ -898,7 +898,7 @@ namespace CadlRanchProjects.Tests
             var response = await new AdditionalPropertiesClient(host, null).GetSpreadStringClient().GetSpreadStringAsync();
             Assert.AreEqual("SpreadSpringRecord", response.Value.Name);
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
-            Assert.AreEqual("abc", response.Value.AdditionalProperties["prop1"]);
+            Assert.AreEqual("abc", response.Value.AdditionalProperties["prop"]);
         });
 
         [Test]
