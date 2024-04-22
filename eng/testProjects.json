@@ -52,6 +52,8 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "payload/media-type",
+        "payload/content-negotiation",
         "authentication/http/custom"
     ],
     "TestServerProjects": [
