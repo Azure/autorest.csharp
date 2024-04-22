@@ -90,7 +90,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -130,7 +130,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -200,7 +200,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -240,7 +240,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -310,7 +310,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -350,7 +350,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -420,7 +420,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -460,7 +460,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -530,7 +530,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -570,7 +570,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -640,7 +640,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -680,7 +680,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -750,7 +750,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -790,7 +790,7 @@ namespace Payload.MultiPart
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
