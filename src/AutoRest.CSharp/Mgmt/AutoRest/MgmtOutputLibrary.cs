@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         // get the request path and operation set
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                        if (operationSet.TryGetResourceDataSchema(out _, out var resourceDataSchema))
                         {
                             // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
                             BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
@@ -839,32 +839,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
-                if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                if (operationSet.TryGetResourceDataSchema(out var resourceSchemaName, out var resourceSchema))
                 {
-                    if (resourceDataSchema is null)
+                    // Skip the renaming for partial resource when resourceSchema is null but resourceSchemaName is not null
+                    if (resourceSchema is not null)
                     {
-                        continue;
+                        // ensure the name of resource data is singular
+                        // skip this step if the configuration is set to keep this plural
+                        if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(resourceSchemaName))
+                        {
+                            resourceSchema.Language.Default.SerializedName ??= resourceSchemaName;
+                            resourceSchemaName = resourceSchemaName.LastWordToSingular(false);
+                            resourceSchema.Language.Default.Name = resourceSchemaName;
+                        }
+                        else
+                        {
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
+                                new TransformItem(TransformTypeName.KeepPluralResourceData, resourceSchemaName),
+                                resourceSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {resourceSchemaName}");
+                        }
                     }
-                    // ensure the name of resource data is singular
-                    var schemaName = resourceDataSchema.Name;
-                    // skip this step if the configuration is set to keep this plural
-                    if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(schemaName))
-                    {
-                        resourceDataSchema.Language.Default.SerializedName ??= schemaName;
-                        schemaName = schemaName.LastWordToSingular(false);
-                        resourceDataSchema.Language.Default.Name = schemaName;
-                    }
-                    else
-                    {
-                        MgmtReport.Instance.TransformSection.AddTransformLog(
-                            new TransformItem(TransformTypeName.KeepPluralResourceData, schemaName),
-                            resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
-                    }
+
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceSchemaName!, out HashSet<OperationSet>? result))
                     {
                         result = new HashSet<OperationSet>();
-                        resourceDataSchemaNameToOperationSets.Add(schemaName, result);
+                        resourceDataSchemaNameToOperationSets.Add(resourceSchemaName!, result);
                     }
                     result.Add(operationSet);
                 }
