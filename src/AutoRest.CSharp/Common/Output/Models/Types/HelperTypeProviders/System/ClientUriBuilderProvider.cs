@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -32,14 +31,12 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private readonly FieldDeclaration _uriBuilderField = new(FieldModifiers.Private, typeof(UriBuilder), "_uriBuilder");
         private readonly FieldDeclaration _pathBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_pathBuilder");
         private readonly FieldDeclaration _queryBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_queryBuilder");
-        private readonly FieldDeclaration _pathSeparatorField = new(FieldModifiers.Private | FieldModifiers.Const, typeof(char), "PathSeparator", Literal('/'), SerializationFormat.Default);
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _uriBuilderField;
             yield return _pathBuilderField;
             yield return _queryBuilderField;
-            yield return _pathSeparatorField;
         }
 
         private PropertyDeclaration? _uriBuilderProperty;
@@ -156,9 +153,9 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Assign(value, new InvokeStaticMethodExpression(typeof(Uri), nameof(Uri.EscapeDataString), new[]{ value }))
                 },
                 EmptyLine,
-                new IfStatement(Equal(new IndexerExpression(value, Literal(0)), _pathSeparatorField))
+                new IfStatement(And(And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, pathBuilder.Length - Int(1)), Literal('/'))), Equal(new IndexerExpression(value, Int(0)), Literal('/'))))
                 {
-                    Assign(value, value.Substring(Literal(1)))
+                    pathBuilder.Remove(pathBuilder.Length - Int(1), Int(1))
                 },
                 EmptyLine,
                 pathBuilder.Append(value),
