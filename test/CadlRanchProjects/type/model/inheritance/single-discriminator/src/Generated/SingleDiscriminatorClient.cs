@@ -47,6 +47,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             _endpoint = endpoint;
         }
 
+        /// <summary> Get model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Bird>> GetModelAsync(CancellationToken cancellationToken = default)
@@ -56,6 +57,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return Response.FromValue(Bird.FromResponse(response), response);
         }
 
+        /// <summary> Get model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetModel(CancellationToken)']/*" />
         public virtual Response<Bird> GetModel(CancellationToken cancellationToken = default)
@@ -66,7 +68,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +103,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,6 +137,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Put model. </summary>
         /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -149,6 +152,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return response;
         }
 
+        /// <summary> Put model. </summary>
         /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -164,7 +168,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +207,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,6 +245,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Get recursive model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Bird>> GetRecursiveModelAsync(CancellationToken cancellationToken = default)
@@ -250,6 +255,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return Response.FromValue(Bird.FromResponse(response), response);
         }
 
+        /// <summary> Get recursive model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetRecursiveModel(CancellationToken)']/*" />
         public virtual Response<Bird> GetRecursiveModel(CancellationToken cancellationToken = default)
@@ -260,7 +266,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get recursive model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -295,7 +301,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get recursive model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -329,6 +335,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Put recursive model. </summary>
         /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -343,6 +350,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return response;
         }
 
+        /// <summary> Put recursive model. </summary>
         /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -358,7 +366,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put recursive model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -397,7 +405,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put recursive model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -435,6 +443,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Get missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Bird>> GetMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -444,6 +453,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return Response.FromValue(Bird.FromResponse(response), response);
         }
 
+        /// <summary> Get missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(CancellationToken)']/*" />
         public virtual Response<Bird> GetMissingDiscriminator(CancellationToken cancellationToken = default)
@@ -454,7 +464,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -489,7 +499,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -523,6 +533,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Get wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Bird>> GetWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -532,6 +543,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return Response.FromValue(Bird.FromResponse(response), response);
         }
 
+        /// <summary> Get wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(CancellationToken)']/*" />
         public virtual Response<Bird> GetWrongDiscriminator(CancellationToken cancellationToken = default)
@@ -542,7 +554,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -577,7 +589,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -611,6 +623,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
+        /// <summary> Get legacy model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetLegacyModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Dinosaur>> GetLegacyModelAsync(CancellationToken cancellationToken = default)
@@ -620,6 +633,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return Response.FromValue(Dinosaur.FromResponse(response), response);
         }
 
+        /// <summary> Get legacy model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='GetLegacyModel(CancellationToken)']/*" />
         public virtual Response<Dinosaur> GetLegacyModel(CancellationToken cancellationToken = default)
@@ -630,7 +644,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get legacy model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -665,7 +679,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get legacy model.
         /// <list type="bullet">
         /// <item>
         /// <description>
