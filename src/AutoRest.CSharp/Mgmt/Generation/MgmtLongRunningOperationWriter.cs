@@ -113,20 +113,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return null;");
                         }
                         _writer.Line($"var lroDetails = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json).ToObjectFromJson<{typeof(Dictionary<string, string>)}>();");
-                        _writer.Line($"var nextRequestUri = lroDetails[\"nextRequestUri\"];");
-                        using (_writer.Scope($"if (Uri.TryCreate(nextRequestUri, UriKind.Absolute, out var uri))"))
-                        {
-                            _writer.Line($"return {typeof(Enumerable)}.{nameof(Enumerable.LastOrDefault)}(uri.Segments);");
-                        }
-                        using (_writer.Scope($"else"))
-                        {
-                            _writer.Line($"return null;");
-                        }
+                        _writer.Line($"return lroDetails[\"id\"];");
                     }
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override string Id => _operationId ?? null;")
+                        .LineRaw("public override string Id => _operationId ?? NextLinkOperationImplementation.NotSet;")
                         .Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
