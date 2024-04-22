@@ -114,7 +114,7 @@ namespace Payload.MultiPart.Models
             }
         }
 
-        internal MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");

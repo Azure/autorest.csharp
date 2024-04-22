@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Configuration.ApiTypes.ToMultipartRequestContentName,
                     null,
                     null,
-                    MethodSignatureModifiers.Internal,
+                    MethodSignatureModifiers.Internal | MethodSignatureModifiers.Virtual,
                     Configuration.ApiTypes.MultipartRequestContentType,
                     null,
                     Array.Empty<Parameter>()),

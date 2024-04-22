@@ -166,7 +166,7 @@ namespace Payload.MultiPart.Models
             }
         }
 
-        internal MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(Id, "id");

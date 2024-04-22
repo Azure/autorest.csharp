@@ -132,7 +132,7 @@ namespace Payload.MultiPart.Models
             }
         }
 
-        internal MultipartFormDataRequestContent ToMultipartRequestContent()
+        internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
