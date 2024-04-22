@@ -10,7 +10,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     internal record ModelReaderWriterOptionsExpression(ValueExpression Untyped) : TypedValueExpression<ModelReaderWriterOptions>(Untyped)
     {
         public static readonly ModelReaderWriterOptionsExpression Wire = new(New.Instance(typeof(ModelReaderWriterOptions), Literal("W")));
-        public static readonly ModelReaderWriterOptionsExpression MultipartFormData = new(New.Instance(typeof(ModelReaderWriterOptions), Literal("MFD")));
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));
     }

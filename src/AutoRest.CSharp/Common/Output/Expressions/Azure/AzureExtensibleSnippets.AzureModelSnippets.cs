@@ -8,12 +8,9 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
-using Azure.Core;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
@@ -36,14 +33,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             }
 
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestContentExpression(model.Invoke(Configuration.ApiTypes.ToRequestContentName));
-            /*
-            public override MethodBodyStatement DeclareMultipartContent()
-            {
-                var content = MultipartFormDataRequestContentProvider.Instance;
-                var contentVar = new VariableReference(content.Type, "content");
-                return Var(contentVar, New.Instance(content.Type));
-            }
-            */
         }
     }
 }

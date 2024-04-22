@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;

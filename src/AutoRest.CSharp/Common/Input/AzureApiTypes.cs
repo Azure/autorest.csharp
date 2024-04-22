@@ -4,11 +4,8 @@
 using System;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.Azure;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -18,7 +15,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AutoRest.CSharp.Common.Input
 {

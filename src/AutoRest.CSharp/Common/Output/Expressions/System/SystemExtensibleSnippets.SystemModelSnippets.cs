@@ -4,17 +4,13 @@
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.System
 {
@@ -25,7 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
                 var result = new Parameter("response", $"The result to deserialize the model from.", typeof(PipelineResponse), null, ValidationType.None, null);
-                    return new Method
+                  return new Method
                 (
                     new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { result }),
                     new MethodBodyStatement[]
@@ -37,10 +33,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             }
 
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new BinaryContentExpression(model.Invoke("ToRequestBody"));
-            /*
-            public override MethodBodyStatement DeclareMultipartContent()
-            {
-            */
         }
     }
 }

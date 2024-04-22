@@ -2,14 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
-using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
-using YamlDotNet.Core.Tokens;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
@@ -23,7 +20,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 
         public ValueExpression Headers => new InvokeInstanceMethodExpression(Untyped, nameof(Response.Headers), Array.Empty<ValueExpression>(), null, false);
         public ValueExpression ContentType => new InvokeInstanceMethodExpression(Headers, nameof(ResponseHeaders.TryGetValue), new ValueExpression[] { Literal("Content-Type"), new KeywordExpression("out", new ParameterReference(new Parameter("value", null, typeof(string), null, ValidationType.None, null, IsOut: true))) }, null, false);
-        //public StringExpression ContentType => new(Property(nameof(Response.Headers.ContentType)));
 
         public static NullableResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[] { value, rawResponse }));

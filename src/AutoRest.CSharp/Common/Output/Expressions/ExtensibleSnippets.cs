@@ -3,8 +3,6 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using static AutoRest.CSharp.Common.Output.Expressions.Azure.AzureExtensibleSnippets;
-using static AutoRest.CSharp.Common.Output.Expressions.System.SystemExtensibleSnippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions
 {

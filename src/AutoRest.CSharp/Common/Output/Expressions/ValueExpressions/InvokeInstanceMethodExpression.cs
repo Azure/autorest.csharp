@@ -7,7 +7,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
-using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
