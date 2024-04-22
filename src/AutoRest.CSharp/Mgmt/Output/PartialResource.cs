@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output;
 /// </summary>
 internal class PartialResource : Resource
 {
-    protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData) : base(operationSet, operations, defaultName, resourceType, resourceData, ResourcePosition)
+    protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType, ResourceData resourceData) : base(operationSet, operations, defaultName, resourceType, resourceData, ResourcePosition)
     {
         OriginalResourceName = originalResourceName;
     }

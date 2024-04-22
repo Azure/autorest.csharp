@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -18,7 +19,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
+using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -547,8 +548,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var originalResourcePath = operationSet.GetRequestPath();
                     var operations = GetChildOperations(originalResourcePath);
                     var resourceData = GetResourceData(originalResourcePath);
-                    if (resourceData is EmptyResourceData emptyResourceData)
-                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, emptyResourceData);
+                    if (resourceData == OutputResourceData.Empty)
+                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                     else
                         BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
@@ -573,7 +574,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
+        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData emptyResourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
             var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData);
@@ -767,6 +768,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
+            foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
+            {
+                rawRequestPathToResourceData.Add(path, OutputResourceData.Empty);
+            }
+
             return rawRequestPathToResourceData;
         }
 
@@ -824,7 +830,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch
         {
-            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema),
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
@@ -836,6 +841,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                 {
+                    if (resourceDataSchema is null)
+                    {
+                        continue;
+                    }
                     // ensure the name of resource data is singular
                     var schemaName = resourceDataSchema.Name;
                     // skip this step if the configuration is set to keep this plural

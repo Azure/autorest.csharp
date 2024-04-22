@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ObjectSchema? FindObjectSchemaWithName(string name)
             => MgmtContext.CodeModel.AllSchemas.OfType<ObjectSchema>().FirstOrDefault(objectSchema => objectSchema.GetOriginalName() == name);
 
-        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out ObjectSchema resourceSchema)
+        public static bool TryGetResourceDataSchema(this OperationSet set, out ObjectSchema? resourceSchema)
         {
             resourceSchema = null;
             // get the result from cache
@@ -50,14 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // try to find it in the partial resource list
-            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
+            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out _))
             {
-                resourceSchema = FindObjectSchemaWithName(resourceSchemaName);
-                if (resourceSchema == null)
-                {
-                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceSchemaName} in the request-path-to-resource-data configuration");
-                }
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceSchema);
                 return true;
             }
 
