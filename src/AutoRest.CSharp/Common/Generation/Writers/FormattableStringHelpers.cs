@@ -247,12 +247,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
-        public static FormattableString GetModelReadWriteOptions(BodyMediaType? type) => type switch
-        {
-            BodyMediaType.Xml => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Xml)}",
-            BodyMediaType.Multipart => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.MultipartFormData)}",
-            _ => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)}",
-        };
+
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {

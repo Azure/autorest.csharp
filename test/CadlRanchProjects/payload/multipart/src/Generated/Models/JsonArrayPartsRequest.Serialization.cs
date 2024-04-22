@@ -162,7 +162,7 @@ namespace Payload.MultiPart.Models
             }
         }
 
-        string IPersistableModel<JsonArrayPartsRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<JsonArrayPartsRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

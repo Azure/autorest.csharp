@@ -109,8 +109,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Return(content)
                     };
         }
-        /*TODO: handle additionalProperties. */
-        private static IEnumerable<MethodBodyStatement> WriteMultiParts(VariableReference multipartContent, IEnumerable<MultipartPropertySerialization> properties/*, ModelReaderWriterOptionsExpression? options*/)
+        private static IEnumerable<MethodBodyStatement> WriteMultiParts(VariableReference multipartContent, IEnumerable<MultipartPropertySerialization> properties)
         {
             foreach (MultipartPropertySerialization property in properties)
             {
@@ -122,7 +121,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     yield return Serializations.WrapInCheckNotWire(
                         property,
-                        /*options?.Format*/Literal("MFD"),
+                        Literal("MFD"),
                         InvokeOptional.WrapInIsDefined(
                             property,
                     new IfElseStatement(checkPropertyIsInitialized,
@@ -136,11 +135,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     /*options?.Format*/Literal("MFD"),
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(multipartContent, property)));
                 }
-                /*
-                yield return Serializations.WrapInCheckNotWire(
-                    property, options?.Format,
-                    WritePropertySerialization(multipartContent, property));
-                */
             }
         }
 
@@ -153,7 +147,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
-                //multipartContent.Add(BuildValueSerizationExpression(additionalProperties.Type.Arguments[1], item.Value), item.Key)
                 SerializationExression(multipartContent, additionalProperties.ValueSerialization, item.Value, new StringExpression(item.Key))
             };
             return statement;
@@ -176,7 +169,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new[]
             {
-                //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
                 new ForeachStatement(serialization.Type.ElementType, "item", value, false, out var item)
                 {
                     SerializationExression(mulitpartContent, serialization.ValueSerialization, item, name)
@@ -188,7 +180,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var dictionaryExpression = new DictionaryExpression(serialization.Type.Arguments[0], serialization.Type.Arguments[1], value);
             return new[]
             {
-                //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
                 new ForeachStatement("item", dictionaryExpression, out KeyValuePairExpression keyValuePair)
                 {
                     SerializationExression(mulitpartContent, serialization.ValueSerialization, keyValuePair.Value, new StringExpression(keyValuePair.Key))
@@ -209,7 +200,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
             {
                 contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
-                //fileNameExpression = name.Add(Literal(".wav"));
                 if (valueSerialization.FileName != null)
                 {
                     fileNameExpression = Literal(valueSerialization.FileName);

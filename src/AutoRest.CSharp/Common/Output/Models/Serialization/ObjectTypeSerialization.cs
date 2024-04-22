@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             Bicep = bicep;
             Multipart = multipart;
 
-            WireFormat = Xml != null ? Serializations.XmlFormat : Serializations.JsonFormat;
+            WireFormat = Xml != null ? Serializations.XmlFormat : Multipart != null ? Serializations.MultipartFormat : Serializations.JsonFormat;
 
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
