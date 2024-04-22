@@ -377,7 +377,7 @@ namespace FirstTestTypeSpec.Models
         /// <description><see cref="int"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="bool"/></description>
+        /// <description><see cref="ModelForUnion"/></description>
         /// </item>
         /// </list>
         /// </remarks>
