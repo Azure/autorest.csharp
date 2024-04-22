@@ -37,6 +37,29 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string scope, string filter, int? top, string skiptoken)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(scope, false);
+            uri.AppendPath("/providers/Microsoft.Consumption/marketplaces", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (skiptoken != null)
+            {
+                uri.AppendQuery("$skiptoken", skiptoken, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateListRequest(string scope, string filter, int? top, string skiptoken)
         {
             var message = _pipeline.CreateMessage();
@@ -118,6 +141,14 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string scope, string filter, int? top, string skiptoken)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListNextPageRequest(string nextLink, string scope, string filter, int? top, string skiptoken)
