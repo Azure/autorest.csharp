@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -88,6 +89,29 @@ namespace OpenAI.Models
             return new CreateFileRequest(file, purpose, serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        {
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(File, "file", "file" + ".wav", "application/octet-stream");
+            content.Add(Purpose, "purpose");
+            return content;
+        }
+
         BinaryData IPersistableModel<CreateFileRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateFileRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -96,6 +120,8 @@ namespace OpenAI.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "MFD":
+                    return SerializeMultipart(options);
                 default:
                     throw new FormatException($"The model {nameof(CreateFileRequest)} does not support writing '{options.Format}' format.");
             }
@@ -117,7 +143,7 @@ namespace OpenAI.Models
             }
         }
 
-        string IPersistableModel<CreateFileRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateFileRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>

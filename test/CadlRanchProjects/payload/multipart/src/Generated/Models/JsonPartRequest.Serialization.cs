@@ -17,7 +17,7 @@ namespace Payload.MultiPart.Models
 {
     public partial class JsonPartRequest : IUtf8JsonSerializable, IJsonModel<JsonPartRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonPartRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonPartRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<JsonPartRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -64,7 +64,7 @@ namespace Payload.MultiPart.Models
 
         internal static JsonPartRequest DeserializeJsonPartRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -113,7 +113,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
+            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             return content;
         }
@@ -163,7 +163,7 @@ namespace Payload.MultiPart.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

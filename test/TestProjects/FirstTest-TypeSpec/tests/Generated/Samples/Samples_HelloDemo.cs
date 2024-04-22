@@ -21,7 +21,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -41,7 +42,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -61,7 +63,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -86,7 +89,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

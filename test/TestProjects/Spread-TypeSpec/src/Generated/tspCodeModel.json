@@ -33,6 +33,9 @@
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "5",
@@ -71,6 +74,9 @@
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "10",
@@ -109,6 +115,9 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "15",
@@ -147,6 +156,9 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "20",
@@ -185,6 +197,9 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "25",
@@ -277,6 +292,9 @@
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "38",

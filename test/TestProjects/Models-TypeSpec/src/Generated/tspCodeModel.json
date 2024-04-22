@@ -197,6 +197,7 @@
    "Description": "A base model with a required property",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "27",
@@ -223,6 +224,9 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "BaseModel": {
     "$ref": "26"
    },
@@ -267,6 +271,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "35",
@@ -293,6 +298,9 @@
    "Description": "Model used only as input",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "38",
@@ -391,6 +399,7 @@
       "Description": "Base model",
       "IsNullable": false,
       "Usage": "Input",
+      "MediaTypes": [],
       "Properties": []
      },
      "IsRequired": true,
@@ -464,6 +473,7 @@
        "Description": "Collection item model",
        "IsNullable": false,
        "Usage": "RoundTrip",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "62",
@@ -488,6 +498,7 @@
            "Description": "Record item model",
            "IsNullable": false,
            "Usage": "RoundTrip",
+           "MediaTypes": [],
            "BaseModel": {
             "$id": "66",
             "Kind": "Model",
@@ -496,6 +507,7 @@
             "Description": "Derived model",
             "IsNullable": false,
             "Usage": "RoundTrip",
+            "MediaTypes": [],
             "BaseModel": {
              "$ref": "51"
             },
@@ -789,6 +801,9 @@
    "Description": "Model used both as input and output",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "BaseModel": {
     "$ref": "51"
    },
@@ -947,6 +962,7 @@
       "IsNullable": false,
       "DiscriminatorPropertyName": "discriminatorProperty",
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "125",
@@ -1350,6 +1366,7 @@
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "51"
    },
@@ -1511,6 +1528,9 @@
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "202",
@@ -1621,6 +1641,7 @@
       "Description": "Derived model with properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "BaseModel": {
        "$id": "217",
        "Kind": "Model",
@@ -1629,6 +1650,7 @@
        "Description": "Base model with properties",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "218",
@@ -1830,6 +1852,7 @@
    "Description": "Output model with readonly properties.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "243",
@@ -2267,6 +2290,7 @@
    "Description": "Model used only as output",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "302",
@@ -2437,6 +2461,9 @@
    "Description": "Input model that has property of its own type",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "323",
@@ -2473,6 +2500,9 @@
    "Description": "Roundtrip model that has property of its own type",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "327",
@@ -2509,6 +2539,7 @@
    "Description": "Output model that has property of its own type",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "331",
@@ -2545,6 +2576,7 @@
    "Description": "Base model",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "335",
@@ -2570,6 +2602,9 @@
    "Description": "Derived model",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "BaseModel": {
     "$ref": "334"
    },
@@ -2602,6 +2637,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "341",
@@ -2642,6 +2678,7 @@
    "Description": "Facet",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "346",
@@ -2666,6 +2703,7 @@
    "Namespace": "ModelsTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "345"
    },
@@ -2714,6 +2752,9 @@
    "Description": "Facets an int32 field by the specified value ranges.",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "BaseModel": {
     "$ref": "348"
    },
@@ -2747,6 +2788,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "29"
    },
@@ -2790,6 +2832,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "124"
    },
@@ -2819,6 +2862,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "B",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "124"
    },
@@ -2848,6 +2892,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "first",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "34"
    },
@@ -2877,6 +2922,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "second",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "34"
    },
@@ -2905,6 +2951,7 @@
    "Description": "This is a model.",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "375",

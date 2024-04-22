@@ -14,6 +14,7 @@
    "Description": "Used in a public operation, should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",
@@ -40,6 +41,7 @@
    "Description": "Used in a public operation, should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "6",
@@ -66,6 +68,7 @@
    "Description": "Used in an internal operation, should be generated but not exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "9",
@@ -92,6 +95,7 @@
    "Description": "Used in an internal operation, should be generated but not exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "12",
@@ -118,6 +122,7 @@
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "15",
@@ -144,6 +149,7 @@
    "Description": "Used by both public and internal operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "18",
@@ -170,6 +176,7 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "21",
@@ -196,6 +203,7 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "20"
    },
@@ -214,6 +222,7 @@
       "Description": "Used in internal operations, should be generated but not exported.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "26",
@@ -249,6 +258,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "29",
@@ -291,6 +301,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "real",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "28"
    },

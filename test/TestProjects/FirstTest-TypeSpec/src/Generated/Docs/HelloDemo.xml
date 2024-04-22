@@ -6,7 +6,8 @@
 This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -23,7 +24,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHiAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -48,7 +50,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -65,7 +68,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHi with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

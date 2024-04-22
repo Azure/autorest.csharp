@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -150,6 +151,47 @@ namespace OpenAI.Models
                 serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        {
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(Image, "image", "image" + ".wav", "application/octet-stream");
+            if (Optional.IsDefined(N))
+            {
+                if (N != null)
+                {
+                    content.Add(N.Value, "n");
+                }
+            }
+            if (Optional.IsDefined(Size))
+            {
+                content.Add(Size.Value, "size");
+            }
+            if (Optional.IsDefined(ResponseFormat))
+            {
+                content.Add(ResponseFormat.Value, "response_format");
+            }
+            if (Optional.IsDefined(User))
+            {
+                content.Add(User, "user");
+            }
+            return content;
+        }
+
         BinaryData IPersistableModel<CreateImageVariationRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateImageVariationRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -158,6 +200,8 @@ namespace OpenAI.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "MFD":
+                    return SerializeMultipart(options);
                 default:
                     throw new FormatException($"The model {nameof(CreateImageVariationRequest)} does not support writing '{options.Format}' format.");
             }
@@ -179,7 +223,7 @@ namespace OpenAI.Models
             }
         }
 
-        string IPersistableModel<CreateImageVariationRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateImageVariationRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>

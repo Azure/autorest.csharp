@@ -6,7 +6,8 @@
 This sample shows how to call CreateUnknownValueAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.CreateUnknownValueAsync(content);
@@ -16,7 +17,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call CreateUnknownValueAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.CreateUnknownValueAsync(content);
@@ -29,7 +31,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call CreateUnknownValue.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
 Response response = client.CreateUnknownValue(content);
@@ -39,7 +42,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call CreateUnknownValue with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
 Response response = client.CreateUnknownValue(content);

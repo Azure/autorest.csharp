@@ -69,6 +69,7 @@
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "10",
@@ -93,6 +94,7 @@
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "13",

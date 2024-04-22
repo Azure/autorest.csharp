@@ -36,6 +36,9 @@
    "Namespace": "PetStore",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "6",
@@ -90,6 +93,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "13",
@@ -129,6 +133,7 @@
    "Namespace": "PetStore",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "18",
@@ -182,6 +187,7 @@
    "Description": "Error",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "25",
@@ -220,6 +226,7 @@
    "Namespace": "PetStore",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -231,6 +238,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "shark",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "12"
    },
@@ -260,6 +268,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "tuna",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "12"
    },

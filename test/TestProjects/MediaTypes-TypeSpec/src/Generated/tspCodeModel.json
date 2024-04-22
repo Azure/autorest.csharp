@@ -12,6 +12,9 @@
    "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "3",

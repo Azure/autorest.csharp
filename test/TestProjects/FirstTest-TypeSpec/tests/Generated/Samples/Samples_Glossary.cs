@@ -22,7 +22,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Glossary_DoSomething_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response response = client.DoSomething("<id>", "<h1>", null);
 
@@ -42,7 +43,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Glossary_DoSomething_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
 
@@ -62,7 +64,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Glossary_DoSomething_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response<Thing> response = client.DoSomething("<id>", "<h1>");
         }
@@ -72,7 +75,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Glossary_DoSomething_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
         }
@@ -82,7 +86,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Glossary_DoSomething_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response response = client.DoSomething("<id>", "<h1>", null);
 
@@ -107,7 +112,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Glossary_DoSomething_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
 
@@ -132,7 +138,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Glossary_DoSomething_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response<Thing> response = client.DoSomething("<id>", "<h1>");
         }
@@ -142,7 +149,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Glossary_DoSomething_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Glossary client = new FirstTestTypeSpecClient(endpoint, credential).GetGlossaryClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
         }

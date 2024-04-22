@@ -21,7 +21,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_EnumTest_CreateUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.CreateUnknownValue(content);
@@ -34,7 +35,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_EnumTest_CreateUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.CreateUnknownValueAsync(content);
@@ -47,7 +49,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.CreateUnknownValue(content);
@@ -60,7 +63,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_EnumTest_CreateUnknownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.CreateUnknownValueAsync(content);

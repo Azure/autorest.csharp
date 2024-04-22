@@ -58,7 +58,7 @@ namespace Payload.MultiPart.Models
 
         internal static JsonPartRequest DeserializeJsonPartRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
+            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             return content;
         }
@@ -156,7 +156,7 @@ namespace Payload.MultiPart.Models
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
         internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

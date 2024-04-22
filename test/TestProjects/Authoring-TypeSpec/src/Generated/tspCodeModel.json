@@ -154,6 +154,9 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "23",
@@ -207,6 +210,7 @@
       "Description": "Represents the settings used to define the project behavior.",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "InheritedDictionaryType": {
        "$id": "30",
        "Kind": "Dictionary",
@@ -341,6 +345,7 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "48",
@@ -380,6 +385,7 @@
       "Description": "The error object.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "53",
@@ -453,6 +459,7 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
          "Usage": "Output",
+         "MediaTypes": [],
          "Properties": [
           {
            "$id": "63",
@@ -505,6 +512,7 @@
    "Description": "Paged collection of Project items",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "67",
@@ -547,6 +555,9 @@
    "Description": "Training job parameters.",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "72",
@@ -571,6 +582,9 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "75",
@@ -596,6 +610,7 @@
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "78",
@@ -637,6 +652,9 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "83",
@@ -675,6 +693,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "88",
@@ -760,6 +779,7 @@
        "Description": "Represents a warning that was encountered while executing the request.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "100",
@@ -833,6 +853,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "108",
@@ -953,6 +974,7 @@
    "Description": "Paged collection of SupportedLanguage items",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "123",
@@ -971,6 +993,7 @@
        "Description": "Represents a supported language.",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "126",
@@ -1034,6 +1057,7 @@
    "Description": "Paged collection of TrainingConfigVersion items",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "133",
@@ -1052,6 +1076,7 @@
        "Description": "Represents a training config version.",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "136",
@@ -1114,6 +1139,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "143",
@@ -1219,6 +1245,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -1228,6 +1255,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -1237,6 +1265,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -1246,6 +1275,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "159",

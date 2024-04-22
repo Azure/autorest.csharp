@@ -153,5 +153,16 @@ namespace FirstTestTypeSpec.Models
                 modelWithRequiredNullable,
                 serializedAdditionalRawData: null);
         }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AuthFlow"/>. </summary>
+        /// <param name="type"></param>
+        /// <param name="tokenUrl"></param>
+        /// <param name="refreshUrl"></param>
+        /// <param name="scopes"></param>
+        /// <returns> A new <see cref="Models.AuthFlow"/> instance for mocking. </returns>
+        public static AuthFlow AuthFlow(string type = null, string tokenUrl = null, string refreshUrl = null, BinaryData scopes = null)
+        {
+            return new AuthFlow(type, tokenUrl, refreshUrl, scopes, serializedAdditionalRawData: null);
+        }
     }
 }

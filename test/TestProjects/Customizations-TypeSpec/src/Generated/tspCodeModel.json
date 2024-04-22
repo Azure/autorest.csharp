@@ -146,6 +146,9 @@
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "21",
@@ -171,6 +174,7 @@
       "Description": "Public model made internal",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "24",
@@ -204,6 +208,9 @@
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [
+       "application/json"
+      ],
       "Properties": [
        {
         "$id": "28",
@@ -251,6 +258,7 @@
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "34",
@@ -284,6 +292,7 @@
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "38",
@@ -712,6 +721,7 @@
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "BaseModel": {
        "$ref": "27"
       },
@@ -759,6 +769,7 @@
       "Description": "Model to make to a struct",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "104",

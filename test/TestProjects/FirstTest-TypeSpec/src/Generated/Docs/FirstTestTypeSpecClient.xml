@@ -6,14 +6,16 @@
 This sample shows how to call TopActionAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
@@ -23,14 +25,16 @@ Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("202
 This sample shows how to call TopAction.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code>
 This sample shows how to call TopAction with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
@@ -40,7 +44,8 @@ Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:
 This sample shows how to call TopActionAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
@@ -57,7 +62,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopActionAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
@@ -82,7 +88,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
@@ -99,7 +106,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
@@ -124,7 +132,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.TopAction2Async(null);
 
@@ -141,7 +150,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2Async with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.TopAction2Async(null);
 
@@ -166,7 +176,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.TopAction2(null);
 
@@ -183,7 +194,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2 with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.TopAction2(null);
 
@@ -208,7 +220,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchActionAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -239,7 +252,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -286,7 +300,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchAction and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -317,7 +332,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -364,7 +380,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
@@ -372,7 +389,8 @@ Response<Thing> response = await client.AnonymousBodyAsync(thing);
 This sample shows how to call AnonymousBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
 {
@@ -390,7 +408,8 @@ Response<Thing> response = await client.AnonymousBodyAsync(thing);
 This sample shows how to call AnonymousBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
 Response<Thing> response = client.AnonymousBody(thing);
@@ -398,7 +417,8 @@ Response<Thing> response = client.AnonymousBody(thing);
 This sample shows how to call AnonymousBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
 {
@@ -416,7 +436,8 @@ Response<Thing> response = client.AnonymousBody(thing);
 This sample shows how to call AnonymousBodyAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -447,7 +468,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -494,7 +516,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBody and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -525,7 +548,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -572,7 +596,8 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call FriendlyModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Friend friend = new Friend("<name>");
 Response<Friend> response = await client.FriendlyModelAsync(friend);
@@ -580,7 +605,8 @@ Response<Friend> response = await client.FriendlyModelAsync(friend);
 This sample shows how to call FriendlyModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Friend friend = new Friend("<name>");
 Response<Friend> response = await client.FriendlyModelAsync(friend);
@@ -591,7 +617,8 @@ Response<Friend> response = await client.FriendlyModelAsync(friend);
 This sample shows how to call FriendlyModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Friend friend = new Friend("<name>");
 Response<Friend> response = client.FriendlyModel(friend);
@@ -599,7 +626,8 @@ Response<Friend> response = client.FriendlyModel(friend);
 This sample shows how to call FriendlyModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Friend friend = new Friend("<name>");
 Response<Friend> response = client.FriendlyModel(friend);
@@ -610,7 +638,8 @@ Response<Friend> response = client.FriendlyModel(friend);
 This sample shows how to call FriendlyModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -624,7 +653,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -641,7 +671,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call FriendlyModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -655,7 +686,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -672,7 +704,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync();
 
@@ -681,7 +714,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeaderAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync();
 
@@ -693,7 +727,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
 
@@ -702,7 +737,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
 
@@ -714,7 +750,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
@@ -722,7 +759,8 @@ Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4
 This sample shows how to call StringFormatAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
@@ -733,7 +771,8 @@ Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4
 This sample shows how to call StringFormat.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
@@ -741,7 +780,8 @@ Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828
 This sample shows how to call StringFormat with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
@@ -752,7 +792,8 @@ Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -766,7 +807,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringFormatAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -783,7 +825,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringFormat.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -797,7 +840,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringFormat with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -814,7 +858,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ProjectedNameModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ProjectedModel projectedModel = new ProjectedModel("<name>");
 Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
@@ -822,7 +867,8 @@ Response<ProjectedModel> response = await client.ProjectedNameModelAsync(project
 This sample shows how to call ProjectedNameModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ProjectedModel projectedModel = new ProjectedModel("<name>");
 Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
@@ -833,7 +879,8 @@ Response<ProjectedModel> response = await client.ProjectedNameModelAsync(project
 This sample shows how to call ProjectedNameModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ProjectedModel projectedModel = new ProjectedModel("<name>");
 Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
@@ -841,7 +888,8 @@ Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
 This sample shows how to call ProjectedNameModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ProjectedModel projectedModel = new ProjectedModel("<name>");
 Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
@@ -852,7 +900,8 @@ Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
 This sample shows how to call ProjectedNameModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -866,7 +915,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call ProjectedNameModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -883,7 +933,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call ProjectedNameModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -897,7 +948,8 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call ProjectedNameModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -914,14 +966,16 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call ReturnsAnonymousModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
 ]]></code>
 This sample shows how to call ReturnsAnonymousModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
 ]]></code></example>
@@ -931,14 +985,16 @@ Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymous
 This sample shows how to call ReturnsAnonymousModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<ReturnsAnonymousModelResponse> response = client.ReturnsAnonymousModel();
 ]]></code>
 This sample shows how to call ReturnsAnonymousModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<ReturnsAnonymousModelResponse> response = client.ReturnsAnonymousModel();
 ]]></code></example>
@@ -948,7 +1004,8 @@ Response<ReturnsAnonymousModelResponse> response = client.ReturnsAnonymousModel(
 This sample shows how to call ReturnsAnonymousModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnsAnonymousModelAsync(null);
 
@@ -958,7 +1015,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnsAnonymousModelAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnsAnonymousModelAsync(null);
 
@@ -971,7 +1029,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnsAnonymousModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnsAnonymousModel(null);
 
@@ -981,7 +1040,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnsAnonymousModel with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnsAnonymousModel(null);
 
@@ -994,7 +1054,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call HeadAsBooleanAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<bool> response = await client.HeadAsBooleanAsync("<id>");
 
@@ -1003,7 +1064,8 @@ Console.WriteLine(response.GetRawResponse().Status);
 This sample shows how to call HeadAsBooleanAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<bool> response = await client.HeadAsBooleanAsync("<id>");
 
@@ -1015,7 +1077,8 @@ Console.WriteLine(response.GetRawResponse().Status);
 This sample shows how to call HeadAsBoolean.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<bool> response = client.HeadAsBoolean("<id>");
 
@@ -1024,7 +1087,8 @@ Console.WriteLine(response.GetRawResponse().Status);
 This sample shows how to call HeadAsBoolean with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<bool> response = client.HeadAsBoolean("<id>");
 
@@ -1036,14 +1100,16 @@ Console.WriteLine(response.GetRawResponse().Status);
 This sample shows how to call StringBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.StringBodyAsync("<body>");
 ]]></code>
 This sample shows how to call StringBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.StringBodyAsync("<body>");
 ]]></code></example>
@@ -1053,14 +1119,16 @@ Response response = await client.StringBodyAsync("<body>");
 This sample shows how to call StringBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.StringBody("<body>");
 ]]></code>
 This sample shows how to call StringBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.StringBody("<body>");
 ]]></code></example>
@@ -1070,7 +1138,8 @@ Response response = client.StringBody("<body>");
 This sample shows how to call StringBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
@@ -1080,7 +1149,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
@@ -1093,7 +1163,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
@@ -1103,7 +1174,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call StringBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
@@ -1116,14 +1188,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call BoolBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.BoolBodyAsync(true);
 ]]></code>
 This sample shows how to call BoolBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.BoolBodyAsync(true);
 ]]></code></example>
@@ -1133,14 +1207,16 @@ Response response = await client.BoolBodyAsync(true);
 This sample shows how to call BoolBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.BoolBody(true);
 ]]></code>
 This sample shows how to call BoolBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.BoolBody(true);
 ]]></code></example>
@@ -1150,7 +1226,8 @@ Response response = client.BoolBody(true);
 This sample shows how to call BoolBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
@@ -1160,7 +1237,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BoolBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
@@ -1173,7 +1251,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BoolBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
@@ -1183,7 +1262,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BoolBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
@@ -1196,14 +1276,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call DateTimeBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call DateTimeBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
@@ -1213,14 +1295,16 @@ Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05
 This sample shows how to call DateTimeBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call DateTimeBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
@@ -1230,7 +1314,8 @@ Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:3
 This sample shows how to call DateTimeBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
 Response response = await client.DateTimeBodyAsync(content);
@@ -1240,7 +1325,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call DateTimeBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
 Response response = await client.DateTimeBodyAsync(content);
@@ -1253,7 +1339,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call DateTimeBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
 Response response = client.DateTimeBody(content);
@@ -1263,7 +1350,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call DateTimeBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
 Response response = client.DateTimeBody(content);
@@ -1276,14 +1364,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call ReturnStringAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<string> response = await client.ReturnStringAsync();
 ]]></code>
 This sample shows how to call ReturnStringAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<string> response = await client.ReturnStringAsync();
 ]]></code></example>
@@ -1293,14 +1383,16 @@ Response<string> response = await client.ReturnStringAsync();
 This sample shows how to call ReturnString.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<string> response = client.ReturnString();
 ]]></code>
 This sample shows how to call ReturnString with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<string> response = client.ReturnString();
 ]]></code></example>
@@ -1310,7 +1402,8 @@ Response<string> response = client.ReturnString();
 This sample shows how to call ReturnStringAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnStringAsync(null);
 
@@ -1320,7 +1413,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnStringAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnStringAsync(null);
 
@@ -1333,7 +1427,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnString and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnString(null);
 
@@ -1343,7 +1438,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnString with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnString(null);
 
@@ -1356,14 +1452,16 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnUnknownAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<BinaryData> response = await client.ReturnUnknownAsync();
 ]]></code>
 This sample shows how to call ReturnUnknownAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<BinaryData> response = await client.ReturnUnknownAsync();
 ]]></code></example>
@@ -1373,14 +1471,16 @@ Response<BinaryData> response = await client.ReturnUnknownAsync();
 This sample shows how to call ReturnUnknown.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<BinaryData> response = client.ReturnUnknown();
 ]]></code>
 This sample shows how to call ReturnUnknown with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response<BinaryData> response = client.ReturnUnknown();
 ]]></code></example>
@@ -1390,7 +1490,8 @@ Response<BinaryData> response = client.ReturnUnknown();
 This sample shows how to call ReturnUnknownAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnUnknownAsync(null);
 
@@ -1400,7 +1501,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.ReturnUnknownAsync(null);
 
@@ -1413,7 +1515,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnUnknown and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnUnknown(null);
 
@@ -1423,7 +1526,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnUnknown with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.ReturnUnknown(null);
 
@@ -1436,7 +1540,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call RecursiveExtensionAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extension input = new Extension(123);
 Response response = await client.RecursiveExtensionAsync(input);
@@ -1444,7 +1549,8 @@ Response response = await client.RecursiveExtensionAsync(input);
 This sample shows how to call RecursiveExtensionAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extension input = new Extension(123);
 Response response = await client.RecursiveExtensionAsync(input);
@@ -1455,7 +1561,8 @@ Response response = await client.RecursiveExtensionAsync(input);
 This sample shows how to call RecursiveExtension.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extension input = new Extension(123);
 Response response = client.RecursiveExtension(input);
@@ -1463,7 +1570,8 @@ Response response = client.RecursiveExtension(input);
 This sample shows how to call RecursiveExtension with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extension input = new Extension(123);
 Response response = client.RecursiveExtension(input);
@@ -1474,7 +1582,8 @@ Response response = client.RecursiveExtension(input);
 This sample shows how to call RecursiveExtensionAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1487,7 +1596,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveExtensionAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1507,7 +1617,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveExtension.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1520,7 +1631,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveExtension with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1540,7 +1652,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ThreeLevelRecursiveAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extendible input = new Extendible();
 Response response = await client.ThreeLevelRecursiveAsync(input);
@@ -1548,7 +1661,8 @@ Response response = await client.ThreeLevelRecursiveAsync(input);
 This sample shows how to call ThreeLevelRecursiveAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extendible input = new Extendible
 {
@@ -1562,7 +1676,8 @@ Response response = await client.ThreeLevelRecursiveAsync(input);
 This sample shows how to call ThreeLevelRecursive.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extendible input = new Extendible();
 Response response = client.ThreeLevelRecursive(input);
@@ -1570,7 +1685,8 @@ Response response = client.ThreeLevelRecursive(input);
 This sample shows how to call ThreeLevelRecursive with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Extendible input = new Extendible
 {
@@ -1584,7 +1700,8 @@ Response response = client.ThreeLevelRecursive(input);
 This sample shows how to call ThreeLevelRecursiveAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.ThreeLevelRecursiveAsync(content);
@@ -1594,7 +1711,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ThreeLevelRecursiveAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1620,7 +1738,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ThreeLevelRecursive.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.ThreeLevelRecursive(content);
@@ -1630,7 +1749,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ThreeLevelRecursive with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1656,7 +1776,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveModelsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ChildModel input = new ChildModel(123, new BaseModel[]
 {
@@ -1667,7 +1788,8 @@ Response response = await client.RecursiveModelsAsync(input);
 This sample shows how to call RecursiveModelsAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ChildModel input = new ChildModel(123, new BaseModel[]
 {
@@ -1681,7 +1803,8 @@ Response response = await client.RecursiveModelsAsync(input);
 This sample shows how to call RecursiveModels.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ChildModel input = new ChildModel(123, new BaseModel[]
 {
@@ -1692,7 +1815,8 @@ Response response = client.RecursiveModels(input);
 This sample shows how to call RecursiveModels with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ChildModel input = new ChildModel(123, new BaseModel[]
 {
@@ -1706,7 +1830,8 @@ Response response = client.RecursiveModels(input);
 This sample shows how to call RecursiveModelsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1726,7 +1851,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveModelsAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1749,7 +1875,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveModels.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1769,7 +1896,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call RecursiveModels with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1792,7 +1920,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ContainSelfModelsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ContainSelf input = new ContainSelf(default);
 Response response = await client.ContainSelfModelsAsync(input);
@@ -1800,7 +1929,8 @@ Response response = await client.ContainSelfModelsAsync(input);
 This sample shows how to call ContainSelfModelsAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ContainSelf input = new ContainSelf(default);
 Response response = await client.ContainSelfModelsAsync(input);
@@ -1811,7 +1941,8 @@ Response response = await client.ContainSelfModelsAsync(input);
 This sample shows how to call ContainSelfModels.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ContainSelf input = new ContainSelf(default);
 Response response = client.ContainSelfModels(input);
@@ -1819,7 +1950,8 @@ Response response = client.ContainSelfModels(input);
 This sample shows how to call ContainSelfModels with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ContainSelf input = new ContainSelf(default);
 Response response = client.ContainSelfModels(input);
@@ -1830,7 +1962,8 @@ Response response = client.ContainSelfModels(input);
 This sample shows how to call ContainSelfModelsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = await client.ContainSelfModelsAsync(content);
@@ -1840,7 +1973,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ContainSelfModelsAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = await client.ContainSelfModelsAsync(content);
@@ -1853,7 +1987,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ContainSelfModels.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = client.ContainSelfModels(content);
@@ -1863,7 +1998,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call ContainSelfModels with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = client.ContainSelfModels(content);
@@ -1876,14 +2012,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call EnumParameterAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
 ]]></code>
 This sample shows how to call EnumParameterAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
 ]]></code></example>
@@ -1893,14 +2031,16 @@ Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
 This sample shows how to call EnumParameter.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.EnumParameter(CsProjectedEnum.CsOne);
 ]]></code>
 This sample shows how to call EnumParameter with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.EnumParameter(CsProjectedEnum.CsOne);
 ]]></code></example>
@@ -1910,7 +2050,8 @@ Response response = client.EnumParameter(CsProjectedEnum.CsOne);
 This sample shows how to call EnumParameterAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.EnumParameterAsync(1.1F);
 
@@ -1919,7 +2060,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call EnumParameterAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.EnumParameterAsync(1.1F);
 
@@ -1931,7 +2073,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call EnumParameter.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.EnumParameter(1.1F);
 
@@ -1940,7 +2083,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call EnumParameter with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.EnumParameter(1.1F);
 
@@ -1952,7 +2096,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BodyIsModelWithProjectedEnumAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
 Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
@@ -1960,7 +2105,8 @@ Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
 This sample shows how to call BodyIsModelWithProjectedEnumAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
 Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
@@ -1971,7 +2117,8 @@ Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
 This sample shows how to call BodyIsModelWithProjectedEnum.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
 Response response = client.BodyIsModelWithProjectedEnum(body);
@@ -1979,7 +2126,8 @@ Response response = client.BodyIsModelWithProjectedEnum(body);
 This sample shows how to call BodyIsModelWithProjectedEnum with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
 Response response = client.BodyIsModelWithProjectedEnum(body);
@@ -1990,7 +2138,8 @@ Response response = client.BodyIsModelWithProjectedEnum(body);
 This sample shows how to call BodyIsModelWithProjectedEnumAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2003,7 +2152,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BodyIsModelWithProjectedEnumAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2019,7 +2169,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BodyIsModelWithProjectedEnum.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2032,7 +2183,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call BodyIsModelWithProjectedEnum with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2048,14 +2200,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call OptionalDictionaryAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.OptionalDictionaryAsync();
 ]]></code>
 This sample shows how to call OptionalDictionaryAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
 {
@@ -2068,14 +2222,16 @@ Response response = await client.OptionalDictionaryAsync(body: new Dictionary<st
 This sample shows how to call OptionalDictionary.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.OptionalDictionary();
 ]]></code>
 This sample shows how to call OptionalDictionary with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.OptionalDictionary(body: new Dictionary<string, int>
 {
@@ -2088,7 +2244,8 @@ Response response = client.OptionalDictionary(body: new Dictionary<string, int>
 This sample shows how to call OptionalDictionaryAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = null;
 Response response = await client.OptionalDictionaryAsync(content);
@@ -2098,7 +2255,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call OptionalDictionaryAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2114,7 +2272,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call OptionalDictionary.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = null;
 Response response = client.OptionalDictionary(content);
@@ -2124,7 +2283,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call OptionalDictionary with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2140,14 +2300,16 @@ Console.WriteLine(response.Status);
 This sample shows how to call AzureLocationOpAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = await client.AzureLocationOpAsync(default, default);
 ]]></code>
 This sample shows how to call AzureLocationOpAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 AzureLocationModel body = new AzureLocationModel(default);
 Response response = await client.AzureLocationOpAsync(default, default, body: body);
@@ -2158,14 +2320,16 @@ Response response = await client.AzureLocationOpAsync(default, default, body: bo
 This sample shows how to call AzureLocationOp.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 Response response = client.AzureLocationOp(default, default);
 ]]></code>
 This sample shows how to call AzureLocationOp with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 AzureLocationModel body = new AzureLocationModel(default);
 Response response = client.AzureLocationOp(default, default, body: body);
@@ -2176,7 +2340,8 @@ Response response = client.AzureLocationOp(default, default, body: body);
 This sample shows how to call AzureLocationOpAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = null;
 Response response = await client.AzureLocationOpAsync(default, default, content);
@@ -2186,7 +2351,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AzureLocationOpAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2202,7 +2368,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AzureLocationOp.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = null;
 Response response = client.AzureLocationOp(default, default, content);
@@ -2212,7 +2379,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AzureLocationOp with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {

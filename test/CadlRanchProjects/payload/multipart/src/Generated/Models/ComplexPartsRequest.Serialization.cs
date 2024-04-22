@@ -17,7 +17,7 @@ namespace Payload.MultiPart.Models
 {
     public partial class ComplexPartsRequest : IUtf8JsonSerializable, IJsonModel<ComplexPartsRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ComplexPartsRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ComplexPartsRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<ComplexPartsRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -85,7 +85,7 @@ namespace Payload.MultiPart.Models
 
         internal static ComplexPartsRequest DeserializeComplexPartsRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -176,11 +176,11 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            content.Add(ModelReaderWriter.Write(Address, new ModelReaderWriterOptions("W")), "address");
+            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
             content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
-                content.Add(ModelReaderWriter.Write(item, new ModelReaderWriterOptions("W")), "previousAddresses");
+                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
             }
             foreach (BinaryData item in Pictures)
             {
@@ -234,7 +234,7 @@ namespace Payload.MultiPart.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
