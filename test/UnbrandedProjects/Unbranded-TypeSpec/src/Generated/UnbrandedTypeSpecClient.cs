@@ -31,7 +31,7 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new UnbrandedTypeSpecClientOptions())
         {
@@ -39,7 +39,7 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, UnbrandedTypeSpecClientOptions options)
