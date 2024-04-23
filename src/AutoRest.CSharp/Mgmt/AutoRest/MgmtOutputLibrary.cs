@@ -549,7 +549,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var operations = GetChildOperations(originalResourcePath);
                     var resourceData = GetResourceData(originalResourcePath);
                     if (resourceData == OutputResourceData.Empty)
-                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
+                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath);
                     else
                         BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
@@ -574,11 +574,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData emptyResourceData)
+        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData);
-            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
+            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType);
+            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), OutputResourceData.Empty, resource, null));
         }
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
