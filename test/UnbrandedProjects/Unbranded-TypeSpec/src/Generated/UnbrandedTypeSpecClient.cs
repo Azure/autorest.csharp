@@ -5,6 +5,8 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;
 
@@ -29,7 +31,7 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new UnbrandedTypeSpecClientOptions())
         {
@@ -37,7 +39,7 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, UnbrandedTypeSpecClientOptions options)
@@ -1257,6 +1259,102 @@ namespace UnbrandedTypeSpec
             return ClientResult.FromValue(result.Value, result.GetRawResponse());
         }
 
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult<IReadOnlyList<string>>> HandleArrayAsync(IEnumerable<string> body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
+            ClientResult result = await HandleArrayAsync(content, null).ConfigureAwait(false);
+            IReadOnlyList<string> value = default;
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
+            {
+                array.Add(item.GetString());
+            }
+            value = array;
+            return ClientResult.FromValue(value, result.GetRawResponse());
+        }
+
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult<IReadOnlyList<string>> HandleArray(IEnumerable<string> body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = BinaryContentHelper.FromEnumerable(body);
+            ClientResult result = HandleArray(content, null);
+            IReadOnlyList<string> value = default;
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
+            {
+                array.Add(item.GetString());
+            }
+            value = array;
+            return ClientResult.FromValue(value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HandleArrayAsync(IEnumerable{string})"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<ClientResult> HandleArrayAsync(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHandleArrayRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HandleArray(IEnumerable{string})"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual ClientResult HandleArray(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHandleArrayRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
+        }
+
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
@@ -1274,10 +1372,7 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1296,10 +1391,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", "text/plain");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1318,10 +1410,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1336,10 +1425,7 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1356,10 +1442,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1377,10 +1460,7 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", "test");
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1396,10 +1476,7 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(action.ToString("O"), true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1414,10 +1491,7 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1434,10 +1508,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1454,10 +1525,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1474,10 +1542,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1493,10 +1558,7 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1514,10 +1576,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1534,10 +1593,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1552,10 +1608,7 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1572,10 +1625,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1592,10 +1642,7 @@ namespace UnbrandedTypeSpec
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1610,10 +1657,7 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -1629,10 +1673,24 @@ namespace UnbrandedTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
+            return message;
+        }
+
+        internal PipelineMessage CreateHandleArrayRequest(BinaryContent content, RequestOptions options)
+        {
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
+            var request = message.Request;
+            request.Method = "PUT";
+            var uri = new ClientUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/headAsBoolean", false);
+            request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
+            message.Apply(options);
             return message;
         }
 

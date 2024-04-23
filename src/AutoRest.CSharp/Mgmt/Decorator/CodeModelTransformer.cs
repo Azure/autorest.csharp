@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);
-            PartialResourceResolver.Update(codeModel);
             SubscriptionIdUpdater.Update(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             CommonSingleWordModels.Update(codeModel);
