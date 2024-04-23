@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using NUnit.Framework;
 using Scm._Type.Model.Usage;
 using Scm._Type.Model.Usage.Models;
