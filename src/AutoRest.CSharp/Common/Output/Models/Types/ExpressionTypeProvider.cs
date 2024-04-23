@@ -34,10 +34,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             if (Configuration.IsBranded)
             {
-                yield return RequestContentHelperProvider.Instance;
-                yield return Utf8JsonRequestContentProvider.Instance;
                 yield return MultipartFormDataRequestContentProvider.Instance;
             }
+            yield return RequestContentHelperProvider.Instance;
+            yield return Utf8JsonRequestContentProvider.Instance;
             if (Configuration.EnableBicepSerialization)
             {
                 yield return BicepSerializationTypeProvider.Instance;

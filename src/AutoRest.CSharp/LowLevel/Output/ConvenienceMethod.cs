@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     yield return new[]
                     {
-                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
+                        Declare(value, Default),
                         JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
                     };
