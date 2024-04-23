@@ -37,6 +37,20 @@ namespace MgmtParamOrdering
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData data, string quick)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData data, string quick)
         {
             var message = _pipeline.CreateMessage();
@@ -121,6 +135,20 @@ namespace MgmtParamOrdering
             }
         }
 
+        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetPatch patch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetPatch patch)
         {
             var message = _pipeline.CreateMessage();
@@ -197,6 +225,21 @@ namespace MgmtParamOrdering
             }
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendQuery("forceDeletion", forceDeletion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -269,6 +312,24 @@ namespace MgmtParamOrdering
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand)
@@ -359,6 +420,25 @@ namespace MgmtParamOrdering
             }
         }
 
+        internal RequestUriBuilder CreateDeallocateRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs, string expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/deallocate", false);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeallocateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -444,6 +524,25 @@ namespace MgmtParamOrdering
             }
         }
 
+        internal RequestUriBuilder CreateDeleteInstancesRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/delete", false);
+            if (forceDeletion != null)
+            {
+                uri.AppendQuery("forceDeletion", forceDeletion.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -526,6 +625,26 @@ namespace MgmtParamOrdering
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInstanceViewRequestUri(string subscriptionId, string resourceGroupName, string vmScaleSetName, string filter, string expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/instanceView", false);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("filter", filter, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetInstanceViewRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string filter, string expand)
@@ -618,6 +737,19 @@ namespace MgmtParamOrdering
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -689,6 +821,14 @@ namespace MgmtParamOrdering
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
