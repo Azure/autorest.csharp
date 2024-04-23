@@ -27,6 +27,13 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteStartArray();
+            foreach (var item in KnownProp)
+            {
+                writer.WriteObjectValue(item, options);
+            }
+            writer.WriteEndArray();
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -60,19 +67,30 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
+            IList<ModelForRecord> knownProp = default;
             IDictionary<string, IList<ModelForRecord>> additionalProperties = default;
             Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
             foreach (var property in element.EnumerateObject())
             {
-                List<ModelForRecord> array = new List<ModelForRecord>();
+                if (property.NameEquals("knownProp"u8))
+                {
+                    List<ModelForRecord> array = new List<ModelForRecord>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(ModelForRecord.DeserializeModelForRecord(item, options));
+                    }
+                    knownProp = array;
+                    continue;
+                }
+                List<ModelForRecord> array0 = new List<ModelForRecord>();
                 foreach (var item in property.Value.EnumerateArray())
                 {
-                    array.Add(ModelForRecord.DeserializeModelForRecord(item, options));
+                    array0.Add(ModelForRecord.DeserializeModelForRecord(item, options));
                 }
-                additionalPropertiesDictionary.Add(property.Name, array);
+                additionalPropertiesDictionary.Add(property.Name, array0);
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsModelArrayAdditionalProperties(additionalProperties);
+            return new ExtendsModelArrayAdditionalProperties(knownProp, additionalProperties);
         }
 
         BinaryData IPersistableModel<ExtendsModelArrayAdditionalProperties>.Write(ModelReaderWriterOptions options)
