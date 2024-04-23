@@ -37,6 +37,21 @@ namespace MgmtOmitOperationGroups
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateGetDefaultRequestUri(string subscriptionId, string resourceGroupName, string model2SName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/model2s/", false);
+            uri.AppendPath(model2SName, true);
+            uri.AppendPath("/model4s/default", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDefaultRequest(string subscriptionId, string resourceGroupName, string model2SName)
         {
             var message = _pipeline.CreateMessage();
