@@ -38,6 +38,25 @@ namespace MgmtPropertyBag
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateListWithSubscriptionRequestUri(string subscriptionId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListWithSubscriptionRequest(string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -125,6 +144,39 @@ namespace MgmtPropertyBag
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, string filter, int? top, string orderby, ETag? ifMatch, string maxpagesize, int? skip)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (orderby != null)
+            {
+                uri.AppendQuery("$orderby", orderby, true);
+            }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string filter, int? top, string orderby, ETag? ifMatch, string maxpagesize, int? skip)
@@ -246,6 +298,36 @@ namespace MgmtPropertyBag
             }
         }
 
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string fooName, string filter, int? top, string orderby, ETag? ifMatch, int? skip)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos/", false);
+            uri.AppendPath(fooName, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (orderby != null)
+            {
+                uri.AppendQuery("$orderby", orderby, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string fooName, string filter, int? top, string orderby, ETag? ifMatch, int? skip)
         {
             var message = _pipeline.CreateMessage();
@@ -358,6 +440,32 @@ namespace MgmtPropertyBag
             }
         }
 
+        internal RequestUriBuilder CreateCreateRequestUri(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos/", false);
+            uri.AppendPath(fooName, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (orderby != null)
+            {
+                uri.AppendQuery("$orderby", orderby, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby)
         {
             var message = _pipeline.CreateMessage();
@@ -462,6 +570,20 @@ namespace MgmtPropertyBag
             }
         }
 
+        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos/", false);
+            uri.AppendPath(fooName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch)
         {
             var message = _pipeline.CreateMessage();
@@ -546,6 +668,40 @@ namespace MgmtPropertyBag
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateReconnectRequestUri(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby, ETag? ifMatch, IEnumerable<string> countryOrRegions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/foos/", false);
+            uri.AppendPath(fooName, true);
+            uri.AppendPath("/reconnect", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (orderby != null)
+            {
+                uri.AppendQuery("$orderby", orderby, true);
+            }
+            if (countryOrRegions != null && !(countryOrRegions is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
+            {
+                foreach (var param in countryOrRegions)
+                {
+                    uri.AppendQuery("countryOrRegions", param, true);
+                }
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateReconnectRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby, ETag? ifMatch, IEnumerable<string> countryOrRegions)

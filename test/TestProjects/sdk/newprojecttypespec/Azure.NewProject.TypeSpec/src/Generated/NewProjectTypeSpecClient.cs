@@ -525,7 +525,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -555,7 +555,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
