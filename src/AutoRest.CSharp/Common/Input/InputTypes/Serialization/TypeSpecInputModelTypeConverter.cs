@@ -155,6 +155,9 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndArray)
             {
                 var property = reader.ReadWithConverter<InputModelProperty>(options);
+                /* in Multipart body model, if the property is of type Bytes, it should be converted to Stream
+                 * In future, we will convert this in emitter when we adopt tcgc.
+                 */
                 if (property != null && isMultipartType)
                 {
                     var propertyType = property.Type;
