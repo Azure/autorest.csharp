@@ -153,16 +153,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmAgentVersion), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(VmAgentVersion) || hasPropertyOverride)
             {
                 builder.Append("  vmAgentVersion: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(VmAgentVersion))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  vmAgentVersion: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (VmAgentVersion.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -176,18 +175,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionHandlers), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(ExtensionHandlers) || hasPropertyOverride)
             {
-                builder.Append("  extensionHandlers: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(ExtensionHandlers))
+                if (ExtensionHandlers.Any() || hasPropertyOverride)
                 {
-                    if (ExtensionHandlers.Any())
+                    builder.Append("  extensionHandlers: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  extensionHandlers: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in ExtensionHandlers)
                         {
@@ -199,18 +197,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
             {
-                builder.Append("  statuses: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(Statuses))
+                if (Statuses.Any() || hasPropertyOverride)
                 {
-                    if (Statuses.Any())
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  statuses: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in Statuses)
                         {

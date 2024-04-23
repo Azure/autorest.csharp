@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmSize), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(VmSize) || hasPropertyOverride)
             {
                 builder.Append("  vmSize: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(VmSize))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  vmSize: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{VmSize.Value.ToString()}'");
                 }
             }

@@ -441,14 +441,9 @@
                     "$ref": "#/definitions/Shell"
                 },
                 "sku": {
-                    "description": "The top level sku property.",
+                    "description": "A model that will be safe flattened.",
                     "type": "object",
                     "$ref": "#/definitions/Sku1"
-                },
-                "unflattened": {
-                    "description": "The unflattened property.",
-                    "type": "object",
-                    "$ref": "#/definitions/Unflattened"
                 },
                 "properties": {
                     "description": "The properties",
@@ -586,8 +581,8 @@
             "description": "A model with a single object for testing safe-flattening",
             "type": "object",
             "properties": {
-                "name1": {
-                    "description": "The middle sku property",
+                "name": {
+                    "description": "The name of the sku",
                     "type": "object",
                     "$ref": "#/definitions/Sku2"
                 }
@@ -596,24 +591,9 @@
         "Sku2": {
             "description": "A model with a single object for testing safe-flattening",
             "type": "object",
-            "required": ["nestedName"],
             "properties": {
                 "nestedName": {
-                    "description": "The childmost sku property",
-                    "type": "string"
-                }
-            }
-        },
-        "Unflattened": {
-            "description": "A model for testing unflattening",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The name",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The value",
+                    "description": "The name of the sku",
                     "type": "string"
                 }
             }

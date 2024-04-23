@@ -121,18 +121,17 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(RequiredCollection) || hasPropertyOverride)
             {
-                builder.Append("  requiredCollection: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(RequiredCollection))
+                if (RequiredCollection.Any() || hasPropertyOverride)
                 {
-                    if (RequiredCollection.Any())
+                    builder.Append("  requiredCollection: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  requiredCollection: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in RequiredCollection)
                         {
@@ -157,16 +156,15 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(OptionalString) || hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(OptionalString))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  optionalString: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (OptionalString.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

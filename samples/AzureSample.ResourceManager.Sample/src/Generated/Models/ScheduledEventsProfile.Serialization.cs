@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TerminateNotificationProfile), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(TerminateNotificationProfile) || hasPropertyOverride)
             {
                 builder.Append("  terminateNotificationProfile: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(TerminateNotificationProfile))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  terminateNotificationProfile: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, TerminateNotificationProfile, options, 2, false, "  terminateNotificationProfile: ");
                 }
             }

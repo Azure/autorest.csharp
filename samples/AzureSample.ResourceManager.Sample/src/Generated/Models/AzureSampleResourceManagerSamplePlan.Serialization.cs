@@ -135,16 +135,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  name: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -158,16 +157,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Publisher), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Publisher) || hasPropertyOverride)
             {
                 builder.Append("  publisher: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Publisher))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  publisher: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Publisher.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -181,16 +179,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Product), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Product) || hasPropertyOverride)
             {
                 builder.Append("  product: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Product))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  product: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Product.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -204,16 +201,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PromotionCode), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(PromotionCode) || hasPropertyOverride)
             {
                 builder.Append("  promotionCode: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PromotionCode))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  promotionCode: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (PromotionCode.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

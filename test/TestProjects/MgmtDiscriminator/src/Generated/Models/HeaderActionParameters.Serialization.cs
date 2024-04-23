@@ -126,40 +126,37 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  typeName: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderAction), out propertyOverride);
+            builder.Append("  headerAction: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  headerAction: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  headerAction: ");
                 builder.AppendLine($"'{HeaderAction.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(HeaderName) || hasPropertyOverride)
             {
                 builder.Append("  headerName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(HeaderName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  headerName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (HeaderName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -173,16 +170,15 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Value) || hasPropertyOverride)
             {
                 builder.Append("  value: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Value))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  value: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Value.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

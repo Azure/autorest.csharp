@@ -28,8 +28,11 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("nestedName"u8);
-            writer.WriteStringValue(NestedName);
+            if (Optional.IsDefined(NestedName))
+            {
+                writer.WritePropertyName("nestedName"u8);
+                writer.WriteStringValue(NestedName);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -99,16 +102,15 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NestedName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(NestedName) || hasPropertyOverride)
             {
                 builder.Append("  nestedName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(NestedName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  nestedName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (NestedName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EncryptionAtHost), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(EncryptionAtHost) || hasPropertyOverride)
             {
                 builder.Append("  encryptionAtHost: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(EncryptionAtHost))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  encryptionAtHost: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = EncryptionAtHost.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

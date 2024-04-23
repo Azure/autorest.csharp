@@ -107,28 +107,26 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride);
+            builder.Append("  paramIndicator: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  paramIndicator: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  paramIndicator: ");
                 builder.AppendLine($"'{ParamIndicator.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ParamName) || hasPropertyOverride)
             {
                 builder.Append("  paramName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ParamName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  paramName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (ParamName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

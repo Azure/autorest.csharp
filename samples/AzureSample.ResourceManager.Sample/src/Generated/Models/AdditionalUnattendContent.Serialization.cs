@@ -147,61 +147,57 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PassName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(PassName) || hasPropertyOverride)
             {
                 builder.Append("  passName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PassName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  passName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{PassName.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ComponentName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ComponentName) || hasPropertyOverride)
             {
                 builder.Append("  componentName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ComponentName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  componentName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{ComponentName.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SettingName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(SettingName) || hasPropertyOverride)
             {
                 builder.Append("  settingName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(SettingName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  settingName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{SettingName.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Content), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Content) || hasPropertyOverride)
             {
                 builder.Append("  content: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Content))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  content: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Content.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

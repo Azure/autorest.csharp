@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -74,11 +75,6 @@ namespace MgmtDiscriminator
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku, options);
-            }
-            if (Optional.IsDefined(Unflattened))
-            {
-                writer.WritePropertyName("unflattened"u8);
-                writer.WriteObjectValue(Unflattened, options);
             }
             if (Optional.IsDefined(Properties))
             {
@@ -152,7 +148,6 @@ namespace MgmtDiscriminator
             Uri uri = default;
             Shell shellProperty = default;
             Sku1 sku = default;
-            Unflattened unflattened = default;
             DeliveryRuleProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -243,15 +238,6 @@ namespace MgmtDiscriminator
                     sku = Sku1.DeserializeSku1(property.Value, options);
                     continue;
                 }
-                if (property.NameEquals("unflattened"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    unflattened = Unflattened.DeserializeUnflattened(property.Value, options);
-                    continue;
-                }
                 if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -305,7 +291,6 @@ namespace MgmtDiscriminator
                 uri,
                 shellProperty,
                 sku,
-                unflattened,
                 properties,
                 serializedAdditionalRawData);
         }
@@ -319,19 +304,23 @@ namespace MgmtDiscriminator
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  name: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -345,223 +334,195 @@ namespace MgmtDiscriminator
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Location) || hasPropertyOverride)
             {
                 builder.Append("  location: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Location))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  location: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Location.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BoolProperty), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(BoolProperty) || hasPropertyOverride)
             {
                 builder.Append("  boolProperty: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(BoolProperty))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  boolProperty: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = BoolProperty.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LocationWithCustomSerialization), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(LocationWithCustomSerialization) || hasPropertyOverride)
             {
                 builder.Append("  locationWithCustomSerialization: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(LocationWithCustomSerialization))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  locationWithCustomSerialization: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     SerializeLocation(builder);
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DateTimeProperty), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DateTimeProperty) || hasPropertyOverride)
             {
                 builder.Append("  dateTimeProperty: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DateTimeProperty))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  dateTimeProperty: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Duration), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Duration) || hasPropertyOverride)
             {
                 builder.Append("  duration: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Duration))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  duration: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedTimeSpan = TypeFormatters.ToString(Duration.Value, "P");
                     builder.AppendLine($"'{formattedTimeSpan}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Number), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Number) || hasPropertyOverride)
             {
                 builder.Append("  number: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Number))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  number: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{Number.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Uri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Uri) || hasPropertyOverride)
             {
                 builder.Append("  uri: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Uri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  uri: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Uri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ShellProperty), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ShellProperty) || hasPropertyOverride)
             {
                 builder.Append("  shellProperty: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ShellProperty))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  shellProperty: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, ShellProperty, options, 2, false, "  shellProperty: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
-            if (hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Sku), out propertyOverride);
+            if (Optional.IsDefined(Sku) || hasPropertyOverride)
             {
                 builder.Append("  sku: ");
-                builder.AppendLine("{");
-                builder.AppendLine("    name1: {");
-                builder.Append("      nestedName: ");
-                builder.AppendLine(propertyOverride);
-                builder.AppendLine("    }");
-                builder.AppendLine("  }");
-            }
-            else
-            {
-                if (Optional.IsDefined(Sku))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  sku: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride);
-            if (hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride);
+            if (Optional.IsDefined(Properties) || hasPropertyOverride)
             {
-                builder.Append("  unflattened: ");
-                if (Unflattened == null)
+                builder.Append("  properties: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine("{");
-                    builder.Append("    name: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                    propertyDictionary.Add("Name", propertyOverride);
-                    bicepOptions.PropertyOverrides.Add(Unflattened, propertyDictionary);
-                    BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
-                }
-            }
-            else
-            {
-                if (Optional.IsDefined(Unflattened))
-                {
-                    builder.Append("  unflattened: ");
-                    BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride);
-            if (hasPropertyOverride)
-            {
-                builder.Append("  properties: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Properties))
-                {
-                    builder.Append("  properties: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Properties, options, 2, false, "  properties: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  id: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Id.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(SystemData) || hasPropertyOverride)
             {
                 builder.Append("  systemData: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(SystemData))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  systemData: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{SystemData.ToString()}'");
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "NestedName":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("NestedName", item.Value);
+                        bicepOptions.PropertyOverrides.Add(Sku, propertyDictionary);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<DeliveryRuleData>.Write(ModelReaderWriterOptions options)

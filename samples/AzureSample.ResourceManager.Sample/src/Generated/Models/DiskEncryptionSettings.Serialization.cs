@@ -136,46 +136,43 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionKey), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DiskEncryptionKey) || hasPropertyOverride)
             {
                 builder.Append("  diskEncryptionKey: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DiskEncryptionKey))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  diskEncryptionKey: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, DiskEncryptionKey, options, 2, false, "  diskEncryptionKey: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyEncryptionKey), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(KeyEncryptionKey) || hasPropertyOverride)
             {
                 builder.Append("  keyEncryptionKey: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(KeyEncryptionKey))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  keyEncryptionKey: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, KeyEncryptionKey, options, 2, false, "  keyEncryptionKey: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
             {
                 builder.Append("  enabled: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Enabled))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  enabled: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = Enabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

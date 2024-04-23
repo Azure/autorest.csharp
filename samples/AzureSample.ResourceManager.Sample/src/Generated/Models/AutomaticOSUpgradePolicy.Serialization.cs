@@ -121,32 +121,30 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticOSUpgrade), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(EnableAutomaticOSUpgrade) || hasPropertyOverride)
             {
                 builder.Append("  enableAutomaticOSUpgrade: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(EnableAutomaticOSUpgrade))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  enableAutomaticOSUpgrade: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = EnableAutomaticOSUpgrade.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisableAutomaticRollback), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DisableAutomaticRollback) || hasPropertyOverride)
             {
                 builder.Append("  disableAutomaticRollback: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DisableAutomaticRollback))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  disableAutomaticRollback: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = DisableAutomaticRollback.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

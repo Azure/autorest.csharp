@@ -136,46 +136,43 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ConsoleScreenshotBlobUri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ConsoleScreenshotBlobUri) || hasPropertyOverride)
             {
                 builder.Append("  consoleScreenshotBlobUri: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ConsoleScreenshotBlobUri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  consoleScreenshotBlobUri: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{ConsoleScreenshotBlobUri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SerialConsoleLogBlobUri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(SerialConsoleLogBlobUri) || hasPropertyOverride)
             {
                 builder.Append("  serialConsoleLogBlobUri: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(SerialConsoleLogBlobUri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  serialConsoleLogBlobUri: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{SerialConsoleLogBlobUri.AbsoluteUri}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Status), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Status) || hasPropertyOverride)
             {
                 builder.Append("  status: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Status))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  status: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, Status, options, 2, false, "  status: ");
                 }
             }

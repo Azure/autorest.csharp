@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BootDiagnostics), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(BootDiagnostics) || hasPropertyOverride)
             {
                 builder.Append("  bootDiagnostics: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(BootDiagnostics))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  bootDiagnostics: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, BootDiagnostics, options, 2, false, "  bootDiagnostics: ");
                 }
             }

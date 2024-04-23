@@ -121,32 +121,30 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProtectFromScaleIn), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ProtectFromScaleIn) || hasPropertyOverride)
             {
                 builder.Append("  protectFromScaleIn: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ProtectFromScaleIn))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  protectFromScaleIn: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = ProtectFromScaleIn.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProtectFromScaleSetActions), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ProtectFromScaleSetActions) || hasPropertyOverride)
             {
                 builder.Append("  protectFromScaleSetActions: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ProtectFromScaleSetActions))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  protectFromScaleSetActions: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = ProtectFromScaleSetActions.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

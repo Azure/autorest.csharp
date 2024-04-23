@@ -151,61 +151,57 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Minimum), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Minimum) || hasPropertyOverride)
             {
                 builder.Append("  minimum: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Minimum))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  minimum: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Minimum.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Maximum), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Maximum) || hasPropertyOverride)
             {
                 builder.Append("  maximum: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Maximum))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  maximum: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Maximum.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DefaultCapacity), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DefaultCapacity) || hasPropertyOverride)
             {
                 builder.Append("  defaultCapacity: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DefaultCapacity))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  defaultCapacity: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{DefaultCapacity.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ScaleType), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ScaleType) || hasPropertyOverride)
             {
                 builder.Append("  scaleType: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ScaleType))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  scaleType: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{ScaleType.Value.ToSerialString()}'");
                 }
             }

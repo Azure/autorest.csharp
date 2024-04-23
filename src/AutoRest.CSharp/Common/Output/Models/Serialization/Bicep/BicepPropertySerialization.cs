@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                 serialization.SerializedType,
                 serialization.IsRequired,
                 serialization.ShouldExcludeInWireSerialization,
-                serialization.Property,
                 serialization.EnumerableValue)
         {
             ValueSerialization = serialization.ValueSerialization switch

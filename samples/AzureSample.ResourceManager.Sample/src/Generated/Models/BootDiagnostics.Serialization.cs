@@ -121,32 +121,30 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
             {
                 builder.Append("  enabled: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Enabled))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  enabled: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = Enabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageUri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(StorageUri) || hasPropertyOverride)
             {
                 builder.Append("  storageUri: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(StorageUri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  storageUri: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{StorageUri.AbsoluteUri}'");
                 }
             }

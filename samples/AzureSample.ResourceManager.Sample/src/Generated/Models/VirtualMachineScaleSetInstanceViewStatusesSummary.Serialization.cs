@@ -117,18 +117,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StatusesSummary), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(StatusesSummary) || hasPropertyOverride)
             {
-                builder.Append("  statusesSummary: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(StatusesSummary))
+                if (StatusesSummary.Any() || hasPropertyOverride)
                 {
-                    if (StatusesSummary.Any())
+                    builder.Append("  statusesSummary: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  statusesSummary: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in StatusesSummary)
                         {

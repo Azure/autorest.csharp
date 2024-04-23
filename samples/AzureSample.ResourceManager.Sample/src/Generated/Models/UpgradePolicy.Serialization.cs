@@ -136,46 +136,43 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Mode), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Mode) || hasPropertyOverride)
             {
                 builder.Append("  mode: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Mode))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  mode: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Mode.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollingUpgradePolicy), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(RollingUpgradePolicy) || hasPropertyOverride)
             {
                 builder.Append("  rollingUpgradePolicy: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(RollingUpgradePolicy))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  rollingUpgradePolicy: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, RollingUpgradePolicy, options, 2, false, "  rollingUpgradePolicy: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradePolicy), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(AutomaticOSUpgradePolicy) || hasPropertyOverride)
             {
                 builder.Append("  automaticOSUpgradePolicy: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(AutomaticOSUpgradePolicy))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  automaticOSUpgradePolicy: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, AutomaticOSUpgradePolicy, options, 2, false, "  automaticOSUpgradePolicy: ");
                 }
             }

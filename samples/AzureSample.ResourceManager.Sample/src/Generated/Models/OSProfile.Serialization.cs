@@ -231,16 +231,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ComputerName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ComputerName) || hasPropertyOverride)
             {
                 builder.Append("  computerName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ComputerName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  computerName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (ComputerName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -254,16 +253,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminUsername), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(AdminUsername) || hasPropertyOverride)
             {
                 builder.Append("  adminUsername: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(AdminUsername))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  adminUsername: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (AdminUsername.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -277,16 +275,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminPassword), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(AdminPassword) || hasPropertyOverride)
             {
                 builder.Append("  adminPassword: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(AdminPassword))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  adminPassword: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (AdminPassword.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -300,16 +297,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomData), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(CustomData) || hasPropertyOverride)
             {
                 builder.Append("  customData: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(CustomData))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  customData: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (CustomData.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -323,48 +319,45 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WindowsConfiguration), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(WindowsConfiguration) || hasPropertyOverride)
             {
                 builder.Append("  windowsConfiguration: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(WindowsConfiguration))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  windowsConfiguration: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, WindowsConfiguration, options, 2, false, "  windowsConfiguration: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LinuxConfiguration), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(LinuxConfiguration) || hasPropertyOverride)
             {
                 builder.Append("  linuxConfiguration: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(LinuxConfiguration))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  linuxConfiguration: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, LinuxConfiguration, options, 2, false, "  linuxConfiguration: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Secrets), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Secrets) || hasPropertyOverride)
             {
-                builder.Append("  secrets: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(Secrets))
+                if (Secrets.Any() || hasPropertyOverride)
                 {
-                    if (Secrets.Any())
+                    builder.Append("  secrets: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  secrets: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in Secrets)
                         {
@@ -376,32 +369,30 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AllowExtensionOperations), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(AllowExtensionOperations) || hasPropertyOverride)
             {
                 builder.Append("  allowExtensionOperations: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(AllowExtensionOperations))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  allowExtensionOperations: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = AllowExtensionOperations.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequireGuestProvisionSignal), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(RequireGuestProvisionSignal) || hasPropertyOverride)
             {
                 builder.Append("  requireGuestProvisionSignal: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(RequireGuestProvisionSignal))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  requireGuestProvisionSignal: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = RequireGuestProvisionSignal.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
