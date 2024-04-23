@@ -71,6 +71,9 @@
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "9",
@@ -96,6 +99,9 @@
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "12",
@@ -121,6 +127,9 @@
    "Description": "Model with a datetime property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "15",
@@ -146,6 +155,9 @@
    "Description": "Model with a duration property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "18",
@@ -171,6 +183,9 @@
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "21",
@@ -202,6 +217,9 @@
    "Description": "Model with collection models properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "25",
@@ -230,6 +248,9 @@
    "Description": "Model with string literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "28",
@@ -259,6 +280,9 @@
    "Description": "Model with int literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "31",
@@ -288,6 +312,9 @@
    "Description": "Model with float literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "34",
@@ -317,6 +344,9 @@
    "Description": "Model with boolean literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "37",
@@ -349,6 +379,9 @@
    "Description": "Model with union of string literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "41",
@@ -402,6 +435,9 @@
    "Description": "Model with union of int literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "48",
@@ -455,6 +491,9 @@
    "Description": "Model with union of float literal property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "55",
@@ -508,6 +547,9 @@
    "Description": "Model with required and optional properties",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "62",

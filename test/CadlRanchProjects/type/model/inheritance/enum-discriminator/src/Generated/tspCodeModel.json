@@ -53,6 +53,9 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "7",
@@ -91,6 +94,9 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "11",
@@ -129,6 +135,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "golden",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "6"
    },
@@ -143,6 +150,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "cobra",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "10"
    },

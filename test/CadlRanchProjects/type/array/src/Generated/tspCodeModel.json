@@ -13,6 +13,7 @@
    "Description": "Array inner model",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",

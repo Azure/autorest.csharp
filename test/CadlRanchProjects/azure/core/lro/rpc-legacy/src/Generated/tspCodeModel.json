@@ -84,6 +84,7 @@
    "Description": "Result of the job",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "12",
@@ -141,6 +142,7 @@
        "Description": "A response containing error details.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "20",
@@ -155,6 +157,7 @@
           "Description": "The error object.",
           "IsNullable": false,
           "Usage": "Output",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "22",
@@ -228,6 +231,7 @@
              "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
              "IsNullable": false,
              "Usage": "Output",
+             "MediaTypes": [],
              "Properties": [
               {
                "$id": "32",
@@ -310,6 +314,9 @@
    "Description": "Data of the job",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "39",

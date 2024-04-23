@@ -33,6 +33,9 @@
    "Namespace": "_Specs_.Azure.Core.Scalar",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "5",

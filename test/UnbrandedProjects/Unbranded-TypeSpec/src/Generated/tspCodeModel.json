@@ -343,6 +343,9 @@
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "47",
@@ -612,6 +615,10 @@
    "Description": "this is a roundtrip model",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "text/plain",
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "82",
@@ -960,6 +967,7 @@
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "127",
@@ -1015,6 +1023,9 @@
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "132",
@@ -1039,6 +1050,9 @@
    "Namespace": "UnbrandedTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "135",
@@ -1078,6 +1092,9 @@
    "Description": "this is a model with a projected name",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "140",
@@ -1102,6 +1119,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": []
   }
  ],

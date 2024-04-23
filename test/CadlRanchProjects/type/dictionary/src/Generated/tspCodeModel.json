@@ -13,6 +13,7 @@
    "Description": "Dictionary inner model",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",

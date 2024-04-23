@@ -78,6 +78,9 @@
    "Description": "Details about a user.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "11",
@@ -117,6 +120,7 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "16",
@@ -156,6 +160,7 @@
       "Description": "The error object.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "21",
@@ -229,6 +234,7 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
          "Usage": "Output",
+         "MediaTypes": [],
          "Properties": [
           {
            "$id": "31",
@@ -281,6 +287,7 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "35",
@@ -331,6 +338,7 @@
       "Description": "The exported user data.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "41",
@@ -378,6 +386,7 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "46",
@@ -436,6 +445,7 @@
    "Description": "The parameters for exporting a user.",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": []
   }
  ],

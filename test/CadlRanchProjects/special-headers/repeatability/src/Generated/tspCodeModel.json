@@ -12,6 +12,7 @@
    "Namespace": "SpecialHeaders.Repeatability",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": []
   }
  ],

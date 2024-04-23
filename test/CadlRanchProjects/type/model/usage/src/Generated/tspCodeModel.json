@@ -13,6 +13,9 @@
    "Description": "Record used in operation parameters",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "3",
@@ -38,6 +41,7 @@
    "Description": "Record used in operation return type",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "6",
@@ -63,6 +67,9 @@
    "Description": "Record used both as operation parameter and return type",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "9",

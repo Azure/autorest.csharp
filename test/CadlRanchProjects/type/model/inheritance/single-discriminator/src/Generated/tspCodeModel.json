@@ -14,6 +14,9 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "3",
@@ -55,6 +58,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "8",
@@ -96,6 +100,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "seagull",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "2"
    },
@@ -110,6 +115,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "sparrow",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "2"
    },
@@ -124,6 +130,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "goose",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "2"
    },
@@ -138,6 +145,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "eagle",
    "Usage": "RoundTrip",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "2"
    },
@@ -204,6 +212,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "t-rex",
    "Usage": "Output",
+   "MediaTypes": [],
    "BaseModel": {
     "$ref": "7"
    },
