@@ -27,5 +27,12 @@ namespace CadlRanchProjects.Tests
             var response = await new VersionedClient(host, null).WithPathApiVersionAsync();
             Assert.AreEqual(200, response.Status);
         });
+
+        [Test]
+        public Task Server_Versions_Versioned_withQueryOldApiVersion() => Test(async (host) =>
+        {
+            var response = await new VersionedClient(host, null).WithQueryOldApiVersionAsync();
+            //Assert.AreEqual(200, response.Status);
+        });
     }
 }
