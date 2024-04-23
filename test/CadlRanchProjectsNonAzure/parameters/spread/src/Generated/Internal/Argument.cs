@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     internal static class Argument
     {

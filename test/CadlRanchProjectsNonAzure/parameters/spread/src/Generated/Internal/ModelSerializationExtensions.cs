@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     internal static class ModelSerializationExtensions
     {

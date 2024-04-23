@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Parameters.Spread.Tests")]
+[assembly: InternalsVisibleTo("Scm.Parameters.Spread.Tests")]

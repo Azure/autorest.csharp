@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Parameters.Spread.Models
+namespace Scm.Parameters.Spread.Models
 {
     internal partial class SpreadAsRequestParameterRequest : IJsonModel<SpreadAsRequestParameterRequest>
     {

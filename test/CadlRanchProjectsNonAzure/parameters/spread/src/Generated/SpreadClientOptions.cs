@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     /// <summary> Client options for SpreadClient. </summary>
     public partial class SpreadClientOptions : ClientPipelineOptions

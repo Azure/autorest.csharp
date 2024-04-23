@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Parameters.Spread.Models
+namespace Scm.Parameters.Spread.Models
 {
     /// <summary> This is a simple model. </summary>
     public partial class BodyParameter

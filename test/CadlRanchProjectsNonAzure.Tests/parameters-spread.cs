@@ -2,8 +2,8 @@
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using Parameters.Spread;
-using Parameters.Spread.Models;
+using Scm.Parameters.Spread;
+using Scm.Parameters.Spread.Models;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Parameters.Spread.Models
+namespace Scm.Parameters.Spread.Models
 {
     /// <summary> The SpreadAsRequestParameterRequest. </summary>
     internal partial class SpreadAsRequestParameterRequest

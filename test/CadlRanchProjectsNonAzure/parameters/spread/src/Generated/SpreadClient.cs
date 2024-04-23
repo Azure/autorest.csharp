@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     // Data plane generated client.
     /// <summary> The Spread service client. </summary>

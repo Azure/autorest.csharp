@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     internal static class ClientPipelineExtensions
     {

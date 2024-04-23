@@ -7,9 +7,9 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Parameters.Spread.Models;
+using Scm.Parameters.Spread.Models;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     // Data plane generated sub-client.
     /// <summary> The Alias sub-client. </summary>

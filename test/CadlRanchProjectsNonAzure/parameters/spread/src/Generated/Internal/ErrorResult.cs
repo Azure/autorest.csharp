@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

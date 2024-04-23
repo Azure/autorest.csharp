@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Parameters.Spread.csproj" />
+    <ProjectReference Include="..\src\Scm.Parameters.Spread.csproj" />
   </ItemGroup>
 
   <ItemGroup>

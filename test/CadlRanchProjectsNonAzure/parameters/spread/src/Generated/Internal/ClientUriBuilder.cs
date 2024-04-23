@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Parameters.Spread
+namespace Scm.Parameters.Spread
 {
     internal class ClientUriBuilder
     {
