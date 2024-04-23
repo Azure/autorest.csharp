@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty property = objectTypeProperty;
-                if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace})
+                if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace })
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)

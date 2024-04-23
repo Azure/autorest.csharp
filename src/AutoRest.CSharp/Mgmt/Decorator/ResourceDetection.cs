@@ -16,47 +16,46 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class ResourceDetection
     {
         private const string ProvidersSegment = "/providers/";
-        private static ConcurrentDictionary<string, InputModelType?> _resourceDataSchemaCache = new ConcurrentDictionary<string, InputModelType?>();
+        private static ConcurrentDictionary<string, (string Name, InputModelType? Schema)?> _resourceDataSchemaCache = new ConcurrentDictionary<string, (string Name, InputModelType? Schema)?>();
 
         public static bool IsResource(this OperationSet set, InputNamespace? inputNamespace = null)
         {
-            return set.TryGetResourceDataSchema(out _, inputNamespace);
+            return set.TryGetResourceDataSchema(out _, out _, inputNamespace);
         }
 
         private static InputModelType? FindObjectSchemaWithName(string name, InputNamespace? inputNamespace = null)
             => inputNamespace?.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
 
-        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out InputModelType resourceType, InputNamespace? intputNamespace = null)
+        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)]out string resourceSchemaName, out InputModelType? resourceSchema, InputNamespace? inputNamespace)
         {
-            resourceType = null;
+            resourceSchemaName = null;
+            resourceSchema = null;
+
             // get the result from cache
-            if (_resourceDataSchemaCache.TryGetValue(set.RequestPath, out resourceType))
+            if (_resourceDataSchemaCache.TryGetValue(set.RequestPath, out var resourceSchemaTuple))
             {
-                return resourceType != null;
+                resourceSchemaName = resourceSchemaTuple?.Name;
+                resourceSchema = resourceSchemaTuple?.Schema;
+                return resourceSchemaTuple != null;
             }
 
             // try to get result from configuration
-            if (Configuration.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out var resourceTypeName))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out resourceSchemaName))
             {
                 // find a schema with this name
-                resourceType = FindObjectSchemaWithName(resourceTypeName, intputNamespace);
-                if (resourceType == null)
+                resourceSchema = FindObjectSchemaWithName(resourceSchemaName, inputNamespace);
+                if (resourceSchema == null)
                 {
-                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceTypeName} in the request-path-to-resource-data configuration");
+                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceSchemaName} in the request-path-to-resource-data configuration");
                 }
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceType);
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
                 return true;
             }
 
             // try to find it in the partial resource list
-            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceTypeName))
+            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
             {
-                resourceType = FindObjectSchemaWithName(resourceTypeName, intputNamespace);
-                if (resourceType == null)
-                {
-                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceTypeName} in the request-path-to-resource-data configuration");
-                }
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceType);
+                resourceSchema = null;
                 return true;
             }
 
@@ -78,16 +77,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // try put operation to get the resource name
-            if (set.TryOperationWithMethod(RequestMethod.Put, out resourceType))
+            if (set.TryOperationWithMethod(RequestMethod.Put, out resourceSchema))
             {
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceType);
+                resourceSchemaName = resourceSchema.Name;
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
                 return true;
             }
 
             // try get operation to get the resource name
-            if (set.TryOperationWithMethod(RequestMethod.Get, out resourceType))
+            if (set.TryOperationWithMethod(RequestMethod.Get, out resourceSchema))
             {
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceType);
+                resourceSchemaName = resourceSchema.Name;
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
                 return true;
             }
 

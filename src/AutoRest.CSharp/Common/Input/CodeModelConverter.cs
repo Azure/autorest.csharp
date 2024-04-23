@@ -10,7 +10,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
-using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -351,8 +350,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                SerializationFormats: schema.SerializationFormats.Select(x => x.ToString()).ToArray(),
-                IsEmpty: schema is EmptyObjectSchema)
+                SerializationFormats: schema.SerializationFormats.Select(x => x.ToString()).ToArray())
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
                 Serialization = GetSerialization(schema, usage),

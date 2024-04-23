@@ -23,8 +23,8 @@ namespace Azure.Core.Tests
         [TestCase(1, 2)]
         [TestCase("a", "b")]
         [TestCase(true, false)]
-        [TestCaseSource("GetTimeSpanData")]
-        [TestCaseSource("GetDateTimeData")]
+        [TestCaseSource(nameof(GetTimeSpanData))]
+        [TestCaseSource(nameof(GetDateTimeData))]
         public void TestGenericFromEnumerable<T>(T expectedValue1, T expectedValue2)
         {
             var expectedList = new List<T> { expectedValue1, expectedValue2 };
@@ -81,8 +81,8 @@ namespace Azure.Core.Tests
         [TestCase(1, 2)]
         [TestCase("a", "b")]
         [TestCase(true, false)]
-        [TestCaseSource("GetTimeSpanData")]
-        [TestCaseSource("GetDateTimeData")]
+        [TestCaseSource(nameof(GetTimeSpanData))]
+        [TestCaseSource(nameof(GetDateTimeData))]
         public void TestGenericFromDictionary<T>(T expectedValue1, T expectedValue2)
         {
             var expectedDictionary = new Dictionary<string, T>()

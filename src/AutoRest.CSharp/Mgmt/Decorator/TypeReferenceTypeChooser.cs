@@ -17,9 +17,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     /// </summary>
     internal static class TypeReferenceTypeChooser
     {
-        private static IReadOnlyList<System.Type>? _typeReferenceTypes;
-        private static IReadOnlyList<System.Type> TypeReferenceTypes => _typeReferenceTypes ??= ReferenceClassFinder.GetTypeReferenceTypes();
-
         private static ConcurrentDictionary<InputType, CSharpType?> _valueCache = new ConcurrentDictionary<InputType, CSharpType?>();
 
         /// <summary>
@@ -40,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static CSharpType? BuildExactMatchType(MgmtObjectType typeToReplace)
         {
-            foreach (System.Type replacementType in TypeReferenceTypes)
+            foreach (System.Type replacementType in ReferenceClassFinder.TypeReferenceTypes)
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {

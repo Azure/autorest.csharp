@@ -22,23 +22,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            ObjectTypeProperty propertyTypeToUse = objectTypeProperty;
-
             if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
             {
-                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
+                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType);
                 if (newProperty != null)
                 {
                     string fullSerializedName = GetFullSerializedName(objectTypeProperty);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                        fullSerializedName,
-                        "ReplacePropertyType", propertyTypeToUse.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
-                    propertyTypeToUse = newProperty;
+                        "ReplacePropertyType", objectTypeProperty.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
+                    return newProperty;
                 }
             }
 
-            return propertyTypeToUse;
+            return objectTypeProperty;
         }
 
         protected override CSharpType? CreateInheritedType()
