@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (model is EmptyResourceData)
+                if (model == ResourceData.Empty)
                     continue;
 
                 var name = model.Type.Name;
