@@ -162,7 +162,7 @@ namespace Type.Enum.Extensible
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         public virtual async Task<ClientResult> PutKnownValueAsync(DaysOfWeekExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = await PutKnownValueAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -171,7 +171,7 @@ namespace Type.Enum.Extensible
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         public virtual ClientResult PutKnownValue(DaysOfWeekExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = PutKnownValue(content, null);
             return result;
         }
@@ -236,7 +236,7 @@ namespace Type.Enum.Extensible
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         public virtual async Task<ClientResult> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = await PutUnknownValueAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -245,7 +245,7 @@ namespace Type.Enum.Extensible
         /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         public virtual ClientResult PutUnknownValue(DaysOfWeekExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = PutUnknownValue(content, null);
             return result;
         }
