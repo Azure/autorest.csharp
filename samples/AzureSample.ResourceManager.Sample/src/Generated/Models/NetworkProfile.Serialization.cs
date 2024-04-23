@@ -117,18 +117,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NetworkInterfaces), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(NetworkInterfaces) || hasPropertyOverride)
             {
-                builder.Append("  networkInterfaces: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(NetworkInterfaces))
+                if (NetworkInterfaces.Any() || hasPropertyOverride)
                 {
-                    if (NetworkInterfaces.Any())
+                    builder.Append("  networkInterfaces: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  networkInterfaces: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in NetworkInterfaces)
                         {

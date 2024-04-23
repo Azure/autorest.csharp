@@ -78,9 +78,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        [TestCase(true)]
-        [TestCase(false)]
-        public void ToBicepWithOverrides(bool initializeOverridedProperty)
+        public void ToBicepWithOverrides()
         {
             var queryParams = new QueryStringMatchConditionParameters(
                 QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
@@ -109,18 +107,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
+                NestedName = "someSku"
             };
-
-            if (initializeOverridedProperty)
-            {
-                data.NestedName = "someSku";
-                data.Unflattened = new Unflattened
-                {
-                    Name = "unflattened",
-                    Value = "value"
-                };
-            }
-
             var options = new BicepModelReaderWriterOptions
             {
                 PropertyOverrides =
@@ -131,7 +119,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                 { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
                                 { nameof(DeliveryRuleData.Location), "locationParameter" },
                                 { nameof(DeliveryRuleData.NestedName), "'overridenSku'" },
-                                { nameof(DeliveryRuleData.UnflattenedName), "'unflattenedOverride'"}
                             }
                         },
                         {
@@ -149,8 +136,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     }
             };
             var bicep = ModelReaderWriter.Write(data, options).ToString();
-            var file = initializeOverridedProperty ? "BicepData/OverridesWithInitialization.bicep" : "BicepData/Overrides.bicep";
-            var expected = File.ReadAllText(TestData.GetLocation(file));
+            var expected = File.ReadAllText(TestData.GetLocation("BicepData/Overrides.bicep"));
             Assert.AreEqual(expected, bicep);
         }
 

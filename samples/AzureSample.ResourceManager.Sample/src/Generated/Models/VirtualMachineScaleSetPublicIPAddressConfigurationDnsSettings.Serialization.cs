@@ -99,16 +99,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DomainNameLabel), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DomainNameLabel) || hasPropertyOverride)
             {
                 builder.Append("  domainNameLabel: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DomainNameLabel))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  domainNameLabel: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (DomainNameLabel.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

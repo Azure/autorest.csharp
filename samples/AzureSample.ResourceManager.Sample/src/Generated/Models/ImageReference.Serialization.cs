@@ -164,16 +164,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Publisher), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Publisher) || hasPropertyOverride)
             {
                 builder.Append("  publisher: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Publisher))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  publisher: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Publisher.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -187,16 +186,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Offer), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Offer) || hasPropertyOverride)
             {
                 builder.Append("  offer: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Offer))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  offer: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Offer.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -210,16 +208,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Sku), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Sku) || hasPropertyOverride)
             {
                 builder.Append("  sku: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Sku))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  sku: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Sku.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -233,16 +230,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Version), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Version) || hasPropertyOverride)
             {
                 builder.Append("  version: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Version))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  version: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Version.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -256,16 +252,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExactVersion), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ExactVersion) || hasPropertyOverride)
             {
                 builder.Append("  exactVersion: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ExactVersion))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  exactVersion: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (ExactVersion.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -279,16 +274,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  id: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Id.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

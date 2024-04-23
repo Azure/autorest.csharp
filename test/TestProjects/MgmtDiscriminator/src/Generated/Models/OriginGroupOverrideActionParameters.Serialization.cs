@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -105,40 +106,57 @@ namespace MgmtDiscriminator.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  typeName: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("OriginGroupId", out propertyOverride);
-            if (hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroup), out propertyOverride);
+            if (Optional.IsDefined(OriginGroup) || hasPropertyOverride)
             {
                 builder.Append("  originGroup: ");
-                builder.AppendLine("{");
-                builder.Append("    id: ");
-                builder.AppendLine(propertyOverride);
-                builder.AppendLine("  }");
-            }
-            else
-            {
-                if (Optional.IsDefined(OriginGroup))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  originGroup: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, OriginGroup, options, 2, false, "  originGroup: ");
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "OriginGroupId":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("Id", item.Value);
+                        bicepOptions.PropertyOverrides.Add(OriginGroup, propertyDictionary);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<OriginGroupOverrideActionParameters>.Write(ModelReaderWriterOptions options)

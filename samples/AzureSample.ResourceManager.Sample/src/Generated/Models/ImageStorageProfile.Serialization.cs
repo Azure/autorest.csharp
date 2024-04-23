@@ -147,33 +147,31 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDisk), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(OSDisk) || hasPropertyOverride)
             {
                 builder.Append("  osDisk: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(OSDisk))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  osDisk: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, OSDisk, options, 2, false, "  osDisk: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DataDisks), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(DataDisks) || hasPropertyOverride)
             {
-                builder.Append("  dataDisks: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(DataDisks))
+                if (DataDisks.Any() || hasPropertyOverride)
                 {
-                    if (DataDisks.Any())
+                    builder.Append("  dataDisks: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  dataDisks: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in DataDisks)
                         {
@@ -185,16 +183,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ZoneResilient), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ZoneResilient) || hasPropertyOverride)
             {
                 builder.Append("  zoneResilient: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ZoneResilient))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  zoneResilient: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = ZoneResilient.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PatchMode), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(PatchMode) || hasPropertyOverride)
             {
                 builder.Append("  patchMode: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PatchMode))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  patchMode: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{PatchMode.Value.ToString()}'");
                 }
             }

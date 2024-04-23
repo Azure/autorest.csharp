@@ -99,14 +99,13 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OperatingSystem), out propertyOverride);
+            builder.Append("  operatingSystem: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  operatingSystem: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  operatingSystem: ");
                 builder.AppendLine($"'{OperatingSystem.ToSerialString()}'");
             }
 

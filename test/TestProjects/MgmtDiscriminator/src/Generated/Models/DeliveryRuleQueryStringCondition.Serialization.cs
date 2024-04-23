@@ -118,43 +118,40 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Parameters), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Parameters) || hasPropertyOverride)
             {
                 builder.Append("  parameters: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Parameters))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  parameters: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, Parameters, options, 2, false, "  parameters: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            builder.Append("  name: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  name: ");
                 builder.AppendLine($"'{Name.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Foo) || hasPropertyOverride)
             {
                 builder.Append("  foo: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Foo))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  foo: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Foo.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

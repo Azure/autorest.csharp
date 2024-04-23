@@ -121,31 +121,29 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ServiceName), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ServiceName) || hasPropertyOverride)
             {
                 builder.Append("  serviceName: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ServiceName))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  serviceName: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{ServiceName.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ServiceState), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ServiceState) || hasPropertyOverride)
             {
                 builder.Append("  serviceState: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ServiceState))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  serviceState: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{ServiceState.Value.ToString()}'");
                 }
             }

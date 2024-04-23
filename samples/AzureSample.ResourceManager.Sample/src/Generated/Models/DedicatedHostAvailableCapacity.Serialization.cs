@@ -117,18 +117,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AllocatableVms), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(AllocatableVms) || hasPropertyOverride)
             {
-                builder.Append("  allocatableVMs: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(AllocatableVms))
+                if (AllocatableVms.Any() || hasPropertyOverride)
                 {
-                    if (AllocatableVms.Any())
+                    builder.Append("  allocatableVMs: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  allocatableVMs: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in AllocatableVms)
                         {

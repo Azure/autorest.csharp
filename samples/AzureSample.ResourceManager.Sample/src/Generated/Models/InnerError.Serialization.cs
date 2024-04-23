@@ -113,16 +113,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Exceptiontype), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Exceptiontype) || hasPropertyOverride)
             {
                 builder.Append("  exceptiontype: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Exceptiontype))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  exceptiontype: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Exceptiontype.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -136,16 +135,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Errordetail), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Errordetail) || hasPropertyOverride)
             {
                 builder.Append("  errordetail: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Errordetail))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  errordetail: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Errordetail.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

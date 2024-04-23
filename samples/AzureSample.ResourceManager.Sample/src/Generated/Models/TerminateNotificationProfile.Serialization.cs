@@ -117,16 +117,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NotBeforeTimeout), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(NotBeforeTimeout) || hasPropertyOverride)
             {
                 builder.Append("  notBeforeTimeout: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(NotBeforeTimeout))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  notBeforeTimeout: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (NotBeforeTimeout.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -140,16 +139,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enable), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Enable) || hasPropertyOverride)
             {
                 builder.Append("  enable: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Enable))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  enable: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var boolValue = Enable.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

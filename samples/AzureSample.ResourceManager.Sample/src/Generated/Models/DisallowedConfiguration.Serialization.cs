@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmDiskType), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(VmDiskType) || hasPropertyOverride)
             {
                 builder.Append("  vmDiskType: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(VmDiskType))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  vmDiskType: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{VmDiskType.Value.ToString()}'");
                 }
             }

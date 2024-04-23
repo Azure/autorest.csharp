@@ -121,18 +121,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Images), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Images) || hasPropertyOverride)
             {
-                builder.Append("  value: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(Images))
+                if (Images.Any() || hasPropertyOverride)
                 {
-                    if (Images.Any())
+                    builder.Append("  value: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  value: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in Images)
                         {
@@ -144,16 +143,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NextLink), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(NextLink) || hasPropertyOverride)
             {
                 builder.Append("  nextLink: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(NextLink))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  nextLink: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (NextLink.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

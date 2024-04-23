@@ -102,16 +102,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  id: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Id.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

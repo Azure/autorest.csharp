@@ -128,16 +128,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  name: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -151,16 +150,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tier), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Tier) || hasPropertyOverride)
             {
                 builder.Append("  tier: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Tier))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  tier: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Tier.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -174,16 +172,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Capacity), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Capacity) || hasPropertyOverride)
             {
                 builder.Append("  capacity: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Capacity))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  capacity: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Capacity.Value.ToString()}'");
                 }
             }

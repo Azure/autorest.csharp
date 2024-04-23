@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxPrice), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(MaxPrice) || hasPropertyOverride)
             {
                 builder.Append("  maxPrice: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(MaxPrice))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  maxPrice: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{MaxPrice.Value.ToString()}'");
                 }
             }

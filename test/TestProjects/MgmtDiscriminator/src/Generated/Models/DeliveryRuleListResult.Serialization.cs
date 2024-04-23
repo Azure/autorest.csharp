@@ -117,18 +117,17 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Value) || hasPropertyOverride)
             {
-                builder.Append("  value: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsCollectionDefined(Value))
+                if (Value.Any() || hasPropertyOverride)
                 {
-                    if (Value.Any())
+                    builder.Append("  value: ");
+                    if (hasPropertyOverride)
                     {
-                        builder.Append("  value: ");
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
                         builder.AppendLine("[");
                         foreach (var item in Value)
                         {

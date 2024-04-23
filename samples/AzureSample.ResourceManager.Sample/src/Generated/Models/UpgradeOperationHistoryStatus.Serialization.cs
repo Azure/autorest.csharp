@@ -136,47 +136,44 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Code) || hasPropertyOverride)
             {
                 builder.Append("  code: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Code))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  code: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Code.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartOn), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(StartOn) || hasPropertyOverride)
             {
                 builder.Append("  startTime: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(StartOn))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  startTime: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EndOn), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(EndOn) || hasPropertyOverride)
             {
                 builder.Append("  endTime: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(EndOn))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  endTime: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }

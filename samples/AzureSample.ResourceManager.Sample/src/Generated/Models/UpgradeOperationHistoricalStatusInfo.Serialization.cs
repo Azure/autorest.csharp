@@ -132,31 +132,29 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Properties), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Properties) || hasPropertyOverride)
             {
                 builder.Append("  properties: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Properties))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  properties: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     BicepSerializationHelpers.AppendChildObject(builder, Properties, options, 2, false, "  properties: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(UpgradeOperationHistoricalStatusInfoType), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType) || hasPropertyOverride)
             {
                 builder.Append("  type: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  type: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (UpgradeOperationHistoricalStatusInfoType.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -170,16 +168,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Location) || hasPropertyOverride)
             {
                 builder.Append("  location: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Location))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  location: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Location.Value.ToString()}'");
                 }
             }

@@ -3,7 +3,6 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
@@ -38,9 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 
         public CustomSerializationHooks? SerializationHooks { get; }
 
-        public ObjectTypeProperty? Property { get; }
-
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldExcludeInWireSerialization, ObjectTypeProperty? property, TypedValueExpression? enumerableValue = null, CustomSerializationHooks? serializationHooks = null)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldExcludeInWireSerialization, TypedValueExpression? enumerableValue = null, CustomSerializationHooks? serializationHooks = null)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
@@ -50,7 +47,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             ShouldExcludeInWireSerialization = shouldExcludeInWireSerialization;
             EnumerableValue = enumerableValue;
             SerializationHooks = serializationHooks;
-            Property = property;
         }
     }
 }

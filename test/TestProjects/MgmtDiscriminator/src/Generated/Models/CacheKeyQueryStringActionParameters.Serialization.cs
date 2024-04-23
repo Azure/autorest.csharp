@@ -130,40 +130,37 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  typeName: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride);
+            builder.Append("  queryStringBehavior: ");
             if (hasPropertyOverride)
             {
-                builder.Append("  queryStringBehavior: ");
-                builder.AppendLine(propertyOverride);
+                builder.AppendLine($"{propertyOverride}");
             }
             else
             {
-                builder.Append("  queryStringBehavior: ");
                 builder.AppendLine($"'{QueryStringBehavior.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(QueryParameters) || hasPropertyOverride)
             {
                 builder.Append("  queryParameters: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(QueryParameters))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  queryParameters: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (QueryParameters.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

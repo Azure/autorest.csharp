@@ -160,16 +160,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Code) || hasPropertyOverride)
             {
                 builder.Append("  code: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Code))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  code: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Code.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -183,31 +182,29 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Level), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Level) || hasPropertyOverride)
             {
                 builder.Append("  level: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Level))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  level: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Level.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisplayStatus), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(DisplayStatus) || hasPropertyOverride)
             {
                 builder.Append("  displayStatus: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(DisplayStatus))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  displayStatus: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (DisplayStatus.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -221,16 +218,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Message), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Message) || hasPropertyOverride)
             {
                 builder.Append("  message: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Message))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  message: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Message.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -244,16 +240,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Time), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Time) || hasPropertyOverride)
             {
                 builder.Append("  time: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Time))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  time: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(Time.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }

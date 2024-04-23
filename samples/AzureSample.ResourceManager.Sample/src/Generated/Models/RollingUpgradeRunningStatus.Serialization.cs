@@ -151,62 +151,58 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Code) || hasPropertyOverride)
             {
                 builder.Append("  code: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Code))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  code: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Code.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartOn), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(StartOn) || hasPropertyOverride)
             {
                 builder.Append("  startTime: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(StartOn))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  startTime: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastAction), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(LastAction) || hasPropertyOverride)
             {
                 builder.Append("  lastAction: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(LastAction))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  lastAction: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{LastAction.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastActionOn), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(LastActionOn) || hasPropertyOverride)
             {
                 builder.Append("  lastActionTime: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(LastActionOn))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  lastActionTime: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     var formattedDateTimeString = TypeFormatters.ToString(LastActionOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }

@@ -106,16 +106,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Uri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Uri) || hasPropertyOverride)
             {
                 builder.Append("  uri: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Uri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  uri: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Uri.AbsoluteUri}'");
                 }
             }

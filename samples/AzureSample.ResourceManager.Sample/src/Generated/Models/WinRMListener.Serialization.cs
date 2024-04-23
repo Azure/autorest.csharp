@@ -121,31 +121,29 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Protocol), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Protocol) || hasPropertyOverride)
             {
                 builder.Append("  protocol: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Protocol))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  protocol: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{Protocol.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CertificateUri), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(CertificateUri) || hasPropertyOverride)
             {
                 builder.Append("  certificateUrl: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(CertificateUri))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  certificateUrl: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
                 }
             }

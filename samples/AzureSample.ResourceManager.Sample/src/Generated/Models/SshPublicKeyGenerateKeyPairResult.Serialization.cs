@@ -115,16 +115,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PrivateKey), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(PrivateKey) || hasPropertyOverride)
             {
                 builder.Append("  privateKey: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PrivateKey))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  privateKey: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (PrivateKey.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -138,16 +137,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicKey), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(PublicKey) || hasPropertyOverride)
             {
                 builder.Append("  publicKey: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(PublicKey))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  publicKey: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (PublicKey.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -161,16 +159,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
             {
                 builder.Append("  id: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Id))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  id: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Id.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

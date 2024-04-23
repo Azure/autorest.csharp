@@ -184,16 +184,15 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(Name))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  name: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -207,76 +206,71 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NumberOfCores), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(NumberOfCores) || hasPropertyOverride)
             {
                 builder.Append("  numberOfCores: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(NumberOfCores))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  numberOfCores: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{NumberOfCores.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDiskSizeInMB), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(OSDiskSizeInMB) || hasPropertyOverride)
             {
                 builder.Append("  osDiskSizeInMB: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(OSDiskSizeInMB))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  osDiskSizeInMB: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{OSDiskSizeInMB.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ResourceDiskSizeInMB), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(ResourceDiskSizeInMB) || hasPropertyOverride)
             {
                 builder.Append("  resourceDiskSizeInMB: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(ResourceDiskSizeInMB))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  resourceDiskSizeInMB: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{ResourceDiskSizeInMB.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MemoryInMB), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(MemoryInMB) || hasPropertyOverride)
             {
                 builder.Append("  memoryInMB: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(MemoryInMB))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  memoryInMB: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{MemoryInMB.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxDataDiskCount), out propertyOverride);
-            if (hasPropertyOverride)
+            if (Optional.IsDefined(MaxDataDiskCount) || hasPropertyOverride)
             {
                 builder.Append("  maxDataDiskCount: ");
-                builder.AppendLine(propertyOverride);
-            }
-            else
-            {
-                if (Optional.IsDefined(MaxDataDiskCount))
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  maxDataDiskCount: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
                     builder.AppendLine($"{MaxDataDiskCount.Value}");
                 }
             }

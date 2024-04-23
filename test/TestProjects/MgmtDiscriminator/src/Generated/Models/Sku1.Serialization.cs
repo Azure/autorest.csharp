@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -28,10 +29,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name1))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name1"u8);
-                writer.WriteObjectValue(Name1, options);
+                writer.WritePropertyName("name"u8);
+                writer.WriteObjectValue(Name, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -71,18 +72,18 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Sku2 name1 = default;
+            Sku2 name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name1"u8))
+                if (property.NameEquals("name"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    name1 = Sku2.DeserializeSku2(property.Value, options);
+                    name = Sku2.DeserializeSku2(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -91,7 +92,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new Sku1(name1, serializedAdditionalRawData);
+            return new Sku1(name, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -103,28 +104,46 @@ namespace MgmtDiscriminator.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
+            if (propertyOverrides != null)
+            {
+                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
+            }
+
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("NestedName", out propertyOverride);
-            if (hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name1: ");
-                builder.AppendLine("{");
-                builder.Append("    nestedName: ");
-                builder.AppendLine(propertyOverride);
-                builder.AppendLine("  }");
-            }
-            else
-            {
-                if (Optional.IsDefined(Name1))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  name1: ");
-                    BicepSerializationHelpers.AppendChildObject(builder, Name1, options, 2, false, "  name1: ");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    BicepSerializationHelpers.AppendChildObject(builder, Name, options, 2, false, "  name: ");
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
+        }
+
+        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
+        {
+            foreach (var item in propertyOverrides.ToList())
+            {
+                switch (item.Key)
+                {
+                    case "NestedName":
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("NestedName", item.Value);
+                        bicepOptions.PropertyOverrides.Add(Name, propertyDictionary);
+                        break;
+                    default:
+                        continue;
+                }
+            }
         }
 
         BinaryData IPersistableModel<Sku1>.Write(ModelReaderWriterOptions options)
