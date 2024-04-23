@@ -195,7 +195,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(Stream))
             {
                 contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
-                fileNameExpression = name.Add(Literal(".wav"));
+                if (valueSerialization.FileName != null)
+                {
+                    fileNameExpression = Literal(valueSerialization.FileName);
+                }
+                else
+                {
+                    fileNameExpression = name.Add(Literal(".wav"));
+                }
+                if (valueSerialization.ContentType != "application/json")
+                {
+                    contentTypeExpression = Literal(valueSerialization.ContentType);
+                }
             }
             if (valueSerialization.Type.IsFrameworkType && valueSerialization.Type.FrameworkType == typeof(BinaryData))
             {
@@ -230,13 +241,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
                     break;
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
-                    contentExpression = BuildValueSerizationExpression(typeof(int), valueExpression);
+                    contentExpression = BuildValueSerizationExpression(typeof(int), new CastExpression(valueExpression, enumType.ValueType));
                     break;
                 case EnumType { IsNumericValueType: true } enumType:
-                    contentExpression = BuildValueSerizationExpression(typeof(float), valueExpression);
+                    contentExpression = BuildValueSerizationExpression(typeof(float), new EnumExpression(enumType, valueExpression).ToSerial());
                     break;
                 case EnumType enumType:
-                    contentExpression = BuildValueSerizationExpression(typeof(string), valueExpression);
+                    contentExpression = BuildValueSerizationExpression(typeof(string), new EnumExpression(enumType, valueExpression).ToSerial());
                     break;
                 default:
                     throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
