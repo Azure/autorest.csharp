@@ -33,7 +33,14 @@ namespace Payload.MultiPart.Models
                     writer.WriteNullValue();
                     continue;
                 }
-                writer.WriteBase64StringValue(item.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(item));
+#else
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(item)))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -75,7 +82,7 @@ namespace Payload.MultiPart.Models
                 return null;
             }
             string id = default;
-            IList<BinaryData> pictures = default;
+            IList<Stream> pictures = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -87,7 +94,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("pictures"u8))
                 {
-                    List<BinaryData> array = new List<BinaryData>();
+                    List<Stream> array = new List<Stream>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         if (item.ValueKind == JsonValueKind.Null)
@@ -96,7 +103,7 @@ namespace Payload.MultiPart.Models
                         }
                         else
                         {
-                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
+                            array.Add(BinaryData.FromString(item.GetRawText()).ToStream());
                         }
                     }
                     pictures = array;
@@ -130,7 +137,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(Id, "id");
-            foreach (BinaryData item in Pictures)
+            foreach (Stream item in Pictures)
             {
                 content.Add(item, "pictures", "pictures" + ".wav", "application/octet-stream");
             }

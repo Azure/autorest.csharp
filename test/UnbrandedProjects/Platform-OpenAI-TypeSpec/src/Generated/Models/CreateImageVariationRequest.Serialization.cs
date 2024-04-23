@@ -23,7 +23,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
-            writer.WriteBase64StringValue(Image.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Image));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Image)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (Optional.IsDefined(N))
             {
                 if (N != null)
@@ -89,7 +96,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            BinaryData image = default;
+            Stream image = default;
             long? n = default;
             CreateImageVariationRequestSize? size = default;
             CreateImageVariationRequestResponseFormat? responseFormat = default;
@@ -100,7 +107,7 @@ namespace OpenAI.Models
             {
                 if (property.NameEquals("image"u8))
                 {
-                    image = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    image = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("n"u8))
@@ -179,11 +186,11 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Size))
             {
-                content.Add(Size.Value, "size");
+                content.Add(Size.Value.ToString(), "size");
             }
             if (Optional.IsDefined(ResponseFormat))
             {
-                content.Add(ResponseFormat.Value, "response_format");
+                content.Add(ResponseFormat.Value.ToString(), "response_format");
             }
             if (Optional.IsDefined(User))
             {

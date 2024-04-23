@@ -23,7 +23,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("file"u8);
-            writer.WriteBase64StringValue(File.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(File));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
             if (Optional.IsDefined(Prompt))
@@ -79,7 +86,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            BinaryData file = default;
+            Stream file = default;
             CreateTranslationRequestModel model = default;
             string prompt = default;
             CreateTranslationRequestResponseFormat? responseFormat = default;
@@ -90,7 +97,7 @@ namespace OpenAI.Models
             {
                 if (property.NameEquals("file"u8))
                 {
-                    file = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    file = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("model"u8))
@@ -155,14 +162,14 @@ namespace OpenAI.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(File, "file", "file" + ".wav", "application/octet-stream");
-            content.Add(Model, "model");
+            content.Add(Model.ToString(), "model");
             if (Optional.IsDefined(Prompt))
             {
                 content.Add(Prompt, "prompt");
             }
             if (Optional.IsDefined(ResponseFormat))
             {
-                content.Add(ResponseFormat.Value, "response_format");
+                content.Add(ResponseFormat.Value.ToString(), "response_format");
             }
             if (Optional.IsDefined(Temperature))
             {

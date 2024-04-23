@@ -25,7 +25,14 @@ namespace Payload.MultiPart.Models
             writer.WritePropertyName("address"u8);
             writer.WriteObjectValue(Address, options);
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteBase64StringValue(ProfileImage.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -65,7 +72,7 @@ namespace Payload.MultiPart.Models
                 return null;
             }
             Address address = default;
-            BinaryData profileImage = default;
+            Stream profileImage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -77,7 +84,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    profileImage = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (options.Format != "W")

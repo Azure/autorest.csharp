@@ -708,6 +708,12 @@ namespace AutoRest.CSharp.Output.Builders
                 valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type
                 return valueSerialization;
             }
+            if (inputType != null && inputType.Name == InputPrimitiveType.Stream.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream))
+            {
+                var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
+                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type
+                return valueSerialization;
+            }
             return inputType switch
             {
                 CodeModelType codeModelType => BuildMultipartSerialization(codeModelType.Schema, valueType, isCollectionElement),

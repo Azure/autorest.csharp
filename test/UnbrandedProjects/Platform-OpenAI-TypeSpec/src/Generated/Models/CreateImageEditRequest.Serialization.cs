@@ -25,11 +25,25 @@ namespace OpenAI.Models
             writer.WritePropertyName("prompt"u8);
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
-            writer.WriteBase64StringValue(Image.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Image));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Image)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (Optional.IsDefined(Mask))
             {
                 writer.WritePropertyName("mask"u8);
-                writer.WriteBase64StringValue(Mask.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Mask));
+#else
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Mask)))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             if (Optional.IsDefined(N))
             {
@@ -97,8 +111,8 @@ namespace OpenAI.Models
                 return null;
             }
             string prompt = default;
-            BinaryData image = default;
-            BinaryData mask = default;
+            Stream image = default;
+            Stream mask = default;
             long? n = default;
             CreateImageEditRequestSize? size = default;
             CreateImageEditRequestResponseFormat? responseFormat = default;
@@ -114,7 +128,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("image"u8))
                 {
-                    image = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    image = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("mask"u8))
@@ -123,7 +137,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    mask = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    mask = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("n"u8))
@@ -209,11 +223,11 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Size))
             {
-                content.Add(Size.Value, "size");
+                content.Add(Size.Value.ToString(), "size");
             }
             if (Optional.IsDefined(ResponseFormat))
             {
-                content.Add(ResponseFormat.Value, "response_format");
+                content.Add(ResponseFormat.Value.ToString(), "response_format");
             }
             if (Optional.IsDefined(User))
             {

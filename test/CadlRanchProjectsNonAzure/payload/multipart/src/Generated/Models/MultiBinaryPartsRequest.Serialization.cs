@@ -23,11 +23,25 @@ namespace Payload.MultiPart.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteBase64StringValue(ProfileImage.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (Optional.IsDefined(Picture))
             {
                 writer.WritePropertyName("picture"u8);
-                writer.WriteBase64StringValue(Picture.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Picture));
+#else
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Picture)))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -67,15 +81,15 @@ namespace Payload.MultiPart.Models
             {
                 return null;
             }
-            BinaryData profileImage = default;
-            BinaryData picture = default;
+            Stream profileImage = default;
+            Stream picture = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    profileImage = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("picture"u8))
@@ -84,7 +98,7 @@ namespace Payload.MultiPart.Models
                     {
                         continue;
                     }
-                    picture = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    picture = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (options.Format != "W")

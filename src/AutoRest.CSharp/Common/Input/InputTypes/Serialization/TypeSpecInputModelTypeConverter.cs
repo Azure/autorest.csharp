@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using YamlDotNet.Serialization.TypeInspectors;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -86,7 +87,7 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, mediaTypes, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options);
+                    CreateProperties(ref reader, properties, options, mediaTypes.Contains("multipart/form-data"));
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
@@ -143,7 +144,7 @@ namespace AutoRest.CSharp.Common.Input
             return model;
         }
 
-        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options)
+        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options, bool isMultipartType)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -154,6 +155,34 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndArray)
             {
                 var property = reader.ReadWithConverter<InputModelProperty>(options);
+                if (property != null && isMultipartType)
+                {
+                    var propertyType = property.Type;
+                    switch (property.Type)
+                    {
+                        case InputPrimitiveType primitiveType when primitiveType.Name.Equals("Bytes"):
+                            propertyType = InputPrimitiveType.Stream;
+                            break;
+                        case InputListType listType when listType.ElementType.Name.Equals("Bytes"):
+                            propertyType = new InputListType(listType.Name, InputPrimitiveType.Stream, listType.IsEmbeddingsVector, listType.IsNullable);
+                            break;
+                        case InputDictionaryType dictionaryType when dictionaryType.ValueType.Name.Equals("Bytes"):
+                            propertyType = new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, InputPrimitiveType.Stream, dictionaryType.IsNullable);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    property = new InputModelProperty(property.Name,
+                                                    property.SerializedName,
+                                                    property.Description,
+                                                    propertyType,
+                                                    property.ConstantValue,
+                                                    property.IsRequired,
+                                                    property.IsReadOnly,
+                                                    property.IsDiscriminator,
+                                                    property.FlattenedNames);
+                }
                 properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
             }
             reader.Read();

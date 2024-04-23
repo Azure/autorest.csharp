@@ -15,7 +15,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Payload_Multipart_FormData_Basic() => Test(async (host) =>
         {
-            MultiPartRequest body = new MultiPartRequest("123", BinaryData.FromBytes(File.ReadAllBytes(SampleJpgPath)));
+            MultiPartRequest body = new MultiPartRequest("123", File.OpenRead(SampleJpgPath));
             var response = await new MultiPartClient(host, null).GetFormDataClient().BasicAsync(body);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
@@ -23,17 +23,17 @@ namespace CadlRanchProjects.Tests
         public Task Payload_Multipart_FormData_JsonPart() => Test(async (host) =>
         {
             Address addressX = new Address("X");
-            JsonPartRequest data = new JsonPartRequest(addressX, BinaryData.FromBytes(File.ReadAllBytes(SampleJpgPath)));
+            JsonPartRequest data = new JsonPartRequest(addressX, File.OpenRead(SampleJpgPath));
             var response = await new MultiPartClient(host, null).GetFormDataClient().JsonPartAsync(data);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Payload_Multipart_FormData_BinaryArrayParts() => Test(async (host) =>
         {
-            var pictures = new BinaryData[]
+            var pictures = new Stream[]
             {
-                BinaryData.FromBytes(File.ReadAllBytes(SamplePngPath)),
-                BinaryData.FromBytes(File.ReadAllBytes(SamplePngPath))
+                File.OpenRead(SamplePngPath),
+                File.OpenRead(SamplePngPath)
             };
             BinaryArrayPartsRequest data = new BinaryArrayPartsRequest("123", pictures);
             var response = await new MultiPartClient(host, null).GetFormDataClient().BinaryArrayPartsAsync(data);

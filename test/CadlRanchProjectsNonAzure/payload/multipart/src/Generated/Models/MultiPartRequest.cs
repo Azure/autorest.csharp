@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Payload.MultiPart.Models
 {
@@ -46,7 +47,7 @@ namespace Payload.MultiPart.Models
         /// <param name="id"></param>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="profileImage"/> is null. </exception>
-        public MultiPartRequest(string id, BinaryData profileImage)
+        public MultiPartRequest(string id, Stream profileImage)
         {
             Argument.AssertNotNull(id, nameof(id));
             Argument.AssertNotNull(profileImage, nameof(profileImage));
@@ -59,7 +60,7 @@ namespace Payload.MultiPart.Models
         /// <param name="id"></param>
         /// <param name="profileImage"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultiPartRequest(string id, BinaryData profileImage, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal MultiPartRequest(string id, Stream profileImage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             ProfileImage = profileImage;
@@ -73,22 +74,7 @@ namespace Payload.MultiPart.Models
 
         /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary>
-        /// Gets the profile image
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        public BinaryData ProfileImage { get; }
+        /// <summary> Gets the profile image. </summary>
+        public Stream ProfileImage { get; }
     }
 }

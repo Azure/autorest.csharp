@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System;
+using System.IO;
 
 namespace Payload.MultiPart.Models
 {
@@ -16,7 +16,7 @@ namespace Payload.MultiPart.Models
         /// <param name="profileImage"></param>
         /// <param name="picture"></param>
         /// <returns> A new <see cref="Models.MultiBinaryPartsRequest"/> instance for mocking. </returns>
-        public static MultiBinaryPartsRequest MultiBinaryPartsRequest(BinaryData profileImage = null, BinaryData picture = null)
+        public static MultiBinaryPartsRequest MultiBinaryPartsRequest(Stream profileImage = null, Stream picture = null)
         {
             return new MultiBinaryPartsRequest(profileImage, picture, serializedAdditionalRawData: null);
         }

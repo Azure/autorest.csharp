@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Payload.MultiPart.Models
@@ -47,7 +48,7 @@ namespace Payload.MultiPart.Models
         /// <param name="profileImage"></param>
         /// <param name="previousAddresses"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> or <paramref name="previousAddresses"/> is null. </exception>
-        public JsonArrayPartsRequest(BinaryData profileImage, IEnumerable<Address> previousAddresses)
+        public JsonArrayPartsRequest(Stream profileImage, IEnumerable<Address> previousAddresses)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
             Argument.AssertNotNull(previousAddresses, nameof(previousAddresses));
@@ -60,7 +61,7 @@ namespace Payload.MultiPart.Models
         /// <param name="profileImage"></param>
         /// <param name="previousAddresses"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal JsonArrayPartsRequest(BinaryData profileImage, IList<Address> previousAddresses, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal JsonArrayPartsRequest(Stream profileImage, IList<Address> previousAddresses, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProfileImage = profileImage;
             PreviousAddresses = previousAddresses;
@@ -72,23 +73,8 @@ namespace Payload.MultiPart.Models
         {
         }
 
-        /// <summary>
-        /// Gets the profile image
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        public BinaryData ProfileImage { get; }
+        /// <summary> Gets the profile image. </summary>
+        public Stream ProfileImage { get; }
         /// <summary> Gets the previous addresses. </summary>
         public IList<Address> PreviousAddresses { get; }
     }
