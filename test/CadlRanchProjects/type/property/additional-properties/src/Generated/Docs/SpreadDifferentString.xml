@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetSpreadDifferentStringAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadDifferentStringAsync.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response<IReadOnlyDictionary<string, string>> response = await client.GetSpreadDifferentStringAsync();
+]]></code>
+This sample shows how to call GetSpreadDifferentStringAsync with all parameters.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response<IReadOnlyDictionary<string, string>> response = await client.GetSpreadDifferentStringAsync();
+]]></code></example>
+    </member>
+    <member name="GetSpreadDifferentString(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadDifferentString.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response<IReadOnlyDictionary<string, string>> response = client.GetSpreadDifferentString();
+]]></code>
+This sample shows how to call GetSpreadDifferentString with all parameters.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response<IReadOnlyDictionary<string, string>> response = client.GetSpreadDifferentString();
+]]></code></example>
+    </member>
+    <member name="GetSpreadDifferentStringAsync(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadDifferentStringAsync and parse the result.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = await client.GetSpreadDifferentStringAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetSpreadDifferentStringAsync with all parameters and parse the result.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = await client.GetSpreadDifferentStringAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="GetSpreadDifferentString(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadDifferentString and parse the result.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = client.GetSpreadDifferentString(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetSpreadDifferentString with all parameters and parse the result.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = client.GetSpreadDifferentString(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(IDictionary{string,string},CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = await client.PutAsync(new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = await client.PutAsync(new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code></example>
+    </member>
+    <member name="Put(IDictionary{string,string},CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = client.Put(new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+Response response = client.Put(new Dictionary<string, string>
+{
+    ["key"] = "<body>"
+});
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = "<body>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
