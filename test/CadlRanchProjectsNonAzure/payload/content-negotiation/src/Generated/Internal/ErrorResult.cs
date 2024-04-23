@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

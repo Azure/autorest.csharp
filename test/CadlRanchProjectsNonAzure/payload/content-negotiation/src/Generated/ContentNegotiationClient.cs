@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     // Data plane generated client.
     /// <summary> The ContentNegotiation service client. </summary>

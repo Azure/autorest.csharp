@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Payload.ContentNegotiation.csproj" />
+    <ProjectReference Include="..\src\Scm.Payload.ContentNegotiation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

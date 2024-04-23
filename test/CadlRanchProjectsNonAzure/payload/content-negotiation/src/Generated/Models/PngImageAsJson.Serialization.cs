@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Payload.ContentNegotiation.Models
+namespace Scm.Payload.ContentNegotiation.Models
 {
     public partial class PngImageAsJson : IJsonModel<PngImageAsJson>
     {

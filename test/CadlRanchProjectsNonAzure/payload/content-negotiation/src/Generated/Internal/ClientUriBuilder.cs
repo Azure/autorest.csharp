@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     internal class ClientUriBuilder
     {
         private UriBuilder _uriBuilder;
         private StringBuilder _pathBuilder;
         private StringBuilder _queryBuilder;
-        private const char PathSeparator = '/';
 
         public ClientUriBuilder()
         {
@@ -42,9 +41,9 @@ namespace Payload.ContentNegotiation
                 value = Uri.EscapeDataString(value);
             }
 
-            if (value[0] == PathSeparator)
+            if (PathBuilder.Length > 0 && PathBuilder[PathBuilder.Length - 1] == '/' && value[0] == '/')
             {
-                value = value.Substring(1);
+                PathBuilder.Remove(PathBuilder.Length - 1, 1);
             }
 
             PathBuilder.Append(value);

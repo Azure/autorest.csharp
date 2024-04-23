@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     /// <summary> Client options for ContentNegotiationClient. </summary>
     public partial class ContentNegotiationClientOptions : ClientPipelineOptions

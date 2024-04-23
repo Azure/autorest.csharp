@@ -4,10 +4,10 @@
 
 using System;
 
-namespace Payload.ContentNegotiation.Models
+namespace Scm.Payload.ContentNegotiation.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class PayloadContentNegotiationModelFactory
+    public static partial class ScmPayloadContentNegotiationModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
         /// <param name="content"></param>

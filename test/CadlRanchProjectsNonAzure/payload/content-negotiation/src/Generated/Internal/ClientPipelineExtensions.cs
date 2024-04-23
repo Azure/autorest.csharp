@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     internal static class ClientPipelineExtensions
     {

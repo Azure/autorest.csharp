@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Payload.ContentNegotiation.Models
+namespace Scm.Payload.ContentNegotiation.Models
 {
     /// <summary> The PngImageAsJson. </summary>
     public partial class PngImageAsJson

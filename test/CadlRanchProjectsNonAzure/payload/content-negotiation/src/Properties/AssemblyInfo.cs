@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Payload.ContentNegotiation.Tests")]
+[assembly: InternalsVisibleTo("Scm.Payload.ContentNegotiation.Tests")]

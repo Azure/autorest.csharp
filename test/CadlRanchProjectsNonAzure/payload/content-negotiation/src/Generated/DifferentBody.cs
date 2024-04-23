@@ -6,9 +6,9 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using Payload.ContentNegotiation.Models;
+using Scm.Payload.ContentNegotiation.Models;
 
-namespace Payload.ContentNegotiation
+namespace Scm.Payload.ContentNegotiation
 {
     // Data plane generated sub-client.
     /// <summary> The DifferentBody sub-client. </summary>
