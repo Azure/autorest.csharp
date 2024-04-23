@@ -6,9 +6,9 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using Scm._Type.Model._Usage.Models;
+using Scm._Type.Model.Usage.Models;
 
-namespace Scm._Type.Model._Usage
+namespace Scm._Type.Model.Usage
 {
     // Data plane generated client.
     /// <summary> Illustrates usage of Record in different places(Operation parameters, return type or both). </summary>

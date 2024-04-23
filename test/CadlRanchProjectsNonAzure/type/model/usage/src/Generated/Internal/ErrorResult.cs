@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Scm._Type.Model._Usage
+namespace Scm._Type.Model.Usage
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

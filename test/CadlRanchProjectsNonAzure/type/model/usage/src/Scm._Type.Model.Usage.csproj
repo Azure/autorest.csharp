@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the Scm._Type.Model._Usage client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>SDK Code Generation Scm._Type.Model._Usage</AssemblyTitle>
+    <Description>This is the Scm._Type.Model.Usage client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation Scm._Type.Model.Usage</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>Scm._Type.Model._Usage</PackageTags>
+    <PackageTags>Scm._Type.Model.Usage</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

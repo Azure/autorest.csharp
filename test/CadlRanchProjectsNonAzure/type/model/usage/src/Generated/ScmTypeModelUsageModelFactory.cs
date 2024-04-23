@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Scm._Type.Model._Usage.Models
+namespace Scm._Type.Model.Usage.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class ScmTypeModelUsageModelFactory

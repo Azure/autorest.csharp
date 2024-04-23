@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Scm._Type.Model._Usage.csproj" />
+    <ProjectReference Include="..\src\Scm._Type.Model.Usage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

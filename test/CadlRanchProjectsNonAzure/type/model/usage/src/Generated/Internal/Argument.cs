@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Scm._Type.Model._Usage
+namespace Scm._Type.Model.Usage
 {
     internal static class Argument
     {

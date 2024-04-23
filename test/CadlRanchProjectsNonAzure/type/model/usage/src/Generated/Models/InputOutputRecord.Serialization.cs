@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Scm._Type.Model._Usage.Models
+namespace Scm._Type.Model.Usage.Models
 {
     public partial class InputOutputRecord : IJsonModel<InputOutputRecord>
     {

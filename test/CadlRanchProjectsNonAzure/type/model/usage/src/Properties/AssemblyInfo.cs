@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Scm._Type.Model._Usage.Tests")]
+[assembly: InternalsVisibleTo("Scm._Type.Model.Usage.Tests")]
