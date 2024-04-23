@@ -28,11 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Types.Azure
 
         private Utf8JsonRequestContentProvider() : base(Configuration.HelperNamespace, null)
         {
-            // non-azure libraries do not need this type
-            Debug.Assert(Configuration.IsBranded);
-
             DeclarationModifiers = TypeSignatureModifiers.Internal;
-            DefaultName = Configuration.IsBranded ? "Utf8JsonRequestContent" : "Utf8JsonRequestBody";
+            DefaultName = $"Utf8Json{Configuration.ApiTypes.RequestContentType.Name}";
             Inherits = Configuration.ApiTypes.RequestContentType;
 
             _streamField = new FieldDeclaration(

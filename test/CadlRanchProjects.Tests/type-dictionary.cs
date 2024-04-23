@@ -16,6 +16,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_Int32Value_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetInt32ValueClient().GetInt32ValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual(1, response.Value["k1"]);
             Assert.AreEqual(2, response.Value["k2"]);
         });
@@ -35,6 +36,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_Int64Value_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetInt64ValueClient().GetInt64ValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual(9007199254740991, response.Value["k1"]);
             Assert.AreEqual(-9007199254740991, response.Value["k2"]);
         });
@@ -54,6 +56,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_BooleanValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetBooleanValueClient().GetBooleanValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual(true, response.Value["k1"]);
             Assert.AreEqual(false, response.Value["k2"]);
         });
@@ -73,6 +76,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_StringValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetStringValueClient().GetStringValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual("hello", response.Value["k1"]);
             Assert.AreEqual("", response.Value["k2"]);
         });
@@ -92,6 +96,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_Float32Value_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
+            Assert.AreEqual(1, response.Value.Count);
             Assert.AreEqual(43.125f, response.Value["k1"]);
         });
 
@@ -109,6 +114,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_DatetimeValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetDatetimeValueClient().GetDatetimeValueAsync();
+            Assert.AreEqual(1, response.Value.Count);
             Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), response.Value["k1"]);
         });
 
@@ -126,6 +132,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_DurationValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetDurationValueClient().GetDurationValueAsync();
+            Assert.AreEqual(1, response.Value.Count);
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value["k1"]);
         });
 
@@ -143,6 +150,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_UnknownValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetUnknownValueClient().GetUnknownValueAsync();
+            Assert.AreEqual(3, response.Value.Count);
             Assert.AreEqual(1, response.Value["k1"].ToObjectFromJson());
             Assert.AreEqual("hello", response.Value["k2"].ToObjectFromJson());
             Assert.AreEqual(null, response.Value["k3"]);
@@ -164,6 +172,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_ModelValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetModelValueClient().GetModelValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual("hello", response.Value["k1"].Property);
             Assert.AreEqual("world", response.Value["k2"].Property);
         });
@@ -183,6 +192,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_RecursiveModelValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetRecursiveModelValueClient().GetRecursiveModelValueAsync();
+            Assert.AreEqual(2, response.Value.Count);
             Assert.AreEqual("hello", response.Value["k1"].Property);
             Assert.AreEqual(0, response.Value["k1"].Children.Count);
             Assert.AreEqual("world", response.Value["k2"].Property);
@@ -212,6 +222,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Dictionary_NullableFloatValue_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
+            Assert.AreEqual(3, response.Value.Count);
             Assert.AreEqual(1.25f, response.Value["k1"]);
             Assert.AreEqual(0.5f, response.Value["k2"]);
             Assert.AreEqual(null, response.Value["k3"]);

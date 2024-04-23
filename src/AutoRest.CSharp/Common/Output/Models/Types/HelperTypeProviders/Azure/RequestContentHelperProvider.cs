@@ -26,15 +26,13 @@ namespace AutoRest.CSharp.Output.Models.Types.Azure
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
         private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
-            // non-azure libraries do not need this type
-            Debug.Assert(Configuration.IsBranded);
-
+            DefaultName = $"{Configuration.ApiTypes.RequestContentType.Name}Helper";
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _requestBodyType = Configuration.ApiTypes.RequestContentType;
             _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
 
-        protected override string DefaultName => "RequestContentHelper";
+        protected override string DefaultName { get; }
 
         protected override IEnumerable<Method> BuildMethods()
         {
