@@ -52,6 +52,7 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "type/enum/extensible",
         "type/array",
         "type/dictionary",
         "authentication/http/custom"
