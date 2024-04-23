@@ -621,9 +621,8 @@ namespace AutoRest.CSharp.Output.Builders
         public MultipartObjectSerialization BuildMultipartObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
-             *             * The current implementation assumes that the object is a flat object and does not have any nested objects.
-             *                         * We need to revisit this and make it more robust.
-             *                                   */
+             *Need to consider the polymorphism and the base class properties.
+             **/
             var properties = new List<MultipartPropertySerialization>();
             foreach (ObjectTypeProperty property in objectType.Properties.ToArray())
             {
@@ -638,7 +637,6 @@ namespace AutoRest.CSharp.Output.Builders
                 var isRequired = schemaProperty.IsRequired;
                 var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
-                /*TODO: need to get the serialization format from the schema*/
                 MultipartSerialization valueSerialization = BuildMultipartSerialization(schemaProperty.Schema, property.Declaration.Type, false);
                 var propertySerialization = new MultipartPropertySerialization(
                     parameter.Name,
@@ -651,7 +649,7 @@ namespace AutoRest.CSharp.Output.Builders
                 properties.Add(propertySerialization);
             }
 
-            /*TODO: need to build serialization for additional properties*/
+            /*build serialization for additional properties*/
             var additionalProperties = CreateMultipartAdditionalPropertiesSerialization(objectSchema, objectType);
             return new MultipartObjectSerialization(objectType,
                 objectType.SerializationConstructor.Signature.Parameters,
@@ -701,17 +699,17 @@ namespace AutoRest.CSharp.Output.Builders
         }
         public static MultipartSerialization BuildMultipartSerialization(InputType? inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat, ValueExpression memberValueExpression)
         {
-            /*TODO: need to update to use InputType to identify if it is a Multipart File or not. */
+            /*TODO: need to update to use InputType to identify if it is a Multipart File or not. Current we will set contentType for Bytes and Stream*/
             if (inputType != null && inputType.Name == InputPrimitiveType.Bytes.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
             {
                 var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
-                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type
+                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type from InputType
                 return valueSerialization;
             }
             if (inputType != null && inputType.Name == InputPrimitiveType.Stream.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream))
             {
                 var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
-                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type
+                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type from InputType
                 return valueSerialization;
             }
             return inputType switch
@@ -771,7 +769,6 @@ namespace AutoRest.CSharp.Output.Builders
                         property.IsRequired,
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
                         enumerableExpression: enumerableExpression);
-                    ;
                 }
             }
         }

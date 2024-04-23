@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        /*TODO: handle additionalProperty serialization */
+        /* handle additionalProperty serialization */
         private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization()
         {
             bool shouldExcludeInWireSerialization = false;

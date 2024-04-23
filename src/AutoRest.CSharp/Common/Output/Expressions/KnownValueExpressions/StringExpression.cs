@@ -29,8 +29,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public StringExpression Substring(ValueExpression startIndex)
             => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
-        public BoolExpression StartsWith(StringExpression value)
-            => new(new InvokeInstanceMethodExpression(this, nameof(string.StartsWith), new[] {value}, null, false));
         public StringExpression Add(StringExpression value)
             => new(new BinaryOperatorExpression(" + ", this, value));
         public ValueExpression ToCharArray()
