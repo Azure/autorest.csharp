@@ -209,10 +209,10 @@ namespace OpenAI.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(Prompt, "prompt");
-            content.Add(Image, "image", "image" + ".wav", "application/octet-stream");
+            content.Add(Image, "image", "image", "application/octet-stream");
             if (Optional.IsDefined(Mask))
             {
-                content.Add(Mask, "mask", "mask" + ".wav", "application/octet-stream");
+                content.Add(Mask, "mask", "mask", "application/octet-stream");
             }
             if (Optional.IsDefined(N))
             {

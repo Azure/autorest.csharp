@@ -191,14 +191,14 @@ namespace Payload.MultiPart.Models
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
             content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
                 content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
             }
             foreach (Stream item in Pictures)
             {
-                content.Add(item, "pictures", "pictures" + ".wav", "application/octet-stream");
+                content.Add(item, "pictures", "pictures", "application/octet-stream");
             }
             return content;
         }

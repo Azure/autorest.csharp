@@ -115,7 +115,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             return content;
         }
 

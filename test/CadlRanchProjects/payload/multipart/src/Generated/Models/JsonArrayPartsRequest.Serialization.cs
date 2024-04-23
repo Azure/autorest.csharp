@@ -130,7 +130,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
                 content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");

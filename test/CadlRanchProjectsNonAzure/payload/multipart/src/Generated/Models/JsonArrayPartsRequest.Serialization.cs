@@ -124,7 +124,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             foreach (Address item in PreviousAddresses)
             {
                 content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");

@@ -121,7 +121,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             return content;
         }
 

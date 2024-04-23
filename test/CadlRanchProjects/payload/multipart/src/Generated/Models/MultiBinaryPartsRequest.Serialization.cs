@@ -134,10 +134,10 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ProfileImage, "profileImage", "profileImage" + ".wav", "application/octet-stream");
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             if (Optional.IsDefined(Picture))
             {
-                content.Add(Picture, "picture", "picture" + ".wav", "application/octet-stream");
+                content.Add(Picture, "picture", "picture", "application/octet-stream");
             }
             return content;
         }

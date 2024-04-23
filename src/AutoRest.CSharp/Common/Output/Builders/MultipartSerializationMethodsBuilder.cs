@@ -51,39 +51,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new SwitchCase(
                 Serializations.MultipartFormat,
-                Return(
-                    new InvokeInstanceMethodExpression(
-                        null,
-                        new MethodSignature(
-                            $"SerializeMultipart",
-                            null,
-                            null,
-                            MethodSignatureModifiers.Private,
-                            typeof(BinaryData),
-                            null,
-                            new[]
-                            {
-                                KnownParameters.Serializations.Options
-                            }),
-                        new ValueExpression[]
-                        {
-                            options
-                        })));
+                Return(new InvokeInstanceMethodExpression(null, "SerializeMultipart", new[] { options }, null, false)));
         }
 
         public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody()
         {
-            var serializeCallExpression = new InvokeInstanceMethodExpression(
-                        null,
-                        new MethodSignature(
-                            Configuration.ApiTypes.ToMultipartRequestContentName,
-                            null,
-                            null,
-                            MethodSignatureModifiers.Private,
-                            Configuration.ApiTypes.MultipartRequestContentType,
-                            null,
-                            Array.Empty<Parameter>()),
-                            Array.Empty<ValueExpression>());
+            var serializeCallExpression = new InvokeInstanceMethodExpression(null, Configuration.ApiTypes.ToMultipartRequestContentName, Array.Empty<ValueExpression>(), null, false);
             return new MethodBodyStatement[]
                         {
                             UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, serializeCallExpression, out var content),
@@ -121,7 +94,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     yield return Serializations.WrapInCheckNotWire(
                         property,
-                        Literal("MFD"),
+                        Serializations.MultipartFormat,
                         InvokeOptional.WrapInIsDefined(
                             property,
                     new IfElseStatement(checkPropertyIsInitialized,
@@ -132,7 +105,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     yield return Serializations.WrapInCheckNotWire(
                         property,
-                    /*options?.Format*/Literal("MFD"),
+                        Serializations.MultipartFormat,
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(multipartContent, property)));
                 }
             }
@@ -201,9 +174,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    fileNameExpression = name.Add(Literal(".wav"));
+                    fileNameExpression = name;
                 }
-                if (valueSerialization.ContentType != "application/json")
+                if (valueSerialization.ContentType != null)
                 {
                     contentTypeExpression = Literal(valueSerialization.ContentType);
                 }
@@ -216,9 +189,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     fileNameExpression = Literal(valueSerialization.FileName);
                 } else
                 {
-                    fileNameExpression = name.Add(Literal(".wav"));
+                    fileNameExpression = name;
                 }
-                if (valueSerialization.ContentType != "application/json")
+                if (valueSerialization.ContentType != null)
                 {
                     contentTypeExpression = Literal(valueSerialization.ContentType);
                 }
@@ -243,11 +216,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     contentExpression = BuildValueSerizationExpression(typeof(int), new CastExpression(valueExpression, enumType.ValueType));
                     break;
-                case EnumType { IsNumericValueType: true } enumType:
-                    contentExpression = BuildValueSerizationExpression(typeof(float), new EnumExpression(enumType, valueExpression).ToSerial());
-                    break;
                 case EnumType enumType:
-                    contentExpression = BuildValueSerizationExpression(typeof(string), new EnumExpression(enumType, valueExpression).ToSerial());
+                    contentExpression = BuildValueSerizationExpression(enumType.ValueType, new EnumExpression(enumType, valueExpression).ToSerial());
                     break;
                 default:
                     throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -257,9 +227,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
         {
-            _ when valueType.IsFrameworkType => valueExpression,
-            _ when valueType.Implementation is SerializableObjectType serializableObjectType => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire }, new[] { valueType }),
-            _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType })
+            { IsFrameworkType: true } => valueExpression,
+            { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType } => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire }, new[] { valueType }),
+            _ => BinaryDataExpression.FromObjectAsJson(valueExpression)
         };
     }
 }

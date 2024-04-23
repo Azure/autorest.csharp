@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using YamlDotNet.Serialization.TypeInspectors;
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputModelType CreateModelType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
-            var mediaTypes = new List<string>();
+            IReadOnlyList<string>? mediaTypes = null;
             var properties = new List<InputModelProperty>();
             bool isNullable = false;
             string? ns = null;
@@ -55,16 +56,11 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.InheritedDictionaryType), options, ref inheritedDictionaryType);
+                    || reader.TryReadWithConverter(nameof(InputModelType.InheritedDictionaryType), options, ref inheritedDictionaryType)
+                    || reader.TryReadWithConverter(nameof(InputModelType.MediaTypes), options, ref mediaTypes);
 
                 if (isKnownProperty)
                 {
-                    continue;
-                }
-                if (reader.GetString() == nameof(InputModelType.MediaTypes))
-                {
-                    reader.Read();
-                    CreatMediaTypes(ref reader, mediaTypes, options);
                     continue;
                 }
                 /**
@@ -73,6 +69,7 @@ namespace AutoRest.CSharp.Common.Input
                  */
                 if (reader.GetString() == nameof(InputModelType.BaseModel))
                 {
+                    mediaTypes ??= new List<string>();
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, mediaTypes, resolver);
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
                     if (baseModel != null)
@@ -85,9 +82,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
+                    mediaTypes ??= new List<string>();
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, mediaTypes, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options, mediaTypes.Contains("multipart/form-data"));
+                    CreateProperties(ref reader, properties, options, mediaTypes.Contains<string>("multipart/form-data"));
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
@@ -99,24 +97,9 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, mediaTypes, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, mediaTypes ?? new List<string>(), resolver);
         }
 
-        private static void CreatMediaTypes(ref Utf8JsonReader reader, ICollection<string> mediaTypes, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-            reader.Read();
-
-            while (reader.TokenType != JsonTokenType.EndArray)
-            {
-                var type = reader.ReadWithConverter<string>(options);
-                mediaTypes.Add(type ?? throw new JsonException($"null item isn't allowed"));
-            }
-            reader.Read();
-        }
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, InputDictionaryType? inheritedDictionaryType, bool isNullable, IReadOnlyList<string> mediaTypes, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");

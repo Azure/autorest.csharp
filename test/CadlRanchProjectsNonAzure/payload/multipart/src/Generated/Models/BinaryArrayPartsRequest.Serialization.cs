@@ -139,7 +139,7 @@ namespace Payload.MultiPart.Models
             content.Add(Id, "id");
             foreach (Stream item in Pictures)
             {
-                content.Add(item, "pictures", "pictures" + ".wav", "application/octet-stream");
+                content.Add(item, "pictures", "pictures", "application/octet-stream");
             }
             return content;
         }

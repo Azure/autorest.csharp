@@ -296,6 +296,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         public BicepObjectSerialization? BuildBicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
             => new BicepObjectSerialization(objectType, jsonObjectSerialization);
+
         private static JsonPropertySerialization? CreateJsonPropertySerializationFromInputModelProperty(SerializableObjectType objectType, ObjectTypeProperty property, TypeFactory typeFactory)
         {
             var declaredName = property.Declaration.Name;

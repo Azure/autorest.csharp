@@ -29,8 +29,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public StringExpression Substring(ValueExpression startIndex)
             => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
-        public StringExpression Add(StringExpression value)
-            => new(new BinaryOperatorExpression(" + ", this, value));
         public ValueExpression ToCharArray()
             => new InvokeInstanceMethodExpression(this, nameof(string.ToCharArray), Array.Empty<ValueExpression>(), null, false);
     }

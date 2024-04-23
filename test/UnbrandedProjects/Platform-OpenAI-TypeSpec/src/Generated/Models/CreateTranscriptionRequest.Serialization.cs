@@ -173,7 +173,7 @@ namespace OpenAI.Models
         internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(File, "file", "file" + ".wav", "application/octet-stream");
+            content.Add(File, "file", "file", "application/octet-stream");
             content.Add(Model.ToString(), "model");
             if (Optional.IsDefined(Prompt))
             {
