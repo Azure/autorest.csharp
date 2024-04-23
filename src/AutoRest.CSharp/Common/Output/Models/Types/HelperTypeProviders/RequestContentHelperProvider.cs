@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -13,7 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models.Types.Azure
+namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class RequestContentHelperProvider : ExpressionTypeProvider
     {

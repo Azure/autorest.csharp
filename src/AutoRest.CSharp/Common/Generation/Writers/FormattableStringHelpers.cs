@@ -10,17 +10,13 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Models.Types.Azure;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using static System.Net.Mime.MediaTypeNames;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers

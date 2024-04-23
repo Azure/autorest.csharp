@@ -4,7 +4,6 @@
 using System;
 using System.ClientModel;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models.Types.Azure
+namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class Utf8JsonRequestContentProvider : ExpressionTypeProvider
     {
