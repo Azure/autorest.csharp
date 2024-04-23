@@ -55,7 +55,8 @@
         "type/array",
         "type/dictionary",
         "payload/content-negotiation",
-        "authentication/http/custom"
+        "authentication/http/custom",
+        "parameters/spread"
     ],
     "TestServerProjects": [
         "additionalProperties",
