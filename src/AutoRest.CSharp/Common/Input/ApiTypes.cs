@@ -41,6 +41,8 @@ namespace AutoRest.CSharp.Common.Input
             return $"_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
         }
 
+        public abstract FormattableString CredentialDescription { get; }
+
         public abstract Type HttpMessageType { get; }
         public abstract string HttpMessageResponseName { get; }
         public string HttpMessageResponseStatusName => nameof(PipelineResponse.Status);
