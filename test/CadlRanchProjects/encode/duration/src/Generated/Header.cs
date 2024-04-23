@@ -45,7 +45,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +77,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +109,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -141,7 +141,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -173,7 +173,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601 array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -208,7 +208,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Iso 8601 array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -243,7 +243,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -275,7 +275,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Int 32 seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,7 +307,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -339,7 +339,7 @@ namespace Encode.Duration
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Float seconds.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -48,7 +48,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,7 +79,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Two.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -110,7 +110,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Five.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -141,7 +141,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Five.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -172,7 +172,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Six.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +203,7 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Six.
         /// <list type="bullet">
         /// <item>
         /// <description>
