@@ -15,25 +15,28 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>
+    public partial class Unflattened : IUtf8JsonSerializable, IJsonModel<Unflattened>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Unflattened>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<DeliveryRuleCondition>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Unflattened>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleCondition>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Unflattened>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(Unflattened)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("foo"u8);
-                writer.WriteStringValue(Foo);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStringValue(Value);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -53,19 +56,19 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        DeliveryRuleCondition IJsonModel<DeliveryRuleCondition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Unflattened IJsonModel<Unflattened>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleCondition>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Unflattened>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(Unflattened)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeliveryRuleCondition(document.RootElement, options);
+            return DeserializeUnflattened(document.RootElement, options);
         }
 
-        internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Unflattened DeserializeUnflattened(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -73,20 +76,20 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            MatchVariable name = "Unknown";
-            string foo = default;
+            string name = default;
+            string value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
                 {
-                    name = new MatchVariable(property.Value.GetString());
+                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("foo"u8))
+                if (property.NameEquals("value"u8))
                 {
-                    foo = property.Value.GetString();
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -95,7 +98,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData);
+            return new Unflattened(name, value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -117,29 +120,40 @@ namespace MgmtDiscriminator.Models
             }
             else
             {
-                builder.Append("  name: ");
-                builder.AppendLine($"'{Name.ToString()}'");
+                if (Optional.IsDefined(Name))
+                {
+                    builder.Append("  name: ");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
+                }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
             if (hasPropertyOverride)
             {
-                builder.Append("  foo: ");
+                builder.Append("  value: ");
                 builder.AppendLine(propertyOverride);
             }
             else
             {
-                if (Optional.IsDefined(Foo))
+                if (Optional.IsDefined(Value))
                 {
-                    builder.Append("  foo: ");
-                    if (Foo.Contains(Environment.NewLine))
+                    builder.Append("  value: ");
+                    if (Value.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{Foo}'''");
+                        builder.AppendLine($"{Value}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{Foo}'");
+                        builder.AppendLine($"'{Value}'");
                     }
                 }
             }
@@ -148,9 +162,9 @@ namespace MgmtDiscriminator.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        BinaryData IPersistableModel<DeliveryRuleCondition>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Unflattened>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleCondition>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Unflattened>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -159,26 +173,26 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Unflattened)} does not support writing '{options.Format}' format.");
             }
         }
 
-        DeliveryRuleCondition IPersistableModel<DeliveryRuleCondition>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Unflattened IPersistableModel<Unflattened>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleCondition>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Unflattened>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeDeliveryRuleCondition(document.RootElement, options);
+                        return DeserializeUnflattened(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Unflattened)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<DeliveryRuleCondition>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Unflattened>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace MgmtDiscriminator.Models
 {
-    /// <summary> A model with a single object for testing safe-flattening. </summary>
-    internal partial class Sku2
+    /// <summary> A model for testing unflattening. </summary>
+    public partial class Unflattened
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,32 +45,27 @@ namespace MgmtDiscriminator.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        /// <param name="nestedName"> The childmost sku property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nestedName"/> is null. </exception>
-        public Sku2(string nestedName)
+        /// <summary> Initializes a new instance of <see cref="Unflattened"/>. </summary>
+        public Unflattened()
         {
-            Argument.AssertNotNull(nestedName, nameof(nestedName));
-
-            NestedName = nestedName;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        /// <param name="nestedName"> The childmost sku property. </param>
+        /// <summary> Initializes a new instance of <see cref="Unflattened"/>. </summary>
+        /// <param name="name"> The name. </param>
+        /// <param name="value"> The value. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Sku2(string nestedName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Unflattened(string name, string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            NestedName = nestedName;
+            Name = name;
+            Value = value;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Sku2"/> for deserialization. </summary>
-        internal Sku2()
-        {
-        }
-
-        /// <summary> The childmost sku property. </summary>
-        [WirePath("nestedName")]
-        public string NestedName { get; set; }
+        /// <summary> The name. </summary>
+        [WirePath("name")]
+        public string Name { get; set; }
+        /// <summary> The value. </summary>
+        [WirePath("value")]
+        public string Value { get; set; }
     }
 }
