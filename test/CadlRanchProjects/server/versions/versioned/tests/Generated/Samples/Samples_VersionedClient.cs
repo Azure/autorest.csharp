@@ -158,53 +158,5 @@ namespace Server.Versions.Versioned.Samples
 
             Console.WriteLine(response.Status);
         }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Versioned_WithQueryOldApiVersion_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            VersionedClient client = new VersionedClient(endpoint);
-
-            Response response = client.WithQueryOldApiVersion();
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Versioned_WithQueryOldApiVersion_ShortVersion_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            VersionedClient client = new VersionedClient(endpoint);
-
-            Response response = await client.WithQueryOldApiVersionAsync();
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Versioned_WithQueryOldApiVersion_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            VersionedClient client = new VersionedClient(endpoint);
-
-            Response response = client.WithQueryOldApiVersion();
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Versioned_WithQueryOldApiVersion_AllParameters_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            VersionedClient client = new VersionedClient(endpoint);
-
-            Response response = await client.WithQueryOldApiVersionAsync();
-
-            Console.WriteLine(response.Status);
-        }
     }
 }

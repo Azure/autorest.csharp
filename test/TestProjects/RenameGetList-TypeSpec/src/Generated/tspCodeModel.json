@@ -63,7 +63,6 @@
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "9",
@@ -117,7 +116,6 @@
       "Description": "Represents the settings used to define the project behavior.",
       "IsNullable": false,
       "Usage": "None",
-      "MediaTypes": [],
       "InheritedDictionaryType": {
        "$id": "16",
        "Kind": "Dictionary",
@@ -252,7 +250,6 @@
    "Description": "Paged collection of Project items",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "34",
@@ -294,7 +291,6 @@
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "39",
@@ -320,7 +316,6 @@
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "42",
@@ -362,7 +357,6 @@
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   }
  ],

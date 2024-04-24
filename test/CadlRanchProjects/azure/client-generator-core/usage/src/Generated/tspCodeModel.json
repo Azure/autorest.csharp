@@ -13,9 +13,6 @@
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "3",
@@ -41,7 +38,6 @@
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "6",
@@ -68,7 +64,6 @@
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "9",

@@ -32,7 +32,6 @@
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "5",

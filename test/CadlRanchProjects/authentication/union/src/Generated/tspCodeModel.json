@@ -69,7 +69,6 @@
    "Namespace": "Authentication.Union",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "10",

@@ -35,7 +35,6 @@
    "Description": "Sample Model",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "5",
@@ -75,9 +74,6 @@
    "Description": "User action param",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "10",
@@ -103,7 +99,6 @@
    "Description": "User action response",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "13",

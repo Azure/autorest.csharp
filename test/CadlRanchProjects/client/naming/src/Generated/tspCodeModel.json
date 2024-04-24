@@ -52,9 +52,6 @@
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "8",
@@ -79,9 +76,6 @@
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "11",
@@ -106,9 +100,6 @@
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "14",
@@ -133,9 +124,6 @@
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "17",
@@ -160,9 +148,6 @@
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "20",

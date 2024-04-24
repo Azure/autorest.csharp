@@ -13,9 +13,6 @@
    "Description": "The model extends from Record<unknown> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "3",
     "Kind": "Dictionary",
@@ -59,9 +56,6 @@
    "Description": "The model extends from a type that extends from Record<unknown>.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "BaseModel": {
     "$ref": "2"
    },
@@ -105,9 +99,6 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "14",
     "Kind": "Dictionary",
@@ -166,9 +157,6 @@
    "Description": "The model is from Record<unknown> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "22",
     "Kind": "Dictionary",
@@ -212,9 +200,6 @@
    "Description": "The model extends from a type that is Record<unknown> type",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "BaseModel": {
     "$ref": "21"
    },
@@ -258,9 +243,6 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "33",
     "Kind": "Dictionary",
@@ -319,9 +301,6 @@
    "Description": "The model extends from Record<string> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "41",
     "Kind": "Dictionary",
@@ -365,9 +344,6 @@
    "Description": "The model is from Record<string> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "47",
     "Kind": "Dictionary",
@@ -411,9 +387,6 @@
    "Description": "The model extends from Record<float32> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "53",
     "Kind": "Dictionary",
@@ -457,9 +430,6 @@
    "Description": "The model is from Record<float32> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "59",
     "Kind": "Dictionary",
@@ -503,7 +473,6 @@
    "Description": "model for record",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "65",
@@ -529,9 +498,6 @@
    "Description": "The model extends from Record<ModelForRecord> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "68",
     "Kind": "Dictionary",
@@ -557,9 +523,6 @@
    "Description": "The model is from Record<ModelForRecord> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "71",
     "Kind": "Dictionary",
@@ -585,9 +548,6 @@
    "Description": "The model extends from Record<ModelForRecord[]> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "74",
     "Kind": "Dictionary",
@@ -619,9 +579,6 @@
    "Description": "The model is from Record<ModelForRecord[]> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "InheritedDictionaryType": {
     "$id": "78",
     "Kind": "Dictionary",
@@ -654,7 +611,6 @@
    "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "BaseModel": {
     "$ref": "13"
    },
@@ -698,7 +654,6 @@
    "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "BaseModel": {
     "$ref": "32"
    },

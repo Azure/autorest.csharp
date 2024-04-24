@@ -13,9 +13,6 @@
    "Description": "This is a simple model.",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "3",
@@ -40,9 +37,6 @@
    "Namespace": "Parameters.Spread.Alias",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "6",
@@ -67,9 +61,6 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "9",
@@ -94,9 +85,6 @@
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "12",

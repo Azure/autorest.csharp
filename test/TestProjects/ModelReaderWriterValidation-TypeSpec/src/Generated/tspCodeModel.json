@@ -193,9 +193,6 @@
    "Description": "The model to change to struct.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "27",
@@ -220,9 +217,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "30",
@@ -323,9 +317,6 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "44",
@@ -366,7 +357,6 @@
    "Description": "The tracked resource data",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "49",
@@ -460,9 +450,6 @@
    "Description": "The availability set data",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "BaseModel": {
     "$ref": "48"
    },
@@ -479,7 +466,6 @@
       "Namespace": "ModelReaderWriterValidationTypeSpec",
       "IsNullable": false,
       "Usage": "RoundTrip",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "64",
@@ -541,7 +527,6 @@
       "Description": "The availability set properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "72",
@@ -560,7 +545,6 @@
           "Description": "The writable sub resource",
           "IsNullable": false,
           "Usage": "RoundTrip",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "75",
@@ -635,7 +619,6 @@
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "82",
@@ -709,7 +692,6 @@
        "Namespace": "ModelReaderWriterValidationTypeSpec",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "93",
@@ -762,7 +744,6 @@
            "Description": "The provider extended location.",
            "IsNullable": false,
            "Usage": "Output",
-           "MediaTypes": [],
            "Properties": [
             {
              "$id": "101",
@@ -836,7 +817,6 @@
            "Description": "The alias type.",
            "IsNullable": false,
            "Usage": "Output",
-           "MediaTypes": [],
            "Properties": [
             {
              "$id": "111",
@@ -869,7 +849,6 @@
                "Description": "The type of the paths for alias.",
                "IsNullable": false,
                "Usage": "Output",
-               "MediaTypes": [],
                "Properties": [
                 {
                  "$id": "116",
@@ -918,7 +897,6 @@
                   "Description": "The type of the pattern for an alias path.",
                   "IsNullable": false,
                   "Usage": "Output",
-                  "MediaTypes": [],
                   "Properties": [
                    {
                     "$id": "123",
@@ -977,7 +955,6 @@
                   "Description": "The ResourceTypeAliasPathMetadata.",
                   "IsNullable": false,
                   "Usage": "Output",
-                  "MediaTypes": [],
                   "Properties": [
                    {
                     "$id": "130",
@@ -1118,7 +1095,6 @@
            "Description": "The ZoneMapping.",
            "IsNullable": false,
            "Usage": "Output",
-           "MediaTypes": [],
            "Properties": [
             {
              "$id": "145",
@@ -1177,7 +1153,6 @@
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "IsNullable": false,
            "Usage": "Output",
-           "MediaTypes": [],
            "Properties": [
             {
              "$id": "153",
@@ -1307,7 +1282,6 @@
    "IsNullable": false,
    "DiscriminatorValue": "X",
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "BaseModel": {
     "$ref": "43"
    },
@@ -1397,7 +1371,6 @@
    "IsNullable": false,
    "DiscriminatorValue": "Y",
    "Usage": "RoundTrip",
-   "MediaTypes": [],
    "BaseModel": {
     "$ref": "43"
    },

@@ -8,3 +8,14 @@ export enum Usage {
     RoundTrip = "RoundTrip",
     Multipart = "Multipart"
 }
+
+export function append(usageString: string, usage: Usage): string {
+    if (!usageString.includes(usage)) {
+        if (usageString.trim().length === 0) {
+            return usageString.concat(usage);
+        } else {
+            return usageString.concat("," + usage);
+        }
+    }
+    return usageString;
+}

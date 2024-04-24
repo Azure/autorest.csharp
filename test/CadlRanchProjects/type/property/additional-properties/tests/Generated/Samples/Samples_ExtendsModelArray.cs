@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetExtendsModelArray(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetExtendsModelArrayAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetExtendsModelArray(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetExtendsModelArrayAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -108,16 +108,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new object[]
-            {
-new
-{
-state = "<state>",
-}
-            },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -129,16 +120,7 @@ state = "<state>",
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new object[]
-            {
-new
-{
-state = "<state>",
-}
-            },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -150,10 +132,7 @@ state = "<state>",
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties(new ModelForRecord[]
-            {
-new ModelForRecord("<state>")
-            });
+            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = client.Put(body);
         }
 
@@ -163,10 +142,7 @@ new ModelForRecord("<state>")
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties(new ModelForRecord[]
-            {
-new ModelForRecord("<state>")
-            });
+            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);
         }
 
@@ -176,16 +152,7 @@ new ModelForRecord("<state>")
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new object[]
-            {
-new
-{
-state = "<state>",
-}
-            },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -197,16 +164,7 @@ state = "<state>",
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new object[]
-            {
-new
-{
-state = "<state>",
-}
-            },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -218,10 +176,7 @@ state = "<state>",
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties(new ModelForRecord[]
-            {
-new ModelForRecord("<state>")
-            });
+            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = client.Put(body);
         }
 
@@ -231,10 +186,7 @@ new ModelForRecord("<state>")
         {
             ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
-            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties(new ModelForRecord[]
-            {
-new ModelForRecord("<state>")
-            });
+            ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);
         }
     }

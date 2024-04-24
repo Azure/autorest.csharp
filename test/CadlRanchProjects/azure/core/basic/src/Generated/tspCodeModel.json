@@ -60,10 +60,6 @@
    "Description": "Details about a user.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/merge-patch+json",
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "8",
@@ -110,7 +106,6 @@
        "Description": "UserOrder for testing list with expand.",
        "IsNullable": false,
        "Usage": "RoundTrip",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "15",
@@ -188,7 +183,6 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "24",
@@ -231,9 +225,6 @@
    "Description": "The body of the input.",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "29",
@@ -258,7 +249,6 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "32",
@@ -301,7 +291,6 @@
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "37",
@@ -320,7 +309,6 @@
        "Description": "First item.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "40",
@@ -370,7 +358,6 @@
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "45",
@@ -389,7 +376,6 @@
        "Description": "Second item.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "48",
@@ -439,7 +425,6 @@
    "Description": "The parameters for exporting a user.",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -450,7 +435,6 @@
    "Description": "The parameters for listing users.",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "54",

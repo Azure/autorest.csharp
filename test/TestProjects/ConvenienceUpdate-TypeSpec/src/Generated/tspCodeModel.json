@@ -13,9 +13,6 @@
    "Description": "A model.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "3",

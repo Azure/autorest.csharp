@@ -34,9 +34,6 @@
    "Description": "Pet",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "5",
@@ -90,7 +87,6 @@
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "12",
@@ -108,7 +104,6 @@
        "Namespace": "MixApiVersion",
        "IsNullable": false,
        "Usage": "None",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "15",
@@ -186,7 +181,6 @@
    "Description": "Error",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "24",
@@ -225,7 +219,6 @@
    "Namespace": "MixApiVersion",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -236,7 +229,6 @@
    "Description": "Not modified",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "30",

@@ -12,7 +12,6 @@
    "Namespace": "Authentication.ApiKey",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",

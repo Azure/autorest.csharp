@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetExtendsModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetExtendsModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetExtendsModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetExtendsModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("knownProp").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -108,13 +108,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -126,13 +120,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -144,7 +132,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties(new ModelForRecord("<state>"));
+            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = client.Put(body);
         }
 
@@ -154,7 +142,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties(new ModelForRecord("<state>"));
+            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = await client.PutAsync(body);
         }
 
@@ -164,13 +152,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -182,13 +164,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                knownProp = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -200,7 +176,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties(new ModelForRecord("<state>"));
+            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = client.Put(body);
         }
 
@@ -210,7 +186,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
-            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties(new ModelForRecord("<state>"));
+            ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = await client.PutAsync(body);
         }
     }

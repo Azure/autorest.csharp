@@ -13,7 +13,6 @@
    "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",
@@ -39,7 +38,6 @@
    "Description": "The second level model in the normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "BaseModel": {
     "$ref": "2"
    },
@@ -68,9 +66,6 @@
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "BaseModel": {
     "$ref": "5"
    },

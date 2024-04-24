@@ -3,7 +3,6 @@
  "Name": "Server.Versions.Versioned",
  "Description": "Illustrates versioned server.",
  "ApiVersions": [
-  "2021-01-01-preview",
   "2022-12-01-preview"
  ],
  "Enums": [
@@ -15,12 +14,6 @@
    "AllowedValues": [
     {
      "$id": "3",
-     "Name": "v2021_01_01_preview",
-     "Value": "2021-01-01-preview",
-     "Description": "The version 2022-12-01-preview."
-    },
-    {
-     "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "The version 2022-12-01-preview."
@@ -36,22 +29,22 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "4",
    "Name": "VersionedClient",
    "Description": "Illustrates versioned server.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "withoutApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "6",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "8",
+        "$id": "7",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -67,11 +60,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "9",
+       "$id": "8",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "10",
+        "$id": "9",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -86,9 +79,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "11",
+        "$id": "10",
         "Type": {
-         "$ref": "10"
+         "$ref": "9"
         },
         "Value": "application/json"
        }
@@ -96,7 +89,7 @@
      ],
      "Responses": [
       {
-       "$id": "12",
+       "$id": "11",
        "StatusCodes": [
         200
        ],
@@ -114,28 +107,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "withQueryApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "14",
+       "$id": "13",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "15",
+        "$id": "14",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "15",
         "Type": {
-         "$id": "17",
+         "$id": "16",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -152,11 +145,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "18",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
+        "$id": "18",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -171,9 +164,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "19",
         "Type": {
-         "$ref": "19"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
@@ -181,7 +174,7 @@
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
@@ -199,26 +192,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "21",
      "Name": "withPathApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "23",
+       "$id": "22",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "24",
+        "$id": "23",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
        "DefaultValue": {
-        "$ref": "16"
+        "$ref": "15"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -230,11 +223,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "25",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "26",
+        "$id": "25",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -249,9 +242,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "26",
         "Type": {
-         "$ref": "26"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
@@ -259,7 +252,7 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
@@ -275,88 +268,10 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "29",
-     "Name": "withQueryOldApiVersion",
-     "ResourceName": "Versioned",
-     "Parameters": [
-      {
-       "$ref": "7"
-      },
-      {
-       "$id": "30",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Type": {
-        "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "16"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "32",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "34",
-        "Type": {
-         "$ref": "33"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "35",
-       "StatusCodes": [
-        200
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "HEAD",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/server/versions/versioned/with-query-old-api-version",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "28"
    },
    "Creatable": true
   }

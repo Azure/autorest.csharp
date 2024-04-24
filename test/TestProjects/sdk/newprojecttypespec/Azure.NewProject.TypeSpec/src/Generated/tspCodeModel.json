@@ -418,9 +418,6 @@
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "56",
@@ -650,9 +647,6 @@
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "85",
@@ -677,9 +671,6 @@
    "Namespace": "NewProjectTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "88",
@@ -719,10 +710,6 @@
    "Description": "this is a roundtrip model",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "text/plain",
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "93",
@@ -1068,7 +1055,6 @@
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "137",

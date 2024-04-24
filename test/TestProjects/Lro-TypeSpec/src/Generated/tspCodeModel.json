@@ -127,7 +127,6 @@
    "Description": "The response for the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "18",
@@ -209,7 +208,6 @@
       "Description": "The error object.",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "29",
@@ -283,7 +281,6 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
          "Usage": "Output",
-         "MediaTypes": [],
          "Properties": [
           {
            "$id": "39",
@@ -333,7 +330,6 @@
       "Description": "The inference results for the Radiology Insights request.",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "44",
@@ -373,9 +369,6 @@
    "Description": "The body of the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "47",
@@ -421,7 +414,6 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "53",
@@ -511,7 +503,6 @@
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "64",
@@ -584,7 +575,6 @@
    "Description": "Health Insights retry after trait",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "72",
@@ -598,7 +588,6 @@
       "Namespace": "lro",
       "IsNullable": false,
       "Usage": "None",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "74",
@@ -613,7 +602,6 @@
          "Description": "The retry-after envelope.",
          "IsNullable": false,
          "Usage": "None",
-         "MediaTypes": [],
          "Properties": []
         },
         "IsRequired": true,

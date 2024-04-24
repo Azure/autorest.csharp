@@ -12,9 +12,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "3",
@@ -39,9 +36,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "6",
@@ -66,9 +60,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "9",
@@ -93,9 +84,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "12",
@@ -120,9 +108,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "15",
@@ -147,9 +132,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "18",
@@ -174,9 +156,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "21",
@@ -201,9 +180,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "24",
@@ -228,9 +204,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "27",
@@ -255,9 +228,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "30",
@@ -282,9 +252,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "33",
@@ -309,9 +276,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "36",
@@ -336,9 +300,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "39",
@@ -363,9 +324,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "42",
@@ -390,9 +348,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "45",
@@ -417,9 +372,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "48",
@@ -444,9 +396,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "51",
@@ -471,9 +420,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "54",
@@ -498,9 +444,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "57",
@@ -525,9 +468,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "60",
@@ -552,9 +492,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "63",
@@ -579,9 +516,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "66",
@@ -606,9 +540,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "69",
@@ -633,9 +564,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "72",
@@ -660,9 +588,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "75",
@@ -687,9 +612,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "78",
@@ -714,9 +636,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "81",
@@ -741,9 +660,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "84",
@@ -768,9 +684,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "87",
@@ -795,9 +708,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "90",
@@ -822,9 +732,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "93",
@@ -849,9 +756,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "96",
@@ -876,9 +780,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "99",
@@ -903,9 +804,6 @@
    "Namespace": "SpecialWords.ModelProperties",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "102",
@@ -930,7 +828,6 @@
    "Namespace": "SpecialWords.Models",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "105",

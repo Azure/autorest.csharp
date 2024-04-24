@@ -166,7 +166,7 @@ export function createModelForService(
             /* TODO: remove this when adopt tcgc.
              *set Multipart usage for models.
              */
-             const bodyParameter = op.Parameters.find(
+            const bodyParameter = op.Parameters.find(
                 (value) => value.Location === RequestLocation.Body
             );
             if (
@@ -176,8 +176,12 @@ export function createModelForService(
             ) {
                 const inputModelType = bodyParameter.Type as InputModelType;
                 op.RequestMediaTypes?.forEach((item) => {
-                    if(item === "multipart/form-data" && !inputModelType.Usage.includes("Multipart")) {
-                        inputModelType.Usage = inputModelType.Usage.concat(",Multipart");
+                    if (
+                        item === "multipart/form-data" &&
+                        !inputModelType.Usage.includes("Multipart")
+                    ) {
+                        inputModelType.Usage =
+                            inputModelType.Usage.concat(",Multipart");
                     }
                 });
             }
@@ -198,7 +202,7 @@ export function createModelForService(
                 apiVersionInOperation.Kind = InputOperationParameterKind.Method;
             }
         }
-    }  
+    }
 
     const clientModel = {
         Name: namespace,

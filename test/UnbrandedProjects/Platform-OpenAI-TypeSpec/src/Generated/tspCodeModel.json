@@ -423,10 +423,7 @@
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
-   "MediaTypes": [
-    "multipart/form-data"
-   ],
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "60",
@@ -585,7 +582,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "82",
@@ -609,10 +605,7 @@
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
-   "MediaTypes": [
-    "multipart/form-data"
-   ],
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "85",
@@ -757,7 +750,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "105",
@@ -782,9 +774,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "108",
@@ -813,7 +802,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Input",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "112",
@@ -923,7 +911,6 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Input",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "128",
@@ -981,7 +968,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Input",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "135",
@@ -1023,7 +1009,6 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Input",
-          "MediaTypes": [],
           "InheritedDictionaryType": {
            "$id": "141",
            "Kind": "Dictionary",
@@ -1097,7 +1082,6 @@
         "Namespace": "OpenAI",
         "IsNullable": false,
         "Usage": "Input",
-        "MediaTypes": [],
         "Properties": [
          {
           "$id": "151",
@@ -1318,7 +1302,6 @@
    "Description": "Represents a chat completion response returned by model, based on the provided input.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "179",
@@ -1392,7 +1375,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "190",
@@ -1420,7 +1402,6 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Output",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "194",
@@ -1516,7 +1497,6 @@
              "Namespace": "OpenAI",
              "IsNullable": false,
              "Usage": "Output",
-             "MediaTypes": [],
              "Properties": [
               {
                "$id": "208",
@@ -1644,7 +1624,6 @@
       "Description": "Usage statistics for the completion request.",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "224",
@@ -1714,9 +1693,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "231",
@@ -1769,7 +1745,6 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Input",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "238",
@@ -1837,7 +1812,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "246",
@@ -2047,7 +2021,6 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "276",
@@ -2163,7 +2136,6 @@
       "Namespace": "OpenAI",
       "IsNullable": true,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "292",
@@ -2227,7 +2199,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "299",
@@ -2283,7 +2254,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "306",
@@ -2315,7 +2285,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "311",
@@ -2447,9 +2416,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "328",
@@ -2764,7 +2730,6 @@
    "Description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "373",
@@ -2838,7 +2803,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "384",
@@ -2880,7 +2844,6 @@
           "Namespace": "OpenAI",
           "IsNullable": true,
           "Usage": "Output",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "390",
@@ -3067,9 +3030,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "414",
@@ -3162,7 +3122,6 @@
    "Deprecated": "deprecated",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "426",
@@ -3212,7 +3171,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "433",
@@ -3314,9 +3272,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "445",
@@ -3416,7 +3371,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "459",
@@ -3467,7 +3421,6 @@
        "Description": "Represents an embedding vector returned by embedding endpoint.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "466",
@@ -3540,7 +3493,6 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "475",
@@ -3590,7 +3542,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "480",
@@ -3623,7 +3574,6 @@
        "Description": "The `File` object represents a document that has been uploaded to OpenAI.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "485",
@@ -3839,10 +3789,7 @@
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
-   "MediaTypes": [
-    "multipart/form-data"
-   ],
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "514",
@@ -3881,7 +3828,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "519",
@@ -3934,9 +3880,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "526",
@@ -4120,7 +4063,6 @@
    "Description": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "551",
@@ -4317,7 +4259,6 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "579",
@@ -4489,7 +4430,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "602",
@@ -4569,7 +4509,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "611",
@@ -4611,7 +4550,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "616",
@@ -4653,7 +4591,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "621",
@@ -4686,7 +4623,6 @@
        "Description": "Describes an OpenAI model offering that can be used with the API.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "626",
@@ -4767,7 +4703,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "635",
@@ -4820,9 +4755,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "642",
@@ -4972,7 +4904,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "663",
@@ -5005,7 +4936,6 @@
        "Description": "Represents the url or the content of an image generated by the OpenAI API.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "668",
@@ -5053,10 +4983,7 @@
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
-   "MediaTypes": [
-    "multipart/form-data"
-   ],
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "673",
@@ -5233,10 +5160,7 @@
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
-   "MediaTypes": [
-    "multipart/form-data"
-   ],
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "698",
@@ -5386,9 +5310,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "719",
@@ -5444,7 +5365,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "726",
@@ -5490,7 +5410,6 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "733",
@@ -5518,7 +5437,6 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Output",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "737",
@@ -5691,7 +5609,6 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Output",
-          "MediaTypes": [],
           "Properties": [
            {
             "$id": "761",
@@ -5877,7 +5794,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "784",
@@ -5891,7 +5807,6 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Output",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "786",
@@ -5966,7 +5881,6 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "795",

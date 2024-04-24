@@ -12,7 +12,6 @@
    "Namespace": "Payload.ContentNegotiation.DifferentBody",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",
@@ -37,7 +36,6 @@
    "Namespace": "Payload.ContentNegotiation.SameBody",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "6",
@@ -62,7 +60,6 @@
    "Namespace": "Payload.ContentNegotiation.SameBody",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "9",

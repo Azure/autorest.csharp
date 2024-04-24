@@ -13,7 +13,6 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",
@@ -32,7 +31,6 @@
        "Description": "User model",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "6",

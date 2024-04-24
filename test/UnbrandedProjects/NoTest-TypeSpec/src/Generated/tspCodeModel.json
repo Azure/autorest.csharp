@@ -128,7 +128,6 @@
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "15",

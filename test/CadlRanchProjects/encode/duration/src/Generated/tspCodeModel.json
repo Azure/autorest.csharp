@@ -12,9 +12,6 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "3",
@@ -39,9 +36,6 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "6",
@@ -66,9 +60,6 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "9",
@@ -93,9 +84,6 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "12",
@@ -120,9 +108,6 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "15",

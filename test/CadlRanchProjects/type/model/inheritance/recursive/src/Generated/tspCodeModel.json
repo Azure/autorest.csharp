@@ -13,7 +13,6 @@
    "Description": "element",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",
@@ -32,9 +31,6 @@
        "Description": "extension",
        "IsNullable": false,
        "Usage": "RoundTrip",
-       "MediaTypes": [
-        "application/json"
-       ],
        "BaseModel": {
         "$ref": "2"
        },

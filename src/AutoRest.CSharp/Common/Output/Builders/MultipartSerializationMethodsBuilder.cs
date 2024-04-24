@@ -210,9 +210,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case SerializableObjectType serializableObjectType:
                     contentExpression = BuildValueSerizationExpression(serializableObjectType.Type, valueExpression);
                     break;
-                case ObjectType:
-                    contentExpression = BuildValueSerizationExpression(valueSerialization.Type, valueExpression);
-                    break;
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     contentExpression = BuildValueSerizationExpression(typeof(int), new CastExpression(valueExpression, enumType.ValueType));
                     break;

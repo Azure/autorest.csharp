@@ -151,9 +151,6 @@
    "Description": "Type for input model body",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "20",
@@ -193,7 +190,6 @@
    "Description": "Paginated ledger entries",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "25",
@@ -211,7 +207,6 @@
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "28",
@@ -289,7 +284,6 @@
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "37",
@@ -307,7 +301,6 @@
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "40",
@@ -363,7 +356,6 @@
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "46",
@@ -406,7 +398,6 @@
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "51",
@@ -425,7 +416,6 @@
        "Description": "Text Blocklist.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "54",
@@ -489,7 +479,6 @@
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "61",
@@ -508,7 +497,6 @@
        "Description": "Item in TextBlocklist.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "64",
@@ -586,7 +574,6 @@
    "Description": "The result of listing the Pools in an Account.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "73",
@@ -605,7 +592,6 @@
        "Description": "A Pool in the Azure Batch service.",
        "IsNullable": false,
        "Usage": "Output",
-       "MediaTypes": [],
        "Properties": [
         {
          "$id": "76",
@@ -682,7 +668,6 @@
    "Namespace": "Pagination",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "85",
@@ -755,7 +740,6 @@
    "Description": "Input model for the ListPaginationLedgerEntries",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "93",
@@ -777,7 +761,6 @@
    "Namespace": "Pagination",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -788,7 +771,6 @@
    "Description": "Load test run model",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -798,7 +780,6 @@
    "Namespace": "Pagination",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -809,7 +790,6 @@
    "Description": "Client related response header values",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -820,7 +800,6 @@
    "Description": "Client related response header values",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -831,7 +810,6 @@
    "Description": "An error response received from the Azure Batch service.",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "100",
