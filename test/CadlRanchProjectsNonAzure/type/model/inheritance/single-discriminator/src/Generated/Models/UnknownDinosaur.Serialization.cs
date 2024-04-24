@@ -130,7 +130,7 @@ namespace Scm._Type.Inheritance.SingleDiscriminator.Models
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
         internal override BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create((Dinosaur)this, ModelSerializationExtensions.WireOptions);
+            return BinaryContent.Create<Dinosaur>(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }
