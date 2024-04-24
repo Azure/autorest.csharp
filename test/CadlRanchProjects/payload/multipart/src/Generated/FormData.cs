@@ -826,8 +826,9 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
             AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
+            using MultipartFormDataRequestContent content = anonymousModelRequest.ToMultipartRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousModelAsync(anonymousModelRequest.ToRequestContent(), null, context).ConfigureAwait(false);
+            Response response = await AnonymousModelAsync(content, content.ContentType, context).ConfigureAwait(false);
             return response;
         }
 
@@ -841,8 +842,9 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
             AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
+            using MultipartFormDataRequestContent content = anonymousModelRequest.ToMultipartRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousModel(anonymousModelRequest.ToRequestContent(), null, context);
+            Response response = AnonymousModel(content, content.ContentType, context);
             return response;
         }
 

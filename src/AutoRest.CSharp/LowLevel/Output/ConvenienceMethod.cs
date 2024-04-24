@@ -68,7 +68,15 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         // write some statements to put the spread back into a local variable
                         yield return GetSpreadConversion(convenienceSpread, convenience, out var spreadExpression);
-                        protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
+                        if (isMultipartOperation)
+                        {
+                            content = new VariableReference(MultipartFormDataRequestContentProvider.Instance.Type, protocol.Name);
+                            yield return UsingDeclare(content, spreadExpression.ToMultipartRequestContent());
+                            protocolInvocationExpressions.Add(content);
+                        } else
+                        {
+                            protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
+                        }
                     }
                 }
                 else

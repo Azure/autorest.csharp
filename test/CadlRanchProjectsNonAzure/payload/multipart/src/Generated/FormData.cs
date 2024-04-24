@@ -618,7 +618,8 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
             AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            ClientResult result = await AnonymousModelAsync(anonymousModelRequest.ToBinaryContent(), null, null).ConfigureAwait(false);
+            using MultipartFormDataBinaryContent content = anonymousModelRequest.ToMultipartBinaryBody();
+            ClientResult result = await AnonymousModelAsync(content, content.ContentType, null).ConfigureAwait(false);
             return result;
         }
 
@@ -630,7 +631,8 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
             AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            ClientResult result = AnonymousModel(anonymousModelRequest.ToBinaryContent(), null, null);
+            using MultipartFormDataBinaryContent content = anonymousModelRequest.ToMultipartBinaryBody();
+            ClientResult result = AnonymousModel(content, content.ContentType, null);
             return result;
         }
 

@@ -39,5 +39,11 @@ namespace CadlRanchProjects.Tests
             var response = await new MultiPartClient(host, null).GetFormDataClient().BinaryArrayPartsAsync(data);
             Assert.AreEqual(204, response.Status);
         });
+        [Test]
+        public Task Payload_Multipart_FormData_Anonymous_Model() => Test(async (host) =>
+        {
+            var response = await new MultiPartClient(host, null).GetFormDataClient().AnonymousModelAsync(File.OpenRead(SampleJpgPath));
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
