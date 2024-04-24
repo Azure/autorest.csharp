@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             public static readonly Parameter OptionalOptions = new Parameter("options", null, nullableModelReaderWriterOptionsType, Constant.Default(nullableModelReaderWriterOptionsType), ValidationType.None, null);
             public static readonly Parameter JsonElement = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
             public static readonly Parameter Data = new Parameter("data", null, typeof(BinaryData), null, ValidationType.None, null);
-            public static readonly Parameter contentType = new Parameter("contentType", null, typeof(string), null, ValidationType.None, null);
         }
     }
 }

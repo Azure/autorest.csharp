@@ -119,7 +119,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
                         {
                             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
-                            /* Remove this if check when Azure.Core upgrade to 1.0.2 */
                             if (mediaType == BodyMediaType.Multipart)
                             {
                                 return $"{parameter.Name:I}.{Configuration.ApiTypes.ToMultipartRequestContentName}()";

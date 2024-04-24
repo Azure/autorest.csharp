@@ -54,13 +54,13 @@ namespace AutoRest.CSharp.Output.Models
                         protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
                     }
                 }
-                else if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.MultipartRequestContent || protocol == KnownParameters.RequestContentNullable)
+                else if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.RequestContentNullable)
                 {
                     Debug.Assert(convenience is not null);
                     // convert body to request content
                     if (convenienceSpread == null)
                     {
-                        content = new VariableReference(isMultipartOperation ? KnownParameters.MultipartRequestContent.Type : protocol.Type, protocol.Name);
+                        content = new VariableReference(isMultipartOperation ? MultipartFormDataRequestContentProvider.Instance.Type : protocol.Type, protocol.Name);
                         yield return UsingDeclare(content, convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault()));
                         protocolInvocationExpressions.Add(content);
                     }
