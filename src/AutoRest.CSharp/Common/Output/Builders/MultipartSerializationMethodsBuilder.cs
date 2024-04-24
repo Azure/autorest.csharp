@@ -13,6 +13,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     null,
                     MethodSignatureModifiers.Internal | MethodSignatureModifiers.Virtual,
-                    Configuration.ApiTypes.MultipartRequestContentType,
+                    MultipartFormDataRequestContentProvider.Instance.Type,
                     null,
                     Array.Empty<Parameter>()),
                 BuildToMultipartRequestContentMethodBody(multipart).ToArray());
@@ -62,11 +63,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var serializeCallExpression = new InvokeInstanceMethodExpression(null, Configuration.ApiTypes.ToMultipartRequestContentName, Array.Empty<ValueExpression>(), null, false);
             return new MethodBodyStatement[]
                         {
-                            UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, serializeCallExpression, out var content),
+                            UsingDeclare("content", MultipartFormDataRequestContentProvider.Instance.Type, serializeCallExpression, out var content),
                             /*using MemoryStream stream = new MemoryStream();*/
-            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
+                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
                             /*content.WriteTo(stream, cancellationToken);*/
-                            Snippets.Extensible.MultipartFormDataRequestContent.WriteTo(content, stream, null),
+                            MultipartFormDataRequestContentProvider.Instance.WriteTo(content, stream, null),
                             new IfElseStatement(GreaterThan(stream.Property("Position"), new MemberExpression(typeof(int), nameof(int.MaxValue))),
                             /*return BinaryData.FromStream(stream);*/
                             Return(BinaryDataExpression.FromStream(stream, false)),
@@ -79,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new MethodBodyStatement[]
                     {
-                        Declare(Configuration.ApiTypes.MultipartRequestContentType, "content", New.Instance(Configuration.ApiTypes.MultipartRequestContentType), out var content),
+                        Declare(MultipartFormDataRequestContentProvider.Instance.Type, "content", New.Instance(MultipartFormDataRequestContentProvider.Instance.Type), out var content),
                         WriteMultiParts(content, multipart!.Properties).ToArray(),
                         SerializeAdditionalProperties((VariableReference)content, multipart.AdditionalProperties),
                         Return(content)
@@ -205,7 +206,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             if (contentExpression != null)
             {
-                return Snippets.Extensible.MultipartFormDataRequestContent.Add(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
+                return MultipartFormDataRequestContentProvider.Instance.Add(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
             }
 
             switch (valueSerialization.Type.Implementation)
@@ -222,7 +223,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 default:
                     throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
             }
-            return Snippets.Extensible.MultipartFormDataRequestContent.Add(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
+            return MultipartFormDataRequestContentProvider.Instance.Add(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
         }
 
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch

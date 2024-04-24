@@ -30,12 +30,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ErrorResultProvider.Instance;
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
-                yield return MultipartFormDataBinaryContentProvider.Instance;
             }
-            if (Configuration.IsBranded)
-            {
-                yield return MultipartFormDataRequestContentProvider.Instance;
-            }
+            yield return MultipartFormDataRequestContentProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
             if (Configuration.EnableBicepSerialization)

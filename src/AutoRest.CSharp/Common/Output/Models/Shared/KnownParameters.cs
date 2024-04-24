@@ -5,6 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using Azure;
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType MatchConditionsType = new(typeof(MatchConditions), true);
         private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);
         private static readonly CSharpType RequestContentType = new(Configuration.ApiTypes.RequestContentType);
-        private static readonly CSharpType MultipartRequestContentType = Configuration.ApiTypes.MultipartRequestContentType;
+        private static readonly CSharpType MultipartRequestContentType = MultipartFormDataRequestContentProvider.Instance.Type;
         private static readonly CSharpType RequestContentNullableType = new(Configuration.ApiTypes.RequestContentType, true);
         private static readonly string RequestContextName = Configuration.ApiTypes.RequestContextName;
         private static readonly string RequestContextDescription = Configuration.ApiTypes.RequestContextDescription;

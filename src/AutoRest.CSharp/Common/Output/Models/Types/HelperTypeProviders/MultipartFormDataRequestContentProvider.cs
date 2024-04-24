@@ -7,7 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _contentTypePropertyName = "ContentType";
         private readonly PropertyDeclaration _httpContentProperty;
         private const string _httpContentPropertyName = "HttpContent";
-        protected override string DefaultName { get; } = "MultipartFormDataRequestContent";
+        protected override string DefaultName { get; } = Configuration.ApiTypes.MultipartRequestContentTypeName;
         private const string _createBoundaryMethodName = "CreateBoundary";
         private const string _addMethodName = "Add";
         private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
@@ -86,10 +86,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _writeToAsyncMethodName = "WriteToAsync";
 
         private readonly MultipartFormDataContentExpression _multipartContentExpression;
-        //private static readonly string WriteToAsync = Configuration.IsBranded ? nameof(RequestContent.WriteToAsync) : nameof(BinaryContent.WriteToAsync);
-        //private static readonly string WriteTo = Configuration.IsBranded ? nameof(RequestContent.WriteTo) : nameof(BinaryContent.WriteTo);
-        //private static readonly string TryComputeLength = Configuration.IsBranded ? nameof(RequestContent.TryComputeLength) : nameof(BinaryContent.TryComputeLength);
-        //private static readonly string Dispose = nameof(IDisposable.Dispose);
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _multipartContentField;
@@ -165,13 +161,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             yield return BuildAddMethod<double>();
             yield return BuildAddMethod<decimal>();
             yield return BuildAddMethod<bool>();
-            //yield return BuildAddMethod<Guid>();
-            //yield return BuildAddMethod<DateTime>();
-            //yield return BuildAddMethod<TimeSpan>();
             yield return BuildAddMethod<Stream>();
-            //yield return BuildAddMethod<FileInfo>();
             yield return BuildAddMethod < byte[]>();
-            //yield return BuildAddMethod<JsonElement>();
             yield return BuildAddMethod<BinaryData>();
             yield return BuildAddHttpContentMethod();
         }
@@ -385,19 +376,26 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     streamParam,
                     cancellationTokenParam
                 });
+            var taskWaitCompletedStatementsList = new List<MethodBodyStatement>();
+            if (Configuration.IsBranded)
+            {
+                taskWaitCompletedStatementsList.Add(new PragmaWarningPreprocessorDirective("disable", "AZC0107"));
+                /*_multipartContent.CopyToAsync(stream).EnsureCompleted();*/
+                taskWaitCompletedStatementsList.Add(new InvokeStaticMethodStatement(typeof(Azure.Core.Pipeline.TaskExtensions), "EnsureCompleted", new[] { _multipartContentExpression.CopyToAsyncExpression(streamParam) }, CallAsExtension: false));
+                taskWaitCompletedStatementsList.Add(new PragmaWarningPreprocessorDirective("restore", "AZC0107"));
+            } else
+            {
+                ValueExpression getTaskWaiterExpression = new InvokeInstanceMethodExpression(_multipartContentExpression.CopyToAsyncExpression(streamParam), nameof(Task.GetAwaiter), Array.Empty<ValueExpression>(), null, false);
+                /*_multipartContent.CopyToAsync(stream).GetAwaiter().GetResult();*/
+                taskWaitCompletedStatementsList.Add(new InvokeInstanceMethodStatement(getTaskWaiterExpression, nameof(TaskAwaiter.GetResult), Array.Empty<ValueExpression>(), false));
+            }
             var body = new MethodBodyStatement[]
             {
                 new IfElsePreprocessorDirective(
                     "NET6_0_OR_GREATER",
                     /*_multipartContent.CopyTo(stream, default, cancellationToken );*/
                     new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyTo), new[] { streamExpression, Snippets.Default ,cancellatinTokenExpression }, false),
-                    new MethodBodyStatement[]
-                    {
-                        new PragmaWarningPreprocessorDirective("disable", "AZC0107"),
-                        /*_multipartContent.CopyToAsync(stream).EnsureCompleted();*/
-                        new InvokeStaticMethodStatement(typeof(Azure.Core.Pipeline.TaskExtensions), "EnsureCompleted",new[]{ _multipartContentExpression.CopyToAsyncExpression(streamParam) }, CallAsExtension: false),
-                        new PragmaWarningPreprocessorDirective("restore", "AZC0107")
-                    }
+                    taskWaitCompletedStatementsList.ToArray()
                     ),
             };
             return new Method(signature, body);
