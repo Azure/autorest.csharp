@@ -76,7 +76,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_ExtendsModel_put() => Test(async (host) =>
         {
-            var value = new ExtendsModelAdditionalProperties()
+            var value = new ExtendsModelAdditionalProperties(new ModelForRecord("ok"))
             {
                 AdditionalProperties =
                 {
@@ -101,7 +101,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_IsModel_put() => Test(async (host) =>
         {
-            var value = new IsModelAdditionalProperties()
+            var value = new IsModelAdditionalProperties(new ModelForRecord("ok"))
             {
                 AdditionalProperties =
                 {
@@ -128,7 +128,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_ExtendsModelArray_put() => Test(async (host) =>
         {
-            var value = new ExtendsModelArrayAdditionalProperties()
+            var value = new ExtendsModelArrayAdditionalProperties(new[] { new ModelForRecord("ok"), new ModelForRecord("ok") })
             {
                 AdditionalProperties =
                 {
@@ -159,7 +159,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_AdditionalProperties_IsModelArray_put() => Test(async (host) =>
         {
-            var value = new IsModelArrayAdditionalProperties()
+            var value = new IsModelArrayAdditionalProperties(new[] { new ModelForRecord("ok"), new ModelForRecord("ok") })
             {
                 AdditionalProperties =
                 {
