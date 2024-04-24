@@ -41,20 +41,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        // This is a new extension introduced by generator to control whether interim state returns are supported in lro.
-        public bool IsInterimLongRunningStateEnabled
-        {
-            get
-            {
-                var isInterimStatusEnabled = Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("enable-interim-state");
-                return isInterimStatusEnabled switch
-                {
-                    "true" => true,
-                    _ => false,
-                };
-            }
-        }
-
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
