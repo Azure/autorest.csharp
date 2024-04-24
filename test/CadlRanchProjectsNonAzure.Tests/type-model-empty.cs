@@ -4,9 +4,9 @@ using Scm._Type.Model.Empty.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeModelEmptyTests : CadlRanchTestBase
+    public class TypeModelEmptyTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Model_Empty_putEmpty() => Test(async (host) =>
