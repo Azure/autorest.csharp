@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using NUnit.Framework;
 using Scm.Parameters.Spread;
 using Scm.Parameters.Spread.Models;
