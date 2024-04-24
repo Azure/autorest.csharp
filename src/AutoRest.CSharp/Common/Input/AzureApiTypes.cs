@@ -95,17 +95,5 @@ namespace AutoRest.CSharp.Common.Input
 """;
 
         public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
-        public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName, ValueExpression? contentType)
-        {
-            return MultipartFormDataRequestContentProvider.Instance.Add(multipartContent, content, name, fileName, contentType);
-        }
-        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
-        {
-            return MultipartFormDataRequestContentProvider.Instance.WriteTo(multipartContent, stream, cancellationToken);
-        }
-        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToAsyncStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
-        {
-            return MultipartFormDataRequestContentProvider.Instance.WriteToAsync(multipartContent, stream, cancellationToken);
-        }
     }
 }

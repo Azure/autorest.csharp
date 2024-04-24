@@ -51,7 +51,6 @@ export interface InputModelType extends InputType {
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
     DerivedModels?: InputModelType[];
-    MediaTypes?: string[];
     InheritedDictionaryType?: InputDictionaryType;
 }
 

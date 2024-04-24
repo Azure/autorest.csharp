@@ -155,8 +155,33 @@ export function createModelForService(
         addChildClients(sdkContext.emitContext, client, clients);
     }
 
+    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
+
+    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
+    setUsage(usages, modelMap);
+    setUsage(usages, enumMap);
+
     for (const client of clients) {
         for (const op of client.Operations) {
+            /* TODO: remove this when adopt tcgc.
+             *set Multipart usage for models.
+             */
+             const bodyParameter = op.Parameters.find(
+                (value) => value.Location === RequestLocation.Body
+            );
+            if (
+                bodyParameter &&
+                bodyParameter.Type &&
+                (bodyParameter.Type as InputModelType)
+            ) {
+                const inputModelType = bodyParameter.Type as InputModelType;
+                op.RequestMediaTypes?.forEach((item) => {
+                    if(item === "multipart/form-data" && !inputModelType.Usage.includes("Multipart")) {
+                        inputModelType.Usage = inputModelType.Usage.concat(",Multipart");
+                    }
+                });
+            }
+
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
@@ -173,13 +198,7 @@ export function createModelForService(
                 apiVersionInOperation.Kind = InputOperationParameterKind.Method;
             }
         }
-    }
-
-    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
-
-    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    setUsage(usages, modelMap);
-    setUsage(usages, enumMap);
+    }  
 
     const clientModel = {
         Name: namespace,
@@ -269,22 +288,6 @@ export function createModelForService(
             );
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
-            const bodyParameter = inputOperation.Parameters.find(
-                (value) => value.Location === RequestLocation.Body
-            );
-            if (
-                bodyParameter &&
-                bodyParameter.Type &&
-                (bodyParameter.Type as InputModelType)
-            ) {
-                const inputModelType = bodyParameter.Type as InputModelType;
-                if (inputModelType.MediaTypes) {
-                    inputOperation.RequestMediaTypes?.forEach((item) => {
-                        if (!inputModelType.MediaTypes?.includes(item))
-                            inputModelType.MediaTypes?.push(item);
-                    });
-                }
-            }
             inputClient.Operations.push(inputOperation);
             if (inputOperation.GenerateConvenienceMethod)
                 convenienceOperations.push(httpOperation);

@@ -101,17 +101,5 @@ namespace AutoRest.CSharp.Common.Input
         public override string LicenseString => string.Empty;
 
         public override string ResponseClassifierIsErrorResponseName => nameof(PipelineMessageClassifier.TryClassify);
-        public override MethodBodyStatement GetMultipartFormDataRequestContentAddStatment(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? fileName, ValueExpression? contentType)
-        {
-            return MultipartFormDataBinaryContentProvider.Instance.Add(multipartContent, content, name, fileName, contentType);
-        }
-        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
-        {
-            return MultipartFormDataBinaryContentProvider.Instance.WriteTo(multipartContent, stream, cancellationToken);
-        }
-        public override MethodBodyStatement GetMultipartFormDataRequestContentWriteToAsyncStatment(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
-        {
-            return MultipartFormDataBinaryContentProvider.Instance.WriteToAsync(multipartContent, stream, cancellationToken);
-        }
     }
 }

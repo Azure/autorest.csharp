@@ -494,9 +494,6 @@
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "66",
@@ -766,9 +763,6 @@
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "101",
@@ -793,9 +787,6 @@
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "104",
@@ -835,9 +826,6 @@
    "Description": "this is a model with a projected name",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "109",
@@ -862,7 +850,6 @@
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
-   "MediaTypes": [],
    "Properties": []
   },
   {
@@ -873,7 +860,6 @@
    "Description": "element",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "113",
@@ -892,9 +878,6 @@
        "Description": "extension",
        "IsNullable": false,
        "Usage": "Input",
-       "MediaTypes": [
-        "application/json"
-       ],
        "BaseModel": {
         "$ref": "112"
        },
@@ -933,9 +916,6 @@
    "Description": "FHIR extendible element",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "119",
@@ -954,7 +934,6 @@
        "Description": "extension",
        "IsNullable": false,
        "Usage": "Input",
-       "MediaTypes": [],
        "BaseModel": {
         "$id": "122",
         "Kind": "Model",
@@ -963,7 +942,6 @@
         "Description": "element",
         "IsNullable": false,
         "Usage": "None",
-        "MediaTypes": [],
         "Properties": [
          {
           "$id": "123",
@@ -1022,7 +1000,6 @@
    "Description": "parenetModel",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "128",
@@ -1048,9 +1025,6 @@
    "Description": "ChildModel",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "BaseModel": {
     "$ref": "127"
    },
@@ -1082,9 +1056,6 @@
    "Description": "containself",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "134",
@@ -1106,9 +1077,6 @@
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "136",
@@ -1130,9 +1098,6 @@
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
-   "MediaTypes": [
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "138",
@@ -1158,10 +1123,6 @@
    "Description": "this is a roundtrip model",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "MediaTypes": [
-    "text/plain",
-    "application/json"
-   ],
    "Properties": [
     {
      "$id": "141",
@@ -1510,7 +1471,6 @@
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
-      "MediaTypes": [],
       "Properties": [
        {
         "$id": "186",
@@ -1566,7 +1526,6 @@
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
-   "MediaTypes": [],
    "Properties": [
     {
      "$id": "191",

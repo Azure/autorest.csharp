@@ -11,5 +11,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
         public override XmlWriterSnippets XmlWriter => throw new NotImplementedException("XmlWriter extensions aren't supported in unbranded yet.");
         public override RestOperationsSnippets RestOperations { get; } = new SystemRestOperationsSnippets();
         public override ModelSnippets Model { get; } = new SystemModelSnippets();
+        public override MultipartFormDataRequestContentSnippets MultipartFormDataRequestContent { get; } = new SystemMultipartFormDataRequestContentSnippets();
     }
 }

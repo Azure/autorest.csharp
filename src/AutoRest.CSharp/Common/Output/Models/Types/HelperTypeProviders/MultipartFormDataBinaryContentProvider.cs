@@ -455,7 +455,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             => new InvokeInstanceMethodStatement(null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
         public MethodBodyStatement AddContentTypeHeader(ValueExpression httpContent, ValueExpression contentType)
             => new InvokeInstanceMethodStatement(null, _addContentTypeHeaderMethodName, new[] { httpContent, contentType }, false);
-        public MethodBodyStatement Add(VariableReference multipartContent, ValueExpression content, ValueExpression name, ValueExpression? filename, ValueExpression? contentType)
+        public MethodBodyStatement Add(ValueExpression multipartContent, ValueExpression content, ValueExpression name, ValueExpression? filename, ValueExpression? contentType)
         {
             var arguments = new List<ValueExpression>() { content, name };
             if (filename != null)
@@ -468,7 +468,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     arguments.Add(Null);
                 arguments.Add(contentType);
             }
-            return new InvokeInstanceMethodStatement(multipartContent.Untyped, _addMethodName, arguments.ToArray(), false);
+            return new InvokeInstanceMethodStatement(multipartContent, _addMethodName, arguments.ToArray(), false);
         }
         public MethodBodyStatement WriteTo(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
         {

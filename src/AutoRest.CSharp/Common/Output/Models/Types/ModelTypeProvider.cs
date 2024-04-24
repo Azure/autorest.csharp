@@ -574,7 +574,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            if (EnsureIncludeSerializer() && _inputModel.MediaTypes.Contains("multipart/form-data"))
+            if (IncludeSerializer && _inputModel.Usage.HasFlag(InputModelTypeUsage.Multipart))
             {
                 var additionalProperties = CreateMultipartAdditionalPropertiesSerialization();
                 var properties = SerializationBuilder.CreateMultipartPropertySerializations(this).ToArray();

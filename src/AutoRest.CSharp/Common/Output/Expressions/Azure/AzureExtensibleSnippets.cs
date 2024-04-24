@@ -9,5 +9,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
         public override RestOperationsSnippets RestOperations { get; } = new AzureRestOperationsSnippets();
         public override ModelSnippets Model { get; } = new AzureModelSnippets();
+        public override MultipartFormDataRequestContentSnippets MultipartFormDataRequestContent { get; } = new AzureMultipartFormDataRequestContentSnippets();
     }
 }
