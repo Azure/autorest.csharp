@@ -178,10 +178,17 @@ export function createModelForService(
                 op.RequestMediaTypes?.forEach((item) => {
                     if (
                         item === "multipart/form-data" &&
-                        !inputModelType.Usage.includes("Multipart")
+                        !inputModelType.Usage.includes(Usage.Multipart)
                     ) {
-                        inputModelType.Usage =
-                            inputModelType.Usage.concat(",Multipart");
+                        if (inputModelType.Usage.trim().length === 0) {
+                            inputModelType.Usage = inputModelType.Usage.concat(
+                                Usage.Multipart
+                            );
+                        } else {
+                            inputModelType.Usage = inputModelType.Usage.trim()
+                                .concat(",")
+                                .concat(Usage.Multipart);
+                        }
                     }
                 });
             }

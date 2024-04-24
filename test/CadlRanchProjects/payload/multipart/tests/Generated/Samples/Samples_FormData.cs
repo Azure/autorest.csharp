@@ -869,5 +869,101 @@ new Address("<city>")
             MultiPartRequest body = new MultiPartRequest("<id>", null);
             Response response = await client.CheckFileNameAndContentTypeAsync(body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_AnonymousModel_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = File.OpenRead("<filePath>"),
+            });
+            Response response = client.AnonymousModel(content, "multipart/form-data");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_AnonymousModel_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = File.OpenRead("<filePath>"),
+            });
+            Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_AnonymousModel_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            Response response = client.AnonymousModel(null);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_AnonymousModel_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            Response response = await client.AnonymousModelAsync(null);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_AnonymousModel_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = File.OpenRead("<filePath>"),
+            });
+            Response response = client.AnonymousModel(content, "multipart/form-data");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_AnonymousModel_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = File.OpenRead("<filePath>"),
+            });
+            Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_AnonymousModel_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            Response response = client.AnonymousModel(null);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_AnonymousModel_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            Response response = await client.AnonymousModelAsync(null);
+        }
     }
 }

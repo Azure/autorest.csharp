@@ -25,7 +25,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Entity_DoSomething_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             Entity client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEntityClient();
 
             Response response = await client.DoSomethingAsync("<p2>", null);
@@ -36,7 +36,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Entity_DoSomething_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             Entity client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEntityClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<p2>");
@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Entity_DoSomething_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             Entity client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEntityClient();
 
             Response response = await client.DoSomethingAsync("<p2>", null);
@@ -58,7 +58,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Entity_DoSomething_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             Entity client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEntityClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<p2>");

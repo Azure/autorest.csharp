@@ -24,7 +24,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
@@ -35,7 +35,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);

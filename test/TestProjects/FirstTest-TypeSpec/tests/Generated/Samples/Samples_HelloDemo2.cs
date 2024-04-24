@@ -24,8 +24,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -93,8 +92,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -162,8 +160,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
@@ -188,8 +185,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
@@ -214,8 +210,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -334,8 +329,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -454,8 +448,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
@@ -503,8 +496,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
@@ -552,8 +544,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -621,8 +612,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -690,8 +680,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -810,8 +799,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_NoContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -930,8 +918,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloDemoAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloDemoAgain(null);
 
@@ -951,8 +938,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloDemoAgainAsync(null);
 
@@ -972,8 +958,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloDemoAgain_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloDemoAgain();
         }
@@ -983,8 +968,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloDemoAgainAsync();
         }
@@ -994,8 +978,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloDemoAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloDemoAgain(null);
 
@@ -1020,8 +1003,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloDemoAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloDemoAgainAsync(null);
 
@@ -1046,8 +1028,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloDemoAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloDemoAgain();
         }
@@ -1057,8 +1038,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloDemoAgain_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloDemoAgainAsync();
         }
@@ -1068,8 +1048,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1103,8 +1082,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1138,8 +1116,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = client.CreateLiteral(body);
@@ -1150,8 +1127,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -1162,8 +1138,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1210,8 +1185,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1258,8 +1232,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
@@ -1277,8 +1250,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
@@ -1296,8 +1268,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1317,8 +1288,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1338,8 +1308,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1349,8 +1318,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }
@@ -1360,8 +1328,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1386,8 +1353,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1412,8 +1378,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1423,8 +1388,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }

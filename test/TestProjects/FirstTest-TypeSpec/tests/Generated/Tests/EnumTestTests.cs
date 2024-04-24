@@ -25,7 +25,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task EnumTest_CreateUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
@@ -37,7 +37,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");

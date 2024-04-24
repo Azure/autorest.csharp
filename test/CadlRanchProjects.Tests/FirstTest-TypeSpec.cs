@@ -43,7 +43,7 @@ namespace CadlRanchProjects.Tests
         //    Assert.AreEqual(new ThingOptionalLiteralFloat(123.45f), result.OptionalLiteralFloat);
         //    Assert.AreEqual(false, result.OptionalLiteralBool);
         //});
-        /*
+
         [Test]
         public async Task FirstTest_CreateLiteral() => await Test(async (host) =>
         {
@@ -112,7 +112,7 @@ namespace CadlRanchProjects.Tests
             Response<BinaryData> response = await new FirstTestTypeSpecClient(host).ReturnUnknownAsync();
             Assert.AreEqual("completed", response.Value.ToObjectFromJson<string>());
         });
-        */
+
         /*
         [Test]
         public async Task FirstTest_ObjectAsHeader() => await Test(async (host) =>

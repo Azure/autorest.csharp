@@ -27,7 +27,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -38,7 +38,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -49,7 +49,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -60,7 +60,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -71,7 +71,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
@@ -82,7 +82,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -118,7 +118,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -151,7 +151,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -176,7 +176,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AnonymousBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
@@ -188,7 +188,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -221,7 +221,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AnonymousBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
@@ -240,7 +240,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -255,7 +255,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Friend friend = new Friend("<name>");
@@ -267,7 +267,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -282,7 +282,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Friend friend = new Friend("<name>");
@@ -294,7 +294,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
@@ -305,7 +305,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_AddTimeHeader_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
@@ -316,7 +316,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -332,7 +332,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -344,7 +344,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -360,7 +360,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -372,7 +372,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ProjectedNameModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -387,7 +387,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ProjectedNameModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ProjectedModel projectedModel = new ProjectedModel("<name>");
@@ -399,7 +399,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ProjectedNameModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -414,7 +414,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ProjectedNameModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ProjectedModel projectedModel = new ProjectedModel("<name>");
@@ -426,7 +426,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnsAnonymousModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
@@ -437,7 +437,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnsAnonymousModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
@@ -448,7 +448,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnsAnonymousModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
@@ -459,7 +459,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnsAnonymousModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
@@ -470,7 +470,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_HeadAsBoolean_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
@@ -481,7 +481,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_HeadAsBoolean_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
@@ -492,7 +492,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create("<body>");
@@ -504,7 +504,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.StringBodyAsync("<body>");
@@ -515,7 +515,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create("<body>");
@@ -527,7 +527,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_StringBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.StringBodyAsync("<body>");
@@ -538,7 +538,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_BoolBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(true);
@@ -550,7 +550,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_BoolBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.BoolBodyAsync(true);
@@ -561,7 +561,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_BoolBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(true);
@@ -573,7 +573,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_BoolBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.BoolBodyAsync(true);
@@ -584,7 +584,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_DateTimeBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
@@ -596,7 +596,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_DateTimeBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -607,7 +607,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_DateTimeBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
@@ -619,7 +619,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_DateTimeBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -630,7 +630,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnString_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnStringAsync(null);
@@ -641,7 +641,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnString_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<string> response = await client.ReturnStringAsync();
@@ -652,7 +652,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnString_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnStringAsync(null);
@@ -663,7 +663,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnString_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<string> response = await client.ReturnStringAsync();
@@ -674,7 +674,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnUnknown_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnUnknownAsync(null);
@@ -685,7 +685,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnUnknown_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<BinaryData> response = await client.ReturnUnknownAsync();
@@ -696,7 +696,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnUnknown_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.ReturnUnknownAsync(null);
@@ -707,7 +707,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_ReturnUnknown_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response<BinaryData> response = await client.ReturnUnknownAsync();
@@ -718,7 +718,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_RecursiveExtension_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -733,7 +733,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_RecursiveExtension_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Extension input = new Extension(123);
@@ -745,7 +745,7 @@ namespace FirstTestTypeSpec.Tests
         public async Task FirstTestTypeSpec_RecursiveExtension_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -764,7 +764,7 @@ null
         public async Task FirstTestTypeSpec_RecursiveExtension_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Extension input = new Extension(123);
@@ -776,7 +776,7 @@ null
         public async Task FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new object());
@@ -788,7 +788,7 @@ null
         public async Task FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Extendible input = new Extendible();
@@ -800,7 +800,7 @@ null
         public async Task FirstTestTypeSpec_ThreeLevelRecursive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -825,7 +825,7 @@ null
         public async Task FirstTestTypeSpec_ThreeLevelRecursive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Extendible input = new Extendible
@@ -840,7 +840,7 @@ null
         public async Task FirstTestTypeSpec_RecursiveModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -862,7 +862,7 @@ level = 123,
         public async Task FirstTestTypeSpec_RecursiveModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ChildModel input = new ChildModel(123, new BaseModel[]
@@ -877,7 +877,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_RecursiveModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -899,7 +899,7 @@ level = 123,
         public async Task FirstTestTypeSpec_RecursiveModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ChildModel input = new ChildModel(123, new BaseModel[]
@@ -914,7 +914,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_ContainSelfModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new { });
@@ -926,7 +926,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_ContainSelfModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ContainSelf input = new ContainSelf(default);
@@ -938,7 +938,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_ContainSelfModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new { });
@@ -950,7 +950,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_ContainSelfModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ContainSelf input = new ContainSelf(default);
@@ -962,7 +962,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_EnumParameter_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.EnumParameterAsync(1.1F);
@@ -973,7 +973,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_EnumParameter_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
@@ -984,7 +984,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_EnumParameter_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.EnumParameterAsync(1.1F);
@@ -995,7 +995,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_EnumParameter_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
@@ -1006,7 +1006,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -1021,7 +1021,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
@@ -1033,7 +1033,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -1048,7 +1048,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
@@ -1060,7 +1060,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
@@ -1072,7 +1072,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.OptionalDictionaryAsync();
@@ -1083,7 +1083,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -1098,7 +1098,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
@@ -1112,7 +1112,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
@@ -1124,7 +1124,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.AzureLocationOpAsync(default, default);
@@ -1135,7 +1135,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = RequestContent.Create(new
@@ -1150,7 +1150,7 @@ new BaseModel(123)
         public async Task FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             AzureLocationModel body = new AzureLocationModel(default);

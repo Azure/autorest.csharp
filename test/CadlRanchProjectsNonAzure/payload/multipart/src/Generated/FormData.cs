@@ -5,6 +5,8 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Payload.MultiPart.Models;
 
@@ -608,6 +610,88 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <param name="profileImage"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
+        public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
+        {
+            Argument.AssertNotNull(profileImage, nameof(profileImage));
+
+            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
+            ClientResult result = await AnonymousModelAsync(anonymousModelRequest.ToBinaryContent(), null, null).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <param name="profileImage"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
+        public virtual ClientResult AnonymousModel(Stream profileImage)
+        {
+            Argument.AssertNotNull(profileImage, nameof(profileImage));
+
+            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
+            ClientResult result = AnonymousModel(anonymousModelRequest.ToBinaryContent(), null, null);
+            return result;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousModelAsync(Stream)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<ClientResult> AnonymousModelAsync(BinaryContent content, string contentType, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateAnonymousModelRequest(content, contentType, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousModel(Stream)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual ClientResult AnonymousModel(BinaryContent content, string contentType, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateAnonymousModelRequest(content, contentType, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
+        }
+
         internal PipelineMessage CreateBasicRequest(BinaryContent content, string contentType, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
@@ -719,6 +803,23 @@ namespace Payload.MultiPart
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/check-filename-and-content-type", false);
+            request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("content-type", contentType);
+            request.Content = content;
+            message.Apply(options);
+            return message;
+        }
+
+        internal PipelineMessage CreateAnonymousModelRequest(BinaryContent content, string contentType, RequestOptions options)
+        {
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier204;
+            var request = message.Request;
+            request.Method = "POST";
+            var uri = new ClientUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/anonymous-model", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);

@@ -6,8 +6,7 @@
 This sample shows how to call HelloAgainAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
@@ -29,8 +28,7 @@ Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>",
 This sample shows how to call HelloAgainAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
@@ -78,8 +76,7 @@ Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>",
 This sample shows how to call HelloAgain.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
@@ -101,8 +98,7 @@ Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 This sample shows how to call HelloAgain with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
@@ -150,8 +146,7 @@ Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 This sample shows how to call HelloAgainAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -216,8 +211,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call HelloAgainAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -336,8 +330,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call HelloAgain and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -402,8 +395,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call HelloAgain with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -522,8 +514,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call NoContentTypeAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -588,8 +579,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call NoContentTypeAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -708,8 +698,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call NoContentType and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -774,8 +763,7 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call NoContentType with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -894,16 +882,14 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 This sample shows how to call HelloDemoAgainAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = await client.HelloDemoAgainAsync();
 ]]></code>
 This sample shows how to call HelloDemoAgainAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = await client.HelloDemoAgainAsync();
 ]]></code></example>
@@ -913,16 +899,14 @@ Response<Thing> response = await client.HelloDemoAgainAsync();
 This sample shows how to call HelloDemoAgain.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = client.HelloDemoAgain();
 ]]></code>
 This sample shows how to call HelloDemoAgain with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = client.HelloDemoAgain();
 ]]></code></example>
@@ -932,8 +916,7 @@ Response<Thing> response = client.HelloDemoAgain();
 This sample shows how to call HelloDemoAgainAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = await client.HelloDemoAgainAsync(null);
 
@@ -950,8 +933,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloDemoAgainAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = await client.HelloDemoAgainAsync(null);
 
@@ -976,8 +958,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloDemoAgain and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = client.HelloDemoAgain(null);
 
@@ -994,8 +975,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloDemoAgain with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = client.HelloDemoAgain(null);
 
@@ -1020,8 +1000,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteralAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
 Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -1029,8 +1008,7 @@ Response<Thing> response = await client.CreateLiteralAsync(body);
 This sample shows how to call CreateLiteralAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
 {
@@ -1048,8 +1026,7 @@ Response<Thing> response = await client.CreateLiteralAsync(body);
 This sample shows how to call CreateLiteral.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
 Response<Thing> response = client.CreateLiteral(body);
@@ -1057,8 +1034,7 @@ Response<Thing> response = client.CreateLiteral(body);
 This sample shows how to call CreateLiteral with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
 {
@@ -1076,8 +1052,7 @@ Response<Thing> response = client.CreateLiteral(body);
 This sample shows how to call CreateLiteralAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1108,8 +1083,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteralAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1156,8 +1130,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteral and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1188,8 +1161,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteral with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1236,16 +1208,14 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteralAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = await client.HelloLiteralAsync();
 ]]></code>
 This sample shows how to call HelloLiteralAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = await client.HelloLiteralAsync();
 ]]></code></example>
@@ -1255,16 +1225,14 @@ Response<Thing> response = await client.HelloLiteralAsync();
 This sample shows how to call HelloLiteral.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = client.HelloLiteral();
 ]]></code>
 This sample shows how to call HelloLiteral with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response<Thing> response = client.HelloLiteral();
 ]]></code></example>
@@ -1274,8 +1242,7 @@ Response<Thing> response = client.HelloLiteral();
 This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = await client.HelloLiteralAsync(null);
 
@@ -1292,8 +1259,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteralAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = await client.HelloLiteralAsync(null);
 
@@ -1318,8 +1284,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = client.HelloLiteral(null);
 
@@ -1336,8 +1301,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteral with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-HelloDemo2 client = new FirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
 Response response = client.HelloLiteral(null);
 
