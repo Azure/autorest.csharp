@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     internal class ClientUriBuilder
     {

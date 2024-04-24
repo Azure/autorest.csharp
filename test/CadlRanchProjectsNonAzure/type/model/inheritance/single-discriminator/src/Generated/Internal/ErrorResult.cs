@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

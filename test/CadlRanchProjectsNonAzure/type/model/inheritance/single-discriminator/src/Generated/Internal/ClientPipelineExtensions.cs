@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     internal static class ClientPipelineExtensions
     {

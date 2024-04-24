@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     internal static class Optional
     {

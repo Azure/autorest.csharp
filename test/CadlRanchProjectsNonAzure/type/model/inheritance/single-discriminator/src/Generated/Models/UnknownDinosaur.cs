@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Unknown version of Dinosaur. </summary>
     internal partial class UnknownDinosaur : Dinosaur

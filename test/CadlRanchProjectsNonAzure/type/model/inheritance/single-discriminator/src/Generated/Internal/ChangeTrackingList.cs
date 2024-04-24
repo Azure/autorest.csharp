@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

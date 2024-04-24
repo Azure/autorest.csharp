@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Type.Model.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Inheritance.SingleDiscriminator.Models
 {
     internal partial class UnknownDinosaur : IJsonModel<Dinosaur>
     {

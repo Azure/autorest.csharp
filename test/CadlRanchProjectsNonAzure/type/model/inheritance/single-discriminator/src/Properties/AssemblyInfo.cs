@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Type.Model.Inheritance.SingleDiscriminator.Tests")]
+[assembly: InternalsVisibleTo("Scm._Type.Inheritance.SingleDiscriminator.Tests")]

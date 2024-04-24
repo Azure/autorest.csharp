@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Type.Model.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances. </summary>
     public partial class Eagle : Bird

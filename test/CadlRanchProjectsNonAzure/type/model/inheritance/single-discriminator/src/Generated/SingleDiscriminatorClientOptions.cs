@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Type.Model.Inheritance.SingleDiscriminator
+namespace Scm._Type.Inheritance.SingleDiscriminator
 {
     /// <summary> Client options for SingleDiscriminatorClient. </summary>
     public partial class SingleDiscriminatorClientOptions : ClientPipelineOptions
