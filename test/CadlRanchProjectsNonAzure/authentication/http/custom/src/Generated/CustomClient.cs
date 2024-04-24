@@ -141,10 +141,7 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/valid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -159,10 +156,7 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
