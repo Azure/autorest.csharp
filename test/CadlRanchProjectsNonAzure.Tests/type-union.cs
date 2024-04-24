@@ -11,9 +11,9 @@ using Scm._Type.Union.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeUnionTests : CadlRanchTestBase
+    public class TypeUnionTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task GetStringsOnly() => Test(async (host) =>
