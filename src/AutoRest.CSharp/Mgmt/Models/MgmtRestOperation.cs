@@ -53,8 +53,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationSource? OperationSource { get; }
 
-        public LongRunningInterimOperation? InterimOperation { get; }
-
         private Func<bool, FormattableString>? _returnsDescription;
         public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
 
@@ -131,7 +129,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             FinalStateVia = operation.IsLongRunning ? operation.LongRunningFinalStateVia : null;
             OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
-            InterimOperation = GetInterimOperation();
         }
 
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
@@ -155,7 +152,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
             OperationSource = other.OperationSource;
-            InterimOperation = other.InterimOperation;
 
             //modify some of the values
             Name = nameOverride;
@@ -182,25 +178,6 @@ namespace AutoRest.CSharp.Mgmt.Models
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
             return operationSource;
-        }
-
-        private LongRunningInterimOperation? GetInterimOperation()
-        {
-            if (!IsLongRunningOperation || IsFakeLongRunningOperation)
-                return null;
-
-            if (Operation.IsInterimLongRunningStateEnabled)
-            {
-                IEnumerable<Schema?> allSchemas = Operation.Responses.Select(r => r.ResponseSchema);
-                ImmutableHashSet<Schema?> schemas = allSchemas.ToImmutableHashSet();
-                if (MgmtReturnType is null || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
-                    throw new NotSupportedException($"The interim state feature is only supported when all responses of the long running operation {Name} have the same shcema.");
-
-                var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, Name);
-                MgmtContext.Library.InterimOperations.Add(interimOperation);
-                return interimOperation;
-            }
-            return null;
         }
 
         private CSharpType? GetFinalResponse()
@@ -239,9 +216,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             // check if this operation need a response converter
             if (mgmtReturnType.Equals(restReturnType))
-                return null;
-
-            if (InterimOperation != null)
                 return null;
 
             var isRestReturnTypeResourceData = restReturnType is { IsFrameworkType: false, Implementation: ResourceData };
@@ -548,9 +522,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (IsPagingOperation)
                 return originalType;
-
-            if (InterimOperation is not null)
-                return InterimOperation.InterimType;
 
             return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: NULLABLE_RESPONSE_METHOD_NAMES.Contains(this.Name));
         }
