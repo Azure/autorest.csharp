@@ -151,7 +151,7 @@ namespace xms_error_responses.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<PetActionError>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
