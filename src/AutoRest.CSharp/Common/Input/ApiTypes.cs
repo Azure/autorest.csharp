@@ -5,7 +5,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
-using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
