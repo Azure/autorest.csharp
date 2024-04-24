@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Scm._Type.Inheritance.SingleDiscriminator.csproj" />
+    <ProjectReference Include="..\src\Scm._Type.Model.Inheritance.SingleDiscriminator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

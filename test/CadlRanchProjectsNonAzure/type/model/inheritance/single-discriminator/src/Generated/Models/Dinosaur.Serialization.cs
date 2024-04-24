@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 
-namespace Scm._Type.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
     [PersistableModelProxy(typeof(UnknownDinosaur))]
     public partial class Dinosaur : IJsonModel<Dinosaur>

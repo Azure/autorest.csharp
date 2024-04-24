@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace Scm._Type.Inheritance.SingleDiscriminator
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator
 {
     internal static class ModelSerializationExtensions
     {

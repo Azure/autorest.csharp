@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Scm._Type.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ScmTypeInheritanceSingleDiscriminatorModelFactory
+    public static partial class ScmTypeModelInheritanceSingleDiscriminatorModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>

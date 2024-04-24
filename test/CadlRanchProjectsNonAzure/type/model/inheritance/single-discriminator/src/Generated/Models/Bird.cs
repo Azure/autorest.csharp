@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm._Type.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary>
     /// This is base model for polymorphic single level inheritance with a discriminator.

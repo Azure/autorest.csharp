@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm._Type.Inheritance.SingleDiscriminator.Models
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Unknown version of Bird. </summary>
     internal partial class UnknownBird : Bird

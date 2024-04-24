@@ -6,9 +6,9 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using Scm._Type.Inheritance.SingleDiscriminator.Models;
+using Scm._Type.Model.Inheritance.SingleDiscriminator.Models;
 
-namespace Scm._Type.Inheritance.SingleDiscriminator
+namespace Scm._Type.Model.Inheritance.SingleDiscriminator
 {
     // Data plane generated client.
     /// <summary> Illustrates inheritance with single discriminator. </summary>
