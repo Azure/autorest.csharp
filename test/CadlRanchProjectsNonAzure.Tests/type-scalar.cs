@@ -4,16 +4,16 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using _Type.Scalar;
+using Scm._Type.Scalar;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
 using YamlDotNet.Core.Tokens;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeScalarTests : CadlRanchTestBase
+    public class TypeScalarTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Scalar_String_get() => Test(async (host) =>
@@ -25,7 +25,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_String_put() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetStringClient().PutAsync("test");
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_Boolean_get() => Test(async (host) =>
@@ -37,7 +37,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_Boolean_put() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetBooleanClient().PutAsync(true);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_Unknown_get() => Test(async (host) =>
@@ -50,7 +50,7 @@ namespace CadlRanchProjects.Tests
         {
             var body = BinaryData.FromString("\"test\"");
             var response = await new ScalarClient(host, null).GetUnknownClient().PutAsync(body);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_DecimalType_ResponseBody() => Test(async (host) =>
@@ -62,13 +62,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_DecimalType_RequestBody() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimalTypeClient().RequestBodyAsync(0.33333m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_DecimalType_RequestParameter() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimalTypeClient().RequestParameterAsync(0.33333m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_Decimal128Type_ResponseBody() => Test(async (host) =>
@@ -80,13 +80,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_Decimal128Type_RequestBody() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimal128TypeClient().RequestBodyAsync(0.33333m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_Decimal128Type_RequestParameter() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimal128TypeClient().RequestParameterAsync(0.33333m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_DecimalVerify_prepareVerify() => Test(async (host) =>
@@ -100,7 +100,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_DecimalVerify_Verify() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimalVerifyClient().VerifyAsync(0.3m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
         [Test]
         public Task Type_Scalar_Decimal128Verify_prepareVerify() => Test(async (host) =>
@@ -114,7 +114,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_Decimal128Verify_Verify() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimal128VerifyClient().VerifyAsync(0.3m);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
 }
