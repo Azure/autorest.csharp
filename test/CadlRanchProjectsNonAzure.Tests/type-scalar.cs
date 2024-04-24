@@ -1,15 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Scm._Type.Scalar;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
-using Azure.Core;
 using NUnit.Framework;
-using YamlDotNet.Core.Tokens;
+using Scm._Type.Scalar;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
