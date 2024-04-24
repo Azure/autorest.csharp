@@ -50,6 +50,8 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(ClientPipeline)}.{nameof(ClientPipeline.Create)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, {beforeTransportPolicies});";
 
+        public override FormattableString CredentialDescription => $"A credential used to authenticate to the service.";
+
         public override Type HttpPipelinePolicyType => typeof(PipelinePolicy);
 
         public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
