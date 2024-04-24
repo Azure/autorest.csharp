@@ -29,7 +29,7 @@ namespace NoTestTypeSpec
 
         /// <summary> Initializes a new instance of NoTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoTestTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new NoTestTypeSpecClientOptions())
         {
@@ -37,7 +37,7 @@ namespace NoTestTypeSpec
 
         /// <summary> Initializes a new instance of NoTestTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoTestTypeSpecClient(Uri endpoint, ApiKeyCredential credential, NoTestTypeSpecClientOptions options)
@@ -158,10 +158,7 @@ namespace NoTestTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 

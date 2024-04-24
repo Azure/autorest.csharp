@@ -90,7 +90,9 @@ namespace AzureSample.ResourceManager.Storage
             try
             {
                 var response = await _azureSampleResourceManagerStoragePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<AzureSampleResourceManagerStoragePrivateEndpointConnectionResource>(Response.FromValue(new AzureSampleResourceManagerStoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var uri = _azureSampleResourceManagerStoragePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new StorageArmOperation<AzureSampleResourceManagerStoragePrivateEndpointConnectionResource>(Response.FromValue(new AzureSampleResourceManagerStoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -139,7 +141,9 @@ namespace AzureSample.ResourceManager.Storage
             try
             {
                 var response = _azureSampleResourceManagerStoragePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken);
-                var operation = new StorageArmOperation<AzureSampleResourceManagerStoragePrivateEndpointConnectionResource>(Response.FromValue(new AzureSampleResourceManagerStoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var uri = _azureSampleResourceManagerStoragePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new StorageArmOperation<AzureSampleResourceManagerStoragePrivateEndpointConnectionResource>(Response.FromValue(new AzureSampleResourceManagerStoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

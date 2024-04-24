@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientPrefix = schema.Name;
         }
 
+        public static ResourceData Empty = new ResourceData(new ObjectSchema());
+
         protected override bool IsResourceType => true;
 
         protected override FormattableString CreateDescription()

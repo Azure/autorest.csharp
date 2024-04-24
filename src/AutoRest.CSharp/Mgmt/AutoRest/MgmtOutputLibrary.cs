@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -18,7 +19,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
+using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -192,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         // get the request path and operation set
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                        if (operationSet.TryGetResourceDataSchema(out _, out var resourceDataSchema))
                         {
                             // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
                             BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
@@ -324,7 +325,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
 
             var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
-            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();
             return _schemaToModels;
         }
 
@@ -547,8 +548,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var originalResourcePath = operationSet.GetRequestPath();
                     var operations = GetChildOperations(originalResourcePath);
                     var resourceData = GetResourceData(originalResourcePath);
-                    if (resourceData is EmptyResourceData emptyResourceData)
-                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, emptyResourceData);
+                    if (resourceData == OutputResourceData.Empty)
+                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath);
                     else
                         BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
@@ -573,11 +574,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
+        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData);
-            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
+            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType);
+            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), OutputResourceData.Empty, resource, null));
         }
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
@@ -767,6 +768,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
+            foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
+            {
+                rawRequestPathToResourceData.Add(path, OutputResourceData.Empty);
+            }
+
             return rawRequestPathToResourceData;
         }
 
@@ -824,7 +830,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch
         {
-            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema),
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
@@ -834,28 +839,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
-                if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
+                if (operationSet.TryGetResourceDataSchema(out var resourceSchemaName, out var resourceSchema))
                 {
-                    // ensure the name of resource data is singular
-                    var schemaName = resourceDataSchema.Name;
-                    // skip this step if the configuration is set to keep this plural
-                    if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(schemaName))
+                    // Skip the renaming for partial resource when resourceSchema is null but resourceSchemaName is not null
+                    if (resourceSchema is not null)
                     {
-                        resourceDataSchema.Language.Default.SerializedName ??= schemaName;
-                        schemaName = schemaName.LastWordToSingular(false);
-                        resourceDataSchema.Language.Default.Name = schemaName;
+                        // ensure the name of resource data is singular
+                        // skip this step if the configuration is set to keep this plural
+                        if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(resourceSchemaName))
+                        {
+                            resourceSchema.Language.Default.SerializedName ??= resourceSchemaName;
+                            resourceSchemaName = resourceSchemaName.LastWordToSingular(false);
+                            resourceSchema.Language.Default.Name = resourceSchemaName;
+                        }
+                        else
+                        {
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
+                                new TransformItem(TransformTypeName.KeepPluralResourceData, resourceSchemaName),
+                                resourceSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {resourceSchemaName}");
+                        }
                     }
-                    else
-                    {
-                        MgmtReport.Instance.TransformSection.AddTransformLog(
-                            new TransformItem(TransformTypeName.KeepPluralResourceData, schemaName),
-                            resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
-                    }
+
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceSchemaName!, out HashSet<OperationSet>? result))
                     {
                         result = new HashSet<OperationSet>();
-                        resourceDataSchemaNameToOperationSets.Add(schemaName, result);
+                        resourceDataSchemaNameToOperationSets.Add(resourceSchemaName!, result);
                     }
                     result.Add(operationSet);
                 }

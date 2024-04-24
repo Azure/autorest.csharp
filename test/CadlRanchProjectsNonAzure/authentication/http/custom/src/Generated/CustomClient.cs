@@ -28,7 +28,7 @@ namespace Scm.Authentication.Http.Custom
         }
 
         /// <summary> Initializes a new instance of CustomClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public CustomClient(ApiKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new CustomClientOptions())
         {
@@ -36,7 +36,7 @@ namespace Scm.Authentication.Http.Custom
 
         /// <summary> Initializes a new instance of CustomClient. </summary>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public CustomClient(Uri endpoint, ApiKeyCredential credential, CustomClientOptions options)
@@ -141,10 +141,7 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/valid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -159,10 +156,7 @@ namespace Scm.Authentication.Http.Custom
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 

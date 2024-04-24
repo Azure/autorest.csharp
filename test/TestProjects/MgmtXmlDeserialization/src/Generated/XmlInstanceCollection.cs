@@ -92,7 +92,9 @@ namespace MgmtXmlDeserialization
             try
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, data, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtXmlDeserializationArmOperation<XmlInstanceResource>(Response.FromValue(new XmlInstanceResource(Client, response), response.GetRawResponse()));
+                var uri = _xmlInstanceXmlDeserializationRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, xmlName, data, ifMatch);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtXmlDeserializationArmOperation<XmlInstanceResource>(Response.FromValue(new XmlInstanceResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -142,7 +144,9 @@ namespace MgmtXmlDeserialization
             try
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, data, ifMatch, cancellationToken);
-                var operation = new MgmtXmlDeserializationArmOperation<XmlInstanceResource>(Response.FromValue(new XmlInstanceResource(Client, response), response.GetRawResponse()));
+                var uri = _xmlInstanceXmlDeserializationRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, xmlName, data, ifMatch);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtXmlDeserializationArmOperation<XmlInstanceResource>(Response.FromValue(new XmlInstanceResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
