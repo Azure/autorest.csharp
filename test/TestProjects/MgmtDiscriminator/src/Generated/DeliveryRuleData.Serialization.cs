@@ -487,31 +487,39 @@ namespace MgmtDiscriminator
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Unflattened), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  unflattened: ");
-                if (Unflattened == null)
-                {
-                    builder.AppendLine("{");
-                    builder.Append("    name: ");
-                    builder.AppendLine(propertyOverride);
-                    builder.AppendLine("  }");
-                }
-                else
-                {
-                    Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                    propertyDictionary.Add("Name", propertyOverride);
-                    bicepOptions.PropertyOverrides.Add(Unflattened, propertyDictionary);
-                    BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
-                }
+                builder.AppendLine(propertyOverride);
             }
             else
             {
-                if (Optional.IsDefined(Unflattened))
+                if (hasObjectOverride && propertyOverrides.TryGetValue("UnflattenedName", out propertyOverride))
                 {
                     builder.Append("  unflattened: ");
-                    BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
+                    if (Unflattened == null)
+                    {
+                        builder.AppendLine("{");
+                        builder.Append("    name: ");
+                        builder.AppendLine(propertyOverride);
+                        builder.AppendLine("  }");
+                    }
+                    else
+                    {
+                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
+                        propertyDictionary.Add("Name", propertyOverride);
+                        bicepOptions.PropertyOverrides.Add(Unflattened, propertyDictionary);
+                        BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
+                    }
+                }
+                else
+                {
+                    if (Optional.IsDefined(Unflattened))
+                    {
+                        builder.Append("  unflattened: ");
+                        BicepSerializationHelpers.AppendChildObject(builder, Unflattened, options, 2, false, "  unflattened: ");
+                    }
                 }
             }
 

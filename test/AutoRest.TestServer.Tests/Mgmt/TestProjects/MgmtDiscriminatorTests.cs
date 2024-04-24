@@ -155,6 +155,75 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
+        public void ToBicepWithOverridesEnvelopeTakesPrecedence()
+        {
+            var queryParams = new QueryStringMatchConditionParameters(
+                QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
+                QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
+            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+                queryParams);
+            var firstAction = new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null);
+            var actions =
+                new[]
+                {
+                    firstAction,
+                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                };
+            var data = new DeliveryRuleData
+            {
+                Properties = new DeliveryRuleProperties(3, condition, actions,
+                    new Dictionary<string, DeliveryRuleAction>()
+                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                {
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
+                }),
+                BoolProperty = false,
+                Location = AzureLocation.AustraliaCentral,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = DateTimeOffset.Parse("2024-03-20T00:00:00.0000000Z"),
+                Duration = TimeSpan.FromDays(1),
+                Number = 4,
+            };
+
+            var options = new BicepModelReaderWriterOptions
+            {
+                PropertyOverrides =
+                    {
+                        {
+                            data, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
+                                { nameof(DeliveryRuleData.Location), "locationParameter" },
+                                { nameof(DeliveryRuleData.NestedName), "'overridenSku'" },
+                                { nameof(DeliveryRuleData.Unflattened), "{" + Environment.NewLine +
+                                                                        "    name: 'envelopeOverride'" + Environment.NewLine +
+                                                                        "    value: 'value'" + Environment.NewLine +
+                                                                        "  }"},
+                                { nameof(DeliveryRuleData.UnflattenedName), "'unflattenedOverride'"}
+                            }
+                        },
+                        {
+                            queryParams, new Dictionary<string, string>
+                            {
+                                { nameof(QueryStringMatchConditionParametersTypeName), "queryParametersTypeNameParameter" },
+                            }
+                        },
+                        {
+                            firstAction, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleAction.Foo), "fooParameter" },
+                            }
+                        }
+                    }
+            };
+            var bicep = ModelReaderWriter.Write(data, options).ToString();
+            var file = "BicepData/OverridesWithEnvelope.bicep";
+            var expected = File.ReadAllText(TestData.GetLocation(file));
+            Assert.AreEqual(expected, bicep);
+        }
+
+        [Test]
         public void ToBicepEmptyChildObject()
         {
             var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,

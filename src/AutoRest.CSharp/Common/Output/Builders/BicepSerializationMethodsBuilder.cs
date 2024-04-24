@@ -258,14 +258,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             // is the property that we are trying to serialize a flattened property? If so, we need to use the name of the childmost property for overrides.
             ValueExpression overridePropertyName = Nameof(property.Value);
+            string? previouslyFlattenedProperty = null;
             if (property.Property!.FlattenedProperty != null)
             {
                 overridePropertyName = Literal(property.Property!.FlattenedProperty.Declaration.Name);
                 isFlattened = true;
             }
-            else if (WasPreviouslyFlattened(propertyOverrideVariables.serialization, property.Property, out var previouslyFlattenedProperty, out wirePath))
+            else if (WasPreviouslyFlattened(propertyOverrideVariables.serialization, property.Property, out previouslyFlattenedProperty, out wirePath))
             {
-                overridePropertyName = Literal(previouslyFlattenedProperty);
                 wasFlattened = true;
                 childPropertyName = ((SerializableObjectType)property.Property.ValueType.Implementation).Properties
                     .Single(
@@ -287,36 +287,36 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // we write the properties if there is a value or an override for that property
 
             wirePath = isFlattened ? property.Property.FlattenedProperty!.GetWirePath() : wirePath;
-
-            yield return new IfElseStatement(
-                new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
-                    new[]
+            MethodBodyStatement elseStatement;
+            if (wasFlattened)
+            {
+                elseStatement = new IfElseStatement(
+                    new IfStatement(
+                    new BoolExpression(
+                        And(
+                            new BoolExpression(propertyOverrideVariables.HasObjectOverride),
+                            new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Literal(previouslyFlattenedProperty),
+                                new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))))
                     {
                         stringBuilder.Append(formattedPropertyName),
-                        new[]
-                        {
-                            wasFlattened
-                                ?
-                                new IfElseStatement(
-                                    Equal(property.Value, Null),
-                                    WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces),
-                                    new[]
-                                    {
-                                        Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
-                                        propertyDictionary.Invoke(
-                                            "Add",
-                                            Literal(childPropertyName),
-                                            propertyOverrideVariables.PropertyOverride).ToStatement(),
-                                        propertyOverrideVariables.BicepOptions.Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
-                                            "Add",
-                                            property.Value,
-                                            propertyDictionary).ToStatement(),
-                                        InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                                    })
-                                : isFlattened ? WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces)
-                                : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride)
-                        }
-
+                        new IfElseStatement(
+                            Equal(property.Value, Null),
+                            WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder,
+                                propertyOverrideVariables.PropertyOverride, spaces),
+                            new[]
+                            {
+                                Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
+                                propertyDictionary.Invoke(
+                                    "Add",
+                                    Literal(childPropertyName),
+                                    propertyOverrideVariables.PropertyOverride).ToStatement(),
+                                propertyOverrideVariables.BicepOptions
+                                    .Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
+                                        "Add",
+                                        property.Value,
+                                        propertyDictionary).ToStatement(),
+                                InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
+                            })
                     },
                     WrapInIsDefined(property, new[]
                     {
@@ -327,6 +327,34 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         })
                     })
                 );
+            }
+            else
+            {
+                elseStatement =
+                WrapInIsDefined(property,
+                    new[]
+                    {
+                        WrapInIsNotEmpty(property,
+                            new[]
+                            {
+                                stringBuilder.Append(formattedPropertyName),
+                                InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
+                            })
+                    });
+            }
+
+            yield return new IfElseStatement(
+                new IfStatement(new BoolExpression(propertyOverrideVariables.HasPropertyOverride))
+                {
+                    stringBuilder.Append(formattedPropertyName),
+                    new[]
+                    {
+                        isFlattened
+                            ? WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder, propertyOverrideVariables.PropertyOverride, spaces)
+                            : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride)
+                    }
+                },
+                elseStatement);
 
             yield return EmptyLine;
         }
