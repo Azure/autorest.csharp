@@ -538,10 +538,7 @@ namespace OpenAI
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -556,10 +553,7 @@ namespace OpenAI
             uri.AppendPath("/fine-tunes", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -575,10 +569,7 @@ namespace OpenAI
             uri.AppendPath(fineTuneId, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -599,10 +590,7 @@ namespace OpenAI
             }
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -619,10 +607,7 @@ namespace OpenAI
             uri.AppendPath("/cancel", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
