@@ -287,61 +287,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // we write the properties if there is a value or an override for that property
 
             wirePath = isFlattened ? property.Property.FlattenedProperty!.GetWirePath() : wirePath;
-            MethodBodyStatement elseStatement;
-            if (wasFlattened)
-            {
-                elseStatement = new IfElseStatement(
-                    new IfStatement(
-                    new BoolExpression(
-                        And(
-                            new BoolExpression(propertyOverrideVariables.HasObjectOverride),
-                            new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Literal(previouslyFlattenedProperty),
-                                new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))))
-                    {
-                        stringBuilder.Append(formattedPropertyName),
-                        new IfElseStatement(
-                            Equal(property.Value, Null),
-                            WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder,
-                                propertyOverrideVariables.PropertyOverride, spaces),
-                            new[]
-                            {
-                                Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
-                                propertyDictionary.Invoke(
-                                    "Add",
-                                    Literal(childPropertyName),
-                                    propertyOverrideVariables.PropertyOverride).ToStatement(),
-                                propertyOverrideVariables.BicepOptions
-                                    .Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
-                                        "Add",
-                                        property.Value,
-                                        propertyDictionary).ToStatement(),
-                                InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                            })
-                    },
-                    WrapInIsDefined(property, new[]
-                    {
-                        WrapInIsNotEmpty(property, new[]
-                        {
-                            stringBuilder.Append(formattedPropertyName),
-                            InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                        })
-                    })
-                );
-            }
-            else
-            {
-                elseStatement =
-                WrapInIsDefined(property,
-                    new[]
-                    {
-                        WrapInIsNotEmpty(property,
-                            new[]
-                            {
-                                stringBuilder.Append(formattedPropertyName),
-                                InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
-                            })
-                    });
-            }
+
 
             yield return new IfElseStatement(
                 new IfStatement(new BoolExpression(propertyOverrideVariables.HasPropertyOverride))
@@ -354,7 +300,67 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             : stringBuilder.AppendLine(propertyOverrideVariables.PropertyOverride)
                     }
                 },
-                elseStatement);
+                ConstructElseStatement());
+
+            MethodBodyStatement ConstructElseStatement()
+            {
+                if (wasFlattened)
+                {
+                    return new IfElseStatement(
+                        new IfStatement(
+                            new BoolExpression(
+                                And(
+                                    new BoolExpression(propertyOverrideVariables.HasObjectOverride),
+                                    new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue",
+                                        Literal(previouslyFlattenedProperty),
+                                        new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))))
+                        {
+                            stringBuilder.Append(formattedPropertyName),
+                            new IfElseStatement(
+                                Equal(property.Value, Null),
+                                WriteFlattenedPropertiesWithOverrides(wirePath!, stringBuilder,
+                                    propertyOverrideVariables.PropertyOverride, spaces),
+                                new[]
+                                {
+                                    Declare(propertyDictionary, New.Instance(typeof(Dictionary<string, string>))),
+                                    propertyDictionary.Invoke(
+                                        "Add",
+                                        Literal(childPropertyName),
+                                        propertyOverrideVariables.PropertyOverride).ToStatement(),
+                                    propertyOverrideVariables.BicepOptions
+                                        .Property(nameof(BicepModelReaderWriterOptions.PropertyOverrides)).Invoke(
+                                            "Add",
+                                            property.Value,
+                                            propertyDictionary).ToStatement(),
+                                    InvokeAppendChildObject(stringBuilder, property, spaces, formattedPropertyName)
+                                })
+                        },
+                        WrapInIsDefined(property,
+                            new[]
+                            {
+                                WrapInIsNotEmpty(property,
+                                    new[]
+                                    {
+                                        stringBuilder.Append(formattedPropertyName),
+                                        InvokeAppendChildObject(stringBuilder, property, spaces,
+                                            formattedPropertyName)
+                                    })
+                            })
+                    );
+                }
+
+                return WrapInIsDefined(property,
+                    new[]
+                    {
+                        WrapInIsNotEmpty(property,
+                            new[]
+                            {
+                                stringBuilder.Append(formattedPropertyName),
+                                InvokeAppendChildObject(stringBuilder, property, spaces,
+                                    formattedPropertyName)
+                            })
+                    });
+            }
 
             yield return EmptyLine;
         }
