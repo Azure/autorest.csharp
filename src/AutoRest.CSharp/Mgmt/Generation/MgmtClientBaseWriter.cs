@@ -654,17 +654,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
         {
-            if (operation.InterimOperation is not null)
+            _writer.Append($"var operation = new {LibraryArmOperation}");
+            if (operation.ReturnType.IsGenericType)
             {
-                _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
-            }
-            else
-            {
-                _writer.Append($"var operation = new {LibraryArmOperation}");
-                if (operation.ReturnType.IsGenericType)
-                {
-                    _writer.Append($"<{operation.MgmtReturnType}>");
-                }
+                _writer.Append($"<{operation.MgmtReturnType}>");
             }
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
