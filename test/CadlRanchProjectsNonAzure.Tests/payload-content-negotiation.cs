@@ -1,9 +1,8 @@
-﻿using System.ClientModel;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Scm.Payload.ContentNegotiation;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using System.IO;
+using Scm.Payload.ContentNegotiation;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
