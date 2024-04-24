@@ -54,6 +54,7 @@
     "CadlRanchProjectsNonAzure":[
         "type/array",
         "type/dictionary",
+        "type/model/inheritance/single-discriminator",
         "authentication/http/custom"
     ],
     "TestServerProjects": [
