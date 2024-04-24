@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     // Data plane generated client.
     /// <summary> The Scalar service client. </summary>

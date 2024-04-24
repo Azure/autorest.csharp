@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     /// <summary> Client options for ScalarClient. </summary>
     public partial class ScalarClientOptions : ClientPipelineOptions

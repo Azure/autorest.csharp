@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     internal static class BinaryContentHelper
     {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     internal class ClientUriBuilder
     {

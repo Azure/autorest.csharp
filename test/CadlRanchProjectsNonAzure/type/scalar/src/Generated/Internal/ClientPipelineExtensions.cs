@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     internal static class ClientPipelineExtensions
     {

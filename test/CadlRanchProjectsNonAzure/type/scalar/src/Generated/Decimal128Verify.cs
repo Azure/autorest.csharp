@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     // Data plane generated sub-client.
     /// <summary> Decimal128 type verification. </summary>

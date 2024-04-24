@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     internal class Utf8JsonBinaryContent : BinaryContent
     {

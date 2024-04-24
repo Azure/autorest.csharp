@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Scm._Type.Union
+namespace Scm._Type.Scalar
 {
     // Data plane generated sub-client.
     /// <summary> Decimal type. </summary>

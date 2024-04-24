@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Scm._Type.Union.csproj" />
+    <ProjectReference Include="..\src\Scm._Type.Scalar.csproj" />
   </ItemGroup>
 
   <ItemGroup>

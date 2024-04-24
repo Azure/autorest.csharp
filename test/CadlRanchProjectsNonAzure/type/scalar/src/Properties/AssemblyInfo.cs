@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Scm._Type.Union.Tests")]
+[assembly: InternalsVisibleTo("Scm._Type.Scalar.Tests")]
