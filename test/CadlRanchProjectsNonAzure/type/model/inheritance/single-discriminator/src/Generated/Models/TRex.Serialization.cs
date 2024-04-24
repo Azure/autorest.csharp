@@ -128,7 +128,7 @@ namespace Scm._Type.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
-        internal virtual BinaryContent ToBinaryContent()
+        internal override BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
