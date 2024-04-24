@@ -7,9 +7,9 @@ using NUnit.Framework;
 using Scm._Type.Model.Usage;
 using Scm._Type.Model.Usage.Models;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeModelUsageTests : CadlRanchTestBase
+    public class TypeModelUsageTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Model_Usage_input() => Test(async (host) =>
