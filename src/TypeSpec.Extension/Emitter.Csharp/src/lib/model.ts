@@ -30,7 +30,8 @@ import {
     isGlobalNamespace,
     navigateTypesInNamespace,
     isVoidType,
-    resolveUsages
+    resolveUsages,
+    ProjectedProgram
 } from "@typespec/compiler";
 import {
     HttpOperation,
@@ -294,10 +295,18 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    const type =
+    let type =
         formattedType.type.kind === "ModelProperty"
             ? formattedType.type.type
             : formattedType.type;
+    // TODO: we should try to remove this when we adopt getAllOperations
+    // we should avoid handling raw type definitions because they could be not correctly projected
+    // in the given api version
+    if ("projector" in context.program)
+        type =
+            (context.program as ProjectedProgram).projector.projectedTypes.get(
+                type
+            ) ?? type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
 
