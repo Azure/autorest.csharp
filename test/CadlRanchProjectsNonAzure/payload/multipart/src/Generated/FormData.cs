@@ -621,10 +621,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -641,10 +638,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -661,10 +655,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -681,10 +672,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -701,10 +689,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -721,10 +706,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -741,10 +723,7 @@ namespace Payload.MultiPart
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("content-type", contentType);
             request.Content = content;
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 

@@ -391,10 +391,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     new InvokeInstanceMethodStatement(_multipartContentField, nameof(MultipartFormDataContent.CopyTo), new[] { streamExpression, Snippets.Default ,cancellatinTokenExpression }, false),
                     new MethodBodyStatement[]
                     {
-                        new PragmaWarningPreprocessorDirective("disable", "AZC0107"),
                         /*_multipartContent.CopyToAsync(stream).GetAwaiter().GetResult();*/
                         new InvokeInstanceMethodStatement(getTaskWaiterExpression, nameof(TaskAwaiter.GetResult), Array.Empty<ValueExpression>(), false),
-                        new PragmaWarningPreprocessorDirective("restore", "AZC0107")
                     }
                     ),
             };

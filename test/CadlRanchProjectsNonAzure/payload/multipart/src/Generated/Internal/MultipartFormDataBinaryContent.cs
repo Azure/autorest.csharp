@@ -176,9 +176,7 @@ namespace Payload.MultiPart
 #if NET6_0_OR_GREATER
 				_multipartContent.CopyTo(stream, default, cancellationToken);
 #else
-#pragma warning disable AZC0107
             _multipartContent.CopyToAsync(stream).GetAwaiter().GetResult();
-#pragma warning restore AZC0107
 #endif
         }
 

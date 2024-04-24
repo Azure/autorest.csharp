@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
+            /* private BinaryData SerializeMultipart(ModelReaderWriterOptions options) */
             yield return new Method(
                 new MethodSignature(
                     "SerializeMultipart",
@@ -36,6 +37,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
                 BuildMultipartSerializationMethodBody().ToArray());
+
+            /* internal virtual MultipartFormDataRequestContent ToMultipartRequestContent() */
             yield return new Method(
                 new MethodSignature(
                     Configuration.ApiTypes.ToMultipartRequestContentName,
@@ -61,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             UsingDeclare("content", Configuration.ApiTypes.MultipartRequestContentType, serializeCallExpression, out var content),
                             /*using MemoryStream stream = new MemoryStream();*/
-                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
+            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
                             /*content.WriteTo(stream, cancellationToken);*/
                             Snippets.Extensible.MultipartFormDataRequestContent.WriteTo(content, stream, null),
                             new IfElseStatement(GreaterThan(stream.Property("Position"), new MemberExpression(typeof(int), nameof(int.MaxValue))),
