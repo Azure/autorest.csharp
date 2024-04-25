@@ -153,15 +153,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -175,17 +176,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EncryptionSettings), out propertyOverride);
-            if (Optional.IsCollectionDefined(EncryptionSettings) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (EncryptionSettings.Any() || hasPropertyOverride)
+                builder.Append("  encryptionSettings: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(EncryptionSettings))
                 {
-                    builder.Append("  encryptionSettings: ");
-                    if (hasPropertyOverride)
+                    if (EncryptionSettings.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  encryptionSettings: ");
                         builder.AppendLine("[");
                         foreach (var item in EncryptionSettings)
                         {
@@ -197,17 +199,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
-            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Statuses.Any() || hasPropertyOverride)
+                builder.Append("  statuses: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Statuses))
                 {
-                    builder.Append("  statuses: ");
-                    if (hasPropertyOverride)
+                    if (Statuses.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  statuses: ");
                         builder.AppendLine("[");
                         foreach (var item in Statuses)
                         {

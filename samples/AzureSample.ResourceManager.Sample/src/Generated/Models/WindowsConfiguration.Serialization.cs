@@ -192,53 +192,51 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
-            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  provisionVMAgent: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ProvisionVmAgent))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  provisionVMAgent: ");
                     var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticUpdates), out propertyOverride);
-            if (Optional.IsDefined(EnableAutomaticUpdates) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enableAutomaticUpdates: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(EnableAutomaticUpdates))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  enableAutomaticUpdates: ");
                     var boolValue = EnableAutomaticUpdates.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TimeZone), out propertyOverride);
-            if (Optional.IsDefined(TimeZone) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  timeZone: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(TimeZone))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  timeZone: ");
                     if (TimeZone.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -252,17 +250,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdditionalUnattendContent), out propertyOverride);
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (AdditionalUnattendContent.Any() || hasPropertyOverride)
+                builder.Append("  additionalUnattendContent: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(AdditionalUnattendContent))
                 {
-                    builder.Append("  additionalUnattendContent: ");
-                    if (hasPropertyOverride)
+                    if (AdditionalUnattendContent.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  additionalUnattendContent: ");
                         builder.AppendLine("[");
                         foreach (var item in AdditionalUnattendContent)
                         {
@@ -273,58 +272,44 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PatchSettings), out propertyOverride);
-            if (Optional.IsDefined(PatchSettings) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("PatchMode", out propertyOverride);
+            if (hasPropertyOverride)
             {
                 builder.Append("  patchSettings: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    patchMode: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(PatchSettings))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  patchSettings: ");
                     BicepSerializationHelpers.AppendChildObject(builder, PatchSettings, options, 2, false, "  patchSettings: ");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WinRM), out propertyOverride);
-            if (Optional.IsDefined(WinRM) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("WinRMListeners", out propertyOverride);
+            if (hasPropertyOverride)
             {
                 builder.Append("  winRM: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    listeners: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(WinRM))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  winRM: ");
                     BicepSerializationHelpers.AppendChildObject(builder, WinRM, options, 2, false, "  winRM: ");
                 }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "PatchMode":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("PatchMode", item.Value);
-                        bicepOptions.PropertyOverrides.Add(PatchSettings, propertyDictionary);
-                        break;
-                    case "WinRMListeners":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Listeners", item.Value);
-                        bicepOptions.PropertyOverrides.Add(WinRM, propertyDictionary0);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<WindowsConfiguration>.Write(ModelReaderWriterOptions options)
