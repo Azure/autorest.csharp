@@ -313,6 +313,7 @@ namespace AutoRest.CSharp.Output.Builders
                     BuildJsonSerializationFromValue(propertyType, false),
                     property.IsRequired,
                     property.IsReadOnly,
+                    property,
                     serializationHooks: new CustomSerializationHooks(
                         serializationMapping?.JsonSerializationValueHook,
                         serializationMapping?.JsonDeserializationValueHook,
@@ -332,6 +333,7 @@ namespace AutoRest.CSharp.Output.Builders
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),
+                property,
                 serializationHooks: new CustomSerializationHooks(
                     serializationMapping?.JsonSerializationValueHook,
                     serializationMapping?.JsonDeserializationValueHook,
@@ -389,6 +391,7 @@ namespace AutoRest.CSharp.Output.Builders
                         BuildJsonSerializationFromValue(propertyType, false),
                         property.IsRequired,
                         property.IsReadOnly,
+                        property,
                         serializationHooks: new CustomSerializationHooks(
                             serializationMapping?.JsonSerializationValueHook,
                             serializationMapping?.JsonDeserializationValueHook,
@@ -400,22 +403,34 @@ namespace AutoRest.CSharp.Output.Builders
                     var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
                     if (parameter is null)
                     {
-                        throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                        throw new InvalidOperationException(
+                            $"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
                     }
 
                     var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                     var isRequired = schemaProperty.IsRequired;
-                    var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
+                    var shouldExcludeInWireSerialization =
+                        (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) &&
+                        property.InitializationValue is null && schemaProperty.IsReadOnly;
                     var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
-                    var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                    var memberValueExpression =
+                        new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                     TypedMemberExpression? enumerableExpression = null;
-                    if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                    if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null &&
+                        property.SchemaProperty.Extensions.IsEmbeddingsVector)
                     {
                         enumerableExpression = property.Declaration.Type.IsNullable
-                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                            ? new TypedMemberExpression(null,
+                                $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}",
+                                typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0]
+                                    .FrameworkType))
+                            : new TypedMemberExpression(null,
+                                $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}",
+                                typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0]
+                                    .FrameworkType));
                     }
+
                     yield return new JsonPropertySerialization(
                         parameter.Name,
                         memberValueExpression,
@@ -424,6 +439,7 @@ namespace AutoRest.CSharp.Output.Builders
                         serialization,
                         isRequired,
                         shouldExcludeInWireSerialization,
+                        property,
                         serializationHooks: new CustomSerializationHooks(
                             serializationMapping?.JsonSerializationValueHook,
                             serializationMapping?.JsonDeserializationValueHook,

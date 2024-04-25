@@ -99,13 +99,14 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradeSupported), out propertyOverride);
-            builder.Append("  automaticOSUpgradeSupported: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  automaticOSUpgradeSupported: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  automaticOSUpgradeSupported: ");
                 var boolValue = AutomaticOSUpgradeSupported == true ? "true" : "false";
                 builder.AppendLine($"{boolValue}");
             }

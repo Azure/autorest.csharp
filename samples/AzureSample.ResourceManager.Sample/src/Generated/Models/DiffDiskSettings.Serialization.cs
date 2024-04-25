@@ -121,29 +121,31 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Option), out propertyOverride);
-            if (Optional.IsDefined(Option) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  option: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Option))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  option: ");
                     builder.AppendLine($"'{Option.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Placement), out propertyOverride);
-            if (Optional.IsDefined(Placement) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  placement: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Placement))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  placement: ");
                     builder.AppendLine($"'{Placement.Value.ToString()}'");
                 }
             }
