@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

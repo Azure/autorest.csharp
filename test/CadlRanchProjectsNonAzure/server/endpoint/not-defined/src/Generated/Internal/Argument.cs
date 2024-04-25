@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     internal static class Argument
     {

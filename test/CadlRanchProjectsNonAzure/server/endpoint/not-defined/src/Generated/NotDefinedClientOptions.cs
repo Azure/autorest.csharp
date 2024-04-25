@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     /// <summary> Client options for NotDefinedClient. </summary>
     public partial class NotDefinedClientOptions : ClientPipelineOptions

@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     // Data plane generated client.
     /// <summary> Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in. </summary>

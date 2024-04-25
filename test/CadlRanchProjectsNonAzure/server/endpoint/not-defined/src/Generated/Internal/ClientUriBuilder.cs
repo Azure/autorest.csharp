@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     internal class ClientUriBuilder
     {

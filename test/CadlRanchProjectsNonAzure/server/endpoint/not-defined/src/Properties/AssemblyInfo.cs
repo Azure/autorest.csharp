@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Server.Endpoint.NotDefined.Tests")]
+[assembly: InternalsVisibleTo("Scm.Server.Endpoint.NotDefined.Tests")]

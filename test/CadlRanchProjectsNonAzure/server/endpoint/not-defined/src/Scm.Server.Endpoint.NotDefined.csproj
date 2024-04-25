@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the Server.Endpoint.NotDefined client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>SDK Code Generation Server.Endpoint.NotDefined</AssemblyTitle>
+    <Description>This is the Scm.Server.Endpoint.NotDefined client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation Scm.Server.Endpoint.NotDefined</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>Server.Endpoint.NotDefined</PackageTags>
+    <PackageTags>Scm.Server.Endpoint.NotDefined</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

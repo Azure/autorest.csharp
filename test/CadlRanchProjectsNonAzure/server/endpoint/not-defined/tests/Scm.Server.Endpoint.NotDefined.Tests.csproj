@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Server.Endpoint.NotDefined.csproj" />
+    <ProjectReference Include="..\src\Scm.Server.Endpoint.NotDefined.csproj" />
   </ItemGroup>
 
   <ItemGroup>

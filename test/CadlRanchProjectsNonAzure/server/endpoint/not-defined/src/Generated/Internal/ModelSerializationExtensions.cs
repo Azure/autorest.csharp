@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace Server.Endpoint.NotDefined
+namespace Scm.Server.Endpoint.NotDefined
 {
     internal static class ModelSerializationExtensions
     {
