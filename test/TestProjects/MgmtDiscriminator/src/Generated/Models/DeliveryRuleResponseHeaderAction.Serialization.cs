@@ -118,40 +118,43 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Parameters), out propertyOverride);
-            if (Optional.IsDefined(Parameters) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  parameters: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Parameters))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  parameters: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Parameters, options, 2, false, "  parameters: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            builder.Append("  name: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  name: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  name: ");
                 builder.AppendLine($"'{Name.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (Optional.IsDefined(Foo) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  foo: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Foo))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  foo: ");
                     if (Foo.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
