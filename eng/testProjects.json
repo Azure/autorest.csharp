@@ -54,6 +54,7 @@
     "CadlRanchProjectsNonAzure":[
         "type/array",
         "type/dictionary",
+        "payload/media-type",
         "authentication/http/custom"
     ],
     "TestServerProjects": [
