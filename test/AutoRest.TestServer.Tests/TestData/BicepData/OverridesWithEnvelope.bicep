@@ -11,7 +11,8 @@
     }
   }
   unflattened: {
-    name: 'unflattenedOverride'
+    name: 'envelopeOverride'
+    value: 'value'
   }
   properties: {
     order: 3
