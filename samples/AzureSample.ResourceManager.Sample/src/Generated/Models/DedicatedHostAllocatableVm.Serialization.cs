@@ -117,15 +117,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmSize), out propertyOverride);
-            if (Optional.IsDefined(VmSize) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  vmSize: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(VmSize))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  vmSize: ");
                     if (VmSize.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -139,15 +140,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Count), out propertyOverride);
-            if (Optional.IsDefined(Count) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  count: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Count))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  count: ");
                     builder.AppendLine($"'{Count.Value.ToString()}'");
                 }
             }
