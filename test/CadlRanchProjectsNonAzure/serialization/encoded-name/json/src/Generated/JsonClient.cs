@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Serialization.EncodedName.Json
+namespace Scm.Serialization.EncodedName.Json
 {
     // Data plane generated client.
     /// <summary> The Json service client. </summary>

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Serialization.EncodedName.Json.Models
+namespace Scm.Serialization.EncodedName.Json.Models
 {
     /// <summary> The JsonEncodedNameModel. </summary>
     public partial class JsonEncodedNameModel

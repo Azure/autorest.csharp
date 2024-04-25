@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Serialization.EncodedName.Json.csproj" />
+    <ProjectReference Include="..\src\Scm.Serialization.EncodedName.Json.csproj" />
   </ItemGroup>
 
   <ItemGroup>

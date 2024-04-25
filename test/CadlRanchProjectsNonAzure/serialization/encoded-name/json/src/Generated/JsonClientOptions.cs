@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Serialization.EncodedName.Json
+namespace Scm.Serialization.EncodedName.Json
 {
     /// <summary> Client options for JsonClient. </summary>
     public partial class JsonClientOptions : ClientPipelineOptions

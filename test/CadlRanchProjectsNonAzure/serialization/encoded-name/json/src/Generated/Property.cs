@@ -6,9 +6,9 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using Serialization.EncodedName.Json.Models;
+using Scm.Serialization.EncodedName.Json.Models;
 
-namespace Serialization.EncodedName.Json
+namespace Scm.Serialization.EncodedName.Json
 {
     // Data plane generated sub-client.
     /// <summary> The Property sub-client. </summary>

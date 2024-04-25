@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Xml;
 
-namespace Serialization.EncodedName.Json
+namespace Scm.Serialization.EncodedName.Json
 {
     internal static class ModelSerializationExtensions
     {

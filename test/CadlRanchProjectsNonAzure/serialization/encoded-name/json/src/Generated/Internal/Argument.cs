@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Serialization.EncodedName.Json
+namespace Scm.Serialization.EncodedName.Json
 {
     internal static class Argument
     {

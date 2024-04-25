@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Serialization.EncodedName.Json.Tests")]
+[assembly: InternalsVisibleTo("Scm.Serialization.EncodedName.Json.Tests")]

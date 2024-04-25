@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Serialization.EncodedName.Json.Models
+namespace Scm.Serialization.EncodedName.Json.Models
 {
     public partial class JsonEncodedNameModel : IJsonModel<JsonEncodedNameModel>
     {
