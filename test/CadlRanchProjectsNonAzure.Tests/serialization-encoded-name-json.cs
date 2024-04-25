@@ -1,18 +1,18 @@
 ﻿using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using Serialization.EncodedName.Json;
-using Serialization.EncodedName.Json.Models;
+using Scm.Serialization.EncodedName.Json;
+using Scm.Serialization.EncodedName.Json.Models;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class SerializationEncodedNameJsonTests: CadlRanchTestBase
+    public class SerializationEncodedNameJsonTests: CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Serialization_EncodedName_Json_Property_send() => Test(async (host) =>
         {
             var response = await new JsonClient(host, null).GetPropertyClient().SendAsync(new JsonEncodedNameModel(true));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
