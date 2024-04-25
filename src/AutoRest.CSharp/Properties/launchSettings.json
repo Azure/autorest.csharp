@@ -688,6 +688,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\http\\custom\\src\\Generated -n"
     },
+    "typespec-nonAzure-server/path/multiple": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\server\\path\\multiple\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/array": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\array\\src\\Generated -n"
