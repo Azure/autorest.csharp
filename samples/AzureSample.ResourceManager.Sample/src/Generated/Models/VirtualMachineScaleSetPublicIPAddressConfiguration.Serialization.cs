@@ -205,23 +205,19 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Name))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  name: ");
                     if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -237,45 +233,53 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.Append("  properties:");
             builder.AppendLine(" {");
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IdleTimeoutInMinutes), out propertyOverride);
-            if (Optional.IsDefined(IdleTimeoutInMinutes) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    idleTimeoutInMinutes: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(IdleTimeoutInMinutes))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("    idleTimeoutInMinutes: ");
                     builder.AppendLine($"{IdleTimeoutInMinutes.Value}");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsSettings), out propertyOverride);
-            if (Optional.IsDefined(DnsSettings) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("DnsDomainNameLabel", out propertyOverride);
+            if (hasPropertyOverride)
             {
                 builder.Append("    dnsSettings: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      dnsSettings: {");
+                builder.Append("        domainNameLabel: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(DnsSettings))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("    dnsSettings: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DnsSettings, options, 4, false, "    dnsSettings: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTags), out propertyOverride);
-            if (Optional.IsCollectionDefined(IPTags) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (IPTags.Any() || hasPropertyOverride)
+                builder.Append("    ipTags: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(IPTags))
                 {
-                    builder.Append("    ipTags: ");
-                    if (hasPropertyOverride)
+                    if (IPTags.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("    ipTags: ");
                         builder.AppendLine("[");
                         foreach (var item in IPTags)
                         {
@@ -286,30 +290,37 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicIPPrefix), out propertyOverride);
-            if (Optional.IsDefined(PublicIPPrefix) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("PublicIPPrefixId", out propertyOverride);
+            if (hasPropertyOverride)
             {
                 builder.Append("    publicIPPrefix: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.AppendLine("      publicIPPrefix: {");
+                builder.Append("        id: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("      }");
+                builder.AppendLine("    }");
+            }
+            else
+            {
+                if (Optional.IsDefined(PublicIPPrefix))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("    publicIPPrefix: ");
                     BicepSerializationHelpers.AppendChildObject(builder, PublicIPPrefix, options, 4, false, "    publicIPPrefix: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PublicIPAddressVersion), out propertyOverride);
-            if (Optional.IsDefined(PublicIPAddressVersion) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("    publicIPAddressVersion: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PublicIPAddressVersion))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("    publicIPAddressVersion: ");
                     builder.AppendLine($"'{PublicIPAddressVersion.Value.ToString()}'");
                 }
             }
@@ -317,28 +328,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "DnsDomainNameLabel":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("DomainNameLabel", item.Value);
-                        bicepOptions.PropertyOverrides.Add(DnsSettings, propertyDictionary);
-                        break;
-                    case "PublicIPPrefixId":
-                        Dictionary<string, string> propertyDictionary0 = new Dictionary<string, string>();
-                        propertyDictionary0.Add("Id", item.Value);
-                        bicepOptions.PropertyOverrides.Add(PublicIPPrefix, propertyDictionary0);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetPublicIPAddressConfiguration>.Write(ModelReaderWriterOptions options)

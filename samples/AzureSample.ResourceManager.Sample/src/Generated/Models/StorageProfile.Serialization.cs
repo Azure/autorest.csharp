@@ -147,45 +147,48 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ImageReference), out propertyOverride);
-            if (Optional.IsDefined(ImageReference) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  imageReference: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ImageReference))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  imageReference: ");
                     BicepSerializationHelpers.AppendChildObject(builder, ImageReference, options, 2, false, "  imageReference: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDisk), out propertyOverride);
-            if (Optional.IsDefined(OSDisk) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  osDisk: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OSDisk))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  osDisk: ");
                     BicepSerializationHelpers.AppendChildObject(builder, OSDisk, options, 2, false, "  osDisk: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DataDisks), out propertyOverride);
-            if (Optional.IsCollectionDefined(DataDisks) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (DataDisks.Any() || hasPropertyOverride)
+                builder.Append("  dataDisks: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(DataDisks))
                 {
-                    builder.Append("  dataDisks: ");
-                    if (hasPropertyOverride)
+                    if (DataDisks.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  dataDisks: ");
                         builder.AppendLine("[");
                         foreach (var item in DataDisks)
                         {
