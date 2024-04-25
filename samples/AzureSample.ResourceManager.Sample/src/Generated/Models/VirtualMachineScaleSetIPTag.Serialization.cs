@@ -113,15 +113,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTagType), out propertyOverride);
-            if (Optional.IsDefined(IPTagType) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  ipTagType: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(IPTagType))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  ipTagType: ");
                     if (IPTagType.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -135,15 +136,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tag), out propertyOverride);
-            if (Optional.IsDefined(Tag) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  tag: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Tag))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  tag: ");
                     if (Tag.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

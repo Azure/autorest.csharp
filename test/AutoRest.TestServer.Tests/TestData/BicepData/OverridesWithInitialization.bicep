@@ -12,6 +12,7 @@
   }
   unflattened: {
     name: 'unflattenedOverride'
+    value: 'value'
   }
   properties: {
     order: 3
