@@ -287,10 +287,12 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    const type =
+    const type = getRealType(
         formattedType.type.kind === "ModelProperty"
             ? formattedType.type.type
-            : formattedType.type;
+            : formattedType.type,
+        context
+    );
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
 
@@ -940,7 +942,7 @@ export function navigateModels(
         namespace,
         {
             model: (m) => {
-                const realModel = getRealType(m);
+                const realModel = getRealType(m, context);
                 return (
                     realModel.kind === "Model" &&
                     realModel.name != "" &&
@@ -948,23 +950,23 @@ export function navigateModels(
                 );
             },
             enum: (e) => {
-                const realEnum = getRealType(e);
+                const realEnum = getRealType(e, context);
                 return realEnum.kind === "Enum" && computeType(realEnum);
             }
         },
         { skipSubNamespaces }
     );
+}
 
-    // TODO: we should try to remove this when we adopt getModels
-    // we should avoid handling raw type definitions because they could be not correctly projected
-    // in the given api version
-    function getRealType(type: Type): Type {
-        if ("projector" in context.program)
-            return (
-                (
-                    context.program as ProjectedProgram
-                ).projector.projectedTypes.get(type) ?? type
-            );
-        return type;
-    }
+// TODO: we should try to remove this when we adopt getModels
+// we should avoid handling raw type definitions because they could be not correctly projected
+// in the given api version
+function getRealType(type: Type, context: SdkContext<NetEmitterOptions>): Type {
+    if ("projector" in context.program)
+        return (
+            (context.program as ProjectedProgram).projector.projectedTypes.get(
+                type
+            ) ?? type
+        );
+    return type;
 }
