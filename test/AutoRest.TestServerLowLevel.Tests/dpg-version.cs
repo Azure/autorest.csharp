@@ -3,7 +3,6 @@
 
 using System;
 using Azure;
-using AutoRest.TestServer.Tests.Infrastructure;
 using TypeSpec.Versioning.Latest;
 using TypeSpec.Versioning.Latest.Models;
 using NUnit.Framework;
@@ -14,7 +13,7 @@ using System.Threading;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class DpgVersionTest : TestServerLowLevelTestBase
+    public class DpgVersionTest
     {
         [Test]
         public void LatestVersion()
