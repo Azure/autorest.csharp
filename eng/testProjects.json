@@ -54,6 +54,7 @@
     "CadlRanchProjectsNonAzure":[
         "type/array",
         "type/dictionary",
+        "client/structure/multi-client",
         "authentication/http/custom"
     ],
     "TestServerProjects": [
