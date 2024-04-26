@@ -11,5 +11,6 @@ internal enum InputModelTypeUsage
     None = 0,
     Input = 1,
     Output = 2,
-    RoundTrip = Input | Output
+    RoundTrip = Input | Output,
+    Multipart = 4,
 }

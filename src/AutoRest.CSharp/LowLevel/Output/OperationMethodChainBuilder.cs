@@ -550,7 +550,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return;
             }
-
             _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
@@ -558,7 +557,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (contentTypeRequestParameter != null)
             {
-                if (Operation.RequestMediaTypes?.Count > 1)
+                if (Operation.RequestMediaTypes != null && (Operation.RequestMediaTypes.Count > 1 || Operation.RequestMediaTypes.Contains("multipart/form-data")))
                 {
                     AddContentTypeRequestParameter(contentTypeRequestParameter, Operation.RequestMediaTypes);
                 }
@@ -606,11 +605,22 @@ namespace AutoRest.CSharp.Output.Models
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
         {
             var name = operationParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
+            if (requestMediaTypes.Count == 1 && requestMediaTypes.Contains("multipart/form-data"))
+            {
+                var description = Parameter.CreateDescription(operationParameter, typeof(string), requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(string), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
+                _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+                AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+                return;
+            }
+            else
+            {
+                var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
+                _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
 
-            AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+                AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+            }
         }
 
         private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
