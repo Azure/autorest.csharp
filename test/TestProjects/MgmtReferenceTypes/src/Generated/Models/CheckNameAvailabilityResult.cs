@@ -5,16 +5,12 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The check availability result. </summary>
-    [PropertyReferenceType]
     public partial class CheckNameAvailabilityResult
     {
         /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityResult"/>. </summary>
-        [InitializationConstructor]
         public CheckNameAvailabilityResult()
         {
         }
@@ -23,7 +19,6 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="nameAvailable"> Indicates if the resource name is available. </param>
         /// <param name="reason"> The reason why the given name is not available. </param>
         /// <param name="message"> Detailed reason why the given name is available. </param>
-        [SerializationConstructor]
         internal CheckNameAvailabilityResult(bool? nameAvailable, CheckNameAvailabilityReason? reason, string message)
         {
             NameAvailable = nameAvailable;

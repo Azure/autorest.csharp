@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Azure.Core;
 using MgmtReferenceTypes;
 
+[assembly: CodeGenSuppressType("TrackedResource")]
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'. </summary>

@@ -5,15 +5,12 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Azure.Core;
 using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(CheckNameAvailabilityContentConverter))]
     public partial class CheckNameAvailabilityContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -24,8 +21,11 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(ResourceType);
+            if (Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
             writer.WriteEndObject();
         }
 
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Fake.Models
                 return null;
             }
             string name = default;
-            ResourceType type = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -46,29 +46,11 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    type = new ResourceType(property.Value.GetString());
+                    type = property.Value.GetString();
                     continue;
                 }
             }
             return new CheckNameAvailabilityContent(name, type);
-        }
-
-        internal partial class CheckNameAvailabilityContentConverter : JsonConverter<CheckNameAvailabilityContent>
-        {
-            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityContent model, JsonSerializerOptions options)
-            {
-                writer.WriteObjectValue(model);
-            }
-
-            public override CheckNameAvailabilityContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeCheckNameAvailabilityContent(document.RootElement);
-            }
         }
     }
 }

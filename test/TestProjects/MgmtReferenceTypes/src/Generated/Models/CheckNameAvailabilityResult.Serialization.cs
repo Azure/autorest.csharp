@@ -5,15 +5,12 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Azure.Core;
 using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(CheckNameAvailabilityResultConverter))]
     public partial class CheckNameAvailabilityResult : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -73,20 +70,6 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new CheckNameAvailabilityResult(nameAvailable, reason, message);
-        }
-
-        internal partial class CheckNameAvailabilityResultConverter : JsonConverter<CheckNameAvailabilityResult>
-        {
-            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityResult model, JsonSerializerOptions options)
-            {
-                writer.WriteObjectValue(model);
-            }
-
-            public override CheckNameAvailabilityResult Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeCheckNameAvailabilityResult(document.RootElement);
-            }
         }
     }
 }

@@ -6,16 +6,13 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
-    [PropertyReferenceType]
     public partial class SystemDataContent
     {
         /// <summary> Initializes a new instance of <see cref="SystemDataContent"/>. </summary>
-        [InitializationConstructor]
         public SystemDataContent()
         {
         }
@@ -27,7 +24,6 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>
         /// <param name="lastModifiedByType"> The type of identity that last modified the resource. </param>
         /// <param name="lastModifiedOn"> The timestamp of resource last modification (UTC). </param>
-        [SerializationConstructor]
         internal SystemDataContent(string createdBy, CreatedByType? createdByType, DateTimeOffset? createdOn, string lastModifiedBy, CreatedByType? lastModifiedByType, DateTimeOffset? lastModifiedOn)
         {
             CreatedBy = createdBy;
