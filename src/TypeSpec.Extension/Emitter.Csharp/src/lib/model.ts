@@ -295,7 +295,7 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    let type =
+    const type =
         formattedType.type.kind === "ModelProperty"
             ? formattedType.type.type
             : formattedType.type;
