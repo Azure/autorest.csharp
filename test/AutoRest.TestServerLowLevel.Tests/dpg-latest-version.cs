@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class DpgVersionTest
+    public class DpgLatestVersionTest
     {
         [Test]
         public void LatestVersion()
@@ -42,7 +42,6 @@ namespace AutoRest.TestServer.Tests
                 m.ReturnType.GenericTypeArguments[0] == typeof(Resource)).FirstOrDefault();
             var createLongRunningOperationParameters = createLongRunningOperation.GetParameters().Select(p => (p.Name, p.ParameterType)).ToArray();
             Assert.AreEqual(new (string, Type)[] { ("waitUntil", typeof(WaitUntil)), ("name", typeof(string)), ("resource", typeof(Resource)), ("cancellationToken", typeof(CancellationToken)) }, createLongRunningOperationParameters);
-
         }
     }
 }
