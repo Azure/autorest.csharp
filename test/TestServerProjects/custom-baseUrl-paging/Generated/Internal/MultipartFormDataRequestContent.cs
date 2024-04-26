@@ -32,7 +32,7 @@ namespace custom_baseUrl_paging
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

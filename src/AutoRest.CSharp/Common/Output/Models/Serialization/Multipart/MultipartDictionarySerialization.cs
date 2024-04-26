@@ -5,9 +5,9 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartDictionarySerialization: MultipartSerialization
+    internal class MultipartDictionarySerialization : MultipartSerialization
     {
-        public MultipartDictionarySerialization(CSharpType type, MultipartSerialization valueSerialization, bool isNullable): base(isNullable, type)
+        public MultipartDictionarySerialization(CSharpType type, MultipartSerialization valueSerialization, bool isNullable) : base(isNullable, type)
         {
             ValueSerialization = valueSerialization;
         }

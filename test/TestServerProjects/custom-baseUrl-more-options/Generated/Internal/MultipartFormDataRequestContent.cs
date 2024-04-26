@@ -32,7 +32,7 @@ namespace custom_baseUrl_more_options
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

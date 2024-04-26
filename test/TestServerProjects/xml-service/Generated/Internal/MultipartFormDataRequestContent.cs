@@ -32,7 +32,7 @@ namespace xml_service
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

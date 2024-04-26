@@ -32,7 +32,7 @@ namespace required_optional
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

@@ -32,7 +32,7 @@ namespace url_multi_collectionFormat
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

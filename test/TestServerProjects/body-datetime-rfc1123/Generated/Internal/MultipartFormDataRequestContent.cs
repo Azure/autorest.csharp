@@ -32,7 +32,7 @@ namespace body_datetime_rfc1123
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

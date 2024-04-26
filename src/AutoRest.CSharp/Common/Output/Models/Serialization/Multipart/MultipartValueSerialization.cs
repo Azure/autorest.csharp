@@ -6,7 +6,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartValueSerialization: MultipartSerialization
+    internal class MultipartValueSerialization : MultipartSerialization
     {
         public MultipartValueSerialization(CSharpType type, SerializationFormat format, bool isNullable) : base(isNullable, type)
         {

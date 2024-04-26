@@ -32,7 +32,7 @@ namespace extensible_enums_swagger
         {
             get
             {
-                return _multipartContent.Headers.ContentType!.ToString();
+                return _multipartContent.Headers.ContentType.ToString();
             }
         }
 

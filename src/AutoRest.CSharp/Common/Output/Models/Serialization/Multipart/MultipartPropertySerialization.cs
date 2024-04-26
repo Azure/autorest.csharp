@@ -8,7 +8,7 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartPropertySerialization: PropertySerialization
+    internal class MultipartPropertySerialization : PropertySerialization
     {
         public MultipartPropertySerialization(
             string parameterName,

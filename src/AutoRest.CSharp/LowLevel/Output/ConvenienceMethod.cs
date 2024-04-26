@@ -27,12 +27,13 @@ namespace AutoRest.CSharp.Output.Models
     {
         private record ConvenienceParameterInfo(Parameter? Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
-        public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics, bool isMultipartOperation = false)
+        public IEnumerable<MethodBodyStatement> GetConvertStatements(LowLevelClientMethod clientMethod, bool async, FieldDeclaration clientDiagnostics)
         {
             var protocolMethod = clientMethod.ProtocolMethodSignature;
             var parametersDict = ProtocolToConvenienceParameterConverters.ToDictionary(converter => converter.Protocol.Name, converter => new ConvenienceParameterInfo(converter.Convenience, converter.ConvenienceSpread));
             var protocolInvocationExpressions = new List<ValueExpression>();
             VariableReference? content = null;
+            bool isMultipartOperation = RequestMediaTypes != null && RequestMediaTypes.Count == 1 && RequestMediaTypes.Contains("multipart/form-data");
             foreach (var protocol in protocolMethod.Parameters)
             {
                 var (convenience, convenienceSpread) = parametersDict[protocol.Name];
@@ -73,7 +74,8 @@ namespace AutoRest.CSharp.Output.Models
                             content = new VariableReference(MultipartFormDataRequestContentProvider.Instance.Type, protocol.Name);
                             yield return UsingDeclare(content, spreadExpression.ToMultipartRequestContent());
                             protocolInvocationExpressions.Add(content);
-                        } else
+                        }
+                        else
                         {
                             protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
                         }
@@ -94,7 +96,8 @@ namespace AutoRest.CSharp.Output.Models
                         if (isMultipartOperation && protocol.Name == "contentType" && content != null)
                         {
                             protocolInvocationExpressions.Add(MultipartFormDataRequestContentProvider.Instance.ContentTypeProperty(content));
-                        } else
+                        }
+                        else
                         {
                             protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
                         }

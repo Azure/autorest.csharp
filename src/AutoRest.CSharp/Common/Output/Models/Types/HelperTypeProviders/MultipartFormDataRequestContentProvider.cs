@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             }
             else
             {
-                throw new Exception($"Not supported type {contentParamType}");
+                throw new NotSupportedException($"{contentParamType} is not supported");
             }
             List<MethodBodyStatement> addContentStatements = new List<MethodBodyStatement>();
             if (valueDelareStatement != null)

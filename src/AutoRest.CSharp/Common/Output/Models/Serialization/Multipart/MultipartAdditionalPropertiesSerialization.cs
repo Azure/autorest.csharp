@@ -8,7 +8,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartAdditionalPropertiesSerialization: MultipartPropertySerialization
+    internal class MultipartAdditionalPropertiesSerialization : MultipartPropertySerialization
     {
         public CSharpType Type { get; }
 

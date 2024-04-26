@@ -5,7 +5,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartFormDataSerialization: MultipartSerialization
+    internal class MultipartFormDataSerialization : MultipartSerialization
     {
         public MultipartFormDataSerialization(bool isNullable, CSharpType type) : base(isNullable, type)
         {
