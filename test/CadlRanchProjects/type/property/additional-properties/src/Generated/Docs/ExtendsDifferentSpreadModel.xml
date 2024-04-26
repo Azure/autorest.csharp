@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetExtendsDifferentSpreadModelAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadModelAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response<DifferentSpreadModelDerived> response = await client.GetExtendsDifferentSpreadModelAsync();
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadModelAsync with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response<DifferentSpreadModelDerived> response = await client.GetExtendsDifferentSpreadModelAsync();
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadModel(CancellationToken)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadModel.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response<DifferentSpreadModelDerived> response = client.GetExtendsDifferentSpreadModel();
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadModel with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response<DifferentSpreadModelDerived> response = client.GetExtendsDifferentSpreadModel();
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadModelAsync(RequestContext)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadModelAsync and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response response = await client.GetExtendsDifferentSpreadModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadModelAsync with all parameters and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response response = await client.GetExtendsDifferentSpreadModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadModel(RequestContext)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadModel and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response response = client.GetExtendsDifferentSpreadModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadModel with all parameters and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+Response response = client.GetExtendsDifferentSpreadModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(DifferentSpreadModelDerived,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(DifferentSpreadModelDerived,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = new
+    {
+        state = "<state>",
+    },
+    knownProp = "<knownProp>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = new
+    {
+        state = "<state>",
+    },
+    knownProp = "<knownProp>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = new
+    {
+        state = "<state>",
+    },
+    knownProp = "<knownProp>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = new
+    {
+        state = "<state>",
+    },
+    knownProp = "<knownProp>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

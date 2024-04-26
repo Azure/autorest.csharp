@@ -3,6 +3,14 @@
 
 import { getLroMetadata, isFixed } from "@azure-tools/typespec-azure-core";
 import {
+    SdkContext,
+    SdkEnumType,
+    SdkModelType,
+    getAccess,
+    getClientType,
+    getUsageOverride
+} from "@azure-tools/typespec-client-generator-core";
+import {
     EncodeData,
     Enum,
     EnumMember,
@@ -10,9 +18,9 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    NeverType,
     Operation,
     Program,
+    ProjectedProgram,
     Scalar,
     Type,
     Union,
@@ -23,14 +31,11 @@ import {
     getEncode,
     getFormat,
     getKnownValues,
-    getVisibility,
     isArrayModelType,
-    isRecordModelType,
     isGlobalNamespace,
+    isRecordModelType,
     navigateTypesInNamespace,
-    isVoidType,
-    resolveUsages,
-    NoTarget
+    resolveUsages
 } from "@typespec/compiler";
 import {
     HttpOperation,
@@ -40,9 +45,12 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
+import { NetEmitterOptions } from "../options.js";
+import { fromSdkEnumType, fromSdkModelType } from "../type/converter.js";
 import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
-import { InputModelProperty } from "../type/inputModelProperty.js";
+import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -53,31 +61,15 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType,
-    isInputDictionaryType,
     isInputEnumType,
     isInputIntrinsicType,
-    isInputListType,
-    isInputLiteralType,
-    isInputModelType
+    isInputLiteralType
 } from "../type/inputType.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
-import {
-    SdkContext,
-    SdkEnumType,
-    SdkModelType,
-    getAccess,
-    getClientType,
-    getUsageOverride,
-    getWireName
-} from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
-import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
-import { fromSdkEnumType, fromSdkModelType } from "../type/converter.js";
-import { NetEmitterOptions } from "../options.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -936,7 +928,7 @@ export function navigateModels(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeModel = (x: Type) =>
+    const computeType = (x: Type) =>
         getInputType(
             context,
             getFormattedType(context.program, x),
@@ -947,10 +939,32 @@ export function navigateModels(
     navigateTypesInNamespace(
         namespace,
         {
-            model: (x) =>
-                x.name !== "" && x.kind === "Model" && computeModel(x),
-            enum: computeModel
+            model: (m) => {
+                const realModel = getRealType(m);
+                return (
+                    realModel.kind === "Model" &&
+                    realModel.name != "" &&
+                    computeType(realModel)
+                );
+            },
+            enum: (e) => {
+                const realEnum = getRealType(e);
+                return realEnum.kind === "Enum" && computeType(realEnum);
+            }
         },
         { skipSubNamespaces }
     );
+
+    // TODO: we should try to remove this when we adopt getModels
+    // we should avoid handling raw type definitions because they could be not correctly projected
+    // in the given api version
+    function getRealType(type: Type): Type {
+        if ("projector" in context.program)
+            return (
+                (
+                    context.program as ProjectedProgram
+                ).projector.projectedTypes.get(type) ?? type
+            );
+        return type;
+    }
 }

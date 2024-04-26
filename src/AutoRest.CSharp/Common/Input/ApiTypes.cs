@@ -41,6 +41,8 @@ namespace AutoRest.CSharp.Common.Input
             return $"_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
         }
 
+        public abstract FormattableString CredentialDescription { get; }
+
         public abstract Type HttpMessageType { get; }
         public abstract string HttpMessageResponseName { get; }
         public string HttpMessageResponseStatusName => nameof(PipelineResponse.Status);
@@ -77,6 +79,8 @@ namespace AutoRest.CSharp.Common.Input
         public abstract CSharpType RequestUriType { get; }
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
+        public abstract string MultipartRequestContentTypeName { get; }
+        public abstract string ToMultipartRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
 
         public abstract Type IXmlSerializableType { get; }

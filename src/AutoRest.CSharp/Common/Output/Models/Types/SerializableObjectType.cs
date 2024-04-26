@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -45,12 +46,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             var json = BuildJsonSerialization();
             var xml = BuildXmlSerialization();
             var bicep = BuildBicepSerialization(json);
-            return new ObjectTypeSerialization(this, json, xml, bicep);
+            var multipart = BuildMultipartSerialization();
+            return new ObjectTypeSerialization(this, json, xml, bicep, multipart);
         }
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
         protected abstract BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json);
+        protected abstract MultipartObjectSerialization? BuildMultipartSerialization();
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();

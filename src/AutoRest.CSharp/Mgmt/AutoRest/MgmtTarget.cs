@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (model is EmptyResourceData)
+                if (model == ResourceData.Empty)
                     continue;
 
                 var name = model.Type.Name;
@@ -211,13 +211,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter = new MgmtLongRunningOperationWriter(false);
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
-
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
-            {
-                var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
-                writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
-            }
 
             foreach (var operationSource in MgmtContext.Library.OperationSources)
             {

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options);
+                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property for id '{id}', name '{name}'");
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Common.Input
             return model;
         }
 
-        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options)
+        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options, bool isMultipartType)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -132,6 +132,32 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndArray)
             {
                 var property = reader.ReadWithConverter<InputModelProperty>(options);
+                /* TODO: in Multipart body model, if the property is of type Bytes, it should be converted to Stream
+                 * In future, we will convert this in emitter when we adopt tcgc.
+                 */
+                if (property != null && isMultipartType)
+                {
+                    static InputType ConvertPropertyType(InputType propertyType)
+                    {
+                        return propertyType switch
+                        {
+                            InputPrimitiveType primitiveType when primitiveType.Kind is InputTypeKind.Bytes => InputPrimitiveType.Stream,
+                            InputListType listType => new InputListType(listType.Name, ConvertPropertyType(listType.ElementType), listType.IsEmbeddingsVector, listType.IsNullable),
+                            InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType), dictionaryType.IsNullable),
+                            _ => propertyType
+                        };
+                    }
+
+                    property = new InputModelProperty(property.Name,
+                                                    property.SerializedName,
+                                                    property.Description,
+                                                    ConvertPropertyType(property.Type),
+                                                    property.ConstantValue,
+                                                    property.IsRequired,
+                                                    property.IsReadOnly,
+                                                    property.IsDiscriminator,
+                                                    property.FlattenedNames);
+                }
                 properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
             }
             reader.Read();

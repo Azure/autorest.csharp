@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -48,6 +49,8 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(ClientPipeline)}.{nameof(ClientPipeline.Create)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, {beforeTransportPolicies});";
 
+        public override FormattableString CredentialDescription => $"A credential used to authenticate to the service.";
+
         public override Type HttpPipelinePolicyType => typeof(PipelinePolicy);
 
         public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
@@ -71,8 +74,10 @@ namespace AutoRest.CSharp.Common.Input
             => $"{requestName}.Content = {contentName};";
 
         public override CSharpType RequestUriType => ClientUriBuilderProvider.Instance.Type;
+        public override string MultipartRequestContentTypeName => "MultipartFormDataBinaryContent";
         public override Type RequestContentType => typeof(BinaryContent);
         public override string ToRequestContentName => "ToBinaryContent";
+        public override string ToMultipartRequestContentName => "ToMultipartBinaryBody";
         public override string RequestContentCreateName => nameof(BinaryContent.Create);
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");

@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class AuthenticationHttpCustomTests: CadlRanchNonAzureTestBase
+    public class AuthenticationHttpCustomTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Authentication_Http_Custom_valid() => Test(async (host) =>

@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -22,7 +23,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
-            writer.WriteBase64StringValue(Image.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Image));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Image)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (Optional.IsDefined(N))
             {
                 if (N != null)
@@ -102,7 +110,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            BinaryData image = default;
+            Stream image = default;
             long? n = default;
             CreateImageRequestSize? size = default;
             CreateImageRequestResponseFormat? responseFormat = default;
@@ -113,7 +121,7 @@ namespace OpenAI.Models
             {
                 if (property.NameEquals("image"u8))
                 {
-                    image = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    image = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("n"u8))
@@ -166,6 +174,53 @@ namespace OpenAI.Models
                 serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        {
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(Image, "image", "image", "application/octet-stream");
+            if (Optional.IsDefined(N))
+            {
+                if (N != null)
+                {
+                    content.Add(N.Value, "n");
+                }
+            }
+            if (Optional.IsDefined(Size))
+            {
+                if (Size != null)
+                {
+                    content.Add(Size.Value.ToSerialString(), "size");
+                }
+            }
+            if (Optional.IsDefined(ResponseFormat))
+            {
+                if (ResponseFormat != null)
+                {
+                    content.Add(ResponseFormat.Value.ToSerialString(), "response_format");
+                }
+            }
+            if (Optional.IsDefined(User))
+            {
+                content.Add(User, "user");
+            }
+            return content;
+        }
+
         BinaryData IPersistableModel<CreateImageVariationRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateImageVariationRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -174,6 +229,8 @@ namespace OpenAI.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "MFD":
+                    return SerializeMultipart(options);
                 default:
                     throw new FormatException($"The model {nameof(CreateImageVariationRequest)} does not support writing '{options.Format}' format.");
             }
@@ -195,7 +252,7 @@ namespace OpenAI.Models
             }
         }
 
-        string IPersistableModel<CreateImageVariationRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateImageVariationRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>

@@ -20,14 +20,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Int32Value_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetInt32ValueClient().GetInt32ValueAsync();
-            Assert.AreEqual(1, response.Value.First());
-            Assert.AreEqual(2, response.Value.Last());
+            CollectionAssert.AreEqual(new[] { 1, 2 }, response.Value);
         });
 
         [Test]
         public Task Type_Array_Int32Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetInt32ValueClient().PutAsync(new List<int> { 1, 2});
+            var response = await new ArrayClient(host, null).GetInt32ValueClient().PutAsync(new List<int> { 1, 2 });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -35,8 +34,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Int64Value_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetInt64ValueClient().GetInt64ValueAsync();
-            Assert.AreEqual(9007199254740991, response.Value.First());
-            Assert.AreEqual(-9007199254740991, response.Value.Last());
+            CollectionAssert.AreEqual(new[] { 9007199254740991, -9007199254740991 }, response.Value);
         });
 
         [Test]
@@ -50,8 +48,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_BooleanValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetBooleanValueClient().GetBooleanValueAsync();
-            Assert.AreEqual(true, response.Value.First());
-            Assert.AreEqual(false, response.Value.Last());
+            CollectionAssert.AreEqual(new[] { true, false }, response.Value);
         });
 
         [Test]
@@ -65,8 +62,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_StringValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetStringValueClient().GetStringValueAsync();
-            Assert.AreEqual("hello", response.Value.First());
-            Assert.AreEqual("", response.Value.Last());
+            CollectionAssert.AreEqual(new[] { "hello", "" }, response.Value);
         });
 
         [Test]
@@ -80,7 +76,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Float32Value_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
-            Assert.AreEqual(43.125f, response.Value.First());
+            CollectionAssert.AreEqual(new[] { 43.125f }, response.Value);
         });
 
         [Test]
@@ -94,7 +90,8 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_DatetimeValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetDatetimeValueClient().GetDatetimeValueAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), response.Value.First());
+            Assert.AreEqual(1, response.Value.Count);
+            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), response.Value[0]);
         });
 
         [Test]
@@ -108,13 +105,14 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_DurationValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetDurationValueClient().GetDurationValueAsync();
-            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value.First());
+            Assert.AreEqual(1, response.Value.Count);
+            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value[0]);
         });
 
         [Test]
         public Task Type_Array_DurationValue_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetDurationValueClient().PutAsync(new List<TimeSpan> { XmlConvert.ToTimeSpan("P123DT22H14M12.011S")});
+            var response = await new ArrayClient(host, null).GetDurationValueClient().PutAsync(new List<TimeSpan> { XmlConvert.ToTimeSpan("P123DT22H14M12.011S") });
             Assert.AreEqual(204, response.Status);
         });
 
@@ -138,8 +136,9 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_ModelValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetModelValueClient().GetModelValueAsync();
-            Assert.AreEqual("hello", response.Value.First().Property);
-            Assert.AreEqual("world", response.Value.Last().Property);
+            Assert.AreEqual(2, response.Value.Count);
+            Assert.AreEqual("hello", response.Value[0].Property);
+            Assert.AreEqual("world", response.Value[1].Property);
         });
 
         [Test]
@@ -153,10 +152,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_NullableFloatValue_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
-            var result = response.Value.ToList();
-            Assert.AreEqual(1.25f, result[0]);
-            Assert.AreEqual(null, result[1]);
-            Assert.AreEqual(3.0f, result[2]);
+            CollectionAssert.AreEqual(new float?[] { 1.25f, null, 3.0f }, response.Value);
         });
 
         [Test]

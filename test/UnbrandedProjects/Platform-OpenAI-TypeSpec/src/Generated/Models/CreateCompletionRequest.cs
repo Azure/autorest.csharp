@@ -211,10 +211,10 @@ namespace OpenAI.Models
         /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="TokenArray"/></description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="long"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="TokenArrayArray"/></description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <c>IList{long}</c></description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -287,7 +287,7 @@ namespace OpenAI.Models
         /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="StopSequences"/></description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
         /// </item>
         /// </list>
         /// </remarks>

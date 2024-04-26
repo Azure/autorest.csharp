@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenAI.Models
 {
@@ -48,7 +49,7 @@ namespace OpenAI.Models
         /// and square.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        public CreateImageVariationRequest(BinaryData image)
+        public CreateImageVariationRequest(Stream image)
         {
             Argument.AssertNotNull(image, nameof(image));
 
@@ -65,7 +66,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateImageVariationRequest(BinaryData image, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateImageVariationRequest(Stream image, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Image = image;
             N = n;
@@ -83,21 +84,8 @@ namespace OpenAI.Models
         /// <summary>
         /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
         /// and square.
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
         /// </summary>
-        public BinaryData Image { get; }
+        public Stream Image { get; }
         /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
         /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>

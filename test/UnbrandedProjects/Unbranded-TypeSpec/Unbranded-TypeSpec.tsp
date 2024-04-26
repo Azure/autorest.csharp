@@ -352,3 +352,9 @@ op stillConvenient(): void;
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
+
+@route("/headAsBoolean")
+@doc("head as boolean.")
+@put
+@convenientAPI(true)
+op handleArray(@body body: string[]): string[];
