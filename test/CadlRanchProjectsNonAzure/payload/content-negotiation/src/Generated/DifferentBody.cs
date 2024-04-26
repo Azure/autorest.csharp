@@ -169,10 +169,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.AppendPath("/content-negotiation/different-body", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "image/png");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
@@ -187,10 +184,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.AppendPath("/content-negotiation/different-body", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            if (options != null)
-            {
-                message.Apply(options);
-            }
+            message.Apply(options);
             return message;
         }
 
