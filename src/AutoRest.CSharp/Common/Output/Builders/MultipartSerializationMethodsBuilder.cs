@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream), Array.Empty<ValueExpression>()), out var stream),
                             /*content.WriteTo(stream, cancellationToken);*/
                             MultipartFormDataRequestContentProvider.Instance.WriteTo(content, stream, null),
-                            new IfElseStatement(GreaterThan(stream.Property("Position"), new MemberExpression(typeof(int), nameof(int.MaxValue))),
+                            new IfElseStatement(GreaterThan(stream.Property("Position"), IntExpression.MaxValue),
                             /*return BinaryData.FromStream(stream);*/
                             Return(BinaryDataExpression.FromStream(stream, false)),
                             /*return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));*/
