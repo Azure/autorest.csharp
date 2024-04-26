@@ -40,12 +40,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
         {
-            JsonConverter = (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true
+            JsonConverter = (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true)
                 ? new JsonConverterProvider(this, _sourceInputModel)
                 : null;
         }
-
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Extensions?.MgmtReferenceType is true;
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
@@ -66,10 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return objectTypeProperty;
         }
 
-        protected override CSharpType? CreateInheritedType()
-        {
-            return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
-        }
+        protected override CSharpType? CreateInheritedType() => base.CreateInheritedType();
 
         // the reference types do not need raw data field
         public override ObjectTypeProperty? RawDataField => null;

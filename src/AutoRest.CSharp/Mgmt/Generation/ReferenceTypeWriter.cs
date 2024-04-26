@@ -20,11 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (Configuration.IsBranded)
                     writer.UseNamespace("Azure.Core");
-                if (extensions.MgmtReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
-                }
-                else if (extensions.MgmtPropertyReferenceType)
+                if (extensions.MgmtPropertyReferenceType)
                 {
                     writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
                 }
