@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;

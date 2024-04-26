@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -14,6 +15,29 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
+        public static HashSet<(string NameSpace, string Name)> PropertyReferenceTypeModels = new HashSet<(string NameSpace, string Name)>
+        {
+            ("Azure.ResourceManager.Models", "ArmPlan"),
+            ("Azure.ResourceManager.Models", "ArmSku"),
+            ("Azure.ResourceManager.Models", "EncryptionProperties"),
+            ("Azure.ResourceManager.Resources.Models","ExtendedLocation"),
+            ("Azure.ResourceManager.Models", "ManagedServiceIdentity"),
+            ("Azure.ResourceManager.Models", "KeyVaultProperties"),
+            ("Azure.ResourceManager.Models", "ResourceProviderData"),
+            ("Azure.ResourceManager.Models", "SubResource"),
+            ("Azure.ResourceManager.Models", "SystemAssignedServiceIdentity"),
+            ("Azure.ResourceManager.Models", "SystemData"),
+            ("Azure.ResourceManager.Models", "UserAssignedIdentity"),
+            ("Azure.ResourceManager.Models", "WritableSubResource")
+        };
+
+        public static HashSet<(string NameSpace, string Name)> TypeReferenceTypeModels = new HashSet<(string NameSpace, string Name)>
+        {
+            ("Azure.ResourceManager.Models", "OperationStatusResult")
+        };
+
+        // ReferenceType is only applied to ResourceData and TrackedResourceData in custom code, not handled by generator
+
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
         {
             JsonConverter = (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true
