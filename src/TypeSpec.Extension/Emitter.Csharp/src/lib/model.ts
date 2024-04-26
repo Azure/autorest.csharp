@@ -299,14 +299,6 @@ export function getInputType(
         formattedType.type.kind === "ModelProperty"
             ? formattedType.type.type
             : formattedType.type;
-    // TODO: we should try to remove this when we adopt getAllOperations
-    // we should avoid handling raw type definitions because they could be not correctly projected
-    // in the given api version
-    if ("projector" in context.program)
-        type =
-            (context.program as ProjectedProgram).projector.projectedTypes.get(
-                type
-            ) ?? type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
 
@@ -1126,7 +1118,7 @@ export function navigateModels(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeModel = (x: Type) =>
+    const computeType = (x: Type) =>
         getInputType(
             context,
             getFormattedType(context.program, x),
@@ -1137,10 +1129,32 @@ export function navigateModels(
     navigateTypesInNamespace(
         namespace,
         {
-            model: (x) =>
-                x.name !== "" && x.kind === "Model" && computeModel(x),
-            enum: computeModel
+            model: (m) => {
+                const realModel = getRealType(m);
+                return (
+                    realModel.kind === "Model" &&
+                    realModel.name != "" &&
+                    computeType(realModel)
+                );
+            },
+            enum: (e) => {
+                const realEnum = getRealType(e);
+                return realEnum.kind === "Enum" && computeType(realEnum);
+            }
         },
         { skipSubNamespaces }
     );
+
+    // TODO: we should try to remove this when we adopt getModels
+    // we should avoid handling raw type definitions because they could be not correctly projected
+    // in the given api version
+    function getRealType(type: Type): Type {
+        if ("projector" in context.program)
+            return (
+                (
+                    context.program as ProjectedProgram
+                ).projector.projectedTypes.get(type) ?? type
+            );
+        return type;
+    }
 }
