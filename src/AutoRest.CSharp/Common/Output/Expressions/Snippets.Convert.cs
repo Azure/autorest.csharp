@@ -80,6 +80,10 @@ namespace AutoRest.CSharp.Common.Output.Models
                             modelExpression = modelExpression.NullConditional();
                         }
                         var serializableObjectExpression = new SerializableObjectTypeExpression(model, modelExpression);
+                        if (contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Multipart)
+                        {
+                            return serializableObjectExpression.ToMultipartRequestContent();
+                        }
                         return serializableObjectExpression.ToRequestContent();
                     default:
                         throw new InvalidOperationException($"Unhandled type: {convenience.Type}");

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -28,5 +29,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public StringExpression Substring(ValueExpression startIndex)
             => new(new InvokeInstanceMethodExpression(this, nameof(string.Substring), new[] { startIndex }, null, false));
+        public ValueExpression ToCharArray()
+            => new InvokeInstanceMethodExpression(this, nameof(string.ToCharArray), Array.Empty<ValueExpression>(), null, false);
     }
 }

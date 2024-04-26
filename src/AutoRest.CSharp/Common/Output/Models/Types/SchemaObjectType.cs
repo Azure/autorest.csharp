@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -778,6 +779,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : null;
         }
 
+        protected override MultipartObjectSerialization? BuildMultipartSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartObjectSerialization(ObjectSchema, this) : null;
+        }
         protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))
