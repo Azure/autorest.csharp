@@ -33,18 +33,6 @@ directive:
   - remove-model: "OperationStatusResult"
   - remove-model: "locationData"
   - from: types.json
-    where: $.definitions['Resource']
-    transform: >
-      $["x-ms-mgmt-referenceType"] = true
-  - from: types.json
-    where: $.definitions['TrackedResource']
-    transform: >
-      $["x-ms-mgmt-referenceType"] = true
-  - from: types.json
-    where: $.definitions.*
-    transform: >
-      $["x-ms-mgmt-propertyReferenceType"] = true
-  - from: types.json
     where: $.definitions.*
     transform: >
       $["x-namespace"] = "Azure.ResourceManager.Fake.Models"
@@ -76,7 +64,6 @@ directive:
       $["x-accessibility"] = "public";
       $["x-csharp-formats"] = "json";
       $["x-csharp-usage"] = "model,input,output";
-      $["x-ms-mgmt-typeReferenceType"] = true;
   - from: privatelinks.json
     where: $.definitions.*.properties[?(@.enum)]
     transform: >
@@ -99,7 +86,5 @@ directive:
   - from: types.json
     where: $.definitions.ErrorDetail
     transform: >
-      $["x-ms-mgmt-referenceType"] = false;
-      $["x-ms-mgmt-propertyReferenceType"] = false;
       $["x-csharp-usage"] = "model";
 ```
