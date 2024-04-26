@@ -612,7 +612,8 @@ namespace AutoRest.CSharp.Output.Models
                 _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
                 AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
                 return;
-            } else
+            }
+            else
             {
                 var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
                 var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
@@ -620,12 +621,6 @@ namespace AutoRest.CSharp.Output.Models
 
                 AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
             }
-            /*
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
-
-            AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
-            */
         }
 
         private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
@@ -685,12 +680,6 @@ namespace AutoRest.CSharp.Output.Models
 
             if (operationParameter.Kind is InputOperationParameterKind.Constant && parameter.DefaultValue is not null)
             {
-                /*
-                if (operationParameter.IsContentType && parameter.DefaultValue.HasValue && $"{parameter.DefaultValue.Value.Value:L}".StartsWith("multipart"))
-                {
-                    return new Reference($"content.{nameof(RequestContent.ContentType)}", typeof(string));
-                }
-                */
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
 

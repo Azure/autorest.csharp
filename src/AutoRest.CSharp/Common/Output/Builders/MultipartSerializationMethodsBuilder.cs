@@ -76,6 +76,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             ),
                         };
         }
+
         public static IEnumerable<MethodBodyStatement> BuildToMultipartRequestContentMethodBody(MultipartObjectSerialization? multipart)
         {
             return new MethodBodyStatement[]
@@ -86,6 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Return(content)
                     };
         }
+
         private static IEnumerable<MethodBodyStatement> WriteMultiParts(ValueExpression multipartContent, IEnumerable<MultipartPropertySerialization> properties)
         {
             foreach (MultipartPropertySerialization property in properties)
@@ -128,6 +130,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
             return statement;
         }
+
         private static MethodBodyStatement WritePropertySerialization(ValueExpression mulitpartContent, MultipartPropertySerialization serialization)
         {
             return new[]
@@ -135,6 +138,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializationExression(mulitpartContent, serialization.ValueSerialization,serialization.Value, Literal(serialization.SerializedName))
             };
         }
+
         private static MethodBodyStatement SerializationExression(ValueExpression mulitpartContent, ObjectSerialization serialization, TypedValueExpression value, StringExpression name) => serialization switch
         {
             MultipartArraySerialization arraySerialization => SerializeArray(mulitpartContent, arraySerialization, value, name),
@@ -142,6 +146,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             MultipartDictionarySerialization dictionarySerialization => SerializeDictionary(mulitpartContent, dictionarySerialization, value.NullableStructValue(), name),
             _ => throw new NotImplementedException($"{serialization.GetType()}")
         };
+
         private static MethodBodyStatement SerializeArray(ValueExpression mulitpartContent, MultipartArraySerialization serialization, ValueExpression value, StringExpression name)
         {
             return new[]
@@ -152,6 +157,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             };
         }
+
         private static MethodBodyStatement SerializeDictionary(ValueExpression mulitpartContent, MultipartDictionarySerialization serialization, ValueExpression value, StringExpression name)
         {
             var dictionaryExpression = new DictionaryExpression(serialization.Type.Arguments[0], serialization.Type.Arguments[1], value);
@@ -191,7 +197,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (valueSerialization.FileName != null)
                 {
                     fileNameExpression = Literal(valueSerialization.FileName);
-                } else
+                }
+                else
                 {
                     fileNameExpression = name;
                 }
@@ -226,7 +233,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return MultipartFormDataRequestContentProvider.Instance.Add(mulitpartContent, contentExpression, name, fileNameExpression, contentTypeExpression);
         }
 
-        private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
+        private static ValueExpression BuildValueSerizationExpression(CSharpType valueType, ValueExpression valueExpression) => valueType switch
         {
             { IsFrameworkType: true } => valueExpression,
             { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType } => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire }, new[] { valueType }),

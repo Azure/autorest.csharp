@@ -8,6 +8,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record HttpContentHeadersExpression(ValueExpression Untyped) : TypedValueExpression<HttpContentHeaders>(Untyped)
     {
-        public ValueExpression ContentType => Property(nameof(HttpContentHeaders.ContentType), true);
+        public ValueExpression ContentType => Property(nameof(HttpContentHeaders.ContentType));
+        public ValueExpression ContentLength => Property(nameof(HttpContentHeaders.ContentLength));
+        public ValueExpression ContentDisposition => Property(nameof(HttpContentHeaders.ContentDisposition));
     }
 }

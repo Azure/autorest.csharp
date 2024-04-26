@@ -14,7 +14,6 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -24,8 +23,9 @@ using MultipartFormDataContent = System.Net.Http.MultipartFormDataContent;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
 {
-    internal class MultipartFormDataRequestContentProvider: ExpressionTypeProvider
+    internal class MultipartFormDataRequestContentProvider : ExpressionTypeProvider
     {
+        protected override string DefaultName { get; } = Configuration.ApiTypes.MultipartRequestContentTypeName;
         private static readonly Lazy<MultipartFormDataRequestContentProvider> _instance = new(() => new MultipartFormDataRequestContentProvider());
         private class FormDataItemTemplate<T> { }
         public static MultipartFormDataRequestContentProvider Instance => _instance.Value;
@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly,
                 type: typeof(MultipartFormDataContent),
                 name: "_multipartContent");
+            _multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
             _randomField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(Random),
@@ -49,17 +50,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 name: "_boundaryValues",
                 initializationValue: Literal("0123456789=ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz").ToCharArray(),
                 serializationFormat: SerializationFormat.Default);
-            ValueExpression contentTypeHeaderExpression = new UnaryOperatorExpression("!", new MultipartFormDataContentExpression(_multipartContentField).Property("Headers").Property("ContentType"), true);
-            ValueExpression contentTypeHeaderValueExpression = new InvokeInstanceMethodExpression(contentTypeHeaderExpression, nameof(MediaTypeHeaderValue.ToString), Array.Empty<ValueExpression>(), null, false);
             _contentTypeProperty = new PropertyDeclaration(
                 description: null,
                 modifiers: MethodSignatureModifiers.Public,
                 propertyType: typeof(string),
                 name: _contentTypePropertyName,
-                propertyBody: new MethodPropertyBody(new MethodBodyStatement[]
-                {
-                    Return(contentTypeHeaderValueExpression)
-                }));
+                propertyBody: new MethodPropertyBody(Return(_multipartContentExpression.Headers.ContentType.InvokeToString())));
             _httpContentProperty = new PropertyDeclaration(
                 description: null,
                 modifiers: MethodSignatureModifiers.Internal,
@@ -67,7 +63,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 name: _httpContentPropertyName,
                 propertyBody: new ExpressionPropertyBody(_multipartContentField)
                 );
-            _multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
         }
         private readonly FieldDeclaration _multipartContentField;
         private readonly FieldDeclaration _randomField;
@@ -77,7 +72,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         private const string _contentTypePropertyName = "ContentType";
         private readonly PropertyDeclaration _httpContentProperty;
         private const string _httpContentPropertyName = "HttpContent";
-        protected override string DefaultName { get; } = Configuration.ApiTypes.MultipartRequestContentTypeName;
         private const string _createBoundaryMethodName = "CreateBoundary";
         private const string _addMethodName = "Add";
         private const string _addFilenameHeaderMethodName = "AddFilenameHeader";
@@ -104,11 +98,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             Modifiers: MethodSignatureModifiers.Public,
             Parameters: Array.Empty<Parameter>(),
                 Summary: null, Description: null);
-            var body = new MethodBodyStatement[]
-            {
-                Assign(_multipartContentField, New.Instance(typeof(MultipartFormDataContent), new[]{CreateBoundary()})),
-            };
-            yield return new Method(signature, body);
+
+            yield return new Method(signature, Assign(_multipartContentField, New.Instance(typeof(MultipartFormDataContent), new[] { CreateBoundary() })));
         }
         protected override IEnumerable<Method> BuildMethods()
         {
@@ -162,7 +153,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             yield return BuildAddMethod<decimal>();
             yield return BuildAddMethod<bool>();
             yield return BuildAddMethod<Stream>();
-            yield return BuildAddMethod < byte[]>();
+            yield return BuildAddMethod<byte[]>();
             yield return BuildAddMethod<BinaryData>();
             yield return BuildAddHttpContentMethod();
         }
@@ -189,34 +180,44 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     contentTypeParam
                 });
             MethodBodyStatement? valueDelareStatement = null;
-            ValueExpression contentExpression;
-            contentExpression = New.Instance(typeof(ByteArrayContent), contentParam);
-            switch (typeof(T))
+            ValueExpression contentExpression = New.Instance(typeof(ByteArrayContent), contentParam);
+            Type contentParamType = typeof(T);
+            if (contentParamType == typeof(Stream))
             {
-                case Type type when type == typeof(Stream):
-                    contentExpression = New.Instance(typeof(StreamContent), contentParam);
-                    break;
-                case Type type when type == typeof(string):
-                    contentExpression = New.Instance(typeof(StringContent), contentParam);
-                    break;
-                case Type btype when btype == typeof(bool):
-                    var boolToStringValue = new TernaryConditionalOperator(contentParam, Literal("true"), Literal("false"));
-                    valueDelareStatement = Declare(typeof(string), "value", boolToStringValue, out TypedValueExpression boolVariable);
-                    contentExpression = New.Instance(typeof(StringContent), boolVariable);
-                    break;
-                case Type itype when itype == typeof(int):
-                case Type ftype when ftype == typeof(float):
-                case Type ltype when ltype == typeof(long):
-                case Type dtype when dtype == typeof(double):
-                case Type detype when detype == typeof(decimal):
-                    ValueExpression invariantCulture = new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture));
-                    var invariantCultureValue = new InvokeInstanceMethodExpression(contentParam, nameof(Int32.ToString), new[] {Literal("G"), invariantCulture }, null, false);
-                    valueDelareStatement = Declare(typeof(string), "value", invariantCultureValue, out TypedValueExpression variable);
-                    contentExpression = New.Instance(typeof(StringContent), variable);
-                    break;
-                case Type bdtype when bdtype == typeof(BinaryData):
-                    contentExpression = New.Instance(typeof(ByteArrayContent), new BinaryDataExpression(contentParam).ToArray());
-                    break;
+                contentExpression = New.Instance(typeof(StreamContent), contentParam);
+            }
+            else if (contentParamType == typeof(string))
+            {
+                contentExpression = New.Instance(typeof(StringContent), contentParam);
+            }
+            else if (contentParamType == typeof(bool))
+            {
+                var boolToStringValue = new TernaryConditionalOperator(contentParam, Literal("true"), Literal("false"));
+                valueDelareStatement = Declare(typeof(string), "value", boolToStringValue, out TypedValueExpression boolVariable);
+                contentExpression = New.Instance(typeof(StringContent), boolVariable);
+            }
+            else if (contentParamType == typeof(int)
+                || contentParamType == typeof(float)
+                || contentParamType == typeof(long)
+                || contentParamType == typeof(double)
+                || contentParamType == typeof(decimal))
+            {
+                ValueExpression invariantCulture = new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture));
+                var invariantCultureValue = new InvokeInstanceMethodExpression(contentParam, nameof(Int32.ToString), new[] { Literal("G"), invariantCulture }, null, false);
+                valueDelareStatement = Declare(typeof(string), "value", invariantCultureValue, out TypedValueExpression variable);
+                contentExpression = New.Instance(typeof(StringContent), variable);
+            }
+            else if (contentParamType == typeof(BinaryData))
+            {
+                contentExpression = New.Instance(typeof(ByteArrayContent), new BinaryDataExpression(contentParam).ToArray());
+            }
+            else if (contentParamType == typeof(byte[]))
+            {
+                contentExpression = New.Instance(typeof(ByteArrayContent), contentParam);
+            }
+            else
+            {
+                throw new Exception($"Not supported type {contentParamType}");
             }
             List<MethodBodyStatement> addContentStatements = new List<MethodBodyStatement>();
             if (valueDelareStatement != null)
@@ -228,7 +229,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             {
                 Argument.AssertNotNull(contentParam),
                 Argument.AssertNotNullOrEmpty(nameParam),
-                new EmptyLineStatement(),
+                EmptyLine,
                 addContentStatements.ToArray(),
             };
             return new Method(signature, body);
@@ -253,7 +254,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     filenameParam,
                     contentTypeParam,
                 });
-            var multipartContentExpression = new MultipartFormDataContentExpression(_multipartContentField);
             var body = new MethodBodyStatement[]
             {
                 new IfStatement(NotEqual(filenameParam, Null))
@@ -266,7 +266,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     Argument.AssertNotNullOrEmpty(contentTypeParam),
                     AddContentTypeHeader(contentParam, contentTypeParam),
                 },
-                multipartContentExpression.Add(contentParam, nameParam)
+                _multipartContentExpression.Add(contentParam, nameParam)
             };
             return new Method(signature, body);
         }
@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 { "Name", nameParam },
                 { "FileName", filenameParam },
             };
-            ValueExpression ContentDispositionHeaderExpression = ((ValueExpression)contentParam).Property("Headers").Property("ContentDisposition");
+            ValueExpression ContentDispositionHeaderExpression = new HttpContentExpression(contentParam).Headers.ContentDisposition;
             var body = new MethodBodyStatement[]
             {
                 Declare(typeof(ContentDispositionHeaderValue), "header", New.Instance(typeof(ContentDispositionHeaderValue), new[]{ Literal("form-data") }, initialProperties), out var header),
@@ -319,7 +319,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                     contentTypeParam,
                 });
             var contentTypeExpression = (ValueExpression)contentTypeParam;
-            ValueExpression ContentTypeHeaderExpression = ((ValueExpression)contentParam).Property("Headers").Property("ContentType");
+            ValueExpression ContentTypeHeaderExpression = new HttpContentExpression(contentParam).Headers.ContentType;
             var body = new MethodBodyStatement[]
             {
                 Declare(typeof(MediaTypeHeaderValue), "header", New.Instance(typeof(MediaTypeHeaderValue), new[]{ contentTypeExpression }), out var header),
@@ -342,13 +342,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 {
                     lengthParameter,
                 });
-            ValueExpression contentLengthHeaderExpression = new MultipartFormDataContentExpression(_multipartContentField).Property("Headers").Property("ContentLength");
-            var declaration = new CodeWriterDeclaration("contentLength");
-            VariableReference contentLengthVariable = new VariableReference(typeof(long), declaration);
-            var contentLengthDeclaration = new DeclarationExpression(contentLengthVariable,false);
+            ValueExpression contentLengthHeaderExpression = _multipartContentExpression.Headers.ContentLength;
             var body = new MethodBodyStatement[]
             {
-                new IfStatement(BoolExpression.Is(contentLengthHeaderExpression, contentLengthDeclaration))
+                new IfStatement(BoolExpression.Is(contentLengthHeaderExpression, new DeclarationExpression(typeof(long), "contentLength", out var contentLengthVariable)))
                 {
                     Assign(lengthParameter, contentLengthVariable),
                     Return(Literal(true)),
@@ -383,7 +380,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
                 /*_multipartContent.CopyToAsync(stream).EnsureCompleted();*/
                 taskWaitCompletedStatementsList.Add(new InvokeStaticMethodStatement(typeof(Azure.Core.Pipeline.TaskExtensions), "EnsureCompleted", new[] { _multipartContentExpression.CopyToAsyncExpression(streamParam) }, CallAsExtension: false));
                 taskWaitCompletedStatementsList.Add(new PragmaWarningPreprocessorDirective("restore", "AZC0107"));
-            } else
+            }
+            else
             {
                 ValueExpression getTaskWaiterExpression = new InvokeInstanceMethodExpression(_multipartContentExpression.CopyToAsyncExpression(streamParam), nameof(Task.GetAwaiter), Array.Empty<ValueExpression>(), null, false);
                 /*_multipartContent.CopyToAsync(stream).GetAwaiter().GetResult();*/
@@ -450,11 +448,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             return new Method(signature, body);
         }
         public ValueExpression CreateBoundary()
-            => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] {});
+            => new InvokeStaticMethodExpression(Type, _createBoundaryMethodName, new ValueExpression[] { });
         public MethodBodyStatement AddFilenameHeader(ValueExpression httpContent, ValueExpression name, ValueExpression filename)
-            => new InvokeInstanceMethodStatement (null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
+            => new InvokeInstanceMethodStatement(null, _addFilenameHeaderMethodName, new[] { httpContent, name, filename }, false);
         public MethodBodyStatement AddContentTypeHeader(ValueExpression httpContent, ValueExpression contentType)
-            => new InvokeInstanceMethodStatement(null, _addContentTypeHeaderMethodName, new[] { httpContent, contentType}, false);
+            => new InvokeInstanceMethodStatement(null, _addContentTypeHeaderMethodName, new[] { httpContent, contentType }, false);
         public MethodBodyStatement Add(ValueExpression multipartContent, ValueExpression content, ValueExpression name, ValueExpression? filename, ValueExpression? contentType)
         {
             var arguments = new List<ValueExpression>() { content, name };
@@ -464,30 +462,32 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
             }
             if (contentType != null)
             {
-                if (filename == null) arguments.Add(Null);
+                if (filename == null)
+                    arguments.Add(Null);
                 arguments.Add(contentType);
             }
             return new InvokeInstanceMethodStatement(multipartContent, _addMethodName, arguments.ToArray(), false);
         }
-        public MethodBodyStatement WriteTo(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        public MethodBodyStatement WriteTo(ValueExpression multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
         {
             if (cancellationToken == null)
             {
-                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToMethodName, new[] { stream }, false);
-            } else
-            {
-                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToMethodName, new[] { stream, cancellationToken }, false);
-            }
-        }
-        public MethodBodyStatement WriteToAsync(VariableReference multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
-        {
-            if (cancellationToken == null)
-            {
-                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToAsyncMethodName, new[] { stream }, false);
+                return new InvokeInstanceMethodStatement(multipartContent, _writeToMethodName, new[] { stream }, false);
             }
             else
             {
-                return new InvokeInstanceMethodStatement(multipartContent.Untyped, _writeToAsyncMethodName, new[] { stream, cancellationToken }, false);
+                return new InvokeInstanceMethodStatement(multipartContent, _writeToMethodName, new[] { stream, cancellationToken }, false);
+            }
+        }
+        public MethodBodyStatement WriteToAsync(ValueExpression multipartContent, ValueExpression stream, ValueExpression? cancellationToken)
+        {
+            if (cancellationToken == null)
+            {
+                return new InvokeInstanceMethodStatement(multipartContent, _writeToAsyncMethodName, new[] { stream }, false);
+            }
+            else
+            {
+                return new InvokeInstanceMethodStatement(multipartContent, _writeToAsyncMethodName, new[] { stream, cancellationToken }, false);
             }
         }
         public ValueExpression ContentTypeProperty(ValueExpression instance) => instance.Property(_contentTypePropertyName);
