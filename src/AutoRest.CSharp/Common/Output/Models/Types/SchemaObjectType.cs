@@ -16,6 +16,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -75,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
-            IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && extensions.MgmtTypeReferenceType;
+            IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(ObjectSchema);
 
             JsonConverter = _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }

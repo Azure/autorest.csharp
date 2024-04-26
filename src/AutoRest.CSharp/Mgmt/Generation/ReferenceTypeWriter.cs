@@ -15,19 +15,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (objectType is not SchemaObjectType schema)
                 return;
-            var extensions = schema.ObjectSchema.Extensions;
-            if (extensions != null)
+
+            if (MgmtReferenceType.IsPropertyReferenceType(schema.ObjectSchema))
             {
                 if (Configuration.IsBranded)
+                {
                     writer.UseNamespace("Azure.Core");
-                if (extensions.MgmtPropertyReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
                 }
-                else if (extensions.MgmtTypeReferenceType)
+                writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
+            }
+            else if (MgmtReferenceType.IsTypeReferenceType(schema.ObjectSchema))
+            {
+                if (Configuration.IsBranded)
                 {
-                    writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
+                    writer.UseNamespace("Azure.Core");
                 }
+                writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
             }
         }
 

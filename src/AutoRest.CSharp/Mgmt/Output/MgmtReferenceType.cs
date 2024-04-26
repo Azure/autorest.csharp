@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -15,32 +13,62 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public static HashSet<(string NameSpace, string Name)> PropertyReferenceTypeModels = new HashSet<(string NameSpace, string Name)>
+        private static HashSet<string> PropertyReferenceTypeModels = new HashSet<string>
         {
-            ("Azure.ResourceManager.Models", "ArmPlan"),
-            ("Azure.ResourceManager.Models", "ArmSku"),
-            ("Azure.ResourceManager.Models", "EncryptionProperties"),
-            ("Azure.ResourceManager.Resources.Models","ExtendedLocation"),
-            ("Azure.ResourceManager.Models", "ManagedServiceIdentity"),
-            ("Azure.ResourceManager.Models", "KeyVaultProperties"),
-            ("Azure.ResourceManager.Models", "ResourceProviderData"),
-            ("Azure.ResourceManager.Models", "SubResource"),
-            ("Azure.ResourceManager.Models", "SystemAssignedServiceIdentity"),
-            ("Azure.ResourceManager.Models", "SystemData"),
-            ("Azure.ResourceManager.Models", "UserAssignedIdentity"),
-            ("Azure.ResourceManager.Models", "WritableSubResource")
+            "ArmPlan",
+            "ArmSku",
+            "EncryptionProperties",
+            "ExtendedLocation",
+            "ManagedServiceIdentity",
+            "KeyVaultProperties",
+            "ResourceProviderData",
+            "SystemAssignedServiceIdentity",
+            "SystemData",
+            "UserAssignedIdentity",
+            "WritableSubResource"
         };
 
-        public static HashSet<(string NameSpace, string Name)> TypeReferenceTypeModels = new HashSet<(string NameSpace, string Name)>
+        private static HashSet<string> TypeReferenceTypeModels = new HashSet<string>
         {
-            ("Azure.ResourceManager.Models", "OperationStatusResult")
+            "OperationStatusResult"
         };
 
         // ReferenceType is only applied to ResourceData and TrackedResourceData in custom code, not handled by generator
 
+        public static bool IsPropertyReferenceType(Schema schema)
+        {
+            // reference types are only applied for Azure.ResourceManager
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+            {
+                return false;
+            }
+
+            // Azure.ResourceManager.Models.SystemData is PropertyReferenceType, but Azure.ResourceManager.Resources.Models.SystemData is not
+            if (schema.Language.Default.Name == "SystemData")
+            {
+                if ("Azure.ResourceManager.Models" == schema.Extensions?.Namespace)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            return PropertyReferenceTypeModels.Contains(schema.Language.Default.Name);
+        }
+
+        public static bool IsTypeReferenceType(Schema schema)
+        {
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+            {
+                return false;
+            }
+
+            return TypeReferenceTypeModels.Contains(schema.Language.Default.Name);
+        }
+
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
         {
-            JsonConverter = (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true)
+            JsonConverter = (IsPropertyReferenceType(objectSchema) || IsTypeReferenceType(ObjectSchema))
                 ? new JsonConverterProvider(this, _sourceInputModel)
                 : null;
         }
