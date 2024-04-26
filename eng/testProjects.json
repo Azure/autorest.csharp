@@ -55,6 +55,7 @@
         "type/array",
         "type/dictionary",
         "client/structure/multi-client",
+        "client/structure/renamed-operation",
         "authentication/http/custom"
     ],
     "TestServerProjects": [
