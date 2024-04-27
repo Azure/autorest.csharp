@@ -58,6 +58,22 @@ export function getTypeName(
     return name;
 }
 
+export function getFullNamespaceString(
+    namespace: Namespace | undefined
+): string {
+    if (!namespace || !namespace.name) {
+        return "";
+    }
+
+    let namespaceString: string = namespace.name;
+    let current: Namespace | undefined = namespace.namespace;
+    while (current && current.name) {
+        namespaceString = `${current.name}.${namespaceString}`;
+        current = current.namespace;
+    }
+    return namespaceString;
+}
+
 export function createContentTypeOrAcceptParameter(
     mediaTypes: string[],
     name: string,
@@ -91,20 +107,4 @@ export function createContentTypeOrAcceptParameter(
                   } as InputConstant)
                 : undefined
     } as InputParameter;
-}
-
-export function getFullNamespaceString(
-    namespace: Namespace | undefined
-): string {
-    if (!namespace || !namespace.name) {
-        return "";
-    }
-
-    let namespaceString: string = namespace.name;
-    let current: Namespace | undefined = namespace.namespace;
-    while (current && current.name) {
-        namespaceString = `${current.name}.${namespaceString}`;
-        current = current.namespace;
-    }
-    return namespaceString;
 }
