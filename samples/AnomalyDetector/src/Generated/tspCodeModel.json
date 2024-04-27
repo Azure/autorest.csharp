@@ -2101,6 +2101,45 @@
   {
    "$id": "279",
    "Kind": "Model",
+   "Name": "ResponseError",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "Error response",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "280",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "The error code.",
+     "Type": {
+      "$id": "281",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "282",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "The message explaining the error reported by the service.",
+     "Type": {
+      "$id": "283",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "284",
+   "Kind": "Model",
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
@@ -2108,7 +2147,7 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "280",
+     "$id": "285",
      "Name": "code",
      "SerializedName": "code",
      "Description": "The error code.",
@@ -2119,56 +2158,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "281",
-     "Name": "message",
-     "SerializedName": "message",
-     "Description": "A message explaining the error reported by the service.",
-     "Type": {
-      "$id": "282",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "283",
-   "Kind": "Model",
-   "Name": "ResponseError",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Error response",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "284",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "The error code.",
-     "Type": {
-      "$id": "285",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
      "$id": "286",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "The message explaining the error reported by the service.",
+     "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "287",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]
