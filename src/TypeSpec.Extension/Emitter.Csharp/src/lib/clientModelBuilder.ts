@@ -155,7 +155,7 @@ export function createModelForService(
         addChildClients(sdkContext.emitContext, client, clients);
     }
 
-    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
+    navigateModels(sdkContext, modelMap, enumMap);
 
     const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);

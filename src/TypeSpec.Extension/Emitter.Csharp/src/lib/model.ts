@@ -6,6 +6,7 @@ import {
     SdkContext,
     SdkEnumType,
     SdkModelType,
+    getAllModels,
     getClientType
 } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -861,7 +862,6 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
 // This is a temporary solution. After we uptake getAllModels we should delete this.
 export function navigateModels(
     context: SdkContext<NetEmitterOptions>,
-    namespace: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
@@ -872,24 +872,10 @@ export function navigateModels(
             models,
             enums
         ) as any;
-    const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
-    navigateTypesInNamespace(
-        namespace,
-        {
-            model: (m) => {
-                const realModel = getRealType(m, context);
-                return (
-                    realModel.kind === "Model" &&
-                    realModel.name != "" &&
-                    computeType(realModel)
-                );
-            },
-            enum: (e) => {
-                const realEnum = getRealType(e, context);
-                return realEnum.kind === "Enum" && computeType(realEnum);
-            }
-        },
-        { skipSubNamespaces }
+    getAllModels(context).forEach((model) =>
+        model.kind === "model"
+            ? fromSdkModelType(model, context, models, enums)
+            : fromSdkEnumType(model, context, enums)
     );
 }
 
