@@ -31,9 +31,7 @@ import {
     getFormat
 } from "@typespec/compiler";
 import { logger } from "../lib/logger.js";
-import {
-    getCSharpInputTypeKindByPrimitiveModelName
-} from "../lib/model.js";
+import { getCSharpInputTypeKindByPrimitiveModelName } from "../lib/model.js";
 import { getFullNamespaceString } from "../lib/utils.js";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
 import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
