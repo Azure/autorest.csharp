@@ -201,7 +201,6 @@
     }
    ],
    "Namespace": "Type.Union",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -224,7 +223,6 @@
     }
    ],
    "Namespace": "Type.Union",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"

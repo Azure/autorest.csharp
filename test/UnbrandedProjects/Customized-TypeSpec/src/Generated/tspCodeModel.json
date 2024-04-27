@@ -225,7 +225,7 @@
    "$id": "28",
    "Kind": "Enum",
    "Name": "IntFixedEnum",
-   "EnumValueType": "Float32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "29",

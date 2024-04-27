@@ -2,37 +2,43 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    IntrinsicType,
-    Program,
-    Type,
-    DateTimeKnownEncoding,
-    Model,
-    Enum,
-    DurationKnownEncoding,
-    getFormat
-} from "@typespec/compiler";
-import { Usage } from "./usage.js";
-import {
-    SdkType,
-    SdkModelPropertyType,
+    SdkArrayType,
     SdkBodyModelPropertyType,
-    SdkModelType,
+    SdkBuiltInType,
+    SdkConstantType,
+    SdkContext,
+    SdkDatetimeType,
+    SdkDictionaryType,
+    SdkDurationType,
     SdkEnumType,
     SdkEnumValueType,
-    SdkDictionaryType,
-    SdkConstantType,
-    SdkBuiltInType,
-    SdkArrayType,
-    SdkDatetimeType,
-    SdkUnionType,
-    SdkContext,
+    SdkModelPropertyType,
+    SdkModelType,
     SdkTupleType,
-    SdkDurationType,
+    SdkType,
+    SdkUnionType,
     UsageFlags,
-    SdkBuiltInKinds,
-    isSdkBuiltInKind,
-    isReadOnly
+    isReadOnly,
+    isSdkBuiltInKind
 } from "@azure-tools/typespec-client-generator-core";
+import {
+    DateTimeKnownEncoding,
+    DurationKnownEncoding,
+    IntrinsicType,
+    Model,
+    Program,
+    Type,
+    getFormat
+} from "@typespec/compiler";
+import { logger } from "../lib/logger.js";
+import {
+    getCSharpInputTypeKindByPrimitiveModelName
+} from "../lib/model.js";
+import { getFullNamespaceString } from "../lib/utils.js";
+import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
+import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "./inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -44,21 +50,9 @@ import {
     InputType,
     InputUnionType
 } from "./inputType.js";
-import { InputModelProperty } from "./inputModelProperty.js";
-import { Visibility } from "@typespec/http";
-import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
-import {
-    getCSharpInputTypeKindByPrimitiveModelName,
-    mapTypeSpecTypeToCSharpInputTypeKind,
-    setUsage
-} from "../lib/model.js";
 import { InputTypeKind } from "./inputTypeKind.js";
-import { getFullNamespaceString } from "../lib/utils.js";
-import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
-import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
-import { logger } from "../lib/logger.js";
-import { get } from "http";
+import { Usage } from "./usage.js";
 
 function fromSdkType(
     sdkType: SdkType,
@@ -237,7 +231,6 @@ export function fromSdkEnumType(
             IsNullable: enumType.nullable,
             Usage: fromUsageFlags(enumType.usage)
         };
-        setUsage(context, enumType.__raw! as Enum, newInputEnumType);
         if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
     }

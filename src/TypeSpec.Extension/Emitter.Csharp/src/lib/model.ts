@@ -6,14 +6,11 @@ import {
     SdkContext,
     SdkEnumType,
     SdkModelType,
-    getAccess,
-    getClientType,
-    getUsageOverride
+    getClientType
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EncodeData,
     Enum,
-    EnumMember,
     IntrinsicType,
     Model,
     ModelProperty,
@@ -67,7 +64,6 @@ import {
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
-import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 /**
@@ -486,70 +482,24 @@ export function getInputType(
         const name = getTypeName(context, e);
         let enumType = enums.get(name);
 
-        if (!enumType) {
-            // if it's in TCGC model cache, then construct from TCGC
-            if (context.modelsMap?.has(e)) {
-                return fromSdkEnumType(
-                    context.modelsMap!.get(e) as SdkEnumType,
-                    context,
-                    enums,
-                    addToCollection
-                );
-            }
-            // TODO remove the following after https://github.com/Azure/typespec-azure/issues/128 is resolved
-            if (e.members.size === 0) {
-                throw new Error(
-                    `Enum type '${e.name}' doesn't define any values.`
-                );
-            }
-            const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(
-                e.members.entries().next().value[1]
+        if (enumType) return enumType;
+
+        // if it's in TCGC model cache, then construct from TCGC
+        if (context.modelsMap?.has(e)) {
+            return fromSdkEnumType(
+                context.modelsMap!.get(e) as SdkEnumType,
+                context,
+                enums,
+                addToCollection
             );
-
-            for (const key of e.members.keys()) {
-                const option = e.members.get(key);
-                if (!option) {
-                    throw Error(`No member value for $key`);
-                }
-                if (enumValueType !== enumMemberType(option)) {
-                    throw new Error(
-                        "The enum member value type is not consistent."
-                    );
-                }
-                const member: InputEnumTypeValue = {
-                    Name: getTypeName(context, option),
-                    Value: option.value ?? option?.name,
-                    Description: getDoc(program, option)
-                };
-                allowValues.push(member);
-            }
-
-            enumType = {
-                Kind: InputTypeKind.Enum,
-                Name: name,
-                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
-                AllowedValues: allowValues,
-                Namespace: getFullNamespaceString(e.namespace),
-                Accessibility: getAccess(context, e),
-                Deprecated: getDeprecated(program, e),
-                Description: getDoc(program, e) ?? "",
-                IsExtensible: false,
-                IsNullable: false,
-                Usage: "None"
-            };
-            setUsage(context, e, enumType);
-            if (addToCollection) enums.set(name, enumType);
         }
+
+        const createdSdkEnumType = getClientType(context, e) as SdkEnumType;
+        context.modelsMap!.set(e, createdSdkEnumType);
+        enumType = fromSdkEnumType(createdSdkEnumType, context, enums);
+        if (addToCollection) enums.set(name, enumType);
 
         return enumType;
-
-        function enumMemberType(member: EnumMember): string {
-            if (typeof member.value === "number") {
-                return "Float32";
-            }
-            return "String";
-        }
     }
 
     function getInputTypeForArray(elementType: Type): InputListType {
@@ -663,21 +613,6 @@ export function getInputType(
                   IsNullable: false
               }
             : itemTypes[0];
-    }
-}
-
-export function setUsage(
-    context: SdkContext,
-    source: Model | Enum,
-    target: InputModelType | InputEnumType
-) {
-    const sourceUsage = getUsageOverride(context, source);
-    if (sourceUsage === UsageFlags.Input) {
-        target.Usage = Usage.Input;
-    } else if (sourceUsage === UsageFlags.Output) {
-        target.Usage = Usage.Output;
-    } else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
-        target.Usage = Usage.RoundTrip;
     }
 }
 
@@ -958,7 +893,7 @@ export function navigateModels(
     );
 }
 
-// TODO: we should try to remove this when we adopt getModels
+// TODO: we should try to remove this when we adopt getAllOperations
 // we should avoid handling raw type definitions because they could be not correctly projected
 // in the given api version
 function getRealType(type: Type, context: SdkContext<NetEmitterOptions>): Type {
