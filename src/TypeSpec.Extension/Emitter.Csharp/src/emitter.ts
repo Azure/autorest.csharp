@@ -74,7 +74,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     for (const transport of logger.transports) {
         transport.level = options.logLevel ?? LoggerLevel.INFO;
     }
-    context.options["filter-out-core-models"] = false;
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
