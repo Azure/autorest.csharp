@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The WidgetData0_kind. </summary>
-    internal readonly partial struct WidgetData0Kind : IEquatable<WidgetData0Kind>
+    public readonly partial struct WidgetData0Kind : IEquatable<WidgetData0Kind>
     {
         private readonly string _value;
 

@@ -423,7 +423,7 @@
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "60",
@@ -605,7 +605,7 @@
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "85",
@@ -3789,7 +3789,7 @@
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "514",
@@ -4983,7 +4983,7 @@
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "673",
@@ -5160,7 +5160,7 @@
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "698",

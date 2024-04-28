@@ -221,7 +221,16 @@ model RoundTripModel {
     modelWithRequiredNullable: ModelWithRequiredNullableProperties;
 
     @doc("this is a list of union types")
-    unionList: (string | int32 | boolean)[];
+    unionList: (string | int32 | ModelForUnion | ModelForUnion[])[];
+}
+
+@doc("This is a model only used in union types, please do not use it anywhere else.")
+model ModelForUnion {
+    @doc("name of the ModelForUnion")
+    name: string;
+
+    @doc("age of the ModelForUnion")
+    age?: int32;
 }
 
 union DaysOfWeekExtensibleEnum {

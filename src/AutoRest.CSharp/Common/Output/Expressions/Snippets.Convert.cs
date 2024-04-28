@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -72,7 +74,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                             enumExpression = enumExpression.NullableStructValue();
                         }
                         var convenienceEnum = new EnumExpression(enumType, enumExpression);
-                        return BinaryDataExpression.FromObjectAsJson(convenienceEnum.ToSerial());
+                        return Extensible.RequestContent.Create(BinaryDataExpression.FromObjectAsJson(convenienceEnum.ToSerial()));
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider model }:
                         TypedValueExpression modelExpression = new ParameterReference(convenience);
                         if (convenience.IsOptionalInSignature)
@@ -80,6 +82,10 @@ namespace AutoRest.CSharp.Common.Output.Models
                             modelExpression = modelExpression.NullConditional();
                         }
                         var serializableObjectExpression = new SerializableObjectTypeExpression(model, modelExpression);
+                        if (contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Multipart)
+                        {
+                            return serializableObjectExpression.ToMultipartRequestContent();
+                        }
                         return serializableObjectExpression.ToRequestContent();
                     default:
                         throw new InvalidOperationException($"Unhandled type: {convenience.Type}");

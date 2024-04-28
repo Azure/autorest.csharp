@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    internal partial class WidgetData2 : IUtf8JsonSerializable, IJsonModel<WidgetData2>
+    public partial class WidgetData2 : IUtf8JsonSerializable, IJsonModel<WidgetData2>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WidgetData2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The WidgetData0. </summary>
-    internal partial class WidgetData0
+    public partial class WidgetData0
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
