@@ -53,10 +53,11 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "authentication/http/custom",
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
-        "authentication/http/custom",
+        "type/model/usage",
         "payload/multipart"
     ],
     "TestServerProjects": [
