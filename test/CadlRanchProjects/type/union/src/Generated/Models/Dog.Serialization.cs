@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    internal partial class Dog : IUtf8JsonSerializable, IJsonModel<Dog>
+    public partial class Dog : IUtf8JsonSerializable, IJsonModel<Dog>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dog>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

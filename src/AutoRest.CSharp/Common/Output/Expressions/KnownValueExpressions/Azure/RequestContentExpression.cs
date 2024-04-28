@@ -18,8 +18,5 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
         public static implicit operator RequestContentExpression(MultipartFormDataContentExpression multipartFormDataContent) => new(multipartFormDataContent.Untyped);
         public static implicit operator RequestContentExpression(StringRequestContentExpression stringRequestContentExpression) => new(stringRequestContentExpression.Untyped);
         public static implicit operator RequestContentExpression(XmlWriterContentExpression xmlWriterContent) => new(xmlWriterContent.Untyped);
-
-        // Cast is valid due to the implicit cast from BinaryData to RequestContent
-        public static implicit operator RequestContentExpression(BinaryDataExpression binaryData) => new(binaryData.Untyped);
     }
 }
