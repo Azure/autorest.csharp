@@ -54,11 +54,13 @@
     ],
     "CadlRanchProjectsNonAzure":[
         "authentication/http/custom",
+        "client/naming",
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
         "type/model/empty",
         "type/model/usage",
+        "parameters/body-optionality",
         "parameters/spread",
         "payload/content-negotiation",
         "payload/multipart"
