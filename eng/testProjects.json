@@ -60,6 +60,7 @@
         "type/enum/extensible",
         "type/model/empty",
         "type/model/usage",
+        "parameters/body-optionality",
         "parameters/collection-format",
         "parameters/spread",
         "payload/content-negotiation",

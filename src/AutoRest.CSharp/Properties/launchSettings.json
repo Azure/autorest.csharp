@@ -704,6 +704,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\client\\naming\\src\\Generated -n"
     },
+    "typespec-nonAzure-parameters/body-optionality": {
+        "commandName": "Project",
+        "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\body-optionality\\src\\Generated -n"
+      },
     "typespec-nonAzure-parameters/collection-format": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\collection-format\\src\\Generated -n"
