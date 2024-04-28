@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Type.Union.Models
 {
     /// <summary> The Dog. </summary>
-    internal partial class Dog
+    public partial class Dog
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

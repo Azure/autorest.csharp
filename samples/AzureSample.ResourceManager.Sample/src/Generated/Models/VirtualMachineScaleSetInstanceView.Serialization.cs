@@ -179,39 +179,39 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool hasPropertyOverride = false;
             string propertyOverride = null;
 
-            if (propertyOverrides != null)
-            {
-                TransformFlattenedOverrides(bicepOptions, propertyOverrides);
-            }
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachine), out propertyOverride);
-            if (Optional.IsDefined(VirtualMachine) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue("VirtualMachineStatusesSummary", out propertyOverride);
+            if (hasPropertyOverride)
             {
                 builder.Append("  virtualMachine: ");
-                if (hasPropertyOverride)
+                builder.AppendLine("{");
+                builder.Append("    statusesSummary: ");
+                builder.AppendLine(propertyOverride);
+                builder.AppendLine("  }");
+            }
+            else
+            {
+                if (Optional.IsDefined(VirtualMachine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  virtualMachine: ");
                     BicepSerializationHelpers.AppendChildObject(builder, VirtualMachine, options, 2, false, "  virtualMachine: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Extensions), out propertyOverride);
-            if (Optional.IsCollectionDefined(Extensions) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Extensions.Any() || hasPropertyOverride)
+                builder.Append("  extensions: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Extensions))
                 {
-                    builder.Append("  extensions: ");
-                    if (hasPropertyOverride)
+                    if (Extensions.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  extensions: ");
                         builder.AppendLine("[");
                         foreach (var item in Extensions)
                         {
@@ -223,17 +223,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
-            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Statuses.Any() || hasPropertyOverride)
+                builder.Append("  statuses: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Statuses))
                 {
-                    builder.Append("  statuses: ");
-                    if (hasPropertyOverride)
+                    if (Statuses.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  statuses: ");
                         builder.AppendLine("[");
                         foreach (var item in Statuses)
                         {
@@ -245,17 +246,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OrchestrationServices), out propertyOverride);
-            if (Optional.IsCollectionDefined(OrchestrationServices) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (OrchestrationServices.Any() || hasPropertyOverride)
+                builder.Append("  orchestrationServices: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(OrchestrationServices))
                 {
-                    builder.Append("  orchestrationServices: ");
-                    if (hasPropertyOverride)
+                    if (OrchestrationServices.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  orchestrationServices: ");
                         builder.AppendLine("[");
                         foreach (var item in OrchestrationServices)
                         {
@@ -268,23 +270,6 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void TransformFlattenedOverrides(BicepModelReaderWriterOptions bicepOptions, IDictionary<string, string> propertyOverrides)
-        {
-            foreach (var item in propertyOverrides.ToList())
-            {
-                switch (item.Key)
-                {
-                    case "VirtualMachineStatusesSummary":
-                        Dictionary<string, string> propertyDictionary = new Dictionary<string, string>();
-                        propertyDictionary.Add("StatusesSummary", item.Value);
-                        bicepOptions.PropertyOverrides.Add(VirtualMachine, propertyDictionary);
-                        break;
-                    default:
-                        continue;
-                }
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetInstanceView>.Write(ModelReaderWriterOptions options)
