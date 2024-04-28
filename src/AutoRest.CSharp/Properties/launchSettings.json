@@ -727,7 +727,7 @@
     "typespec-nonAzure-type/model/inheritance/single-discriminator": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\single-discriminator\\src\\Generated -n"
-    }，
+    },
     "typespec-nonAzure-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\empty\\src\\Generated -n"
