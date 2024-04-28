@@ -61,6 +61,7 @@
         "type/model/empty",
         "type/model/inheritance/single-discriminator",
         "type/model/usage",
+        "parameters/body-optionality",
         "parameters/spread",
         "payload/content-negotiation",
         "payload/multipart"
