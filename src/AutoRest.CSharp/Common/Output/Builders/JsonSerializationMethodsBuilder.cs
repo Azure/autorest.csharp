@@ -463,6 +463,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 return utf8JsonWriter.WriteBinaryData(binaryDataValue);
             }
+            if (valueType == typeof(Stream))
+            {
+                return utf8JsonWriter.WriteBinaryData(BinaryDataExpression.FromStream(value, false));
+            }
 
             if (IsCustomJsonConverterAdded(valueType))
             {
@@ -980,6 +984,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url
                     ? BinaryDataExpression.FromBytes(element.GetBytesFromBase64(format.ToFormatSpecifier()))
                     : BinaryDataExpression.FromString(element.GetRawText());
+            }
+
+            if (frameworkType == typeof(Stream))
+            {
+                /* BinaryData.FromString(property.Value).ToStream() */
+                return new BinaryDataExpression(BinaryDataExpression.FromString(element.GetRawText())).ToStream();
             }
 
             if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)

@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="unionItems">the list of union type items.</param>
         /// <returns>A list of FormattableString representing the description of each union item.
         /// </returns>
-        public static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
+        internal static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
         {
             var values = new List<FormattableString>();
 
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="parameterDescription">The parameter description.</param>
         /// <param name="isPropReadOnly">Flag to determine if a property is read only.</param>
         /// <returns>The formatted property description string.</returns>
-        internal FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
+        private FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
         {
             FormattableString description;
             if (string.IsNullOrEmpty(parameterDescription))
@@ -314,39 +314,56 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (type.IsFrameworkType)
             {
                 string typeSpecificDesc;
+                var unionTypes = GetUnionTypes(type);
                 IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();
-                if (type.IsUnion || ValueType is { IsUnion: true })
+                if (unionTypes.Count > 0)
                 {
-                    // get the union types, if any
-                    var items = type.IsUnion ? type.UnionItemTypes : ValueType.UnionItemTypes;
-
-                    if (items is { Count: > 0 })
-            {
-                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
-            }
+                    unionTypeDescriptions = GetUnionTypesDescriptions(unionTypes);
                 }
 
                 if (type.FrameworkType == typeof(BinaryData))
             {
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
-            }
-                if (type.IsList &&
-                    type.Arguments[0].IsFrameworkType &&
-                    type.Arguments[0].FrameworkType == typeof(BinaryData))
-            {
+                }
+                if (type.IsList && HasBinaryData(type.ElementType))
+                {
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
-            }
-                if (type.IsDictionary &&
-                    type.Arguments[1].IsFrameworkType &&
-                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                }
+                if (type.IsDictionary && HasBinaryData(type.ElementType))
                 {
                     typeSpecificDesc = "the value of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
             }
-            return $"";
+            return FormattableStringHelpers.Empty;
+
+            // recursively get the union types if any.
+            static IReadOnlyList<CSharpType> GetUnionTypes(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return GetUnionTypes(type.ElementType);
+                }
+                else if (type.IsUnion)
+                {
+                    return type.UnionItemTypes;
+                }
+
+                return Array.Empty<CSharpType>();
+            }
+
+            // recursively get if any element or argument of this type is BinaryData
+            static bool HasBinaryData(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return HasBinaryData(type.ElementType);
+                }
+
+                return type.IsFrameworkType && type.FrameworkType == typeof(BinaryData);
+            }
         }
 
         private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat, IReadOnlyList<FormattableString> unionTypeDescriptions)
