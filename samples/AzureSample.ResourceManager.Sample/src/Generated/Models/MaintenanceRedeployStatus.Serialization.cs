@@ -200,104 +200,111 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IsCustomerInitiatedMaintenanceAllowed), out propertyOverride);
-            if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  isCustomerInitiatedMaintenanceAllowed: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  isCustomerInitiatedMaintenanceAllowed: ");
                     var boolValue = IsCustomerInitiatedMaintenanceAllowed.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreMaintenanceWindowStartOn), out propertyOverride);
-            if (Optional.IsDefined(PreMaintenanceWindowStartOn) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  preMaintenanceWindowStartTime: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PreMaintenanceWindowStartOn))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  preMaintenanceWindowStartTime: ");
                     var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowStartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreMaintenanceWindowEndOn), out propertyOverride);
-            if (Optional.IsDefined(PreMaintenanceWindowEndOn) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  preMaintenanceWindowEndTime: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PreMaintenanceWindowEndOn))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  preMaintenanceWindowEndTime: ");
                     var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowEndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaintenanceWindowStartOn), out propertyOverride);
-            if (Optional.IsDefined(MaintenanceWindowStartOn) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  maintenanceWindowStartTime: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(MaintenanceWindowStartOn))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  maintenanceWindowStartTime: ");
                     var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowStartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaintenanceWindowEndOn), out propertyOverride);
-            if (Optional.IsDefined(MaintenanceWindowEndOn) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  maintenanceWindowEndTime: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(MaintenanceWindowEndOn))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  maintenanceWindowEndTime: ");
                     var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowEndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastOperationResultCode), out propertyOverride);
-            if (Optional.IsDefined(LastOperationResultCode) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  lastOperationResultCode: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(LastOperationResultCode))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  lastOperationResultCode: ");
                     builder.AppendLine($"'{LastOperationResultCode.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastOperationMessage), out propertyOverride);
-            if (Optional.IsDefined(LastOperationMessage) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  lastOperationMessage: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(LastOperationMessage))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  lastOperationMessage: ");
                     if (LastOperationMessage.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
