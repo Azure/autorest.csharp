@@ -2,19 +2,19 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using _Type.Union;
-using _Type.Union.Models;
+using Scm._Type.Union;
+using Scm._Type.Union.Models;
 
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
+using System.ClientModel.Primitives;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeUnionTests : CadlRanchTestBase
+    public class TypeUnionTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task GetStringsOnly() => Test(async (host) =>
@@ -28,7 +28,7 @@ namespace CadlRanchProjects.Tests
         public Task SendStringsOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetStringsOnlyClient().SendAsync(SendRequest9Prop.B);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -43,7 +43,7 @@ namespace CadlRanchProjects.Tests
         public Task SendStringExtensibleOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp3("custom"));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -58,7 +58,7 @@ namespace CadlRanchProjects.Tests
         public Task SendStringExtensibleNamedOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetStringExtensibleNamedClient().SendAsync(new StringExtensibleNamedUnion("custom"));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -73,7 +73,7 @@ namespace CadlRanchProjects.Tests
         public Task SendIntsOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(BinaryData.FromObjectAsJson(2));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -88,7 +88,7 @@ namespace CadlRanchProjects.Tests
         public Task SendFloatsOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetFloatsOnlyClient().SendAsync(BinaryData.FromObjectAsJson(2.2));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -103,7 +103,7 @@ namespace CadlRanchProjects.Tests
         public Task SendModelsOnly() => Test(async (host) =>
         {
             var response = await new UnionClient(host, null).GetModelsOnlyClient().SendAsync(ModelReaderWriter.Write(new Cat("test")));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
 
@@ -121,7 +121,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetEnumsOnlyClient().SendAsync(new EnumsOnlyCases(BinaryData.FromObjectAsJson(LR.Right.ToSerialString()),
                 BinaryData.FromObjectAsJson(UD.Up.ToSerialString())));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -138,7 +138,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringAndArrayClient().SendAsync(new StringAndArrayCases(BinaryData.FromObjectAsJson("test"),
                 BinaryData.FromObjectAsJson(new List<string>() { "test1", "test2" })));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -159,7 +159,7 @@ namespace CadlRanchProjects.Tests
                 BinaryData.FromObjectAsJson(2),
                 BinaryData.FromObjectAsJson(3.3),
                 BinaryData.FromObjectAsJson(true)));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
@@ -180,14 +180,12 @@ namespace CadlRanchProjects.Tests
                 BinaryData.FromObjectAsJson("a"),
                 BinaryData.FromObjectAsJson(2),
                 BinaryData.FromObjectAsJson(true)));
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         private static void AssertEqual(BinaryData source, BinaryData target)
         {
-            var sourceData = source.ToArray();
-            var targetDate = target.ToArray();
-            CollectionAssert.AreEqual(sourceData, targetDate);
+            BinaryDataAssert.AreEqual(source, target);
         }
 
         private void AssertEqual(Cat cat1, Cat cat2)
