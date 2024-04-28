@@ -57,7 +57,11 @@
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
+        "type/model/empty",
         "type/model/inheritance/single-discriminator",
+        "type/model/usage",
+        "parameters/spread",
+        "payload/content-negotiation",
         "payload/multipart"
     ],
     "TestServerProjects": [
