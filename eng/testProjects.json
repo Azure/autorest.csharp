@@ -66,6 +66,7 @@
         "type/model/empty",
         "type/model/inheritance/single-discriminator",
         "type/model/usage",
+        "type/scalar",
         "type/union"
     ],
     "TestServerProjects": [
