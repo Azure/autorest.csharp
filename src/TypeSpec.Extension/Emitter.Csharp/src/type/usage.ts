@@ -5,5 +5,6 @@ export enum Usage {
     None = "None",
     Input = "Input",
     Output = "Output",
-    RoundTrip = "RoundTrip"
+    RoundTrip = "RoundTrip",
+    Multipart = "Multipart"
 }
