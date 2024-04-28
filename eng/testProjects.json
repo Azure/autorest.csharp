@@ -66,6 +66,7 @@
         "type/model/empty",
         "type/model/inheritance/single-discriminator",
         "type/model/usage",
+        "type/property/additional-properties",
         "type/scalar",
         "type/union",
         "serialization/encoded-name/json",
