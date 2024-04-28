@@ -67,6 +67,7 @@
         "type/model/usage",
         "type/scalar",
         "type/union",
+        "serialization/encoded-name/json",
         "server/endpoint/not-defined",
         "special-words"
     ],
