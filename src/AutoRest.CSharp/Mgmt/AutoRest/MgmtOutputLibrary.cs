@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private IEnumerable<Schema> UpdateBodyParameters()
+        private IEnumerable<InputType> UpdateBodyParameters()
         {
             var updatedTypes = new List<InputType>();
             Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>(ReferenceEqualityComparer.Instance);

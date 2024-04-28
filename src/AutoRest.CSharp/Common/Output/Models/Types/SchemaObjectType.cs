@@ -742,7 +742,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartObjectSerialization(ObjectSchema, this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart.ToString()) ? _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this) : null;
         }
         protected override IEnumerable<Method> BuildMethods()
         {

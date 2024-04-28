@@ -648,7 +648,8 @@ namespace AutoRest.CSharp.Output.Builders
                     new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
                     shouldExcludeInWireSerialization);
         }
-        public MultipartObjectSerialization BuildMultipartObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+
+        public MultipartObjectSerialization BuildMultipartObjectSerialization(InputModelType objectSchema, SchemaObjectType objectType)
         {
             /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
              *Need to consider the polymorphism and the base class properties.
@@ -656,7 +657,7 @@ namespace AutoRest.CSharp.Output.Builders
             var properties = new List<MultipartPropertySerialization>();
             foreach (ObjectTypeProperty property in objectType.Properties.ToArray())
             {
-                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
+                var schemaProperty = property.InputModelProperty!; // we ensure this is not null when we build the array
                 var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
                 if (parameter is null)
                 {
@@ -667,7 +668,7 @@ namespace AutoRest.CSharp.Output.Builders
                 var isRequired = schemaProperty.IsRequired;
                 var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
-                MultipartSerialization valueSerialization = BuildMultipartSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+                MultipartSerialization valueSerialization = BuildMultipartSerialization(schemaProperty.Type, property.Declaration.Type, false, property.SerializationFormat, new TypedMemberExpression(null, serializedName, property.Declaration.Type).NullableStructValue());
                 var propertySerialization = new MultipartPropertySerialization(
                     parameter.Name,
                     memberValueExpression,
@@ -688,9 +689,9 @@ namespace AutoRest.CSharp.Output.Builders
                 objectType.Discriminator,
                 false);
         }
-        private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization(InputModelType objectSchema, ObjectType objectType)
         {
-            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
+            var inheritedDictionarySchema = objectSchema.InheritedDictionaryType;
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in objectType.EnumerateHierarchy())
@@ -714,7 +715,7 @@ namespace AutoRest.CSharp.Output.Builders
             MultipartSerialization valueSerialization;
             if (inheritedDictionarySchema is not null)
             {
-                valueSerialization = BuildMultipartSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType, false);
+                valueSerialization = BuildMultipartSerialization(inheritedDictionarySchema.KeyType, dictionaryValueType, false, additionalPropertiesProperty.SerializationFormat, new TypedMemberExpression(null, additionalPropertiesProperty.Declaration.Name, additionalPropertiesProperty.Declaration.Type).NullableStructValue());
             }
             else
             {
@@ -744,30 +745,10 @@ namespace AutoRest.CSharp.Output.Builders
             }
             return inputType switch
             {
-                CodeModelType codeModelType => BuildMultipartSerialization(codeModelType.Schema, valueType, isCollectionElement),
                 InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new MultipartDictionarySerialization(valueType, BuildMultipartSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
             };
-        }
-        public static MultipartSerialization BuildMultipartSerialization(Schema schema, CSharpType type, bool isCollectionElement)
-        {
-            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
-            {
-                return new MultipartValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
-            }
-
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return BuildMultipartSerialization(constantSchema.ValueType, type, isCollectionElement);
-                case ArraySchema arraySchema:
-                    return new MultipartArraySerialization(type, BuildMultipartSerialization(arraySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
-                case DictionarySchema dictionarySchema:
-                    return new MultipartDictionarySerialization(type, BuildMultipartSerialization(dictionarySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
-                default:
-                    return new MultipartValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType));
-            }
         }
         public static IEnumerable<MultipartPropertySerialization> CreateMultipartPropertySerializations(ModelTypeProvider model)
         {
