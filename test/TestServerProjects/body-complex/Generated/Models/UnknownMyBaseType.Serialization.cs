@@ -166,7 +166,7 @@ namespace body_complex.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<MyBaseType>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
