@@ -131,7 +131,7 @@ namespace _Type.Property.AdditionalProperties.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<IsUnknownAdditionalPropertiesDiscriminated>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
