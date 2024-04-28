@@ -57,6 +57,7 @@
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
+        "type/model/empty",
         "type/model/usage",
         "parameters/spread",
         "payload/content-negotiation",
