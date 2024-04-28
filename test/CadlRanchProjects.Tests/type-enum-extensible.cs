@@ -20,14 +20,14 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Type_Enum_Extensible_String_putKnownValue() => Test(async (host) =>
+        public Task Type_Enum_Extensible_String_getUnknownValue() => Test(async (host) =>
         {
             var response = await new ExtensibleClient(host, null).GetStringClient().GetUnknownValueAsync();
             Assert.AreEqual(new DaysOfWeekExtensibleEnum("Weekend"), (DaysOfWeekExtensibleEnum)response);
         });
 
         [Test]
-        public Task Type_Enum_Extensible_String_getUnknownValue() => Test(async (host) =>
+        public Task Type_Enum_Extensible_String_putKnownValue() => Test(async (host) =>
         {
             Response response = await new ExtensibleClient(host, null).GetStringClient().PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
             Assert.AreEqual(204, response.Status);
