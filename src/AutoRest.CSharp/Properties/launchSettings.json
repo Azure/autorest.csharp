@@ -700,13 +700,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\http\\custom\\src\\Generated -n"
     },
-    "typespec-nonAzure-parameters/collection-format": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\collection-format\\src\\Generated -n"
-    },
     "typespec-nonAzure-client/naming": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\client\\naming\\src\\Generated -n"
+    },
+    "typespec-nonAzure-parameters/collection-format": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\collection-format\\src\\Generated -n"
     },
     "typespec-nonAzure-parameters/spread": {
       "commandName": "Project",
