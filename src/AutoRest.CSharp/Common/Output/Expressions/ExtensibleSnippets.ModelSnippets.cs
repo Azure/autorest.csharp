@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                     }
                     : new[]
                     {
-                        Return(BinaryContentExpression.Create(This, ModelReaderWriterOptionsExpression.Wire))
+                        Return(BinaryContentExpression.Create(This, ModelReaderWriterOptionsExpression.Wire, type))
                     };
                 return new Method
                 (

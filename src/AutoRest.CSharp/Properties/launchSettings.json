@@ -696,9 +696,21 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\duration\\src\\Generated -n"
     },
+    "typespec-nonAzure-authentication/api-key": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\api-key\\src\\Generated -n"
+    },
     "typespec-nonAzure-authentication/http/custom": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\http\\custom\\src\\Generated -n"
+    },
+    "typespec-nonAzure-client/naming": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\client\\naming\\src\\Generated -n"
+    },
+    "typespec-nonAzure-parameters/body-optionality": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\body-optionality\\src\\Generated -n"
     },
     "typespec-nonAzure-parameters/spread": {
       "commandName": "Project",
@@ -711,6 +723,18 @@
     "typespec-nonAzure-payload/multipart": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\multipart\\src\\Generated -n"
+    },
+    "typespec-nonAzure-serialization/encoded-name/json": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\serialization\\encoded-name\\json\\src\\Generated -n"
+    },
+    "typespec-nonAzure-server/endpoint/not-defined": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\server\\endpoint\\not-defined\\src\\Generated -n"
+    },
+    "typespec-nonAzure-special-words": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\special-words\\src\\Generated -n"
     },
     "typespec-nonAzure-type/array": {
       "commandName": "Project",
@@ -728,9 +752,21 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\empty\\src\\Generated -n"
     },
+    "typespec-nonAzure-type/model/inheritance/single-discriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\single-discriminator\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/model/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\usage\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/scalar": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\scalar\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/union": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\union\\src\\Generated -n"
     },
     "typespec-parameters/body-optionality": {
       "commandName": "Project",
