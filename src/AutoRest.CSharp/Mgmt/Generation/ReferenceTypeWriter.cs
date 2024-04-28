@@ -32,6 +32,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
             }
+            else if (MgmtReferenceType.IsReferenceType(schema.ObjectSchema))
+            {
+                if (Configuration.IsBranded)
+                {
+                    writer.UseNamespace("Azure.Core");
+                }
+                writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
+            }
         }
 
         protected override void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)

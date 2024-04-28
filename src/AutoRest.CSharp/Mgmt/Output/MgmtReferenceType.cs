@@ -34,6 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         };
 
         // ReferenceType is only applied to ResourceData and TrackedResourceData in custom code, not handled by generator
+        private static HashSet<string> ReferenceTypeModels = new HashSet<string>
+        {
+            "ResourceData",
+            "TrackedResourceData"
+        };
 
         public static bool IsPropertyReferenceType(Schema schema)
         {
@@ -58,12 +63,35 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public static bool IsTypeReferenceType(Schema schema)
         {
+            // reference types are only applied for Azure.ResourceManager
             if (!Configuration.MgmtConfiguration.IsArmCore)
             {
                 return false;
             }
 
             return TypeReferenceTypeModels.Contains(schema.Language.Default.Name);
+        }
+
+        public static bool IsReferenceType(ObjectType schema)
+        {
+            // reference types are only applied for Azure.ResourceManager
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+            {
+                return false;
+            }
+
+            return ReferenceTypeModels.Contains(schema.Declaration.Name);
+        }
+
+        public static bool IsReferenceType(Schema schema)
+        {
+            // reference types are only applied for Azure.ResourceManager
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+            {
+                return false;
+            }
+
+            return ReferenceTypeModels.Contains(schema.Language.Default.Name);
         }
 
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)

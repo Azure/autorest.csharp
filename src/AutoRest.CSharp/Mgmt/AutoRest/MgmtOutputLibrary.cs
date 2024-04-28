@@ -819,7 +819,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema or ChoiceSchema => new EnumType(_schemaToInputEnumMap[schema], schema, MgmtContext.Context),
-            ObjectSchema objectSchema => (MgmtReferenceType.IsPropertyReferenceType(schema) || MgmtReferenceType.IsTypeReferenceType(schema))
+            ObjectSchema objectSchema => (MgmtReferenceType.IsPropertyReferenceType(schema) || MgmtReferenceType.IsTypeReferenceType(schema) || MgmtReferenceType.IsReferenceType(schema))
                 ? new MgmtReferenceType(objectSchema)
                 : new MgmtObjectType(objectSchema),
             _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")
