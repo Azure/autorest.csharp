@@ -67,7 +67,8 @@
         "type/model/inheritance/single-discriminator",
         "type/model/usage",
         "type/scalar",
-        "type/union"
+        "type/union",
+        "special-words"
     ],
     "TestServerProjects": [
         "additionalProperties",
