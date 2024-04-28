@@ -32,6 +32,7 @@
         "encode/duration",
         "payload/content-negotiation",
         "payload/media-type",
+        "payload/multipart",
         "payload/pageable",
         "serialization/encoded-name/json",
         "server/endpoint/not-defined",
@@ -52,10 +53,24 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "authentication/api-key",
+        "authentication/http/custom",
+        "client/naming",
+        "encode/bytes",
+        "parameters/body-optionality",
+        "parameters/spread",
+        "payload/content-negotiation",
+        "payload/multipart",
         "type/array",
         "type/dictionary",
-        "encode/bytes",
-        "authentication/http/custom"
+        "type/enum/extensible",
+        "type/model/empty",
+        "type/model/usage",
+        "type/scalar",
+        "type/union",
+        "serialization/encoded-name/json",
+        "server/endpoint/not-defined",
+        "special-words"
     ],
     "TestServerProjects": [
         "additionalProperties",

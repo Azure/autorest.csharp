@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace OpenAI.Models
@@ -37,7 +38,7 @@ namespace OpenAI.Models
         /// and latency.
         /// </param>
         /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
-        public static CreateTranscriptionRequest CreateTranscriptionRequest(BinaryData file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
+        public static CreateTranscriptionRequest CreateTranscriptionRequest(Stream file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
         {
             return new CreateTranscriptionRequest(
                 file,
@@ -78,7 +79,7 @@ namespace OpenAI.Models
         /// automatically increase the temperature until certain thresholds are hit.
         /// </param>
         /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
-        public static CreateTranslationRequest CreateTranslationRequest(BinaryData file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
+        public static CreateTranslationRequest CreateTranslationRequest(Stream file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
         {
             return new CreateTranslationRequest(
                 file,
@@ -1129,7 +1130,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
-        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, BinaryData image = null, BinaryData mask = null, long? n = null, CreateImageEditRequestSize? size = null, CreateImageEditRequestResponseFormat? responseFormat = null, string user = null)
+        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageEditRequestSize? size = null, CreateImageEditRequestResponseFormat? responseFormat = null, string user = null)
         {
             return new CreateImageEditRequest(
                 prompt,
@@ -1152,7 +1153,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
-        public static CreateImageVariationRequest CreateImageVariationRequest(BinaryData image = null, long? n = null, CreateImageVariationRequestSize? size = null, CreateImageVariationRequestResponseFormat? responseFormat = null, string user = null)
+        public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageVariationRequestSize? size = null, CreateImageVariationRequestResponseFormat? responseFormat = null, string user = null)
         {
             return new CreateImageVariationRequest(
                 image,
