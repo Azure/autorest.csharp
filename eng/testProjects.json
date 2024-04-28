@@ -53,6 +53,7 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "authentication/api-key",
         "authentication/http/custom",
         "client/naming",
         "parameters/body-optionality",
