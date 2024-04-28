@@ -61,6 +61,7 @@
         "type/model/empty",
         "type/model/usage",
         "type/scalar",
+        "parameters/body-optionality",
         "parameters/spread",
         "payload/content-negotiation",
         "payload/multipart"
