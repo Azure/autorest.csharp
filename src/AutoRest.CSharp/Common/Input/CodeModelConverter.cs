@@ -622,8 +622,7 @@ namespace AutoRest.CSharp.Common.Input
             ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
             StringSchema stringSchema => CreateTypeForStringSchema(stringSchema, format, isNullable),
 
-            // TODO: Handle char case
-            CharSchema => InputPrimitiveType.String,
+            CharSchema => InputPrimitiveType.Char,
 
             AnySchema => InputIntrinsicType.Unknown,
             AnyObjectSchema => InputIntrinsicType.Unknown,
