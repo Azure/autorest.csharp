@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (parent is ModelTypeProvider parentModelType)
             {
-                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == "ToRequestContent"))
+                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.ToRequestContentName))
                     ? MethodSignatureModifiers.Override
                     : MethodSignatureModifiers.Virtual;
             }
@@ -733,7 +733,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (IncludeSerializer)
             {
-                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), Type);
+                var type = IsUnknownDerivedType ? Inherits! : Type;
+                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), type);
             }
         }
 
