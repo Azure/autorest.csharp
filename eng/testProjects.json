@@ -66,10 +66,6 @@
         "type/model/empty",
         "type/model/usage",
         "type/union",
-        "parameters/body-optionality",
-        "parameters/spread",
-        "payload/content-negotiation",
-        "payload/multipart",
         "server/endpoint/not-defined"
     ],
     "TestServerProjects": [
