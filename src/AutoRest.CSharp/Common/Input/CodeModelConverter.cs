@@ -303,7 +303,8 @@ namespace AutoRest.CSharp.Common.Input
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
-                Usage: GetUsage(usage),
+                Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains<string>("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
+                        | GetUsage(usage),
                 Properties: properties,
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
                 DerivedModels: derived,

@@ -6,9 +6,12 @@
   duration: 'P1D'
   number: 4
   sku: {
-    name: {
+    name1: {
       nestedName: 'overridenSku'
     }
+  }
+  unflattened: {
+    name: 'unflattenedOverride'
   }
   properties: {
     order: 3
