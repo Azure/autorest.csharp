@@ -8,7 +8,7 @@
 namespace _Type.Union.Models
 {
     /// <summary> The UD. </summary>
-    internal enum UD
+    public enum UD
     {
         /// <summary> up. </summary>
         Up,

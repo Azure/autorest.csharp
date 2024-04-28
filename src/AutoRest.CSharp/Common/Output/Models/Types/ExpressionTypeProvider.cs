@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types.System;
@@ -30,6 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
             }
+            yield return MultipartFormDataRequestContentProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
             if (Configuration.EnableBicepSerialization)

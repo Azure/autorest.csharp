@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -31,6 +32,8 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethod = clientMethod.ProtocolMethodSignature;
             var parametersDict = ProtocolToConvenienceParameterConverters.ToDictionary(converter => converter.Protocol.Name, converter => new ConvenienceParameterInfo(converter.Convenience, converter.ConvenienceSpread));
             var protocolInvocationExpressions = new List<ValueExpression>();
+            VariableReference? content = null;
+            bool isMultipartOperation = RequestMediaTypes != null && RequestMediaTypes.Count == 1 && RequestMediaTypes.Contains("multipart/form-data");
             foreach (var protocol in protocolMethod.Parameters)
             {
                 var (convenience, convenienceSpread) = parametersDict[protocol.Name];
@@ -58,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
                     // convert body to request content
                     if (convenienceSpread == null)
                     {
-                        var content = new VariableReference(protocol.Type, protocol.Name);
+                        content = new VariableReference(isMultipartOperation ? MultipartFormDataRequestContentProvider.Instance.Type : protocol.Type, protocol.Name);
                         yield return UsingDeclare(content, convenience.GetConversionToProtocol(protocol.Type, RequestMediaTypes?.FirstOrDefault()));
                         protocolInvocationExpressions.Add(content);
                     }
@@ -66,7 +69,16 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         // write some statements to put the spread back into a local variable
                         yield return GetSpreadConversion(convenienceSpread, convenience, out var spreadExpression);
-                        protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
+                        if (isMultipartOperation)
+                        {
+                            content = new VariableReference(MultipartFormDataRequestContentProvider.Instance.Type, protocol.Name);
+                            yield return UsingDeclare(content, spreadExpression.ToMultipartRequestContent());
+                            protocolInvocationExpressions.Add(content);
+                        }
+                        else
+                        {
+                            protocolInvocationExpressions.Add(spreadExpression.ToRequestContent());
+                        }
                     }
                 }
                 else
@@ -81,7 +93,14 @@ namespace AutoRest.CSharp.Output.Models
                     else
                     {
                         // if convenience parameter is null here, we just use the default value of the protocol parameter as value (we always do this even if the parameter is optional just in case there is an ordering issue)
-                        protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
+                        if (isMultipartOperation && protocol.Name == "contentType" && content != null)
+                        {
+                            protocolInvocationExpressions.Add(MultipartFormDataRequestContentProvider.Instance.ContentTypeProperty(content));
+                        }
+                        else
+                        {
+                            protocolInvocationExpressions.Add(DefaultOf(protocol.Type));
+                        }
                     }
                 }
             }
