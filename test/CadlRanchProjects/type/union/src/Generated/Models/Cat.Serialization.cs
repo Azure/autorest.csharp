@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    internal partial class Cat : IUtf8JsonSerializable, IJsonModel<Cat>
+    public partial class Cat : IUtf8JsonSerializable, IJsonModel<Cat>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cat>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
