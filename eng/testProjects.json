@@ -32,6 +32,7 @@
         "encode/duration",
         "payload/content-negotiation",
         "payload/media-type",
+        "payload/multipart",
         "payload/pageable",
         "serialization/encoded-name/json",
         "server/endpoint/not-defined",
@@ -52,10 +53,12 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "authentication/http/custom",
         "type/array",
         "type/dictionary",
+        "type/enum/extensible",
         "type/model/inheritance/single-discriminator",
-        "authentication/http/custom"
+        "payload/multipart"
     ],
     "TestServerProjects": [
         "additionalProperties",

@@ -242,6 +242,25 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
             writer.WriteObjectValue(ModelWithRequiredNullable, options);
+            writer.WritePropertyName("unionList"u8);
+            writer.WriteStartArray();
+            foreach (var item in UnionList)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -301,6 +320,7 @@ namespace FirstTestTypeSpec.Models
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             ModelWithRequiredNullableProperties modelWithRequiredNullable = default;
+            IList<BinaryData> unionList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -551,6 +571,23 @@ namespace FirstTestTypeSpec.Models
                     modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, options);
                     continue;
                 }
+                if (property.NameEquals("unionList"u8))
+                {
+                    List<BinaryData> array = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
+                    }
+                    unionList = array;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
@@ -579,6 +616,7 @@ namespace FirstTestTypeSpec.Models
                 readOnlyRequiredRecordUnknown,
                 readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
                 modelWithRequiredNullable,
+                unionList,
                 serializedAdditionalRawData);
         }
 
