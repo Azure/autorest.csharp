@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeDictionaryTests : CadlRanchTestBase
+    public class TypeDictionaryTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Dictionary_Int32Value_get() => Test(async (host) =>

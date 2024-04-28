@@ -484,7 +484,15 @@ namespace AutoRest.CSharp.Generation.Types
         public virtual CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, Arguments, isNullable)
-                : new CSharpType(Implementation, arguments: Arguments, isNullable: isNullable);
+                {
+                    Literal = Literal,
+                    UnionItemTypes = UnionItemTypes
+                }
+                : new CSharpType(Implementation, arguments: Arguments, isNullable: isNullable)
+                {
+                    Literal = Literal,
+                    UnionItemTypes = UnionItemTypes
+                };
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 

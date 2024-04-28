@@ -38,7 +38,7 @@ namespace Scm.Client.Naming
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         public virtual async Task<ClientResult> UnionEnumNameAsync(ClientExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = await UnionEnumNameAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -47,7 +47,7 @@ namespace Scm.Client.Naming
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         public virtual ClientResult UnionEnumName(ClientExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = UnionEnumName(content, null);
             return result;
         }
@@ -112,7 +112,7 @@ namespace Scm.Client.Naming
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         public virtual async Task<ClientResult> UnionEnumMemberNameAsync(ExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = await UnionEnumMemberNameAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -121,7 +121,7 @@ namespace Scm.Client.Naming
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         public virtual ClientResult UnionEnumMemberName(ExtensibleEnum body)
         {
-            using BinaryContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             ClientResult result = UnionEnumMemberName(content, null);
             return result;
         }
