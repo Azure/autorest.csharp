@@ -281,7 +281,7 @@ describe("Test getUsages", () => {
         assert(usages.roundTrips.includes("Foo"));
     });
 
-    it.skip("[TODO]: TCGC bug on discriminator. Test the usage of body polymorphism type in azure core resource operation.", async () => {
+    it("Test the usage of body polymorphism type in azure core resource operation.", async () => {
         const program = await typeSpecCompile(
             `
             @doc("This is a model.")

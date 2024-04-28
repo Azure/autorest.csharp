@@ -117,17 +117,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsServers), out propertyOverride);
-            if (Optional.IsCollectionDefined(DnsServers) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (DnsServers.Any() || hasPropertyOverride)
+                builder.Append("  dnsServers: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(DnsServers))
                 {
-                    builder.Append("  dnsServers: ");
-                    if (hasPropertyOverride)
+                    if (DnsServers.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  dnsServers: ");
                         builder.AppendLine("[");
                         foreach (var item in DnsServers)
                         {
