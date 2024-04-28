@@ -54,6 +54,8 @@
     ],
     "CadlRanchProjectsNonAzure":[
         "authentication/http/custom",
+        "client/naming",
+        "parameters/body-optionality",
         "parameters/spread",
         "payload/content-negotiation",
         "payload/multipart",
