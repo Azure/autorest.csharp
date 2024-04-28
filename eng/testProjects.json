@@ -55,6 +55,7 @@
     "CadlRanchProjectsNonAzure":[
         "type/array",
         "type/dictionary",
+        "type/enum/extensible",
         "authentication/http/custom",
         "payload/multipart"
     ],
