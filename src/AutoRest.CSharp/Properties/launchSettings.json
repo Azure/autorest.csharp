@@ -727,6 +727,10 @@
     "typespec-nonAzure-server/endpoint/not-defined": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\server\\endpoint\\not-defined\\src\\Generated -n"
+     },
+    "typespec-nonAzure-special-words": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\special-words\\src\\Generated -n"
     },
     "typespec-nonAzure-type/array": {
       "commandName": "Project",

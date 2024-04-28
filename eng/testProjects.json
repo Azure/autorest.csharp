@@ -67,7 +67,8 @@
         "type/model/usage",
         "type/scalar",
         "type/union",
-        "server/endpoint/not-defined"
+        "server/endpoint/not-defined",
+        "special-words"
     ],
     "TestServerProjects": [
         "additionalProperties",
