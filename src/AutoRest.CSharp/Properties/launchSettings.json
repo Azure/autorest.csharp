@@ -700,10 +700,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\http\\custom\\src\\Generated -n"
     },
-    "typespec-nonAzure-serialization/encoded-name/json": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\serialization\\encoded-name\\json\\src\\Generated -n"
-    },
     "typespec-nonAzure-client/naming": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\client\\naming\\src\\Generated -n"
@@ -719,6 +715,10 @@
     "typespec-nonAzure-payload/multipart": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\multipart\\src\\Generated -n"
+    },
+    "typespec-nonAzure-serialization/encoded-name/json": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\serialization\\encoded-name\\json\\src\\Generated -n"
     },
     "typespec-nonAzure-type/array": {
       "commandName": "Project",

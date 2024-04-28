@@ -62,8 +62,8 @@
         "type/model/usage",
         "parameters/spread",
         "payload/content-negotiation",
-        "payload/multipart"
-        "serialization/encoded-name/json",
+        "payload/multipart",
+        "serialization/encoded-name/json"
     ],
     "TestServerProjects": [
         "additionalProperties",
