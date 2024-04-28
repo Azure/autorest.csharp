@@ -129,8 +129,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            using BinaryContent content = image.ToBinaryContent();
-            ClientResult result = await CreateEditAsync(content, null).ConfigureAwait(false);
+            using MultipartFormDataBinaryContent content = image.ToMultipartBinaryBody();
+            ClientResult result = await CreateEditAsync(content, content.ContentType, null).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -142,8 +142,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            using BinaryContent content = image.ToBinaryContent();
-            ClientResult result = CreateEdit(content, null);
+            using MultipartFormDataBinaryContent content = image.ToMultipartBinaryBody();
+            ClientResult result = CreateEdit(content, content.ContentType, null);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -163,15 +163,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateEditAsync(BinaryContent content, RequestOptions options = null)
+        public virtual async Task<ClientResult> CreateEditAsync(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateEditRequest(content, options);
+            using PipelineMessage message = CreateCreateEditRequest(content, contentType, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
@@ -191,15 +192,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult CreateEdit(BinaryContent content, RequestOptions options = null)
+        public virtual ClientResult CreateEdit(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateEditRequest(content, options);
+            using PipelineMessage message = CreateCreateEditRequest(content, contentType, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -211,8 +213,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            using BinaryContent content = image.ToBinaryContent();
-            ClientResult result = await CreateVariationAsync(content, null).ConfigureAwait(false);
+            using MultipartFormDataBinaryContent content = image.ToMultipartBinaryBody();
+            ClientResult result = await CreateVariationAsync(content, content.ContentType, null).ConfigureAwait(false);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -224,8 +226,8 @@ namespace OpenAI
         {
             Argument.AssertNotNull(image, nameof(image));
 
-            using BinaryContent content = image.ToBinaryContent();
-            ClientResult result = CreateVariation(content, null);
+            using MultipartFormDataBinaryContent content = image.ToMultipartBinaryBody();
+            ClientResult result = CreateVariation(content, content.ContentType, null);
             return ClientResult.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -245,15 +247,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> CreateVariationAsync(BinaryContent content, RequestOptions options = null)
+        public virtual async Task<ClientResult> CreateVariationAsync(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateVariationRequest(content, options);
+            using PipelineMessage message = CreateCreateVariationRequest(content, contentType, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
@@ -273,15 +276,16 @@ namespace OpenAI
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult CreateVariation(BinaryContent content, RequestOptions options = null)
+        public virtual ClientResult CreateVariation(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateCreateVariationRequest(content, options);
+            using PipelineMessage message = CreateCreateVariationRequest(content, contentType, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -302,7 +306,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateCreateEditRequest(BinaryContent content, RequestOptions options)
+        internal PipelineMessage CreateCreateEditRequest(BinaryContent content, string contentType, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -313,13 +317,13 @@ namespace OpenAI
             uri.AppendPath("/images/edits", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", "multipart/form-data");
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
         }
 
-        internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, RequestOptions options)
+        internal PipelineMessage CreateCreateVariationRequest(BinaryContent content, string contentType, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -330,7 +334,7 @@ namespace OpenAI
             uri.AppendPath("/images/variations", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", "multipart/form-data");
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
