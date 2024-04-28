@@ -700,6 +700,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\http\\custom\\src\\Generated -n"
     },
+    "typespec-nonAzure-parameters/spread": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\parameters\\spread\\src\\Generated -n"
+    },
+    "typespec-nonAzure-payload/content-negotiation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\content-negotiation\\src\\Generated -n"
+    },
     "typespec-nonAzure-payload/multipart": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\multipart\\src\\Generated -n"
@@ -715,6 +723,14 @@
     "typespec-nonAzure-type/enum/extensible": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\enum\\extensible\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/model/empty": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\empty\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/model/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\usage\\src\\Generated -n"
     },
     "typespec-parameters/body-optionality": {
       "commandName": "Project",

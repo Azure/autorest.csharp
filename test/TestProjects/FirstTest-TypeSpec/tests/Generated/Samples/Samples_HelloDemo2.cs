@@ -63,6 +63,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
 
@@ -85,6 +89,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -131,6 +136,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
@@ -153,6 +162,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -176,7 +186,11 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            });
             Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
         }
 
@@ -201,7 +215,11 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            });
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
@@ -283,6 +301,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
 
@@ -322,6 +344,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -402,6 +425,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
@@ -441,6 +468,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -471,7 +499,11 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -519,7 +551,11 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -583,6 +619,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
 
@@ -605,6 +645,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -651,6 +692,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
@@ -673,6 +718,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -753,6 +799,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
 
@@ -792,6 +842,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
@@ -872,6 +923,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
@@ -911,6 +966,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            Console.WriteLine(result.GetProperty("unionList")[0].ToString());
         }
 
         [Test]
