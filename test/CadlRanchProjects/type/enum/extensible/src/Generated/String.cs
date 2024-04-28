@@ -230,7 +230,7 @@ namespace _Type._Enum.Extensible
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutKnownValueAsync(content, context).ConfigureAwait(false);
             return response;
@@ -242,7 +242,7 @@ namespace _Type._Enum.Extensible
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutKnownValue(content, context);
             return response;
@@ -332,7 +332,7 @@ namespace _Type._Enum.Extensible
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutUnknownValueAsync(content, context).ConfigureAwait(false);
             return response;
@@ -344,7 +344,7 @@ namespace _Type._Enum.Extensible
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutUnknownValue(content, context);
             return response;
