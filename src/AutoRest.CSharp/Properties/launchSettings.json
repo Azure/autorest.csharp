@@ -728,6 +728,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\serialization\\encoded-name\\json\\src\\Generated -n"
     },
+    "typespec-nonAzure-special-words": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\special-words\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/array": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\array\\src\\Generated -n"

@@ -67,7 +67,8 @@
         "type/model/usage",
         "type/scalar",
         "type/union",
-        "serialization/encoded-name/json"
+        "serialization/encoded-name/json",
+        "special-words"
     ],
     "TestServerProjects": [
         "additionalProperties",
