@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Scm._Type.Union.Models
 {
-    internal partial class Dog : IJsonModel<Dog>
+    public partial class Dog : IJsonModel<Dog>
     {
         void IJsonModel<Dog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {

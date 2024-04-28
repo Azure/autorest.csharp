@@ -5,7 +5,7 @@
 namespace Scm._Type.Union.Models
 {
     /// <summary> The LR. </summary>
-    internal enum LR
+    public enum LR
     {
         /// <summary> left. </summary>
         Left,
