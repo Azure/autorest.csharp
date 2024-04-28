@@ -65,6 +65,7 @@
         "type/enum/extensible",
         "type/model/empty",
         "type/model/usage",
+        "type/scalar",
         "type/union",
         "serialization/encoded-name/json"
     ],
