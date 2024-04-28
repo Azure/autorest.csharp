@@ -54,6 +54,7 @@
     ],
     "CadlRanchProjectsNonAzure":[
         "authentication/http/custom",
+        "client/naming",
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
