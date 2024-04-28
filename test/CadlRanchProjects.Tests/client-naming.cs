@@ -63,8 +63,7 @@ namespace CadlRanchProjects.Tests
         public Task Client_Naming_Header_response() => Test(async (host) =>
         {
             var response = await new NamingClient(host, null).ResponseAsync();
-            var results = response.Headers.Contains("default-name");
-            Assert.AreEqual(true, results);
+            Assert.IsTrue(response.Headers.Contains("default-name"));
             foreach (var header in response.Headers)
             {
                 var key = header.Name;

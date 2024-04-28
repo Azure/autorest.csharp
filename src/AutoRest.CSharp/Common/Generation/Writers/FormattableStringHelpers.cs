@@ -116,6 +116,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
+                        {
+                            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+                            if (mediaType == BodyMediaType.Multipart)
+                            {
+                                return $"{parameter.Name:I}.{Configuration.ApiTypes.ToMultipartRequestContentName}()";
+                            }
+                            break;
+                        }
                 }
             }
 

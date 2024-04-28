@@ -140,42 +140,45 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride);
-            if (Optional.IsDefined(Algorithm) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  algorithm: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Algorithm))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  algorithm: ");
                     builder.AppendLine($"'{Algorithm.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParameterNameOverride), out propertyOverride);
-            if (Optional.IsCollectionDefined(ParameterNameOverride) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (ParameterNameOverride.Any() || hasPropertyOverride)
+                builder.Append("  parameterNameOverride: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(ParameterNameOverride))
                 {
-                    builder.Append("  parameterNameOverride: ");
-                    if (hasPropertyOverride)
+                    if (ParameterNameOverride.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  parameterNameOverride: ");
                         builder.AppendLine("[");
                         foreach (var item in ParameterNameOverride)
                         {

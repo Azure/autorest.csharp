@@ -151,57 +151,61 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SuccessfulInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(SuccessfulInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  successfulInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SuccessfulInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  successfulInstanceCount: ");
                     builder.AppendLine($"{SuccessfulInstanceCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FailedInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(FailedInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  failedInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(FailedInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  failedInstanceCount: ");
                     builder.AppendLine($"{FailedInstanceCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(InProgressInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(InProgressInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  inProgressInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(InProgressInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  inProgressInstanceCount: ");
                     builder.AppendLine($"{InProgressInstanceCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PendingInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(PendingInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  pendingInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PendingInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  pendingInstanceCount: ");
                     builder.AppendLine($"{PendingInstanceCount.Value}");
                 }
             }
