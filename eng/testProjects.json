@@ -53,17 +53,23 @@
         "client/structure/two-operation-group"
     ],
     "CadlRanchProjectsNonAzure":[
+        "authentication/api-key",
         "authentication/http/custom",
         "client/naming",
+        "parameters/body-optionality",
+        "parameters/spread",
+        "payload/content-negotiation",
+        "payload/multipart",
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
         "type/model/empty",
         "type/model/usage",
-        "parameters/body-optionality",
-        "parameters/spread",
-        "payload/content-negotiation",
-        "payload/multipart"
+        "type/scalar",
+        "type/union",
+        "serialization/encoded-name/json",
+        "server/endpoint/not-defined",
+        "special-words"
     ],
     "TestServerProjects": [
         "additionalProperties",
