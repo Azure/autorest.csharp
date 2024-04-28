@@ -54,16 +54,15 @@
     ],
     "CadlRanchProjectsNonAzure":[
         "authentication/http/custom",
+        "parameters/spread",
+        "payload/content-negotiation",
+        "payload/multipart",
         "type/array",
         "type/dictionary",
-        "type/union",
-        "authentication/http/custom"
         "type/enum/extensible",
         "type/model/empty",
         "type/model/usage",
-        "parameters/spread",
-        "payload/content-negotiation",
-        "payload/multipart"
+        "type/union"
     ],
     "TestServerProjects": [
         "additionalProperties",

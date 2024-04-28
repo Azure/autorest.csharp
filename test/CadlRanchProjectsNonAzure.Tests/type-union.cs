@@ -185,9 +185,7 @@ namespace CadlRanchProjectsNonAzure.Tests
 
         private static void AssertEqual(BinaryData source, BinaryData target)
         {
-            var sourceData = source.ToArray();
-            var targetDate = target.ToArray();
-            CollectionAssert.AreEqual(sourceData, targetDate);
+            BinaryDataAssert.AreEqual(source, target);
         }
 
         private void AssertEqual(Cat cat1, Cat cat2)
