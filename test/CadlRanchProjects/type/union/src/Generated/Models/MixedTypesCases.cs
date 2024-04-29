@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _Type.Union.Models
 {
@@ -50,18 +51,21 @@ namespace _Type.Union.Models
         /// <param name="literal"> This should be receive/send the "a" variant. </param>
         /// <param name="int"> This should be receive/send the int variant. </param>
         /// <param name="boolean"> This should be receive/send the boolean variant. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model"/>, <paramref name="literal"/>, <paramref name="int"/> or <paramref name="boolean"/> is null. </exception>
-        public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean)
+        /// <param name="array"> This should be receive/send 4 element with Cat, "a", int, and boolean. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/>, <paramref name="literal"/>, <paramref name="int"/>, <paramref name="boolean"/> or <paramref name="array"/> is null. </exception>
+        public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean, IEnumerable<BinaryData> array)
         {
             Argument.AssertNotNull(model, nameof(model));
             Argument.AssertNotNull(literal, nameof(literal));
             Argument.AssertNotNull(@int, nameof(@int));
             Argument.AssertNotNull(boolean, nameof(boolean));
+            Argument.AssertNotNull(array, nameof(array));
 
             Model = model;
             Literal = literal;
             Int = @int;
             Boolean = boolean;
+            Array = array.ToList();
         }
 
         /// <summary> Initializes a new instance of <see cref="MixedTypesCases"/>. </summary>
@@ -69,13 +73,15 @@ namespace _Type.Union.Models
         /// <param name="literal"> This should be receive/send the "a" variant. </param>
         /// <param name="int"> This should be receive/send the int variant. </param>
         /// <param name="boolean"> This should be receive/send the boolean variant. </param>
+        /// <param name="array"> This should be receive/send 4 element with Cat, "a", int, and boolean. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean, IList<BinaryData> array, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Literal = literal;
             Int = @int;
             Boolean = boolean;
+            Array = array;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -276,5 +282,53 @@ namespace _Type.Union.Models
         /// </para>
         /// </summary>
         public BinaryData Boolean { get; set; }
+        /// <summary>
+        /// This should be receive/send 4 element with Cat, "a", int, and boolean
+        /// <para>
+        /// To assign an object to the element of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="Cat"/></description>
+        /// </item>
+        /// <item>
+        /// <description>"a"</description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="int"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="bool"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public IList<BinaryData> Array { get; }
     }
 }
