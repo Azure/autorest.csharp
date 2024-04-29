@@ -7,7 +7,7 @@ using Scm._Type.Model.Inheritance.EnumDiscriminator.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace CadlRanchProCadlRanchProjectsNonAzurejects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
     public class EnumDiscriminatorTests : CadlRanchNonAzureTestBase
     {

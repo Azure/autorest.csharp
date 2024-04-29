@@ -7,7 +7,7 @@ using Scm._Type.Model.Inheritance.NotDiscriminated.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace CadlRanchPCadlRanchProjectsNonAzurerojects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
     public class NotDiscriminatedTests : CadlRanchNonAzureTestBase
     {
