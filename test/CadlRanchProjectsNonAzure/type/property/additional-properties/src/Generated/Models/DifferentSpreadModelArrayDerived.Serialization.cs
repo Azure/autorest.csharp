@@ -28,15 +28,44 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-                    writer.WriteObjectValue(item0, options);
+                    if (item0 == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item0);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item0))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
                 writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -62,8 +91,11 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 return null;
             }
             IList<ModelForRecord> derivedProp = default;
-            IDictionary<string, IList<ModelForRecord>> additionalProperties = default;
-            Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
+            string knownProp = default;
+            IDictionary<string, IList<BinaryData>> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, IList<BinaryData>> additionalPropertiesDictionary = new Dictionary<string, IList<BinaryData>>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("derivedProp"u8))
@@ -76,15 +108,36 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                     derivedProp = array;
                     continue;
                 }
-                List<ModelForRecord> array0 = new List<ModelForRecord>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("knownProp"u8))
                 {
-                    array0.Add(ModelForRecord.DeserializeModelForRecord(item, options));
+                    knownProp = property.Value.GetString();
+                    continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, array0);
+                if (property.Value.ValueKind == JsonValueKind.Array)
+                {
+                    List<BinaryData> array = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, array);
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadModelArrayDerived(derivedProp, additionalProperties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new DifferentSpreadModelArrayDerived(knownProp, additionalProperties, serializedAdditionalRawData, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadModelArrayDerived>.Write(ModelReaderWriterOptions options)
@@ -120,14 +173,14 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static DifferentSpreadModelArrayDerived FromResponse(PipelineResponse response)
+        internal static new DifferentSpreadModelArrayDerived FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadModelArrayDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
-        internal virtual BinaryContent ToBinaryContent()
+        internal override BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
