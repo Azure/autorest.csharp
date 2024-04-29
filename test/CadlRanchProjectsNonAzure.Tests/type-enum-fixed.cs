@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
@@ -14,7 +13,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Enum_Fixed_String_getKnownValue() => Test(async (host) =>
         {
             var response = await new FixedClient(host, null).GetStringClient().GetKnownValueAsync();
-            Assert.AreEqual(DaysOfWeekEnum.Monday, (DaysOfWeekEnum)response);
+            Assert.AreEqual(DaysOfWeekEnum.Monday, response.Value);
         });
 
         [Test]
