@@ -155,50 +155,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             SerializationParameters = serializationParameters;
         }
 
+        // TODO -- when we consolidate the schemas into input types, we should remove this method and move it into BuilderHelpers
         private static CSharpType CreateAdditionalPropertiesPropertyType(TypeFactory typeFactory, InputDictionaryType additionalPropertiesInputType)
         {
-            // TODO -- we only construct additional properties when the type is verifiable, because we always need the property to fall into the bucket of serialized additional raw data field when it does not fit the additional properties.
-            var type = typeFactory.CreateType(additionalPropertiesInputType);
-            var arguments = type.Arguments;
-            var keyType = arguments[0];
-            var valueType = arguments[1];
+            var originalType = typeFactory.CreateType(additionalPropertiesInputType);
 
-            return type.MakeGenericType(new[] { ReplaceUnverifiableType(keyType, typeFactory), ReplaceUnverifiableType(valueType, typeFactory) });
-        }
-
-        private static CSharpType ReplaceUnverifiableType(CSharpType type, TypeFactory typeFactory)
-        {
-            // when the type is System.Object
-            if (type.EqualsIgnoreNullable(typeFactory.UnknownType))
-            {
-                return type;
-            }
-
-            // when the type is a verifiable type
-            if (BuilderHelpers.IsVerifiableType(type))
-            {
-                return type;
-            }
-
-            // when the type is a union
-            if (type.IsUnion)
-            {
-                return type;
-            }
-
-            // otherwise the type is not a verifiable type
-            // replace for list
-            if (type.IsList)
-            {
-                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], typeFactory) });
-            }
-            // replace for dictionary
-            if (type.IsDictionary)
-            {
-                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], typeFactory), ReplaceUnverifiableType(type.Arguments[1], typeFactory) });
-            }
-            // for the other cases, wrap them in a union
-            return CSharpType.FromUnion(new[] { type }, type.IsNullable);
+            return BuilderHelpers.CreateAdditionalPropertiesPropertyType(originalType, typeFactory.UnknownType);
         }
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)

@@ -107,8 +107,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // the same name.
                 var existingMember = ModelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
+                // find the type of the additional properties
+                var additionalPropertiesType = BuilderHelpers.CreateAdditionalPropertiesPropertyType(ImplementsDictionaryType, _typeFactory.UnknownType);
+
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", additionalPropertiesType, "public", existingMember, _typeFactory),
                     "Additional Properties",
                     true,
                     null
@@ -118,9 +121,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private ObjectTypeProperty? _rawDataField;
-        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage) _usage;
+        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage)_usage;
 
+        private ObjectTypeProperty? _rawDataField;
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -383,6 +386,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
+
+        private CSharpType? CreateInheritedDictionaryType()
+        {
+            foreach (ComplexSchema complexSchema in ObjectSchema.Parents!.Immediate)
+            {
+                if (complexSchema is DictionarySchema dictionarySchema)
+                {
+                    return new CSharpType(
+                        _usage.HasFlag(SchemaTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
+                        typeof(string),
+                        _typeFactory.CreateType(dictionarySchema.ElementType, false));
+                };
+            }
+
+            return null;
+        }
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
@@ -669,22 +688,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Debug.Assert(!type.IsFrameworkType);
                 return type;
             }
-            return null;
-        }
-
-        private CSharpType? CreateInheritedDictionaryType()
-        {
-            foreach (ComplexSchema complexSchema in ObjectSchema.Parents!.Immediate)
-            {
-                if (complexSchema is DictionarySchema dictionarySchema)
-                {
-                    return new CSharpType(
-                        _usage.HasFlag(SchemaTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
-                        typeof(string),
-                        _typeFactory.CreateType(dictionarySchema.ElementType, false));
-                };
-            }
-
             return null;
         }
 

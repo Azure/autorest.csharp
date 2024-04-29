@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -355,6 +356,51 @@ namespace AutoRest.CSharp.Output.Builders
                 modifiers |= MethodSignatureModifiers.Override;
             }
             return modifiers;
+        }
+
+        public static CSharpType CreateAdditionalPropertiesPropertyType(CSharpType originalType, CSharpType unknownType)
+        {
+            // TODO -- we only construct additional properties when the type is verifiable, because we always need the property to fall into the bucket of serialized additional raw data field when it does not fit the additional properties.
+            var arguments = originalType.Arguments;
+            var keyType = arguments[0];
+            var valueType = arguments[1];
+
+            return originalType.MakeGenericType(new[] { ReplaceUnverifiableType(keyType, unknownType), ReplaceUnverifiableType(valueType, unknownType) });
+        }
+
+        private static CSharpType ReplaceUnverifiableType(CSharpType type, CSharpType unknownType)
+        {
+            // when the type is System.Object
+            if (type.EqualsIgnoreNullable(unknownType))
+            {
+                return type;
+            }
+
+            // when the type is a verifiable type
+            if (BuilderHelpers.IsVerifiableType(type))
+            {
+                return type;
+            }
+
+            // when the type is a union
+            if (type.IsUnion)
+            {
+                return type;
+            }
+
+            // otherwise the type is not a verifiable type
+            // replace for list
+            if (type.IsList)
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], unknownType) });
+            }
+            // replace for dictionary
+            if (type.IsDictionary)
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], unknownType), ReplaceUnverifiableType(type.Arguments[1], unknownType) });
+            }
+            // for the other cases, wrap them in a union
+            return CSharpType.FromUnion(new[] { type }, type.IsNullable);
         }
 
         private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>
