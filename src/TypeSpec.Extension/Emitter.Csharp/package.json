@@ -40,7 +40,7 @@
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-client-generator-core": ">=0.36.0 <1.0.0",
+        "@azure-tools/typespec-client-generator-core": "0.42.0-dev.8 || >=0.36.0 <1.0.0",
         "@typespec/compiler": ">=0.50.0 <1.0.0",
         "@typespec/http": ">=0.50.0 <1.0.0",
         "@typespec/rest": ">=0.50.0 <1.0.0",
@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.41.0",
-        "@azure-tools/typespec-client-generator-core": "0.41.5",
+        "@azure-tools/typespec-client-generator-core": "0.42.0-dev.8",
         "@typespec/compiler": "0.55.0",
         "@typespec/eslint-config-typespec": "0.55.0",
         "@typespec/eslint-plugin": "0.55.0",
