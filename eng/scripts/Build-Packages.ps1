@@ -32,7 +32,6 @@ if ($BuildNumber) {
     # set package versions
     $versionTag = $Prerelease ? "-alpha" : "-beta"
 
-    # TODO: Remove 'x' suffix before merge    
     $generatorVersion = "$generatorVersion$versionTag.$BuildNumber"
     Write-Host "Setting output variable 'generatorVersion' to $generatorVersion"
     Write-Host "##vso[task.setvariable variable=generatorVersion;isoutput=true]$generatorVersion"
