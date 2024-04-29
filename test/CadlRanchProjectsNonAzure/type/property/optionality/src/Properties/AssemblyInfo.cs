@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Scm._Type.Property.Optional.Tests")]
+[assembly: InternalsVisibleTo("Scm._Type.Property.Optionality.Tests")]

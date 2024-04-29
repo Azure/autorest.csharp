@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Scm._Type.Property.Optional.csproj" />
+    <ProjectReference Include="..\src\Scm._Type.Property.Optionality.csproj" />
   </ItemGroup>
 
   <ItemGroup>

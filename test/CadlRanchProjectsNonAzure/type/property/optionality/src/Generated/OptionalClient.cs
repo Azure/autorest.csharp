@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Scm._Type.Property.Optional
+namespace Scm._Type.Property.Optionality
 {
     // Data plane generated client.
     /// <summary> The Optional service client. </summary>

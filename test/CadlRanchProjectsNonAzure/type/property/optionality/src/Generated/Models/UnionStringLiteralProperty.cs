@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm._Type.Property.Optional.Models
+namespace Scm._Type.Property.Optionality.Models
 {
     /// <summary> Model with union of string literal property. </summary>
     public partial class UnionStringLiteralProperty

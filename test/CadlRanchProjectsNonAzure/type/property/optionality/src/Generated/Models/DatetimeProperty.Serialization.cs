@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Scm._Type.Property.Optional.Models
+namespace Scm._Type.Property.Optionality.Models
 {
     public partial class DatetimeProperty : IJsonModel<DatetimeProperty>
     {

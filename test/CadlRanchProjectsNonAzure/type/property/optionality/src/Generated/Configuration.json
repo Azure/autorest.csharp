@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Scm._Type.Property.Optional",
-  "library-name": "Scm._Type.Property.Optional",
+  "namespace": "Scm._Type.Property.Optionality",
+  "library-name": "Scm._Type.Property.Optionality",
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"

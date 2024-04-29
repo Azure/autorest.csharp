@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Scm._Type.Property.Optional
+namespace Scm._Type.Property.Optionality
 {
     internal class ClientUriBuilder
     {

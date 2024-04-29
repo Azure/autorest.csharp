@@ -1,3 +1,3 @@
 options:
   "@azure-tools/typespec-csharp":
-    namespace: Scm._Type.Property.Optional
+    namespace: Scm._Type.Property.Optionality

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm._Type.Property.Optional.Models
+namespace Scm._Type.Property.Optionality.Models
 {
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty

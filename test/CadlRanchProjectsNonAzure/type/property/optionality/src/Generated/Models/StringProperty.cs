@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm._Type.Property.Optional.Models
+namespace Scm._Type.Property.Optionality.Models
 {
     /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class StringProperty

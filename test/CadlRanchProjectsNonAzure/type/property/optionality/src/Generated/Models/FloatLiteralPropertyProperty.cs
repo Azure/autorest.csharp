@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Scm._Type.Property.Optional.Models
+namespace Scm._Type.Property.Optionality.Models
 {
     /// <summary> The FloatLiteralProperty_property. </summary>
     public readonly partial struct FloatLiteralPropertyProperty : IEquatable<FloatLiteralPropertyProperty>

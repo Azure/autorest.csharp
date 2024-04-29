@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Scm._Type.Property.Optional
+namespace Scm._Type.Property.Optionality
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

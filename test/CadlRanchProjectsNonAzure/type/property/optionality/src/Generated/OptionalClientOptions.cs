@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Scm._Type.Property.Optional
+namespace Scm._Type.Property.Optionality
 {
     /// <summary> Client options for OptionalClient. </summary>
     public partial class OptionalClientOptions : ClientPipelineOptions

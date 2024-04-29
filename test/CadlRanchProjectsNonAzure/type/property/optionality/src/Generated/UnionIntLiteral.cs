@@ -6,9 +6,9 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using Scm._Type.Property.Optional.Models;
+using Scm._Type.Property.Optionality.Models;
 
-namespace Scm._Type.Property.Optional
+namespace Scm._Type.Property.Optionality
 {
     // Data plane generated sub-client.
     /// <summary> The UnionIntLiteral sub-client. </summary>
