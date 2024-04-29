@@ -38,7 +38,25 @@ try {
     $currentVersion = node -p -e "require('./package.json').version";
     $devVersion = "$currentVersion-beta.$BuildNumber"
 
-    npm install @autorest/csharp@$autorestVersion --save-exact
+    $attemptCount = 0
+    $maxAttempts = 3
+    while($true) {
+        Write-Host "Installing @autorest/csharp@$autorestVersion and updating package.json"
+        npm install @autorest/csharp@$autorestVersion --save-exact
+        $attemptCount += 1
+
+        if($LASTEXITCODE -eq 0) {
+            break
+        }
+
+        if($attemptCount -eq $maxAttempts) {
+            Write-Host "Failed to install @autorest/csharp@$autorestVersion. Exiting..."
+            exit 1
+        }
+
+        Write-Host "Failed to install @autorest/csharp@$autorestVersion. Retrying in 5 seconds..."
+        Start-Sleep -Seconds 5
+    }
 
     Write-Host "Setting TypeSpec Emitter version to $devVersion"
     npm version --no-git-tag-version $devVersion | Out-Null;
