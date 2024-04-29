@@ -131,8 +131,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (_rawDataField != null)
                     return _rawDataField;
 
-                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                if (!ShouldHaveRawData)
                     return null;
+
+                // if we have an additional properties property, and its value type is also BinaryData, we should not have a raw data field
+                if (AdditionalPropertiesProperty != null)
+                {
+                    var valueType = AdditionalPropertiesProperty.Declaration.Type.ElementType;
+                    if (valueType.EqualsIgnoreNullable(_typeFactory.UnknownType))
+                    {
+                        return null;
+                    }
+                }
 
                 // when this model has derived types, the accessibility should change from private to `protected internal`
                 string accessibility = HasDerivedTypes() ? "private protected" : "private";

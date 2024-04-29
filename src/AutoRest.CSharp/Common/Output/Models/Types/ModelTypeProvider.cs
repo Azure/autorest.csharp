@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (AdditionalPropertiesProperty != null)
                 {
                     var valueType = AdditionalPropertiesProperty.Declaration.Type.ElementType;
-                    if (valueType.EqualsIgnoreNullable(typeof(BinaryData)) || valueType.EqualsIgnoreNullable(typeof(object)))
+                    if (valueType.EqualsIgnoreNullable(_typeFactory.UnknownType))
                     {
                         return null;
                     }
