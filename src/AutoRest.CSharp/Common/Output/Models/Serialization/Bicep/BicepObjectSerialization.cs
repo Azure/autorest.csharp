@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
@@ -13,15 +14,21 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
     {
         public BicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
         {
-            IsResourceData = EvaluateIsResourceData(jsonObjectSerialization);;
+            IsResourceData = EvaluateIsResourceData(jsonObjectSerialization);
+            CustomizationType = objectType.GetExistingType();
 
-            Properties = jsonObjectSerialization.Properties.Select(p =>
+            Serializations = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
 
+            Properties = objectType.Properties;
             FlattenedProperties = objectType.Properties
                 .Where(p => p.FlattenedProperty != null)
                 .Select(p => p.FlattenedProperty!).ToList();
         }
+
+        public INamedTypeSymbol? CustomizationType { get; set; }
+
+        public IReadOnlyList<ObjectTypeProperty> Properties { get; set; }
 
         private static bool EvaluateIsResourceData(JsonObjectSerialization jsonObjectSerialization)
         {
@@ -53,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 
         public IList<FlattenedObjectTypeProperty> FlattenedProperties { get; }
 
-        public IEnumerable<BicepPropertySerialization> Properties { get; }
+        public IEnumerable<BicepPropertySerialization> Serializations { get; }
 
         public bool IsResourceData { get; }
     }

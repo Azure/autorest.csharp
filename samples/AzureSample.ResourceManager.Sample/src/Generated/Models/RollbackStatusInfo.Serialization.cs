@@ -136,43 +136,46 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SuccessfullyRolledbackInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  successfullyRolledbackInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  successfullyRolledbackInstanceCount: ");
                     builder.AppendLine($"{SuccessfullyRolledbackInstanceCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FailedRolledbackInstanceCount), out propertyOverride);
-            if (Optional.IsDefined(FailedRolledbackInstanceCount) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  failedRolledbackInstanceCount: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(FailedRolledbackInstanceCount))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  failedRolledbackInstanceCount: ");
                     builder.AppendLine($"{FailedRolledbackInstanceCount.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollbackError), out propertyOverride);
-            if (Optional.IsDefined(RollbackError) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  rollbackError: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(RollbackError))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  rollbackError: ");
                     BicepSerializationHelpers.AppendChildObject(builder, RollbackError, options, 2, false, "  rollbackError: ");
                 }
             }

@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<Bird>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

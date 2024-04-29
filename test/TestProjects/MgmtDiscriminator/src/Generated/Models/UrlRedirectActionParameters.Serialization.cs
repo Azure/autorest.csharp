@@ -174,51 +174,55 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride);
-            builder.Append("  redirectType: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  redirectType: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  redirectType: ");
                 builder.AppendLine($"'{RedirectType.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride);
-            if (Optional.IsDefined(DestinationProtocol) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  destinationProtocol: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DestinationProtocol))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  destinationProtocol: ");
                     builder.AppendLine($"'{DestinationProtocol.Value.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride);
-            if (Optional.IsDefined(CustomPath) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  customPath: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CustomPath))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  customPath: ");
                     if (CustomPath.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -232,15 +236,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride);
-            if (Optional.IsDefined(CustomHostname) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  customHostname: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CustomHostname))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  customHostname: ");
                     if (CustomHostname.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -254,15 +259,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride);
-            if (Optional.IsDefined(CustomQueryString) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  customQueryString: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CustomQueryString))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  customQueryString: ");
                     if (CustomQueryString.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -276,15 +282,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride);
-            if (Optional.IsDefined(CustomFragment) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  customFragment: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CustomFragment))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  customFragment: ");
                     if (CustomFragment.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

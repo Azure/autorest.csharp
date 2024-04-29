@@ -67,6 +67,10 @@ namespace FirstTestTypeSpec.Tests
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
         }
@@ -93,7 +97,11 @@ namespace FirstTestTypeSpec.Tests
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            });
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
@@ -176,6 +184,10 @@ namespace FirstTestTypeSpec.Tests
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
         }
@@ -209,7 +221,11 @@ namespace FirstTestTypeSpec.Tests
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -274,6 +290,10 @@ namespace FirstTestTypeSpec.Tests
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
         }
@@ -357,6 +377,10 @@ namespace FirstTestTypeSpec.Tests
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
+                unionList = new object[]
+            {
+"<unionList>"
+            },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
         }
