@@ -176,7 +176,8 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendMixedTypesOnlyOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetMixedTypesClient().SendAsync(new MixedTypesCases(ModelReaderWriter.Write(new Cat("test")),
+            var response = await new UnionClient(host, null).GetMixedTypesClient().SendAsync(new MixedTypesCases(
+                ModelReaderWriter.Write(new Cat("test")),
                 BinaryData.FromObjectAsJson("a"),
                 BinaryData.FromObjectAsJson(2),
                 BinaryData.FromObjectAsJson(true),
