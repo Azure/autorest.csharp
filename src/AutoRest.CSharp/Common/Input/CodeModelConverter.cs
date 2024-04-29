@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Common.Input
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
-                Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains<string>("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
+                Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
                         | GetUsage(usage),
                 Properties: properties,
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
@@ -351,9 +351,9 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                SerializationFormats: schema.SerializationFormats.Select(x => x.ToString()).ToArray())
+                SerializationFormats: GetSerializationFormats(schema))
             {
-                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
+                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select<global::AutoRest.CSharp.Input.ObjectSchema, global::AutoRest.CSharp.Common.Input.InputModelType>(GetOrCreateModel).ToList<global::AutoRest.CSharp.Common.Input.InputModelType>() : global::System.Array.Empty<global::AutoRest.CSharp.Common.Input.InputModelType>(),
                 Serialization = GetSerialization(schema, usage),
                 SpecName = schema.Language.Default.SerializedName
             };
@@ -363,6 +363,17 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache[schema] = derived;
 
             return model;
+        }
+
+        private static IReadOnlyList<string> GetSerializationFormats(ObjectSchema schema)
+        {
+            var formats = schema.SerializationFormats.Select(x => x.ToString().ToLowerInvariant()).ToList();
+
+            if (schema.Extensions != null)
+            {
+                formats.AddRange(schema.Extensions.Formats);
+            }
+            return formats;
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)

@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return ReferenceTypeModels.Contains(schema.Name);
         }
 
-        public MgmtReferenceType(InputModelType inputModel, string? name = default, string? nameSpace = default) : base(inputModel, name, nameSpace)
+        public MgmtReferenceType(InputModelType inputModel) : base(inputModel)
         {
             JsonConverter = (IsPropertyReferenceType(inputModel) || IsTypeReferenceType(InputModel))
                 ? new JsonConverterProvider(this, _sourceInputModel)

@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory;
             DefaultName = inputModel.CSharpName();
+            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, defaultNamespace);
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
@@ -65,16 +66,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             SkipInitializerConstructor = IsUnknownDerivedType;
             IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(InputModel) || MgmtReferenceType.IsReferenceType(InputModel);
 
-            // TODO: handle this later
-            IsInheritableCommonType = false;
-            //IsInheritableCommonType = InputModel is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
-
             JsonConverter = _usage.HasFlag(InputModelTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal InputModelType InputModel { get; }
 
         protected override string DefaultName { get; }
+        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
 
         private SerializableObjectType? _defaultDerivedType;
@@ -718,7 +716,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _supportedSerializationFormats.Contains("Json") ? _serializationBuilder.BuildJsonObjectSerialization(InputModel, this) : null;
+            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _supportedSerializationFormats.Contains("json") ? _serializationBuilder.BuildJsonObjectSerialization(InputModel, this) : null;
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
@@ -737,7 +735,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         // TODO: implement this
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains("Xml")
+            return _supportedSerializationFormats.Contains("xml")
                 ? SerializationBuilder.BuildXmlObjectSerialization(InputModel.Serialization?.Xml?.Name ?? InputModel.Name, this, _typeFactory)
                 : null;
         }

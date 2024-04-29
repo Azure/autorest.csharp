@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             {
                                 case MgmtReferenceType:
                                     // when we get a reference type, we should still wrap it into a reference type
-                                    replacedTypes.Add(schema, new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(schema, new MgmtReferenceType(schema));
                                     break;
                                 default:
                                     // other types will go into SystemObjectType

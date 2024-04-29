@@ -20,30 +20,29 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(InputModelType inputModel, string? name = null, string? nameSpace = null, SerializableObjectType? defaultDerivedType = null)
-            : base(inputModel, MgmtContext.Context.DefaultNamespace, MgmtContext.TypeFactory, MgmtContext.Context.SourceInputModel, defaultDerivedType)
+        public MgmtObjectType(InputModelType inputModel, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModel, inputModel.Namespace ?? MgmtContext.Context.DefaultNamespace, MgmtContext.TypeFactory, MgmtContext.Context.SourceInputModel, defaultDerivedType)
         {
-            _defaultName = name;
-            _defaultNamespace = nameSpace;
+            _defaultName = inputModel.Name;
         }
 
         protected virtual bool IsResourceType => false;
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
+        protected override string DefaultName => _defaultName ??= GetDefaultName();
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
+        private string GetDefaultName()
         {
-            var name = inputModel.CSharpName();
-            return isResourceType ? name + "Data" : name;
+            var name = InputModel.CSharpName();
+            return IsResourceType ? name + "Data" : name;
         }
 
-        private static string GetDefaultNamespace(bool isResourceType)
+        private string GetDefaultNamespace(BuildContext context)
         {
-            return isResourceType ? MgmtContext.DefaultNamespace : $"{Configuration.Namespace}.Models";
+            return IsResourceType ? context.DefaultNamespace : GetDefaultModelNamespace(InputModel.Namespace, context.DefaultNamespace);
         }
 
         private HashSet<string> GetParentPropertyNames()

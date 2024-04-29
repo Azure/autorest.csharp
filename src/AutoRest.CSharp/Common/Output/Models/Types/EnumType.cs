@@ -23,8 +23,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(Configuration.Generation1ConvenienceClient ? input.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
+        public EnumType(InputEnumType input, string defaultNameSpace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+            : base(input.Namespace ?? defaultNameSpace, sourceInputModel)
         {
             IsEnum = true;
             _allowedValues = input.AllowedValues;

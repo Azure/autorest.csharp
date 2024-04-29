@@ -14,12 +14,12 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ResourceData : MgmtObjectType
     {
         public ResourceData(InputModelType inputModel)
-            : this(inputModel, null, null, null)
+            : this(inputModel, null)
         {
         }
 
-        public ResourceData(InputModelType inputModel, string? name = null, string? nameSpace = null, SerializableObjectType? defaultDerivedType = null)
-            : base(inputModel, name, nameSpace, defaultDerivedType)
+        public ResourceData(InputModelType inputModel, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModel, defaultDerivedType)
         {
             _clientPrefix = inputModel.Name;
         }
