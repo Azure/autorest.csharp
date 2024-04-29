@@ -8,6 +8,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -23,26 +24,25 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtObjectType(InputModelType inputModel, SerializableObjectType? defaultDerivedType = null)
             : base(inputModel, inputModel.Namespace ?? MgmtContext.Context.DefaultNamespace, MgmtContext.TypeFactory, MgmtContext.Context.SourceInputModel, defaultDerivedType)
         {
-            _defaultName = inputModel.Name;
         }
 
         protected virtual bool IsResourceType => false;
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= GetDefaultName();
+        protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        private string GetDefaultName()
+        private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
-            var name = InputModel.CSharpName();
-            return IsResourceType ? name + "Data" : name;
+            var name = inputModel.CSharpName();
+            return isResourceType ? name + "Data" : name;
         }
 
-        private string GetDefaultNamespace(BuildContext context)
+        private static string GetDefaultNamespace(BuildContext context, InputModelType inputModel, bool isResourceType)
         {
-            return IsResourceType ? context.DefaultNamespace : GetDefaultModelNamespace(InputModel.Namespace, context.DefaultNamespace);
+            return isResourceType ? context.DefaultNamespace : GetDefaultModelNamespace(inputModel.Namespace, context.DefaultNamespace);
         }
 
         private HashSet<string> GetParentPropertyNames()

@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     null,
                     null,
                     false,
-                    new string[] { "Json" })
+                    new string[] { "json" })
                 {
                     IsUnknownDiscriminatorModel = true
                 };
@@ -819,7 +819,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             InputEnumType enumType => new EnumType(enumType, MgmtContext.Context),
             InputModelType inputModel => (MgmtReferenceType.IsPropertyReferenceType(inputModel) || MgmtReferenceType.IsTypeReferenceType(inputModel) || MgmtReferenceType.IsReferenceType(inputModel))
                 ? new MgmtReferenceType(inputModel)
-                : new MgmtObjectType(inputModel),
+                : new MgmtObjectType(inputModel, defaultDerivedType: defaultDerivedType),
             _ => throw new NotImplementedException($"Unhandled schema type {inputType.GetType()} with name {inputType.Name}")
         };
 

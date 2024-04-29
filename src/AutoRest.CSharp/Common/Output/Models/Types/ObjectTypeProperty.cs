@@ -322,7 +322,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 if (type.FrameworkType == typeof(BinaryData))
-            {
+                {
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
@@ -453,7 +453,7 @@ Examples:
                 }
             }
             else if (valueType.Implementation is ObjectType objectType)
-        {
+            {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
             return updatedDescription ?? $"";
