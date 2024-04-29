@@ -7,13 +7,11 @@
 
 using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Azure.Core;
 using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(SystemDataContentConverter))]
     public partial class SystemDataContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -120,20 +118,6 @@ namespace Azure.ResourceManager.Fake.Models
                 lastModifiedBy,
                 lastModifiedByType,
                 lastModifiedAt);
-        }
-
-        internal partial class SystemDataContentConverter : JsonConverter<SystemDataContent>
-        {
-            public override void Write(Utf8JsonWriter writer, SystemDataContent model, JsonSerializerOptions options)
-            {
-                writer.WriteObjectValue(model);
-            }
-
-            public override SystemDataContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeSystemDataContent(document.RootElement);
-            }
         }
     }
 }

@@ -14,26 +14,33 @@ namespace AutoRest.CSharp.Mgmt.Generation
         // TODO: handle this with custom code
         protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
-            //if (objectType is not SchemaObjectType schema)
-            //    return;
-            //var extensions = schema.InputModel.Extensions;
-            //if (extensions != null)
-            //{
-            //    if (Configuration.IsBranded)
-            //        writer.UseNamespace("Azure.Core");
-            //    if (extensions.MgmtReferenceType)
-            //    {
-            //        writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
-            //    }
-            //    else if (extensions.MgmtPropertyReferenceType)
-            //    {
-            //        writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
-            //    }
-            //    else if (extensions.MgmtTypeReferenceType)
-            //    {
-            //        writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
-            //    }
-            //}
+            if (objectType is not SchemaObjectType schema)
+                return;
+
+            if (MgmtReferenceType.IsPropertyReferenceType(schema.InputModel))
+            {
+                if (Configuration.IsBranded)
+                {
+                    writer.UseNamespace("Azure.Core");
+                }
+                writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
+            }
+            else if (MgmtReferenceType.IsTypeReferenceType(schema.InputModel))
+            {
+                if (Configuration.IsBranded)
+                {
+                    writer.UseNamespace("Azure.Core");
+                }
+                writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
+            }
+            else if (MgmtReferenceType.IsReferenceType(schema.InputModel))
+            {
+                if (Configuration.IsBranded)
+                {
+                    writer.UseNamespace("Azure.Core");
+                }
+                writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}(new string[]{{\"SystemData\"}})]");
+            }
         }
 
         protected override void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)

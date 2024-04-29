@@ -5,16 +5,12 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The check availability request body. </summary>
-    [PropertyReferenceType]
     public partial class CheckNameAvailabilityContent
     {
         /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityContent"/>. </summary>
-        [InitializationConstructor]
         public CheckNameAvailabilityContent()
         {
         }
@@ -22,8 +18,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The name of the resource for which availability needs to be checked. </param>
         /// <param name="resourceType"> The resource type. </param>
-        [SerializationConstructor]
-        internal CheckNameAvailabilityContent(string name, ResourceType resourceType)
+        internal CheckNameAvailabilityContent(string name, string resourceType)
         {
             Name = name;
             ResourceType = resourceType;
@@ -32,6 +27,6 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> The name of the resource for which availability needs to be checked. </summary>
         public string Name { get; set; }
         /// <summary> The resource type. </summary>
-        public ResourceType ResourceType { get; set; }
+        public string ResourceType { get; set; }
     }
 }

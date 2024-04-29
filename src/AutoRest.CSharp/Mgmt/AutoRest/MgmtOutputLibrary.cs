@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Reflection.Metadata.Ecma335;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -21,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -818,10 +817,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private TypeProvider BuildModel(InputType inputType, MgmtObjectType? defaultDerivedType = null) => inputType switch
         {
             InputEnumType enumType => new EnumType(enumType, MgmtContext.Context),
-            // TODO: handle this when regen resource manager
-            // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
-            InputModelType inputModel => new MgmtObjectType(inputModel, defaultDerivedType: defaultDerivedType),
-            _ => throw new NotImplementedException($"Unhandled input type {inputType.GetType()} with name {inputType.Name}")
+            InputModelType inputModel => (MgmtReferenceType.IsPropertyReferenceType(inputModel) || MgmtReferenceType.IsTypeReferenceType(inputModel) || MgmtReferenceType.IsReferenceType(inputModel))
+                ? new MgmtReferenceType(inputModel)
+                : new MgmtObjectType(inputModel),
+            _ => throw new NotImplementedException($"Unhandled schema type {inputType.GetType()} with name {inputType.Name}")
         };
 
         private TypeProvider BuildResourceData(InputType inputType, MgmtObjectType? defaultDerivedType)

@@ -16,9 +16,9 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -63,6 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;
+            IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(InputModel) || MgmtReferenceType.IsReferenceType(InputModel);
 
             // TODO: handle this later
             IsInheritableCommonType = false;
@@ -77,7 +78,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; } = "public";
 
         private SerializableObjectType? _defaultDerivedType;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null;
+
+        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -716,7 +718,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return _supportedSerializationFormats.Contains("Json") ? _serializationBuilder.BuildJsonObjectSerialization(InputModel, this) : null;
+            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _supportedSerializationFormats.Contains("Json") ? _serializationBuilder.BuildJsonObjectSerialization(InputModel, this) : null;
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)

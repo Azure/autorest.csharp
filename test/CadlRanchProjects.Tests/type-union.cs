@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -71,7 +72,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendIntsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(BinaryData.FromString("2"));
+            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(BinaryData.FromObjectAsJson(2));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -86,7 +87,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendFloatsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetFloatsOnlyClient().SendAsync(BinaryData.FromString("2.2"));
+            var response = await new UnionClient(host, null).GetFloatsOnlyClient().SendAsync(BinaryData.FromObjectAsJson(2.2));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -101,7 +102,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendModelsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetModelsOnlyClient().SendAsync(BinaryData.FromObjectAsJson(new { name = "test" }));
+            var response = await new UnionClient(host, null).GetModelsOnlyClient().SendAsync(ModelReaderWriter.Write(new Cat("test")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -175,7 +176,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendMixedTypesOnlyOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetMixedTypesClient().SendAsync(new MixedTypesCases(BinaryData.FromObjectAsJson(new { name = "test" }),
+            var response = await new UnionClient(host, null).GetMixedTypesClient().SendAsync(new MixedTypesCases(ModelReaderWriter.Write(new Cat("test")),
                 BinaryData.FromObjectAsJson("a"),
                 BinaryData.FromObjectAsJson(2),
                 BinaryData.FromObjectAsJson(true)));

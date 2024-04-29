@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Fake.Models;
 using NUnit.Framework;
@@ -23,14 +22,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private const string ReferenceNamespace = "Azure.ResourceManager.Fake.Models";
         private const string ProjectNamespace = "MgmtReferenceTypes.Models";
         private IEnumerable<Type>? _referenceTypes;
-        private IEnumerable<Type>? _projectTypes;
-        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceDataContent)).GetTypes().Where(
+        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(TrackedResourceData)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ReferenceNamespace &&
-            !t.IsEnum);
-        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceDataContent)).GetTypes().Where(
-            t => t.IsPublic &&
-            t.Namespace == ProjectNamespace &&
             !t.IsEnum);
 
         protected override IEnumerable<Type> MyTypes() => ReferenceTypes;
@@ -52,16 +46,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(MgmtReferenceTypesResourceDataContent), ReferenceNamespace)]
-        [TestCase(typeof(TrackedResource), ReferenceNamespace)]
-        [TestCase(typeof(MgmtReferenceTypesSku), ReferenceNamespace)]
-        [TestCase(typeof(MgmtReferenceTypesSkuTier), ReferenceNamespace)]
         [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
-        [TestCase(typeof(PrivateLinkResourceData), ReferenceNamespace)]
-        [TestCase(typeof(PrivateLinkResourceList), ReferenceNamespace)]
-        [TestCase(typeof(PrivateEndpointConnectionData), ReferenceNamespace)]
-        [TestCase(typeof(PrivateEndpointConnectionList), ReferenceNamespace)]
         public void ValidateNamespace(Type typeToTest, string expectedNamespace)
         {
             //all should be resources.models namespace from referencetype
@@ -69,27 +55,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedNamespace, typeToTest.Namespace);
         }
 
-        [TestCase(typeof(MgmtReferenceTypesResourceDataContent), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(MgmtReferenceTypesSku), typeof(PropertyReferenceTypeAttribute))]
-        [TestCase(typeof(PrivateLinkResourceData), typeof(TypeReferenceTypeAttribute))]
-        [TestCase(typeof(PrivateLinkResourceList), typeof(TypeReferenceTypeAttribute))]
-        [TestCase(typeof(PrivateEndpointConnectionData), typeof(TypeReferenceTypeAttribute))]
-        [TestCase(typeof(PrivateEndpointConnectionList), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(TrackedResourceData), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(OperationStatusResult), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(KeyVaultProperties), typeof(PropertyReferenceTypeAttribute))]
         public void ValidateReferrenceTypeAttributes(Type referenceType, Type attributeType)
         {
             Assert.IsNotNull(referenceType.GetCustomAttribute(attributeType), $"ReferenceType attribute was not found for {referenceType.Name}");
             var ctors = referenceType.GetConstructors();
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute)) != null), $"InitializationConstructor attribute was not found for {referenceType.Name}");
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(SerializationConstructorAttribute)) != null), $"SerializationConstructor attribute was not found for {referenceType.Name}");
-        }
-
-        [Test]
-        public void ValidateResponseErrorFromAzureCore()
-        {
-            var property = typeof(ErrorResponse).GetProperty("Error");
-            Assert.IsNotNull(property);
-            Assert.AreEqual(typeof(ResponseError), property.PropertyType);
         }
     }
 }
