@@ -47,7 +47,7 @@
                 }
             ]
         },
-        "TrackedResource": {
+        "TrackedResourceData": {
             "title": "Tracked Resource",
             "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
             "type": "object",
@@ -555,7 +555,7 @@
                 "modelAsString": true
             }
         },
-        "encryptionProperties": {
+        "operationStatusResult": {
             "description": "Configuration of key for data encryption",
             "type": "object",
             "properties": {

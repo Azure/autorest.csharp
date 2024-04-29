@@ -10,20 +10,20 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Configuration of key for data encryption. </summary>
-    [PropertyReferenceType]
-    public partial class EncryptionProperties
+    [TypeReferenceType]
+    public partial class OperationStatusResult
     {
-        /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationStatusResult"/>. </summary>
         [InitializationConstructor]
-        public EncryptionProperties()
+        public OperationStatusResult()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationStatusResult"/>. </summary>
         /// <param name="status"> Indicates whether or not the encryption is enabled for container registry. </param>
         /// <param name="keyVaultProperties"> Key vault properties. </param>
         [SerializationConstructor]
-        internal EncryptionProperties(EncryptionStatus? status, KeyVaultProperties keyVaultProperties)
+        protected OperationStatusResult(EncryptionStatus? status, KeyVaultProperties keyVaultProperties)
         {
             Status = status;
             KeyVaultProperties = keyVaultProperties;

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.UseNamespace("Azure.Core");
                 }
-                writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
+                writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}(new string[]{{\"SystemData\"}})]");
             }
         }
 

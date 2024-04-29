@@ -74,7 +74,7 @@ schemas: !Schemas
           - create
       language: !Languages 
         default:
-          name: TrackedResourceLocation
+          name: TrackedResourceDataLocation
           description: The geo-location where the resource lives
       protocol: !Protocols {}
     - !StringSchema &ref_19
@@ -615,7 +615,7 @@ schemas: !Schemas
       elementType: *ref_1
       language: !Languages 
         default:
-          name: TrackedResourceTags
+          name: TrackedResourceDataTags
           description: Resource tags.
       protocol: !Protocols {}
   anyObjects:
@@ -703,7 +703,7 @@ schemas: !Schemas
               x-namespace: Azure.ResourceManager.Fake.Models
             language: !Languages 
               default:
-                name: TrackedResource
+                name: TrackedResourceData
                 description: The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
                 namespace: ''
                 summary: Tracked Resource
@@ -1354,7 +1354,7 @@ schemas: !Schemas
         x-namespace: Azure.ResourceManager.Fake.Models
       language: !Languages 
         default:
-          name: EncryptionProperties
+          name: OperationStatusResult
           description: Configuration of key for data encryption
           namespace: ''
       protocol: !Protocols {}

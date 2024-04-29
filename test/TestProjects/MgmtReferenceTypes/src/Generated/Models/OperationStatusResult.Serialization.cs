@@ -13,8 +13,8 @@ using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(EncryptionPropertiesConverter))]
-    public partial class EncryptionProperties : IUtf8JsonSerializable
+    [JsonConverter(typeof(OperationStatusResultConverter))]
+    public partial class OperationStatusResult : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element)
+        internal static OperationStatusResult DeserializeOperationStatusResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -61,20 +61,20 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new EncryptionProperties(status, keyVaultProperties);
+            return new OperationStatusResult(status, keyVaultProperties);
         }
 
-        internal partial class EncryptionPropertiesConverter : JsonConverter<EncryptionProperties>
+        internal partial class OperationStatusResultConverter : JsonConverter<OperationStatusResult>
         {
-            public override void Write(Utf8JsonWriter writer, EncryptionProperties model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, OperationStatusResult model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
 
-            public override EncryptionProperties Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override OperationStatusResult Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeEncryptionProperties(document.RootElement);
+                return DeserializeOperationStatusResult(document.RootElement);
             }
         }
     }
