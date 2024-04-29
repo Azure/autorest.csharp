@@ -6,9 +6,9 @@ using NUnit.Framework;
 using Scm._Type._Enum.Fixed;
 using Scm._Type._Enum.Fixed.Models;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class TypeEnumFixedTests : CadlRanchTestBase
+    public class TypeEnumFixedTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Enum_Fixed_String_getKnownValue() => Test(async (host) =>
