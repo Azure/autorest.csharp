@@ -57,6 +57,25 @@ namespace Scm._Type.Union.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
+            writer.WritePropertyName("array"u8);
+            writer.WriteStartArray();
+            foreach (var item in Array)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -99,6 +118,7 @@ namespace Scm._Type.Union.Models
             BinaryData literal = default;
             BinaryData @int = default;
             BinaryData boolean = default;
+            IList<BinaryData> array = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -123,13 +143,36 @@ namespace Scm._Type.Union.Models
                     boolean = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("array"u8))
+                {
+                    List<BinaryData> array0 = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array0.Add(null);
+                        }
+                        else
+                        {
+                            array0.Add(BinaryData.FromString(item.GetRawText()));
+                        }
+                    }
+                    array = array0;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new MixedTypesCases(model, literal, @int, boolean, serializedAdditionalRawData);
+            return new MixedTypesCases(
+                model,
+                literal,
+                @int,
+                boolean,
+                array,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedTypesCases>.Write(ModelReaderWriterOptions options)
