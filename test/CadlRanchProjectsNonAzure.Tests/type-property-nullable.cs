@@ -44,12 +44,8 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Type_Property_Nullable_String_patchNull() => Test(async (host) =>
         {
-            var value = new
-            {
-                requiredProperty = "foo",
-                //nullableProperty = null
-            };
-            var response = await new NullableClient(host, null).GetStringClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
+            var response = await new NullableClient(host, null).GetStringClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
@@ -85,7 +81,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Nullable_Bytes_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetBytesClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            var response = await new NullableClient(host, null).GetBytesClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
@@ -121,7 +117,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Nullable_Datetime_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetDatetimeClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            var response = await new NullableClient(host, null).GetDatetimeClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
@@ -157,7 +153,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Nullable_Duration_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetDurationClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            var response = await new NullableClient(host, null).GetDurationClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
@@ -196,7 +192,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Nullable_CollectionsByte_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
@@ -245,7 +241,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Nullable_CollectionsModel_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetCollectionsModelClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromObjectAsJson(value)));
+            var response = await new NullableClient(host, null).GetCollectionsModelClient().PatchNullAsync(BinaryContent.Create(BinaryData.FromString(value)));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
