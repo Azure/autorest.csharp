@@ -5,7 +5,6 @@ using System;
 using System.Xml;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -35,5 +34,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         }
 
         public MethodBodyStatement WriteObjectValue(ValueExpression value, string? nameHint) => Extensible.XmlWriter.WriteObjectValue(this, value, nameHint);
+
+        public MethodBodyStatement Flush()
+            => new InvokeInstanceMethodStatement(this, nameof(XmlWriter.Flush), Array.Empty<ValueExpression>(), false);
+
+        public MethodBodyStatement FlushAsync(ValueExpression? cancellationToken = null)
+        {
+            var arguments = cancellationToken is null
+                ? Array.Empty<ValueExpression>()
+                : new[] { cancellationToken };
+            return new InvokeInstanceMethodStatement(this, nameof(XmlWriter.FlushAsync), arguments, true);
+        }
     }
 }

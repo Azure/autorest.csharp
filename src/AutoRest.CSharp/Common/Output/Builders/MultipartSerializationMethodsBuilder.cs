@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             /*return BinaryData.FromStream(stream);*/
                             Return(BinaryDataExpression.FromStream(stream, false)),
                             /*return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));*/
-                            Return(New.Instance(typeof(BinaryData), new[]{ new InvokeInstanceMethodExpression((new StreamExpression(stream)).GetBuffer, "AsMemory", new[] { Literal(0), new CastExpression(stream.Property("Position"), typeof(int)) }, null, false) }))
+                            Return(New.Instance(typeof(BinaryData), new[]{ new InvokeInstanceMethodExpression(new StreamExpression(stream).GetBuffer(), "AsMemory", new[] { Literal(0), new CastExpression(stream.Property("Position"), typeof(int)) }, null, false) }))
                             ),
                         };
         }

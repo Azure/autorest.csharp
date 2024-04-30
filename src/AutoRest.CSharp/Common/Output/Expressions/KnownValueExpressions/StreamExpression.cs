@@ -12,7 +12,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public MethodBodyStatement CopyTo(StreamExpression destination) => new InvokeInstanceMethodStatement(Untyped, nameof(Stream.CopyTo), destination);
 
-        public ValueExpression Position => new TypedMemberExpression(this, nameof(Stream.Position), typeof(long));
-        public ValueExpression GetBuffer => new InvokeInstanceMethodExpression(this, nameof(MemoryStream.GetBuffer), Array.Empty<ValueExpression>(), null, false);
+        public LongExpression Length => new(Property(nameof(Stream.Length)));
+        public LongExpression Position => new(Property(nameof(Stream.Position)));
+        public ValueExpression GetBuffer() => new InvokeInstanceMethodExpression(this, nameof(MemoryStream.GetBuffer), Array.Empty<ValueExpression>(), null, false);
     }
 }

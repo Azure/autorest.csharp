@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return MultipartFormDataRequestContentProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
+            yield return XmlRequestContentProvider.Instance;
             if (Configuration.EnableBicepSerialization)
             {
                 yield return BicepSerializationTypeProvider.Instance;

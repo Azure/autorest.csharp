@@ -59,19 +59,19 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             {
                 var messageVar = new VariableReference(typeof(HttpMessage), "message");
                 message = messageVar;
-                return Snippets.UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+                return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
             }
 
             public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)
             {
-                var contentVar = new VariableReference(typeof(XmlWriterContent), "content");
+                var contentVar = new VariableReference(XmlRequestContentProvider.Instance.Type, "content");
                 content = contentVar;
-                writer = new XmlWriterContentExpression(content).XmlWriter;
-                return Snippets.Var(contentVar, Snippets.New.Instance(typeof(XmlWriterContent)));
+                writer = XmlRequestContentProvider.Instance.XmlWriterProperty(content);
+                return Var(contentVar, New.Instance(XmlRequestContentProvider.Instance.Type));
             }
 
             public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)
-                => Snippets.Return(new HttpPipelineExpression(pipeline).ProcessHeadAsBoolMessage(new HttpMessageExpression(message), clientDiagnostics, new RequestContextExpression(KnownParameters.RequestContext), async));
+                => Return(new HttpPipelineExpression(pipeline).ProcessHeadAsBoolMessage(new HttpMessageExpression(message), clientDiagnostics, new RequestContextExpression(KnownParameters.RequestContext), async));
 
             public override TypedValueExpression InvokeServiceOperationCall(TypedValueExpression pipeline, TypedValueExpression message, bool async)
                 => new HttpPipelineExpression(pipeline).ProcessMessage(new HttpMessageExpression(message), new RequestContextExpression(KnownParameters.RequestContext), null, async);

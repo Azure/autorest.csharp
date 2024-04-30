@@ -81,9 +81,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
 
-        public static MethodBodyStatement Declare(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
-            => Declare(name, value, d => new XmlWriterContentExpression(d), out variable);
-
         public static MethodBodyStatement Declare(string name, TypedValueExpression value, out TypedValueExpression variable)
         {
             var declaration = new VariableReference(value.Type, name);
@@ -135,9 +132,6 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static MethodBodyStatement Var(string name, XDocumentExpression value, out XDocumentExpression variable)
             => Var(name, value, d => new XDocumentExpression(d), out variable);
-
-        public static MethodBodyStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
-            => Var(name, value, d => new XmlWriterContentExpression(d), out variable);
 
         public static MethodBodyStatement Var(string name, TypedValueExpression value, out TypedValueExpression variable)
         {

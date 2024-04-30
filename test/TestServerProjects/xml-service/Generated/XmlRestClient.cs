@@ -107,7 +107,7 @@ namespace xml_service
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(model, "RootWithRefAndNoMeta");
             request.Content = content;
             return message;
@@ -226,7 +226,7 @@ namespace xml_service
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(model, "RootWithRefAndMeta");
             request.Content = content;
             return message;
@@ -346,7 +346,7 @@ namespace xml_service
             request.Uri = uri;
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
             request.Content = content;
             return message;
@@ -466,7 +466,7 @@ namespace xml_service
             request.Uri = uri;
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(wrappedLists, "AppleBarrel");
             request.Content = content;
             return message;
@@ -629,7 +629,7 @@ namespace xml_service
             uri.AppendPath("/xml/empty-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
             request.Content = content;
             return message;
@@ -748,7 +748,7 @@ namespace xml_service
             uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(appleBarrel, "AppleBarrel");
             request.Content = content;
             return message;
@@ -877,7 +877,7 @@ namespace xml_service
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteStartElement("bananas");
             foreach (var item in bananas)
             {
@@ -1011,7 +1011,7 @@ namespace xml_service
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteStartElement("bananas");
             foreach (var item in bananas)
             {
@@ -1145,7 +1145,7 @@ namespace xml_service
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteStartElement("bananas");
             foreach (var item in bananas)
             {
@@ -1269,7 +1269,7 @@ namespace xml_service
             uri.AppendPath("/xml/empty-child-element", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(banana, "banana");
             request.Content = content;
             return message;
@@ -1452,7 +1452,7 @@ namespace xml_service
             uri.AppendQuery("restype", "service", true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(properties, "StorageServiceProperties");
             request.Content = content;
             return message;
@@ -1585,7 +1585,7 @@ namespace xml_service
             uri.AppendQuery("restype", "container", true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteStartElement("SignedIdentifiers");
             foreach (var item in properties)
             {
@@ -1943,7 +1943,7 @@ namespace xml_service
             request.Uri = uri;
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(slideshow, "ModelWithByteProperty");
             request.Content = content;
             return message;
@@ -2063,7 +2063,7 @@ namespace xml_service
             request.Uri = uri;
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
-            var content = new XmlWriterContent();
+            var content = new XmlWriterRequestContent();
             content.XmlWriter.WriteObjectValue(model, "ModelWithUrlProperty");
             request.Content = content;
             return message;
