@@ -377,7 +377,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             // when the type is a verifiable type
-            if (BuilderHelpers.IsVerifiableType(type))
+            if (IsVerifiableType(type))
             {
                 return type;
             }
