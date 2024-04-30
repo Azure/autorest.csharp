@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Azure.Core;
 
-namespace FirstTestTypeSpec
+namespace AzureSample.Storage.Tables
 {
     internal partial class XmlWriterRequestContent : RequestContent
     {

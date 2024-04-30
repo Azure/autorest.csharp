@@ -7,7 +7,6 @@
 
 using System;
 using System.Xml.Linq;
-using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {

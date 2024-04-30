@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace xml_service
 {
-    internal class XmlWriterRequestContent : RequestContent
+    internal partial class XmlWriterRequestContent : RequestContent
     {
         private readonly MemoryStream _stream;
         private readonly RequestContent _content;
@@ -30,7 +30,7 @@ namespace xml_service
 
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellationToken = default)
         {
-            await XmlWriter.FlushAsync().ConfigureAwait(false);
+            XmlWriter.Flush();
             await _content.WriteToAsync(stream, cancellationToken).ConfigureAwait(false);
         }
 

@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var cancellationToken = (ValueExpression)KnownParameters.CancellationTokenParameter;
             var body = new MethodBodyStatement[]
             {
-                writer.FlushAsync(),
+                writer.Flush(),
                 new InvokeInstanceMethodStatement(content, WriteToAsync, new[] { stream, cancellationToken }, true)
             };
 

@@ -34,13 +34,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return MultipartFormDataRequestContentProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
-            yield return XmlRequestContentProvider.Instance;
+            if (Configuration.IsBranded)
+            {
+                // xml is not implemented in non-azure libraries yet
+                yield return XmlRequestContentProvider.Instance;
+                yield return XElementExtensionsProvider.Instance;
+                yield return XmlWriterExtensionsProvider.Instance;
+            }
             if (Configuration.EnableBicepSerialization)
             {
                 yield return BicepSerializationTypeProvider.Instance;
             }
-            yield return XElementExtensionsProvider.Instance;
-            yield return XmlWriterExtensionsProvider.Instance;
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
