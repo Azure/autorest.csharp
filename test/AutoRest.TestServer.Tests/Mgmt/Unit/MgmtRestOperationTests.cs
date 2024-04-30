@@ -92,11 +92,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 helperNamespace: "");
         }
 
-        private void TestPair(ResourceMatchType expected, RequestMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
+        private void TestPair(ResourceMatchType expected, string httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
             RequestPath resourcePath = RequestPath.FromString(resourcePathStr);
             RequestPath requestPath = RequestPath.FromString(requestPathStr);
-            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
+            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(new RequestMethod(httpMethod), resourcePath, requestPath, isList));
         }
 
         [TestCase(ResourceMatchType.ParentList, "GET", true,
@@ -109,7 +109,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventSubscriptions")]
         public void ValidateScopeListMatching(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
@@ -136,7 +136,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/scm",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/basicPublishingCredentialsPolicies/scm")]
         public void ValidateMatchingSegments(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ParentList, "GET", true,
            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{continuouswebjobsName}",
@@ -168,7 +168,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase(ResourceMatchType.AncestorList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")]
-        public void ValidateListMatchingSegments(ResourceMatchType expected, RequestMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+        public void ValidateListMatchingSegments(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
             => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.Context, "POST", false,
@@ -178,7 +178,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute")]
         public void PostMethodOnMultipleLevels(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.None, "GET", false,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs",
@@ -193,13 +193,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")]
         public void StaticSingletonEnumeration(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory")]
         public void DifferentReferenceName(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ChildList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
@@ -208,7 +208,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates")]
         public void ParentListAndChildList(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.None, "POST", false,
             "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}",
@@ -220,7 +220,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability")]
         public void ValidateCheckNameAvailability(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
@@ -241,7 +241,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
         public void PolicyDefinitionMultiParent(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
@@ -256,12 +256,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups")]
         public void ChildListDifferentRoot(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ParentList, "GET", true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}",
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes")]
         public void ValidateCommonRestTestProject(ResourceMatchType expected, string httpMethod, bool isList, string resourcePathStr, string requestPathStr)
-            => TestPair(expected, new RequestMethod(httpMethod), resourcePathStr, requestPathStr, isList);
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
     }
 }
