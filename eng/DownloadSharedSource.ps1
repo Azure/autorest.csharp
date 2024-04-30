@@ -75,7 +75,6 @@ $files = @(
     'StringRequestContent.cs',
     'TypeFormatters.cs',
     'XmlWriterContent.cs',
-    'XmlWriterExtensions.cs',
     'TrimmingAttribute.cs')
 $sourcePath = "$clonedPath/sdk/core/Azure.Core/src/Shared/"
 $destinationPath = "$repoRoot/src/assets/Azure.Core.Shared"

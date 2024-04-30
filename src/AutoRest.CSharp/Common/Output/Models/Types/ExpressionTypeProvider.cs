@@ -39,6 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return BicepSerializationTypeProvider.Instance;
             }
             yield return XElementExtensionsProvider.Instance;
+            yield return XmlWriterExtensionsProvider.Instance;
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)

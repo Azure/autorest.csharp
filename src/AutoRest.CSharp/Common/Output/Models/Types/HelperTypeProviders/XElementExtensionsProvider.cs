@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 new SwitchCaseExpression(Literal("U"), _typeFormatters.FromBase64UrlString(element.Value)),
                 new SwitchCaseExpression(Literal("D"), InvokeConvert.FromBase64String(element.Value)),
-                SwitchCaseExpression.Default(ThrowExpression(New.ArgumentException(format, new FormattableStringExpression("Format is not supported: '{{{0}}}'", format))))
+                SwitchCaseExpression.Default(ThrowExpression(New.ArgumentException(format, new FormattableStringExpression("Format is not supported: '{0}'", format))))
             });
 
             return new(signature, body);

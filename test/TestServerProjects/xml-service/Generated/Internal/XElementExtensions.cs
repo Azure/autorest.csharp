@@ -16,7 +16,7 @@ namespace xml_service
         {
             "U" => ModelSerializationExtensions.TypeFormatters.FromBase64UrlString(element.Value),
             "D" => Convert.FromBase64String(element.Value),
-            _ => throw new ArgumentException($"Format is not supported: '{{format}}'", nameof(format))
+            _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
         };
 
         public static DateTimeOffset GetDateTimeOffsetValue(this XElement element, string format) => format switch

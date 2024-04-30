@@ -24,6 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ArgumentOutOfRangeException(ValueExpression valueParameter, string message, bool wrapInNameOf = true)
                 => Instance(typeof(ArgumentOutOfRangeException), wrapInNameOf ? Nameof(valueParameter) : valueParameter, Literal(message));
 
+            public static ValueExpression NotImplementedException()
+                => Instance(typeof(NotImplementedException));
+
             public static ValueExpression NotImplementedException(ValueExpression message)
                 => Instance(typeof(NotImplementedException), message);
 
