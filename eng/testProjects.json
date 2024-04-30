@@ -62,6 +62,7 @@
         "type/array",
         "type/dictionary",
         "type/enum/extensible",
+        "type/enum/fixed",
         "type/model/empty",
         "type/model/inheritance/single-discriminator",
         "type/model/usage",
