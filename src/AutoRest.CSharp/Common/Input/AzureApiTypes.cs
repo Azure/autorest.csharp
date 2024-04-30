@@ -96,6 +96,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public override string ResponseClassifierIsErrorResponseName => nameof(ResponseClassifier.IsErrorResponse);
 
+        public override Type RequestHeadersType => typeof(RequestHeaders);
+
         public override Type ResponseHeadersType => typeof(ResponseHeaders);
     }
 }

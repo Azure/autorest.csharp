@@ -4,6 +4,7 @@
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -11,24 +12,29 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record RequestHeadersExpression(ValueExpression Untyped) : TypedValueExpression<RequestHeaders>(Untyped)
     {
+        public MethodBodyStatement Add(ValueExpression name, ValueExpression value)
+            => new InvokeInstanceMethodStatement(Untyped, nameof(RequestHeaders.Add), new[] { name, value }, false);
+        public MethodBodyStatement Add(ValueExpression name, ValueExpression value, ValueExpression format)
+            => RequestHeaderExtensionsProvider.Instance.Add(Untyped, name, value, format);
+
         public MethodBodyStatement Add(ValueExpression conditions)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.Add), new[] { Untyped, conditions }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.Add(Untyped, conditions);
         public MethodBodyStatement Add(ValueExpression conditions, SerializationFormat format)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.Add), new[] { Untyped, conditions, Literal(format.ToFormatSpecifier()) }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.Add(Untyped, conditions, Literal(format.ToFormatSpecifier()));
 
         public MethodBodyStatement Add(string name, ValueExpression value)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.Add), new[] { Untyped, Literal(name), value }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.Add(Untyped, Literal(name), value);
         public MethodBodyStatement Add(string name, ValueExpression value, string format)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.Add), new[] { Untyped, Literal(name), value, Literal(format) }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.Add(Untyped, Literal(name), value, Literal(format));
         public MethodBodyStatement Add(string name, ValueExpression value, SerializationFormat format)
             => format.ToFormatSpecifier() is { } formatSpecifier
                 ? Add(name, value, formatSpecifier)
                 : Add(name, value);
 
         public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.AddDelimited), new[] { Untyped, Literal(name), value, Literal(delimiter) }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.AddDelimited(Untyped, Literal(name), value, Literal(delimiter));
         public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter, string format)
-            => new InvokeStaticMethodStatement(typeof(RequestHeaderExtensions), nameof(RequestHeaderExtensions.AddDelimited), new[] { Untyped, Literal(name), value, Literal(delimiter), Literal(format) }, CallAsExtension: true);
+            => RequestHeaderExtensionsProvider.Instance.AddDelimited(Untyped, Literal(name), value, Literal(delimiter), Literal(format));
         public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter, SerializationFormat format)
             => format.ToFormatSpecifier() is { } formatSpecifier
                 ? AddDelimited(name, value, delimiter, formatSpecifier)

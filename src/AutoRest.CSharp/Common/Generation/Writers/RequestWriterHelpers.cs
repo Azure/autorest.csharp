@@ -350,9 +350,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             string? delimiter = header.Delimiter;
             string method = delimiter != null
-                ? nameof(RequestHeaderExtensions.AddDelimited)
-                : nameof(RequestHeaderExtensions.Add);
+                ? "AddDelimited"
+                : "Add";
 
+            writer.UseNamespace(RequestHeaderExtensionsProvider.Instance.Declaration.Namespace);
             var value = GetFieldReference(fields, header.Value);
             using (WriteValueNullCheck(writer, value))
             {

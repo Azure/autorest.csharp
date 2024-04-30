@@ -39,7 +39,6 @@
     <Compile Include="$(AzureCoreSharedSources)ProtocolOperation.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)ProtocolOperationHelpers.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)RawRequestUriBuilder.cs" LinkBase="Shared/Core" />
-    <Compile Include="$(AzureCoreSharedSources)RequestHeaderExtensions.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)ResponseWithHeaders.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)ResponseWithHeadersOfTHeaders.cs" LinkBase="Shared/Core" />    
     <Compile Include="$(AzureCoreSharedSources)ResponseWithHeadersOfTOfTHeaders.cs" LinkBase="Shared/Core" />
