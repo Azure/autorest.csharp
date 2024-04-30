@@ -19,12 +19,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(InputEnumType enumType, BuildContext context)
-            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
+            : this(enumType, GetDefaultModelNamespace(enumType.Namespace, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(InputEnumType input, string defaultNameSpace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(input.Namespace ?? defaultNameSpace, sourceInputModel)
+            : base(defaultNameSpace, sourceInputModel)
         {
             IsEnum = true;
             _allowedValues = input.AllowedValues;
