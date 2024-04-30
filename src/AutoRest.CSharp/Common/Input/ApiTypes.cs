@@ -95,6 +95,8 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ResponseClassifierType { get; }
         public abstract Type StatusCodeClassifierType { get; }
 
+        public abstract Type ResponseHeadersType { get; }
+
         public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
 
         public abstract ValueExpression GetKeySampleExpression(string clientName);

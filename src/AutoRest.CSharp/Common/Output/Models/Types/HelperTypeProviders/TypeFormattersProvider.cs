@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature,
                 new SwitchExpression(format, new SwitchCaseExpression[]
                 {
-                    new(Literal("P"), new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[]{ value })),
+                    new(Literal("P"), InvokeConvert.ToTimeSpan(value)),
                     SwitchCaseExpression.Default(TimeSpanExpression.ParseExact(value, format, new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture))))
                 }));
         }

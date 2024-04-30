@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -31,5 +33,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static DateTimeOffsetExpression Parse(ValueExpression value, ValueExpression formatProvider, ValueExpression style)
             => new(InvokeStatic(nameof(DateTimeOffset.Parse), new[] { value, formatProvider, style }));
+
+        public static BoolExpression TryParseExact(ValueExpression input, ValueExpression format, ValueExpression formatProvider, ValueExpression styles, ValueExpression result)
+            => new(InvokeStatic(nameof(DateTimeOffset.TryParseExact), new[] { input, format, formatProvider, styles, result }, false));
     }
 }

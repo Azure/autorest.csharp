@@ -40,6 +40,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return XmlRequestContentProvider.Instance;
                 yield return XElementExtensionsProvider.Instance;
                 yield return XmlWriterExtensionsProvider.Instance;
+                // only legacy data plane libraries are using this type
+                yield return ResponseHeaderExtensionsProvider.Instance;
             }
             if (Configuration.EnableBicepSerialization)
             {

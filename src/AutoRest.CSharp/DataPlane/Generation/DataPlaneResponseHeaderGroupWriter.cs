@@ -2,10 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -19,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
             {
                 if (Configuration.IsBranded)
-                    writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
+                    writer.UseNamespace(ResponseHeaderExtensionsProvider.Instance.Declaration.Namespace);
 
                 using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} partial class {responseHeaderGroup.Declaration.Name}"))
                 {

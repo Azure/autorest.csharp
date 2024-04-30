@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
@@ -151,11 +152,16 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static class InvokeConvert
         {
-            public static ValueExpression ToDouble(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToDouble), Arguments: new[] { value });
+            public static DoubleExpression ToDouble(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToDouble), Arguments: new[] { value }));
 
-            public static ValueExpression ToInt32(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToInt32), Arguments: new[] { value });
+            public static IntExpression ToInt32(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToInt32), Arguments: new[] { value }));
 
-            public static ValueExpression FromBase64String(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.FromBase64String), Arguments: new[] { value });
+            public static ValueExpression FromBase64String(ValueExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.FromBase64String), Arguments: new[] { value });
+
+            public static TimeSpanExpression ToTimeSpan(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[] { value }));
+
+            public static ValueExpression ChangeType(ValueExpression stringValue, ValueExpression type, ValueExpression cultureInfo)
+                => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ChangeType), new[] { stringValue, type, cultureInfo });
         }
     }
 }

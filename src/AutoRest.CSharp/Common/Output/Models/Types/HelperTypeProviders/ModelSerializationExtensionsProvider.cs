@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static ModelSerializationExtensionsProvider Instance => _instance.Value;
         private class WriteObjectValueTemplate<T> { }
 
-        private readonly CSharpType _t = typeof(WriteObjectValueTemplate<>).GetGenericArguments()[0];
+        private static readonly CSharpType _t = typeof(WriteObjectValueTemplate<>).GetGenericArguments()[0];
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
         private readonly TypeFormattersProvider _typeFormattersProvider;

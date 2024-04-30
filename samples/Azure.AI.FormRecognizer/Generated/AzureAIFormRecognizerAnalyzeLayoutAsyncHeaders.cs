@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace Azure.AI.FormRecognizer
 {
     internal partial class AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders

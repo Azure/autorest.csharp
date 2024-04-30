@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Float(float value) => new FormattableStringToExpression($"{value}f");
         public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}d");
 
+        public static ValueExpression Typeof(ValueExpression type) => new InvokeInstanceMethodExpression(null, "typeof", new[] { type }, false);
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[] { expression }, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 

@@ -69,7 +69,6 @@ $files = @(
     'RawRequestUriBuilder.cs',
     'RequestHeaderExtensions.cs',
     'RequestUriBuilderExtensions.cs',
-    'ResponseHeadersExtensions.cs',
     'ResponseWithHeaders.cs',
     'ResponseWithHeadersOfTHeaders.cs',
     'ResponseWithHeadersOfTOfTHeaders.cs',
