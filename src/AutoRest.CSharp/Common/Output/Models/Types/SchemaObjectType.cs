@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private SerializableObjectType? _defaultDerivedType;
 
-        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null);
+        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.DiscriminatorValue == null);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
