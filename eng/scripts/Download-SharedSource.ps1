@@ -79,7 +79,6 @@ $files = @(
     'TrimmingAttribute.cs',
     'TypeFormatters.cs',
     'VoidValue.cs',
-    'XElementExtensions.cs',
     'XmlWriterContent.cs',
     'XmlWriterExtensions.cs',
     'Multipart/MultipartContent.cs',

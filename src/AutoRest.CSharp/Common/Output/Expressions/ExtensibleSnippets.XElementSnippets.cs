@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public abstract ValueExpression GetBytesFromBase64Value(XElementExpression xElement, string? format);
             public abstract ValueExpression GetDateTimeOffsetValue(XElementExpression xElement, string? format);
-            public abstract ValueExpression GetObjectValue(XElementExpression xElement, string? format);
             public abstract ValueExpression GetTimeSpanValue(XElementExpression xElement, string? format);
         }
     }

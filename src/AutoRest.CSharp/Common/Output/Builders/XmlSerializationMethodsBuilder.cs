@@ -457,7 +457,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     if (frameworkType == typeof(object))
                     {
-                        return element.GetObjectValue(serialization.Format.ToFormatSpecifier());
+                        return element.Value;
                     }
                 }
             }

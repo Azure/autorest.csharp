@@ -152,7 +152,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static class InvokeConvert
         {
             public static ValueExpression ToDouble(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToDouble), Arguments: new[] { value });
+
             public static ValueExpression ToInt32(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.ToInt32), Arguments: new[] { value });
+
+            public static ValueExpression FromBase64String(StringExpression value) => new InvokeStaticMethodExpression(typeof(Convert), nameof(Convert.FromBase64String), Arguments: new[] { value });
         }
     }
 }
