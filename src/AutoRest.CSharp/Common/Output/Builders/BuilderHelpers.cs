@@ -370,7 +370,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         private static CSharpType ReplaceUnverifiableType(CSharpType type, CSharpType unknownType)
         {
-            // when the type is System.Object
+            // when the type is System.Object Or BinaryData
             if (type.EqualsIgnoreNullable(unknownType))
             {
                 return type;
