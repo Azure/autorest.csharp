@@ -482,13 +482,14 @@ namespace AutoRest.CSharp.Generation.Writers
             string? delimiter = queryParameter.Delimiter;
             bool explode = queryParameter.Explode;
             string method = delimiter != null && !explode
-                ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
-                : nameof(RequestUriBuilderExtensions.AppendQuery);
+                ? "AppendQueryDelimited"
+                : "AppendQuery";
 
             var value = GetReferenceForQueryParameter(fields, queryParameter);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
             using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value, checkUndefinedCollection: true))
             {
+                writer.UseNamespace(RequestUriBuilderExtensionsProvider.Instance.Declaration.Namespace);
                 if (explode)
                 {
                     var paramVariable = new CodeWriterDeclaration("param");
