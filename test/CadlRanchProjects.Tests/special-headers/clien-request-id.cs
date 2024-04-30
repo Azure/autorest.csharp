@@ -1,9 +1,8 @@
-using _Specs_.Azure.Core.Traits;
+using System.Threading.Tasks;
+using _Azure.SpecialHeaders.XmsClientRequestId;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using System.Threading.Tasks;
-using SpecialHeaders.ClientRequestId;
 
 namespace CadlRanchProjects.Tests
 {
@@ -12,9 +11,9 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Special_Headers_Client_Request_ID_Get() => Test(async (host) =>
         {
-            Response response = await new ClientRequestIdClient(host, null).GetClientRequestIdAsync();
+            Response response = await new XmsClientRequestIdClient(host, null).GetXmsClientRequestIdAsync();
             Assert.AreEqual(204, response.Status);
-            Assert.IsTrue(response.Headers.TryGetValue("client-request-id", out var headerValue));
+            Assert.IsTrue(response.Headers.TryGetValue("x-ms-client-request-id", out var headerValue));
         });
     }
 }

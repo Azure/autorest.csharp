@@ -652,10 +652,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\src\\Generated -n"
     },
-    "typespec-azure/core/lro/rpc-legacy": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\rpc-legacy\\src\\Generated -n"
-    },
     "typespec-azure/core/lro/standard": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\standard\\src\\Generated -n"
@@ -667,6 +663,10 @@
     "typespec-azure/core/traits": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
+    },
+    "typespec-azure/special-headers/client-request-id": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\special-headers\\client-request-id\\src\\Generated -n"
     },
     "typespec-client/naming": {
       "commandName": "Project",
@@ -748,6 +748,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\enum\\extensible\\src\\Generated -n"
     },
+    "typespec-nonAzure-type/enum/fixed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\enum\\fixed\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\empty\\src\\Generated -n"
@@ -823,10 +827,6 @@
     "typespec-server/versions/versioned": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\versions\\versioned\\src\\Generated -n"
-    },
-    "typespec-special-headers/client-request-id": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\client-request-id\\src\\Generated -n"
     },
     "typespec-special-headers/conditional-request": {
       "commandName": "Project",

@@ -12,6 +12,7 @@ namespace CadlRanchProjects.Tests
     {
         private string SamplePngPath = Path.Combine(CadlRanchServer.GetSpecDirectory(), "assets", "image.png");
         private string SampleJpgPath = Path.Combine(CadlRanchServer.GetSpecDirectory(), "assets", "image.jpg");
+
         [Test]
         public Task Payload_Multipart_FormData_Basic() => Test(async (host) =>
         {
@@ -19,6 +20,7 @@ namespace CadlRanchProjects.Tests
             var response = await new MultiPartClient(host, null).GetFormDataClient().BasicAsync(body);
             Assert.AreEqual(204, response.Status);
         });
+
         [Test]
         public Task Payload_Multipart_FormData_JsonPart() => Test(async (host) =>
         {
@@ -27,6 +29,7 @@ namespace CadlRanchProjects.Tests
             var response = await new MultiPartClient(host, null).GetFormDataClient().JsonPartAsync(data);
             Assert.AreEqual(204, response.Status);
         });
+
         [Test]
         public Task Payload_Multipart_FormData_BinaryArrayParts() => Test(async (host) =>
         {
@@ -39,6 +42,7 @@ namespace CadlRanchProjects.Tests
             var response = await new MultiPartClient(host, null).GetFormDataClient().BinaryArrayPartsAsync(data);
             Assert.AreEqual(204, response.Status);
         });
+
         [Test]
         public Task Payload_Multipart_FormData_Anonymous_Model() => Test(async (host) =>
         {

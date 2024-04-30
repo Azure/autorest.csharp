@@ -44,6 +44,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
 ]]></code>
 This sample shows how to call GetMixedTypeAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -56,6 +57,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetMixedType(RequestContext)">
@@ -71,6 +73,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
 ]]></code>
 This sample shows how to call GetMixedType with all parameters and parse the result.
 <code><![CDATA[
@@ -83,6 +86,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="SendAsync(MixedTypesCases,CancellationToken)">
@@ -94,7 +98,10 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-}), null, null, null);
+}), null, null, null, new BinaryData[]
+{
+    null
+});
 Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
@@ -104,7 +111,10 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-}), null, null, null);
+}), null, null, null, new BinaryData[]
+{
+    null
+});
 Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
@@ -117,7 +127,10 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-}), null, null, null);
+}), null, null, null, new BinaryData[]
+{
+    null
+});
 Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
@@ -127,7 +140,10 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-}), null, null, null);
+}), null, null, null, new BinaryData[]
+{
+    null
+});
 Response response = client.Send(prop);
 ]]></code></example>
     </member>
@@ -147,7 +163,11 @@ using RequestContent content = RequestContent.Create(new
         },
         ["literal"] = null,
         ["int"] = null,
-        ["boolean"] = null
+        ["boolean"] = null,
+        ["array"] = new object[]
+        {
+            null
+        }
     },
 });
 Response response = await client.SendAsync(content);
@@ -168,7 +188,11 @@ using RequestContent content = RequestContent.Create(new
         },
         ["literal"] = null,
         ["int"] = null,
-        ["boolean"] = null
+        ["boolean"] = null,
+        ["array"] = new object[]
+        {
+            null
+        }
     },
 });
 Response response = await client.SendAsync(content);
@@ -192,7 +216,11 @@ using RequestContent content = RequestContent.Create(new
         },
         ["literal"] = null,
         ["int"] = null,
-        ["boolean"] = null
+        ["boolean"] = null,
+        ["array"] = new object[]
+        {
+            null
+        }
     },
 });
 Response response = client.Send(content);
@@ -213,7 +241,11 @@ using RequestContent content = RequestContent.Create(new
         },
         ["literal"] = null,
         ["int"] = null,
-        ["boolean"] = null
+        ["boolean"] = null,
+        ["array"] = new object[]
+        {
+            null
+        }
     },
 });
 Response response = client.Send(content);
