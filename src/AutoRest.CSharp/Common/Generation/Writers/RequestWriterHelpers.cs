@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -28,9 +27,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestAndUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        // This only serves the MPG now
+        public static void WriteRequestAndUriCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
-            WriteUriCreation(writer, clientMethod, methodAccessibility, fields, clientParameters);
+            WriteUriCreation(writer, clientMethod, fields, clientParameters);
             WriteRequestCreation(writer, clientMethod, fields, responseClassifierType, writeSDKUserAgent, clientParameters);
         }
 
@@ -241,11 +241,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, IReadOnlyList<Parameter>? clientParameters = null)
+        private static void WriteUriCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields? fields, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var methodName = CreateRequestUriMethodName($"{clientMethod.Name}");
-            writer.Append($"{methodAccessibility} {typeof(RequestUriBuilder)} {methodName}(");
+            writer.Append($"internal {typeof(RequestUriBuilder)} {methodName}(");
             foreach (Parameter clientParameter in clientMethod.Parameters)
             {
                 writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
