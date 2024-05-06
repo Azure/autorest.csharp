@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using FirstTestTypeSpec;
 
 namespace Azure.Core.Tests
 {
