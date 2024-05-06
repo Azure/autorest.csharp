@@ -161,7 +161,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(StartOn))
                 {
                     builder.Append("  startTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(StartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -177,7 +177,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(EndOn))
                 {
                     builder.Append("  endTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(EndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

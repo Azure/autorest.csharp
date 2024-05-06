@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return OptionalTypeProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
+            yield return TypeFormattersProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
             if (!Configuration.IsBranded)
             {

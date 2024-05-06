@@ -74,7 +74,6 @@ $files = @(
     'StringRequestContent.cs',
     'TaskExtensions.cs',
     'TrimmingAttribute.cs',
-    'TypeFormatters.cs',
     'VoidValue.cs',
     'Multipart/MultipartContent.cs',
     'Multipart/MultipartFormDataContent.cs'

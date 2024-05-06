@@ -18,13 +18,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Lazy<XElementExtensionsProvider> _instance = new(() => new XElementExtensionsProvider());
         public static XElementExtensionsProvider Instance => _instance.Value;
 
-        // TODO -- workaround to be removed
-        private readonly TypeFormattersProvider _typeFormatters;
-
         private XElementExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _typeFormatters = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
         }
 
         protected override string DefaultName { get; } = "XElementExtensions";
@@ -53,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var format = new StringExpression(_formatParameter);
             var body = new SwitchExpression(format, new[]
             {
-                new SwitchCaseExpression(Literal("U"), _typeFormatters.FromBase64UrlString(element.Value)),
+                new SwitchCaseExpression(Literal("U"), TypeFormattersProvider.Instance.FromBase64UrlString(element.Value)),
                 new SwitchCaseExpression(Literal("D"), InvokeConvert.FromBase64String(element.Value)),
                 SwitchCaseExpression.Default(ThrowExpression(New.ArgumentException(format, new FormattableStringExpression("Format is not supported: '{0}'", format))))
             });
@@ -76,7 +72,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var body = new SwitchExpression(new StringExpression(_formatParameter), new[]
             {
                 new SwitchCaseExpression(Literal("U"), DateTimeOffsetExpression.FromUnixTimeSeconds(element.CastTo(typeof(long)))),
-                SwitchCaseExpression.Default(_typeFormatters.ParseDateTimeOffset(element.Value, format))
+                SwitchCaseExpression.Default(TypeFormattersProvider.Instance.ParseDateTimeOffset(element.Value, format))
             });
 
             return new(signature, body);
@@ -94,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var element = new XElementExpression(_elementParameter);
             var format = new StringExpression(_formatParameter);
-            var body = _typeFormatters.ParseTimeSpan(element.Value, format);
+            var body = TypeFormattersProvider.Instance.ParseTimeSpan(element.Value, format);
 
             return new(signature, body);
         }

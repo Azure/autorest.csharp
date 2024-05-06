@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -21,14 +20,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class TypeFormattersProvider : ExpressionTypeProvider
     {
-        //private static readonly Lazy<TypeFormattersProvider> _instance = new(() => new TypeFormattersProvider());
-        //public static TypeFormattersProvider Instance => _instance.Value;
+        private static readonly Lazy<TypeFormattersProvider> _instance = new(() => new TypeFormattersProvider());
+        public static TypeFormattersProvider Instance => _instance.Value;
 
-        // TODO -- this type provider is temprorarily an inner class therefore it is not singleton yet. We need to change this to singleton when we decide to emit the entire TypeFormatters class.
-        internal TypeFormattersProvider(ExpressionTypeProvider declaringTypeProvider) : base(Configuration.HelperNamespace, null)
+        private TypeFormattersProvider() : base(Configuration.HelperNamespace, null)
         {
-            DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            DeclaringTypeProvider = declaringTypeProvider;
+            DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Partial | TypeSignatureModifiers.Static;
         }
 
         protected override string DefaultName => "TypeFormatters";

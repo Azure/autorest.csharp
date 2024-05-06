@@ -184,7 +184,7 @@ namespace MgmtDiscriminator.Models
                 if (Optional.IsDefined(CacheDuration))
                 {
                     builder.Append("  cacheDuration: ");
-                    var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
+                    var formattedTimeSpan = Azure.Core.TypeFormatters.ToString(CacheDuration.Value, "P");
                     builder.AppendLine($"'{formattedTimeSpan}'");
                 }
             }

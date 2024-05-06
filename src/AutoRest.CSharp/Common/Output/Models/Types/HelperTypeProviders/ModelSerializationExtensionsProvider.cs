@@ -28,12 +28,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly CSharpType _t = typeof(WriteObjectValueTemplate<>).GetGenericArguments()[0];
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
-        private readonly TypeFormattersProvider _typeFormattersProvider;
 
         public ModelSerializationExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _typeFormattersProvider = new TypeFormattersProvider(this);
 
             _wireOptionsField = new FieldDeclaration(
                 modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
@@ -166,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 },
                 EmptyLine,
                 Return(new SwitchExpression(format,
-                    new SwitchCaseExpression(Literal("U"), _typeFormattersProvider.FromBase64UrlString(GetRequiredString(element))),
+                    new SwitchCaseExpression(Literal("U"), TypeFormattersProvider.Instance.FromBase64UrlString(GetRequiredString(element))),
                     new SwitchCaseExpression(Literal("D"), element.GetBytesFromBase64()),
                     SwitchCaseExpression.Default(ThrowExpression(New.ArgumentException(format, new FormattableStringExpression("Format is not supported: '{0}'", format))))
                     ))
@@ -191,7 +189,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var body = new SwitchExpression(format,
                 SwitchCaseExpression.When(Literal("U"), Equal(element.ValueKind, JsonValueKindExpression.Number), DateTimeOffsetExpression.FromUnixTimeSeconds(element.GetInt64())),
                 // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
-                SwitchCaseExpression.Default(_typeFormattersProvider.ParseDateTimeOffset(element.GetString(), format))
+                SwitchCaseExpression.Default(TypeFormattersProvider.Instance.ParseDateTimeOffset(element.GetString(), format))
                 );
 
             return new Method(signature, body);
@@ -210,7 +208,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Summary: null, Description: null, ReturnDescription: null);
             var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
             // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
-            var body = _typeFormattersProvider.ParseTimeSpan(element.GetString(), _formatParameter);
+            var body = TypeFormattersProvider.Instance.ParseTimeSpan(element.GetString(), _formatParameter);
 
             return new Method(signature, body);
         }
@@ -311,7 +309,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ReturnType: null,
                     Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeOffsetValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(_typeFormattersProvider.ToString(dateTimeOffsetValueParameter, _formatParameter))
+                writer.WriteStringValue(TypeFormattersProvider.Instance.ToString(dateTimeOffsetValueParameter, _formatParameter))
                 );
 
             var dateTimeValueParameter = new Parameter("value", null, typeof(DateTime), null, ValidationType.None, null);
@@ -322,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ReturnType: null,
                     Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(_typeFormattersProvider.ToString(dateTimeValueParameter, _formatParameter))
+                writer.WriteStringValue(TypeFormattersProvider.Instance.ToString(dateTimeValueParameter, _formatParameter))
                 );
 
             var timeSpanValueParameter = new Parameter("value", null, typeof(TimeSpan), null, ValidationType.None, null);
@@ -333,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ReturnType: null,
                     Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, timeSpanValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(_typeFormattersProvider.ToString(timeSpanValueParameter, _formatParameter))
+                writer.WriteStringValue(TypeFormattersProvider.Instance.ToString(timeSpanValueParameter, _formatParameter))
                 );
 
             var charValueParameter = new Parameter("value", null, typeof(char), null, ValidationType.None, null);
@@ -375,7 +373,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     new(Literal("U"), new MethodBodyStatement[]
                     {
-                        writer.WriteStringValue(_typeFormattersProvider.ToBase64UrlString(value)),
+                        writer.WriteStringValue(TypeFormattersProvider.Instance.ToBase64UrlString(value)),
                         Break
                     }),
                     new(Literal("D"), new MethodBodyStatement[]
@@ -621,10 +619,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, parameters, CallAsExtension: true, TypeArguments: new[] { value.Type });
         }
         #endregion
-
-        protected override IEnumerable<ExpressionTypeProvider> BuildNestedTypes()
-        {
-            yield return _typeFormattersProvider; // TODO -- we should remove this and move `TypeFormattersProvider.Instance` to the list of helper providers
-        }
     }
 }

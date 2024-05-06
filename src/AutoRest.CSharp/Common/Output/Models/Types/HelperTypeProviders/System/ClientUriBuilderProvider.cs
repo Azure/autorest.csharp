@@ -191,9 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 Parameters: parameters,
                 ReturnType: null,
                 Summary: null, Description: null, ReturnDescription: null);
-            // TODO -- this is temporary, in the future, TypeFormatters will be a standalone static class, but now it is a nested type inside ModelSerializationExtensions
-            var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
-            var convertToStringExpression = typeFormattersProvider.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
+            var convertToStringExpression = TypeFormattersProvider.Instance.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
             var body = new InvokeInstanceMethodStatement(null, _appendPathMethodName, convertToStringExpression, escapeParameter);
 
             return new(signature, body);
@@ -267,9 +265,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 Parameters: parameters,
                 ReturnType: null,
                 Summary: null, Description: null, ReturnDescription: null);
-            // TODO -- this is temporary, in the future, TypeFormatters will be a standalone static class, but now it is a nested type inside ModelSerializationExtensions
-            var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
-            var convertToStringExpression = typeFormattersProvider.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
+            var convertToStringExpression = TypeFormattersProvider.Instance.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
             var body = new InvokeInstanceMethodStatement(null, _appendQueryMethodName, nameParameter, convertToStringExpression, escapeParameter);
 
             return new(signature, body);

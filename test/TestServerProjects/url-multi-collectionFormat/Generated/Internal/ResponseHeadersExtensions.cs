@@ -74,7 +74,7 @@ namespace url_multi_collectionFormat
                 }
                 else
                 {
-                    value = ModelSerializationExtensions.TypeFormatters.ParseDateTimeOffset(stringValue, "");
+                    value = TypeFormatters.ParseDateTimeOffset(stringValue, "");
                 }
                 return true;
             }

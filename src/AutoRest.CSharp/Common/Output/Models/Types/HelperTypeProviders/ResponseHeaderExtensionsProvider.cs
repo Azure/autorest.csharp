@@ -24,14 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static readonly CSharpType _t = typeof(TryGetValueMethodTemplate<>).GetGenericArguments()[0];
 
-        // TODO -- workaround, to be removed
-        private readonly TypeFormattersProvider _typeFormatters;
-
         private ResponseHeaderExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             DefaultName = $"{Configuration.ApiTypes.ResponseHeadersType.Name}Extensions";
-            _typeFormatters = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
 
             _knownFormatsField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly | FieldModifiers.Static,
@@ -146,7 +142,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     DateTimeOffsetExpression.TryParseExact(stringValue, _knownFormatsField, invariantFormatInfo, new BinaryOperatorExpression("|", FrameworkEnumValue(DateTimeStyles.AllowInnerWhite), FrameworkEnumValue(DateTimeStyles.AssumeUniversal)), new KeywordExpression("out", dto))
                 ),
                 Assign(value, dto),
-                Assign(value, _typeFormatters.ParseDateTimeOffset(stringValue, Literal("")))
+                Assign(value, TypeFormattersProvider.Instance.ParseDateTimeOffset(stringValue, Literal("")))
             );
         }
 

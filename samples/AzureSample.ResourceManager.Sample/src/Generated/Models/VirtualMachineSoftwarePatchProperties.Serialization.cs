@@ -419,7 +419,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(PublishedOn))
                 {
                     builder.Append("  publishedDate: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(PublishedOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(PublishedOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -435,7 +435,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(LastModifiedOn))
                 {
                     builder.Append("  lastModifiedDateTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(LastModifiedOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(LastModifiedOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

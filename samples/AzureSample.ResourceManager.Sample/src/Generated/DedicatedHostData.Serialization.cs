@@ -559,7 +559,7 @@ namespace AzureSample.ResourceManager.Sample
                 if (Optional.IsDefined(ProvisioningOn))
                 {
                     builder.Append("    provisioningTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(ProvisioningOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(ProvisioningOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

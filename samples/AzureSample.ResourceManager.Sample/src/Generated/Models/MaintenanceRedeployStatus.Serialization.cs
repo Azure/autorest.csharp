@@ -226,7 +226,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(PreMaintenanceWindowStartOn))
                 {
                     builder.Append("  preMaintenanceWindowStartTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowStartOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(PreMaintenanceWindowStartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -242,7 +242,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(PreMaintenanceWindowEndOn))
                 {
                     builder.Append("  preMaintenanceWindowEndTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowEndOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(PreMaintenanceWindowEndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -258,7 +258,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(MaintenanceWindowStartOn))
                 {
                     builder.Append("  maintenanceWindowStartTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowStartOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(MaintenanceWindowStartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -274,7 +274,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(MaintenanceWindowEndOn))
                 {
                     builder.Append("  maintenanceWindowEndTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowEndOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(MaintenanceWindowEndOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

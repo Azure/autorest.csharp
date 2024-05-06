@@ -321,7 +321,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(StartOn))
                 {
                     builder.Append("  startDateTime: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(StartOn.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

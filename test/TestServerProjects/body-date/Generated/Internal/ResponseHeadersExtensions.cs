@@ -74,7 +74,7 @@ namespace body_date
                 }
                 else
                 {
-                    value = ModelSerializationExtensions.TypeFormatters.ParseDateTimeOffset(stringValue, "");
+                    value = TypeFormatters.ParseDateTimeOffset(stringValue, "");
                 }
                 return true;
             }

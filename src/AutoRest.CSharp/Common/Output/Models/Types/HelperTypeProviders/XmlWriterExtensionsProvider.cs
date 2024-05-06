@@ -20,13 +20,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Lazy<XmlWriterExtensionsProvider> _instance = new(() => new XmlWriterExtensionsProvider());
         public static XmlWriterExtensionsProvider Instance => _instance.Value;
 
-        // TODO -- workaround to be removed
-        private readonly TypeFormattersProvider _typeFormatters;
-
         private XmlWriterExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _typeFormatters = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
         }
 
         protected override string DefaultName { get; } = "XmlWriterExtensions";
@@ -81,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Summary: null, Description: null, ReturnDescription: null);
 
             var writer = new XmlWriterExpression(_writerParameter);
-            var body = writer.WriteValue(_typeFormatters.ToString(valueParameter, _formatParameter));
+            var body = writer.WriteValue(TypeFormattersProvider.Instance.ToString(valueParameter, _formatParameter));
 
             return new(signature, body);
         }

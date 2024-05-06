@@ -74,7 +74,7 @@ namespace xms_error_responses
                 }
                 else
                 {
-                    value = ModelSerializationExtensions.TypeFormatters.ParseDateTimeOffset(stringValue, "");
+                    value = TypeFormatters.ParseDateTimeOffset(stringValue, "");
                 }
                 return true;
             }

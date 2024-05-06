@@ -24,14 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static readonly CSharpType _t = typeof(TryGetValueMethodTemplate<>).GetGenericArguments()[0];
 
-        // TODO -- workaround, to be removed
-        private readonly TypeFormattersProvider _typeFormatters;
-
         private RequestUriBuilderExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Partial | TypeSignatureModifiers.Static;
             DefaultName = $"RequestUriBuilderExtensions";
-            _typeFormatters = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
         }
 
         protected override string DefaultName { get; }
@@ -88,8 +84,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var builder = (ValueExpression)_builderParameter;
             var body = hasFormat
-                ? new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendPath), _typeFormatters.ConvertToString(valueParameter, _formatParameter), _escapeParameter)
-                : new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendPath), _typeFormatters.ConvertToString(valueParameter), _escapeParameter);
+                ? new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendPath), TypeFormattersProvider.Instance.ConvertToString(valueParameter, _formatParameter), _escapeParameter)
+                : new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendPath), TypeFormattersProvider.Instance.ConvertToString(valueParameter), _escapeParameter);
 
             return new(signature, body);
         }
@@ -108,8 +104,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Summary: null, Description: null, ReturnDescription: null);
             var builder = (ValueExpression)_builderParameter;
             var body = hasFormat
-                ? new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendQuery), new ValueExpression[] { _nameParameter, _typeFormatters.ConvertToString(valueParameter, _formatParameter), _escapeParameter }, false)
-                : new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendQuery), new ValueExpression[] { _nameParameter, _typeFormatters.ConvertToString(valueParameter), _escapeParameter }, false);
+                ? new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendQuery), new ValueExpression[] { _nameParameter, TypeFormattersProvider.Instance.ConvertToString(valueParameter, _formatParameter), _escapeParameter }, false)
+                : new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendQuery), new ValueExpression[] { _nameParameter, TypeFormattersProvider.Instance.ConvertToString(valueParameter), _escapeParameter }, false);
 
             return new(signature, body);
         }
@@ -137,7 +133,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var format = hasFormat ? (ValueExpression)_formatParameter : null;
             var body = new MethodBodyStatement[]
             {
-                Declare("stringValues", value.Select(new TypedFuncExpression(new[] { v }, _typeFormatters.ConvertToString(new VariableReference(t, v), format))), out var stringValues),
+                Declare("stringValues", value.Select(new TypedFuncExpression(new[] { v }, TypeFormattersProvider.Instance.ConvertToString(new VariableReference(t, v), format))), out var stringValues),
                 new InvokeInstanceMethodStatement(builder, nameof(RequestUriBuilder.AppendQuery), new ValueExpression[] { _nameParameter, StringExpression.Join(delimiterParameter, stringValues), _escapeParameter }, false)
             };
 

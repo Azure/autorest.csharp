@@ -74,7 +74,7 @@ namespace AzureSample.Storage.Tables
                 }
                 else
                 {
-                    value = ModelSerializationExtensions.TypeFormatters.ParseDateTimeOffset(stringValue, "");
+                    value = TypeFormatters.ParseDateTimeOffset(stringValue, "");
                 }
                 return true;
             }

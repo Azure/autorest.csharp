@@ -17,52 +17,52 @@ namespace JsonAsBinary
     {
         public static void Add(this RequestHeaders headers, string name, bool value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, float value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, double value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, int value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, long value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, DateTimeOffset value, string format)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value, format));
+            headers.Add(name, TypeFormatters.ConvertToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string name, TimeSpan value, string format)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value, format));
+            headers.Add(name, TypeFormatters.ConvertToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string name, Guid value)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value));
+            headers.Add(name, TypeFormatters.ConvertToString(value));
         }
 
         public static void Add(this RequestHeaders headers, string name, byte[] value, string format)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value, format));
+            headers.Add(name, TypeFormatters.ConvertToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string name, BinaryData value, string format)
         {
-            headers.Add(name, ModelSerializationExtensions.TypeFormatters.ConvertToString(value, format));
+            headers.Add(name, TypeFormatters.ConvertToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string prefix, IDictionary<string, string> headersToAdd)
@@ -121,7 +121,7 @@ namespace JsonAsBinary
 
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter, string format)
         {
-            IEnumerable<string> stringValues = value.Select(v => ModelSerializationExtensions.TypeFormatters.ConvertToString(v, format));
+            IEnumerable<string> stringValues = value.Select(v => TypeFormatters.ConvertToString(v, format));
             headers.Add(name, string.Join(delimiter, stringValues));
         }
     }

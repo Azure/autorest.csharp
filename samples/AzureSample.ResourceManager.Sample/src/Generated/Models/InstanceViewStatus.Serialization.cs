@@ -254,7 +254,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(Time))
                 {
                     builder.Append("  time: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(Time.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(Time.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }

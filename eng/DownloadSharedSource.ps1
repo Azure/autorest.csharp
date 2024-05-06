@@ -70,7 +70,6 @@ $files = @(
     'ResponseWithHeadersOfTHeaders.cs',
     'ResponseWithHeadersOfTOfTHeaders.cs',
     'StringRequestContent.cs',
-    'TypeFormatters.cs',
     'TrimmingAttribute.cs')
 $sourcePath = "$clonedPath/sdk/core/Azure.Core/src/Shared/"
 $destinationPath = "$repoRoot/src/assets/Azure.Core.Shared"

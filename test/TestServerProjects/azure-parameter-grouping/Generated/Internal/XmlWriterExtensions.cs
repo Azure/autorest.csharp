@@ -27,17 +27,17 @@ namespace azure_parameter_grouping
 
         public static void WriteValue(this XmlWriter writer, DateTimeOffset value, string format)
         {
-            writer.WriteValue(ModelSerializationExtensions.TypeFormatters.ToString(value, format));
+            writer.WriteValue(TypeFormatters.ToString(value, format));
         }
 
         public static void WriteValue(this XmlWriter writer, TimeSpan value, string format)
         {
-            writer.WriteValue(ModelSerializationExtensions.TypeFormatters.ToString(value, format));
+            writer.WriteValue(TypeFormatters.ToString(value, format));
         }
 
         public static void WriteValue(this XmlWriter writer, byte[] value, string format)
         {
-            writer.WriteValue(ModelSerializationExtensions.TypeFormatters.ToString(value, format));
+            writer.WriteValue(TypeFormatters.ToString(value, format));
         }
     }
 }

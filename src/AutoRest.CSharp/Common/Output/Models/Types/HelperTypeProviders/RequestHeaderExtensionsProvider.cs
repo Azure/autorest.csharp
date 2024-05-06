@@ -22,14 +22,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Lazy<RequestHeaderExtensionsProvider> _instance = new Lazy<RequestHeaderExtensionsProvider>(() => new RequestHeaderExtensionsProvider());
         public static RequestHeaderExtensionsProvider Instance => _instance.Value;
 
-        // TODO -- workaround, to be removed
-        private readonly TypeFormattersProvider _typeFormatters;
-
         private RequestHeaderExtensionsProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Partial | TypeSignatureModifiers.Static;
             DefaultName = $"RequestHeaderExtensions";
-            _typeFormatters = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
         }
 
         protected override string DefaultName { get; }
@@ -79,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var format = hasFormat ? (ValueExpression)_formatParameter : null;
             var headers = new RequestHeadersExpression(_headersParameter);
-            var body = headers.Add(_nameParameter, _typeFormatters.ConvertToString(valueParameter, format));
+            var body = headers.Add(_nameParameter, TypeFormattersProvider.Instance.ConvertToString(valueParameter, format));
 
             return new(signature, body);
         }
@@ -224,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var v = new CodeWriterDeclaration("v");
             var body = new MethodBodyStatement[]
             {
-                Declare("stringValues", value.Select(new TypedFuncExpression(new[] {v}, _typeFormatters.ConvertToString(new VariableReference(t, v), _formatParameter))), out var stringValues),
+                Declare("stringValues", value.Select(new TypedFuncExpression(new[] {v}, TypeFormattersProvider.Instance.ConvertToString(new VariableReference(t, v), _formatParameter))), out var stringValues),
                 headers.Add(_nameParameter, StringExpression.Join(_delimiterParameter, stringValues))
             };
             return new(signature, body);

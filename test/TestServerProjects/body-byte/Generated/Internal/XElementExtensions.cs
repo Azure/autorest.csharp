@@ -14,7 +14,7 @@ namespace body_byte
     {
         public static byte[] GetBytesFromBase64Value(this XElement element, string format) => format switch
         {
-            "U" => ModelSerializationExtensions.TypeFormatters.FromBase64UrlString(element.Value),
+            "U" => TypeFormatters.FromBase64UrlString(element.Value),
             "D" => Convert.FromBase64String(element.Value),
             _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
         };
@@ -22,9 +22,9 @@ namespace body_byte
         public static DateTimeOffset GetDateTimeOffsetValue(this XElement element, string format) => format switch
         {
             "U" => DateTimeOffset.FromUnixTimeSeconds((long)element),
-            _ => ModelSerializationExtensions.TypeFormatters.ParseDateTimeOffset(element.Value, format)
+            _ => TypeFormatters.ParseDateTimeOffset(element.Value, format)
         };
 
-        public static TimeSpan GetTimeSpanValue(this XElement element, string format) => ModelSerializationExtensions.TypeFormatters.ParseTimeSpan(element.Value, format);
+        public static TimeSpan GetTimeSpanValue(this XElement element, string format) => TypeFormatters.ParseTimeSpan(element.Value, format);
     }
 }

@@ -401,7 +401,7 @@ namespace MgmtDiscriminator
                 if (Optional.IsDefined(DateTimeProperty))
                 {
                     builder.Append("  dateTimeProperty: ");
-                    var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
+                    var formattedDateTimeString = Azure.Core.TypeFormatters.ToString(DateTimeProperty.Value, "o");
                     builder.AppendLine($"'{formattedDateTimeString}'");
                 }
             }
@@ -417,7 +417,7 @@ namespace MgmtDiscriminator
                 if (Optional.IsDefined(Duration))
                 {
                     builder.Append("  duration: ");
-                    var formattedTimeSpan = TypeFormatters.ToString(Duration.Value, "P");
+                    var formattedTimeSpan = Azure.Core.TypeFormatters.ToString(Duration.Value, "P");
                     builder.AppendLine($"'{formattedTimeSpan}'");
                 }
             }
