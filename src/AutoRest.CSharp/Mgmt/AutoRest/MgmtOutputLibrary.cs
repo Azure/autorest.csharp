@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                 return null;
 
-            string defaultDerivedName = $"Unknown{actualBase.Name}";
+            string defaultDerivedName = $"Unknown{actualBase.SpecName}";
             if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out MgmtObjectType? defaultDerivedType))
             {
                 //create the "Unknown" version
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "internal",
                     null,
                     // [TODO]: Condition is added to minimize change
-                    $"Unknown version of {actualBase.Name}",
+                    $"Unknown version of {actualBase.SpecName}",
                     actualBase.Usage,
                     Array.Empty<InputModelProperty>(),
                     actualBase,
