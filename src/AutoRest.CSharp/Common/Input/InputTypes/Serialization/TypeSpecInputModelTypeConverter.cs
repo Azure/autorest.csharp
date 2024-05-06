@@ -156,6 +156,7 @@ namespace AutoRest.CSharp.Common.Input
                                                     property.IsRequired,
                                                     property.IsReadOnly,
                                                     property.IsDiscriminator,
+                                                    property.IsNullable,
                                                     property.FlattenedNames);
                 }
                 properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));

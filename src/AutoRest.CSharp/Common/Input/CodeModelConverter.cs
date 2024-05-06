@@ -412,6 +412,7 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
+            IsNullable: property.IsNullable,
             FlattenedNames: property.FlattenedNames.ToList(),
             Format: property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format,
             ElementTypeFormat: GetElementType(property)
