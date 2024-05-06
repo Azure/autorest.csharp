@@ -75,10 +75,6 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
     format?: string,
     encode?: EncodeData
 ): InputPrimitiveTypeKind {
-    // TODO: https://github.com/Azure/typespec-azure/issues/201
-    if (typespecType === undefined && format === "string") {
-        return InputPrimitiveTypeKind.String;
-    }
     const kind = typespecType.kind;
     switch (kind) {
         case "Model":

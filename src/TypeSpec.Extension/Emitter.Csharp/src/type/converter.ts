@@ -487,7 +487,9 @@ function fromSdkConstantType(
             constantType.valueType.kind === "boolean" ||
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(constantType.valueType)
-                : convertConstantToEnum(
+                : // TODO: this might change in the near future
+                  // we might keep constant as-is, instead of creating an enum for it.
+                  convertConstantToEnum(
                       constantType,
                       enums,
                       literalTypeContext
