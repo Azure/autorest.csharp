@@ -41,18 +41,6 @@ export const $lib = createTypeSpecLibrary({
                 default: paramMessage`No Route for service for service ${"service"}`
             }
         },
-        "No-Model": {
-            severity: "error",
-            messages: {
-                default: paramMessage`Model '${"name"}' is not found`
-            }
-        },
-        "No-Type": {
-            severity: "error",
-            messages: {
-                default: paramMessage`Type '${"kind"}' is not found`
-            }
-        },
         "Invalid-Name": {
             severity: "warning",
             messages: {

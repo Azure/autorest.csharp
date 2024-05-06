@@ -129,14 +129,6 @@ export function fromSdkModelType(
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
-        // TODO: can we fix the resolving reference issue in csharp?
-        // https://github.com/Azure/autorest.csharp/issues/4136
-        // if (modelType.discriminatedSubtypes) {
-        //     inputModelType.DerivedModels = Object.values(
-        //         modelType.discriminatedSubtypes
-        //     ).map((m) => fromSdkModelType(m, program, models, enums));
-        // }
-
         inputModelType.InheritedDictionaryType = modelType.additionalProperties
             ? ({
                   Kind: InputTypeKind.Dictionary,
@@ -251,6 +243,7 @@ function fromSdkDatetimeType(
                 return InputPrimitiveTypeKind.DateTimeUnix;
         }
     }
+
     return {
         Kind: InputTypeKind.Primitive,
         Name: fromDateTimeKnownEncoding(dateTimeType.encode),
@@ -280,6 +273,7 @@ function fromSdkDurationType(
                 return InputPrimitiveTypeKind.DurationISO8601;
         }
     }
+
     return {
         Kind: InputTypeKind.Primitive,
         Name: fromDurationKnownEncoding(
@@ -459,7 +453,7 @@ function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
     };
 }
 
-export function fromUnionType(
+function fromUnionType(
     union: SdkUnionType,
     context: SdkContext,
     models: Map<string, InputModelType>,
@@ -592,7 +586,7 @@ function fromSdkDictionaryType(
     };
 }
 
-export function fromSdkArrayType(
+function fromSdkArrayType(
     arrayType: SdkArrayType,
     context: SdkContext,
     models: Map<string, InputModelType>,
@@ -606,7 +600,7 @@ export function fromSdkArrayType(
     };
 }
 
-export function fromUsageFlags(usage: UsageFlags): Usage {
+function fromUsageFlags(usage: UsageFlags): Usage {
     if (usage === UsageFlags.Input) return Usage.Input;
     else if (usage === UsageFlags.Output) return Usage.Output;
     else if (usage === (UsageFlags.Input | UsageFlags.Output))

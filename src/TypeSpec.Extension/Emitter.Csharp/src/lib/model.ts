@@ -859,19 +859,11 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
     };
 }
 
-// This is a temporary solution. After we uptake getAllModels we should delete this.
 export function navigateModels(
     context: SdkContext<NetEmitterOptions>,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeType = (x: Type) =>
-        getInputType(
-            context,
-            getFormattedType(context.program, x),
-            models,
-            enums
-        ) as any;
     getAllModels(context).forEach((model) =>
         model.kind === "model"
             ? fromSdkModelType(model, context, models, enums)
