@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"{enumType.Description}");
                 AddClassAttributes(writer, enumType);
 
-                var implementType = new CSharpType(typeof(IEquatable<>), cs);
+                var implementType = CSharpType.Create(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{enumType.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
                     writer.Line($"private readonly {enumType.ValueType} _value;");

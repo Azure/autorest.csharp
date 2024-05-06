@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private Method BuildAppendQueryDelimitedMethod(bool hasFormat)
         {
             var nameParameter = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
-            var valueParameter = new Parameter("value", null, new CSharpType(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
+            var valueParameter = new Parameter("value", null, CSharpType.Create(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
             var delimiterParameter = new Parameter("delimiter", null, typeof(string), null, ValidationType.None, null);
             var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
             var escapeParameter = new Parameter("escape", null, typeof(bool), new Constant(true, typeof(bool)), ValidationType.None, null);

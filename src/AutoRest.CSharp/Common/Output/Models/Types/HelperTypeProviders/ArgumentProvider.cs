@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNull()
         {
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
-            var messageParam = new Parameter("message", null, typeof(string), Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
+            var messageParam = new Parameter("message", null, typeof(string), Constant.Default(CSharpType.Create(typeof(string), true)), ValidationType.None, null);
             var signature = GetSignature("AssertNull", new[] { valueParam, _nameParam, messageParam }, new[] { _t });
             var value = new ParameterReference(valueParam);
             var message = new ParameterReference(messageParam);
@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
             var minParam = new Parameter("minimum", null, _t, null, ValidationType.None, null);
             var maxParam = new Parameter("maximum", null, _t, null, ValidationType.None, null);
-            var whereExpressions = new WhereExpression[] { Where.NotNull(_t).And(new CSharpType(typeof(IComparable<>), _t)) };
+            var whereExpressions = new WhereExpression[] { Where.NotNull(_t).And(CSharpType.Create(typeof(IComparable<>), _t)) };
             var signature = GetSignature("AssertInRange", new[] { valueParam, minParam, maxParam, _nameParam }, new[] { _t }, whereExpressions);
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNotDefault()
         {
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
-            var whereExpressions = new WhereExpression[] { Where.Struct(_t).And(new CSharpType(typeof(IEquatable<>), _t)) };
+            var whereExpressions = new WhereExpression[] { Where.Struct(_t).And(CSharpType.Create(typeof(IEquatable<>), _t)) };
             var signature = GetSignature("AssertNotDefault", new[] { valueParam.WithRef(), _nameParam }, new[] { _t }, whereExpressions);
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
@@ -207,12 +207,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNotNullOrEmptyCollection()
         {
             const string throwMessage = "Value cannot be an empty collection.";
-            var valueParam = new Parameter("value", null, new CSharpType(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
+            var valueParam = new Parameter("value", null, CSharpType.Create(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
             var signature = GetSignature(AssertNotNullOrEmptyMethodName, new[] { valueParam, _nameParam }, new[] { _t });
             return new Method(signature, new MethodBodyStatement[]
             {
                 AssertNotNullSnippet(valueParam),
-                new IfStatement(IsCollectionEmpty(valueParam, new VariableReference(new CSharpType(typeof(ICollection<>), _t), new CodeWriterDeclaration("collectionOfT"))))
+                new IfStatement(IsCollectionEmpty(valueParam, new VariableReference(CSharpType.Create(typeof(ICollection<>), _t), new CodeWriterDeclaration("collectionOfT"))))
                 {
                     ThrowArgumentException(throwMessage)
                 },
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     ThrowArgumentException(throwMessage)
                 },
-                UsingDeclare("e", new CSharpType(typeof(IEnumerator<>), _t), new ParameterReference(valueParam).Invoke("GetEnumerator"), out var eVar),
+                UsingDeclare("e", CSharpType.Create(typeof(IEnumerator<>), _t), new ParameterReference(valueParam).Invoke("GetEnumerator"), out var eVar),
                 new IfStatement(Not(new BoolExpression(eVar.Invoke("MoveNext"))))
                 {
                     ThrowArgumentException(throwMessage)

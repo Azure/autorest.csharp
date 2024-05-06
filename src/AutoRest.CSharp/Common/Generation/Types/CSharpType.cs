@@ -88,19 +88,29 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="type">The base system type.</param>
         /// <param name="isNullable">Optional flag to determine if the constructed type should be nullable. Defaults to <c>false</c>.</param>
-        public CSharpType(Type type, bool isNullable = false) : this(
+        private CSharpType(Type type, bool isNullable = false) : this(
             type,
             isNullable,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
         { }
+
+        public static CSharpType Create(Type type, bool isNullable = false)
+        {
+            return new CSharpType(type, isNullable);
+        }
 
         /// <summary>
         /// Constructs a non-nullable <see cref="CSharpType"/> from a <see cref="Type"/> with arguments
         /// </summary>
         /// <param name="type">The base system type.</param>
         /// <param name="arguments">The type's arguments.</param>
-        public CSharpType(Type type, params CSharpType[] arguments) : this(type, arguments, false)
+        private CSharpType(Type type, params CSharpType[] arguments) : this(type, arguments, false)
         { }
+
+        public static CSharpType Create(Type type, params CSharpType[] arguments)
+        {
+            return new CSharpType(type, arguments);
+        }
 
         /// <summary>
         /// Constructs a <see cref="CSharpType"/> from a <see cref="Type"/> with arguments.
@@ -108,8 +118,13 @@ namespace AutoRest.CSharp.Generation.Types
         /// <param name="type">The base system type.</param>
         /// <param name="isNullable">Optional flag to determine if the constructed type should be nullable. Defaults to <c>false</c>.</param>
         /// <param name="arguments">The type's arguments.</param>
-        public CSharpType(Type type, bool isNullable, params CSharpType[] arguments) : this(type, arguments, isNullable)
+        private CSharpType(Type type, bool isNullable, params CSharpType[] arguments) : this(type, arguments, isNullable)
         { }
+
+        public static CSharpType Create(Type type, bool isNullable, params CSharpType[] arguments)
+        {
+            return new CSharpType(type, isNullable, arguments);
+        }
 
         /// <summary>
         /// Constructs a <see cref="CSharpType"/> from a <see cref="Type"/>.
@@ -117,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <param name="type">The base system type.</param>
         /// <param name="arguments">The type's arguments.</param>
         /// <param name="isNullable">Optional flag to determine if the constructed type should be nullable. Defaults to <c>false</c>.</param>
-        public CSharpType(Type type, IReadOnlyList<CSharpType> arguments, bool isNullable = false)
+        private CSharpType(Type type, IReadOnlyList<CSharpType> arguments, bool isNullable = false)
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
 
@@ -134,6 +149,11 @@ namespace AutoRest.CSharp.Generation.Types
             var declaringType = type.DeclaringType is not null && !type.IsGenericParameter ? new CSharpType(type.DeclaringType) : null;
 
             Initialize(name, isValueType, isEnum, isNullable, ns, declaringType, arguments, isPublic);
+        }
+
+        public static CSharpType Create(Type type, IReadOnlyList<CSharpType> arguments, bool isNullable = false)
+        {
+            return new CSharpType(type, arguments, isNullable);
         }
 
         [Conditional("DEBUG")]
@@ -167,8 +187,6 @@ namespace AutoRest.CSharp.Generation.Types
             var isEnum = implementation.IsEnum;
 
             Initialize(name, isValueType, isEnum, isNullable, ns, declaringType, arguments, isPublic);
-
-            SerializeAs = _implementation?.SerializeAs;
         }
 
         [MemberNotNull(nameof(_name))]
@@ -214,7 +232,6 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType ElementType => _elementType ??= GetElementType();
         public CSharpType InputType => _inputType ??= GetInputType();
         public CSharpType OutputType => _outputType ??= GetOutputType();
-        public Type? SerializeAs { get; init; }
         public IReadOnlyList<CSharpType> UnionItemTypes { get { return _unionItemTypes; } private init { _unionItemTypes = value; } }
 
         private bool TypeIsReadOnlyMemory()

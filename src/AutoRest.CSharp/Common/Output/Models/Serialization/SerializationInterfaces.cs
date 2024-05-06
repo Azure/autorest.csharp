@@ -25,8 +25,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization
                     }
                     if (Configuration.UseModelReaderWriter)
                     {
-                        IJsonModelTInterface = new CSharpType(typeof(IJsonModel<>), modelType);
-                        IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
+                        IJsonModelTInterface = CSharpType.Create(typeof(IJsonModel<>), modelType);
+                        IPersistableModelTInterface = CSharpType.Create(typeof(IPersistableModel<>), modelType);
                         // we only need this interface when the model is a struct
                         IJsonModelObjectInterface = isStruct ? (CSharpType)typeof(IJsonModel<object>) : null;
                         IPersistableModelObjectInterface = isStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
                     IXmlInterface = Configuration.ApiTypes.IXmlSerializableType;
                     if (Configuration.UseModelReaderWriter)
                     {
-                        IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
+                        IPersistableModelTInterface = CSharpType.Create(typeof(IPersistableModel<>), modelType);
                         IPersistableModelObjectInterface = isStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
                     }
                 }

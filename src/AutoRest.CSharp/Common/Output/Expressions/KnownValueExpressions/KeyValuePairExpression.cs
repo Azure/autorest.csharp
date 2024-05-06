@@ -12,6 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public TypedValueExpression Key => new TypedMemberExpression(Untyped, nameof(KeyValuePair<string, string>.Key), KeyType);
         public TypedValueExpression Value => new TypedMemberExpression(Untyped, nameof(KeyValuePair<string, string>.Value), ValueType);
 
-        public static CSharpType GetType(CSharpType keyType, CSharpType valueType) => new(typeof(KeyValuePair<,>), keyType, valueType);
+        public static CSharpType GetType(CSharpType keyType, CSharpType valueType) => CSharpType.Create(typeof(KeyValuePair<,>), keyType, valueType);
     }
 }

@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             var result = new Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>();
             foreach (var client in _topLevelClients)
             {
-                var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
+                var returnType = CSharpType.Create(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
                 foreach (var ctor in client.PrimaryConstructors)
                 {
                     var signatureParameters = new List<Parameter>() { FactoryBuilderParameter };
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             foreach (var client in _topLevelClients)
             {
-                var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
+                var returnType = CSharpType.Create(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
 
                 FormattableString summary = $"Registers a {client.Type:C} instance";
                 yield return new MethodSignature(
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     GenericArguments: new[] { TBuilderType, TConfigurationType },
                     GenericParameterConstraints: new[]
                     {
-                        Where.Implements(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
+                        Where.Implements(TBuilderType, CSharpType.Create(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
                     });
             }
         }

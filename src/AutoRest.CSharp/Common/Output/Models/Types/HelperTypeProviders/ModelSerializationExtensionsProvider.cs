@@ -449,7 +449,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (Configuration.UseModelReaderWriter)
             {
                 cases.Add(
-                  BuildWriteObjectValueSwitchCase(new CSharpType(typeof(IJsonModel<>), _t), "jsonModel", jsonModel => new MethodBodyStatement[]
+                  BuildWriteObjectValueSwitchCase(CSharpType.Create(typeof(IJsonModel<>), _t), "jsonModel", jsonModel => new MethodBodyStatement[]
                   {
                         new InvokeInstanceMethodStatement(jsonModel, nameof(IJsonModel<object>.Write), writer, NullCoalescing(options, ModelReaderWriterOptionsExpression.Wire)),
                         Break
@@ -594,7 +594,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private MethodSignature GetWriteObjectValueMethodSignature(CSharpType? genericArgument, out ValueExpression value, out Utf8JsonWriterExpression writer, out ParameterReference options)
         {
             var valueParameter = new Parameter("value", null, genericArgument ?? typeof(object), null, ValidationType.None, null);
-            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(new CSharpType(typeof(ModelReaderWriterOptions)).WithNullable(true)), ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), Constant.Default(CSharpType.Create(typeof(ModelReaderWriterOptions), true)), ValidationType.None, null);
             var parameters = Configuration.UseModelReaderWriter
                 ? new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, optionsParameter }
                 : new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter };

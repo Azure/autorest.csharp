@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (headAsBoolean)
             {
-                responseType = new CSharpType(typeof(bool));
+                responseType = typeof(bool);
                 return new[]
                 {
                     new Response(
@@ -505,7 +505,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var name = "endpoint";
-            var type = new CSharpType(typeof(Uri));
+            var type = CSharpType.Create(typeof(Uri));
             var defaultValue = parameter.DefaultValue;
             var description = parameter.Description;
             var location = parameter.RequestLocation;
@@ -539,7 +539,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
             CSharpType type = typeOverride != null
-                ? new CSharpType(typeOverride, isNullable)
+                ? CSharpType.Create(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, isNullable);
             return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory, keepClientDefaultValue);
         }

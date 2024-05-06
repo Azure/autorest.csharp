@@ -67,8 +67,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
         {
             var returnType = operation.ReturnType != null
-                ? new CSharpType(Configuration.ApiTypes.ResponseOfTType, operation.ReturnType)
-                : new CSharpType(Configuration.ApiTypes.ResponseType);
+                ? CSharpType.Create(Configuration.ApiTypes.ResponseOfTType, operation.ReturnType)
+                : CSharpType.Create(Configuration.ApiTypes.ResponseType);
 
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
             var method = new MethodSignature(operation.Name, $"{operation.Summary}", $"{operation.Description}", MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);

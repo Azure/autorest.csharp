@@ -98,27 +98,27 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private CSharpType? GetInterfaceType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(IOperationSource<>), operation.ResultType) : null;
+            return operation.ResultType != null ? CSharpType.Create(typeof(IOperationSource<>), operation.ResultType) : null;
         }
 
         private CSharpType GetNextLinkOperationType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(IOperation<>), operation.ResultType) : typeof(IOperation);
+            return operation.ResultType != null ? CSharpType.Create(typeof(IOperation<>), operation.ResultType) : typeof(IOperation);
         }
 
         private CSharpType GetBaseType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Operation));
+            return operation.ResultType != null ? CSharpType.Create(typeof(Operation<>), operation.ResultType) : CSharpType.Create(typeof(Operation));
         }
 
         private CSharpType GetValueTaskType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(Configuration.ApiTypes.ResponseOfTType, operation.ResultType) : new CSharpType(Configuration.ApiTypes.ResponseType);
+            return operation.ResultType != null ? CSharpType.Create(Configuration.ApiTypes.ResponseOfTType, operation.ResultType) : CSharpType.Create(Configuration.ApiTypes.ResponseType);
         }
 
         private CSharpType GetHelperType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(OperationInternal<>), operation.ResultType) : new CSharpType(typeof(OperationInternal));
+            return operation.ResultType != null ? CSharpType.Create(typeof(OperationInternal<>), operation.ResultType) : CSharpType.Create(typeof(OperationInternal));
         }
 
         private void WriteFields(CodeWriter writer, PagingResponseInfo? pagingResponse, CSharpType helperType)
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteWaitForCompletionMethods(CodeWriter writer, CSharpType valueTaskType, string waitForCompletionMethodName, bool async)
         {
-            var waitForCompletionType = async ? new CSharpType(typeof(ValueTask<>), valueTaskType) : valueTaskType;
+            var waitForCompletionType = async ? CSharpType.Create(typeof(ValueTask<>), valueTaskType) : valueTaskType;
 
             writer.WriteXmlDocumentationInheritDoc();
             writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(cancellationToken);");
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
             var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
-            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            using (writer.Scope($"{asyncKeyword}{CSharpType.Create(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, true);
             }
@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (async)
             {
-                writer.Line($"return new {new CSharpType(typeof(ValueTask<>), resultType)}({returnValue});");
+                writer.Line($"return new {CSharpType.Create(typeof(ValueTask<>), resultType)}({returnValue});");
             }
             else
             {

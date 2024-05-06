@@ -45,10 +45,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static IEnumerable<Method> BuildResourceJsonSerializationMethods(Resource resource)
         {
             var resourceDataType = resource.ResourceData.Type;
-            var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), resourceDataType);
+            var jsonModelInterface = CSharpType.Create(typeof(IJsonModel<>), resourceDataType);
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            var modelReaderWriter = new CSharpType(typeof(ModelReaderWriter));
-            var iModelTInterface = new CSharpType(typeof(IPersistableModel<>), resourceDataType);
+            var modelReaderWriter = CSharpType.Create(typeof(ModelReaderWriter));
+            var iModelTInterface = CSharpType.Create(typeof(IPersistableModel<>), resourceDataType);
             var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
 
             // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 expression = typed
                     .NullableStructValue()
-                    .Property(nameof(ReadOnlyMemory<byte>.Span), new CSharpType(typeof(ReadOnlySpan<>), typed.Type.Arguments[0]));
+                    .Property(nameof(ReadOnlyMemory<byte>.Span), CSharpType.Create(typeof(ReadOnlySpan<>), typed.Type.Arguments[0]));
             }
 
             return new EnumerableExpression(array.Type.ElementType, expression);
@@ -331,11 +331,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, TypedValueExpression value, ModelReaderWriterOptionsExpression? options)
         {
-            if (valueSerialization.Type.SerializeAs is not null)
-            {
-                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.SerializeAs, options);
-            }
-
             if (valueSerialization.Type.IsFrameworkType)
             {
                 return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.FrameworkType, options);
@@ -901,20 +896,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
         {
-            if (serializationType.SerializeAs != null)
-            {
-                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType), serializationType);
-            }
-
             if (serializationType.IsFrameworkType)
             {
-                var frameworkType = serializationType.FrameworkType;
-                if (frameworkType == typeof(Nullable<>))
-                {
-                    frameworkType = serializationType.Arguments[0].FrameworkType;
-                }
-
-                return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
+                return GetFrameworkTypeValueExpression(serializationType.FrameworkType, element, serializationFormat, serializationType);
             }
 
             return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);

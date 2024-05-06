@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                                 : Public | Virtual
                             : Accessibility,
                         IsPagingOperation
-                            ? new CSharpType(typeof(Pageable<>), ReturnType)
+                            ? CSharpType.Create(typeof(Pageable<>), ReturnType)
                             : ReturnType, null, MethodParameters.ToArray(),
                         attributes);
                     return _methodSignature;

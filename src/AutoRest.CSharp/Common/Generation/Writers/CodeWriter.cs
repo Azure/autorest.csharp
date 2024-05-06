@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     switch (argument)
                     {
                         case Type t:
-                            AppendTypeForCRef(new CSharpType(t));
+                            AppendTypeForCRef(CSharpType.Create(t));
                             break;
                         case CSharpType t:
                             AppendTypeForCRef(t);
@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         Append(fs);
                         break;
                     case Type t:
-                        AppendType(new CSharpType(t), false, false);
+                        AppendType(CSharpType.Create(t), false, false);
                         break;
                     case CSharpType t:
                         AppendType(t, isDeclaration, false);

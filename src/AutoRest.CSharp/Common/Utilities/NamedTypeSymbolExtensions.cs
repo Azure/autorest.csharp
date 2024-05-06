@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Utilities
 
             var type = Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
             return symbol.TypeArguments.Length > 0
-                ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
+                ? CSharpType.Create(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
                 : type;
         }
 

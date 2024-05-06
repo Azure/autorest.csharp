@@ -13,24 +13,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static CSharpType WrapPageable(this CSharpType type, bool isAsync)
         {
-            return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
+            return isAsync ? CSharpType.Create(typeof(AsyncPageable<>), type) : CSharpType.Create(typeof(Pageable<>), type);
         }
 
         public static CSharpType WrapAsync(this CSharpType type, bool isAsync)
         {
-            return isAsync ? new CSharpType(typeof(Task<>), type) : type;
+            return isAsync ? CSharpType.Create(typeof(Task<>), type) : type;
         }
 
         public static CSharpType WrapResponse(this CSharpType type, bool isAsync, bool isNullable)
         {
-            var response = new CSharpType(isNullable ? typeof(NullableResponse<>) : Configuration.ApiTypes.ResponseOfTType, type);
-            return isAsync ? new CSharpType(typeof(Task<>), response) : response;
+            var response = CSharpType.Create(isNullable ? typeof(NullableResponse<>) : Configuration.ApiTypes.ResponseOfTType, type);
+            return isAsync ? CSharpType.Create(typeof(Task<>), response) : response;
         }
 
         public static CSharpType WrapOperation(this CSharpType type, bool isAsync)
         {
-            var response = new CSharpType(typeof(ArmOperation<>), type);
-            return isAsync ? new CSharpType(typeof(Task<>), response) : response;
+            var response = CSharpType.Create(typeof(ArmOperation<>), type);
+            return isAsync ? CSharpType.Create(typeof(Task<>), response) : response;
         }
     }
 }

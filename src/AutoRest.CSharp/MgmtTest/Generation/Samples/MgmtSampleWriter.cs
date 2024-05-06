@@ -469,7 +469,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     // this is an extension operation against ArmResource
                     // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
                     // so insert a scope parameter instead of ArmResource here
-                    var scope = new CodeWriterVariableDeclaration("scope", new CSharpType(typeof(ResourceIdentifier)));
+                    var scope = new CodeWriterVariableDeclaration("scope", typeof(ResourceIdentifier));
                     WriteCreateScopeResourceIdentifier(sample, scope.Declaration, sample.RequestPath.GetScopePath());
                     result.Add(parameter.Name, scope);
                 }

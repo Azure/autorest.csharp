@@ -678,7 +678,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
-                    return new CSharpType(
+                    return CSharpType.Create(
                         _usage.HasFlag(SchemaTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
                         _typeFactory.CreateType(dictionarySchema.ElementType, false));
@@ -782,6 +782,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartObjectSerialization(ObjectSchema, this) : null;
         }
+
         protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))

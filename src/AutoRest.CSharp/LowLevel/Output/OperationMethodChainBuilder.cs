@@ -278,18 +278,18 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (Operation.LongRunning != null)
                 {
-                    var convenienceMethodReturnType = new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), responseType));
+                    var convenienceMethodReturnType = CSharpType.Create(typeof(Operation<>), CSharpType.Create(typeof(Pageable<>), responseType));
                     return new ReturnTypeChain(convenienceMethodReturnType, typeof(Operation<Pageable<BinaryData>>), responseType);
                 }
 
-                return new ReturnTypeChain(new CSharpType(typeof(Pageable<>), responseType), typeof(Pageable<BinaryData>), responseType);
+                return new ReturnTypeChain(CSharpType.Create(typeof(Pageable<>), responseType), typeof(Pageable<BinaryData>), responseType);
             }
 
             if (Operation.LongRunning != null)
             {
                 if (responseType != null)
                 {
-                    return new ReturnTypeChain(new CSharpType(typeof(Operation<>), responseType), typeof(Operation<BinaryData>), responseType);
+                    return new ReturnTypeChain(CSharpType.Create(typeof(Operation<>), responseType), typeof(Operation<BinaryData>), responseType);
                 }
 
                 return new ReturnTypeChain(typeof(Operation), typeof(Operation), null);
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
+                return new ReturnTypeChain(CSharpType.Create(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
             }
 
             return new ReturnTypeChain(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseType, null);
@@ -689,7 +689,7 @@ namespace AutoRest.CSharp.Output.Models
         private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
         {
             InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
+            InputModelType modelType => CSharpType.Create(typeof(object), modelType.IsNullable),
             _ => null
         };
 

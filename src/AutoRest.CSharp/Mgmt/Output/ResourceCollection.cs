@@ -41,8 +41,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
             return new CSharpType[]
             {
-                new CSharpType(typeof(IEnumerable<>), getRestOperation.MgmtReturnType!),
-                new CSharpType(typeof(IAsyncEnumerable<>), getRestOperation.MgmtReturnType!)
+                CSharpType.Create(typeof(IEnumerable<>), getRestOperation.MgmtReturnType!),
+                CSharpType.Create(typeof(IAsyncEnumerable<>), getRestOperation.MgmtReturnType!)
             };
         }
         public Resource Resource { get; }

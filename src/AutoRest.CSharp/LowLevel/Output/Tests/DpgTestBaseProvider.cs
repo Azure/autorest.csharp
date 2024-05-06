@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             DefaultNamespace = $"{defaultNamespace}.Tests";
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestBase";
             _clients = clients;
-            Inherits = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
+            Inherits = CSharpType.Create(typeof(RecordedTestBase<>), TestEnvironment.Type);
             DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
         }
 

@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
             {
-                responseType = new CSharpType(typeof(bool));
+                responseType = typeof(bool);
                 return new[]
                 {
                     new Response(
@@ -489,7 +489,7 @@ namespace AutoRest.CSharp.Output.Models
             var location = parameter.RequestLocation;
 
             return defaultValue != null
-                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
+                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(CSharpType.Create(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
                 : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
@@ -498,7 +498,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
+            CSharpType type = typeOverride != null ? CSharpType.Create(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
         }
 

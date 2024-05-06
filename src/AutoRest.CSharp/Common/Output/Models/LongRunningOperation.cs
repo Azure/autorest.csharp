@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 {
                     NextPageMethod = lroInfo.NextOperationMethod;
                     PagingResponse = new PagingResponseInfo(paging.NextLinkName, paging.ItemName, ResultType);
-                    ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
+                    ResultType = CSharpType.Create(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
 

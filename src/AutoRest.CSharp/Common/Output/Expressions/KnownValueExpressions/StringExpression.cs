@@ -4,7 +4,6 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions

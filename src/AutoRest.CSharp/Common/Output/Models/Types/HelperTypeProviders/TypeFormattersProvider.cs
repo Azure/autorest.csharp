@@ -304,7 +304,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildConvertToStringMethod()
         {
             var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
-            var nullableStringType = new CSharpType(typeof(string), true);
+            var nullableStringType = CSharpType.Create(typeof(string), true);
             var formatParameter = new Parameter("format", null, nullableStringType, Constant.Default(nullableStringType), ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: _convertToStringMethodName,

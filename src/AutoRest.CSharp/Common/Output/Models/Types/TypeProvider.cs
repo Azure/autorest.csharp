@@ -53,8 +53,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
         public virtual SignatureType? SignatureType => null;
 
-        internal virtual Type? SerializeAs => null;
-
         protected virtual IEnumerable<CSharpType> BuildTypeArguments()
         {
             yield break;

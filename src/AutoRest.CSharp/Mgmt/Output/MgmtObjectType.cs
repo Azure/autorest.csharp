@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 if (shouldReplace)
                 {
-                    var newType = new CSharpType(frameworkType.GetGenericTypeDefinition(), type.IsNullable, arguments);
+                    var newType = CSharpType.Create(frameworkType.GetGenericTypeDefinition(), type.IsNullable, arguments);
                     return new ObjectTypeProperty(
                         new MemberDeclarationOptions(objectTypeProperty.Declaration.Accessibility, objectTypeProperty.Declaration.Name, newType),
                         objectTypeProperty.Description,

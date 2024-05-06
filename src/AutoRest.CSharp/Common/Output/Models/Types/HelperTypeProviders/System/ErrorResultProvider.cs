@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
 
         protected override IEnumerable<CSharpType> BuildImplements()
         {
-            yield return new CSharpType(typeof(ClientResult<>), _t);
+            yield return CSharpType.Create(typeof(ClientResult<>), _t);
         }
 
         protected override IEnumerable<FieldDeclaration> BuildFields()

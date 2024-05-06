@@ -8,7 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
-    internal sealed record ListExpression(CSharpType ItemType, ValueExpression Untyped) : TypedValueExpression(new CSharpType(typeof(List<>), ItemType), Untyped)
+    internal sealed record ListExpression(CSharpType ItemType, ValueExpression Untyped) : TypedValueExpression(CSharpType.Create(typeof(List<>), ItemType), Untyped)
     {
         public MethodBodyStatement Add(ValueExpression item) => new InvokeInstanceMethodStatement(Untyped, nameof(List<object>.Add), item);
 

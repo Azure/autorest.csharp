@@ -51,8 +51,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
-        internal override Type? SerializeAs => GetSerializeAs(_type);
-
         protected override string DefaultAccessibility { get; } = "public";
 
         internal Type SystemType => _type;
@@ -79,13 +77,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             throw new InvalidOperationException($"{attributeType} ctor was not found for {type.Name}");
         }
-
-        private static Type? GetSerializeAs(Type type) => type.Name switch
-        {
-            _ when type == typeof(ResourceIdentifier) => type,
-            _ when type == typeof(SystemData) => type,
-            _ => null,
-        };
 
         private static string GetNameWithoutGeneric(Type t)
         {
@@ -128,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var unwrapNullable = Nullable.GetUnderlyingType(type);
 
-            return unwrapNullable == null ? new CSharpType(type, IsNullable(type)) : new CSharpType(unwrapNullable, true);
+            return unwrapNullable == null ? CSharpType.Create(type, IsNullable(type)) : CSharpType.Create(unwrapNullable, true);
 
             static bool IsNullable(Type type)
             {
@@ -201,10 +192,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType)
-                {
-                    SerializeAs = GetSerializeAs(property.PropertyType)
-                });
+                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, CSharpType.Create(property.PropertyType));
             }
 
             static bool IsRequired(PropertyInfo property, Type systemType)

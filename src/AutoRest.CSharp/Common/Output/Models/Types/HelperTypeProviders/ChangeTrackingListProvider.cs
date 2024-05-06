@@ -42,11 +42,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ChangeTrackingListProvider() : base(Configuration.HelperNamespace, null)
         {
             _t = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0];
-            _iListOfT = new CSharpType(typeof(IList<>), _t);
-            _iReadOnlyListOfT = new CSharpType(typeof(IReadOnlyList<>), _t);
+            _iListOfT = CSharpType.Create(typeof(IList<>), _t);
+            _iReadOnlyListOfT = CSharpType.Create(typeof(IReadOnlyList<>), _t);
 
             _ensureListSignature = new MethodSignature("EnsureList", null, null, MethodSignatureModifiers.Public, _iListOfT, null, Array.Empty<Parameter>());
-            _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, new CSharpType(typeof(IEnumerator<>), _t), null, Array.Empty<Parameter>());
+            _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, CSharpType.Create(typeof(IEnumerator<>), _t), null, Array.Empty<Parameter>());
             _innerListField = new FieldDeclaration(FieldModifiers.Private, _iListOfT, "_innerList");
             _innerList = new VariableReference(_iListOfT, _innerListField.Declaration);
             _tArray = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0].MakeArrayType();
@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 new IfStatement(IsUndefined)
                 {
-                    new DeclareLocalFunctionStatement(new CodeWriterDeclaration("enumerateEmpty"), Array.Empty<Parameter>(), new CSharpType(typeof(IEnumerator<>), _t), new KeywordStatement("yield", new KeywordExpression("break", null))),
+                    new DeclareLocalFunctionStatement(new CodeWriterDeclaration("enumerateEmpty"), Array.Empty<Parameter>(), CSharpType.Create(typeof(IEnumerator<>), _t), new KeywordStatement("yield", new KeywordExpression("break", null))),
                     Return(new InvokeStaticMethodExpression(null, "enumerateEmpty", Array.Empty<ValueExpression>()))
                 },
                 Return(EnsureList.Invoke(_getEnumeratorSignature))
@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             return new Method(_ensureListSignature, new MethodBodyStatement[]
             {
-                Return(new BinaryOperatorExpression("??=", _innerList, New.Instance(new CSharpType(typeof(List<>), _t))))
+                Return(NullCoalescing(_innerList, New.Instance(CSharpType.Create(typeof(List<>), _t))))
             });
         }
     }

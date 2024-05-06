@@ -56,10 +56,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
-                new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType) :
+                CSharpType.Create(Configuration.ApiTypes.ResponseOfTType, bodyType) :
                 Configuration.ApiTypes.ResponseType;
 
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            responseType = async ? CSharpType.Create(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
             writer.WriteXmlDocumentationSummary($"{clientMethod.RestClientMethod.SummaryText}");
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 $"{pagingMethod.Method.SummaryText}",
                 $"{pagingMethod.Method.DescriptionText}",
                 MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
-                new CSharpType(typeof(Pageable<>), pageType),
+                CSharpType.Create(typeof(Pageable<>), pageType),
                 null,
                 parameters);
 
@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.StartMethod;
-            CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
+            CSharpType returnType = async ? CSharpType.Create(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             var parameters = originalMethod.Parameters;
 
             writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");

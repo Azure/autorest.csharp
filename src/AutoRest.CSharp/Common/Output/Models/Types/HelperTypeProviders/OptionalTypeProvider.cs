@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildIsReadOnlyDictionaryDefined()
         {
-            var collectionParam = new Parameter("collection", null, new CSharpType(typeof(IReadOnlyDictionary<,>), _tKey, _tValue), null, ValidationType.None, null);
+            var collectionParam = new Parameter("collection", null, CSharpType.Create(typeof(IReadOnlyDictionary<,>), _tKey, _tValue), null, ValidationType.None, null);
             var signature = GetIsCollectionDefinedSignature(collectionParam, _tKey, _tValue);
             VariableReference changeTrackingReference = new VariableReference(_genericChangeTrackingDictionary, new CodeWriterDeclaration("changeTrackingDictionary"));
             DeclarationExpression changeTrackingDeclarationExpression = new(changeTrackingReference, false);
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildIsDictionaryDefined()
         {
-            var collectionParam = new Parameter("collection", null, new CSharpType(typeof(IDictionary<,>), _tKey, _tValue), null, ValidationType.None, null);
+            var collectionParam = new Parameter("collection", null, CSharpType.Create(typeof(IDictionary<,>), _tKey, _tValue), null, ValidationType.None, null);
             var signature = GetIsCollectionDefinedSignature(collectionParam, _tKey, _tValue);
             VariableReference changeTrackingReference = new VariableReference(_genericChangeTrackingDictionary, new CodeWriterDeclaration("changeTrackingDictionary"));
             DeclarationExpression changeTrackingDeclarationExpression = new(changeTrackingReference, false);
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildIsListDefined()
         {
-            var collectionParam = new Parameter("collection", null, new CSharpType(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
+            var collectionParam = new Parameter("collection", null, CSharpType.Create(typeof(IEnumerable<>), _t), null, ValidationType.None, null);
             var signature = GetIsCollectionDefinedSignature(collectionParam, _t);
             VariableReference changeTrackingReference = new VariableReference(_genericChangeTrackingList, new CodeWriterDeclaration("changeTrackingList"));
             DeclarationExpression changeTrackingDeclarationExpression = new(changeTrackingReference, false);

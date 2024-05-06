@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCreateResultAsync()
         {
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
-            using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
+            using (_writer.Scope($"async {CSharpType.Create(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
             }

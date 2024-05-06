@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal static class BuilderHelpers
     {
-        public static Constant StringConstant(string? s) => ParseConstant(s, new CSharpType(typeof(string), s == null));
+        public static Constant StringConstant(string? s) => ParseConstant(s, CSharpType.Create(typeof(string), s == null));
 
         public static Constant ParseConstant(object? value, CSharpType type)
         {
@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Output.Builders
                     arguments[i] = PromoteNullabilityInformation(newType.Arguments[i], defaultType.Arguments[i]);
                 }
 
-                return new CSharpType(newType.FrameworkType, defaultType.IsNullable, arguments);
+                return CSharpType.Create(newType.FrameworkType, defaultType.IsNullable, arguments);
             }
 
             return newType.WithNullable(defaultType.IsNullable);

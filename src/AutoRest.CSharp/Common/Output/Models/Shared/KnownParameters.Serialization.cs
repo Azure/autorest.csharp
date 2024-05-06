@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static class Serializations
         {
             private static readonly CSharpType modelReaderWriterOptionsType = typeof(ModelReaderWriterOptions);
-            private static readonly CSharpType nullableModelReaderWriterOptionsType = new CSharpType(typeof(ModelReaderWriterOptions), isNullable: true);
+            private static readonly CSharpType nullableModelReaderWriterOptionsType = CSharpType.Create(typeof(ModelReaderWriterOptions), isNullable: true);
 
             public static readonly Parameter XmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
             public static readonly Parameter NameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);

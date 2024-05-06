@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var dictionaryTType = typeof(IDictionary<,>);
             CSharpType valueType = dictionaryTType.GetGenericArguments()[1];
-            var dictionaryParameter = new Parameter("dictionary", null, new CSharpType(dictionaryTType, typeof(string), valueType), null, ValidationType.None, null);
+            var dictionaryParameter = new Parameter("dictionary", null, CSharpType.Create(dictionaryTType, typeof(string), valueType), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: _fromDictionaryName,
                 Modifiers: _methodModifiers,

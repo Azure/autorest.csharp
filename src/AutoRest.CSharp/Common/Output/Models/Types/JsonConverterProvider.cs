@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _includeSerializer = model.IncludeSerializer;
             _includeDeserializer = model.IncludeDeserializer;
             DefaultName = $"{model.Declaration.Name}Converter";
-            Inherits = new CSharpType(typeof(JsonConverter<>), model.Type);
+            Inherits = CSharpType.Create(typeof(JsonConverter<>), model.Type);
         }
 
         protected override string DefaultName { get; }

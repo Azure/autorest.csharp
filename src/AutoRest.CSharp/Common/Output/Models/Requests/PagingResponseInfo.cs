@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType ResponseType { get; }
         public string? NextLinkPropertyName { get; }
         public string ItemPropertyName { get; }
-        public CSharpType PageType => new CSharpType(typeof(Page<>), ItemType);
+        public CSharpType PageType => CSharpType.Create(typeof(Page<>), ItemType);
         public CSharpType ItemType { get; }
 
         private ObjectTypeProperty GetPropertyBySerializedName(CSharpType type, string name)

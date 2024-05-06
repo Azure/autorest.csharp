@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
             {
                 if (Configuration.IsBranded)
-                    writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
+                    writer.UseNamespace(CSharpType.Create(typeof(ResponseHeadersExtensions)).Namespace);
 
                 using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} partial class {responseHeaderGroup.Declaration.Name}"))
                 {

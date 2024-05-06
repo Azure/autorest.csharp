@@ -632,7 +632,7 @@ namespace AutoRest.CSharp.Output.Builders
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
                     valueSerialization,
-                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                    additionalPropertiesProperty.Declaration.Type.InitializationType,
                     shouldExcludeInWireSerialization);
         }
         public MultipartObjectSerialization BuildMultipartObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
@@ -710,7 +710,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             return new MultipartAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,
-                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                additionalPropertiesProperty.Declaration.Type.InitializationType,
                 valueSerialization,
                 shouldExcludeInWireSerialization);
         }

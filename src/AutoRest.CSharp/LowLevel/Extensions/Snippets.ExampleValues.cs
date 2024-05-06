@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 { IsReadOnlyMemory: true } => GetExpressionForList(type, exampleValue, serializationFormat, true),
                 { IsList: true } => GetExpressionForList(type, exampleValue, serializationFormat, includeCollectionInitialization),
                 { IsDictionary: true } => GetExpressionForDictionary(type, exampleValue, serializationFormat, includeCollectionInitialization),
-                { SerializeAs: { } serializedType } => GetExpressionForFrameworkType(serializedType, exampleValue, serializationFormat, includeCollectionInitialization),
                 { IsFrameworkType: true, FrameworkType: { } frameworkType } => GetExpressionForFrameworkType(frameworkType, exampleValue, serializationFormat, includeCollectionInitialization),
                 _ => GetExpressionForTypeProvider(type, exampleValue)
             };

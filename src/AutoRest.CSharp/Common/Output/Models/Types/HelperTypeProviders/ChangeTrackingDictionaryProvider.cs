@@ -45,12 +45,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             WhereClause = Where.NotNull(_tKey);
             _indexParam = new Parameter("key", null, _tKey, null, ValidationType.None, null);
-            _IDictionary = new CSharpType(typeof(IDictionary<,>), _tKey, _tValue);
-            _dictionary = new CSharpType(typeof(Dictionary<,>), _tKey, _tValue);
-            _IReadOnlyDictionary = new CSharpType(typeof(IReadOnlyDictionary<,>), _tKey, _tValue);
-            _IEnumerator = new CSharpType(typeof(IEnumerator<>), new CSharpType(typeof(KeyValuePair<,>), _tKey, _tValue));
-            _keyValuePair = new CSharpType(typeof(KeyValuePair<,>), _tKey, _tValue);
-            _innerDictionaryField = new FieldDeclaration(FieldModifiers.Private, new CSharpType(typeof(IDictionary<,>), _tKey, _tValue), "_innerDictionary");
+            _IDictionary = CSharpType.Create(typeof(IDictionary<,>), _tKey, _tValue);
+            _dictionary = CSharpType.Create(typeof(Dictionary<,>), _tKey, _tValue);
+            _IReadOnlyDictionary = CSharpType.Create(typeof(IReadOnlyDictionary<,>), _tKey, _tValue);
+            _IEnumerator = CSharpType.Create(typeof(IEnumerator<>), CSharpType.Create(typeof(KeyValuePair<,>), _tKey, _tValue));
+            _keyValuePair = CSharpType.Create(typeof(KeyValuePair<,>), _tKey, _tValue);
+            _innerDictionaryField = new FieldDeclaration(FieldModifiers.Private, CSharpType.Create(typeof(IDictionary<,>), _tKey, _tValue), "_innerDictionary");
             _innerDictionary = new DictionaryExpression(_tKey, _tValue, new VariableReference(_IDictionary, _innerDictionaryField.Declaration));
             _ensureDictionarySignature = new MethodSignature("EnsureDictionary", null, null, MethodSignatureModifiers.Public, _IDictionary, null, Array.Empty<Parameter>());
             EnsureDictionary = This.Invoke(_ensureDictionarySignature);
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private PropertyDeclaration BuildEnumerableValues()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.None, new CSharpType(typeof(IEnumerable<>), _tValue), "Values", new ExpressionPropertyBody(
+            return new PropertyDeclaration(null, MethodSignatureModifiers.None, CSharpType.Create(typeof(IEnumerable<>), _tValue), "Values", new ExpressionPropertyBody(
                 new MemberExpression(This, "Values")),
                 null,
                 _IReadOnlyDictionary);
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private PropertyDeclaration BuildEnumerableKeys()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.None, new CSharpType(typeof(IEnumerable<>), _tKey), "Keys", new ExpressionPropertyBody(
+            return new PropertyDeclaration(null, MethodSignatureModifiers.None, CSharpType.Create(typeof(IEnumerable<>), _tKey), "Keys", new ExpressionPropertyBody(
                 new MemberExpression(This, "Keys")),
                 null,
                 _IReadOnlyDictionary);
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private PropertyDeclaration BuildValues()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, new CSharpType(typeof(ICollection<>), _tValue), "Values",
+            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, CSharpType.Create(typeof(ICollection<>), _tValue), "Values",
                 new ExpressionPropertyBody(new TernaryConditionalOperator(
                     IsUndefined,
                     new InvokeStaticMethodExpression(typeof(Array), "Empty", Array.Empty<ValueExpression>(), new[] { _tValue }),
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private PropertyDeclaration BuildKeys()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, new CSharpType(typeof(ICollection<>), _tKey), "Keys",
+            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, CSharpType.Create(typeof(ICollection<>), _tKey), "Keys",
                 new ExpressionPropertyBody(new TernaryConditionalOperator(
                     IsUndefined,
                     new InvokeStaticMethodExpression(typeof(Array), "Empty", Array.Empty<ValueExpression>(), new[] { _tKey }),

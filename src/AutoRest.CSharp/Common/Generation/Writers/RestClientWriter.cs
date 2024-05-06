@@ -73,10 +73,10 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType? headerModelType = operation.HeaderModel?.Type;
             CSharpType returnType = bodyType switch
             {
-                null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                { } when headerModelType == null => new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType),
-                { } => new CSharpType(typeof(ResponseWithHeaders<,>), bodyType, headerModelType),
-                _ => new CSharpType(Configuration.ApiTypes.ResponseType),
+                null when headerModelType != null => CSharpType.Create(typeof(ResponseWithHeaders<>), headerModelType),
+                { } when headerModelType == null => CSharpType.Create(Configuration.ApiTypes.ResponseOfTType, bodyType),
+                { } => CSharpType.Create(typeof(ResponseWithHeaders<,>), bodyType, headerModelType),
+                _ => Configuration.ApiTypes.ResponseType,
             };
 
             var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();

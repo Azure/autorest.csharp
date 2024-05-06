@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteIEnumerable(CSharpType type)
         {
             _writer.Line();
-            var enumeratorType = new CSharpType(typeof(IEnumerator<>), type.Arguments);
+            var enumeratorType = CSharpType.Create(typeof(IEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetEnumerator()");
             string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteIAsyncEnumerable(CSharpType type)
         {
             _writer.Line();
-            var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
+            var enumeratorType = CSharpType.Create(typeof(IAsyncEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
             string argValue = GetEnumerableArgValue();
             using (_writer.Scope())

@@ -627,7 +627,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new MultipartAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,
-                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                additionalPropertiesProperty.Declaration.Type.InitializationType,
                 valueSerialization,
                 shouldExcludeInWireSerialization);
         }
@@ -673,7 +673,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new JsonAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,
                 valueSerialization,
-                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                additionalPropertiesProperty.Declaration.Type.InitializationType,
                 shouldExcludeInWireSerialization);
         }
 

@@ -23,11 +23,6 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static FormattableString GetDeserializeValueFormattable(FormattableString element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, JsonSerializationOptions serializationOptions = JsonSerializationOptions.None)
         {
-            if (serializationType.SerializeAs != null)
-            {
-                return $"({serializationType}){GetFrameworkTypeValueFormattable(serializationType.SerializeAs, element, serializationFormat, serializationType)}";
-            }
-
             if (serializationType.IsFrameworkType)
             {
                 var frameworkType = serializationType.FrameworkType;

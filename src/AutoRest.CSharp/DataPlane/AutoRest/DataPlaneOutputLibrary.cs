@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model)
             => _models.TryGetValue(model with { IsNullable = false }, out var modelTypeProvider)
                 ? modelTypeProvider.Type.WithNullable(model.IsNullable)
-                : new CSharpType(typeof(object), model.IsNullable);
+                : CSharpType.Create(typeof(object), model.IsNullable);
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for HLC!");
 

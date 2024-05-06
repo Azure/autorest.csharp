@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // the second as the value type
             var valueType = type.Arguments[1];
             // the type of dictionary in our generated SDK is usually an interface `IDictionary<>` or `IReadOnlyDictionary<>`, here we just use `Dictionary` as its proper initialization
-            var concreteDictType = new CSharpType(typeof(Dictionary<,>), type.Arguments);
+            var concreteDictType = type.InitializationType;
             var initialization = includeInitialization ? (FormattableString)$"new {concreteDictType}()" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ReturnType = returnType;
             DefaultName = $"{(resource != null ? resource.ResourceName : returnType.Name)}OperationSource";
-            Interface = new CSharpType(typeof(IOperationSource<>), returnType);
+            Interface = CSharpType.Create(typeof(IOperationSource<>), returnType);
             Resource = resource;
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
             ArmClientCtor = new ConstructorSignature(Type, null, null, Internal, new[] { KnownParameters.ArmClient });

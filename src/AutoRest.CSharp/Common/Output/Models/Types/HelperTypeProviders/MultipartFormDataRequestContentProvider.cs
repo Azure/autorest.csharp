@@ -161,10 +161,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         {
             var contentParam = new Parameter("content", null, typeof(T), null, ValidationType.None, null);
             var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
-            var filenameParam = new Parameter("filename", null, new CSharpType(typeof(string), true),
-                        Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
-            var contentTypeParam = new Parameter("contentType", null, new CSharpType(typeof(string), true),
-                        Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
+            var filenameParam = new Parameter("filename", null, CSharpType.Create(typeof(string), true),
+                        Constant.Default(CSharpType.Create(typeof(string), true)), ValidationType.None, null);
+            var contentTypeParam = new Parameter("contentType", null, CSharpType.Create(typeof(string), true),
+                        Constant.Default(CSharpType.Create(typeof(string), true)), ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: _addMethodName,
                 Summary: null,
@@ -238,8 +238,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders
         {
             var contentParam = new Parameter("content", null, typeof(HttpContent), null, ValidationType.None, null);
             var nameParam = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
-            var filenameParam = new Parameter("filename", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
-            var contentTypeParam = new Parameter("contentType", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+            var filenameParam = new Parameter("filename", null, CSharpType.Create(typeof(string), true), null, ValidationType.None, null);
+            var contentTypeParam = new Parameter("contentType", null, CSharpType.Create(typeof(string), true), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: "Add",
                 Summary: null,

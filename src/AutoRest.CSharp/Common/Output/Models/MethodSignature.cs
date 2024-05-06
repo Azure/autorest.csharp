@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models
                 return this with
                 {
                     Name = Name + "Async",
-                    ReturnType = new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments)
+                    ReturnType = CSharpType.Create(typeof(AsyncPageable<>), ReturnType.Arguments)
                 };
             }
 
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Name = Name + "Async",
                     Modifiers = Modifiers | Async,
-                    ReturnType = new CSharpType(typeof(IAsyncEnumerable<>), ReturnType.Arguments),
+                    ReturnType = CSharpType.Create(typeof(IAsyncEnumerable<>), ReturnType.Arguments),
                     Parameters = Parameters.Append(KnownParameters.EnumeratorCancellationTokenParameter).ToArray()
                 };
             }
@@ -65,8 +65,8 @@ namespace AutoRest.CSharp.Output.Models
                 Modifiers = Modifiers | Async,
                 ReturnType = ReturnType != null
                     ? ReturnType.IsOperationOfPageable
-                        ? new CSharpType(typeof(Task<>), new CSharpType(typeof(Operation<>), new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments[0].Arguments[0])))
-                        : new CSharpType(typeof(Task<>), ReturnType)
+                        ? CSharpType.Create(typeof(Task<>), CSharpType.Create(typeof(Operation<>), CSharpType.Create(typeof(AsyncPageable<>), ReturnType.Arguments[0].Arguments[0])))
+                        : CSharpType.Create(typeof(Task<>), ReturnType)
                     : typeof(Task)
             };
         }
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models
                 return this with
                 {
                     Name = Name[..^5],
-                    ReturnType = new CSharpType(typeof(Pageable<>), ReturnType.Arguments)
+                    ReturnType = CSharpType.Create(typeof(Pageable<>), ReturnType.Arguments)
                 };
             }
 
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Name = Name[..^5],
                     Modifiers = Modifiers ^ Async,
-                    ReturnType = new CSharpType(typeof(IEnumerable<>), ReturnType.Arguments),
+                    ReturnType = CSharpType.Create(typeof(IEnumerable<>), ReturnType.Arguments),
                     Parameters = Parameters.Where(p => p != KnownParameters.EnumeratorCancellationTokenParameter).ToArray()
                 };
             }
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
                 Modifiers = Modifiers ^ Async,
                 ReturnType = ReturnType?.Arguments.Count == 1
                     ? ReturnType.Arguments[0].IsOperationOfAsyncPageable
-                        ? new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), ReturnType.Arguments[0].Arguments[0].Arguments[0]))
+                        ? CSharpType.Create(typeof(Operation<>), CSharpType.Create(typeof(Pageable<>), ReturnType.Arguments[0].Arguments[0].Arguments[0]))
                         : ReturnType.Arguments[0]
                     : null
             };
