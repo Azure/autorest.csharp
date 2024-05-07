@@ -191,7 +191,7 @@
        "Type": {
         "$id": "27",
         "Kind": "Primitive",
-        "Name": "DateTime",
+        "Name": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1137,7 +1137,7 @@
        "Type": {
         "$id": "112",
         "Kind": "Primitive",
-        "Name": "DateTime",
+        "Name": "DateTimeRFC7231",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1568,7 +1568,7 @@
          "Type": {
           "$id": "154",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          }
         }
@@ -1636,7 +1636,7 @@
          "Type": {
           "$id": "161",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          }
         }
@@ -1704,7 +1704,7 @@
          "Type": {
           "$id": "168",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          }
         }
@@ -1772,7 +1772,7 @@
          "Type": {
           "$id": "175",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          }
         }
