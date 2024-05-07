@@ -251,7 +251,7 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, param),
+            param,
             models,
             enums,
             operation.operation
@@ -307,7 +307,7 @@ export function loadOperation(
     ): InputParameter {
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, body),
+            body,
             models,
             enums,
             operation.operation
@@ -349,7 +349,7 @@ export function loadOperation(
             const typespecType = getEffectiveSchemaType(context, body.type);
             const inputType: InputType = getInputType(
                 context,
-                getFormattedType(program, typespecType),
+                typespecType,
                 models,
                 enums,
                 operation.operation
@@ -367,7 +367,7 @@ export function loadOperation(
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        getFormattedType(program, headers[key].type),
+                        headers[key].type,
                         models,
                         enums,
                         operation.operation
@@ -401,11 +401,13 @@ export function loadOperation(
             metadata.finalResult !== undefined &&
             metadata.finalResult !== "void"
         ) {
-            const formattedType = getFormattedType(
-                program,
-                metadata.finalEnvelopeResult as Model
+            bodyType = getInputType(
+                context,
+                metadata.finalEnvelopeResult as Model,
+                models,
+                enums,
+                op.operation
             );
-            bodyType = getInputType(context, formattedType, models, enums, op.operation);
         }
 
         return {

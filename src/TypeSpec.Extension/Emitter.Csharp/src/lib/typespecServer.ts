@@ -63,12 +63,7 @@ export function resolveServers(
                       Name: InputPrimitiveTypeKind.Uri,
                       IsNullable: false
                   } as InputPrimitiveType)
-                : getInputType(
-                      context,
-                      getFormattedType(context.program, prop),
-                      models,
-                      enums
-                  );
+                : getInputType(context, prop, models, enums);
 
             if (value) {
                 defaultValue = {

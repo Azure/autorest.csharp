@@ -52,7 +52,7 @@ import { InputTypeKind } from "./inputTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
 import { Usage } from "./usage.js";
 
-function fromSdkType(
+export function fromSdkType(
     sdkType: SdkType,
     context: SdkContext,
     models: Map<string, InputModelType>,

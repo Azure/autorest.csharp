@@ -6,13 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadRecordNonDiscriminatedUnion3(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadRecordNonDiscriminatedUnion3Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordNonDiscriminatedUnion3();
+            Response<SpreadRecordForNonDiscriminatedUnion3> response = client.GetSpreadRecordNonDiscriminatedUnion3();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordNonDiscriminatedUnion3Async();
+            Response<SpreadRecordForNonDiscriminatedUnion3> response = await client.GetSpreadRecordNonDiscriminatedUnion3Async();
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadRecordNonDiscriminatedUnion3(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadRecordNonDiscriminatedUnion3Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordNonDiscriminatedUnion3();
+            Response<SpreadRecordForNonDiscriminatedUnion3> response = client.GetSpreadRecordNonDiscriminatedUnion3();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordNonDiscriminatedUnion3Async();
+            Response<SpreadRecordForNonDiscriminatedUnion3> response = await client.GetSpreadRecordNonDiscriminatedUnion3Async();
         }
 
         [Test]
@@ -110,14 +110,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            },
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -132,14 +125,7 @@ start = "<start>",
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            },
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -152,17 +138,8 @@ start = "<start>",
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response response = client.Put(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            })
-            });
+            SpreadRecordForNonDiscriminatedUnion3 body = new SpreadRecordForNonDiscriminatedUnion3("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -171,17 +148,8 @@ start = "<start>",
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            })
-            });
+            SpreadRecordForNonDiscriminatedUnion3 body = new SpreadRecordForNonDiscriminatedUnion3("<name>");
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -192,14 +160,7 @@ start = "<start>",
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            },
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -214,14 +175,7 @@ start = "<start>",
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            },
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -234,17 +188,8 @@ start = "<start>",
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response response = client.Put(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            })
-            });
+            SpreadRecordForNonDiscriminatedUnion3 body = new SpreadRecordForNonDiscriminatedUnion3("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -253,17 +198,8 @@ start = "<start>",
         {
             SpreadRecordNonDiscriminatedUnion3 client = new AdditionalPropertiesClient().GetSpreadRecordNonDiscriminatedUnion3Client();
 
-            Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object[]
-            {
-new
-{
-kind = "kind1",
-start = "<start>",
-}
-            })
-            });
+            SpreadRecordForNonDiscriminatedUnion3 body = new SpreadRecordForNonDiscriminatedUnion3("<name>");
+            Response response = await client.PutAsync(body);
         }
     }
 }
