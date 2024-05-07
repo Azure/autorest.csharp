@@ -183,7 +183,9 @@ export function loadOperation(
             }
             mediaTypes.push(...mediaTypeValues);
         } else if (isInputEnumType(contentTypeParameter.Type)) {
-            const mediaTypeValues = contentTypeParameter.Type.AllowedValues.map((value) => value.Value);
+            const mediaTypeValues = contentTypeParameter.Type.AllowedValues.map(
+                (value) => value.Value
+            );
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";
             }

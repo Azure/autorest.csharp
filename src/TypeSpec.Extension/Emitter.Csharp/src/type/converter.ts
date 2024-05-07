@@ -511,7 +511,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
         ),
         IsNullable: scalarType.nullable
     };
-    
+
     function getCSharpInputTypeKindByPrimitiveModelName(
         name: string,
         format?: string,
