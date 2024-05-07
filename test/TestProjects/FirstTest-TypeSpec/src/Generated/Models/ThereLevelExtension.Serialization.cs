@@ -78,7 +78,7 @@ namespace FirstTestTypeSpec.Models
                 return null;
             }
             sbyte level = default;
-            IReadOnlyList<ThereLevelExtension> extension = default;
+            IList<ThereLevelExtension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

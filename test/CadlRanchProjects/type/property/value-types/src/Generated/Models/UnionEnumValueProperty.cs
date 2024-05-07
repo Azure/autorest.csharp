@@ -53,13 +53,13 @@ namespace _Type.Property.ValueTypes.Models
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnionEnumValueProperty(UnionEnumValuePropertyProperty property, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UnionEnumValueProperty(ExtendedEnum property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Property. </summary>
-        public UnionEnumValuePropertyProperty Property { get; } = UnionEnumValuePropertyProperty.Value2;
+        public ExtendedEnum Property { get; } = ExtendedEnum.EnumValue2;
     }
 }

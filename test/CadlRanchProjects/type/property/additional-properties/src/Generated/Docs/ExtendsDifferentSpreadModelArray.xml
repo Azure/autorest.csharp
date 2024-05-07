@@ -41,6 +41,7 @@ Response response = await client.GetExtendsDifferentSpreadModelArrayAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code>
 This sample shows how to call GetExtendsDifferentSpreadModelArrayAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -50,6 +51,7 @@ Response response = await client.GetExtendsDifferentSpreadModelArrayAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtendsDifferentSpreadModelArray(RequestContext)">
@@ -62,6 +64,7 @@ Response response = client.GetExtendsDifferentSpreadModelArray(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code>
 This sample shows how to call GetExtendsDifferentSpreadModelArray with all parameters and parse the result.
 <code><![CDATA[
@@ -71,6 +74,7 @@ Response response = client.GetExtendsDifferentSpreadModelArray(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(DifferentSpreadModelArrayDerived,CancellationToken)">
@@ -79,7 +83,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
 {
     new ModelForRecord("<state>")
 });
@@ -89,7 +93,7 @@ This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
 {
     new ModelForRecord("<state>")
 });
@@ -102,7 +106,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
 {
     new ModelForRecord("<state>")
 });
@@ -112,7 +116,7 @@ This sample shows how to call Put with all parameters.
 <code><![CDATA[
 ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
 {
     new ModelForRecord("<state>")
 });
@@ -134,6 +138,7 @@ using RequestContent content = RequestContent.Create(new
             state = "<state>",
         }
     },
+    knownProp = "<knownProp>",
 });
 Response response = await client.PutAsync(content);
 
@@ -152,6 +157,7 @@ using RequestContent content = RequestContent.Create(new
             state = "<state>",
         }
     },
+    knownProp = "<knownProp>",
 });
 Response response = await client.PutAsync(content);
 
@@ -173,6 +179,7 @@ using RequestContent content = RequestContent.Create(new
             state = "<state>",
         }
     },
+    knownProp = "<knownProp>",
 });
 Response response = client.Put(content);
 
@@ -191,6 +198,7 @@ using RequestContent content = RequestContent.Create(new
             state = "<state>",
         }
     },
+    knownProp = "<knownProp>",
 });
 Response response = client.Put(content);
 

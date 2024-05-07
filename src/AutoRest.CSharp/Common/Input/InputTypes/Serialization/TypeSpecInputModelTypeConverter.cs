@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Common.Input
                     CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
-                        throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
+                        throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property for id '{id}', name '{name}'");
                     }
                 }
                 else

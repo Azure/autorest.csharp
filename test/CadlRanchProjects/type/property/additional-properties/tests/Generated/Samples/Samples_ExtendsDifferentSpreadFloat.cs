@@ -28,6 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -40,6 +41,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -70,6 +72,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -82,6 +85,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -111,6 +115,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 derivedProp = 123.45F,
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -126,6 +131,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 derivedProp = 123.45F,
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -138,7 +144,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
 
-            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived(123.45F);
+            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
             Response response = client.Put(body);
         }
 
@@ -148,7 +154,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
 
-            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived(123.45F);
+            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
             Response response = await client.PutAsync(body);
         }
 
@@ -161,6 +167,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 derivedProp = 123.45F,
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -176,6 +183,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 derivedProp = 123.45F,
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -188,7 +196,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
 
-            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived(123.45F);
+            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
             Response response = client.Put(body);
         }
 
@@ -198,7 +206,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
 
-            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived(123.45F);
+            DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
             Response response = await client.PutAsync(body);
         }
     }

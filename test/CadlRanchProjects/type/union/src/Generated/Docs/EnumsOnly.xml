@@ -83,14 +83,14 @@ This sample shows how to call SendAsync.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+EnumsOnlyCases prop = new EnumsOnlyCases(EnumsOnlyCasesLr.Left, EnumsOnlyCasesUd.Up);
 Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+EnumsOnlyCases prop = new EnumsOnlyCases(EnumsOnlyCasesLr.Left, EnumsOnlyCasesUd.Up);
 Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
@@ -100,14 +100,14 @@ This sample shows how to call Send.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+EnumsOnlyCases prop = new EnumsOnlyCases(EnumsOnlyCasesLr.Left, EnumsOnlyCasesUd.Up);
 Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+EnumsOnlyCases prop = new EnumsOnlyCases(EnumsOnlyCasesLr.Left, EnumsOnlyCasesUd.Up);
 Response response = client.Send(prop);
 ]]></code></example>
     </member>

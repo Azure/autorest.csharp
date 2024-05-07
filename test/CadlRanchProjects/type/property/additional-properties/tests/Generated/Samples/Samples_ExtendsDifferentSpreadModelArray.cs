@@ -28,6 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -40,6 +41,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -70,6 +72,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -82,6 +85,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp")[0].GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -117,6 +121,7 @@ new
 state = "<state>",
 }
             },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -138,6 +143,7 @@ new
 state = "<state>",
 }
             },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -150,7 +156,7 @@ state = "<state>",
         {
             ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
             {
 new ModelForRecord("<state>")
             });
@@ -163,7 +169,7 @@ new ModelForRecord("<state>")
         {
             ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
             {
 new ModelForRecord("<state>")
             });
@@ -185,6 +191,7 @@ new
 state = "<state>",
 }
             },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -206,6 +213,7 @@ new
 state = "<state>",
 }
             },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -218,7 +226,7 @@ state = "<state>",
         {
             ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
             {
 new ModelForRecord("<state>")
             });
@@ -231,7 +239,7 @@ new ModelForRecord("<state>")
         {
             ExtendsDifferentSpreadModelArray client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelArrayClient();
 
-            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(new ModelForRecord[]
+            DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived("<knownProp>", new ModelForRecord[]
             {
 new ModelForRecord("<state>")
             });

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Client.Structure.Service.rename.operation;
+using Client.Structure.Service.rename.operation.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -33,37 +34,37 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Client_Structure_Service_Client_RenamedOne() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").RenamedOneAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).RenamedOneAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Service_Client_RenamedThree() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").RenamedThreeAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).RenamedThreeAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Service_Client_RenamedFive() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").RenamedFiveAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).RenamedFiveAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group_Client_RenamedTwo() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").GetGroupClient().RenamedTwoAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).GetGroupClient().RenamedTwoAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group_Client_RenamedFour() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").GetGroupClient().RenamedFourAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).GetGroupClient().RenamedFourAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Operation_Group_Client_RenamedSix() => Test(async (host) =>
         {
-            Response response = await new RenamedOperationClient(host, "renamed-operation").GetGroupClient().RenamedSixAsync();
+            Response response = await new RenamedOperationClient(host, ClientType.RenamedOperation).GetGroupClient().RenamedSixAsync();
             Assert.AreEqual(204, response.Status);
         });
     }

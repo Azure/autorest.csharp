@@ -104,7 +104,7 @@ namespace ModelsTypeSpec.Models
             bool requiredBoolean = default;
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
-            IList<float?> requiredCollectionWithNullableFloatElement = default;
+            IReadOnlyList<float?> requiredCollectionWithNullableFloatElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
