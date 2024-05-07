@@ -36,7 +36,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
-        private readonly IReadOnlyList<string> _supportedSerializationFormats;
 
         protected SchemaObjectType(InputModelType inputModel, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
@@ -59,14 +58,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            _supportedSerializationFormats = GetSupportedSerializationFormats();
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;
             IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(InputModel) || MgmtReferenceType.IsReferenceType(InputModel);
 
-            JsonConverter = _usage.HasFlag(InputModelTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter = InputModel.Serialization.IncludeConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal InputModelType InputModel { get; }
@@ -407,14 +405,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             Constant? value = null;
 
             //only load implementations for the base type
-            // [TODO]: OrderBy(i => i.Key) is needed only to preserve the order. Remove it in a separate PR.
-            var implementations = Configuration.Generation1ConvenienceClient
-                ? GetDerivedTypes(InputModel.DerivedModels).OrderBy(i => i.Key).ToArray()
-                : GetDerivedTypes(InputModel.DerivedModels).ToArray();
+            var implementations = GetDerivedTypes(InputModel.DerivedModels).ToArray();
 
             if (InputModel.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(InputModel.DiscriminatorValue, property.Declaration.Type);
+                value = BuilderHelpers.ParseConstant(InputModel.DiscriminatorValue, property.Declaration.Type.WithNullable(false));
             }
 
             return new ObjectTypeDiscriminator(
@@ -424,24 +419,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
-        }
-
-        private IReadOnlyList<string> GetSupportedSerializationFormats()
-        {
-            var formats = InputModel.SerializationFormats.ToList();
-            if (Configuration.SkipSerializationFormatXml)
-            {
-                formats.Remove("Xml");
-            }
-            if (ModelTypeMapping?.Formats is { } formatsDefinedInSource)
-            {
-                foreach (var format in formatsDefinedInSource)
-                {
-                    formats.Add(format);
-                }
-            }
-
-            return formats.Distinct().ToArray();
         }
 
         private HashSet<string?> GetParentPropertySerializedNames()
@@ -729,7 +706,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _supportedSerializationFormats.Contains("json") ? _serializationBuilder.BuildJsonObjectSerialization(InputModel, this) : null;
+            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
@@ -745,17 +722,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
         }
 
-        // TODO: implement this
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains("xml")
-                ? SerializationBuilder.BuildXmlObjectSerialization(InputModel.Serialization?.Xml?.Name ?? InputModel.Name, this, _typeFactory)
+            return InputModel.Serialization?.Xml is not null
+                ? SerializationBuilder.BuildXmlObjectSerialization(InputModel.Serialization.Xml.Name ?? InputModel.Name, this, _typeFactory)
                 : null;
         }
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart.ToString()) ? _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this) : null;
+            // TODO: implement multipart serialization
+            //return _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this);
+            return null;
         }
         protected override IEnumerable<Method> BuildMethods()
         {
