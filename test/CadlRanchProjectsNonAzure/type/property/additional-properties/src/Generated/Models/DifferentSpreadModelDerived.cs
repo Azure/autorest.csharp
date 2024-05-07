@@ -8,26 +8,27 @@ using System.Collections.Generic;
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
     /// <summary> The model extends from a model that spread Record&lt;ModelForRecord&gt; with the different known property type. </summary>
-    public partial class DifferentSpreadModelDerived
+    public partial class DifferentSpreadModelDerived : DifferentSpreadModelRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelDerived"/>. </summary>
+        /// <param name="knownProp"></param>
         /// <param name="derivedProp"> The index property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="derivedProp"/> is null. </exception>
-        public DifferentSpreadModelDerived(ModelForRecord derivedProp)
+        /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> or <paramref name="derivedProp"/> is null. </exception>
+        public DifferentSpreadModelDerived(string knownProp, ModelForRecord derivedProp) : base(knownProp)
         {
+            Argument.AssertNotNull(knownProp, nameof(knownProp));
             Argument.AssertNotNull(derivedProp, nameof(derivedProp));
 
             DerivedProp = derivedProp;
-            AdditionalProperties = new ChangeTrackingDictionary<string, ModelForRecord>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelDerived"/>. </summary>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal DifferentSpreadModelDerived(ModelForRecord derivedProp, IDictionary<string, ModelForRecord> additionalProperties)
+        /// <param name="derivedProp"> The index property. </param>
+        internal DifferentSpreadModelDerived(string knownProp, IDictionary<string, ModelForRecord> additionalProperties, ModelForRecord derivedProp) : base(knownProp, additionalProperties)
         {
             DerivedProp = derivedProp;
-            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelDerived"/> for deserialization. </summary>
@@ -37,7 +38,5 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 
         /// <summary> The index property. </summary>
         public ModelForRecord DerivedProp { get; set; }
-        /// <summary> Additional Properties. </summary>
-        public IDictionary<string, ModelForRecord> AdditionalProperties { get; }
     }
 }

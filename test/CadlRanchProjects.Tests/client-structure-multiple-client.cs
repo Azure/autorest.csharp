@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Client.Structure.Service.Multiple.Client;
+using Client.Structure.Service.Multiple.Client.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -32,37 +33,37 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Client_Structure_Multiple_ClientA_RenamedOne() => Test(async (host) =>
         {
-            Response response = await new ClientAClient(host, "multi-client").RenamedOneAsync();
+            Response response = await new ClientAClient(host, ClientType.MultiClient).RenamedOneAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Multiple_ClientA_RenamedThree() => Test(async (host) =>
         {
-            Response response = await new ClientAClient(host, "multi-client").RenamedThreeAsync();
+            Response response = await new ClientAClient(host, ClientType.MultiClient).RenamedThreeAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Multiple_ClientA_RenamedFive() => Test(async (host) =>
         {
-            Response response = await new ClientAClient(host, "multi-client").RenamedFiveAsync();
+            Response response = await new ClientAClient(host, ClientType.MultiClient).RenamedFiveAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Multiple_ClientB_RenamedTwo() => Test(async (host) =>
         {
-            Response response = await new ClientBClient(host, "multi-client").RenamedTwoAsync();
+            Response response = await new ClientBClient(host, ClientType.MultiClient).RenamedTwoAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Multiple_ClientB_RenamedFour() => Test(async (host) =>
         {
-            Response response = await new ClientBClient(host, "multi-client").RenamedFourAsync();
+            Response response = await new ClientBClient(host, ClientType.MultiClient).RenamedFourAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_Multiple_ClientB_RenamedSix() => Test(async (host) =>
         {
-            Response response = await new ClientBClient(host, "multi-client").RenamedSixAsync();
+            Response response = await new ClientBClient(host, ClientType.MultiClient).RenamedSixAsync();
             Assert.AreEqual(204, response.Status);
         });
     }

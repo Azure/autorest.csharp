@@ -403,7 +403,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
-            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || value.Type is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } });
+            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || value.Type is { IsFrameworkType: false, Implementation: EnumType });
             if (!Configuration.IsBranded)
             {
                 if (value.Type.IsFrameworkType && value.Type.FrameworkType != typeof(string))

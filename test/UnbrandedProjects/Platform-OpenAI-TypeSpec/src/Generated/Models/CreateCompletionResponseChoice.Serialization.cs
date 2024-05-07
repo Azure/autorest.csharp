@@ -35,7 +35,7 @@ namespace OpenAI.Models
                 writer.WriteNull("logprobs");
             }
             writer.WritePropertyName("finish_reason"u8);
-            writer.WriteStringValue(FinishReason.ToString());
+            writer.WriteStringValue(FinishReason.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -104,7 +104,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new CreateCompletionResponseChoiceFinishReason(property.Value.GetString());
+                    finishReason = property.Value.GetString().ToCreateCompletionResponseChoiceFinishReason();
                     continue;
                 }
                 if (options.Format != "W")

@@ -375,7 +375,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         else
                         {
-                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
+                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} in method {_client?.Declaration.FullName}.{name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
                         }
                     }
                     else
@@ -669,10 +669,10 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
-                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
+                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByName(parameter.Name);
                 if (field == null)
                 {
-                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
+                    throw new InvalidOperationException($"Parameter '{parameter.Name}' should have matching field");
                 }
 
                 return new Reference(field.Name, field.Type);

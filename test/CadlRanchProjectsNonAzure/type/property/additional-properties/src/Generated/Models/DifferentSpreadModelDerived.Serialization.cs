@@ -23,6 +23,8 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteObjectValue(DerivedProp, options);
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -52,6 +54,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 return null;
             }
             ModelForRecord derivedProp = default;
+            string knownProp = default;
             IDictionary<string, ModelForRecord> additionalProperties = default;
             Dictionary<string, ModelForRecord> additionalPropertiesDictionary = new Dictionary<string, ModelForRecord>();
             foreach (var property in element.EnumerateObject())
@@ -61,10 +64,15 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                     derivedProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
                     continue;
                 }
+                if (property.NameEquals("knownProp"u8))
+                {
+                    knownProp = property.Value.GetString();
+                    continue;
+                }
                 additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value, options));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadModelDerived(derivedProp, additionalProperties);
+            return new DifferentSpreadModelDerived(knownProp, additionalProperties, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadModelDerived>.Write(ModelReaderWriterOptions options)
@@ -100,14 +108,14 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static DifferentSpreadModelDerived FromResponse(PipelineResponse response)
+        internal static new DifferentSpreadModelDerived FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadModelDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
-        internal virtual BinaryContent ToBinaryContent()
+        internal override BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }

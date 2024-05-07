@@ -204,7 +204,7 @@ op test(@body input: Pet): Pet;
                         ],
                         IsExtensible: false,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
@@ -338,7 +338,7 @@ op test(@body input: Pet): Pet;
                         ],
                         IsExtensible: false,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,

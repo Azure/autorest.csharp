@@ -73,7 +73,6 @@
     }
    ],
    "Namespace": "TypeSpec.Versioning.Specific",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
@@ -386,75 +385,57 @@
   },
   {
    "$ref": "40"
-  },
-  {
-   "$id": "49",
-   "Kind": "Model",
-   "Name": "ExportParams",
-   "Namespace": "TypeSpec.Versioning.Specific",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": []
-  },
-  {
-   "$id": "50",
-   "Kind": "Model",
-   "Name": "ListQueryParams",
-   "Namespace": "TypeSpec.Versioning.Specific",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "51",
+   "$id": "49",
    "Name": "SpecificClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "50"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "51",
+   "Name": "ResourceOperations",
    "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "52"
    },
-   "Creatable": true
-  },
-  {
-   "$id": "53",
-   "Name": "ResourceOperations",
-   "Description": "",
-   "Operations": [],
-   "Protocol": {
-    "$id": "54"
-   },
    "Creatable": false,
    "Parent": "SpecificClient"
   },
   {
-   "$id": "55",
+   "$id": "53",
    "Name": "VersioningOp",
    "Description": "",
    "Operations": [
     {
-     "$id": "56",
+     "$id": "54",
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
      "Parameters": [
       {
-       "$id": "57",
+       "$id": "55",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "58",
+        "$id": "56",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "57",
         "Type": {
-         "$id": "60",
+         "$id": "58",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -471,11 +452,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "61",
+       "$id": "59",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "62",
+        "$id": "60",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -491,11 +472,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "61",
        "Name": "projectFileVersion",
        "NameInRequest": "projectFileVersion",
        "Type": {
-        "$id": "64",
+        "$id": "62",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -511,11 +492,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "64",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -530,9 +511,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "65",
         "Type": {
-         "$ref": "66"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
@@ -540,7 +521,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "66",
        "StatusCodes": [
         202
        ],
@@ -550,12 +531,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "69",
+         "$id": "67",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "70",
+          "$id": "68",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -574,10 +555,10 @@
      "Path": "/versioning/resources/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "71",
+      "$id": "69",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "72",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -592,25 +573,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "73",
+     "$id": "71",
      "Name": "list",
      "ResourceName": "Resource",
      "Description": "Resource list operation template.",
      "Parameters": [
       {
-       "$id": "74",
+       "$id": "72",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "75",
+        "$id": "73",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "59"
+        "$ref": "57"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -622,16 +603,16 @@
        "Kind": "Client"
       },
       {
-       "$id": "76",
+       "$id": "74",
        "Name": "select",
        "NameInRequest": "select",
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
-        "$id": "77",
+        "$id": "75",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "78",
+         "$id": "76",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -649,11 +630,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "79",
+       "$id": "77",
        "Name": "expand",
        "NameInRequest": "expand",
        "Type": {
-        "$id": "80",
+        "$id": "78",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -669,11 +650,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "82",
+        "$id": "80",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -688,9 +669,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "83",
+        "$id": "81",
         "Type": {
-         "$ref": "82"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
@@ -698,7 +679,7 @@
      ],
      "Responses": [
       {
-       "$id": "84",
+       "$id": "82",
        "StatusCodes": [
         200
        ],
@@ -719,7 +700,7 @@
      "Path": "/versioning/resources",
      "BufferResponse": true,
      "Paging": {
-      "$id": "85",
+      "$id": "83",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -727,25 +708,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "86",
+     "$id": "84",
      "Name": "create",
      "ResourceName": "Resource",
      "Description": "Create or replace operation template.",
      "Parameters": [
       {
-       "$id": "87",
+       "$id": "85",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "88",
+        "$id": "86",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "59"
+        "$ref": "57"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -757,11 +738,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "89",
+       "$id": "87",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "90",
+        "$id": "88",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -777,7 +758,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "91",
+       "$id": "89",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -795,11 +776,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "92",
+       "$id": "90",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "93",
+        "$id": "91",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -814,19 +795,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "94",
+        "$id": "92",
         "Type": {
-         "$ref": "93"
+         "$ref": "91"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "95",
+       "$id": "93",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "96",
+        "$id": "94",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -841,9 +822,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "97",
+        "$id": "95",
         "Type": {
-         "$ref": "96"
+         "$ref": "94"
         },
         "Value": "application/json"
        }
@@ -851,7 +832,7 @@
      ],
      "Responses": [
       {
-       "$id": "98",
+       "$id": "96",
        "StatusCodes": [
         201
        ],
@@ -866,7 +847,7 @@
        ]
       },
       {
-       "$id": "99",
+       "$id": "97",
        "StatusCodes": [
         200
        ],
@@ -894,7 +875,7 @@
     }
    ],
    "Protocol": {
-    "$id": "100"
+    "$id": "98"
    },
    "Creatable": false,
    "Parent": "SpecificClient"
