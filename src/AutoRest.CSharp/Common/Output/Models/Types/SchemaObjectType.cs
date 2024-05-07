@@ -731,9 +731,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            // TODO: implement multipart serialization
-            //return _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this);
-            return null;
+            return InputModel.Usage.HasFlag(InputModelTypeUsage.Multipart) ? _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this) : null;
         }
         protected override IEnumerable<Method> BuildMethods()
         {
