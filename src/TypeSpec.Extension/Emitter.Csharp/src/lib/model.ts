@@ -278,6 +278,7 @@ export function getInputType(
     formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
+    operation?: Operation,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
     const type = getRealType(
@@ -324,7 +325,7 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
-                const sdkType = getClientType(context, type);
+                const sdkType = getClientType(context, type, operation);
                 return {
                     Kind: InputTypeKind.Primitive,
                     Name: getCSharpInputTypeKindByPrimitiveModelName(
@@ -343,6 +344,7 @@ export function getInputType(
             getFormattedType(program, type.type),
             models,
             enums,
+            operation,
             literalTypeContext
         );
     } else if (type.kind === "Tuple") {
@@ -507,7 +509,8 @@ export function getInputType(
                 context,
                 getFormattedType(program, elementType),
                 models,
-                enums
+                enums,
+                operation
             ),
             IsNullable: false
         };
@@ -521,13 +524,15 @@ export function getInputType(
                 context,
                 getFormattedType(program, key),
                 models,
-                enums
+                enums,
+                operation
             ),
             ValueType: getInputType(
                 context,
                 getFormattedType(program, value),
                 models,
-                enums
+                enums,
+                operation
             ),
             IsNullable: false
         };
@@ -583,7 +588,8 @@ export function getInputType(
                 context,
                 getFormattedType(program, variant.type),
                 models,
-                enums
+                enums,
+                operation
             );
             if (
                 isInputIntrinsicType(inputType) &&
@@ -642,7 +648,7 @@ export function getUsages(
             typeName = getTypeName(context, effectiveType as Model);
         }
         if (type.kind === "Union") {
-            let clientType = getClientType(context, type);
+            let clientType = getClientType(context, type); // TODO -- we should also pass in an operation as well
             if (clientType.kind === "enum" && clientType.isFixed === false) {
                 typeName = clientType.name;
             }

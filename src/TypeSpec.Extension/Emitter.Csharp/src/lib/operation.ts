@@ -253,15 +253,16 @@ export function loadOperation(
             context,
             getFormattedType(program, param),
             models,
-            enums
+            enums,
+            operation.operation
         );
-        let defaultValue = undefined;
+        let defaultValue: InputConstant | undefined = undefined;
         const value = getDefaultValue(typespecType);
         if (value) {
             defaultValue = {
                 Type: inputType,
                 Value: value
-            } as InputConstant;
+            };
         }
         const requestLocation = requestLocationMap[location];
         const isApiVer: boolean = isApiVersion(sdkContext, parameter);
@@ -308,7 +309,8 @@ export function loadOperation(
             context,
             getFormattedType(program, body),
             models,
-            enums
+            enums,
+            operation.operation
         );
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
@@ -349,7 +351,8 @@ export function loadOperation(
                 context,
                 getFormattedType(program, typespecType),
                 models,
-                enums
+                enums,
+                operation.operation
             );
             type = inputType;
         }
@@ -366,7 +369,8 @@ export function loadOperation(
                         context,
                         getFormattedType(program, headers[key].type),
                         models,
-                        enums
+                        enums,
+                        operation.operation
                     )
                 } as HttpResponseHeader);
             }
@@ -401,7 +405,7 @@ export function loadOperation(
                 program,
                 metadata.finalEnvelopeResult as Model
             );
-            bodyType = getInputType(context, formattedType, models, enums);
+            bodyType = getInputType(context, formattedType, models, enums, op.operation);
         }
 
         return {
