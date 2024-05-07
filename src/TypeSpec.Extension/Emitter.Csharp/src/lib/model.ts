@@ -5,7 +5,8 @@ import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     SdkContext,
     getAllModels,
-    getClientType
+    getClientType,
+    getSdkModelPropertyType
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EncodeData,
@@ -19,6 +20,7 @@ import {
     getEffectiveModelType,
     getEncode,
     getFormat,
+    ignoreDiagnostics,
     isArrayModelType,
     isRecordModelType,
     resolveUsages
@@ -34,6 +36,7 @@ import { getResourceOperation } from "@typespec/rest";
 import { NetEmitterOptions } from "../options.js";
 import {
     fromSdkEnumType,
+    fromSdkModelPropertyType,
     fromSdkModelType,
     fromSdkType
 } from "../type/converter.js";
@@ -265,8 +268,20 @@ export function getInputType(
 ): InputType {
     logger.debug(`getInputType for kind: ${type.kind}`);
 
-    const sdkType = getClientType(context, type, operation);
+    if (type.kind === "ModelProperty") {
+        const propertyType = ignoreDiagnostics(
+            getSdkModelPropertyType(context, type, operation)
+        );
+        return fromSdkModelPropertyType(
+            propertyType,
+            context,
+            models,
+            enums,
+            literalTypeContext
+        );
+    }
 
+    const sdkType = getClientType(context, type, operation);
     return fromSdkType(sdkType, context, models, enums, literalTypeContext);
 }
 

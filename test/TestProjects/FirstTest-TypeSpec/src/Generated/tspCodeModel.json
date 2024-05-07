@@ -1567,7 +1567,7 @@
        "Type": {
         "$id": "197",
         "Kind": "Primitive",
-        "Name": "String",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",

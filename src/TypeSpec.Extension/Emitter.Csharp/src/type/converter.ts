@@ -96,6 +96,31 @@ export function fromSdkType(
     return {} as InputType;
 }
 
+// this function is only for the case when we get a type from a parameter, because in typespec, the parameters are
+export function fromSdkModelPropertyType(
+    propertyType: SdkModelPropertyType,
+    context: SdkContext,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
+): InputType {
+    // when the type is string, we need to add the format
+    if (propertyType.type.kind === "string") {
+        return fromStringType(
+            context.program,
+            propertyType.type,
+            propertyType.__raw
+        );
+    }
+    return fromSdkType(
+        propertyType.type,
+        context,
+        models,
+        enums,
+        literalTypeContext
+    );
+}
+
 export function fromSdkModelType(
     modelType: SdkModelType,
     context: SdkContext,
@@ -160,7 +185,7 @@ export function fromSdkModelType(
                     p.kind !== "path"
             )
             .map((p) =>
-                fromSdkModelPropertyType(p, context, models, enums, {
+                fromSdkModelProperty(p, {
                     ModelName: inputModelType?.Name,
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
@@ -168,6 +193,46 @@ export function fromSdkModelType(
     }
 
     return inputModelType;
+
+    function fromSdkModelProperty(
+        propertyType: SdkModelPropertyType,
+        literalTypeContext: LiteralTypeContext
+    ): InputModelProperty {
+        const serializedName =
+            propertyType.kind === "property"
+                ? (propertyType as SdkBodyModelPropertyType).serializedName
+                : "";
+        literalTypeContext.PropertyName = serializedName;
+
+        const isRequired =
+            propertyType.kind === "path" || propertyType.kind === "body"
+                ? true
+                : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
+        const isDiscriminator =
+            propertyType.kind === "property" && propertyType.discriminator
+                ? true
+                : false;
+        const modelProperty: InputModelProperty = {
+            Name: propertyType.nameInClient,
+            SerializedName: serializedName,
+            Description:
+                propertyType.description ??
+                (isDiscriminator ? "Discriminator" : ""),
+            Type: fromSdkType(
+                propertyType.type,
+                context,
+                models,
+                enums,
+                literalTypeContext
+            ),
+            IsRequired: isRequired,
+            IsReadOnly:
+                propertyType.kind === "property" && isReadOnly(propertyType),
+            IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
+        };
+
+        return modelProperty;
+    }
 }
 
 function getDiscriminatorPropertyNameFromCurrentModel(
@@ -265,6 +330,9 @@ function fromSdkDurationType(
                 if (wireType.kind === "float" || wireType.kind === "float32") {
                     return InputPrimitiveTypeKind.DurationSecondsFloat;
                 }
+                if (wireType.kind === "float64") {
+                    return InputPrimitiveTypeKind.DurationSecondsDouble;
+                }
                 return InputPrimitiveTypeKind.DurationSeconds;
             default:
                 logger.warn(
@@ -316,7 +384,8 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
 
 function fromStringType(
     program: Program,
-    stringType: SdkType
+    stringType: SdkType,
+    raw?: Type // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
 ): InputPrimitiveType {
     function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
         if (!rawStringType) return InputPrimitiveTypeKind.String;
@@ -339,9 +408,10 @@ function fromStringType(
         }
     }
 
+    raw = raw ?? stringType.__raw;
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromStringFormat(stringType.__raw),
+        Name: fromStringFormat(raw),
         IsNullable: stringType.nullable
     };
 }
@@ -609,49 +679,6 @@ function fromUsageFlags(usage: UsageFlags): Usage {
     else if (usage === (UsageFlags.Input | UsageFlags.Output))
         return Usage.RoundTrip;
     else return Usage.None;
-}
-
-function fromSdkModelPropertyType(
-    propertyType: SdkModelPropertyType,
-    context: SdkContext,
-    models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext: LiteralTypeContext
-): InputModelProperty {
-    const serializedName =
-        propertyType.kind === "property"
-            ? (propertyType as SdkBodyModelPropertyType).serializedName
-            : "";
-    literalTypeContext.PropertyName = serializedName;
-
-    const isRequired =
-        propertyType.kind === "path" || propertyType.kind === "body"
-            ? true
-            : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
-    const isDiscriminator =
-        propertyType.kind === "property" && propertyType.discriminator
-            ? true
-            : false;
-    const modelProperty: InputModelProperty = {
-        Name: propertyType.nameInClient,
-        SerializedName: serializedName,
-        Description:
-            propertyType.description ??
-            (isDiscriminator ? "Discriminator" : ""),
-        Type: fromSdkType(
-            propertyType.type,
-            context,
-            models,
-            enums,
-            literalTypeContext
-        ),
-        IsRequired: isRequired,
-        IsReadOnly:
-            propertyType.kind === "property" && isReadOnly(propertyType),
-        IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
-    };
-
-    return modelProperty;
 }
 
 function getCSharpInputTypeKindByIntrinsic(
