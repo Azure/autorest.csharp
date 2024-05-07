@@ -612,48 +612,45 @@
   {
    "$id": "82",
    "Kind": "Model",
-   "Name": "ModelForRecord",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "model for record",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "83",
-     "Name": "state",
-     "SerializedName": "state",
-     "Description": "The state property",
-     "Type": {
-      "$id": "84",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "85",
-   "Kind": "Model",
    "Name": "ExtendsModelAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
-    "$id": "86",
+    "$id": "83",
     "Kind": "Dictionary",
     "Name": "Dictionary",
     "KeyType": {
-     "$id": "87",
+     "$id": "84",
      "Kind": "Primitive",
      "Name": "String",
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "82"
+     "$id": "85",
+     "Kind": "Model",
+     "Name": "ModelForRecord",
+     "Namespace": "Type.Property.AdditionalProperties",
+     "Description": "model for record",
+     "IsNullable": false,
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "86",
+       "Name": "state",
+       "SerializedName": "state",
+       "Description": "The state property",
+       "Type": {
+        "$id": "87",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
     },
     "IsNullable": false
    },
@@ -664,12 +661,15 @@
      "SerializedName": "knownProp",
      "Description": "",
      "Type": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "85"
   },
   {
    "$id": "89",
@@ -690,7 +690,7 @@
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "82"
+     "$ref": "85"
     },
     "IsNullable": false
    },
@@ -701,7 +701,7 @@
      "SerializedName": "knownProp",
      "Description": "",
      "Type": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -727,7 +727,7 @@
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "82"
+     "$ref": "85"
     },
     "IsNullable": false
    },
@@ -738,7 +738,7 @@
      "SerializedName": "knownProp",
      "Description": "",
      "Type": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -768,7 +768,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsNullable": false
     },
@@ -785,7 +785,7 @@
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "82"
+       "$ref": "85"
       },
       "IsNullable": false
      },
@@ -817,7 +817,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsNullable": false
     },
@@ -834,7 +834,7 @@
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "82"
+       "$ref": "85"
       },
       "IsNullable": false
      },
@@ -865,7 +865,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsNullable": false
     },
@@ -882,7 +882,7 @@
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "82"
+       "$ref": "85"
       },
       "IsNullable": false
      },
@@ -996,7 +996,7 @@
      "IsNullable": false
     },
     "ValueType": {
-     "$ref": "82"
+     "$ref": "85"
     },
     "IsNullable": false
    },
@@ -1040,7 +1040,7 @@
      "Kind": "Array",
      "Name": "Array",
      "ElementType": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsNullable": false
     },
@@ -1137,7 +1137,7 @@
      "SerializedName": "derivedProp",
      "Description": "The index property",
      "Type": {
-      "$ref": "82"
+      "$ref": "85"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1166,7 +1166,7 @@
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "82"
+       "$ref": "85"
       },
       "IsNullable": false
      },
@@ -1292,129 +1292,123 @@
   {
    "$id": "165",
    "Kind": "Model",
-   "Name": "WidgetData0",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "166",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "",
-     "Type": {
-      "$id": "167",
-      "Kind": "Literal",
-      "Name": "Literal",
-      "LiteralValueType": {
-       "$ref": "2"
-      },
-      "Value": "kind0",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "168",
-     "Name": "fooProp",
-     "SerializedName": "fooProp",
-     "Description": "",
-     "Type": {
-      "$id": "169",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "170",
-   "Kind": "Model",
-   "Name": "WidgetData1",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "171",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "",
-     "Type": {
-      "$id": "172",
-      "Kind": "Literal",
-      "Name": "Literal",
-      "LiteralValueType": {
-       "$ref": "4"
-      },
-      "Value": "kind1",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "173",
-     "Name": "start",
-     "SerializedName": "start",
-     "Description": "",
-     "Type": {
-      "$id": "174",
-      "Kind": "Primitive",
-      "Name": "DateTime",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "175",
-     "Name": "end",
-     "SerializedName": "end",
-     "Description": "",
-     "Type": {
-      "$id": "176",
-      "Kind": "Primitive",
-      "Name": "DateTime",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "177",
-   "Kind": "Model",
    "Name": "SpreadRecordForDiscriminatedUnion",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData>",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
-    "$id": "178",
+    "$id": "166",
     "Kind": "Dictionary",
     "Name": "Dictionary",
     "KeyType": {
-     "$id": "179",
+     "$id": "167",
      "Kind": "Primitive",
      "Name": "String",
      "IsNullable": false
     },
     "ValueType": {
-     "$id": "180",
+     "$id": "168",
      "Kind": "Union",
      "Name": "Union",
      "UnionItemTypes": [
       {
-       "$ref": "165"
+       "$id": "169",
+       "Kind": "Model",
+       "Name": "WidgetData0",
+       "Namespace": "Type.Property.AdditionalProperties",
+       "IsNullable": false,
+       "Usage": "RoundTrip",
+       "Properties": [
+        {
+         "$id": "170",
+         "Name": "kind",
+         "SerializedName": "kind",
+         "Description": "",
+         "Type": {
+          "$id": "171",
+          "Kind": "Literal",
+          "Name": "Literal",
+          "LiteralValueType": {
+           "$ref": "2"
+          },
+          "Value": "kind0",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "172",
+         "Name": "fooProp",
+         "SerializedName": "fooProp",
+         "Description": "",
+         "Type": {
+          "$id": "173",
+          "Kind": "Primitive",
+          "Name": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        }
+       ]
       },
       {
-       "$ref": "170"
+       "$id": "174",
+       "Kind": "Model",
+       "Name": "WidgetData1",
+       "Namespace": "Type.Property.AdditionalProperties",
+       "IsNullable": false,
+       "Usage": "RoundTrip",
+       "Properties": [
+        {
+         "$id": "175",
+         "Name": "kind",
+         "SerializedName": "kind",
+         "Description": "",
+         "Type": {
+          "$id": "176",
+          "Kind": "Literal",
+          "Name": "Literal",
+          "LiteralValueType": {
+           "$ref": "4"
+          },
+          "Value": "kind1",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "177",
+         "Name": "start",
+         "SerializedName": "start",
+         "Description": "",
+         "Type": {
+          "$id": "178",
+          "Kind": "Primitive",
+          "Name": "DateTimeRFC3339",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "179",
+         "Name": "end",
+         "SerializedName": "end",
+         "Description": "",
+         "Type": {
+          "$id": "180",
+          "Kind": "Primitive",
+          "Name": "DateTimeRFC3339",
+          "IsNullable": false
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        }
+       ]
       }
      ],
      "IsNullable": false
@@ -1437,6 +1431,12 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "169"
+  },
+  {
+   "$ref": "174"
   },
   {
    "$id": "183",
@@ -1462,10 +1462,10 @@
      "Name": "Union",
      "UnionItemTypes": [
       {
-       "$ref": "165"
+       "$ref": "169"
       },
       {
-       "$ref": "170"
+       "$ref": "174"
       }
      ],
      "IsNullable": false
@@ -1492,73 +1492,70 @@
   {
    "$id": "189",
    "Kind": "Model",
-   "Name": "WidgetData2",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "190",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "",
-     "Type": {
-      "$id": "191",
-      "Kind": "Literal",
-      "Name": "Literal",
-      "LiteralValueType": {
-       "$ref": "6"
-      },
-      "Value": "kind1",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "192",
-     "Name": "start",
-     "SerializedName": "start",
-     "Description": "",
-     "Type": {
-      "$id": "193",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "194",
-   "Kind": "Model",
    "Name": "SpreadRecordForNonDiscriminatedUnion2",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData2 | WidgetData1>",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
-    "$id": "195",
+    "$id": "190",
     "Kind": "Dictionary",
     "Name": "Dictionary",
     "KeyType": {
-     "$id": "196",
+     "$id": "191",
      "Kind": "Primitive",
      "Name": "String",
      "IsNullable": false
     },
     "ValueType": {
-     "$id": "197",
+     "$id": "192",
      "Kind": "Union",
      "Name": "Union",
      "UnionItemTypes": [
       {
-       "$ref": "189"
+       "$id": "193",
+       "Kind": "Model",
+       "Name": "WidgetData2",
+       "Namespace": "Type.Property.AdditionalProperties",
+       "IsNullable": false,
+       "Usage": "RoundTrip",
+       "Properties": [
+        {
+         "$id": "194",
+         "Name": "kind",
+         "SerializedName": "kind",
+         "Description": "",
+         "Type": {
+          "$id": "195",
+          "Kind": "Literal",
+          "Name": "Literal",
+          "LiteralValueType": {
+           "$ref": "6"
+          },
+          "Value": "kind1",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "196",
+         "Name": "start",
+         "SerializedName": "start",
+         "Description": "",
+         "Type": {
+          "$id": "197",
+          "Kind": "Primitive",
+          "Name": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        }
+       ]
       },
       {
-       "$ref": "170"
+       "$ref": "174"
       }
      ],
      "IsNullable": false
@@ -1581,6 +1578,9 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "193"
   },
   {
    "$id": "200",
@@ -1610,12 +1610,12 @@
        "Kind": "Array",
        "Name": "Array",
        "ElementType": {
-        "$ref": "189"
+        "$ref": "193"
        },
        "IsNullable": false
       },
       {
-       "$ref": "170"
+       "$ref": "174"
       }
      ],
      "IsNullable": false
@@ -1642,14 +1642,14 @@
   {
    "$id": "207",
    "Kind": "Model",
-   "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
+   "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
    "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "19"
+    "$ref": "38"
    },
    "Properties": [
     {
@@ -1685,14 +1685,14 @@
   {
    "$id": "212",
    "Kind": "Model",
-   "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
+   "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
    "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "38"
+    "$ref": "19"
    },
    "Properties": [
     {
@@ -3950,7 +3950,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "85"
+        "$ref": "82"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3983,7 +3983,7 @@
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "85"
+        "$ref": "82"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -6798,7 +6798,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "177"
+        "$ref": "165"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6831,7 +6831,7 @@
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "177"
+        "$ref": "165"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -7154,7 +7154,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "194"
+        "$ref": "189"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7187,7 +7187,7 @@
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "194"
+        "$ref": "189"
        },
        "Location": "Body",
        "IsRequired": true,

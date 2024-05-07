@@ -33,7 +33,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathTokenType",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "6",
@@ -94,7 +94,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathAttributes",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "15",
@@ -150,7 +150,7 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "ProviderAuthorizationConsentState",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "22",
@@ -352,106 +352,103 @@
   {
    "$id": "48",
    "Kind": "Model",
-   "Name": "TrackedResourceData",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The tracked resource data",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "49",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
-      "$id": "50",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "51",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
-      "$id": "52",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "53",
-     "Name": "resourceType",
-     "SerializedName": "type",
-     "Description": "The resource type.",
-     "Type": {
-      "$id": "54",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "55",
-     "Name": "location",
-     "SerializedName": "location",
-     "Description": "The location property.",
-     "Type": {
-      "$id": "56",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "57",
-     "Name": "tags",
-     "SerializedName": "tags",
-     "Description": "The tags property.",
-     "Type": {
-      "$id": "58",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "59",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "60",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "61",
-   "Kind": "Model",
    "Name": "AvailabilitySetData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The availability set data",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "48"
+    "$id": "49",
+    "Kind": "Model",
+    "Name": "TrackedResourceData",
+    "Namespace": "ModelReaderWriterValidationTypeSpec",
+    "Description": "The tracked resource data",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "50",
+      "Name": "id",
+      "SerializedName": "id",
+      "Description": "The id property.",
+      "Type": {
+       "$id": "51",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true
+     },
+     {
+      "$id": "52",
+      "Name": "name",
+      "SerializedName": "name",
+      "Description": "The name property.",
+      "Type": {
+       "$id": "53",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true
+     },
+     {
+      "$id": "54",
+      "Name": "resourceType",
+      "SerializedName": "type",
+      "Description": "The resource type.",
+      "Type": {
+       "$id": "55",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true
+     },
+     {
+      "$id": "56",
+      "Name": "location",
+      "SerializedName": "location",
+      "Description": "The location property.",
+      "Type": {
+       "$id": "57",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     },
+     {
+      "$id": "58",
+      "Name": "tags",
+      "SerializedName": "tags",
+      "Description": "The tags property.",
+      "Type": {
+       "$id": "59",
+       "Kind": "Dictionary",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "60",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$id": "61",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsRequired": false,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -601,6 +598,9 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "49"
   },
   {
    "$ref": "63"
@@ -1965,7 +1965,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "61"
+        "$ref": "48"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2039,7 +2039,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "61"
+        "$ref": "48"
        },
        "BodyMediaType": "Json",
        "Headers": [],

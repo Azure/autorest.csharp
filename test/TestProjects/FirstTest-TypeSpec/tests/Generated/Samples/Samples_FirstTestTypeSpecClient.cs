@@ -1706,7 +1706,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = client.RecursiveExtension(input);
         }
 
@@ -1717,7 +1720,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -1830,7 +1836,10 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(123) },
+                Extension = {new ThereLevelExtension(123)
+{
+Extension = {default},
+}},
             };
             Response response = client.ThreeLevelRecursive(input);
         }
@@ -1844,7 +1853,10 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(123) },
+                Extension = {new ThereLevelExtension(123)
+{
+Extension = {default},
+}},
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }

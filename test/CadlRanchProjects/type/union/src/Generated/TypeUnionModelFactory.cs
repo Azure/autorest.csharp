@@ -15,7 +15,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse9"/>. </summary>
         /// <param name="prop"></param>
         /// <returns> A new <see cref="Models.GetResponse9"/> instance for mocking. </returns>
-        public static GetResponse9 GetResponse9(GetResponse9Prop prop = default)
+        public static GetResponse9 GetResponse9(GetResponseProp4 prop = default)
         {
             return new GetResponse9(prop, serializedAdditionalRawData: null);
         }
@@ -39,7 +39,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse6"/>. </summary>
         /// <param name="prop"></param>
         /// <returns> A new <see cref="Models.GetResponse6"/> instance for mocking. </returns>
-        public static GetResponse6 GetResponse6(BinaryData prop = null)
+        public static GetResponse6 GetResponse6(GetResponseProp2 prop = default)
         {
             return new GetResponse6(prop, serializedAdditionalRawData: null);
         }
@@ -47,7 +47,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse5"/>. </summary>
         /// <param name="prop"></param>
         /// <returns> A new <see cref="Models.GetResponse5"/> instance for mocking. </returns>
-        public static GetResponse5 GetResponse5(BinaryData prop = null)
+        public static GetResponse5 GetResponse5(GetResponseProp1 prop = default)
         {
             return new GetResponse5(prop, serializedAdditionalRawData: null);
         }

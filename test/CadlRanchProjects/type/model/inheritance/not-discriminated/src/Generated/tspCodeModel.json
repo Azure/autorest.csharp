@@ -8,66 +8,60 @@
   {
    "$id": "2",
    "Kind": "Model",
-   "Name": "Pet",
-   "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-   "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "3",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "5",
-   "Kind": "Model",
-   "Name": "Cat",
-   "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-   "Description": "The second level model in the normal multiple levels inheritance.",
-   "IsNullable": false,
-   "Usage": "None",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Properties": [
-    {
-     "$id": "6",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
-      "$id": "7",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "8",
-   "Kind": "Model",
    "Name": "Siamese",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "5"
+    "$id": "3",
+    "Kind": "Model",
+    "Name": "Cat",
+    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
+    "Description": "The second level model in the normal multiple levels inheritance.",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "BaseModel": {
+     "$id": "4",
+     "Kind": "Model",
+     "Name": "Pet",
+     "Namespace": "Type.Model.Inheritance.NotDiscriminated",
+     "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
+     "IsNullable": false,
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "5",
+       "Name": "name",
+       "SerializedName": "name",
+       "Description": "",
+       "Type": {
+        "$id": "6",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
+    },
+    "Properties": [
+     {
+      "$id": "7",
+      "Name": "age",
+      "SerializedName": "age",
+      "Description": "",
+      "Type": {
+       "$id": "8",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -85,6 +79,12 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "3"
+  },
+  {
+   "$ref": "4"
   }
  ],
  "Clients": [
@@ -134,7 +134,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "8"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -266,7 +266,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -297,7 +297,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "8"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -371,7 +371,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],

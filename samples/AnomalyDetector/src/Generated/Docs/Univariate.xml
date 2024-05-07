@@ -25,7 +25,7 @@ UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeri
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 })
 {
@@ -64,7 +64,7 @@ UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeri
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 })
 {
@@ -120,7 +120,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },
@@ -186,7 +186,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },
@@ -235,7 +235,7 @@ UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeri
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 })
 {
@@ -274,7 +274,7 @@ UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeri
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 })
 {
@@ -331,7 +331,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },
@@ -399,7 +399,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },
@@ -449,7 +449,7 @@ UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetecti
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 }, TimeGranularity.Yearly)
 {
@@ -485,7 +485,7 @@ UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetecti
 {
     new TimeSeriesPoint(123.45F)
     {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+        Timestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
     }
 }, TimeGranularity.Yearly)
 {
@@ -533,7 +533,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },
@@ -587,7 +587,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            timestamp = "2022-05-10T18:57:31.2311892Z",
             value = 123.45F,
         }
     },

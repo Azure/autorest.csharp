@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+// TODO: clean up primitive types, separate types info from encoding info
+// https://github.com/Azure/autorest.csharp/issues/4681
 export enum InputPrimitiveTypeKind {
     AzureLocation = "AzureLocation",
     Boolean = "Boolean",
@@ -40,6 +42,5 @@ export enum InputPrimitiveTypeKind {
     Uri = "Uri",
     Enum = "Enum",
     SByte = "SByte", //int8
-    Byte = "Byte", //uint8
-    UnKnownKind = "UnknownKind"
+    Byte = "Byte" //uint8
 }

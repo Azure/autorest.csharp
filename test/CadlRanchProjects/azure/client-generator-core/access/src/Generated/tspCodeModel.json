@@ -164,32 +164,6 @@
   {
    "$id": "20",
    "Kind": "Model",
-   "Name": "BaseModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "Accessibility": "internal",
-   "Description": "Used in internal operations, should be generated but not exported.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "21",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "22",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "23",
-   "Kind": "Model",
    "Name": "OuterModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Accessibility": "internal",
@@ -197,7 +171,30 @@
    "IsNullable": false,
    "Usage": "Output",
    "BaseModel": {
-    "$ref": "20"
+    "$id": "21",
+    "Kind": "Model",
+    "Name": "BaseModel",
+    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+    "Accessibility": "internal",
+    "Description": "Used in internal operations, should be generated but not exported.",
+    "IsNullable": false,
+    "Usage": "Output",
+    "Properties": [
+     {
+      "$id": "22",
+      "Name": "name",
+      "SerializedName": "name",
+      "Description": "",
+      "Type": {
+       "$id": "23",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -237,6 +234,9 @@
    ]
   },
   {
+   "$ref": "21"
+  },
+  {
    "$ref": "25"
   },
   {
@@ -255,14 +255,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "30",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -1016,7 +1016,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "20"
        },
        "BodyMediaType": "Json",
        "Headers": [],

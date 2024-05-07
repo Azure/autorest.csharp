@@ -3,9 +3,14 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+
+@versioned(Versions)
 @service({
-    title: "hello world",
-    version: "0.1.0",
+    title: "hello world"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -20,9 +25,10 @@ import "@azure-tools/typespec-azure-core";
 )
 namespace CustomizedTypeSpec;
 
-using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
+enum Versions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+    "2022-05-15-preview"
+}
 
 @doc("float fixed enum")
 @fixed
@@ -162,12 +168,10 @@ union DaysOfWeekExtensibleEnum {
 
 model ModelWithFormat {
     @doc("url format")
-    @format("Uri")
-    sourceUrl: string;
+    sourceUrl: url;
 
     @doc("uuid format")
-    @format("uuid")
-    guid: string;
+    guid: uuid;
 }
 
 @route("/hello")
