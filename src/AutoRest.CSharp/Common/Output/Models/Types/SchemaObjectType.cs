@@ -603,7 +603,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected internal IEnumerable<InputModelType> GetCombinedSchemas() => InputModel.GetSelfAndBaseModels();
+        protected internal IEnumerable<InputModelType> GetCombinedSchemas()
+        {
+            yield return InputModel;
+
+            foreach (var model in InputModel.GetAllBaseModels())
+            {
+                yield return model;
+            }
+        }
 
         protected override CSharpType? CreateInheritedType()
         {

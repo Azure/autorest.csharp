@@ -344,7 +344,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     null,
                     null,
                     false,
-                    new string[] { "json" })
+                    new string[] { "json" },
+                    new List<InputModelType> { actualBase })
                 {
                     IsUnknownDiscriminatorModel = true
                 };

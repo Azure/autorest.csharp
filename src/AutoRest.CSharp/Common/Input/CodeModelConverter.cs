@@ -351,7 +351,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                SerializationFormats: GetSerializationFormats(schema))
+                SerializationFormats: GetSerializationFormats(schema),
+                Parents: schema.Parents?.All is null ? null : schema.Parents.All.OfType<ObjectSchema>().Select(GetOrCreateModel).ToArray())
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select<global::AutoRest.CSharp.Input.ObjectSchema, global::AutoRest.CSharp.Common.Input.InputModelType>(GetOrCreateModel).ToList<global::AutoRest.CSharp.Common.Input.InputModelType>() : global::System.Array.Empty<global::AutoRest.CSharp.Common.Input.InputModelType>(),
                 Serialization = GetSerialization(schema, usage),
