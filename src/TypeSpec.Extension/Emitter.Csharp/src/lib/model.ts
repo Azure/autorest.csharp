@@ -9,17 +9,12 @@ import {
     getSdkModelPropertyType
 } from "@azure-tools/typespec-client-generator-core";
 import {
-    EncodeData,
     Model,
     ModelProperty,
     Operation,
-    Program,
-    ProjectedProgram,
     Type,
     UsageFlags,
     getEffectiveModelType,
-    getEncode,
-    getFormat,
     ignoreDiagnostics,
     isArrayModelType,
     isRecordModelType,
@@ -40,8 +35,6 @@ import {
     fromSdkModelType,
     fromSdkType
 } from "../type/converter.js";
-import { FormattedType } from "../type/formattedType.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import {
     InputEnumType,
     InputModelType,
@@ -52,157 +45,6 @@ import {
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { logger } from "./logger.js";
 import { capitalize, getTypeName } from "./utils.js";
-/**
- * Map calType to csharp InputTypeKind
- */
-export function mapTypeSpecTypeToCSharpInputTypeKind(
-    typespecType: Type,
-    format?: string,
-    encode?: EncodeData
-): InputPrimitiveTypeKind {
-    const kind = typespecType.kind;
-    switch (kind) {
-        case "Model":
-            return getCSharpInputTypeKindByPrimitiveModelName(
-                typespecType.name,
-                format,
-                encode
-            );
-        case "ModelProperty":
-            return InputPrimitiveTypeKind.Object;
-        case "Enum":
-            return InputPrimitiveTypeKind.Enum;
-        case "Number":
-            let numberValue = typespecType.value;
-            if (numberValue % 1 === 0) {
-                return InputPrimitiveTypeKind.Int32;
-            }
-            return InputPrimitiveTypeKind.Float64;
-        case "Boolean":
-            return InputPrimitiveTypeKind.Boolean;
-        case "String":
-            if (format === "date") return InputPrimitiveTypeKind.DateTime;
-            if (format === "uri") return InputPrimitiveTypeKind.Uri;
-            return InputPrimitiveTypeKind.String;
-        default:
-            throw new Error(`Unsupported primitive kind ${kind}`);
-    }
-}
-
-export function getCSharpInputTypeKindByPrimitiveModelName(
-    name: string,
-    format?: string,
-    encode?: EncodeData
-): InputPrimitiveTypeKind {
-    switch (name) {
-        case "bytes":
-            switch (encode?.encoding) {
-                case undefined:
-                case "base64":
-                    return InputPrimitiveTypeKind.Bytes;
-                case "base64url":
-                    return InputPrimitiveTypeKind.BytesBase64Url;
-                default:
-                    logger.warn(
-                        `invalid encode ${encode?.encoding} for bytes.`
-                    );
-                    return InputPrimitiveTypeKind.Bytes;
-            }
-        case "int8":
-            return InputPrimitiveTypeKind.SByte;
-        case "uint8":
-            return InputPrimitiveTypeKind.Byte;
-        case "int32":
-            return InputPrimitiveTypeKind.Int32;
-        case "int64":
-            return InputPrimitiveTypeKind.Int64;
-        case "integer":
-            return InputPrimitiveTypeKind.Int64;
-        case "safeint":
-            return InputPrimitiveTypeKind.SafeInt;
-        case "float32":
-            return InputPrimitiveTypeKind.Float32;
-        case "float64":
-            return InputPrimitiveTypeKind.Float64;
-        case "decimal":
-            return InputPrimitiveTypeKind.Decimal;
-        case "decimal128":
-            return InputPrimitiveTypeKind.Decimal128;
-        case "uri":
-        case "url":
-            return InputPrimitiveTypeKind.Uri;
-        case "uuid":
-            return InputPrimitiveTypeKind.Guid;
-        case "eTag":
-            return InputPrimitiveTypeKind.String;
-        case "string":
-            switch (format?.toLowerCase()) {
-                case "date":
-                    return InputPrimitiveTypeKind.DateTime;
-                case "uri":
-                case "url":
-                    return InputPrimitiveTypeKind.Uri;
-                case "uuid":
-                    return InputPrimitiveTypeKind.Guid;
-                default:
-                    if (format) {
-                        logger.warn(`invalid format ${format}`);
-                    }
-                    return InputPrimitiveTypeKind.String;
-            }
-        case "boolean":
-            return InputPrimitiveTypeKind.Boolean;
-        case "date":
-            return InputPrimitiveTypeKind.Date;
-        case "plainDate":
-            return InputPrimitiveTypeKind.Date;
-        case "plainTime":
-            return InputPrimitiveTypeKind.Time;
-        case "datetime":
-        case "utcDateTime":
-            switch (encode?.encoding) {
-                case undefined:
-                    return InputPrimitiveTypeKind.DateTime;
-                case "rfc3339":
-                    return InputPrimitiveTypeKind.DateTimeRFC3339;
-                case "rfc7231":
-                    return InputPrimitiveTypeKind.DateTimeRFC7231;
-                case "unixTimestamp":
-                    return InputPrimitiveTypeKind.DateTimeUnix;
-                default:
-                    logger.warn(
-                        `invalid encode ${encode?.encoding} for date time.`
-                    );
-                    return InputPrimitiveTypeKind.DateTime;
-            }
-        case "time":
-            return InputPrimitiveTypeKind.Time;
-        case "duration":
-            switch (encode?.encoding) {
-                case undefined:
-                case "ISO8601":
-                    return InputPrimitiveTypeKind.DurationISO8601;
-                case "seconds":
-                    if (
-                        encode.type?.name === "float" ||
-                        encode.type?.name === "float32"
-                    ) {
-                        return InputPrimitiveTypeKind.DurationSecondsFloat;
-                    } else {
-                        return InputPrimitiveTypeKind.DurationSeconds;
-                    }
-                default:
-                    logger.warn(
-                        `invalid encode ${encode?.encoding} for duration.`
-                    );
-                    return InputPrimitiveTypeKind.DurationISO8601;
-            }
-        case "azureLocation":
-            return InputPrimitiveTypeKind.AzureLocation;
-        default:
-            return InputPrimitiveTypeKind.Object;
-    }
-}
 
 /**
  * If type is an anonymous model, tries to find a named model that has the same
@@ -509,24 +351,6 @@ export function getUsages(
     }
 }
 
-export function getFormattedType(program: Program, type: Type): FormattedType {
-    let targetType = type;
-    const format = getFormat(program, type);
-    if (type.kind === "ModelProperty") {
-        targetType = type.type;
-    }
-    const encodeData =
-        type.kind === "Scalar" || type.kind === "ModelProperty"
-            ? getEncode(program, type)
-            : undefined;
-
-    return {
-        type: targetType,
-        format: format,
-        encode: encodeData
-    };
-}
-
 export function navigateModels(
     context: SdkContext<NetEmitterOptions>,
     models: Map<string, InputModelType>,
@@ -537,17 +361,4 @@ export function navigateModels(
             ? fromSdkModelType(model, context, models, enums)
             : fromSdkEnumType(model, context, enums)
     );
-}
-
-// TODO: we should try to remove this when we adopt getAllOperations
-// we should avoid handling raw type definitions because they could be not correctly projected
-// in the given api version
-function getRealType(type: Type, context: SdkContext<NetEmitterOptions>): Type {
-    if ("projector" in context.program)
-        return (
-            (context.program as ProjectedProgram).projector.projectedTypes.get(
-                type
-            ) ?? type
-        );
-    return type;
 }

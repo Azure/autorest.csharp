@@ -24,6 +24,7 @@ import {
 import {
     DateTimeKnownEncoding,
     DurationKnownEncoding,
+    EncodeData,
     IntrinsicType,
     Model,
     Program,
@@ -31,7 +32,6 @@ import {
     getFormat
 } from "@typespec/compiler";
 import { logger } from "../lib/logger.js";
-import { getCSharpInputTypeKindByPrimitiveModelName } from "../lib/model.js";
 import { getFullNamespaceString } from "../lib/utils.js";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
 import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
@@ -511,6 +511,121 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
         ),
         IsNullable: scalarType.nullable
     };
+    
+    function getCSharpInputTypeKindByPrimitiveModelName(
+        name: string,
+        format?: string,
+        encode?: EncodeData
+    ): InputPrimitiveTypeKind {
+        switch (name) {
+            case "bytes":
+                switch (encode?.encoding) {
+                    case undefined:
+                    case "base64":
+                        return InputPrimitiveTypeKind.Bytes;
+                    case "base64url":
+                        return InputPrimitiveTypeKind.BytesBase64Url;
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for bytes.`
+                        );
+                        return InputPrimitiveTypeKind.Bytes;
+                }
+            case "int8":
+                return InputPrimitiveTypeKind.SByte;
+            case "uint8":
+                return InputPrimitiveTypeKind.Byte;
+            case "int32":
+                return InputPrimitiveTypeKind.Int32;
+            case "int64":
+                return InputPrimitiveTypeKind.Int64;
+            case "integer":
+                return InputPrimitiveTypeKind.Int64;
+            case "safeint":
+                return InputPrimitiveTypeKind.SafeInt;
+            case "float32":
+                return InputPrimitiveTypeKind.Float32;
+            case "float64":
+                return InputPrimitiveTypeKind.Float64;
+            case "decimal":
+                return InputPrimitiveTypeKind.Decimal;
+            case "decimal128":
+                return InputPrimitiveTypeKind.Decimal128;
+            case "uri":
+            case "url":
+                return InputPrimitiveTypeKind.Uri;
+            case "uuid":
+                return InputPrimitiveTypeKind.Guid;
+            case "eTag":
+                return InputPrimitiveTypeKind.String;
+            case "string":
+                switch (format?.toLowerCase()) {
+                    case "date":
+                        return InputPrimitiveTypeKind.DateTime;
+                    case "uri":
+                    case "url":
+                        return InputPrimitiveTypeKind.Uri;
+                    case "uuid":
+                        return InputPrimitiveTypeKind.Guid;
+                    default:
+                        if (format) {
+                            logger.warn(`invalid format ${format}`);
+                        }
+                        return InputPrimitiveTypeKind.String;
+                }
+            case "boolean":
+                return InputPrimitiveTypeKind.Boolean;
+            case "date":
+                return InputPrimitiveTypeKind.Date;
+            case "plainDate":
+                return InputPrimitiveTypeKind.Date;
+            case "plainTime":
+                return InputPrimitiveTypeKind.Time;
+            case "datetime":
+            case "utcDateTime":
+                switch (encode?.encoding) {
+                    case undefined:
+                        return InputPrimitiveTypeKind.DateTime;
+                    case "rfc3339":
+                        return InputPrimitiveTypeKind.DateTimeRFC3339;
+                    case "rfc7231":
+                        return InputPrimitiveTypeKind.DateTimeRFC7231;
+                    case "unixTimestamp":
+                        return InputPrimitiveTypeKind.DateTimeUnix;
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for date time.`
+                        );
+                        return InputPrimitiveTypeKind.DateTime;
+                }
+            case "time":
+                return InputPrimitiveTypeKind.Time;
+            case "duration":
+                switch (encode?.encoding) {
+                    case undefined:
+                    case "ISO8601":
+                        return InputPrimitiveTypeKind.DurationISO8601;
+                    case "seconds":
+                        if (
+                            encode.type?.name === "float" ||
+                            encode.type?.name === "float32"
+                        ) {
+                            return InputPrimitiveTypeKind.DurationSecondsFloat;
+                        } else {
+                            return InputPrimitiveTypeKind.DurationSeconds;
+                        }
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for duration.`
+                        );
+                        return InputPrimitiveTypeKind.DurationISO8601;
+                }
+            case "azureLocation":
+                return InputPrimitiveTypeKind.AzureLocation;
+            default:
+                return InputPrimitiveTypeKind.Object;
+        }
+    }
 }
 
 function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {

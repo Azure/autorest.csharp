@@ -14,7 +14,7 @@ import {
 } from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
-import { getFormattedType, getInputType } from "../../../src/lib/model.js";
+import { getInputType } from "../../../src/lib/model.js";
 import {
     SdkContext,
     createSdkContext,

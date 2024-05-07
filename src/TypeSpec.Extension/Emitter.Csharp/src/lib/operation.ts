@@ -38,6 +38,7 @@ import {
     InputListType,
     InputModelType,
     InputType,
+    isInputEnumType,
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
@@ -59,7 +60,6 @@ import { logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getFormattedType,
     getInputType
 } from "./model.js";
 import {
@@ -178,6 +178,12 @@ export function loadOperation(
                 contentTypeParameter.Type.UnionItemTypes.map((item) =>
                     isInputLiteralType(item) ? item.Value : undefined
                 );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
+            }
+            mediaTypes.push(...mediaTypeValues);
+        } else if (isInputEnumType(contentTypeParameter.Type)) {
+            const mediaTypeValues = contentTypeParameter.Type.AllowedValues.map((value) => value.Value);
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";
             }
