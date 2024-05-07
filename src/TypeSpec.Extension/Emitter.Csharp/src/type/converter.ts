@@ -284,6 +284,7 @@ function fromSdkDurationType(
     } as InputPrimitiveType;
 }
 
+// TODO: tuple is not officially supported
 function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
     return {
         Kind: InputTypeKind.Intrinsic,
