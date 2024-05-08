@@ -1567,7 +1567,7 @@
        "Type": {
         "$id": "197",
         "Kind": "Primitive",
-        "Name": "String",
+        "Name": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Path",
