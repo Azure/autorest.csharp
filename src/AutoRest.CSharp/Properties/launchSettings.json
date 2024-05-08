@@ -510,7 +510,11 @@
     },
     "NoDocs-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoDocs-TypeSpec\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoDocs-TypeSpec\\src\\Generated -n"
+    },
+    "NoDocsUnbranded-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoDocsUnbranded-TypeSpec\\src\\Generated -n"
     },
     "non-string-enum": {
       "commandName": "Project",
