@@ -15,83 +15,55 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private static HashSet<string> PropertyReferenceTypeModels = new HashSet<string>
         {
-            "ArmPlan",
-            "ArmSku",
-            "EncryptionProperties",
-            "ExtendedLocation",
-            "ManagedServiceIdentity",
-            "KeyVaultProperties",
-            "ResourceProviderData",
-            "SystemAssignedServiceIdentity",
-            "SystemData",
-            "UserAssignedIdentity",
-            "WritableSubResource"
+            "Azure.ResourceManager.Models.ArmPlan",
+            "Azure.ResourceManager.Models.ArmSku",
+            "Azure.ResourceManager.Models.EncryptionProperties",
+            "Azure.ResourceManager.Resources.Models.ExtendedLocation",
+            "Azure.ResourceManager.Models.ManagedServiceIdentity",
+            "Azure.ResourceManager.Models.KeyVaultProperties",
+            "Azure.ResourceManager.Resources.ResourceProviderData",
+            "Azure.ResourceManager.Models.SystemAssignedServiceIdentity",
+            "Azure.ResourceManager.Models.SystemData",
+            "Azure.ResourceManager.Models.UserAssignedIdentity",
+            "Azure.ResourceManager.Resources.Models.WritableSubResource"
         };
 
         private static HashSet<string> TypeReferenceTypeModels = new HashSet<string>
         {
-            "OperationStatusResult"
+            "Azure.ResourceManager.Models.OperationStatusResult"
         };
 
-        // ReferenceType is only applied to ResourceData and TrackedResourceData in custom code, not handled by generator
         private static HashSet<string> ReferenceTypeModels = new HashSet<string>
         {
-            "ResourceData",
-            "TrackedResourceData"
+            "Azure.ResourceManager.Models.ResourceData",
+            "Azure.ResourceManager.Models.TrackedResourceData"
         };
 
         public static bool IsPropertyReferenceType(Schema schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            // Azure.ResourceManager.Models.SystemData is PropertyReferenceType, but Azure.ResourceManager.Resources.Models.SystemData is not
-            if (schema.Language.Default.Name == "SystemData")
-            {
-                if ("Azure.ResourceManager.Models" == schema.Extensions?.Namespace)
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            return PropertyReferenceTypeModels.Contains(schema.Language.Default.Name);
-        }
+            => PropertyReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
 
         public static bool IsTypeReferenceType(Schema schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            return TypeReferenceTypeModels.Contains(schema.Language.Default.Name);
-        }
+            => TypeReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
 
         public static bool IsReferenceType(ObjectType schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            return ReferenceTypeModels.Contains(schema.Declaration.Name);
-        }
+            => ReferenceTypeModels.Contains($"{schema.Declaration.Namespace}.{schema.Declaration.Name}");
 
         public static bool IsReferenceType(Schema schema)
+            => ReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
+
+        private static string GetNamespace(Schema schema)
         {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
+            if (!string.IsNullOrEmpty(schema.Extensions?.Namespace))
             {
-                return false;
+                return schema.Extensions.Namespace;
             }
 
-            return ReferenceTypeModels.Contains(schema.Language.Default.Name);
+            if (!string.IsNullOrEmpty(schema.Language.Default.Namespace))
+            {
+                return schema.Language.Default.Namespace;
+            }
+
+            return $"{Configuration.Namespace}.Models";
         }
 
         public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
@@ -108,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType);
                 if (newProperty != null)
                 {
-                    string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
+                    string fullSerializedName = GetFullSerializedName(objectTypeProperty);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                        fullSerializedName,
