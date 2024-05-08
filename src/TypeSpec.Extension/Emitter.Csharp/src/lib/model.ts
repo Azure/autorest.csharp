@@ -110,6 +110,9 @@ export function getInputType(
 ): InputType {
     logger.debug(`getInputType for kind: ${type.kind}`);
 
+    // TODO -- we might could remove this workaround when we adopt getAllOperations
+    //         or when we decide not to honor the `@format` decorators on parameters
+    // this is specifically dealing with the case of an operation parameter
     if (type.kind === "ModelProperty") {
         const propertyType = ignoreDiagnostics(
             getSdkModelPropertyType(context, type, operation)
