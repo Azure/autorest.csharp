@@ -7,13 +7,13 @@ This sample shows how to call GetSpreadDifferentFloatAsync.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response<IReadOnlyDictionary<string, float>> response = await client.GetSpreadDifferentFloatAsync();
+Response<DifferentSpreadFloatRecord> response = await client.GetSpreadDifferentFloatAsync();
 ]]></code>
 This sample shows how to call GetSpreadDifferentFloatAsync with all parameters.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response<IReadOnlyDictionary<string, float>> response = await client.GetSpreadDifferentFloatAsync();
+Response<DifferentSpreadFloatRecord> response = await client.GetSpreadDifferentFloatAsync();
 ]]></code></example>
     </member>
     <member name="GetSpreadDifferentFloat(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetSpreadDifferentFloat.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response<IReadOnlyDictionary<string, float>> response = client.GetSpreadDifferentFloat();
+Response<DifferentSpreadFloatRecord> response = client.GetSpreadDifferentFloat();
 ]]></code>
 This sample shows how to call GetSpreadDifferentFloat with all parameters.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response<IReadOnlyDictionary<string, float>> response = client.GetSpreadDifferentFloat();
+Response<DifferentSpreadFloatRecord> response = client.GetSpreadDifferentFloat();
 ]]></code></example>
     </member>
     <member name="GetSpreadDifferentFloatAsync(RequestContext)">
@@ -40,7 +40,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 Response response = await client.GetSpreadDifferentFloatAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetSpreadDifferentFloatAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 Response response = await client.GetSpreadDifferentFloatAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetSpreadDifferentFloat(RequestContext)">
@@ -61,7 +61,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 Response response = client.GetSpreadDifferentFloat(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetSpreadDifferentFloat with all parameters and parse the result.
 <code><![CDATA[
@@ -70,49 +70,41 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 Response response = client.GetSpreadDifferentFloat(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,float},CancellationToken)">
+    <member name="PutAsync(DifferentSpreadFloatRecord,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response response = await client.PutAsync(new Dictionary<string, float>
-{
-    ["key"] = 123.45F
-});
+DifferentSpreadFloatRecord body = new DifferentSpreadFloatRecord("<name>");
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response response = await client.PutAsync(new Dictionary<string, float>
-{
-    ["key"] = 123.45F
-});
+DifferentSpreadFloatRecord body = new DifferentSpreadFloatRecord("<name>");
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,float},CancellationToken)">
+    <member name="Put(DifferentSpreadFloatRecord,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response response = client.Put(new Dictionary<string, float>
-{
-    ["key"] = 123.45F
-});
+DifferentSpreadFloatRecord body = new DifferentSpreadFloatRecord("<name>");
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferentFloatClient();
 
-Response response = client.Put(new Dictionary<string, float>
-{
-    ["key"] = 123.45F
-});
+DifferentSpreadFloatRecord body = new DifferentSpreadFloatRecord("<name>");
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -123,7 +115,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = 123.45F,
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +127,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = 123.45F,
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +142,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = 123.45F,
+    name = "<name>",
 });
 Response response = client.Put(content);
 
@@ -162,7 +154,7 @@ SpreadDifferentFloat client = new AdditionalPropertiesClient().GetSpreadDifferen
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = 123.45F,
+    name = "<name>",
 });
 Response response = client.Put(content);
 

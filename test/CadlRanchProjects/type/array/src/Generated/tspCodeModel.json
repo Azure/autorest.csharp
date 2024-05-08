@@ -1106,7 +1106,7 @@
         "ElementType": {
          "$id": "120",
          "Kind": "Primitive",
-         "Name": "DateTime",
+         "Name": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1146,7 +1146,7 @@
         "ElementType": {
          "$id": "124",
          "Kind": "Primitive",
-         "Name": "DateTime",
+         "Name": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false

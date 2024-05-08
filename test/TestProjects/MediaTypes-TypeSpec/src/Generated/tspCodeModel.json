@@ -116,38 +116,7 @@
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "17",
-        "Kind": "Union",
-        "Name": "Union",
-        "UnionItemTypes": [
-         {
-          "$id": "18",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "19",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/json; serialization=Avro",
-          "IsNullable": false
-         },
-         {
-          "$id": "20",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "21",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/octet-stream",
-          "IsNullable": false
-         }
-        ],
-        "IsNullable": false
+        "$ref": "2"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -160,11 +129,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "22",
+       "$id": "17",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "23",
+        "$id": "18",
         "Kind": "Primitive",
         "Name": "Bytes",
         "IsNullable": false
@@ -180,11 +149,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "20",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -199,9 +168,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "21",
         "Type": {
-         "$ref": "25"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -209,7 +178,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -231,7 +200,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "23",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Parameters": [
@@ -239,55 +208,11 @@
        "$ref": "14"
       },
       {
-       "$id": "29",
+       "$id": "24",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "30",
-        "Kind": "Union",
-        "Name": "Union",
-        "UnionItemTypes": [
-         {
-          "$id": "31",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "32",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/json",
-          "IsNullable": false
-         },
-         {
-          "$id": "33",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "34",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/octet-stream",
-          "IsNullable": false
-         },
-         {
-          "$id": "35",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "36",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "text/plain",
-          "IsNullable": false
-         }
-        ],
-        "IsNullable": false
+        "$ref": "5"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -300,11 +225,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "37",
+       "$id": "25",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "38",
+        "$id": "26",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -320,11 +245,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "39",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "28",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -339,9 +264,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "29",
         "Type": {
-         "$ref": "40"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
@@ -349,7 +274,7 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "30",
        "StatusCodes": [
         204
        ],
@@ -372,7 +297,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "43",
+     "$id": "31",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
      "Parameters": [
@@ -380,15 +305,15 @@
        "$ref": "14"
       },
       {
-       "$id": "44",
+       "$id": "32",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "45",
+        "$id": "33",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "46",
+         "$id": "34",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -398,9 +323,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "35",
         "Type": {
-         "$ref": "45"
+         "$ref": "33"
         },
         "Value": "application/json"
        },
@@ -414,7 +339,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "48",
+       "$id": "36",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -431,11 +356,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "50",
+        "$id": "38",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -450,9 +375,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "39",
         "Type": {
-         "$ref": "50"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -460,7 +385,7 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "40",
        "StatusCodes": [
         204
        ],
@@ -482,7 +407,7 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "41"
    },
    "Creatable": true
   }

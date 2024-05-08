@@ -24,19 +24,19 @@ import {
 import {
     DateTimeKnownEncoding,
     DurationKnownEncoding,
+    EncodeData,
     IntrinsicType,
     Model,
     Program,
     Type,
     getFormat
 } from "@typespec/compiler";
-import { logger } from "../lib/logger.js";
-import { getCSharpInputTypeKindByPrimitiveModelName } from "../lib/model.js";
-import { getFullNamespaceString } from "../lib/utils.js";
-import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
-import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
-import { InputModelProperty } from "./inputModelProperty.js";
-import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
+import { logger } from "./logger.js";
+import { getFullNamespaceString } from "./utils.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -47,12 +47,12 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType
-} from "./inputType.js";
-import { InputTypeKind } from "./inputTypeKind.js";
-import { LiteralTypeContext } from "./literalTypeContext.js";
-import { Usage } from "./usage.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { Usage } from "../type/usage.js";
 
-function fromSdkType(
+export function fromSdkType(
     sdkType: SdkType,
     context: SdkContext,
     models: Map<string, InputModelType>,
@@ -94,6 +94,32 @@ function fromSdkType(
     if (isSdkBuiltInKind(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
     return {} as InputType;
+}
+
+// TODO -- this is workaround because TCGC ignore format, we need to remove this after a discussion on format.
+// this function is only for the case when we get a type from a parameter, because in typespec, the parameters share the same type as the properties
+export function fromSdkModelPropertyType(
+    propertyType: SdkModelPropertyType,
+    context: SdkContext,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>,
+    literalTypeContext?: LiteralTypeContext
+): InputType {
+    // when the type is string, we need to add the format
+    if (propertyType.type.kind === "string") {
+        return fromStringType(
+            context.program,
+            propertyType.type,
+            propertyType.__raw
+        );
+    }
+    return fromSdkType(
+        propertyType.type,
+        context,
+        models,
+        enums,
+        literalTypeContext
+    );
 }
 
 export function fromSdkModelType(
@@ -160,7 +186,7 @@ export function fromSdkModelType(
                     p.kind !== "path"
             )
             .map((p) =>
-                fromSdkModelPropertyType(p, context, models, enums, {
+                fromSdkModelProperty(p, {
                     ModelName: inputModelType?.Name,
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
@@ -168,6 +194,46 @@ export function fromSdkModelType(
     }
 
     return inputModelType;
+
+    function fromSdkModelProperty(
+        propertyType: SdkModelPropertyType,
+        literalTypeContext: LiteralTypeContext
+    ): InputModelProperty {
+        const serializedName =
+            propertyType.kind === "property"
+                ? (propertyType as SdkBodyModelPropertyType).serializedName
+                : "";
+        literalTypeContext.PropertyName = serializedName;
+
+        const isRequired =
+            propertyType.kind === "path" || propertyType.kind === "body"
+                ? true
+                : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
+        const isDiscriminator =
+            propertyType.kind === "property" && propertyType.discriminator
+                ? true
+                : false;
+        const modelProperty: InputModelProperty = {
+            Name: propertyType.name,
+            SerializedName: serializedName,
+            Description:
+                propertyType.description ??
+                (isDiscriminator ? "Discriminator" : ""),
+            Type: fromSdkType(
+                propertyType.type,
+                context,
+                models,
+                enums,
+                literalTypeContext
+            ),
+            IsRequired: isRequired,
+            IsReadOnly:
+                propertyType.kind === "property" && isReadOnly(propertyType),
+            IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
+        };
+
+        return modelProperty;
+    }
 }
 
 function getDiscriminatorPropertyNameFromCurrentModel(
@@ -265,6 +331,9 @@ function fromSdkDurationType(
                 if (wireType.kind === "float" || wireType.kind === "float32") {
                     return InputPrimitiveTypeKind.DurationSecondsFloat;
                 }
+                if (wireType.kind === "float64") {
+                    return InputPrimitiveTypeKind.DurationSecondsDouble;
+                }
                 return InputPrimitiveTypeKind.DurationSeconds;
             default:
                 logger.warn(
@@ -316,7 +385,11 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
 
 function fromStringType(
     program: Program,
-    stringType: SdkType
+    stringType: SdkType,
+    // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
+    // only when we get the type from a parameter, we need to pass the the parameter as raw here to get the format
+    // TODO -- we should remove this entirely later because TCGC ignores format in these cases, we add it now because we have old test projects, and we did not discuss the impact yet
+    raw?: Type
 ): InputPrimitiveType {
     function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
         if (!rawStringType) return InputPrimitiveTypeKind.String;
@@ -339,9 +412,10 @@ function fromStringType(
         }
     }
 
+    raw = raw ?? stringType.__raw;
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromStringFormat(stringType.__raw),
+        Name: fromStringFormat(raw),
         IsNullable: stringType.nullable
     };
 }
@@ -441,6 +515,121 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
         ),
         IsNullable: scalarType.nullable
     };
+
+    function getCSharpInputTypeKindByPrimitiveModelName(
+        name: string,
+        format?: string,
+        encode?: EncodeData
+    ): InputPrimitiveTypeKind {
+        switch (name) {
+            case "bytes":
+                switch (encode?.encoding) {
+                    case undefined:
+                    case "base64":
+                        return InputPrimitiveTypeKind.Bytes;
+                    case "base64url":
+                        return InputPrimitiveTypeKind.BytesBase64Url;
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for bytes.`
+                        );
+                        return InputPrimitiveTypeKind.Bytes;
+                }
+            case "int8":
+                return InputPrimitiveTypeKind.SByte;
+            case "uint8":
+                return InputPrimitiveTypeKind.Byte;
+            case "int32":
+                return InputPrimitiveTypeKind.Int32;
+            case "int64":
+                return InputPrimitiveTypeKind.Int64;
+            case "integer":
+                return InputPrimitiveTypeKind.Int64;
+            case "safeint":
+                return InputPrimitiveTypeKind.SafeInt;
+            case "float32":
+                return InputPrimitiveTypeKind.Float32;
+            case "float64":
+                return InputPrimitiveTypeKind.Float64;
+            case "decimal":
+                return InputPrimitiveTypeKind.Decimal;
+            case "decimal128":
+                return InputPrimitiveTypeKind.Decimal128;
+            case "uri":
+            case "url":
+                return InputPrimitiveTypeKind.Uri;
+            case "uuid":
+                return InputPrimitiveTypeKind.Guid;
+            case "eTag":
+                return InputPrimitiveTypeKind.String;
+            case "string":
+                switch (format?.toLowerCase()) {
+                    case "date":
+                        return InputPrimitiveTypeKind.DateTime;
+                    case "uri":
+                    case "url":
+                        return InputPrimitiveTypeKind.Uri;
+                    case "uuid":
+                        return InputPrimitiveTypeKind.Guid;
+                    default:
+                        if (format) {
+                            logger.warn(`invalid format ${format}`);
+                        }
+                        return InputPrimitiveTypeKind.String;
+                }
+            case "boolean":
+                return InputPrimitiveTypeKind.Boolean;
+            case "date":
+                return InputPrimitiveTypeKind.Date;
+            case "plainDate":
+                return InputPrimitiveTypeKind.Date;
+            case "plainTime":
+                return InputPrimitiveTypeKind.Time;
+            case "datetime":
+            case "utcDateTime":
+                switch (encode?.encoding) {
+                    case undefined:
+                        return InputPrimitiveTypeKind.DateTime;
+                    case "rfc3339":
+                        return InputPrimitiveTypeKind.DateTimeRFC3339;
+                    case "rfc7231":
+                        return InputPrimitiveTypeKind.DateTimeRFC7231;
+                    case "unixTimestamp":
+                        return InputPrimitiveTypeKind.DateTimeUnix;
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for date time.`
+                        );
+                        return InputPrimitiveTypeKind.DateTime;
+                }
+            case "time":
+                return InputPrimitiveTypeKind.Time;
+            case "duration":
+                switch (encode?.encoding) {
+                    case undefined:
+                    case "ISO8601":
+                        return InputPrimitiveTypeKind.DurationISO8601;
+                    case "seconds":
+                        if (
+                            encode.type?.name === "float" ||
+                            encode.type?.name === "float32"
+                        ) {
+                            return InputPrimitiveTypeKind.DurationSecondsFloat;
+                        } else {
+                            return InputPrimitiveTypeKind.DurationSeconds;
+                        }
+                    default:
+                        logger.warn(
+                            `invalid encode ${encode?.encoding} for duration.`
+                        );
+                        return InputPrimitiveTypeKind.DurationISO8601;
+                }
+            case "azureLocation":
+                return InputPrimitiveTypeKind.AzureLocation;
+            default:
+                return InputPrimitiveTypeKind.Object;
+        }
+    }
 }
 
 function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
@@ -609,49 +798,6 @@ function fromUsageFlags(usage: UsageFlags): Usage {
     else if (usage === (UsageFlags.Input | UsageFlags.Output))
         return Usage.RoundTrip;
     else return Usage.None;
-}
-
-function fromSdkModelPropertyType(
-    propertyType: SdkModelPropertyType,
-    context: SdkContext,
-    models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext: LiteralTypeContext
-): InputModelProperty {
-    const serializedName =
-        propertyType.kind === "property"
-            ? (propertyType as SdkBodyModelPropertyType).serializedName
-            : "";
-    literalTypeContext.PropertyName = serializedName;
-
-    const isRequired =
-        propertyType.kind === "path" || propertyType.kind === "body"
-            ? true
-            : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
-    const isDiscriminator =
-        propertyType.kind === "property" && propertyType.discriminator
-            ? true
-            : false;
-    const modelProperty: InputModelProperty = {
-        Name: propertyType.nameInClient,
-        SerializedName: serializedName,
-        Description:
-            propertyType.description ??
-            (isDiscriminator ? "Discriminator" : ""),
-        Type: fromSdkType(
-            propertyType.type,
-            context,
-            models,
-            enums,
-            literalTypeContext
-        ),
-        IsRequired: isRequired,
-        IsReadOnly:
-            propertyType.kind === "property" && isReadOnly(propertyType),
-        IsDiscriminator: isDiscriminator === true ? true : undefined // TODO: keep backward compatible to ease comparison. remove this after TCGC is merged
-    };
-
-    return modelProperty;
 }
 
 function getCSharpInputTypeKindByIntrinsic(
