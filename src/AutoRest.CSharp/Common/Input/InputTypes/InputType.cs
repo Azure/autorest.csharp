@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Security.Cryptography.X509Certificates;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Common.Input;
 
@@ -10,7 +10,7 @@ internal abstract record InputType
     protected InputType(string name, bool isNullable)
     {
         Name = name;
-        SpecName = name;
+        SpecName = NameTransformer.Instance.EnsureNameCase(name, null).Name;
         IsNullable = isNullable;
     }
 
