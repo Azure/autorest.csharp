@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                 return null;
 
-            string defaultDerivedName = $"Unknown{actualBase.SpecName ?? actualBase.Name}";
+            string defaultDerivedName = GetDefaultDerivedName(actualBase);
             if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out MgmtObjectType? defaultDerivedType))
             {
                 //create the "Unknown" version
@@ -355,6 +355,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return defaultDerivedType;
+        }
+
+        private static string GetDefaultDerivedName(InputModelType actualBase)
+        {
+            if (actualBase.SpecName is not null)
+            {
+                return $"Unknown{NameTransformer.Instance.EnsureNameCase(actualBase.SpecName, null).Name}";
+            }
+            return $"Unknown{actualBase.Name}";
         }
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];

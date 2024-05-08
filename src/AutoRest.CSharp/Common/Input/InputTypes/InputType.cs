@@ -10,7 +10,7 @@ internal abstract record InputType
     protected InputType(string name, bool isNullable)
     {
         Name = name;
-        SpecName = NameTransformer.Instance.EnsureNameCase(name, null).Name;
+        SpecName = name;
         IsNullable = isNullable;
     }
 
