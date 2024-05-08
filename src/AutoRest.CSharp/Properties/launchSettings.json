@@ -508,6 +508,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts\\Generated"
     },
+    "NoDocs-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoDocs-TypeSpec\\src\\Generated -n"
+    },
     "non-string-enum": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"

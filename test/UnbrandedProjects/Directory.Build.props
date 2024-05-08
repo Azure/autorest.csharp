@@ -3,6 +3,7 @@
     <!--Needed for inclusion in the autorest.csharp.sln-->
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
+    <IsNoDocProject Condition="$(MSBuildProjectName.StartsWith('NoDocs'))">true</IsNoDocProject>
     <IsUnbranded>true</IsUnbranded>
   </PropertyGroup>
 

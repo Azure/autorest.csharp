@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -15,11 +16,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class DocumentationWriterExtensions
     {
-        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, CSharpType? crefType = null)
-            => crefType == null
-                ? writer.Line($"/// <inheritdoc />")
-                : writer.Line($"/// <inheritdoc cref=\"{crefType}\"/>");
-
         public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, FormattableString? text)
         {
             return writer.WriteXmlDocumentation("summary", text);
