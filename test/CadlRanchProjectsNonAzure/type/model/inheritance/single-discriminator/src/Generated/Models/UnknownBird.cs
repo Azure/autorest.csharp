@@ -11,7 +11,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
     internal partial class UnknownBird : Bird
     {
         /// <summary> Initializes a new instance of <see cref="UnknownBird"/>. </summary>
-        /// <param name="kind"></param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="wingspan"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownBird(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, wingspan, serializedAdditionalRawData)

@@ -41,6 +41,7 @@ Response response = await client.GetExtendsDifferentSpreadStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetExtendsDifferentSpreadStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -50,6 +51,7 @@ Response response = await client.GetExtendsDifferentSpreadStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtendsDifferentSpreadString(RequestContext)">
@@ -62,6 +64,7 @@ Response response = client.GetExtendsDifferentSpreadString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetExtendsDifferentSpreadString with all parameters and parse the result.
 <code><![CDATA[
@@ -71,6 +74,7 @@ Response response = client.GetExtendsDifferentSpreadString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(DifferentSpreadStringDerived,CancellationToken)">
@@ -79,14 +83,14 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadStringClient();
 
-DifferentSpreadStringDerived body = new DifferentSpreadStringDerived("<derivedProp>");
+DifferentSpreadStringDerived body = new DifferentSpreadStringDerived(123.45F, "<derivedProp>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadStringClient();
 
-DifferentSpreadStringDerived body = new DifferentSpreadStringDerived("<derivedProp>");
+DifferentSpreadStringDerived body = new DifferentSpreadStringDerived(123.45F, "<derivedProp>");
 Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
@@ -96,14 +100,14 @@ This sample shows how to call Put.
 <code><![CDATA[
 ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadStringClient();
 
-DifferentSpreadStringDerived body = new DifferentSpreadStringDerived("<derivedProp>");
+DifferentSpreadStringDerived body = new DifferentSpreadStringDerived(123.45F, "<derivedProp>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadStringClient();
 
-DifferentSpreadStringDerived body = new DifferentSpreadStringDerived("<derivedProp>");
+DifferentSpreadStringDerived body = new DifferentSpreadStringDerived(123.45F, "<derivedProp>");
 Response response = client.Put(body);
 ]]></code></example>
     </member>
@@ -116,6 +120,7 @@ ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtend
 using RequestContent content = RequestContent.Create(new
 {
     derivedProp = "<derivedProp>",
+    id = 123.45F,
 });
 Response response = await client.PutAsync(content);
 
@@ -128,6 +133,7 @@ ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtend
 using RequestContent content = RequestContent.Create(new
 {
     derivedProp = "<derivedProp>",
+    id = 123.45F,
 });
 Response response = await client.PutAsync(content);
 
@@ -143,6 +149,7 @@ ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtend
 using RequestContent content = RequestContent.Create(new
 {
     derivedProp = "<derivedProp>",
+    id = 123.45F,
 });
 Response response = client.Put(content);
 
@@ -155,6 +162,7 @@ ExtendsDifferentSpreadString client = new AdditionalPropertiesClient().GetExtend
 using RequestContent content = RequestContent.Create(new
 {
     derivedProp = "<derivedProp>",
+    id = 123.45F,
 });
 Response response = client.Put(content);
 

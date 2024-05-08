@@ -23,7 +23,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>
-        /// <param name="kind"></param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="wingspan"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="friends">

@@ -12,26 +12,27 @@ using System.Linq;
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The model extends from a model that spread Record&lt;ModelForRecord[]&gt; with the different known property type. </summary>
-    public partial class DifferentSpreadModelArrayDerived
+    public partial class DifferentSpreadModelArrayDerived : DifferentSpreadModelArrayRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelArrayDerived"/>. </summary>
+        /// <param name="knownProp"></param>
         /// <param name="derivedProp"> The index property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="derivedProp"/> is null. </exception>
-        public DifferentSpreadModelArrayDerived(IEnumerable<ModelForRecord> derivedProp)
+        /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> or <paramref name="derivedProp"/> is null. </exception>
+        public DifferentSpreadModelArrayDerived(string knownProp, IEnumerable<ModelForRecord> derivedProp) : base(knownProp)
         {
+            Argument.AssertNotNull(knownProp, nameof(knownProp));
             Argument.AssertNotNull(derivedProp, nameof(derivedProp));
 
             DerivedProp = derivedProp.ToList();
-            AdditionalProperties = new ChangeTrackingDictionary<string, IList<ModelForRecord>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelArrayDerived"/>. </summary>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal DifferentSpreadModelArrayDerived(IList<ModelForRecord> derivedProp, IDictionary<string, IList<ModelForRecord>> additionalProperties)
+        /// <param name="derivedProp"> The index property. </param>
+        internal DifferentSpreadModelArrayDerived(string knownProp, IDictionary<string, IList<ModelForRecord>> additionalProperties, IList<ModelForRecord> derivedProp) : base(knownProp, additionalProperties)
         {
             DerivedProp = derivedProp;
-            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelArrayDerived"/> for deserialization. </summary>
@@ -41,7 +42,5 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> The index property. </summary>
         public IList<ModelForRecord> DerivedProp { get; }
-        /// <summary> Additional Properties. </summary>
-        public IDictionary<string, IList<ModelForRecord>> AdditionalProperties { get; }
     }
 }
