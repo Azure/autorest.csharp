@@ -26,11 +26,7 @@ import {
     DurationKnownEncoding,
     EncodeData,
     IntrinsicType,
-    Model,
-    Program,
-    Type,
-    getFormat
-} from "@typespec/compiler";
+    Model} from "@typespec/compiler";
 import { logger } from "./logger.js";
 import { getFullNamespaceString } from "./utils.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
@@ -78,15 +74,16 @@ export function fromSdkType(
         return fromSdkConstantType(sdkType, enums, literalTypeContext);
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
-    if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
+    if (sdkType.kind === "utcDateTime" || sdkType.kind == "offsetDateTime")
+        return fromSdkDatetimeType(sdkType);
     if (sdkType.kind === "duration")
-        return fromSdkDurationType(sdkType as SdkDurationType);
+        return fromSdkDurationType(sdkType);
     if (sdkType.kind === "bytes")
-        return fromBytesType(sdkType as SdkBuiltInType);
+        return fromBytesType(sdkType);
     if (sdkType.kind === "string")
-        return fromStringType(context.program, sdkType);
-    // TODO: offsetDateTime
+        return fromStringType(sdkType);
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
+    // TODO -- refine the other types from TCGC
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
     // this happens for discriminator type, normally all other primitive types should be handled in scalar above
     // TODO: can we improve the type in TCGC around discriminator
@@ -94,32 +91,6 @@ export function fromSdkType(
     if (isSdkBuiltInKind(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
     return {} as InputType;
-}
-
-// TODO -- this is workaround because TCGC ignore format, we need to remove this after a discussion on format.
-// this function is only for the case when we get a type from a parameter, because in typespec, the parameters share the same type as the properties
-export function fromSdkModelPropertyType(
-    propertyType: SdkModelPropertyType,
-    context: SdkContext,
-    models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
-): InputType {
-    // when the type is string, we need to add the format
-    if (propertyType.type.kind === "string") {
-        return fromStringType(
-            context.program,
-            propertyType.type,
-            propertyType.__raw
-        );
-    }
-    return fromSdkType(
-        propertyType.type,
-        context,
-        models,
-        enums,
-        literalTypeContext
-    );
 }
 
 export function fromSdkModelType(
@@ -384,38 +355,11 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
 }
 
 function fromStringType(
-    program: Program,
-    stringType: SdkType,
-    // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
-    // only when we get the type from a parameter, we need to pass the the parameter as raw here to get the format
-    // TODO -- we should remove this entirely later because TCGC ignores format in these cases, we add it now because we have old test projects, and we did not discuss the impact yet
-    raw?: Type
+    stringType: SdkType
 ): InputPrimitiveType {
-    function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
-        if (!rawStringType) return InputPrimitiveTypeKind.String;
-
-        const format = getFormat(program, rawStringType);
-        switch (format) {
-            case "date":
-                // TODO: remove
-                return InputPrimitiveTypeKind.DateTime;
-            case "uri":
-            case "url":
-                return InputPrimitiveTypeKind.Uri;
-            case "uuid":
-                return InputPrimitiveTypeKind.Guid;
-            default:
-                if (format) {
-                    logger.warn(`Invalid string format '${format}'`);
-                }
-                return InputPrimitiveTypeKind.String;
-        }
-    }
-
-    raw = raw ?? stringType.__raw;
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromStringFormat(raw),
+        Name: InputPrimitiveTypeKind.String,
         IsNullable: stringType.nullable
     };
 }
