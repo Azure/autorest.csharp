@@ -30,7 +30,7 @@ namespace OpenAI.Models
             if (FinishedAt != null)
             {
                 writer.WritePropertyName("finished_at"u8);
-                writer.WriteStringValue(FinishedAt.Value, "O");
+                writer.WriteNumberValue(FinishedAt.Value, "U");
             }
             else
             {
@@ -50,7 +50,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("organization_id"u8);
             writer.WriteStringValue(OrganizationId);
             writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
+            writer.WriteStringValue(Status.ToSerialString());
             writer.WritePropertyName("hyperparameters"u8);
             writer.WriteObjectValue(Hyperparameters, options);
             writer.WritePropertyName("training_file"u8);
@@ -167,7 +167,7 @@ namespace OpenAI.Models
                         finishedAt = null;
                         continue;
                     }
-                    finishedAt = property.Value.GetDateTimeOffset("O");
+                    finishedAt = DateTimeOffset.FromUnixTimeSeconds(property.Value.GetInt64());
                     continue;
                 }
                 if (property.NameEquals("model"u8))
@@ -192,7 +192,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new FineTuningJobStatus(property.Value.GetString());
+                    status = property.Value.GetString().ToFineTuningJobStatus();
                     continue;
                 }
                 if (property.NameEquals("hyperparameters"u8))

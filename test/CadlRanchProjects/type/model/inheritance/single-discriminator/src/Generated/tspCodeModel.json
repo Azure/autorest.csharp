@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "kind",
      "SerializedName": "kind",
-     "Description": "",
+     "Description": "Discriminator",
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
@@ -61,14 +61,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {

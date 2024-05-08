@@ -84,7 +84,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ImputeMode",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "15",
@@ -160,7 +160,7 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "DataSchema",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "27",
@@ -208,7 +208,7 @@
    "$id": "32",
    "Kind": "Enum",
    "Name": "FillNAMethod",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "33",
@@ -338,7 +338,6 @@
     }
    ],
    "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -356,7 +355,6 @@
     }
    ],
    "Namespace": "AnomalyDetector",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
@@ -398,7 +396,7 @@
          "Type": {
           "$id": "62",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -1153,7 +1151,7 @@
             "Type": {
              "$id": "164",
              "Kind": "Primitive",
-             "Name": "DateTime",
+             "Name": "DateTimeRFC3339",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1167,7 +1165,7 @@
             "Type": {
              "$id": "166",
              "Kind": "Primitive",
-             "Name": "DateTime",
+             "Name": "DateTimeRFC3339",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1230,7 +1228,7 @@
            "Type": {
             "$id": "174",
             "Kind": "Primitive",
-            "Name": "DateTime",
+            "Name": "DateTimeRFC3339",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1244,7 +1242,7 @@
            "Type": {
             "$id": "176",
             "Kind": "Primitive",
-            "Name": "DateTime",
+            "Name": "DateTimeRFC3339",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1286,7 +1284,7 @@
          "Type": {
           "$id": "181",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1537,7 +1535,7 @@
      "Type": {
       "$id": "209",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1551,7 +1549,7 @@
      "Type": {
       "$id": "211",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1845,7 +1843,7 @@
      "Type": {
       "$id": "247",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1859,7 +1857,7 @@
      "Type": {
       "$id": "249",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2103,6 +2101,45 @@
   {
    "$id": "279",
    "Kind": "Model",
+   "Name": "ResponseError",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "Error response",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "280",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "The error code.",
+     "Type": {
+      "$id": "281",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "282",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "The message explaining the error reported by the service.",
+     "Type": {
+      "$id": "283",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "284",
+   "Kind": "Model",
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
@@ -2110,7 +2147,7 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "280",
+     "$id": "285",
      "Name": "code",
      "SerializedName": "code",
      "Description": "The error code.",
@@ -2121,56 +2158,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "281",
-     "Name": "message",
-     "SerializedName": "message",
-     "Description": "A message explaining the error reported by the service.",
-     "Type": {
-      "$id": "282",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "283",
-   "Kind": "Model",
-   "Name": "ResponseError",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Error response",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "284",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "The error code.",
-     "Type": {
-      "$id": "285",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
      "$id": "286",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "The message explaining the error reported by the service.",
+     "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "287",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]

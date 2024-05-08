@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.41.0",
-        "@azure-tools/typespec-client-generator-core": "0.41.5",
+        "@azure-tools/typespec-client-generator-core": "0.41.8",
         "@typespec/compiler": "0.55.0",
         "@typespec/eslint-config-typespec": "0.55.0",
         "@typespec/eslint-plugin": "0.55.0",

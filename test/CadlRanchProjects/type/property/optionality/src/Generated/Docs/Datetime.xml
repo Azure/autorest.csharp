@@ -160,7 +160,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 DatetimeProperty body = new DatetimeProperty
 {
-    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 };
 Response response = await client.PutAllAsync(body);
 ]]></code></example>
@@ -180,7 +180,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 DatetimeProperty body = new DatetimeProperty
 {
-    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 };
 Response response = client.PutAll(body);
 ]]></code></example>
@@ -202,7 +202,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.PutAllAsync(content);
 
@@ -226,7 +226,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.PutAll(content);
 
@@ -248,7 +248,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 DatetimeProperty body = new DatetimeProperty
 {
-    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 };
 Response response = await client.PutDefaultAsync(body);
 ]]></code></example>
@@ -268,7 +268,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 DatetimeProperty body = new DatetimeProperty
 {
-    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
 };
 Response response = client.PutDefault(body);
 ]]></code></example>
@@ -290,7 +290,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.PutDefaultAsync(content);
 
@@ -314,7 +314,7 @@ Datetime client = new OptionalClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.PutDefault(content);
 

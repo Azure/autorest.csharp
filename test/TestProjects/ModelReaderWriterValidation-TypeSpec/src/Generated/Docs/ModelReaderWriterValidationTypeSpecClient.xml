@@ -411,6 +411,10 @@ AvailabilitySetData body = new AvailabilitySetData("<location>")
         PlatformFaultDomainCount = 1234,
         PlatformUpdateDomainCount = 1234,
     },
+    Tags =
+    {
+        ["key"] = "<tags>"
+    },
 };
 Response<AvailabilitySetData> response = await client.Op4Async(body);
 ]]></code></example>
@@ -446,6 +450,10 @@ AvailabilitySetData body = new AvailabilitySetData("<location>")
         }},
         PlatformFaultDomainCount = 1234,
         PlatformUpdateDomainCount = 1234,
+    },
+    Tags =
+    {
+        ["key"] = "<tags>"
     },
 };
 Response<AvailabilitySetData> response = client.Op4(body);

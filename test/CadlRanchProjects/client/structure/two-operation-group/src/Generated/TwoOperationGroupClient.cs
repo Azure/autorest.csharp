@@ -8,6 +8,7 @@
 using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Client.Structure.Service.TwoOperationGroup.Models;
 
 namespace Client.Structure.Service.TwoOperationGroup
 {
@@ -51,24 +52,16 @@ namespace Client.Structure.Service.TwoOperationGroup
         }
 
         /// <summary> Initializes a new instance of Group1. </summary>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group1 GetGroup1Client(string client)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        public virtual Group1 GetGroup1Client(ClientType client)
         {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
-
             return new Group1(ClientDiagnostics, _pipeline, _endpoint, client);
         }
 
         /// <summary> Initializes a new instance of Group2. </summary>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group2 GetGroup2Client(string client)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        public virtual Group2 GetGroup2Client(ClientType client)
         {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
-
             return new Group2(ClientDiagnostics, _pipeline, _endpoint, client);
         }
     }

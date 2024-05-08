@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ClientExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -25,7 +25,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "5",

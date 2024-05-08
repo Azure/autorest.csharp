@@ -5,28 +5,32 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The model extends from a model that spread Record&lt;float32&gt; with the different known property type. </summary>
-    public partial class DifferentSpreadFloatDerived
+    public partial class DifferentSpreadFloatDerived : DifferentSpreadFloatRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/>. </summary>
+        /// <param name="name"> The id property. </param>
         /// <param name="derivedProp"> The index property. </param>
-        public DifferentSpreadFloatDerived(float derivedProp)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public DifferentSpreadFloatDerived(string name, float derivedProp) : base(name)
         {
+            Argument.AssertNotNull(name, nameof(name));
+
             DerivedProp = derivedProp;
-            AdditionalProperties = new ChangeTrackingDictionary<string, float>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/>. </summary>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="name"> The id property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        internal DifferentSpreadFloatDerived(float derivedProp, IDictionary<string, float> additionalProperties)
+        /// <param name="derivedProp"> The index property. </param>
+        internal DifferentSpreadFloatDerived(string name, IDictionary<string, float> additionalProperties, float derivedProp) : base(name, additionalProperties)
         {
             DerivedProp = derivedProp;
-            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/> for deserialization. </summary>
@@ -36,7 +40,5 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> The index property. </summary>
         public float DerivedProp { get; set; }
-        /// <summary> Additional Properties. </summary>
-        public IDictionary<string, float> AdditionalProperties { get; }
     }
 }

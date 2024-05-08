@@ -7,16 +7,43 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "GetResponseProp3",
-   "EnumValueType": "string",
+   "Name": "GetResponseProp4",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
+     "Name": "a",
+     "Value": "a"
+    },
+    {
+     "$id": "4",
      "Name": "b",
      "Value": "b"
     },
     {
-     "$id": "4",
+     "$id": "5",
+     "Name": "c",
+     "Value": "c"
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "6",
+   "Kind": "Enum",
+   "Name": "GetResponseProp3",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "b",
+     "Value": "b"
+    },
+    {
+     "$id": "8",
      "Name": "c",
      "Value": "c"
     }
@@ -27,18 +54,18 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "5",
+   "$id": "9",
    "Kind": "Enum",
    "Name": "StringExtensibleNamedUnion",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "6",
+     "$id": "10",
      "Name": "OptionB",
      "Value": "b"
     },
     {
-     "$id": "7",
+     "$id": "11",
      "Name": "c",
      "Value": "c"
     }
@@ -49,47 +76,109 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "8",
+   "$id": "12",
    "Kind": "Enum",
-   "Name": "LR",
-   "EnumValueType": "String",
+   "Name": "GetResponseProp2",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
-     "$id": "9",
-     "Name": "left",
-     "Value": "left"
+     "$id": "13",
+     "Name": "1",
+     "Value": 1
     },
     {
-     "$id": "10",
-     "Name": "right",
-     "Value": "right"
+     "$id": "14",
+     "Name": "2",
+     "Value": 2
+    },
+    {
+     "$id": "15",
+     "Name": "3",
+     "Value": 3
     }
    ],
-   "Namespace": "Type.Union",
-   "Description": "",
+   "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
-   "$id": "11",
+   "$id": "16",
    "Kind": "Enum",
-   "Name": "UD",
+   "Name": "GetResponseProp1",
+   "EnumValueType": "Float32",
+   "AllowedValues": [
+    {
+     "$id": "17",
+     "Name": "1.1",
+     "Value": 1.1
+    },
+    {
+     "$id": "18",
+     "Name": "2.2",
+     "Value": 2.2
+    },
+    {
+     "$id": "19",
+     "Name": "3.3",
+     "Value": 3.3
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "20",
+   "Kind": "Enum",
+   "Name": "EnumsOnlyCasesLr",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "12",
+     "$id": "21",
+     "Name": "left",
+     "Value": "left"
+    },
+    {
+     "$id": "22",
+     "Name": "right",
+     "Value": "right"
+    },
+    {
+     "$id": "23",
      "Name": "up",
      "Value": "up"
     },
     {
-     "$id": "13",
+     "$id": "24",
      "Name": "down",
      "Value": "down"
     }
    ],
-   "Namespace": "Type.Union",
-   "Description": "",
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "25",
+   "Kind": "Enum",
+   "Name": "EnumsOnlyCasesUd",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "26",
+     "Name": "up",
+     "Value": "up"
+    },
+    {
+     "$id": "27",
+     "Name": "down",
+     "Value": "down"
+    }
+   ],
+   "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -97,7 +186,7 @@
  ],
  "Models": [
   {
-   "$id": "14",
+   "$id": "28",
    "Kind": "Model",
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
@@ -105,56 +194,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "15",
+     "$id": "29",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "16",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "17",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "18",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "a",
-        "IsNullable": false
-       },
-       {
-        "$id": "19",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "20",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "b",
-        "IsNullable": false
-       },
-       {
-        "$id": "21",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "22",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "c",
-        "IsNullable": false
-       }
-      ],
-      "IsNullable": false
+      "$ref": "2"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -162,7 +207,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "30",
    "Kind": "Model",
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
@@ -170,56 +215,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "31",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "25",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "26",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "27",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "a",
-        "IsNullable": false
-       },
-       {
-        "$id": "28",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "29",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "b",
-        "IsNullable": false
-       },
-       {
-        "$id": "30",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "31",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "c",
-        "IsNullable": false
-       }
-      ],
-      "IsNullable": false
+      "$ref": "2"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -240,7 +241,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$ref": "6"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -261,7 +262,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$ref": "6"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -282,7 +283,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "5"
+      "$ref": "9"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -303,7 +304,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "5"
+      "$ref": "9"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -324,51 +325,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "42",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "43",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "44",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 1,
-        "IsNullable": false
-       },
-       {
-        "$id": "45",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "46",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 2,
-        "IsNullable": false
-       },
-       {
-        "$id": "47",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "48",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 3,
-        "IsNullable": false
-       }
-      ],
-      "IsNullable": false
+      "$ref": "12"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -376,7 +333,7 @@
    ]
   },
   {
-   "$id": "49",
+   "$id": "42",
    "Kind": "Model",
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
@@ -384,53 +341,125 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "50",
+     "$id": "43",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "51",
+      "$ref": "12"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "44",
+   "Kind": "Model",
+   "Name": "GetResponse5",
+   "Namespace": "Type.Union",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "45",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "16"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "46",
+   "Kind": "Model",
+   "Name": "SendRequest5",
+   "Namespace": "Type.Union",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "47",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "16"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "48",
+   "Kind": "Model",
+   "Name": "GetResponse4",
+   "Namespace": "Type.Union",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "49",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$id": "50",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "52",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "53",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 1,
-        "IsNullable": false
+        "$id": "51",
+        "Kind": "Model",
+        "Name": "Cat",
+        "Namespace": "Type.Union",
+        "IsNullable": false,
+        "Usage": "RoundTrip",
+        "Properties": [
+         {
+          "$id": "52",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "53",
+           "Kind": "Primitive",
+           "Name": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false
+         }
+        ]
        },
        {
         "$id": "54",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "55",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 2,
-        "IsNullable": false
-       },
-       {
-        "$id": "56",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "57",
-         "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "Value": 3,
-        "IsNullable": false
+        "Kind": "Model",
+        "Name": "Dog",
+        "Namespace": "Type.Union",
+        "IsNullable": false,
+        "Usage": "RoundTrip",
+        "Properties": [
+         {
+          "$id": "55",
+          "Name": "bark",
+          "SerializedName": "bark",
+          "Description": "",
+          "Type": {
+           "$id": "56",
+           "Kind": "Primitive",
+           "Name": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false
+         }
+        ]
        }
       ],
       "IsNullable": false
@@ -441,64 +470,111 @@
    ]
   },
   {
-   "$id": "58",
+   "$ref": "51"
+  },
+  {
+   "$ref": "54"
+  },
+  {
+   "$id": "57",
    "Kind": "Model",
-   "Name": "GetResponse5",
+   "Name": "SendRequest4",
+   "Namespace": "Type.Union",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "58",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$id": "59",
+      "Kind": "Union",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$ref": "51"
+       },
+       {
+        "$ref": "54"
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "60",
+   "Kind": "Model",
+   "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "59",
+     "$id": "61",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "60",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "61",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "62",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
-        },
-        "Value": 1.1,
-        "IsNullable": false
-       },
+      "$id": "62",
+      "Kind": "Model",
+      "Name": "EnumsOnlyCases",
+      "Namespace": "Type.Union",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
        {
         "$id": "63",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "64",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
+        "Name": "lr",
+        "SerializedName": "lr",
+        "Description": "This should be receive/send the left variant",
+        "Type": {
+         "$ref": "20"
         },
-        "Value": 2.2,
-        "IsNullable": false
+        "IsRequired": true,
+        "IsReadOnly": false
        },
        {
-        "$id": "65",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "66",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
+        "$id": "64",
+        "Name": "ud",
+        "SerializedName": "ud",
+        "Description": "This should be receive/send the up variant",
+        "Type": {
+         "$ref": "25"
         },
-        "Value": 3.3,
-        "IsNullable": false
+        "IsRequired": true,
+        "IsReadOnly": false
        }
-      ],
-      "IsNullable": false
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "62"
+  },
+  {
+   "$id": "65",
+   "Kind": "Model",
+   "Name": "SendRequest3",
+   "Namespace": "Type.Union",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "66",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "62"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -508,10 +584,10 @@
   {
    "$id": "67",
    "Kind": "Model",
-   "Name": "SendRequest5",
+   "Name": "GetResponse2",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "68",
@@ -520,204 +596,39 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "70",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "71",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
-        },
-        "Value": 1.1,
-        "IsNullable": false
-       },
-       {
-        "$id": "72",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "73",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
-        },
-        "Value": 2.2,
-        "IsNullable": false
-       },
-       {
-        "$id": "74",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "75",
-         "Kind": "Primitive",
-         "Name": "Float64",
-         "IsNullable": false
-        },
-        "Value": 3.3,
-        "IsNullable": false
-       }
-      ],
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "76",
-   "Kind": "Model",
-   "Name": "GetResponse4",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "77",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "78",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "79",
-        "Kind": "Model",
-        "Name": "Cat",
-        "Namespace": "Type.Union",
-        "IsNullable": false,
-        "Usage": "RoundTrip",
-        "Properties": [
-         {
-          "$id": "80",
-          "Name": "name",
-          "SerializedName": "name",
-          "Description": "",
-          "Type": {
-           "$id": "81",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": false
-         }
-        ]
-       },
-       {
-        "$id": "82",
-        "Kind": "Model",
-        "Name": "Dog",
-        "Namespace": "Type.Union",
-        "IsNullable": false,
-        "Usage": "RoundTrip",
-        "Properties": [
-         {
-          "$id": "83",
-          "Name": "bark",
-          "SerializedName": "bark",
-          "Description": "",
-          "Type": {
-           "$id": "84",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": false
-         }
-        ]
-       }
-      ],
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "79"
-  },
-  {
-   "$ref": "82"
-  },
-  {
-   "$id": "85",
-   "Kind": "Model",
-   "Name": "SendRequest4",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "86",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "87",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$ref": "79"
-       },
-       {
-        "$ref": "82"
-       }
-      ],
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "88",
-   "Kind": "Model",
-   "Name": "GetResponse3",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "89",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "90",
       "Kind": "Model",
-      "Name": "EnumsOnlyCases",
+      "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "91",
-        "Name": "lr",
-        "SerializedName": "lr",
-        "Description": "This should be receive/send the left variant",
+        "$id": "70",
+        "Name": "string",
+        "SerializedName": "string",
+        "Description": "This should be receive/send the string variant",
         "Type": {
-         "$id": "92",
+         "$id": "71",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "8"
+           "$id": "72",
+           "Kind": "Primitive",
+           "Name": "String",
+           "IsNullable": false
           },
           {
-           "$ref": "11"
+           "$id": "73",
+           "Kind": "Array",
+           "Name": "Array",
+           "ElementType": {
+            "$id": "74",
+            "Kind": "Primitive",
+            "Name": "String",
+            "IsNullable": false
+           },
+           "IsNullable": false
           }
          ],
          "IsNullable": false
@@ -726,20 +637,32 @@
         "IsReadOnly": false
        },
        {
-        "$id": "93",
-        "Name": "ud",
-        "SerializedName": "ud",
-        "Description": "This should be receive/send the up variant",
+        "$id": "75",
+        "Name": "array",
+        "SerializedName": "array",
+        "Description": "This should be receive/send the array variant",
         "Type": {
-         "$id": "94",
+         "$id": "76",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "11"
+           "$id": "77",
+           "Kind": "Primitive",
+           "Name": "String",
+           "IsNullable": false
           },
           {
-           "$ref": "11"
+           "$id": "78",
+           "Kind": "Array",
+           "Name": "Array",
+           "ElementType": {
+            "$id": "79",
+            "Kind": "Primitive",
+            "Name": "String",
+            "IsNullable": false
+           },
+           "IsNullable": false
           }
          ],
          "IsNullable": false
@@ -755,23 +678,23 @@
    ]
   },
   {
-   "$ref": "90"
+   "$ref": "69"
   },
   {
-   "$id": "95",
+   "$id": "80",
    "Kind": "Model",
-   "Name": "SendRequest3",
+   "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "96",
+     "$id": "81",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "90"
+      "$ref": "69"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -779,52 +702,154 @@
    ]
   },
   {
-   "$id": "97",
+   "$id": "82",
    "Kind": "Model",
-   "Name": "GetResponse2",
+   "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "98",
+     "$id": "83",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "99",
+      "$id": "84",
       "Kind": "Model",
-      "Name": "StringAndArrayCases",
+      "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "100",
-        "Name": "string",
-        "SerializedName": "string",
-        "Description": "This should be receive/send the string variant",
+        "$id": "85",
+        "Name": "stringLiteral",
+        "SerializedName": "stringLiteral",
+        "Description": "This should be receive/send the \"a\" variant",
         "Type": {
-         "$id": "101",
+         "$id": "86",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$id": "102",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          {
-           "$id": "103",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
-            "$id": "104",
+           "$id": "87",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "88",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
            },
+           "Value": "a",
+           "IsNullable": false
+          },
+          {
+           "$id": "89",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "90",
+            "Kind": "Primitive",
+            "Name": "Int32",
+            "IsNullable": false
+           },
+           "Value": 2,
+           "IsNullable": false
+          },
+          {
+           "$id": "91",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "92",
+            "Kind": "Primitive",
+            "Name": "Float32",
+            "IsNullable": false
+           },
+           "Value": 3.3,
+           "IsNullable": false
+          },
+          {
+           "$id": "93",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "94",
+            "Kind": "Primitive",
+            "Name": "Boolean",
+            "IsNullable": false
+           },
+           "Value": true,
+           "IsNullable": false
+          }
+         ],
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "95",
+        "Name": "intLiteral",
+        "SerializedName": "intLiteral",
+        "Description": "This should be receive/send the 2 variant",
+        "Type": {
+         "$id": "96",
+         "Kind": "Union",
+         "Name": "Union",
+         "UnionItemTypes": [
+          {
+           "$id": "97",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "98",
+            "Kind": "Primitive",
+            "Name": "String",
+            "IsNullable": false
+           },
+           "Value": "a",
+           "IsNullable": false
+          },
+          {
+           "$id": "99",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "100",
+            "Kind": "Primitive",
+            "Name": "Int32",
+            "IsNullable": false
+           },
+           "Value": 2,
+           "IsNullable": false
+          },
+          {
+           "$id": "101",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "102",
+            "Kind": "Primitive",
+            "Name": "Float32",
+            "IsNullable": false
+           },
+           "Value": 3.3,
+           "IsNullable": false
+          },
+          {
+           "$id": "103",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "104",
+            "Kind": "Primitive",
+            "Name": "Boolean",
+            "IsNullable": false
+           },
+           "Value": true,
            "IsNullable": false
           }
          ],
@@ -835,9 +860,9 @@
        },
        {
         "$id": "105",
-        "Name": "array",
-        "SerializedName": "array",
-        "Description": "This should be receive/send the array variant",
+        "Name": "floatLiteral",
+        "SerializedName": "floatLiteral",
+        "Description": "This should be receive/send the 3.3 variant",
         "Type": {
          "$id": "106",
          "Kind": "Union",
@@ -845,20 +870,54 @@
          "UnionItemTypes": [
           {
            "$id": "107",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          {
-           "$id": "108",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
-            "$id": "109",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "108",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
            },
+           "Value": "a",
+           "IsNullable": false
+          },
+          {
+           "$id": "109",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "110",
+            "Kind": "Primitive",
+            "Name": "Int32",
+            "IsNullable": false
+           },
+           "Value": 2,
+           "IsNullable": false
+          },
+          {
+           "$id": "111",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "112",
+            "Kind": "Primitive",
+            "Name": "Float32",
+            "IsNullable": false
+           },
+           "Value": 3.3,
+           "IsNullable": false
+          },
+          {
+           "$id": "113",
+           "Kind": "Literal",
+           "Name": "Literal",
+           "LiteralValueType": {
+            "$id": "114",
+            "Kind": "Primitive",
+            "Name": "Boolean",
+            "IsNullable": false
+           },
+           "Value": true,
            "IsNullable": false
           }
          ],
@@ -866,64 +925,12 @@
         },
         "IsRequired": true,
         "IsReadOnly": false
-       }
-      ]
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "99"
-  },
-  {
-   "$id": "110",
-   "Kind": "Model",
-   "Name": "SendRequest2",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "111",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "99"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "112",
-   "Kind": "Model",
-   "Name": "GetResponse1",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "113",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "114",
-      "Kind": "Model",
-      "Name": "MixedLiteralsCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
-      "Usage": "RoundTrip",
-      "Properties": [
+       },
        {
         "$id": "115",
-        "Name": "stringLiteral",
-        "SerializedName": "stringLiteral",
-        "Description": "This should be receive/send the \"a\" variant",
+        "Name": "booleanLiteral",
+        "SerializedName": "booleanLiteral",
+        "Description": "This should be receive/send the true variant",
         "Type": {
          "$id": "116",
          "Kind": "Union",
@@ -962,7 +969,7 @@
            "LiteralValueType": {
             "$id": "122",
             "Kind": "Primitive",
-            "Name": "Float64",
+            "Name": "Float32",
             "IsNullable": false
            },
            "Value": 3.3,
@@ -986,210 +993,6 @@
         },
         "IsRequired": true,
         "IsReadOnly": false
-       },
-       {
-        "$id": "125",
-        "Name": "intLiteral",
-        "SerializedName": "intLiteral",
-        "Description": "This should be receive/send the 2 variant",
-        "Type": {
-         "$id": "126",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
-          {
-           "$id": "127",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "128",
-            "Kind": "Primitive",
-            "Name": "String",
-            "IsNullable": false
-           },
-           "Value": "a",
-           "IsNullable": false
-          },
-          {
-           "$id": "129",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "130",
-            "Kind": "Primitive",
-            "Name": "Int32",
-            "IsNullable": false
-           },
-           "Value": 2,
-           "IsNullable": false
-          },
-          {
-           "$id": "131",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "132",
-            "Kind": "Primitive",
-            "Name": "Float64",
-            "IsNullable": false
-           },
-           "Value": 3.3,
-           "IsNullable": false
-          },
-          {
-           "$id": "133",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "134",
-            "Kind": "Primitive",
-            "Name": "Boolean",
-            "IsNullable": false
-           },
-           "Value": true,
-           "IsNullable": false
-          }
-         ],
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "135",
-        "Name": "floatLiteral",
-        "SerializedName": "floatLiteral",
-        "Description": "This should be receive/send the 3.3 variant",
-        "Type": {
-         "$id": "136",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
-          {
-           "$id": "137",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "138",
-            "Kind": "Primitive",
-            "Name": "String",
-            "IsNullable": false
-           },
-           "Value": "a",
-           "IsNullable": false
-          },
-          {
-           "$id": "139",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "140",
-            "Kind": "Primitive",
-            "Name": "Int32",
-            "IsNullable": false
-           },
-           "Value": 2,
-           "IsNullable": false
-          },
-          {
-           "$id": "141",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "142",
-            "Kind": "Primitive",
-            "Name": "Float64",
-            "IsNullable": false
-           },
-           "Value": 3.3,
-           "IsNullable": false
-          },
-          {
-           "$id": "143",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "144",
-            "Kind": "Primitive",
-            "Name": "Boolean",
-            "IsNullable": false
-           },
-           "Value": true,
-           "IsNullable": false
-          }
-         ],
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "145",
-        "Name": "booleanLiteral",
-        "SerializedName": "booleanLiteral",
-        "Description": "This should be receive/send the true variant",
-        "Type": {
-         "$id": "146",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
-          {
-           "$id": "147",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "148",
-            "Kind": "Primitive",
-            "Name": "String",
-            "IsNullable": false
-           },
-           "Value": "a",
-           "IsNullable": false
-          },
-          {
-           "$id": "149",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "150",
-            "Kind": "Primitive",
-            "Name": "Int32",
-            "IsNullable": false
-           },
-           "Value": 2,
-           "IsNullable": false
-          },
-          {
-           "$id": "151",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "152",
-            "Kind": "Primitive",
-            "Name": "Float64",
-            "IsNullable": false
-           },
-           "Value": 3.3,
-           "IsNullable": false
-          },
-          {
-           "$id": "153",
-           "Kind": "Literal",
-           "Name": "Literal",
-           "LiteralValueType": {
-            "$id": "154",
-            "Kind": "Primitive",
-            "Name": "Boolean",
-            "IsNullable": false
-           },
-           "Value": true,
-           "IsNullable": false
-          }
-         ],
-         "IsNullable": false
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
        }
       ]
      },
@@ -1199,10 +1002,10 @@
    ]
   },
   {
-   "$ref": "114"
+   "$ref": "84"
   },
   {
-   "$id": "155",
+   "$id": "125",
    "Kind": "Model",
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
@@ -1210,12 +1013,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "156",
+     "$id": "126",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "114"
+      "$ref": "84"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1223,7 +1026,7 @@
    ]
   },
   {
-   "$id": "157",
+   "$id": "127",
    "Kind": "Model",
    "Name": "GetResponse",
    "Namespace": "Type.Union",
@@ -1231,12 +1034,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "158",
+     "$id": "128",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "159",
+      "$id": "129",
       "Kind": "Model",
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
@@ -1244,24 +1047,24 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "160",
+        "$id": "130",
         "Name": "model",
         "SerializedName": "model",
         "Description": "This should be receive/send the Cat variant",
         "Type": {
-         "$id": "161",
+         "$id": "131",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "79"
+           "$ref": "51"
           },
           {
-           "$id": "162",
+           "$id": "132",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "163",
+            "$id": "133",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -1270,13 +1073,13 @@
            "IsNullable": false
           },
           {
-           "$id": "164",
+           "$id": "134",
            "Kind": "Primitive",
            "Name": "Int32",
            "IsNullable": false
           },
           {
-           "$id": "165",
+           "$id": "135",
            "Kind": "Primitive",
            "Name": "Boolean",
            "IsNullable": false
@@ -1288,24 +1091,24 @@
         "IsReadOnly": false
        },
        {
-        "$id": "166",
+        "$id": "136",
         "Name": "literal",
         "SerializedName": "literal",
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
-         "$id": "167",
+         "$id": "137",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "79"
+           "$ref": "51"
           },
           {
-           "$id": "168",
+           "$id": "138",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "169",
+            "$id": "139",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -1314,13 +1117,13 @@
            "IsNullable": false
           },
           {
-           "$id": "170",
+           "$id": "140",
            "Kind": "Primitive",
            "Name": "Int32",
            "IsNullable": false
           },
           {
-           "$id": "171",
+           "$id": "141",
            "Kind": "Primitive",
            "Name": "Boolean",
            "IsNullable": false
@@ -1332,24 +1135,24 @@
         "IsReadOnly": false
        },
        {
-        "$id": "172",
+        "$id": "142",
         "Name": "int",
         "SerializedName": "int",
         "Description": "This should be receive/send the int variant",
         "Type": {
-         "$id": "173",
+         "$id": "143",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "79"
+           "$ref": "51"
           },
           {
-           "$id": "174",
+           "$id": "144",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "175",
+            "$id": "145",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -1358,13 +1161,13 @@
            "IsNullable": false
           },
           {
-           "$id": "176",
+           "$id": "146",
            "Kind": "Primitive",
            "Name": "Int32",
            "IsNullable": false
           },
           {
-           "$id": "177",
+           "$id": "147",
            "Kind": "Primitive",
            "Name": "Boolean",
            "IsNullable": false
@@ -1376,24 +1179,24 @@
         "IsReadOnly": false
        },
        {
-        "$id": "178",
+        "$id": "148",
         "Name": "boolean",
         "SerializedName": "boolean",
         "Description": "This should be receive/send the boolean variant",
         "Type": {
-         "$id": "179",
+         "$id": "149",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$ref": "79"
+           "$ref": "51"
           },
           {
-           "$id": "180",
+           "$id": "150",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "181",
+            "$id": "151",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -1402,18 +1205,68 @@
            "IsNullable": false
           },
           {
-           "$id": "182",
+           "$id": "152",
            "Kind": "Primitive",
            "Name": "Int32",
            "IsNullable": false
           },
           {
-           "$id": "183",
+           "$id": "153",
            "Kind": "Primitive",
            "Name": "Boolean",
            "IsNullable": false
           }
          ],
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "154",
+        "Name": "array",
+        "SerializedName": "array",
+        "Description": "This should be receive/send 4 element with Cat, \"a\", int, and boolean",
+        "Type": {
+         "$id": "155",
+         "Kind": "Array",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "156",
+          "Kind": "Union",
+          "Name": "Union",
+          "UnionItemTypes": [
+           {
+            "$ref": "51"
+           },
+           {
+            "$id": "157",
+            "Kind": "Literal",
+            "Name": "Literal",
+            "LiteralValueType": {
+             "$id": "158",
+             "Kind": "Primitive",
+             "Name": "String",
+             "IsNullable": false
+            },
+            "Value": "a",
+            "IsNullable": false
+           },
+           {
+            "$id": "159",
+            "Kind": "Primitive",
+            "Name": "Int32",
+            "IsNullable": false
+           },
+           {
+            "$id": "160",
+            "Kind": "Primitive",
+            "Name": "Boolean",
+            "IsNullable": false
+           }
+          ],
+          "IsNullable": false
+         },
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1427,10 +1280,10 @@
    ]
   },
   {
-   "$ref": "159"
+   "$ref": "129"
   },
   {
-   "$id": "184",
+   "$id": "161",
    "Kind": "Model",
    "Name": "SendRequest",
    "Namespace": "Type.Union",
@@ -1438,12 +1291,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "185",
+     "$id": "162",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "159"
+      "$ref": "129"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1453,32 +1306,32 @@
  ],
  "Clients": [
   {
-   "$id": "186",
+   "$id": "163",
    "Name": "UnionClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "187"
+    "$id": "164"
    },
    "Creatable": true
   },
   {
-   "$id": "188",
+   "$id": "165",
    "Name": "StringsOnly",
    "Description": "Describe union of string \"a\" | \"b\" | \"c\"",
    "Operations": [
     {
-     "$id": "189",
+     "$id": "166",
      "Name": "get",
      "ResourceName": "StringsOnly",
      "Parameters": [
       {
-       "$id": "190",
+       "$id": "167",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "191",
+        "$id": "168",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1493,9 +1346,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "192",
+        "$id": "169",
         "Type": {
-         "$id": "193",
+         "$id": "170",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1504,11 +1357,11 @@
        }
       },
       {
-       "$id": "194",
+       "$id": "171",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "195",
+        "$id": "172",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1523,9 +1376,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "196",
+        "$id": "173",
         "Type": {
-         "$ref": "195"
+         "$ref": "172"
         },
         "Value": "application/json"
        }
@@ -1533,12 +1386,12 @@
      ],
      "Responses": [
       {
-       "$id": "197",
+       "$id": "174",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1557,19 +1410,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "198",
+     "$id": "175",
      "Name": "send",
      "ResourceName": "StringsOnly",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "199",
+       "$id": "176",
        "Name": "SendRequest9",
        "NameInRequest": "",
        "Type": {
-        "$ref": "23"
+        "$ref": "30"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1582,11 +1435,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "200",
+       "$id": "177",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "201",
+        "$id": "178",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1601,12 +1454,257 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "202",
+        "$id": "179",
         "Type": {
-         "$ref": "201"
+         "$ref": "178"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "180",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "181",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "182",
+        "Type": {
+         "$ref": "181"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "183",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/strings-only",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "184"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "185",
+   "Name": "StringExtensible",
+   "Description": "Describe union of string string | \"b\" | \"c\"",
+   "Operations": [
+    {
+     "$id": "186",
+     "Name": "get",
+     "ResourceName": "StringExtensible",
+     "Parameters": [
+      {
+       "$ref": "167"
+      },
+      {
+       "$id": "187",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "188",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "189",
+        "Type": {
+         "$ref": "188"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "190",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "32"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/union/string-extensible",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "191",
+     "Name": "send",
+     "ResourceName": "StringExtensible",
+     "Parameters": [
+      {
+       "$ref": "167"
+      },
+      {
+       "$id": "192",
+       "Name": "SendRequest8",
+       "NameInRequest": "",
+       "Type": {
+        "$ref": "34"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Spread"
+      },
+      {
+       "$id": "193",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "194",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "195",
+        "Type": {
+         "$ref": "194"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "196",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "197",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "198",
+        "Type": {
+         "$ref": "197"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "199",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/string-extensible",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "200"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "201",
+   "Name": "StringExtensibleNamed",
+   "Description": "Describe union of string string | \"b\" | \"c\" but where the union is named and some of the variants are named",
+   "Operations": [
+    {
+     "$id": "202",
+     "Name": "get",
+     "ResourceName": "StringExtensibleNamed",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "203",
@@ -1640,80 +1738,10 @@
       {
        "$id": "206",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/strings-only",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "207"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "208",
-   "Name": "StringExtensible",
-   "Description": "Describe union of string string | \"b\" | \"c\"",
-   "Operations": [
-    {
-     "$id": "209",
-     "Name": "get",
-     "ResourceName": "StringExtensible",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "210",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "211",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "212",
-        "Type": {
-         "$ref": "211"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "213",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "36"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1726,25 +1754,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/string-extensible",
+     "Path": "/type/union/string-extensible-named",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "214",
+     "$id": "207",
      "Name": "send",
-     "ResourceName": "StringExtensible",
+     "ResourceName": "StringExtensibleNamed",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "215",
-       "Name": "SendRequest8",
+       "$id": "208",
+       "Name": "SendRequest7",
        "NameInRequest": "",
        "Type": {
-        "$ref": "34"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1757,11 +1785,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "216",
+       "$id": "209",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "217",
+        "$id": "210",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1776,12 +1804,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "218",
+        "$id": "211",
         "Type": {
-         "$ref": "217"
+         "$ref": "210"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "212",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "213",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "214",
+        "Type": {
+         "$ref": "213"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "215",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/string-extensible-named",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "216"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "217",
+   "Name": "IntsOnly",
+   "Description": "Describe union of integer 1 | 2 | 3",
+   "Operations": [
+    {
+     "$id": "218",
+     "Name": "get",
+     "ResourceName": "IntsOnly",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "219",
@@ -1815,80 +1913,10 @@
       {
        "$id": "222",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/string-extensible",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "223"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "224",
-   "Name": "StringExtensibleNamed",
-   "Description": "Describe union of string string | \"b\" | \"c\" but where the union is named and some of the variants are named",
-   "Operations": [
-    {
-     "$id": "225",
-     "Name": "get",
-     "ResourceName": "StringExtensibleNamed",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "226",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "227",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "228",
-        "Type": {
-         "$ref": "227"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "229",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "36"
+        "$ref": "40"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1901,25 +1929,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/string-extensible-named",
+     "Path": "/type/union/ints-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "230",
+     "$id": "223",
      "Name": "send",
-     "ResourceName": "StringExtensibleNamed",
+     "ResourceName": "IntsOnly",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "231",
-       "Name": "SendRequest7",
+       "$id": "224",
+       "Name": "SendRequest6",
        "NameInRequest": "",
        "Type": {
-        "$ref": "38"
+        "$ref": "42"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1932,11 +1960,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "232",
+       "$id": "225",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "233",
+        "$id": "226",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1951,12 +1979,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "234",
+        "$id": "227",
         "Type": {
-         "$ref": "233"
+         "$ref": "226"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "228",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "229",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "230",
+        "Type": {
+         "$ref": "229"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "231",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/ints-only",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "232"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "233",
+   "Name": "FloatsOnly",
+   "Description": "Describe union of floats 1.1 | 2.2 | 3.3",
+   "Operations": [
+    {
+     "$id": "234",
+     "Name": "get",
+     "ResourceName": "FloatsOnly",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "235",
@@ -1990,80 +2088,10 @@
       {
        "$id": "238",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/string-extensible-named",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "239"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "240",
-   "Name": "IntsOnly",
-   "Description": "Describe union of integer 1 | 2 | 3",
-   "Operations": [
-    {
-     "$id": "241",
-     "Name": "get",
-     "ResourceName": "IntsOnly",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "242",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "243",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "244",
-        "Type": {
-         "$ref": "243"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "245",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2076,25 +2104,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/ints-only",
+     "Path": "/type/union/floats-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "246",
+     "$id": "239",
      "Name": "send",
-     "ResourceName": "IntsOnly",
+     "ResourceName": "FloatsOnly",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "247",
-       "Name": "SendRequest6",
+       "$id": "240",
+       "Name": "SendRequest5",
        "NameInRequest": "",
        "Type": {
-        "$ref": "49"
+        "$ref": "46"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2107,11 +2135,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "248",
+       "$id": "241",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "249",
+        "$id": "242",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2126,12 +2154,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "243",
         "Type": {
-         "$ref": "249"
+         "$ref": "242"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "244",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "245",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "246",
+        "Type": {
+         "$ref": "245"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "247",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/floats-only",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "248"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "249",
+   "Name": "ModelsOnly",
+   "Description": "Describe union of models",
+   "Operations": [
+    {
+     "$id": "250",
+     "Name": "get",
+     "ResourceName": "ModelsOnly",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "251",
@@ -2165,80 +2263,10 @@
       {
        "$id": "254",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/ints-only",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "255"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "256",
-   "Name": "FloatsOnly",
-   "Description": "Describe union of floats 1.1 | 2.2 | 3.3",
-   "Operations": [
-    {
-     "$id": "257",
-     "Name": "get",
-     "ResourceName": "FloatsOnly",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "258",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "259",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "260",
-        "Type": {
-         "$ref": "259"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "261",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "58"
+        "$ref": "48"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2251,25 +2279,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/floats-only",
+     "Path": "/type/union/models-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "262",
+     "$id": "255",
      "Name": "send",
-     "ResourceName": "FloatsOnly",
+     "ResourceName": "ModelsOnly",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "263",
-       "Name": "SendRequest5",
+       "$id": "256",
+       "Name": "SendRequest4",
        "NameInRequest": "",
        "Type": {
-        "$ref": "67"
+        "$ref": "57"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2282,11 +2310,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "264",
+       "$id": "257",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "265",
+        "$id": "258",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2301,12 +2329,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "266",
+        "$id": "259",
         "Type": {
-         "$ref": "265"
+         "$ref": "258"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "260",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "261",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "262",
+        "Type": {
+         "$ref": "261"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "263",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/models-only",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "264"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "265",
+   "Name": "EnumsOnly",
+   "Description": "Describe union of 2 different enums",
+   "Operations": [
+    {
+     "$id": "266",
+     "Name": "get",
+     "ResourceName": "EnumsOnly",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "267",
@@ -2340,80 +2438,10 @@
       {
        "$id": "270",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/floats-only",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "271"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "272",
-   "Name": "ModelsOnly",
-   "Description": "Describe union of models",
-   "Operations": [
-    {
-     "$id": "273",
-     "Name": "get",
-     "ResourceName": "ModelsOnly",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "274",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "275",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "276",
-        "Type": {
-         "$ref": "275"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "277",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "76"
+        "$ref": "60"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2426,25 +2454,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/models-only",
+     "Path": "/type/union/enums-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "278",
+     "$id": "271",
      "Name": "send",
-     "ResourceName": "ModelsOnly",
+     "ResourceName": "EnumsOnly",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "279",
-       "Name": "SendRequest4",
+       "$id": "272",
+       "Name": "SendRequest3",
        "NameInRequest": "",
        "Type": {
-        "$ref": "85"
+        "$ref": "65"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2457,11 +2485,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "280",
+       "$id": "273",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "281",
+        "$id": "274",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2476,12 +2504,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "282",
+        "$id": "275",
         "Type": {
-         "$ref": "281"
+         "$ref": "274"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "276",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "277",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "278",
+        "Type": {
+         "$ref": "277"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "279",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/enums-only",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "280"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "281",
+   "Name": "StringAndArray",
+   "Description": "Describe union of a string and an array of strings",
+   "Operations": [
+    {
+     "$id": "282",
+     "Name": "get",
+     "ResourceName": "StringAndArray",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "283",
@@ -2515,80 +2613,10 @@
       {
        "$id": "286",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/models-only",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "287"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "288",
-   "Name": "EnumsOnly",
-   "Description": "Describe union of 2 different enums",
-   "Operations": [
-    {
-     "$id": "289",
-     "Name": "get",
-     "ResourceName": "EnumsOnly",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "290",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "291",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "292",
-        "Type": {
-         "$ref": "291"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "293",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "88"
+        "$ref": "67"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2601,25 +2629,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/enums-only",
+     "Path": "/type/union/string-and-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "294",
+     "$id": "287",
      "Name": "send",
-     "ResourceName": "EnumsOnly",
+     "ResourceName": "StringAndArray",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "295",
-       "Name": "SendRequest3",
+       "$id": "288",
+       "Name": "SendRequest2",
        "NameInRequest": "",
        "Type": {
-        "$ref": "95"
+        "$ref": "80"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2632,11 +2660,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "296",
+       "$id": "289",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "297",
+        "$id": "290",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2651,12 +2679,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "298",
+        "$id": "291",
         "Type": {
-         "$ref": "297"
+         "$ref": "290"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "292",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "293",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "294",
+        "Type": {
+         "$ref": "293"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "295",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/string-and-array",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "296"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "297",
+   "Name": "MixedLiterals",
+   "Description": "Describe union of floats \"a\" | 2 | 3.3",
+   "Operations": [
+    {
+     "$id": "298",
+     "Name": "get",
+     "ResourceName": "MixedLiterals",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "299",
@@ -2690,80 +2788,10 @@
       {
        "$id": "302",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/enums-only",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "303"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "304",
-   "Name": "StringAndArray",
-   "Description": "Describe union of a string and an array of strings",
-   "Operations": [
-    {
-     "$id": "305",
-     "Name": "get",
-     "ResourceName": "StringAndArray",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "306",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "307",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "308",
-        "Type": {
-         "$ref": "307"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "309",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "97"
+        "$ref": "82"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2776,25 +2804,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/union/string-and-array",
+     "Path": "/type/union/mixed-literals",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "310",
+     "$id": "303",
      "Name": "send",
-     "ResourceName": "StringAndArray",
+     "ResourceName": "MixedLiterals",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "311",
-       "Name": "SendRequest2",
+       "$id": "304",
+       "Name": "SendRequest1",
        "NameInRequest": "",
        "Type": {
-        "$ref": "110"
+        "$ref": "125"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2807,11 +2835,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "312",
+       "$id": "305",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "313",
+        "$id": "306",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2826,12 +2854,82 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "314",
+        "$id": "307",
         "Type": {
-         "$ref": "313"
+         "$ref": "306"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "308",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "309",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "310",
+        "Type": {
+         "$ref": "309"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "311",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/union/mixed-literals",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "312"
+   },
+   "Creatable": false,
+   "Parent": "UnionClient"
+  },
+  {
+   "$id": "313",
+   "Name": "MixedTypes",
+   "Description": "Describe union of floats \"a\" | 2 | 3.3",
+   "Operations": [
+    {
+     "$id": "314",
+     "Name": "get",
+     "ResourceName": "MixedTypes",
+     "Parameters": [
+      {
+       "$ref": "167"
       },
       {
        "$id": "315",
@@ -2865,255 +2963,10 @@
       {
        "$id": "318",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/string-and-array",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "319"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "320",
-   "Name": "MixedLiterals",
-   "Description": "Describe union of floats \"a\" | 2 | 3.3",
-   "Operations": [
-    {
-     "$id": "321",
-     "Name": "get",
-     "ResourceName": "MixedLiterals",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "322",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "323",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "324",
-        "Type": {
-         "$ref": "323"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "325",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "112"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/union/mixed-literals",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "326",
-     "Name": "send",
-     "ResourceName": "MixedLiterals",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "327",
-       "Name": "SendRequest1",
-       "NameInRequest": "",
-       "Type": {
-        "$ref": "155"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Spread"
-      },
-      {
-       "$id": "328",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "329",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "330",
-        "Type": {
-         "$ref": "329"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "331",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "332",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "333",
-        "Type": {
-         "$ref": "332"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "334",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/union/mixed-literals",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "335"
-   },
-   "Creatable": false,
-   "Parent": "UnionClient"
-  },
-  {
-   "$id": "336",
-   "Name": "MixedTypes",
-   "Description": "Describe union of floats \"a\" | 2 | 3.3",
-   "Operations": [
-    {
-     "$id": "337",
-     "Name": "get",
-     "ResourceName": "MixedTypes",
-     "Parameters": [
-      {
-       "$ref": "190"
-      },
-      {
-       "$id": "338",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "339",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "340",
-        "Type": {
-         "$ref": "339"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "341",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "157"
+        "$ref": "127"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3132,19 +2985,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "342",
+     "$id": "319",
      "Name": "send",
      "ResourceName": "MixedTypes",
      "Parameters": [
       {
-       "$ref": "190"
+       "$ref": "167"
       },
       {
-       "$id": "343",
+       "$id": "320",
        "Name": "SendRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "184"
+        "$ref": "161"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3157,11 +3010,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "344",
+       "$id": "321",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "345",
+        "$id": "322",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3176,19 +3029,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "346",
+        "$id": "323",
         "Type": {
-         "$ref": "345"
+         "$ref": "322"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "347",
+       "$id": "324",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "348",
+        "$id": "325",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3203,9 +3056,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "349",
+        "$id": "326",
         "Type": {
-         "$ref": "348"
+         "$ref": "325"
         },
         "Value": "application/json"
        }
@@ -3213,7 +3066,7 @@
      ],
      "Responses": [
       {
-       "$id": "350",
+       "$id": "327",
        "StatusCodes": [
         204
        ],
@@ -3235,7 +3088,7 @@
     }
    ],
    "Protocol": {
-    "$id": "351"
+    "$id": "328"
    },
    "Creatable": false,
    "Parent": "UnionClient"

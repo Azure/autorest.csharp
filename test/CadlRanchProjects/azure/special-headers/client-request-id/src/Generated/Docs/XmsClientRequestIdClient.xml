@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetXmsClientRequestIdAsync(RequestContext)">
+      <example>
+This sample shows how to call GetXmsClientRequestIdAsync.
+<code><![CDATA[
+XmsClientRequestIdClient client = new XmsClientRequestIdClient();
+
+Response response = await client.GetXmsClientRequestIdAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call GetXmsClientRequestIdAsync with all request content.
+<code><![CDATA[
+XmsClientRequestIdClient client = new XmsClientRequestIdClient();
+
+Response response = await client.GetXmsClientRequestIdAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="GetXmsClientRequestId(RequestContext)">
+      <example>
+This sample shows how to call GetXmsClientRequestId.
+<code><![CDATA[
+XmsClientRequestIdClient client = new XmsClientRequestIdClient();
+
+Response response = client.GetXmsClientRequestId();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call GetXmsClientRequestId with all request content.
+<code><![CDATA[
+XmsClientRequestIdClient client = new XmsClientRequestIdClient();
+
+Response response = client.GetXmsClientRequestId();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

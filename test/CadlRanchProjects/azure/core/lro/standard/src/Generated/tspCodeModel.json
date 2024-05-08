@@ -427,38 +427,28 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$id": "51",
-   "Kind": "Model",
-   "Name": "UserExportParams",
-   "Namespace": "_Specs_.Azure.Core.Lro.Standard",
-   "Description": "The parameters for exporting a user.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "52",
+   "$id": "51",
    "Name": "StandardClient",
    "Description": "Illustrates bodies templated with Azure Core with long-running operation",
    "Operations": [
     {
-     "$id": "53",
+     "$id": "52",
      "Name": "createOrReplace",
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
      "Description": "Creates or replaces a User",
      "Parameters": [
       {
-       "$id": "54",
+       "$id": "53",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "55",
+        "$id": "54",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -473,9 +463,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "55",
         "Type": {
-         "$id": "57",
+         "$id": "56",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -484,21 +474,21 @@
        }
       },
       {
-       "$id": "58",
+       "$id": "57",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "59",
+        "$id": "58",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "59",
         "Type": {
-         "$id": "61",
+         "$id": "60",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -515,12 +505,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "62",
+       "$id": "61",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "63",
+        "$id": "62",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -536,7 +526,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "64",
+       "$id": "63",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -554,11 +544,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "65",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -573,19 +563,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "66",
         "Type": {
-         "$ref": "66"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "68",
+       "$id": "67",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "69",
+        "$id": "68",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -600,9 +590,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "69",
         "Type": {
-         "$ref": "69"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
@@ -610,7 +600,7 @@
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "70",
        "StatusCodes": [
         201
        ],
@@ -620,12 +610,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "72",
+         "$id": "71",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "73",
+          "$id": "72",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -638,7 +628,7 @@
        ]
       },
       {
-       "$id": "74",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
@@ -648,12 +638,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "75",
+         "$id": "74",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "76",
+          "$id": "75",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -675,10 +665,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "77",
+      "$id": "76",
       "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "78",
+       "$id": "77",
        "StatusCodes": [
         200
        ],
@@ -692,29 +682,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "79",
+     "$id": "78",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
      "Description": "Deletes a User",
      "Parameters": [
       {
-       "$ref": "54"
+       "$ref": "53"
       },
       {
-       "$id": "80",
+       "$id": "79",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "81",
+        "$id": "80",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "60"
+        "$ref": "59"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -726,12 +716,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "82",
+       "$id": "81",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "83",
+        "$id": "82",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -747,11 +737,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "83",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "84",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -766,9 +756,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "85",
         "Type": {
-         "$ref": "85"
+         "$ref": "84"
         },
         "Value": "application/json"
        }
@@ -776,7 +766,7 @@
      ],
      "Responses": [
       {
-       "$id": "87",
+       "$id": "86",
        "StatusCodes": [
         202
        ],
@@ -786,12 +776,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "88",
+         "$id": "87",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "89",
+          "$id": "88",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -810,10 +800,10 @@
      "Path": "/azure/core/lro/standard/users/{name}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "90",
+      "$id": "89",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "91",
+       "$id": "90",
        "StatusCodes": [
         204
        ],
@@ -824,29 +814,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "92",
+     "$id": "91",
      "Name": "export",
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
      "Description": "Exports a User",
      "Parameters": [
       {
-       "$ref": "54"
+       "$ref": "53"
       },
       {
-       "$id": "93",
+       "$id": "92",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "94",
+        "$id": "93",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "60"
+        "$ref": "59"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -858,12 +848,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "95",
+       "$id": "94",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "96",
+        "$id": "95",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -879,12 +869,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "97",
+       "$id": "96",
        "Name": "format",
        "NameInRequest": "format",
        "Description": "The format of the data.",
        "Type": {
-        "$id": "98",
+        "$id": "97",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -900,11 +890,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "99",
+       "$id": "98",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "100",
+        "$id": "99",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -919,9 +909,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "101",
+        "$id": "100",
         "Type": {
-         "$ref": "100"
+         "$ref": "99"
         },
         "Value": "application/json"
        }
@@ -929,7 +919,7 @@
      ],
      "Responses": [
       {
-       "$id": "102",
+       "$id": "101",
        "StatusCodes": [
         202
        ],
@@ -939,12 +929,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "103",
+         "$id": "102",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "104",
+          "$id": "103",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -963,10 +953,10 @@
      "Path": "/azure/core/lro/standard/users/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "105",
+      "$id": "104",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "106",
+       "$id": "105",
        "StatusCodes": [
         200
        ],
@@ -982,7 +972,7 @@
     }
    ],
    "Protocol": {
-    "$id": "107"
+    "$id": "106"
    },
    "Creatable": true
   }
