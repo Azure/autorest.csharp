@@ -48,5 +48,18 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new MultiPartClient(host, null).GetFormDataClient().AnonymousModelAsync(File.OpenRead(SampleJpgPath));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task Payload_Multipart_FormData_multiBinaryParts(bool hasPicture) => Test(async (host) =>
+        {
+            MultiBinaryPartsRequest data = new MultiBinaryPartsRequest(File.OpenRead(SampleJpgPath));
+            if (hasPicture)
+            {
+                data.Picture = File.OpenRead(SamplePngPath);
+            }
+            var response = await new MultiPartClient(host, null).GetFormDataClient().MultiBinaryPartsAsync(data);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        });
     }
 }
