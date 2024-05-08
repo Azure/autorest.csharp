@@ -58,7 +58,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+            _defaultDerivedType = defaultDerivedType
+                //if I have children and parents then I am my own defaultDerivedType
+                ?? (inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null } ? this :(inputModel.IsUnknownDiscriminatorModel ? this : null));
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;

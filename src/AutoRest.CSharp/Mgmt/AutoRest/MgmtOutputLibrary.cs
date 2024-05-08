@@ -20,6 +20,7 @@ using AutoRest.CSharp.Utilities;
 using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
 using System.Runtime.CompilerServices;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -315,15 +316,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return null;
             }
 
-            var actualBase = model;
-            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
-            {
-                actualBase = actualBase.BaseModel;
-            }
+            var actualBase = isBasePolyType ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
+            if (actualBase is null)
+                throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
 
             //We don't need to create default type if its an input only model
             if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                 return null;
+
+            //if I have children and parents then I am my own defaultDerivedType
+            if (model.DerivedModels.Any() && model.BaseModel is { DiscriminatorPropertyName: not null })
+            {
+                return null;
+            }
 
             string defaultDerivedName = GetDefaultDerivedName(actualBase);
             if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out MgmtObjectType? defaultDerivedType))
