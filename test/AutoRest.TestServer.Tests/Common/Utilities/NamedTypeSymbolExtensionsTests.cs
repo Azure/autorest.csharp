@@ -110,6 +110,7 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 flavor: "azure",
+                disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
                 helperNamespace: "");
