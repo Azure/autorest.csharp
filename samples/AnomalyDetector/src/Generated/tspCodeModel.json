@@ -8,6 +8,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "APIVersion",
    "EnumValueType": "String",
    "AllowedValues": [

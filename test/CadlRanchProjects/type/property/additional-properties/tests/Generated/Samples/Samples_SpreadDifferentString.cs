@@ -6,13 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadDifferentString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadDifferentStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response<IReadOnlyDictionary<string, string>> response = client.GetSpreadDifferentString();
+            Response<DifferentSpreadStringRecord> response = client.GetSpreadDifferentString();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response<IReadOnlyDictionary<string, string>> response = await client.GetSpreadDifferentStringAsync();
+            Response<DifferentSpreadStringRecord> response = await client.GetSpreadDifferentStringAsync();
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadDifferentString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadDifferentStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response<IReadOnlyDictionary<string, string>> response = client.GetSpreadDifferentString();
+            Response<DifferentSpreadStringRecord> response = client.GetSpreadDifferentString();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response<IReadOnlyDictionary<string, string>> response = await client.GetSpreadDifferentStringAsync();
+            Response<DifferentSpreadStringRecord> response = await client.GetSpreadDifferentStringAsync();
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -125,7 +125,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -138,10 +138,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response response = client.Put(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            DifferentSpreadStringRecord body = new DifferentSpreadStringRecord(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -150,10 +148,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            DifferentSpreadStringRecord body = new DifferentSpreadStringRecord(123.45F);
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -164,7 +160,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -179,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -192,10 +188,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response response = client.Put(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            DifferentSpreadStringRecord body = new DifferentSpreadStringRecord(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -204,10 +198,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentString client = new AdditionalPropertiesClient().GetSpreadDifferentStringClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            DifferentSpreadStringRecord body = new DifferentSpreadStringRecord(123.45F);
+            Response response = await client.PutAsync(body);
         }
     }
 }
