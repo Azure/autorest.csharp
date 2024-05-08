@@ -14,7 +14,6 @@ internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputT
     public static InputPrimitiveType BytesBase64Url { get; } = new(InputTypeKind.BytesBase64Url);
     public static InputPrimitiveType Char { get; } = new(InputTypeKind.Char);
     public static InputPrimitiveType ContentType { get; } = new(InputTypeKind.ContentType);
-    public static InputPrimitiveType Char { get; } = new(InputTypeKind.Char);
     public static InputPrimitiveType Date { get; } = new(InputTypeKind.Date);
     public static InputPrimitiveType DateTime { get; } = new(InputTypeKind.DateTime);
     public static InputPrimitiveType DateTimeISO8601 { get; } = new(InputTypeKind.DateTimeISO8601);
