@@ -161,11 +161,9 @@ op test(@body input: Pet): Pet;
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const [services] = getAllHttpServices(program);
-        const modelMap = new Map<string, InputModelType>();
-        const enumMap = new Map<string, InputEnumType>();
-        navigateModels(sdkContext, services[0].namespace, modelMap, enumMap);
-        const pet = modelMap.get("Pet");
+        const codeModel = createModel(sdkContext);
+        const models = codeModel.Models;
+        const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
         assert(
@@ -218,7 +216,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Cat
-        const cat = modelMap.get("Cat");
+        const cat = models.find((m) => m.Name === "Cat");
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "Cat");
         assert(cat.BaseModel === pet);
@@ -237,7 +235,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Dog
-        const dog = modelMap.get("Dog");
+        const dog = models.find((m) => m.Name === "Dog");
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "Dog");
         assert(dog.BaseModel === pet);
@@ -295,11 +293,9 @@ op test(@body input: Pet): Pet;
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const [services] = getAllHttpServices(program);
-        const modelMap = new Map<string, InputModelType>();
-        const enumMap = new Map<string, InputEnumType>();
-        navigateModels(sdkContext, services[0].namespace, modelMap, enumMap);
-        const pet = modelMap.get("Pet");
+        const codeModel = createModel(sdkContext);
+        const models = codeModel.Models;
+        const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
         assert(
@@ -352,7 +348,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Cat
-        const cat = modelMap.get("Cat");
+        const cat = models.find((m) => m.Name === "Cat");
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "cat");
         assert(cat.BaseModel === pet);
@@ -371,7 +367,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Dog
-        const dog = modelMap.get("Dog");
+        const dog = models.find((m) => m.Name === "Dog");
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "dog");
         assert(dog.BaseModel === pet);

@@ -42,5 +42,6 @@ internal enum InputTypeKind
     Time,
     Uri,
     SByte,
-    Byte
+    Byte,
+    Char
 }
