@@ -96,7 +96,8 @@ export function fromSdkType(
     return {} as InputType;
 }
 
-// this function is only for the case when we get a type from a parameter, because in typespec, the parameters are
+// TODO -- this is workaround because TCGC ignore format, we need to remove this after a discussion on format.
+// this function is only for the case when we get a type from a parameter, because in typespec, the parameters share the same type as the properties
 export function fromSdkModelPropertyType(
     propertyType: SdkModelPropertyType,
     context: SdkContext,
@@ -385,7 +386,10 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
 function fromStringType(
     program: Program,
     stringType: SdkType,
-    raw?: Type // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
+    // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
+    // only when we get the type from a parameter, we need to pass the the parameter as raw here to get the format
+    // TODO -- we should remove this entirely later because TCGC ignores format in these cases, we add it now because we have old test projects, and we did not discuss the impact yet
+    raw?: Type
 ): InputPrimitiveType {
     function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
         if (!rawStringType) return InputPrimitiveTypeKind.String;
