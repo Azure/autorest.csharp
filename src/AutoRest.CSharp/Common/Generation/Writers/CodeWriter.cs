@@ -226,6 +226,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public CodeWriter WriteRawXmlDocumentation(FormattableString? content)
         {
+            // if xml docs is globally turned off by the configuration, write nothing
+            if (Configuration.DisableXmlDocs)
+                return this;
+
             if (content is null)
                 return this;
 
@@ -238,6 +242,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)
         {
+            // if xml docs is globally turned off by the configuration, write nothing
+            if (Configuration.DisableXmlDocs)
+                return this;
+
             const string xmlDoc = "/// ";
             const string xmlDocNewLine = "\n/// ";
 
@@ -324,6 +332,18 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return this;
+        }
+
+        public CodeWriter WriteXmlDocumentationInheritDoc(CSharpType? crefType = null)
+        {
+            // TODO Temporary -- maybe we should consolidate this into the CodeWriter.AppendXmlDocumentation method as well
+            // currently the CodeWriter.AppendXmlDocumentation will remove empty tags, and it does not support we just write a tag like <something />, therefore now we cannot use it here.
+            if (Configuration.DisableXmlDocs)
+                return this;
+
+            return crefType == null
+                        ? Line($"/// <inheritdoc />")
+                        : Line($"/// <inheritdoc cref=\"{crefType:C}\"/>");
         }
 
         protected string GetTemporaryVariable(string s)

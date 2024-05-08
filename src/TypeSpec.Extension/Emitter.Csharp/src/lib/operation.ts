@@ -38,6 +38,7 @@ import {
     InputListType,
     InputModelType,
     InputType,
+    isInputEnumType,
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
@@ -59,7 +60,6 @@ import { logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getFormattedType,
     getInputType
 } from "./model.js";
 import {
@@ -182,6 +182,14 @@ export function loadOperation(
                 throw "Media type of content type should be string.";
             }
             mediaTypes.push(...mediaTypeValues);
+        } else if (isInputEnumType(contentTypeParameter.Type)) {
+            const mediaTypeValues = contentTypeParameter.Type.AllowedValues.map(
+                (value) => value.Value
+            );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
+            }
+            mediaTypes.push(...mediaTypeValues);
         }
     }
     const requestMethod = parseHttpRequestMethod(verb);
@@ -251,17 +259,18 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, param),
+            param,
             models,
-            enums
+            enums,
+            operation.operation
         );
-        let defaultValue = undefined;
+        let defaultValue: InputConstant | undefined = undefined;
         const value = getDefaultValue(typespecType);
         if (value) {
             defaultValue = {
                 Type: inputType,
                 Value: value
-            } as InputConstant;
+            };
         }
         const requestLocation = requestLocationMap[location];
         const isApiVer: boolean = isApiVersion(sdkContext, parameter);
@@ -306,9 +315,10 @@ export function loadOperation(
     ): InputParameter {
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, body),
+            body,
             models,
-            enums
+            enums,
+            operation.operation
         );
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
@@ -347,9 +357,10 @@ export function loadOperation(
             const typespecType = getEffectiveSchemaType(context, body.type);
             const inputType: InputType = getInputType(
                 context,
-                getFormattedType(program, typespecType),
+                typespecType,
                 models,
-                enums
+                enums,
+                operation.operation
             );
             type = inputType;
         }
@@ -364,9 +375,10 @@ export function loadOperation(
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        getFormattedType(program, headers[key].type),
+                        headers[key].type,
                         models,
-                        enums
+                        enums,
+                        operation.operation
                     )
                 } as HttpResponseHeader);
             }
@@ -397,11 +409,13 @@ export function loadOperation(
             metadata.finalResult !== undefined &&
             metadata.finalResult !== "void"
         ) {
-            const formattedType = getFormattedType(
-                program,
-                metadata.finalEnvelopeResult as Model
+            bodyType = getInputType(
+                context,
+                metadata.finalEnvelopeResult as Model,
+                models,
+                enums,
+                op.operation
             );
-            bodyType = getInputType(context, formattedType, models, enums);
         }
 
         return {
