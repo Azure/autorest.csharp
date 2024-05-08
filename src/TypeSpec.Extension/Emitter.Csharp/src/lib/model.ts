@@ -34,7 +34,7 @@ import {
     fromSdkModelPropertyType,
     fromSdkModelType,
     fromSdkType
-} from "../type/converter.js";
+} from "./converter.js";
 import {
     InputEnumType,
     InputModelType,

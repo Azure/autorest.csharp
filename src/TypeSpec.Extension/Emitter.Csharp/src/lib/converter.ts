@@ -31,12 +31,12 @@ import {
     Type,
     getFormat
 } from "@typespec/compiler";
-import { logger } from "../lib/logger.js";
-import { getFullNamespaceString } from "../lib/utils.js";
-import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
-import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
-import { InputModelProperty } from "./inputModelProperty.js";
-import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
+import { logger } from "./logger.js";
+import { getFullNamespaceString } from "./utils.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -47,10 +47,10 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType
-} from "./inputType.js";
-import { InputTypeKind } from "./inputTypeKind.js";
-import { LiteralTypeContext } from "./literalTypeContext.js";
-import { Usage } from "./usage.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { Usage } from "../type/usage.js";
 
 export function fromSdkType(
     sdkType: SdkType,
@@ -213,7 +213,7 @@ export function fromSdkModelType(
                 ? true
                 : false;
         const modelProperty: InputModelProperty = {
-            Name: propertyType.nameInClient,
+            Name: propertyType.name,
             SerializedName: serializedName,
             Description:
                 propertyType.description ??
