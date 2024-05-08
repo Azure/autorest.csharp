@@ -88,7 +88,8 @@ op test(@body input: Pet): Pet;
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
-                    Description: "Discriminator"
+                    Description: "Discriminator",
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
@@ -206,7 +207,8 @@ op test(@body input: Pet): Pet;
                     },
                     IsRequired: true,
                     IsReadOnly: false,
-                    IsDiscriminator: true
+                    IsDiscriminator: true,
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
@@ -338,7 +340,8 @@ op test(@body input: Pet): Pet;
                     },
                     IsRequired: true,
                     IsReadOnly: false,
-                    IsDiscriminator: true
+                    IsDiscriminator: true,
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
