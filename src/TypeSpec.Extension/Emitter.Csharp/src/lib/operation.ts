@@ -39,6 +39,7 @@ import {
     InputModelType,
     InputType,
     isInputEnumType,
+    isInputListType,
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
@@ -127,7 +128,7 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = bodyParameter.Type as InputModelType;
+                var bodyModelType = bodyParameter.Type;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
@@ -218,7 +219,7 @@ export function loadOperation(
                 paging = {
                     NextLinkName: nextLinkProperty?.name,
                     ItemName: itemsProperty?.name
-                } as OperationPaging;
+                };
             }
         }
     }
@@ -248,7 +249,7 @@ export function loadOperation(
         Paging: paging,
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
-    } as InputOperation;
+    };
 
     function loadOperationParameter(
         context: SdkContext<NetEmitterOptions>,
@@ -285,6 +286,7 @@ export function loadOperation(
                     ? InputOperationParameterKind.Constant
                     : InputOperationParameterKind.Client
                 : InputOperationParameterKind.Method;
+        const explode = isInputListType(inputType) && format === "multi";
         return {
             Name: getTypeName(sdkContext, param),
             NameInRequest: name,
@@ -298,15 +300,12 @@ export function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode:
-                (inputType as InputListType).ElementType && format === "multi"
-                    ? true
-                    : false,
+            Explode: explode,
             Kind: kind,
             ArraySerializationDelimiter: format
                 ? collectionFormatToDelimMap[format]
                 : undefined
-        } as InputParameter;
+        };
     }
 
     function loadBodyParameter(
@@ -337,7 +336,7 @@ export function loadOperation(
             SkipUrlEncoding: false,
             Explode: false,
             Kind: kind
-        } as InputParameter;
+        };
     }
 
     function loadOperationResponse(
@@ -380,7 +379,7 @@ export function loadOperation(
                         enums,
                         operation.operation
                     )
-                } as HttpResponseHeader);
+                });
             }
         }
 
@@ -391,7 +390,7 @@ export function loadOperation(
             Headers: responseHeaders,
             IsErrorResponse: isErrorModel(program, response.type),
             ContentTypes: body?.contentTypes
-        } as OperationResponse;
+        };
     }
 
     function loadLongRunningOperation(
@@ -425,10 +424,12 @@ export function loadOperation(
                 // for now, let assume we don't allow return type
                 StatusCodes: op.verb === "delete" ? [204] : [200],
                 BodyType: bodyType,
-                BodyMediaType: BodyMediaType.Json
-            } as OperationResponse,
+                BodyMediaType: BodyMediaType.Json,
+                Headers: [],
+                IsErrorResponse: false
+            },
             ResultPath: metadata.finalResultPath
-        } as OperationLongRunning;
+        };
     }
 }
 

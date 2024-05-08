@@ -2,10 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { ServiceAuthentication } from "@typespec/http";
-import { InputApiKeyAuth } from "../type/inputApiKeyAuth.js";
 import { InputAuth } from "../type/inputAuth.js";
-import { InputOAuth2Auth } from "../type/inputOAuth2Auth.js";
-import { Logger } from "winston";
 import { logger } from "./logger.js";
 
 export function processServiceAuthentication(
@@ -18,7 +15,7 @@ export function processServiceAuthentication(
         for (const scheme of option.schemes) {
             switch (scheme.type) {
                 case "apiKey":
-                    auth.ApiKey = { Name: scheme.name } as InputApiKeyAuth;
+                    auth.ApiKey = { Name: scheme.name };
                     break;
                 case "oauth2":
                     for (const flow of scheme.flows) {
@@ -40,12 +37,12 @@ export function processServiceAuthentication(
                         auth.ApiKey = {
                             Name: "Authorization",
                             Prefix: "Bearer"
-                        } as InputApiKeyAuth;
+                        };
                     } else {
                         auth.ApiKey = {
                             Name: "Authorization",
                             Prefix: schemeOrApiKeyPrefix
-                        } as InputApiKeyAuth;
+                        };
                     }
                     break;
                 default:
@@ -57,7 +54,7 @@ export function processServiceAuthentication(
     if (scopes) {
         auth.OAuth2 = {
             Scopes: Array.from(scopes.values())
-        } as InputOAuth2Auth;
+        };
     }
 
     return auth;

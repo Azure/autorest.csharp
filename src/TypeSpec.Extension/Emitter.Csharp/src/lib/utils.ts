@@ -81,11 +81,11 @@ export function createContentTypeOrAcceptParameter(
 ): InputParameter {
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
-    const inputType: InputType = {
+    const inputType: InputPrimitiveType = {
         Kind: InputTypeKind.Primitive,
         Name: InputPrimitiveTypeKind.String,
         IsNullable: false
-    } as InputPrimitiveType;
+    };
     return {
         Name: name,
         NameInRequest: nameInRequest,
@@ -101,10 +101,10 @@ export function createContentTypeOrAcceptParameter(
         Kind: InputOperationParameterKind.Constant,
         DefaultValue:
             mediaTypes.length === 1
-                ? ({
+                ? {
                       Type: inputType,
                       Value: mediaTypes[0]
-                  } as InputConstant)
+                  }
                 : undefined
-    } as InputParameter;
+    };
 }

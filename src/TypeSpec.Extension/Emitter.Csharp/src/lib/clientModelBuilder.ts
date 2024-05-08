@@ -40,7 +40,8 @@ import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType
+    InputPrimitiveType,
+    isInputModelType
 } from "../type/inputType.js";
 import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
@@ -101,7 +102,7 @@ export function createModelForService(
                       Kind: InputTypeKind.Primitive,
                       Name: InputPrimitiveTypeKind.String,
                       IsNullable: false
-                  } as InputPrimitiveType,
+                  },
                   Value: defaultApiVersion
               }
             : undefined;
@@ -169,12 +170,8 @@ export function createModelForService(
             const bodyParameter = op.Parameters.find(
                 (value) => value.Location === RequestLocation.Body
             );
-            if (
-                bodyParameter &&
-                bodyParameter.Type &&
-                (bodyParameter.Type as InputModelType)
-            ) {
-                const inputModelType = bodyParameter.Type as InputModelType;
+            if (bodyParameter && isInputModelType(bodyParameter?.Type)) {
+                const inputModelType = bodyParameter.Type;
                 op.RequestMediaTypes?.forEach((item) => {
                     if (
                         item === "multipart/form-data" &&
@@ -211,7 +208,7 @@ export function createModelForService(
         }
     }
 
-    const clientModel = {
+    return {
         Name: namespace,
         Description: description,
         ApiVersions: Array.from(apiVersions.values()),
@@ -219,18 +216,14 @@ export function createModelForService(
         Models: Array.from(modelMap.values()),
         Clients: clients,
         Auth: auth
-    } as CodeModel;
-    return clientModel;
+    };
 
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
         client: SdkClient | SdkOperationGroup,
         clients: InputClient[]
     ) {
-        const dpgOperationGroups = listOperationGroups(
-            sdkContext,
-            client as SdkClient
-        );
+        const dpgOperationGroups = listOperationGroups(sdkContext, client);
         for (const dpgGroup of dpgOperationGroups) {
             var subClient = emitClient(dpgGroup, client);
             clients.push(subClient);
@@ -276,14 +269,14 @@ export function createModelForService(
             clientDesc = getDoc(program, container) ?? "";
         }
 
-        const inputClient = {
+        const inputClient: InputClient = {
             Name: getClientName(client),
             Description: clientDesc,
             Operations: [],
             Protocol: {},
             Creatable: client.kind === ClientKind.SdkClient,
             Parent: parent === undefined ? undefined : getClientName(parent)
-        } as InputClient;
+        };
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(
                 getHttpOperation(program, op)

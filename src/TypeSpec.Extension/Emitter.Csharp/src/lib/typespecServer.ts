@@ -58,18 +58,18 @@ export function resolveServers(
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
             const inputType: InputType = isEndpoint
-                ? ({
+                ? {
                       Kind: InputTypeKind.Primitive,
                       Name: InputPrimitiveTypeKind.Uri,
                       IsNullable: false
-                  } as InputPrimitiveType)
+                  }
                 : getInputType(context, prop, models, enums);
 
             if (value) {
                 defaultValue = {
                     Type: inputType,
                     Value: value
-                } as InputConstant;
+                };
             }
             const variable: InputParameter = {
                 Name: name,
@@ -102,7 +102,7 @@ export function resolveServers(
                     Kind: InputTypeKind.Primitive,
                     Name: InputPrimitiveTypeKind.String,
                     IsNullable: false
-                } as InputPrimitiveType,
+                },
                 Location: RequestLocation.Uri,
                 IsApiVersion: false,
                 IsResourceParameter: false,
@@ -117,9 +117,9 @@ export function resolveServers(
                         Kind: InputTypeKind.Primitive,
                         Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
-                    } as InputPrimitiveType,
+                    },
                     Value: server.url
-                } as InputConstant
+                }
             };
             url = `{host}`;
             parameters.push(variable);

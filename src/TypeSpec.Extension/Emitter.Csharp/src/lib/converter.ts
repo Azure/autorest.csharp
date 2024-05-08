@@ -79,10 +79,8 @@ export function fromSdkType(
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
     if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
-    if (sdkType.kind === "duration")
-        return fromSdkDurationType(sdkType as SdkDurationType);
-    if (sdkType.kind === "bytes")
-        return fromBytesType(sdkType as SdkBuiltInType);
+    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType);
+    if (sdkType.kind === "bytes") return fromBytesType(sdkType);
     if (sdkType.kind === "string")
         return fromStringType(context.program, sdkType);
     // TODO: offsetDateTime
@@ -92,7 +90,7 @@ export function fromSdkType(
     // TODO: can we improve the type in TCGC around discriminator
     if (sdkType.__raw?.kind === "Intrinsic") return fromIntrinsicType(sdkType);
     if (isSdkBuiltInKind(sdkType.kind))
-        return fromSdkBuiltInType(sdkType as SdkBuiltInType);
+        return fromSdkBuiltInType(sdkType as SdkBuiltInType); // TODO -- should remove this as when we exhaust all possible other types (for example offsetDateTime)
     return {} as InputType;
 }
 
@@ -155,14 +153,14 @@ export function fromSdkModelType(
             : undefined;
 
         inputModelType.InheritedDictionaryType = modelType.additionalProperties
-            ? ({
+            ? {
                   Kind: InputTypeKind.Dictionary,
                   Name: InputTypeKind.Dictionary,
                   KeyType: {
                       Kind: InputTypeKind.Primitive,
                       Name: InputPrimitiveTypeKind.String,
                       IsNullable: false
-                  } as InputPrimitiveType,
+                  },
                   ValueType: fromSdkType(
                       modelType.additionalProperties,
                       context,
@@ -170,7 +168,7 @@ export function fromSdkModelType(
                       enums
                   ),
                   IsNullable: false
-              } as InputDictionaryType)
+              }
             : undefined;
         inputModelType.Properties = modelType.properties
             .filter(
@@ -186,9 +184,10 @@ export function fromSdkModelType(
             )
             .map((p) =>
                 fromSdkModelProperty(p, {
-                    ModelName: inputModelType?.Name,
-                    Namespace: inputModelType?.Namespace
-                } as LiteralTypeContext)
+                    ModelName: inputModelType!.Name, // it catches the inputModelType defines outside the if in this closure therefore it is still possible to be undefined, but actually it is not
+                    Namespace: inputModelType!.Namespace,
+                    PropertyName: p.name
+                })
             );
     }
 
@@ -313,7 +312,7 @@ function fromSdkDatetimeType(
         Kind: InputTypeKind.Primitive,
         Name: fromDateTimeKnownEncoding(dateTimeType.encode),
         IsNullable: dateTimeType.nullable
-    } as InputPrimitiveType;
+    };
 }
 
 function fromSdkDurationType(
@@ -349,7 +348,7 @@ function fromSdkDurationType(
             durationType.wireType
         ),
         IsNullable: durationType.nullable
-    } as InputPrimitiveType;
+    };
 }
 
 // TODO: tuple is not officially supported
@@ -357,8 +356,8 @@ function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
     return {
         Kind: InputTypeKind.Intrinsic,
         Name: InputIntrinsicTypeKind.Unknown,
-        IsNullable: tupleType.nullable
-    } as InputIntrinsicType;
+        IsNullable: false
+    };
 }
 
 function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
@@ -423,7 +422,7 @@ function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
         Kind: InputTypeKind.Primitive,
         Name: builtInKind,
         IsNullable: builtInType.nullable
-    } as InputPrimitiveType;
+    };
 }
 
 function mapTcgcTypeToCSharpInputTypeKind(
@@ -629,7 +628,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
 }
 
 function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
-    const name = (scalarType.__raw! as IntrinsicType).name;
     return {
         Kind: InputTypeKind.Intrinsic,
         Name: getCSharpInputTypeKindByIntrinsic(
@@ -645,7 +643,7 @@ function fromUnionType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputUnionType | InputType {
-    let itemTypes: InputType[] = [];
+    const itemTypes: InputType[] = [];
     for (const value of union.values) {
         const inputType = fromSdkType(value, context, models, enums);
         itemTypes.push(inputType);

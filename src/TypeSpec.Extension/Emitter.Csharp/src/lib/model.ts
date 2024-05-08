@@ -156,7 +156,7 @@ export function getUsages(
             typeName = getTypeName(context, type);
         }
         if (type.kind === "Model") {
-            typeName = getTypeName(context, effectiveType as Model);
+            typeName = getTypeName(context, type);
         }
         if (type.kind === "Union") {
             let clientType = getClientType(context, type); // TODO -- we should also pass in an operation as well
