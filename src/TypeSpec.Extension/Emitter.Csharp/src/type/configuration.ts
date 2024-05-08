@@ -24,4 +24,5 @@ export interface Configuration {
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
+    "disable-xml-docs"?: boolean;
 }
