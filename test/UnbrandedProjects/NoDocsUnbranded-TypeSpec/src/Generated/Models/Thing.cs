@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NoDocsTypeSpec.Models
+namespace NoDocsUnbrandedTypeSpec.Models
 {
     public partial class Thing
     {

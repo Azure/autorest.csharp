@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NoDocsTypeSpec
+namespace NoDocsUnbrandedTypeSpec
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

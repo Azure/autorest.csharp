@@ -18,7 +18,7 @@ import "@azure-tools/typespec-azure-core";
 @useAuth(
     ApiKeyAuth<ApiKeyLocation.header, "my-api-key">
 )
-namespace NoDocsTypeSpec;
+namespace NoDocsUnbrandedTypeSpec;
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;

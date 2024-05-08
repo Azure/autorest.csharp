@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 flavor: "azure",
+                disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
                 helperNamespace: "");

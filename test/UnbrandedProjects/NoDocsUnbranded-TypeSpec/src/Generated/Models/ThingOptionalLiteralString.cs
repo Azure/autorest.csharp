@@ -5,7 +5,7 @@
 using System;
 using System.ComponentModel;
 
-namespace NoDocsTypeSpec.Models
+namespace NoDocsUnbrandedTypeSpec.Models
 {
     public readonly partial struct ThingOptionalLiteralString : IEquatable<ThingOptionalLiteralString>
     {

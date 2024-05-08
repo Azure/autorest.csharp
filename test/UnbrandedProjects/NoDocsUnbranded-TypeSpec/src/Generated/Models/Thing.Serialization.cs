@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace NoDocsTypeSpec.Models
+namespace NoDocsUnbrandedTypeSpec.Models
 {
     public partial class Thing : IJsonModel<Thing>
     {

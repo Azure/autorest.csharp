@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the NoDocsTypeSpec client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>SDK Code Generation NoDocsTypeSpec</AssemblyTitle>
+    <Description>This is the NoDocsUnbrandedTypeSpec client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation NoDocsUnbrandedTypeSpec</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>NoDocsTypeSpec</PackageTags>
+    <PackageTags>NoDocsUnbrandedTypeSpec</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

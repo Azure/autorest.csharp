@@ -6,7 +6,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 
-namespace NoDocsTypeSpec
+namespace NoDocsUnbrandedTypeSpec
 {
     internal static class ClientPipelineExtensions
     {

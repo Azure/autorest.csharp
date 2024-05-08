@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("NoDocsTypeSpec.Tests")]
+[assembly: InternalsVisibleTo("NoDocsUnbrandedTypeSpec.Tests")]

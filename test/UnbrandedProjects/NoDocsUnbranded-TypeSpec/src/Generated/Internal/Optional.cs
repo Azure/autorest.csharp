@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace NoDocsTypeSpec
+namespace NoDocsUnbrandedTypeSpec
 {
     internal static class Optional
     {

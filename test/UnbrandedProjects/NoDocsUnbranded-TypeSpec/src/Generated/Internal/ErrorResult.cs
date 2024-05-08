@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace NoDocsTypeSpec
+namespace NoDocsUnbrandedTypeSpec
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

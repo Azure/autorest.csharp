@@ -6,12 +6,12 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading.Tasks;
-using NoDocsTypeSpec.Models;
+using NoDocsUnbrandedTypeSpec.Models;
 
-namespace NoDocsTypeSpec
+namespace NoDocsUnbrandedTypeSpec
 {
     // Data plane generated client.
-    public partial class NoDocsTypeSpecClient
+    public partial class NoDocsUnbrandedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
         private readonly ApiKeyCredential _keyCredential;
@@ -20,19 +20,19 @@ namespace NoDocsTypeSpec
 
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        protected NoDocsTypeSpecClient()
+        protected NoDocsUnbrandedTypeSpecClient()
         {
         }
 
-        public NoDocsTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new NoDocsTypeSpecClientOptions())
+        public NoDocsUnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new NoDocsUnbrandedTypeSpecClientOptions())
         {
         }
 
-        public NoDocsTypeSpecClient(Uri endpoint, ApiKeyCredential credential, NoDocsTypeSpecClientOptions options)
+        public NoDocsUnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, NoDocsUnbrandedTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new NoDocsTypeSpecClientOptions();
+            options ??= new NoDocsUnbrandedTypeSpecClientOptions();
 
             _keyCredential = credential;
             _pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
