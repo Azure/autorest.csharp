@@ -708,7 +708,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return MgmtReferenceType.IsReferenceType(InputModel) ? null : _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
+            return MgmtReferenceType.IsReferenceType(InputModel) || !InputModel.Serialization.Json ? null : _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
