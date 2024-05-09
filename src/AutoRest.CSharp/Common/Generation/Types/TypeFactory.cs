@@ -88,6 +88,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
                 InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
+                InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
