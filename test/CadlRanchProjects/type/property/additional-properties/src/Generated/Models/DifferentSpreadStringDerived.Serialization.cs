@@ -29,6 +29,8 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteStringValue(DerivedProp);
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -58,6 +60,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             string derivedProp = default;
+            float id = default;
             IDictionary<string, string> additionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
@@ -67,10 +70,15 @@ namespace _Type.Property.AdditionalProperties.Models
                     derivedProp = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetSingle();
+                    continue;
+                }
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadStringDerived(derivedProp, additionalProperties);
+            return new DifferentSpreadStringDerived(id, additionalProperties, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadStringDerived>.Write(ModelReaderWriterOptions options)
@@ -106,14 +114,14 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DifferentSpreadStringDerived FromResponse(Response response)
+        internal static new DifferentSpreadStringDerived FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadStringDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);

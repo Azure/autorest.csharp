@@ -14,10 +14,11 @@ import {
 } from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
-import { getFormattedType, getInputType } from "../../../src/lib/model.js";
+import { getInputType } from "../../../src/lib/model.js";
 import {
     SdkContext,
-    createSdkContext
+    createSdkContext,
+    getAllModels
 } from "@azure-tools/typespec-client-generator-core";
 import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
 
@@ -113,12 +114,7 @@ export function navigateModels(
     enums: Map<string, InputEnumType>
 ) {
     const computeModel = (x: Type) =>
-        getInputType(
-            context,
-            getFormattedType(context.program, x),
-            models,
-            enums
-        ) as any;
+        getInputType(context, x, models, enums) as any;
     const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
     navigateTypesInNamespace(
         namespace,
@@ -137,5 +133,8 @@ export function navigateModels(
 export function createNetSdkContext(
     program: EmitContext<NetEmitterOptions>
 ): SdkContext<NetEmitterOptions> {
-    return createSdkContext(program, "@azure-tools/typespec-azure");
+    const sdkContext = createSdkContext(program, "@azure-tools/typespec-azure");
+    // initialize TCGC
+    getAllModels(sdkContext);
+    return sdkContext;
 }

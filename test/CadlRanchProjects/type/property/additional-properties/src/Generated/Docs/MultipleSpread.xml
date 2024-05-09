@@ -7,13 +7,13 @@ This sample shows how to call GetMultipleSpreadAsync.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetMultipleSpreadAsync();
+Response<MultipleSpreadRecord> response = await client.GetMultipleSpreadAsync();
 ]]></code>
 This sample shows how to call GetMultipleSpreadAsync with all parameters.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetMultipleSpreadAsync();
+Response<MultipleSpreadRecord> response = await client.GetMultipleSpreadAsync();
 ]]></code></example>
     </member>
     <member name="GetMultipleSpread(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetMultipleSpread.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetMultipleSpread();
+Response<MultipleSpreadRecord> response = client.GetMultipleSpread();
 ]]></code>
 This sample shows how to call GetMultipleSpread with all parameters.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetMultipleSpread();
+Response<MultipleSpreadRecord> response = client.GetMultipleSpread();
 ]]></code></example>
     </member>
     <member name="GetMultipleSpreadAsync(RequestContext)">
@@ -40,7 +40,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 Response response = await client.GetMultipleSpreadAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetMultipleSpreadAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 Response response = await client.GetMultipleSpreadAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>
     <member name="GetMultipleSpread(RequestContext)">
@@ -61,7 +61,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 Response response = client.GetMultipleSpread(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetMultipleSpread with all parameters and parse the result.
 <code><![CDATA[
@@ -70,49 +70,41 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 Response response = client.GetMultipleSpread(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="PutAsync(MultipleSpreadRecord,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+MultipleSpreadRecord body = new MultipleSpreadRecord(true);
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+MultipleSpreadRecord body = new MultipleSpreadRecord(true);
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="Put(MultipleSpreadRecord,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+MultipleSpreadRecord body = new MultipleSpreadRecord(true);
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+MultipleSpreadRecord body = new MultipleSpreadRecord(true);
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -123,7 +115,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +127,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +142,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = client.Put(content);
 
@@ -162,7 +154,7 @@ MultipleSpread client = new AdditionalPropertiesClient().GetMultipleSpreadClient
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = client.Put(content);
 

@@ -5,8 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Scm._Type.Property.AdditionalProperties.Models;
 
@@ -37,57 +35,17 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        public virtual async Task<ClientResult<IReadOnlyDictionary<string, IList<ModelForRecord>>>> GetSpreadModelArrayAsync()
+        public virtual async Task<ClientResult<SpreadModelArrayRecord>> GetSpreadModelArrayAsync()
         {
             ClientResult result = await GetSpreadModelArrayAsync(null).ConfigureAwait(false);
-            IReadOnlyDictionary<string, IList<ModelForRecord>> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
-            Dictionary<string, IList<ModelForRecord>> dictionary = new Dictionary<string, IList<ModelForRecord>>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    List<ModelForRecord> array = new List<ModelForRecord>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(ModelForRecord.DeserializeModelForRecord(item));
-                    }
-                    dictionary.Add(property.Name, array);
-                }
-            }
-            value = dictionary;
-            return ClientResult.FromValue(value, result.GetRawResponse());
+            return ClientResult.FromValue(SpreadModelArrayRecord.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get call. </summary>
-        public virtual ClientResult<IReadOnlyDictionary<string, IList<ModelForRecord>>> GetSpreadModelArray()
+        public virtual ClientResult<SpreadModelArrayRecord> GetSpreadModelArray()
         {
             ClientResult result = GetSpreadModelArray(null);
-            IReadOnlyDictionary<string, IList<ModelForRecord>> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
-            Dictionary<string, IList<ModelForRecord>> dictionary = new Dictionary<string, IList<ModelForRecord>>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    List<ModelForRecord> array = new List<ModelForRecord>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(ModelForRecord.DeserializeModelForRecord(item));
-                    }
-                    dictionary.Add(property.Name, array);
-                }
-            }
-            value = dictionary;
-            return ClientResult.FromValue(value, result.GetRawResponse());
+            return ClientResult.FromValue(SpreadModelArrayRecord.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -141,11 +99,11 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> PutAsync(IDictionary<string, IList<ModelForRecord>> body)
+        public virtual async Task<ClientResult> PutAsync(SpreadModelArrayRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = BinaryContentHelper.FromDictionary(body);
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await PutAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -153,11 +111,11 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult Put(IDictionary<string, IList<ModelForRecord>> body)
+        public virtual ClientResult Put(SpreadModelArrayRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = BinaryContentHelper.FromDictionary(body);
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Put(content, null);
             return result;
         }
@@ -172,7 +130,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string,IList{ModelForRecord}})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(SpreadModelArrayRecord)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -200,7 +158,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string,IList{ModelForRecord}})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(SpreadModelArrayRecord)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

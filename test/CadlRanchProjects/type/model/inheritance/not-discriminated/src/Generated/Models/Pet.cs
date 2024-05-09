@@ -48,7 +48,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Pet(string name)
+        public Pet(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -69,7 +69,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
-        public string Name { get; }
+        /// <summary> Gets or sets the name. </summary>
+        public string Name { get; set; }
     }
 }

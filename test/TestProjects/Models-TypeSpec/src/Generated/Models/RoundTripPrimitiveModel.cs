@@ -26,7 +26,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
-        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
+        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
+        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IReadOnlyList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -75,24 +75,24 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
-        public string RequiredString { get; set; }
+        public string RequiredString { get; }
         /// <summary> Required int, illustrating a value type property. </summary>
-        public int RequiredInt { get; set; }
+        public int RequiredInt { get; }
         /// <summary> Required int64, illustrating a value type property. </summary>
-        public long RequiredInt64 { get; set; }
+        public long RequiredInt64 { get; }
         /// <summary> Required safeint, illustrating a value type property. </summary>
-        public long RequiredSafeInt { get; set; }
+        public long RequiredSafeInt { get; }
         /// <summary> Required float, illustrating a value type property. </summary>
-        public float RequiredFloat { get; set; }
+        public float RequiredFloat { get; }
         /// <summary> Required double, illustrating a value type property. </summary>
-        public double RequiredDouble { get; set; }
+        public double RequiredDouble { get; }
         /// <summary> Required bolean, illustrating a value type property. </summary>
-        public bool RequiredBoolean { get; set; }
+        public bool RequiredBoolean { get; }
         /// <summary> Required date time offset, illustrating a reference type property. </summary>
-        public DateTimeOffset RequiredDateTimeOffset { get; set; }
+        public DateTimeOffset RequiredDateTimeOffset { get; }
         /// <summary> Required time span, illustrating a value type property. </summary>
-        public TimeSpan RequiredTimeSpan { get; set; }
+        public TimeSpan RequiredTimeSpan { get; }
         /// <summary> Required collection of which the element is a nullable float. </summary>
-        public IList<float?> RequiredCollectionWithNullableFloatElement { get; }
+        public IReadOnlyList<float?> RequiredCollectionWithNullableFloatElement { get; }
     }
 }

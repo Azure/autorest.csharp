@@ -14,7 +14,7 @@ import {
 } from "../type/inputType.js";
 import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
-import { getInputType, getFormattedType } from "./model.js";
+import { getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { NetEmitterOptions } from "../options.js";
@@ -63,12 +63,7 @@ export function resolveServers(
                       Name: InputPrimitiveTypeKind.Uri,
                       IsNullable: false
                   } as InputPrimitiveType)
-                : getInputType(
-                      context,
-                      getFormattedType(context.program, prop),
-                      models,
-                      enums
-                  );
+                : getInputType(context, prop, models, enums);
 
             if (value) {
                 defaultValue = {

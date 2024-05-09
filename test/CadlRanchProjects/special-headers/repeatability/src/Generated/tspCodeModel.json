@@ -3,37 +3,50 @@
  "Name": "SpecialHeaders.Repeatability",
  "Description": "Illustrates OASIS repeatability headers",
  "ApiVersions": [],
- "Enums": [],
- "Models": [
+ "Enums": [
   {
    "$id": "2",
-   "Kind": "Model",
-   "Name": "RepeatableResponse",
-   "Namespace": "SpecialHeaders.Repeatability",
+   "Kind": "Enum",
+   "Name": "ImmediateSuccessResponse",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "accepted",
+     "Value": "accepted"
+    },
+    {
+     "$id": "4",
+     "Name": "rejected",
+     "Value": "rejected"
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output",
-   "Properties": []
+   "Usage": "None"
   }
  ],
+ "Models": [],
  "Clients": [
   {
-   "$id": "3",
+   "$id": "5",
    "Name": "RepeatabilityClient",
    "Description": "Illustrates OASIS repeatability headers",
    "Operations": [
     {
-     "$id": "4",
+     "$id": "6",
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
      "Parameters": [
       {
-       "$id": "5",
+       "$id": "7",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "6",
+        "$id": "8",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -48,9 +61,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "7",
+        "$id": "9",
         "Type": {
-         "$id": "8",
+         "$id": "10",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -59,33 +72,13 @@
        }
       },
       {
-       "$id": "9",
+       "$id": "11",
        "Name": "repeatabilityRequestID",
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
-        "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "11",
-       "Name": "repeatabilityFirstSent",
-       "NameInRequest": "Repeatability-First-Sent",
-       "Type": {
         "$id": "12",
         "Kind": "Primitive",
-        "Name": "DateTime",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -100,10 +93,30 @@
       },
       {
        "$id": "13",
+       "Name": "repeatabilityFirstSent",
+       "NameInRequest": "Repeatability-First-Sent",
+       "Type": {
+        "$id": "14",
+        "Kind": "Primitive",
+        "Name": "DateTimeRFC7231",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "14",
+        "$id": "16",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -118,9 +131,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "17",
         "Type": {
-         "$ref": "14"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -128,50 +141,19 @@
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "17",
+         "$id": "19",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$id": "18",
-          "Kind": "Union",
-          "Name": "Union",
-          "UnionItemTypes": [
-           {
-            "$id": "19",
-            "Kind": "Literal",
-            "Name": "Literal",
-            "LiteralValueType": {
-             "$id": "20",
-             "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
-            },
-            "Value": "accepted",
-            "IsNullable": false
-           },
-           {
-            "$id": "21",
-            "Kind": "Literal",
-            "Name": "Literal",
-            "LiteralValueType": {
-             "$id": "22",
-             "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
-            },
-            "Value": "rejected",
-            "IsNullable": false
-           }
-          ],
-          "IsNullable": false
+          "$ref": "2"
          }
         }
        ],
@@ -188,7 +170,7 @@
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "20"
    },
    "Creatable": true
   }

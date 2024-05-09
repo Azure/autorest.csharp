@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ExtensibleEnumWithOperator",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -89,7 +89,7 @@
    "$id": "13",
    "Kind": "Enum",
    "Name": "EnumToBeMadeExtensible",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "14",
@@ -117,7 +117,7 @@
    "$id": "17",
    "Kind": "Enum",
    "Name": "NormalEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "18",

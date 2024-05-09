@@ -28,7 +28,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("created_at"u8);
             writer.WriteNumberValue(CreatedAt, "U");
             writer.WritePropertyName("level"u8);
-            writer.WriteStringValue(Level.ToString());
+            writer.WriteStringValue(Level.ToSerialString());
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -95,7 +95,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("level"u8))
                 {
-                    level = new FineTuningJobEventLevel(property.Value.GetString());
+                    level = property.Value.GetString().ToFineTuningJobEventLevel();
                     continue;
                 }
                 if (property.NameEquals("message"u8))

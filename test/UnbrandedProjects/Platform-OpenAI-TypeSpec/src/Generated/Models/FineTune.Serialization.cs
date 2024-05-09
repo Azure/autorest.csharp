@@ -43,7 +43,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("organization_id"u8);
             writer.WriteStringValue(OrganizationId);
             writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
+            writer.WriteStringValue(Status.ToSerialString());
             writer.WritePropertyName("hyperparams"u8);
             writer.WriteObjectValue(Hyperparams, options);
             writer.WritePropertyName("training_files"u8);
@@ -174,7 +174,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new FineTuneStatus(property.Value.GetString());
+                    status = property.Value.GetString().ToFineTuneStatus();
                     continue;
                 }
                 if (property.NameEquals("hyperparams"u8))

@@ -34,6 +34,8 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -68,6 +70,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             IList<ModelForRecord> derivedProp = default;
+            string knownProp = default;
             IDictionary<string, IList<ModelForRecord>> additionalProperties = default;
             Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
             foreach (var property in element.EnumerateObject())
@@ -82,6 +85,11 @@ namespace _Type.Property.AdditionalProperties.Models
                     derivedProp = array;
                     continue;
                 }
+                if (property.NameEquals("knownProp"u8))
+                {
+                    knownProp = property.Value.GetString();
+                    continue;
+                }
                 List<ModelForRecord> array0 = new List<ModelForRecord>();
                 foreach (var item in property.Value.EnumerateArray())
                 {
@@ -90,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, array0);
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadModelArrayDerived(derivedProp, additionalProperties);
+            return new DifferentSpreadModelArrayDerived(knownProp, additionalProperties, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadModelArrayDerived>.Write(ModelReaderWriterOptions options)
@@ -126,14 +134,14 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DifferentSpreadModelArrayDerived FromResponse(Response response)
+        internal static new DifferentSpreadModelArrayDerived FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadModelArrayDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
