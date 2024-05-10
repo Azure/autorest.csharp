@@ -35,7 +35,7 @@ internal static class SchemaExtensions
     private static bool IsTagsProperty(InputModelProperty property)
         => property.CSharpName().Equals("Tags")
             && property.Type is InputDictionaryType dictType
-            && dictType.KeyType is InputPrimitiveType inputPrimitive
+            && dictType.ValueType is InputPrimitiveType inputPrimitive
             && inputPrimitive.Kind == InputTypeKind.String;
 
     public static bool HasTags(this InputType schema)
