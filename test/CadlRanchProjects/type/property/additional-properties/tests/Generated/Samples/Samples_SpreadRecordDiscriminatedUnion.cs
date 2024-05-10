@@ -6,13 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadRecordDiscriminatedUnion(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadRecordDiscriminatedUnionAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordDiscriminatedUnion();
+            Response<SpreadRecordForDiscriminatedUnion> response = client.GetSpreadRecordDiscriminatedUnion();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
+            Response<SpreadRecordForDiscriminatedUnion> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadRecordDiscriminatedUnion(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadRecordDiscriminatedUnionAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordDiscriminatedUnion();
+            Response<SpreadRecordForDiscriminatedUnion> response = client.GetSpreadRecordDiscriminatedUnion();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
+            Response<SpreadRecordForDiscriminatedUnion> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
         }
 
         [Test]
@@ -110,11 +110,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                },
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -129,11 +125,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                },
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -146,14 +138,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response response = client.Put(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                })
-            });
+            SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -162,14 +148,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                })
-            });
+            SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -180,11 +160,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                },
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -199,11 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                },
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -216,14 +188,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response response = client.Put(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                })
-            });
+            SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -232,14 +198,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new
-                {
-                    kind = "kind0",
-                    fooProp = "<fooProp>",
-                })
-            });
+            SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+            Response response = await client.PutAsync(body);
         }
     }
 }

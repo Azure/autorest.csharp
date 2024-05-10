@@ -5,9 +5,8 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Scm._Type.Property.AdditionalProperties.Models;
 
 namespace Scm._Type.Property.AdditionalProperties
 {
@@ -36,47 +35,17 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        public virtual async Task<ClientResult<IReadOnlyDictionary<string, BinaryData>>> GetMultipleSpreadAsync()
+        public virtual async Task<ClientResult<MultipleSpreadRecord>> GetMultipleSpreadAsync()
         {
             ClientResult result = await GetMultipleSpreadAsync(null).ConfigureAwait(false);
-            IReadOnlyDictionary<string, BinaryData> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
-            Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    dictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            value = dictionary;
-            return ClientResult.FromValue(value, result.GetRawResponse());
+            return ClientResult.FromValue(MultipleSpreadRecord.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get call. </summary>
-        public virtual ClientResult<IReadOnlyDictionary<string, BinaryData>> GetMultipleSpread()
+        public virtual ClientResult<MultipleSpreadRecord> GetMultipleSpread()
         {
             ClientResult result = GetMultipleSpread(null);
-            IReadOnlyDictionary<string, BinaryData> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
-            Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    dictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    dictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            value = dictionary;
-            return ClientResult.FromValue(value, result.GetRawResponse());
+            return ClientResult.FromValue(MultipleSpreadRecord.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -130,11 +99,11 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> PutAsync(IDictionary<string, BinaryData> body)
+        public virtual async Task<ClientResult> PutAsync(MultipleSpreadRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = BinaryContentHelper.FromDictionary(body);
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await PutAsync(content, null).ConfigureAwait(false);
             return result;
         }
@@ -142,11 +111,11 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult Put(IDictionary<string, BinaryData> body)
+        public virtual ClientResult Put(MultipleSpreadRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = BinaryContentHelper.FromDictionary(body);
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Put(content, null);
             return result;
         }
@@ -161,7 +130,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string,BinaryData})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(MultipleSpreadRecord)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -189,7 +158,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string,BinaryData})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(MultipleSpreadRecord)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -432,10 +432,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPropertyChooser\\src\\Generated -n"
     },
-    "MgmtReferenceTypes": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtReferenceTypes\\src\\Generated -n"
-    },
     "MgmtResourceName": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtResourceName\\src\\Generated -n"
@@ -507,6 +503,14 @@
     "NameConflicts": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts\\Generated"
+    },
+    "NoDocs-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoDocs-TypeSpec\\src\\Generated -n"
+    },
+    "NoDocsUnbranded-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoDocsUnbranded-TypeSpec\\src\\Generated -n"
     },
     "non-string-enum": {
       "commandName": "Project",
@@ -859,6 +863,10 @@
     "typespec-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\empty\\src\\Generated -n"
+    },
+    "typespec-type/model/flatten": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\flatten\\src\\Generated -n"
     },
     "typespec-type/model/inheritance/enum-discriminator": {
       "commandName": "Project",

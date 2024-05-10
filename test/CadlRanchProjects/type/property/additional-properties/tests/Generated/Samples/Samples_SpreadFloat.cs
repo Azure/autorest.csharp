@@ -6,13 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -27,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadFloatAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response<IReadOnlyDictionary<string, float>> response = client.GetSpreadFloat();
+            Response<SpreadFloatRecord> response = client.GetSpreadFloat();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response<IReadOnlyDictionary<string, float>> response = await client.GetSpreadFloatAsync();
+            Response<SpreadFloatRecord> response = await client.GetSpreadFloatAsync();
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadFloatAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response<IReadOnlyDictionary<string, float>> response = client.GetSpreadFloat();
+            Response<SpreadFloatRecord> response = client.GetSpreadFloat();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response<IReadOnlyDictionary<string, float>> response = await client.GetSpreadFloatAsync();
+            Response<SpreadFloatRecord> response = await client.GetSpreadFloatAsync();
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -125,7 +125,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -138,10 +138,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response response = client.Put(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -150,10 +148,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -164,7 +160,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -179,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -192,10 +188,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response response = client.Put(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -204,10 +198,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadFloat client = new AdditionalPropertiesClient().GetSpreadFloatClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            SpreadFloatRecord body = new SpreadFloatRecord(123.45F);
+            Response response = await client.PutAsync(body);
         }
     }
 }

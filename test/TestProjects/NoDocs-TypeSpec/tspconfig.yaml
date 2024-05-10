@@ -1,0 +1,8 @@
+options:
+  "@azure-tools/typespec-csharp":
+    flavor: "azure"
+    generate-convenience-methods: false
+    deserialize-null-collection-as-null-value: true
+    head-as-boolean: true
+    generate-test-project: true
+    disable-xml-docs: true

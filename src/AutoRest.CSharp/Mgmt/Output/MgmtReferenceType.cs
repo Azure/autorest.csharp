@@ -14,83 +14,50 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private static HashSet<string> PropertyReferenceTypeModels = new HashSet<string>
         {
-            "ArmPlan",
-            "ArmSku",
-            "EncryptionProperties",
-            "ExtendedLocation",
-            "ManagedServiceIdentity",
-            "KeyVaultProperties",
-            "ResourceProviderData",
-            "SystemAssignedServiceIdentity",
-            "SystemData",
-            "UserAssignedIdentity",
-            "WritableSubResource"
+            "Azure.ResourceManager.Models.ArmPlan",
+            "Azure.ResourceManager.Models.ArmSku",
+            "Azure.ResourceManager.Models.EncryptionProperties",
+            "Azure.ResourceManager.Resources.Models.ExtendedLocation",
+            "Azure.ResourceManager.Models.ManagedServiceIdentity",
+            "Azure.ResourceManager.Models.KeyVaultProperties",
+            "Azure.ResourceManager.Resources.ResourceProviderData",
+            "Azure.ResourceManager.Models.SystemAssignedServiceIdentity",
+            "Azure.ResourceManager.Models.SystemData",
+            "Azure.ResourceManager.Models.UserAssignedIdentity",
+            "Azure.ResourceManager.Resources.Models.WritableSubResource"
         };
 
         private static HashSet<string> TypeReferenceTypeModels = new HashSet<string>
         {
-            "OperationStatusResult"
+            "Azure.ResourceManager.Models.OperationStatusResult"
         };
 
-        // ReferenceType is only applied to ResourceData and TrackedResourceData in custom code, not handled by generator
         private static HashSet<string> ReferenceTypeModels = new HashSet<string>
         {
-            "ResourceData",
-            "TrackedResourceData"
+            "Azure.ResourceManager.Models.ResourceData",
+            "Azure.ResourceManager.Models.TrackedResourceData"
         };
 
         public static bool IsPropertyReferenceType(InputModelType schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            // Azure.ResourceManager.Models.SystemData is PropertyReferenceType, but Azure.ResourceManager.Resources.Models.SystemData is not
-            if (schema.Name == "SystemData")
-            {
-                if ("Azure.ResourceManager.Models" == schema.Namespace)
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            return PropertyReferenceTypeModels.Contains(schema.Name);
-        }
+            => PropertyReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
 
         public static bool IsTypeReferenceType(InputModelType schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            return TypeReferenceTypeModels.Contains(schema.Name);
-        }
+            => TypeReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
 
         public static bool IsReferenceType(ObjectType schema)
-        {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-            {
-                return false;
-            }
-
-            return ReferenceTypeModels.Contains(schema.Declaration.Name);
-        }
+            => ReferenceTypeModels.Contains($"{schema.Declaration.Namespace}.{schema.Declaration.Name}");
 
         public static bool IsReferenceType(InputModelType schema)
+            => ReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
+
+        private static string GetNamespace(InputModelType schema)
         {
-            // reference types are only applied for Azure.ResourceManager
-            if (!Configuration.MgmtConfiguration.IsArmCore)
+            if (!string.IsNullOrEmpty(schema.Namespace))
             {
-                return false;
+                return schema.Namespace;
             }
 
-            return ReferenceTypeModels.Contains(schema.Name);
+            return $"{Configuration.Namespace}.Models";
         }
 
         public MgmtReferenceType(InputModelType inputModel) : base(inputModel)

@@ -87,6 +87,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null,
                 flavor: "azure",
+                disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
                 helperNamespace: "");

@@ -811,16 +811,5 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedModel.Type);
             }
         }
-
-        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
-        {
-            var result = new ModelTypeProvider(
-                _inputModel.ReplaceProperty(property, inputType),
-                DefaultNamespace,
-                _sourceInputModel,
-                _typeFactory,
-                _defaultDerivedType);
-            return result;
-        }
     }
 }

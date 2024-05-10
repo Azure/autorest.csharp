@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -28,7 +27,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadDifferentModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -40,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadDifferentModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -49,7 +48,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetSpreadDifferentModel();
+            Response<DifferentSpreadModelRecord> response = client.GetSpreadDifferentModel();
         }
 
         [Test]
@@ -58,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetSpreadDifferentModelAsync();
+            Response<DifferentSpreadModelRecord> response = await client.GetSpreadDifferentModelAsync();
         }
 
         [Test]
@@ -70,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetSpreadDifferentModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -82,7 +81,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetSpreadDifferentModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -91,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetSpreadDifferentModel();
+            Response<DifferentSpreadModelRecord> response = client.GetSpreadDifferentModel();
         }
 
         [Test]
@@ -100,7 +99,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetSpreadDifferentModelAsync();
+            Response<DifferentSpreadModelRecord> response = await client.GetSpreadDifferentModelAsync();
         }
 
         [Test]
@@ -111,10 +110,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    state = "<state>",
-                },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -129,10 +125,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    state = "<state>",
-                },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -145,10 +138,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response response = client.Put(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            DifferentSpreadModelRecord body = new DifferentSpreadModelRecord("<knownProp>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -157,10 +148,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            DifferentSpreadModelRecord body = new DifferentSpreadModelRecord("<knownProp>");
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -171,10 +160,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    state = "<state>",
-                },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -189,10 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new
-                {
-                    state = "<state>",
-                },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -205,10 +188,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response response = client.Put(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            DifferentSpreadModelRecord body = new DifferentSpreadModelRecord("<knownProp>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -217,10 +198,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             SpreadDifferentModel client = new AdditionalPropertiesClient().GetSpreadDifferentModelClient();
 
-            Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            DifferentSpreadModelRecord body = new DifferentSpreadModelRecord("<knownProp>");
+            Response response = await client.PutAsync(body);
         }
     }
 }
