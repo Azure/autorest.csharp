@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, ObjectType objectType)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-            if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
+            if (!MgmtReferenceType.IsReferenceType(objectType) && Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
             {
                 writer.Line($"[WirePath(\"{property.GetWirePath()}\")]");
             }

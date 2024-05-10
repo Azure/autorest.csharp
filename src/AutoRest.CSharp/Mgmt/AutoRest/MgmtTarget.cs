@@ -293,13 +293,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
-            if (model is MgmtReferenceType mgmtReferenceType)
-            {
-                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
-                if (extensions != null && extensions.MgmtReferenceType)
-                    return;
-            }
-
             WriteSerialization(project, model, serializeWriter, serializationFileName);
         }
 
