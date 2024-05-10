@@ -320,8 +320,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (actualBase is null)
                 throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
 
-            //We don't need to create default type if its an input only model
-            if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+            // We don't need to create default type if its an input only model
+            // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+            if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                 return null;
 
             //if I have children and parents then I am my own defaultDerivedType

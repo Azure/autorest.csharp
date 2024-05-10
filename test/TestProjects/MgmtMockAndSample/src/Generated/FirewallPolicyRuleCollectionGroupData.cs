@@ -32,7 +32,7 @@ namespace MgmtMockAndSample
         /// <param name="ruleCollections">
         /// Group of Firewall Policy rule collections.
         /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="FirewallPolicyNatRuleCollection"/> and <see cref="FirewallPolicyFilterRuleCollection"/>.
+        /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
         internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState) : base(id)
@@ -56,7 +56,7 @@ namespace MgmtMockAndSample
         /// <summary>
         /// Group of Firewall Policy rule collections.
         /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="FirewallPolicyNatRuleCollection"/> and <see cref="FirewallPolicyFilterRuleCollection"/>.
+        /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </summary>
         public IList<FirewallPolicyRuleCollection> RuleCollections { get; }
         /// <summary> The provisioning state of the firewall policy rule collection group resource. </summary>

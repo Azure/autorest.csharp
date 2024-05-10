@@ -572,7 +572,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="ruleCollections">
         /// Group of Firewall Policy rule collections.
         /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="FirewallPolicyNatRuleCollection"/> and <see cref="FirewallPolicyFilterRuleCollection"/>.
+        /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
         /// <returns> A new <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/> instance for mocking. </returns>
