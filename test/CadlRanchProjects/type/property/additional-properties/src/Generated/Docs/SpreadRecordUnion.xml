@@ -7,13 +7,13 @@ This sample shows how to call GetSpreadRecordUnionAsync.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordUnionAsync();
+Response<SpreadRecordForUnion> response = await client.GetSpreadRecordUnionAsync();
 ]]></code>
 This sample shows how to call GetSpreadRecordUnionAsync with all parameters.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordUnionAsync();
+Response<SpreadRecordForUnion> response = await client.GetSpreadRecordUnionAsync();
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordUnion(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetSpreadRecordUnion.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordUnion();
+Response<SpreadRecordForUnion> response = client.GetSpreadRecordUnion();
 ]]></code>
 This sample shows how to call GetSpreadRecordUnion with all parameters.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordUnion();
+Response<SpreadRecordForUnion> response = client.GetSpreadRecordUnion();
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordUnionAsync(RequestContext)">
@@ -40,7 +40,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 Response response = await client.GetSpreadRecordUnionAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordUnionAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 Response response = await client.GetSpreadRecordUnionAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordUnion(RequestContext)">
@@ -61,7 +61,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 Response response = client.GetSpreadRecordUnion(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordUnion with all parameters and parse the result.
 <code><![CDATA[
@@ -70,49 +70,41 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 Response response = client.GetSpreadRecordUnion(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="PutAsync(SpreadRecordForUnion,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+SpreadRecordForUnion body = new SpreadRecordForUnion(true);
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+SpreadRecordForUnion body = new SpreadRecordForUnion(true);
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="Put(SpreadRecordForUnion,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+SpreadRecordForUnion body = new SpreadRecordForUnion(true);
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnionClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson("<body>")
-});
+SpreadRecordForUnion body = new SpreadRecordForUnion(true);
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -123,7 +115,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +127,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +142,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = client.Put(content);
 
@@ -162,7 +154,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    flag = true,
 });
 Response response = client.Put(content);
 

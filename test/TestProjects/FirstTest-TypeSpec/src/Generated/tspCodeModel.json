@@ -2039,7 +2039,7 @@
        "Type": {
         "$id": "236",
         "Kind": "Primitive",
-        "Name": "DateTime",
+        "Name": "DateTimeRFC7231",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2698,7 +2698,7 @@
        "Type": {
         "$id": "295",
         "Kind": "Primitive",
-        "Name": "DateTime",
+        "Name": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Body",

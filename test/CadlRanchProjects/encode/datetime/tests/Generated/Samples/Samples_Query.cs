@@ -21,7 +21,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient();
 
-            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 
             Console.WriteLine(response.Status);
         }
@@ -32,7 +32,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient();
 
-            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 
             Console.WriteLine(response.Status);
         }
@@ -43,7 +43,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient();
 
-            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 
             Console.WriteLine(response.Status);
         }
@@ -54,7 +54,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient();
 
-            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 
             Console.WriteLine(response.Status);
         }

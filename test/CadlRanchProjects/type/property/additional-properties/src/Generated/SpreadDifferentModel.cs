@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -49,37 +47,21 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModelAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<IReadOnlyDictionary<string, ModelForRecord>>> GetSpreadDifferentModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DifferentSpreadModelRecord>> GetSpreadDifferentModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetSpreadDifferentModelAsync(context).ConfigureAwait(false);
-            IReadOnlyDictionary<string, ModelForRecord> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            Dictionary<string, ModelForRecord> dictionary = new Dictionary<string, ModelForRecord>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value));
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(DifferentSpreadModelRecord.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModel(CancellationToken)']/*" />
-        public virtual Response<IReadOnlyDictionary<string, ModelForRecord>> GetSpreadDifferentModel(CancellationToken cancellationToken = default)
+        public virtual Response<DifferentSpreadModelRecord> GetSpreadDifferentModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetSpreadDifferentModel(context);
-            IReadOnlyDictionary<string, ModelForRecord> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            Dictionary<string, ModelForRecord> dictionary = new Dictionary<string, ModelForRecord>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value));
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(DifferentSpreadModelRecord.FromResponse(response), response);
         }
 
         /// <summary>
@@ -156,12 +138,12 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,ModelForRecord},CancellationToken)']/*" />
-        public virtual async Task<Response> PutAsync(IDictionary<string, ModelForRecord> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='PutAsync(DifferentSpreadModelRecord,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
@@ -171,12 +153,12 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='Put(IDictionary{string,ModelForRecord},CancellationToken)']/*" />
-        public virtual Response Put(IDictionary<string, ModelForRecord> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='Put(DifferentSpreadModelRecord,CancellationToken)']/*" />
+        public virtual Response Put(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
@@ -192,7 +174,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string,ModelForRecord},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(DifferentSpreadModelRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -231,7 +213,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string,ModelForRecord},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(DifferentSpreadModelRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

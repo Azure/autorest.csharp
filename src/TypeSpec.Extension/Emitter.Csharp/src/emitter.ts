@@ -178,7 +178,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "use-model-reader-writer":
                     options["use-model-reader-writer"] ?? true,
                 "azure-arm":
-                    sdkContext.arm === false ? undefined : sdkContext.arm
+                    sdkContext.arm === false ? undefined : sdkContext.arm,
+                "disable-xml-docs":
+                    options["disable-xml-docs"] === false
+                        ? undefined
+                        : options["disable-xml-docs"]
             };
 
             await program.host.writeFile(

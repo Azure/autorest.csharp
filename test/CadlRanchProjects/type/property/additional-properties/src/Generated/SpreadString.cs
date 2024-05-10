@@ -6,13 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties
 {
@@ -48,37 +47,21 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='GetSpreadStringAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetSpreadStringAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SpreadStringRecord>> GetSpreadStringAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetSpreadStringAsync(context).ConfigureAwait(false);
-            IReadOnlyDictionary<string, string> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetString());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(SpreadStringRecord.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='GetSpreadString(CancellationToken)']/*" />
-        public virtual Response<IReadOnlyDictionary<string, string>> GetSpreadString(CancellationToken cancellationToken = default)
+        public virtual Response<SpreadStringRecord> GetSpreadString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetSpreadString(context);
-            IReadOnlyDictionary<string, string> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetString());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(SpreadStringRecord.FromResponse(response), response);
         }
 
         /// <summary>
@@ -155,12 +138,12 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,string},CancellationToken)']/*" />
-        public virtual async Task<Response> PutAsync(IDictionary<string, string> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='PutAsync(SpreadStringRecord,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(SpreadStringRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
@@ -170,12 +153,12 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='Put(IDictionary{string,string},CancellationToken)']/*" />
-        public virtual Response Put(IDictionary<string, string> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadString.xml" path="doc/members/member[@name='Put(SpreadStringRecord,CancellationToken)']/*" />
+        public virtual Response Put(SpreadStringRecord body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
@@ -191,7 +174,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string,string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(SpreadStringRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -230,7 +213,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string,string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(SpreadStringRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

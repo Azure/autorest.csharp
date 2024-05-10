@@ -4,16 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
@@ -90,6 +87,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
                 InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
+                InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),

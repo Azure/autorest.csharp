@@ -4,7 +4,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -63,10 +62,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     // when it is constant, it could have DefaultValue
                     value = InputExampleValue.Value(parameter.Type, parameter.DefaultValue.Value);
                 }
-                else if (parameter.Type is InputUnionType unionType && unionType.UnionItemTypes.First() is InputLiteralType literalType)
+                else if (parameter.Type is InputUnionType unionType && unionType.UnionItemTypes[0] is InputLiteralType literalType)
                 {
                     // or it could be a union of literal types
                     value = InputExampleValue.Value(parameter.Type, literalType.Value);
+                }
+                else if (parameter.Type is InputEnumType enumType && enumType.AllowedValues[0].Value is { } enumValue)
+                {
+                    // or it could be an enum of a few values
+                    value = InputExampleValue.Value(parameter.Type, enumValue);
                 }
                 else
                 {
