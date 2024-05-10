@@ -420,7 +420,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             Constant? value = null;
 
             //only load implementations for the base type
-            var implementations = GetDerivedTypes(InputModel.DerivedModels).ToArray();
+            // TODO: remove the order by
+            var implementations = GetDerivedTypes(InputModel.DerivedModels).OrderBy(x => x.Key).ToArray();
 
             if (InputModel.DiscriminatorValue != null)
             {

@@ -99,59 +99,9 @@ namespace AutoRest.CSharp.Output.Builders
                 case InputDictionaryType dictionaryType:
                     var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, type.ElementType, null, false);
                     return new XmlDictionarySerialization(type.InitializationType, valueElement, xmlName);
-                case CodeModelType cmt:
-                    return BuildXmlElementSerialization(cmt.Schema, type, name, isRoot);
                 default:
                     return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
             }
-        }
-
-        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
-        {
-            KnownMediaType.Json => BuildSerialization(schema, type, false),
-            KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
-            _ => throw new NotImplementedException(mediaType.ToString())
-        };
-
-
-        private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
-        {
-            string xmlName =
-                schema.XmlName ??
-                name ??
-                schema.Name;
-
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return BuildXmlElementSerialization(constantSchema.ValueType, type, name, false);
-                case ArraySchema arraySchema:
-                    var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
-
-                    return new XmlArraySerialization(
-                        type.InitializationType,
-                        BuildXmlElementSerialization(arraySchema.ElementType, type.ElementType, null, false),
-                        xmlName,
-                        wrapped);
-
-                case DictionarySchema dictionarySchema:
-                    return new XmlDictionarySerialization(
-                        type.InitializationType,
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, type.ElementType, null, false),
-                        xmlName);
-                default:
-                    return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
-            }
-        }
-
-        private static XmlValueSerialization BuildXmlValueSerialization(Schema schema, CSharpType type)
-        {
-            return new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema));
-        }
-
-        private static XmlValueSerialization BuildXmlValueSerialization(InputType schema, CSharpType type)
-        {
-            return new XmlValueSerialization(type, GetSerializationFormat(schema));
         }
 
         private static bool IsManagedServiceIdentityV3(InputType schema, CSharpType type)
