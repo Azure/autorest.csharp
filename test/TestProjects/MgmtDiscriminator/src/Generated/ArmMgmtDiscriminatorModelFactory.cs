@@ -63,17 +63,17 @@ namespace MgmtDiscriminator.Models
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed
         /// Please note <see cref="Models.DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Models.DeliveryRuleRemoteAddressCondition"/>, <see cref="Models.DeliveryRuleRequestMethodCondition"/> and <see cref="Models.DeliveryRuleQueryStringCondition"/>.
+        /// The available derived classes include <see cref="Models.DeliveryRuleQueryStringCondition"/>, <see cref="Models.DeliveryRuleRemoteAddressCondition"/> and <see cref="Models.DeliveryRuleRequestMethodCondition"/>.
         /// </param>
         /// <param name="actions">
         /// A list of actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="Models.DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlSigningAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.UrlRewriteAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>.
+        /// The available derived classes include <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlRewriteAction"/> and <see cref="Models.UrlSigningAction"/>.
         /// </param>
         /// <param name="extraMappingInfo">
         /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="Models.DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlSigningAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.UrlRewriteAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>.
+        /// The available derived classes include <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlRewriteAction"/> and <see cref="Models.UrlSigningAction"/>.
         /// </param>
         /// <param name="pet">
         /// A pet

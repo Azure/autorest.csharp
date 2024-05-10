@@ -17,7 +17,7 @@ namespace MgmtDiscriminator
     /// A class representing the Artifact data model.
     /// Represents a blueprint artifact.
     /// Please note <see cref="ArtifactData"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="TemplateArtifact"/> and <see cref="RoleAssignmentArtifact"/>.
+    /// The available derived classes include <see cref="RoleAssignmentArtifact"/> and <see cref="TemplateArtifact"/>.
     /// </summary>
     public abstract partial class ArtifactData : ResourceData
     {

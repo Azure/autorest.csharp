@@ -78,9 +78,9 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
+                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element, options);
                     case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element, options);
                     case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element, options);
-                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element, options);
                 }
             }
             return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element, options);
