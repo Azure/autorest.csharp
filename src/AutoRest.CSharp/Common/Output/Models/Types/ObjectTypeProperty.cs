@@ -313,6 +313,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (type.IsFrameworkType)
             {
+                // TODO -- need to fix this so that we could have the reference of unioned models.
                 string typeSpecificDesc;
                 var unionTypes = GetUnionTypes(type);
                 IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();

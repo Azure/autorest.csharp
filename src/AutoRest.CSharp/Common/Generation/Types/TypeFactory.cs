@@ -22,12 +22,12 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
-        private readonly Type _unknownType;
+        public Type UnknownType { get; }
 
         public TypeFactory(OutputLibrary library, Type unknownType)
         {
             _library = library;
-            _unknownType = unknownType;
+            UnknownType = unknownType;
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Generation.Types
                 isNullable: inputType.IsNullable,
                 new CSharpType(typeof(IList<>), _library.FindTypeByName(property!.ElementTypeFormat!)!)),
             _ when ToXMsFormatType(format) is Type type => new CSharpType(type, inputType.IsNullable),
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => _unknownType,
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => UnknownType,
             _ => throw new Exception("Unknown type")
         };
 

@@ -71,7 +71,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual(1, value.AdditionalProperties.Count);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop"));
-            var model = value.AdditionalProperties["prop"];
+            var model = ModelReaderWriter.Read<ModelForRecord>(value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", model.State);
         });
 
@@ -82,7 +82,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new ModelForRecord("ok")
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsModelClient().PutAsync(value);
@@ -96,7 +96,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual(1, value.AdditionalProperties.Count);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop"));
-            var model = value.AdditionalProperties["prop"];
+            var model = ModelReaderWriter.Read<ModelForRecord>(value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", model.State);
         });
 
@@ -107,7 +107,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new ModelForRecord("ok")
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetIsModelClient().PutAsync(value);
@@ -121,7 +121,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual(1, value.AdditionalProperties.Count);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop"));
-            var prop = value.AdditionalProperties["prop"];
+            var prop = value.AdditionalProperties["prop"].Select(item => ModelReaderWriter.Read<ModelForRecord>(item)).ToList();
             Assert.AreEqual(2, prop.Count);
             Assert.AreEqual("ok", prop[0].State);
             Assert.AreEqual("ok", prop[1].State);
@@ -136,8 +136,8 @@ namespace CadlRanchProjectsNonAzure.Tests
                 {
                     ["prop"] = new[]
                     {
-                        new ModelForRecord("ok"),
-                        new ModelForRecord("ok")
+                        ModelReaderWriter.Write(new ModelForRecord("ok")),
+                        ModelReaderWriter.Write(new ModelForRecord("ok"))
                     }
                 }
             };
@@ -152,7 +152,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual(1, value.AdditionalProperties.Count);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop"));
-            var prop = value.AdditionalProperties["prop"];
+            var prop = value.AdditionalProperties["prop"].Select(item => ModelReaderWriter.Read<ModelForRecord>(item)).ToList();
             Assert.AreEqual(2, prop.Count);
             Assert.AreEqual("ok", prop[0].State);
             Assert.AreEqual("ok", prop[1].State);
@@ -167,8 +167,8 @@ namespace CadlRanchProjectsNonAzure.Tests
                 {
                     ["prop"] = new[]
                     {
-                        new ModelForRecord("ok"),
-                        new ModelForRecord("ok")
+                        ModelReaderWriter.Write(new ModelForRecord("ok")),
+                        ModelReaderWriter.Write(new ModelForRecord("ok"))
                     }
                 }
             };
@@ -458,7 +458,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.IsNotNull(response.Value.DerivedProp);
             Assert.AreEqual("ok", response.Value.DerivedProp.State);
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
-            var prop = response.Value.AdditionalProperties["prop"];
+            var prop = ModelReaderWriter.Read<ModelForRecord>(response.Value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", prop.State);
         });
 
@@ -469,7 +469,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new ModelForRecord("ok")
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelClient().PutAsync(value);
@@ -487,8 +487,10 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
             var list = response.Value.AdditionalProperties["prop"];
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("ok", list[0].State);
-            Assert.AreEqual("ok", list[1].State);
+            var prop1 = ModelReaderWriter.Read<ModelForRecord>(list[0]);
+            Assert.AreEqual("ok", prop1.State);
+            var prop2 = ModelReaderWriter.Read<ModelForRecord>(list[1]);
+            Assert.AreEqual("ok", prop2.State);
         });
 
         [Test]
@@ -498,7 +500,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new[] { new ModelForRecord("ok"), new ModelForRecord("ok") }
+                    ["prop"] = new[] { ModelReaderWriter.Write(new ModelForRecord("ok")), ModelReaderWriter.Write(new ModelForRecord("ok")) }
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsDifferentSpreadModelArrayClient().PutAsync(value);
@@ -583,7 +585,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new AdditionalPropertiesClient(host, null).GetSpreadDifferentModelClient().GetSpreadDifferentModelAsync();
             Assert.AreEqual("abc", response.Value.KnownProp);
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
-            var model = response.Value.AdditionalProperties["prop"];
+            var model = ModelReaderWriter.Read<ModelForRecord>(response.Value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", model.State);
         });
 
@@ -594,7 +596,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new ModelForRecord("ok")
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetSpreadDifferentModelClient().PutAsync(value);
@@ -609,8 +611,10 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
             var list = response.Value.AdditionalProperties["prop"];
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("ok", list[0].State);
-            Assert.AreEqual("ok", list[1].State);
+            var first = ModelReaderWriter.Read<ModelForRecord>(list[0]);
+            var second = ModelReaderWriter.Read<ModelForRecord>(list[1]);
+            Assert.AreEqual("ok", first.State);
+            Assert.AreEqual("ok", second.State);
         });
 
         [Test]
@@ -622,8 +626,8 @@ namespace CadlRanchProjectsNonAzure.Tests
                 {
                     ["prop"] = new[]
                     {
-                        new ModelForRecord("ok"),
-                        new ModelForRecord("ok")
+                        ModelReaderWriter.Write(new ModelForRecord("ok")),
+                        ModelReaderWriter.Write(new ModelForRecord("ok"))
                     }
                 }
             };
@@ -683,7 +687,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new AdditionalPropertiesClient(host, null).GetSpreadModelClient().GetSpreadModelAsync();
             Assert.AreEqual("ok", response.Value.KnownProp.State);
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
-            var model = response.Value.AdditionalProperties["prop"];
+            var model = ModelReaderWriter.Read<ModelForRecord>(response.Value.AdditionalProperties["prop"]);
             Assert.AreEqual("ok", model.State);
         });
 
@@ -694,7 +698,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = new ModelForRecord("ok")
+                    ["prop"] = ModelReaderWriter.Write(new ModelForRecord("ok"))
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetSpreadModelClient().PutAsync(value);
@@ -711,8 +715,10 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual(1, response.Value.AdditionalProperties.Count);
             var list = response.Value.AdditionalProperties["prop"];
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("ok", list[0].State);
-            Assert.AreEqual("ok", list[1].State);
+            var first = ModelReaderWriter.Read<ModelForRecord>(list[0]);
+            var second = ModelReaderWriter.Read<ModelForRecord>(list[1]);
+            Assert.AreEqual("ok", first.State);
+            Assert.AreEqual("ok", second.State);
         });
 
         [Test]
@@ -724,8 +730,8 @@ namespace CadlRanchProjectsNonAzure.Tests
                 {
                     ["prop"] = new[]
                     {
-                        new ModelForRecord("ok"),
-                        new ModelForRecord("ok")
+                        ModelReaderWriter.Write(new ModelForRecord("ok")),
+                        ModelReaderWriter.Write(new ModelForRecord("ok"))
                     }
                 }
             };

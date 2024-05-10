@@ -570,6 +570,330 @@ namespace ModelReaderWriterValidationTypeSpec
             }
         }
 
+        /// <summary> Op 6. </summary>
+        /// <param name="body"> The <see cref="ModelWithStringAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op6Async(ModelWithStringAdditionalProperties,CancellationToken)']/*" />
+        public virtual async Task<Response<ModelWithStringAdditionalProperties>> Op6Async(ModelWithStringAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Op6Async(content, context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithStringAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary> Op 6. </summary>
+        /// <param name="body"> The <see cref="ModelWithStringAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op6(ModelWithStringAdditionalProperties,CancellationToken)']/*" />
+        public virtual Response<ModelWithStringAdditionalProperties> Op6(ModelWithStringAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Op6(content, context);
+            return Response.FromValue(ModelWithStringAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 6.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op6Async(ModelWithStringAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op6Async(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> Op6Async(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op6");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp6Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 6.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op6(ModelWithStringAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op6(RequestContent,RequestContext)']/*" />
+        public virtual Response Op6(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op6");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp6Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Op 7. </summary>
+        /// <param name="body"> The <see cref="ModelWithArrayAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op7Async(ModelWithArrayAdditionalProperties,CancellationToken)']/*" />
+        public virtual async Task<Response<ModelWithArrayAdditionalProperties>> Op7Async(ModelWithArrayAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Op7Async(content, context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithArrayAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary> Op 7. </summary>
+        /// <param name="body"> The <see cref="ModelWithArrayAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op7(ModelWithArrayAdditionalProperties,CancellationToken)']/*" />
+        public virtual Response<ModelWithArrayAdditionalProperties> Op7(ModelWithArrayAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Op7(content, context);
+            return Response.FromValue(ModelWithArrayAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 7.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op7Async(ModelWithArrayAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op7Async(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> Op7Async(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op7");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp7Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 7.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op7(ModelWithArrayAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op7(RequestContent,RequestContext)']/*" />
+        public virtual Response Op7(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op7");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp7Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Op 8. </summary>
+        /// <param name="body"> The <see cref="ModelWithUnknownAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op8Async(ModelWithUnknownAdditionalProperties,CancellationToken)']/*" />
+        public virtual async Task<Response<ModelWithUnknownAdditionalProperties>> Op8Async(ModelWithUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Op8Async(content, context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithUnknownAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary> Op 8. </summary>
+        /// <param name="body"> The <see cref="ModelWithUnknownAdditionalProperties"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op8(ModelWithUnknownAdditionalProperties,CancellationToken)']/*" />
+        public virtual Response<ModelWithUnknownAdditionalProperties> Op8(ModelWithUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Op8(content, context);
+            return Response.FromValue(ModelWithUnknownAdditionalProperties.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 8.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op8Async(ModelWithUnknownAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op8Async(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> Op8Async(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op8");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp8Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Op 8.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Op8(ModelWithUnknownAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op8(RequestContent,RequestContext)']/*" />
+        public virtual Response Op8(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op8");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOp8Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateOp1Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -640,6 +964,51 @@ namespace ModelReaderWriterValidationTypeSpec
             uri.AppendPath("/api/ResourceProvider", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateOp6Request(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/api/AdditionalProperties/string", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateOp7Request(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/api/AdditionalProperties/array", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateOp8Request(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/api/AdditionalProperties/unknown", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
