@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.UseNamespace("Azure.Core");
                 }
+
+                // The hard-coded string input is needed for ReferenceTypeAttribute to work, and this only applies to ResourceData and TrackedResourceData now.
                 writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}(new string[]{{\"SystemData\"}})]");
             }
         }
