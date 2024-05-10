@@ -49,11 +49,11 @@ namespace MgmtCustomizations.Models
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("size"u8);
-            SerializeSizeProperty(writer);
+            SerializeSizeProperty(writer, options);
             if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
-                SerializeDateOfBirthProperty(writer);
+                SerializeDateOfBirthProperty(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -71,7 +71,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
-                SerializeColorProperty(writer);
+                SerializeColorProperty(writer, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
