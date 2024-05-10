@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
-                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
+                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter, options)
                     : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value, options)
             };
         }

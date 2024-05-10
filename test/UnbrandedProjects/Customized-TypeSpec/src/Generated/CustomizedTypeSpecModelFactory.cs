@@ -47,5 +47,15 @@ namespace CustomizedTypeSpec.Models
                 requiredNullableList?.ToList(),
                 serializedAdditionalRawData: null);
         }
+
+        /// <summary> Initializes a new instance of <see cref="Models.SuperRoundTripModel"/>. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredReadonlyInt"> Required readonly int. </param>
+        /// <returns> A new <see cref="Models.SuperRoundTripModel"/> instance for mocking. </returns>
+        public static SuperRoundTripModel SuperRoundTripModel(string requiredString = null, int requiredSuperInt = default, int requiredReadonlyInt = default)
+        {
+            return new SuperRoundTripModel(requiredString, requiredSuperInt, requiredReadonlyInt, serializedAdditionalRawData: null);
+        }
     }
 }

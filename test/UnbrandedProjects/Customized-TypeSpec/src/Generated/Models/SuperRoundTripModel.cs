@@ -57,11 +57,13 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredReadonlyInt"> Required readonly int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuperRoundTripModel(string requiredString, int requiredSuperInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SuperRoundTripModel(string requiredString, int requiredSuperInt, int requiredReadonlyInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredSuperInt = requiredSuperInt;
+            RequiredReadonlyInt = requiredReadonlyInt;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -72,5 +74,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
+        /// <summary> Required readonly int. </summary>
+        public int RequiredReadonlyInt { get; }
     }
 }
