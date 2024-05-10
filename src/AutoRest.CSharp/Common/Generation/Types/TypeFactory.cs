@@ -22,12 +22,13 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
-        private readonly Type _unknownType;
+
+        public Type UnknownType { get; }
 
         public TypeFactory(OutputLibrary library, Type unknownType)
         {
             _library = library;
-            _unknownType = unknownType;
+            UnknownType = unknownType;
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
@@ -91,7 +92,7 @@ namespace AutoRest.CSharp.Generation.Types
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => _unknownType,
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => UnknownType,
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -139,8 +140,8 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => _unknownType,
-            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? _unknownType,
+            AllSchemaTypes.Any => UnknownType,
+            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? UnknownType,
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };

@@ -489,6 +489,9 @@
                         }
                     }
                 }
+            },
+            "additionalProperties": {
+                "type": "string"
             }
         },
         "DeliveryRuleListResult": {
