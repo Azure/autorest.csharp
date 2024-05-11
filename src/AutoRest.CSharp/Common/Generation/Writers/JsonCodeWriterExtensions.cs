@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
                 }
-                else if (format is SerializationFormat.Duration_Seconds_Float)
+                else if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }

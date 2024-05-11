@@ -361,8 +361,11 @@ function fromSdkDurationType(
             case "ISO8601":
                 return InputPrimitiveTypeKind.DurationISO8601;
             case "seconds":
-                if (wireType.kind === "float" || wireType.kind === "float32" || wireType.kind === "float64") {
+                if (wireType.kind === "float" || wireType.kind === "float32") {
                     return InputPrimitiveTypeKind.DurationSecondsFloat;
+                }
+                if (wireType.kind === "float64") {
+                    return InputPrimitiveTypeKind.DurationSecondsDouble;
                 }
                 return InputPrimitiveTypeKind.DurationSeconds;
             default:
