@@ -30,8 +30,8 @@ namespace MgmtSafeFlatten.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
                     case "LayerOneBar": return LayerOneBarType.DeserializeLayerOneBarType(element);
+                    case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
                 }
             }
             return UnknownLayerOneBaseType.DeserializeUnknownLayerOneBaseType(element);
