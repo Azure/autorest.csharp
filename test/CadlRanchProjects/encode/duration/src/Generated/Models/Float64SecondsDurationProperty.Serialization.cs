@@ -28,7 +28,7 @@ namespace Encode.Duration.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteNumberValue(Convert.ToDouble(Value.ToString("s\\.ffffff")));
+            writer.WriteNumberValue(Convert.ToDouble(Value.ToString("s\\.FFFFFF")));
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

@@ -31,7 +31,7 @@ namespace Encode.Duration.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.fff")));
+                writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.FFF")));
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

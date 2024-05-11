@@ -483,7 +483,7 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/float-seconds", false);
-            uri.AppendQuery("input", input, "s\\.fff", true);
+            uri.AppendQuery("input", input, "s\\.FFF", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -497,7 +497,7 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/float64-seconds", false);
-            uri.AppendQuery("input", input, "s\\.ffffff", true);
+            uri.AppendQuery("input", input, "s\\.FFFFFF", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

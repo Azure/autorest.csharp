@@ -498,7 +498,7 @@ namespace Encode.Duration
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/header/float-seconds", false);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "s\\.fff");
+            request.Headers.Add("duration", duration, "s\\.FFF");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -512,7 +512,7 @@ namespace Encode.Duration
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/header/float64-seconds", false);
             request.Uri = uri;
-            request.Headers.Add("duration", duration, "s\\.ffffff");
+            request.Headers.Add("duration", duration, "s\\.FFFFFF");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

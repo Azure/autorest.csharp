@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             SerializationFormat.Duration_ISO8601 => "P",
             SerializationFormat.Duration_Constant => "c",
             SerializationFormat.Duration_Seconds => "%s",
-            SerializationFormat.Duration_Seconds_Float => "s\\.fff",
-            SerializationFormat.Duration_Seconds_Double => "s\\.ffffff",
+            SerializationFormat.Duration_Seconds_Float => "s\\.FFF",
+            SerializationFormat.Duration_Seconds_Double => "s\\.FFFFFF",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };
