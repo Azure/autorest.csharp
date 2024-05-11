@@ -421,7 +421,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             //only load implementations for the base type
             // TODO: remove the order by
-            var implementations = GetDerivedTypes(InputModel.DerivedModels).OrderBy(x => x.Key).ToArray();
+            var implementationDictionary = new Dictionary<string, ObjectTypeDiscriminatorImplementation>();
+            GetDerivedTypes(InputModel.DerivedModels, implementationDictionary);
+            var implementations = implementationDictionary.Values.OrderBy(x => x.Key).ToArray();
 
             if (InputModel.DiscriminatorValue != null)
             {
@@ -757,17 +759,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
+        // There are derived models with duplicate discriminator values, which is not allowed
+        // Follow the same logic as modelerfour to remove derived models with duplicate discriminator values
+        private void GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes, Dictionary<string, ObjectTypeDiscriminatorImplementation> implementations)
         {
             foreach (var derivedInputType in derivedInputTypes)
             {
                 var derivedType = (SchemaObjectType)_typeFactory.CreateType(derivedInputType).Implementation;
-                foreach (var discriminatorImplementation in GetDerivedTypes(derivedType.InputModel.DerivedModels))
+                var derivedTypeImplementation = new Dictionary<string, ObjectTypeDiscriminatorImplementation>();
+                GetDerivedTypes(derivedType.InputModel.DerivedModels, derivedTypeImplementation);
+                foreach (var discriminatorImplementation in derivedTypeImplementation)
                 {
-                    yield return discriminatorImplementation;
+                    implementations[discriminatorImplementation.Key] = discriminatorImplementation.Value;
                 }
 
-                yield return new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedType.Type);
+                implementations[derivedInputType.DiscriminatorValue!] = new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedType.Type);
             }
         }
     }
