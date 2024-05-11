@@ -23,7 +23,6 @@ export enum InputPrimitiveTypeKind {
     DurationConstant = "DurationConstant",
     DurationSeconds = "DurationSeconds",
     DurationSecondsFloat = "DurationSecondsFloat",
-    DurationSecondsDouble = "DurationSecondsDouble",
     ETag = "Etag",
     Float32 = "Float32",
     Float64 = "Float64",

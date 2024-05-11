@@ -1153,12 +1153,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetDateTime();
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format == SerializationFormat.Duration_Seconds)
+                if (format is SerializationFormat.Duration_Seconds)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetInt32());
                 }
 
-                if (format == SerializationFormat.Duration_Seconds_Float)
+                if (format is SerializationFormat.Duration_Seconds_Float)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetDouble());
                 }
