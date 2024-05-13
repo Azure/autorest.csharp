@@ -36,6 +36,17 @@ namespace MgmtExtensionResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateValidateSomethingRequestUri(string subscriptionId, ValidateSomethingContent content)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.OrphanedPost/validateSomething", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateValidateSomethingRequest(string subscriptionId, ValidateSomethingContent content)
         {
             var message = _pipeline.CreateMessage();
@@ -51,7 +62,7 @@ namespace MgmtExtensionResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue<ValidateSomethingContent>(content);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

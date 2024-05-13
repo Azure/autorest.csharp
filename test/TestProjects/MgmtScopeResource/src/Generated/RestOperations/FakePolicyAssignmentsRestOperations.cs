@@ -37,6 +37,18 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string scope, string policyAssignmentName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(scope, false);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
+            uri.AppendPath(policyAssignmentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateDeleteRequest(string scope, string policyAssignmentName)
         {
             var message = _pipeline.CreateMessage();
@@ -113,6 +125,18 @@ namespace MgmtScopeResource
             }
         }
 
+        internal RequestUriBuilder CreateCreateRequestUri(string scope, string policyAssignmentName, FakePolicyAssignmentData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(scope, false);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
+            uri.AppendPath(policyAssignmentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, FakePolicyAssignmentData data)
         {
             var message = _pipeline.CreateMessage();
@@ -129,7 +153,7 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<FakePolicyAssignmentData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -191,6 +215,18 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string scope, string policyAssignmentName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(scope, false);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
+            uri.AppendPath(policyAssignmentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateGetRequest(string scope, string policyAssignmentName)
@@ -267,6 +303,27 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListForResourceGroupRequestUri(string subscriptionId, string resourceGroupName, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListForResourceGroupRequest(string subscriptionId, string resourceGroupName, string filter, int? top)
@@ -352,6 +409,35 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListForResourceRequestUri(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/", false);
+            uri.AppendPath(resourceProviderNamespace, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(parentResourcePath, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceType, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceName, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListForResourceRequest(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
@@ -463,6 +549,25 @@ namespace MgmtScopeResource
             }
         }
 
+        internal RequestUriBuilder CreateListForManagementGroupRequestUri(string managementGroupId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(managementGroupId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateListForManagementGroupRequest(string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -540,6 +645,25 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListRequest(string subscriptionId, string filter, int? top)
@@ -621,6 +745,14 @@ namespace MgmtScopeResource
             }
         }
 
+        internal RequestUriBuilder CreateListForResourceGroupNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateListForResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -695,6 +827,14 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListForResourceNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListForResourceNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
@@ -789,6 +929,14 @@ namespace MgmtScopeResource
             }
         }
 
+        internal RequestUriBuilder CreateListForManagementGroupNextPageRequestUri(string nextLink, string managementGroupId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal Azure.Core.HttpMessage CreateListForManagementGroupNextPageRequest(string nextLink, string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -859,6 +1007,14 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)

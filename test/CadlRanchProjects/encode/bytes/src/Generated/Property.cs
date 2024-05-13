@@ -44,6 +44,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -52,12 +53,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -66,14 +68,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -158,12 +161,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Base64Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -172,14 +176,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Base64(content, context);
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,6 +260,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -264,12 +269,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Base64urlAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -278,14 +284,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Base64url(content, context);
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +330,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -362,6 +368,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url array. </summary>
         /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -370,12 +377,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Base64urlArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
+        /// <summary> Base 64url array. </summary>
         /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -384,14 +392,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Base64urlArray(content, context);
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +438,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>

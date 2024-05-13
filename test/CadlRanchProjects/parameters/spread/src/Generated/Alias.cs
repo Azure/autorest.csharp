@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,6 +45,7 @@ namespace Parameters.Spread
             _endpoint = endpoint;
         }
 
+        /// <summary> Spread as request body. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -52,12 +54,13 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
+            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
             Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Spread as request body. </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -66,14 +69,14 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
+            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
             Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +115,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +153,7 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> Spread as request parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -163,12 +167,13 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
+            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
             Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Spread as request parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
@@ -182,14 +187,14 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
+            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
             Response response = SpreadAsRequestParameter(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -233,7 +238,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread as request parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -276,6 +281,7 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -299,12 +305,20 @@ namespace Parameters.Spread
             Argument.AssertNotNull(prop5, nameof(prop5));
             Argument.AssertNotNull(prop6, nameof(prop6));
 
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(
+                prop1,
+                prop2,
+                prop3,
+                prop4,
+                prop5,
+                prop6,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
             Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
@@ -328,14 +342,21 @@ namespace Parameters.Spread
             Argument.AssertNotNull(prop5, nameof(prop5));
             Argument.AssertNotNull(prop6, nameof(prop6));
 
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(
+                prop1,
+                prop2,
+                prop3,
+                prop4,
+                prop5,
+                prop6,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
             Response response = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread with multiple parameters.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -379,7 +400,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Spread with multiple parameters.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
@@ -23,10 +23,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = client.GetUnknownValue(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = client.GetUnknownValue(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -37,10 +37,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.GetUnknownValueAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -51,10 +51,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = client.GetUnknownValue(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = client.GetUnknownValue(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -65,10 +65,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            using RequestContent content = RequestContent.Create("Monday");
+            Response response = await client.GetUnknownValueAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(response.Status);
         }
     }
 }

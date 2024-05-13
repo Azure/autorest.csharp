@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class DeliveryRuleProperties : IUtf8JsonSerializable, IJsonModel<DeliveryRuleProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DeliveryRuleProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
-                writer.WriteObjectValue<DeliveryRuleCondition>(Conditions, options);
+                writer.WriteObjectValue(Conditions, options);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
@@ -45,7 +45,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    writer.WriteObjectValue<DeliveryRuleAction>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -56,14 +56,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue<DeliveryRuleAction>(item.Value, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue<Pet>(Pet, options);
+                writer.WriteObjectValue(Pet, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Foo))
             {
@@ -102,7 +102,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleProperties DeserializeDeliveryRuleProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,7 +115,7 @@ namespace MgmtDiscriminator.Models
             Pet pet = default;
             string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"u8))
@@ -180,10 +180,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new DeliveryRuleProperties(
                 order,
                 conditions,
@@ -206,45 +206,48 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Order), out propertyOverride);
-            if (Optional.IsDefined(Order) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  order: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Order))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  order: ");
                     builder.AppendLine($"{Order.Value}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride);
-            if (Optional.IsDefined(Conditions) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  conditions: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Conditions))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  conditions: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride);
-            if (Optional.IsCollectionDefined(Actions) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Actions.Any() || hasPropertyOverride)
+                builder.Append("  actions: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Actions))
                 {
-                    builder.Append("  actions: ");
-                    if (hasPropertyOverride)
+                    if (Actions.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  actions: ");
                         builder.AppendLine("[");
                         foreach (var item in Actions)
                         {
@@ -256,17 +259,18 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride);
-            if (Optional.IsCollectionDefined(ExtraMappingInfo) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (ExtraMappingInfo.Any() || hasPropertyOverride)
+                builder.Append("  extraMappingInfo: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(ExtraMappingInfo))
                 {
-                    builder.Append("  extraMappingInfo: ");
-                    if (hasPropertyOverride)
+                    if (ExtraMappingInfo.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  extraMappingInfo: ");
                         builder.AppendLine("{");
                         foreach (var item in ExtraMappingInfo)
                         {
@@ -279,29 +283,31 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride);
-            if (Optional.IsDefined(Pet) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  pet: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Pet))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  pet: ");
                     BicepSerializationHelpers.AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (Optional.IsDefined(Foo) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  foo: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Foo))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  foo: ");
                     if (Foo.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

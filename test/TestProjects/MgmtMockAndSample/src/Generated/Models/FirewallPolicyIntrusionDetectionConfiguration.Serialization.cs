@@ -22,7 +22,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in SignatureOverrides)
                 {
-                    writer.WriteObjectValue<FirewallPolicyIntrusionDetectionSignatureSpecification>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in BypassTrafficSettings)
                 {
-                    writer.WriteObjectValue<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

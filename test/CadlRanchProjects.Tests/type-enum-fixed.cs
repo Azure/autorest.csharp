@@ -14,7 +14,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Enum_Fixed_String_getKnownValue() => Test(async (host) =>
         {
             var response = await new FixedClient(host, null).GetStringClient().GetKnownValueAsync();
-            Assert.AreEqual(DaysOfWeekEnum.Monday, (DaysOfWeekEnum)response);
+            Assert.AreEqual(DaysOfWeekEnum.Monday, response.Value);
         });
 
         [Test]

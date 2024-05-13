@@ -45,6 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
@@ -69,6 +70,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValue(CancellationToken cancellationToken = default)
@@ -94,7 +96,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -129,7 +131,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -163,6 +165,7 @@ namespace _Type._Array
             }
         }
 
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -171,12 +174,13 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromEnumerable(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -185,14 +189,14 @@ namespace _Type._Array
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromEnumerable(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -231,7 +235,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

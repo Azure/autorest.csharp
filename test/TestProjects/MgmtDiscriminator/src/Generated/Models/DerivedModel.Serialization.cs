@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class DerivedModel : IUtf8JsonSerializable, IJsonModel<DerivedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DerivedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -73,7 +73,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DerivedModel DeserializeDerivedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,7 +82,7 @@ namespace MgmtDiscriminator.Models
             IList<string> requiredCollection = default;
             string optionalString = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredCollection"u8))
@@ -102,10 +102,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new DerivedModel(optionalString, serializedAdditionalRawData, requiredCollection);
         }
 
@@ -121,17 +121,18 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequiredCollection), out propertyOverride);
-            if (Optional.IsCollectionDefined(RequiredCollection) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (RequiredCollection.Any() || hasPropertyOverride)
+                builder.Append("  requiredCollection: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(RequiredCollection))
                 {
-                    builder.Append("  requiredCollection: ");
-                    if (hasPropertyOverride)
+                    if (RequiredCollection.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  requiredCollection: ");
                         builder.AppendLine("[");
                         foreach (var item in RequiredCollection)
                         {
@@ -156,15 +157,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OptionalString), out propertyOverride);
-            if (Optional.IsDefined(OptionalString) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  optionalString: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OptionalString))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  optionalString: ");
                     if (OptionalString.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

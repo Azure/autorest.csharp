@@ -37,6 +37,18 @@ namespace MgmtExtensionResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string policyDefinitionName, PolicyDefinitionData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string policyDefinitionName, PolicyDefinitionData data)
         {
             var message = _pipeline.CreateMessage();
@@ -53,7 +65,7 @@ namespace MgmtExtensionResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PolicyDefinitionData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -115,6 +127,18 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string policyDefinitionName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string policyDefinitionName)
@@ -179,6 +203,18 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string policyDefinitionName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string policyDefinitionName)
@@ -257,6 +293,16 @@ namespace MgmtExtensionResource
             }
         }
 
+        internal RequestUriBuilder CreateGetBuiltInRequestUri(string policyDefinitionName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBuiltInRequest(string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -327,6 +373,18 @@ namespace MgmtExtensionResource
             }
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateAtManagementGroupRequestUri(string managementGroupId, string policyDefinitionName, PolicyDefinitionData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(managementGroupId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateAtManagementGroupRequest(string managementGroupId, string policyDefinitionName, PolicyDefinitionData data)
         {
             var message = _pipeline.CreateMessage();
@@ -343,7 +401,7 @@ namespace MgmtExtensionResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<PolicyDefinitionData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -405,6 +463,18 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDeleteAtManagementGroupRequestUri(string managementGroupId, string policyDefinitionName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(managementGroupId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteAtManagementGroupRequest(string managementGroupId, string policyDefinitionName)
@@ -469,6 +539,18 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetAtManagementGroupRequestUri(string managementGroupId, string policyDefinitionName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(managementGroupId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions/", false);
+            uri.AppendPath(policyDefinitionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetAtManagementGroupRequest(string managementGroupId, string policyDefinitionName)
@@ -545,6 +627,25 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string filter, int? top)
@@ -626,6 +727,23 @@ namespace MgmtExtensionResource
             }
         }
 
+        internal RequestUriBuilder CreateListBuiltInRequestUri(string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateListBuiltInRequest(string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -691,6 +809,25 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListByManagementGroupRequestUri(string managementGroupId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(managementGroupId, true);
+            uri.AppendPath("/providers/Microsoft.Authorization/policyDefinitions", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, false);
+            }
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateListByManagementGroupRequest(string managementGroupId, string filter, int? top)
@@ -772,6 +909,14 @@ namespace MgmtExtensionResource
             }
         }
 
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -844,6 +989,14 @@ namespace MgmtExtensionResource
             }
         }
 
+        internal RequestUriBuilder CreateListBuiltInNextPageRequestUri(string nextLink, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateListBuiltInNextPageRequest(string nextLink, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -908,6 +1061,14 @@ namespace MgmtExtensionResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListByManagementGroupNextPageRequestUri(string nextLink, string managementGroupId, string filter, int? top)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListByManagementGroupNextPageRequest(string nextLink, string managementGroupId, string filter, int? top)

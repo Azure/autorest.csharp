@@ -46,12 +46,17 @@ namespace MgmtDiscriminator.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        public Sku2()
+        /// <param name="nestedName"> The childmost sku property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nestedName"/> is null. </exception>
+        public Sku2(string nestedName)
         {
+            Argument.AssertNotNull(nestedName, nameof(nestedName));
+
+            NestedName = nestedName;
         }
 
         /// <summary> Initializes a new instance of <see cref="Sku2"/>. </summary>
-        /// <param name="nestedName"> The name of the sku. </param>
+        /// <param name="nestedName"> The childmost sku property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Sku2(string nestedName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +64,12 @@ namespace MgmtDiscriminator.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the sku. </summary>
+        /// <summary> Initializes a new instance of <see cref="Sku2"/> for deserialization. </summary>
+        internal Sku2()
+        {
+        }
+
+        /// <summary> The childmost sku property. </summary>
         [WirePath("nestedName")]
         public string NestedName { get; set; }
     }

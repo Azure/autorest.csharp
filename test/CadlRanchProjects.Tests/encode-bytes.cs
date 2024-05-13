@@ -6,6 +6,7 @@ using Azure;
 using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace CadlRanchProjects.Tests
 {
@@ -52,8 +53,8 @@ namespace CadlRanchProjects.Tests
         {
             BinaryData data = BinaryData.FromString("test");
             var body = new DefaultBytesProperty(data);
-            Response<DefaultBytesProperty> response = await new BytesClient(host, null).GetPropertyClient().DefaultAsync(body);
-            Assert.AreEqual(body.Value.ToString(), response.Value.Value.ToString());
+            DefaultBytesProperty response = await new BytesClient(host, null).GetPropertyClient().DefaultAsync(body);
+            BinaryDataAssert.AreEqual(body.Value, response.Value);
         });
 
         [Test]
@@ -61,8 +62,8 @@ namespace CadlRanchProjects.Tests
         {
             BinaryData data = BinaryData.FromString("test");
             var body = new Base64BytesProperty(data);
-            Response<Base64BytesProperty> response = await new BytesClient(host, null).GetPropertyClient().Base64Async(body);
-            Assert.AreEqual(body.Value.ToString(), response.Value.Value.ToString());
+            Base64BytesProperty response = await new BytesClient(host, null).GetPropertyClient().Base64Async(body);
+            BinaryDataAssert.AreEqual(body.Value, response.Value);
         });
 
         [Test]
@@ -70,8 +71,8 @@ namespace CadlRanchProjects.Tests
         {
             BinaryData data = BinaryData.FromString("test");
             var body = new Base64urlBytesProperty(data);
-            Response<Base64urlBytesProperty> response = await new BytesClient(host, null).GetPropertyClient().Base64urlAsync(body);
-            Assert.AreEqual(body.Value.ToString(), response.Value.Value.ToString());
+            Base64urlBytesProperty response = await new BytesClient(host, null).GetPropertyClient().Base64urlAsync(body);
+            BinaryDataAssert.AreEqual(body.Value, response.Value);
         });
 
         [Test]
@@ -80,9 +81,9 @@ namespace CadlRanchProjects.Tests
             BinaryData data1 = BinaryData.FromString("test");
             BinaryData data2 = BinaryData.FromString("test");
             var body = new Base64urlArrayBytesProperty(new[] {data1,data2});
-            Response<Base64urlArrayBytesProperty> response = await new BytesClient(host, null).GetPropertyClient().Base64urlArrayAsync(body);
-            Assert.AreEqual(body.Value[0].ToString(), response.Value.Value[0].ToString());
-            Assert.AreEqual(body.Value[1].ToString(), response.Value.Value[1].ToString());
+            Base64urlArrayBytesProperty response = await new BytesClient(host, null).GetPropertyClient().Base64urlArrayAsync(body);
+            BinaryDataAssert.AreEqual(body.Value[0], response.Value[0]);
+            BinaryDataAssert.AreEqual(body.Value[1], response.Value[1]);
         });
 
         [Test]
@@ -129,7 +130,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need to fix cadl-ranch issue.")]
         public Task Encode_Bytes_RequestBody_octetStream() => Test(async (host) =>
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
@@ -138,7 +138,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need to fix cadl-ranch issue.")]
         public Task Encode_Bytes_RequestBody_customContentType() => Test(async (host) =>
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
@@ -160,6 +159,43 @@ namespace CadlRanchProjects.Tests
             BinaryData data = new BinaryData($"\"{Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("test")).Replace('+', '-').Replace('/', '_').Replace("=", "")}\"");
             Response response = await new BytesClient(host, null).GetRequestBodyClient().Base64urlAsync(data);
             Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
+        {
+            var response = await new BytesClient(host, null).GetResponseBodyClient().DefaultAsync();
+            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA==").ToArray(), response.Value.ToArray());
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_octetStream() => Test(async (host) =>
+        {
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
+            var response = await new BytesClient(host, null).GetResponseBodyClient().OctetStreamAsync();
+            CollectionAssert.AreEqual(data.ToArray(), response.Value.ToArray());
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_customContentType() => Test(async (host) =>
+        {
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
+            BinaryData result = await new BytesClient(host, null).GetResponseBodyClient().CustomContentTypeAsync();
+            BinaryDataAssert.AreEqual(data, result);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_base64() => Test(async (host) =>
+        {
+            BinaryData result = await new BytesClient(host, null).GetResponseBodyClient().Base64Async();
+            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA=="), result);
+        });
+
+        [Test]
+        public Task Encode_Bytes_ResponseBody_base64url() => Test(async (host) =>
+        {
+            BinaryData result = await new BytesClient(host, null).GetResponseBodyClient().Base64urlAsync();
+            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA"), result);
         });
     }
 }

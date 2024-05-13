@@ -9,22 +9,22 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
 $root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
+. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 Push-Location $root
 try {
     if ($UnitTests) {
         # check if shared code is up to date
-        & "$root/eng/scripts/preview/Download-SharedSource.ps1"
+        & "$root/eng/scripts/Download-SharedSource.ps1"
 
         try {
             Write-Host 'Checking for changes in shared source...'
-            & "$root/eng/scripts/preview/Check-GitChanges.ps1"
+            & "$root/eng/scripts/Check-GitChanges.ps1"
             Write-Host 'Done. No shared source differences detected.'
         }
         catch {
-            Write-Error 'Shared source files are updated. Please run eng/scripts/preview/Download-SharedSource.ps1'
+            Write-Error 'Shared source files are updated. Please run eng/scripts/Download-SharedSource.ps1'
         }
         
         # build CADL Ranch Mock Api project
@@ -44,6 +44,7 @@ try {
         Push-Location "$root/src/TypeSpec.Extension/Emitter.Csharp"
         try {
             Invoke-LoggedCommand "npm run prettier" -GroupOutput
+            Invoke-LoggedCommand "npm run lint" -GroupOutput
             Invoke-LoggedCommand "npm run build" -GroupOutput
             Invoke-LoggedCommand "npm run test" -GroupOutput
         }
@@ -61,7 +62,7 @@ try {
 
         try {
             Write-Host 'Checking for differences in generated code...'
-            & "$root/eng/scripts/preview/Check-GitChanges.ps1"
+            & "$root/eng/scripts/Check-GitChanges.ps1"
             Write-Host 'Done. No code generation differences detected.'
         }
         catch {

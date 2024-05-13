@@ -1,25 +1,18 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert from "assert";
-import { createModel } from "../../src/lib/clientModelBuilder.js";
-import {
-    typeSpecCompile,
-    createEmitterContext,
-    createEmitterTestHost,
-    navigateModels,
-    createNetSdkContext
-} from "./utils/TestUtil.js";
 import isEqual from "lodash.isequal";
-import {
-    InputDictionaryType,
-    InputEnumType,
-    InputListType,
-    InputModelType
-} from "../../src/type/inputType.js";
-import { getAllHttpServices } from "@typespec/http";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { InputIntrinsicTypeKind } from "../../src/type/inputIntrinsicTypeKind.js";
 import { InputModelProperty } from "../../src/type/inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputDictionaryType } from "../../src/type/inputType.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
+import {
+    createEmitterContext,
+    createEmitterTestHost,
+    createNetSdkContext,
+    typeSpecCompile
+} from "./utils/TestUtil.js";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
@@ -88,7 +81,8 @@ op test(@body input: Pet): Pet;
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
-                    Description: "Discriminator"
+                    Description: "Discriminator",
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
@@ -161,11 +155,9 @@ op test(@body input: Pet): Pet;
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const [services] = getAllHttpServices(program);
-        const modelMap = new Map<string, InputModelType>();
-        const enumMap = new Map<string, InputEnumType>();
-        navigateModels(sdkContext, services[0].namespace, modelMap, enumMap);
-        const pet = modelMap.get("Pet");
+        const codeModel = createModel(sdkContext);
+        const models = codeModel.Models;
+        const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
         assert(
@@ -202,13 +194,14 @@ op test(@body input: Pet): Pet;
                                 Description: undefined
                             }
                         ],
-                        IsExtensible: true,
+                        IsExtensible: false,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
-                    IsDiscriminator: true
+                    IsDiscriminator: true,
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
@@ -218,7 +211,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Cat
-        const cat = modelMap.get("Cat");
+        const cat = models.find((m) => m.Name === "Cat");
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "Cat");
         assert(cat.BaseModel === pet);
@@ -237,7 +230,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Dog
-        const dog = modelMap.get("Dog");
+        const dog = models.find((m) => m.Name === "Dog");
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "Dog");
         assert(dog.BaseModel === pet);
@@ -295,11 +288,9 @@ op test(@body input: Pet): Pet;
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const [services] = getAllHttpServices(program);
-        const modelMap = new Map<string, InputModelType>();
-        const enumMap = new Map<string, InputEnumType>();
-        navigateModels(sdkContext, services[0].namespace, modelMap, enumMap);
-        const pet = modelMap.get("Pet");
+        const codeModel = createModel(sdkContext);
+        const models = codeModel.Models;
+        const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
         assert(
@@ -336,13 +327,14 @@ op test(@body input: Pet): Pet;
                                 Description: undefined
                             }
                         ],
-                        IsExtensible: true,
+                        IsExtensible: false,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
-                    IsDiscriminator: true
+                    IsDiscriminator: true,
+                    FlattenedNames: undefined
                 } as InputModelProperty,
                 discriminatorProperty
             ),
@@ -352,7 +344,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Cat
-        const cat = modelMap.get("Cat");
+        const cat = models.find((m) => m.Name === "Cat");
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "cat");
         assert(cat.BaseModel === pet);
@@ -371,7 +363,7 @@ op test(@body input: Pet): Pet;
         );
 
         // verify derived model Dog
-        const dog = modelMap.get("Dog");
+        const dog = models.find((m) => m.Name === "Dog");
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "dog");
         assert(dog.BaseModel === pet);

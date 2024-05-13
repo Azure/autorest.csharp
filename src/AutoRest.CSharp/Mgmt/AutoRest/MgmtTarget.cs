@@ -19,7 +19,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
-using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -62,10 +61,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
         {
             var addedFilenames = new HashSet<string>();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
 
@@ -158,7 +156,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (model is EmptyResourceData)
+                if (model == ResourceData.Empty)
                     continue;
 
                 var name = model.Type.Name;
@@ -186,10 +184,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
+                var name = resource.Type.Name;
+
                 var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
                 MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
+                AddGeneratedFile(project, $"{name}.cs", writer.ToString());
+
+                // we do not need this if model reader writer feature is not enabled
+                if (Configuration.UseModelReaderWriter)
+                {
+                    WriteSerialization(project, resource, serializeWriter, $"{name}.Serialization.cs");
+                }
             }
 
             var wirePathWriter = new WirePathWriter();
@@ -205,13 +211,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter = new MgmtLongRunningOperationWriter(false);
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
-
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
-            {
-                var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
-                writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
-            }
 
             foreach (var operationSource in MgmtContext.Library.OperationSources)
             {
@@ -294,13 +293,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
-            if (model is MgmtReferenceType mgmtReferenceType)
-            {
-                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
-                if (extensions != null && extensions.MgmtReferenceType)
-                    return;
-            }
+            WriteSerialization(project, model, serializeWriter, serializationFileName);
+        }
 
+        private static void WriteSerialization(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string serializationFileName)
+        {
             var serializerCodeWriter = new CodeWriter();
             serializeWriter.WriteSerialization(serializerCodeWriter, model);
             AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());

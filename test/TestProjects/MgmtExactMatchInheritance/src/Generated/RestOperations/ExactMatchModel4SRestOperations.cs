@@ -37,6 +37,20 @@ namespace MgmtExactMatchInheritance
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreatePutRequestUri(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/exactMatchModel4s/", false);
+            uri.AppendPath(exactMatchModel4SName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4)
         {
             var message = _pipeline.CreateMessage();
@@ -55,7 +69,7 @@ namespace MgmtExactMatchInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ExactMatchModel4>(exactMatchModel4);
+            content.JsonWriter.WriteObjectValue(exactMatchModel4);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

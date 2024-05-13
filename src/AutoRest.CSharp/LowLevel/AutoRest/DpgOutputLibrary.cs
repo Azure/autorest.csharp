@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
+            if (!_isTspInput)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }

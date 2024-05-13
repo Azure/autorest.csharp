@@ -56,6 +56,7 @@ namespace ModelsTypeSpec
             _apiVersion = options.Version;
         }
 
+        /// <summary> Put base model with discriminator defined on base. </summary>
         /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -64,12 +65,13 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
         }
 
+        /// <summary> Put base model with discriminator defined on base. </summary>
         /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -78,14 +80,14 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutBaseModelWithDiscriminatorDefinedOnBase(content, context);
             return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put base model with discriminator defined on base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -124,7 +126,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put base model with discriminator defined on base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -162,6 +164,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Get output discriminator model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetOutputDiscriminatorModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputBaseModelWithDiscriminator>> GetOutputDiscriminatorModelAsync(CancellationToken cancellationToken = default)
@@ -171,6 +174,7 @@ namespace ModelsTypeSpec
             return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
         }
 
+        /// <summary> Get output discriminator model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetOutputDiscriminatorModel(CancellationToken)']/*" />
         public virtual Response<OutputBaseModelWithDiscriminator> GetOutputDiscriminatorModel(CancellationToken cancellationToken = default)
@@ -181,7 +185,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get output discriminator model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -216,7 +220,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get output discriminator model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -259,8 +263,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -274,8 +278,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTrip(content, context);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
@@ -367,8 +371,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripPrimitiveAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
         }
@@ -382,8 +386,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripPrimitive(content, context);
             return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
         }
@@ -475,8 +479,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripOptionalAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
         }
@@ -490,8 +494,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripOptional(content, context);
             return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
         }
@@ -583,8 +587,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripReadOnlyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
         }
@@ -598,8 +602,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripReadOnly(content, context);
             return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
         }
@@ -691,8 +695,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripToOutputAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
@@ -706,8 +710,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripToOutput(content, context);
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
@@ -799,8 +803,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputRecursiveAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -814,8 +818,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputRecursive(content, context);
             return response;
         }
@@ -907,8 +911,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripRecursiveAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
         }
@@ -922,8 +926,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripRecursive(content, context);
             return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
         }
@@ -1293,8 +1297,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripToOutputWithNoUseBaseAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
         }
@@ -1308,8 +1312,8 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripToOutputWithNoUseBase(content, context);
             return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
         }
@@ -1482,6 +1486,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Get single base. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBaseAsync(CancellationToken)']/*" />
         public virtual async Task<Response<SingleBase>> GetSingleBaseAsync(CancellationToken cancellationToken = default)
@@ -1491,6 +1496,7 @@ namespace ModelsTypeSpec
             return Response.FromValue(SingleBase.FromResponse(response), response);
         }
 
+        /// <summary> Get single base. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBase(CancellationToken)']/*" />
         public virtual Response<SingleBase> GetSingleBase(CancellationToken cancellationToken = default)
@@ -1501,7 +1507,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get single base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1536,7 +1542,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get single base.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1570,6 +1576,7 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Generic type. </summary>
         /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1578,12 +1585,13 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GenericTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Generic type. </summary>
         /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1592,14 +1600,14 @@ namespace ModelsTypeSpec
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GenericType(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Generic type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1638,7 +1646,7 @@ namespace ModelsTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Generic type.
         /// <list type="bullet">
         /// <item>
         /// <description>

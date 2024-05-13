@@ -16,7 +16,7 @@ namespace _Type.Property.ValueTypes.Models
 {
     public partial class UnionStringLiteralProperty : IUtf8JsonSerializable, IJsonModel<UnionStringLiteralProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnionStringLiteralProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnionStringLiteralProperty>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UnionStringLiteralProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -28,7 +28,7 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteStringValue(Property.ToString());
+            writer.WriteStringValue(Property.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,7 +61,7 @@ namespace _Type.Property.ValueTypes.Models
 
         internal static UnionStringLiteralProperty DeserializeUnionStringLiteralProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -69,20 +69,20 @@ namespace _Type.Property.ValueTypes.Models
             }
             UnionStringLiteralPropertyProperty property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = new UnionStringLiteralPropertyProperty(property0.Value.GetString());
+                    property = property0.Value.GetString().ToUnionStringLiteralPropertyProperty();
                     continue;
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                    rawDataDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UnionStringLiteralProperty(property, serializedAdditionalRawData);
         }
 
@@ -125,11 +125,11 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeUnionStringLiteralProperty(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<UnionStringLiteralProperty>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

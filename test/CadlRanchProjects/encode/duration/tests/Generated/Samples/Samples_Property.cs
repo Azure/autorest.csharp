@@ -437,6 +437,110 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Seconds_ShortVersion()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = 3.141592,
+            });
+            Response response = client.Float64Seconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Seconds_ShortVersion_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = 3.141592,
+            });
+            Response response = await client.Float64SecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Seconds_ShortVersion_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64SecondsDurationProperty body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(3.141592));
+            Response<Float64SecondsDurationProperty> response = client.Float64Seconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Seconds_ShortVersion_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64SecondsDurationProperty body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(3.141592));
+            Response<Float64SecondsDurationProperty> response = await client.Float64SecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Seconds_AllParameters()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = 3.141592,
+            });
+            Response response = client.Float64Seconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Seconds_AllParameters_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = 3.141592,
+            });
+            Response response = await client.Float64SecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Seconds_AllParameters_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64SecondsDurationProperty body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(3.141592));
+            Response<Float64SecondsDurationProperty> response = client.Float64Seconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Seconds_AllParameters_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64SecondsDurationProperty body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(3.141592));
+            Response<Float64SecondsDurationProperty> response = await client.Float64SecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Property_FloatSecondsArray_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient();

@@ -441,9 +441,14 @@
                     "$ref": "#/definitions/Shell"
                 },
                 "sku": {
-                    "description": "A model that will be safe flattened.",
+                    "description": "The top level sku property.",
                     "type": "object",
                     "$ref": "#/definitions/Sku1"
+                },
+                "unflattened": {
+                    "description": "The unflattened property.",
+                    "type": "object",
+                    "$ref": "#/definitions/Unflattened"
                 },
                 "properties": {
                     "description": "The properties",
@@ -484,6 +489,9 @@
                         }
                     }
                 }
+            },
+            "additionalProperties": {
+                "type": "string"
             }
         },
         "DeliveryRuleListResult": {
@@ -581,8 +589,8 @@
             "description": "A model with a single object for testing safe-flattening",
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "The name of the sku",
+                "name1": {
+                    "description": "The middle sku property",
                     "type": "object",
                     "$ref": "#/definitions/Sku2"
                 }
@@ -591,9 +599,24 @@
         "Sku2": {
             "description": "A model with a single object for testing safe-flattening",
             "type": "object",
+            "required": ["nestedName"],
             "properties": {
                 "nestedName": {
-                    "description": "The name of the sku",
+                    "description": "The childmost sku property",
+                    "type": "string"
+                }
+            }
+        },
+        "Unflattened": {
+            "description": "A model for testing unflattening",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value",
                     "type": "string"
                 }
             }

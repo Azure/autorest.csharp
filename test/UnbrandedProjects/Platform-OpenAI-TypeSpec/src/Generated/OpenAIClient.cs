@@ -28,7 +28,7 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public OpenAIClient(ApiKeyCredential credential) : this(new Uri("https://api.openai.com/v1"), credential, new OpenAIClientOptions())
         {
@@ -36,7 +36,7 @@ namespace OpenAI
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public OpenAIClient(Uri endpoint, ApiKeyCredential credential, OpenAIClientOptions options)

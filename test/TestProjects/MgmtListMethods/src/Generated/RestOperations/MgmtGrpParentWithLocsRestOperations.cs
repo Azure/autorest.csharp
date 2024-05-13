@@ -37,6 +37,18 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string groupId, string mgmtGrpParentWithLocName, MgmtGrpParentWithLocData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGrpParentWithLocs/", false);
+            uri.AppendPath(mgmtGrpParentWithLocName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGrpParentWithLocName, MgmtGrpParentWithLocData data)
         {
             var message = _pipeline.CreateMessage();
@@ -53,7 +65,7 @@ namespace MgmtListMethods
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MgmtGrpParentWithLocData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -115,6 +127,18 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string groupId, string mgmtGrpParentWithLocName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGrpParentWithLocs/", false);
+            uri.AppendPath(mgmtGrpParentWithLocName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string groupId, string mgmtGrpParentWithLocName)
@@ -193,6 +217,17 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string groupId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGrpParentWithLocs", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string groupId)
         {
             var message = _pipeline.CreateMessage();
@@ -258,6 +293,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string groupId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string groupId)

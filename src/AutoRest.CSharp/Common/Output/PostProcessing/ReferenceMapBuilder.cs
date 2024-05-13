@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Utilities;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -54,6 +54,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
         private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, ReferenceMap referenceMap, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> cache)
         {
+            // only add to reference when myself is public
+            if (symbol.DeclaredAccessibility != Accessibility.Public)
+                return;
+
             // process myself, adding base and generic arguments
             AddTypeSymbol(symbol, symbol, referenceMap);
 
@@ -238,7 +242,26 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private void ProcessPropertySymbol(INamedTypeSymbol keySymbol, IPropertySymbol propertySymbol, ReferenceMap referenceMap) => AddTypeSymbol(keySymbol, propertySymbol.Type, referenceMap);
+        private void ProcessPropertySymbol(INamedTypeSymbol keySymbol, IPropertySymbol propertySymbol, ReferenceMap referenceMap)
+        {
+            AddTypeSymbol(keySymbol, propertySymbol.Type, referenceMap);
+
+            // find the node that defines myself
+            var xml = propertySymbol.GetDocumentationCommentXml();
+            if (string.IsNullOrEmpty(xml))
+            {
+                return;
+            }
+
+            var xdoc = XDocument.Parse(xml);
+            var crefs = xdoc.Descendants().Attributes("cref").Select(a => a.Value).Where(a => a[0] == 'T' && a[1] == ':').Select(a => a.Substring(2));
+
+            foreach (var cref in crefs)
+            {
+                var symbol = _compilation.GetTypeByMetadataName(cref);
+                AddTypeSymbol(keySymbol, symbol, referenceMap);
+            }
+        }
 
         private void ProcessFieldSymbol(INamedTypeSymbol keySymbol, IFieldSymbol fieldSymbol, ReferenceMap referenceMap) => AddTypeSymbol(keySymbol, fieldSymbol.Type, referenceMap);
 

@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -21,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static CodeModel CodeModel => Context.CodeModel;
 
-        public static string DefaultNamespace => Context.DefaultNamespace;
+        public static string DefaultNamespace => Configuration.Namespace;
 
         public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);
 

@@ -23,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue<WindowsConfiguration>(WindowsConfiguration);
+                writer.WriteObjectValue(WindowsConfiguration);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue<LinuxConfiguration>(LinuxConfiguration);
+                writer.WriteObjectValue(LinuxConfiguration);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue<VaultSecretGroup>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

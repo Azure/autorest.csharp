@@ -56,7 +56,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Without api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -87,7 +87,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Without api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With query api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With query api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +180,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With path api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace Server.Versions.Versioned
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] With path api version.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -231,6 +231,68 @@ namespace Server.Versions.Versioned
             try
             {
                 using HttpMessage message = CreateWithPathApiVersionRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] With query old api version.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/VersionedClient.xml" path="doc/members/member[@name='WithQueryOldApiVersionAsync(RequestContext)']/*" />
+        public virtual async Task<Response> WithQueryOldApiVersionAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("VersionedClient.WithQueryOldApiVersion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateWithQueryOldApiVersionRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] With query old api version.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/VersionedClient.xml" path="doc/members/member[@name='WithQueryOldApiVersion(RequestContext)']/*" />
+        public virtual Response WithQueryOldApiVersion(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("VersionedClient.WithQueryOldApiVersion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateWithQueryOldApiVersionRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -276,6 +338,20 @@ namespace Server.Versions.Versioned
             uri.Reset(_endpoint);
             uri.AppendPath("/server/versions/versioned/with-path-api-version/", false);
             uri.AppendPath(_apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateWithQueryOldApiVersionRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/server/versions/versioned/with-query-old-api-version", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

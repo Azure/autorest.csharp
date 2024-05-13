@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Authentication.ApiKey;
+using System.Threading.Tasks;
 using Authentication.Http.Custom;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using System.Threading.Tasks;
 
 namespace CadlRanchProjects.Tests
 {

@@ -5,6 +5,7 @@ import { LoggerLevel } from "./lib/logger.js";
 import { tspOutputFileName } from "./constants.js";
 
 export type NetEmitterOptions = {
+    "api-version"?: string;
     outputFile?: string;
     logFile?: string;
     namespace: string;
@@ -34,12 +35,14 @@ export type NetEmitterOptions = {
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
+    "disable-xml-docs"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
     additionalProperties: false,
     properties: {
+        "api-version": { type: "string", nullable: true },
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
         namespace: { type: "string" },
@@ -63,6 +66,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "filter-out-core-models": { type: "boolean", nullable: true },
+        "flatten-union-as-enum": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         "existing-project-folder": { type: "string", nullable: true },
         "keep-non-overloadable-protocol-signature": {
@@ -113,12 +117,14 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true,
             default: false
         },
-        "use-model-reader-writer": { type: "boolean", nullable: true }
+        "use-model-reader-writer": { type: "boolean", nullable: true },
+        "disable-xml-docs": { type: "boolean", nullable: true }
     },
     required: []
 };
 
 const defaultOptions = {
+    "api-version": "latest",
     outputFile: tspOutputFileName,
     logFile: "log.json",
     skipSDKGeneration: false,
@@ -126,6 +132,7 @@ const defaultOptions = {
     csharpGeneratorPath: dllFilePath,
     "clear-output-folder": false,
     "save-inputs": false,
+    "filter-out-core-models": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
     "package-name": undefined,

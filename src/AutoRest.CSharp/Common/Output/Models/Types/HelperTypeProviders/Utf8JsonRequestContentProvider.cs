@@ -4,6 +4,7 @@
 using System;
 using System.ClientModel;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Utf8JsonRequestContentProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal;
-            DefaultName = Configuration.IsBranded ? "Utf8JsonRequestContent" : "Utf8JsonRequestBody";
+            DefaultName = $"Utf8Json{Configuration.ApiTypes.RequestContentType.Name}";
             Inherits = Configuration.ApiTypes.RequestContentType;
 
             _streamField = new FieldDeclaration(

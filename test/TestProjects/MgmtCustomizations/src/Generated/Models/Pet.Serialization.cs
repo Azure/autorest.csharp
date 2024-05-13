@@ -15,7 +15,7 @@ namespace MgmtCustomizations.Models
     [PersistableModelProxy(typeof(UnknownPet))]
     public partial class Pet : IUtf8JsonSerializable, IJsonModel<Pet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pet>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pet>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Pet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -34,12 +34,31 @@ namespace MgmtCustomizations.Models
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("size"u8);
-            SerializeSizeProperty(writer);
+            SerializeSizeProperty(writer, options);
             if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
-                SerializeDateOfBirthProperty(writer);
+                SerializeDateOfBirthProperty(writer, options);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                SerializeColorProperty(writer, options);
+            }
+            writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -72,7 +91,7 @@ namespace MgmtCustomizations.Models
 
         internal static Pet DeserializePet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {

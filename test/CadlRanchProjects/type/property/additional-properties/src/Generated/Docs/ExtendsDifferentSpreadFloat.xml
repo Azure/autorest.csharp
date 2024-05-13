@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetExtendsDifferentSpreadFloatAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadFloatAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response<DifferentSpreadFloatDerived> response = await client.GetExtendsDifferentSpreadFloatAsync();
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadFloatAsync with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response<DifferentSpreadFloatDerived> response = await client.GetExtendsDifferentSpreadFloatAsync();
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadFloat(CancellationToken)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadFloat.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response<DifferentSpreadFloatDerived> response = client.GetExtendsDifferentSpreadFloat();
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadFloat with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response<DifferentSpreadFloatDerived> response = client.GetExtendsDifferentSpreadFloat();
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadFloatAsync(RequestContext)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadFloatAsync and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response response = await client.GetExtendsDifferentSpreadFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadFloatAsync with all parameters and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response response = await client.GetExtendsDifferentSpreadFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
+    </member>
+    <member name="GetExtendsDifferentSpreadFloat(RequestContext)">
+      <example>
+This sample shows how to call GetExtendsDifferentSpreadFloat and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response response = client.GetExtendsDifferentSpreadFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetExtendsDifferentSpreadFloat with all parameters and parse the result.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+Response response = client.GetExtendsDifferentSpreadFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("derivedProp").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(DifferentSpreadFloatDerived,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(DifferentSpreadFloatDerived,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived("<name>", 123.45F);
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = 123.45F,
+    name = "<name>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = 123.45F,
+    name = "<name>",
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = 123.45F,
+    name = "<name>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+ExtendsDifferentSpreadFloat client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadFloatClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    derivedProp = 123.45F,
+    name = "<name>",
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

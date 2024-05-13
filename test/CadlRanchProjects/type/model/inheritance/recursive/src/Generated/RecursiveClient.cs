@@ -47,6 +47,7 @@ namespace _Type.Model.Inheritance.Recursive
             _endpoint = endpoint;
         }
 
+        /// <summary> Put. </summary>
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -55,12 +56,13 @@ namespace _Type.Model.Inheritance.Recursive
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Put. </summary>
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -69,14 +71,14 @@ namespace _Type.Model.Inheritance.Recursive
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,6 +155,7 @@ namespace _Type.Model.Inheritance.Recursive
             }
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='GetRecursiveAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Extension>> GetRecursiveAsync(CancellationToken cancellationToken = default)
@@ -162,6 +165,7 @@ namespace _Type.Model.Inheritance.Recursive
             return Response.FromValue(Extension.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='GetRecursive(CancellationToken)']/*" />
         public virtual Response<Extension> GetRecursive(CancellationToken cancellationToken = default)
@@ -172,7 +176,7 @@ namespace _Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +211,7 @@ namespace _Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>

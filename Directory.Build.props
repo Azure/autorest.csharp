@@ -4,6 +4,7 @@
     <RepoEngPath>$(MSBuildThisFileDirectory)eng</RepoEngPath>
     <RepoSrcPath>$(RepoRoot)src</RepoSrcPath>
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
+    <IsNoDocProject Condition="$(MSBuildProjectName.StartsWith('NoDocs'))">true</IsNoDocProject>
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
     <FakeAzureCoreTestFrameworkSources>$(MSBuildThisFileDirectory)/src/assets/TestFramework/</FakeAzureCoreTestFrameworkSources>
@@ -17,7 +18,9 @@
     <!-- TODO we should figure out how to make our generator create the right thing for these two warnings https://github.com/Azure/autorest.csharp/issues/3706 -->
     <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0006;AZC0007</NoWarn>
     <!-- TODO new project need this-->
-    <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0008</NoWarn> 
+    <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0008</NoWarn>
+    <NoWarn Condition="'$(IsUnbranded)' == 'true'">AZC0107</NoWarn>
+    <NoWarn Condition="'$(IsNoDocProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
     <IncludeSharedSourceInLocalBuild Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProject)' != 'true'">true</IncludeSharedSourceInLocalBuild>
   </PropertyGroup>
 

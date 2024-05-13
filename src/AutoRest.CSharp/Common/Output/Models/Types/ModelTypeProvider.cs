@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -68,8 +70,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (_rawDataField != null)
                     return _rawDataField;
 
-                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                if (!ShouldHaveRawData)
                     return null;
+
+                // if we have an additional properties property, and its value type is also BinaryData, we should not have a raw data field
+                if (AdditionalPropertiesProperty != null)
+                {
+                    var valueType = AdditionalPropertiesProperty.Declaration.Type.ElementType;
+                    if (valueType.EqualsIgnoreNullable(_typeFactory.UnknownType))
+                    {
+                        return null;
+                    }
+                }
 
                 // when this model has derived types, the accessibility should change from private to `protected internal`
                 string accessibility = HasDerivedTypes() ? "private protected" : "private";
@@ -107,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputModel = inputModel;
             _deprecated = inputModel.Deprecated;
             _derivedModels = inputModel.DerivedModels;
-            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is {DiscriminatorPropertyName: not null}
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null }
                 ? this //if I have children and parents then I am my own defaultDerivedType
                 : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
@@ -241,7 +253,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (parent is ModelTypeProvider parentModelType)
             {
-                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == "ToRequestContent"))
+                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.ToRequestContentName))
                     ? MethodSignatureModifiers.Override
                     : MethodSignatureModifiers.Virtual;
             }
@@ -255,7 +267,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModelProperties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, GetBaseObjectType(), _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
+            return new ModelTypeProviderFields(_inputModelProperties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -397,7 +409,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return InitializationConstructor;
 
             // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
-            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+            if (!SerializationConstructorSignature.Parameters.Any(p => p.Type.IsList) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructor;
 
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
@@ -412,7 +424,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // only initialization ctor initializes the discriminator
             // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
             // [TODO]: Consolidate property initializer generation between HLC and DPG
-            if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
+            if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is { Value: { } discriminatorValue } && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -443,8 +455,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
+                    var inputType = parameter?.Type ?? propertyType.InputType;
+                    if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
@@ -462,15 +474,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     initializationValue = defaultCtorParameter;
                 }
-                else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                else if (initializationValue == null && propertyType.IsCollection)
                 {
-                    if (TypeFactory.IsReadOnlyMemory(propertyType))
+                    if (propertyType.IsReadOnlyMemory)
                     {
                         initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                     }
                     else
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        initializationValue = Constant.NewInstanceOf(propertyType.PropertyInitializationType);
                     }
                 }
                 // [TODO]: Consolidate property initializer generation between HLC and DPG
@@ -564,13 +576,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
-            var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, JsonConverter);
+            var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization();
+            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, rawDataField, Discriminator, JsonConverter);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
+        protected override MultipartObjectSerialization? BuildMultipartSerialization()
+        {
+            if (IncludeSerializer && _inputModel.Usage.HasFlag(InputModelTypeUsage.Multipart))
+            {
+                var additionalProperties = CreateMultipartAdditionalPropertiesSerialization();
+                var properties = SerializationBuilder.CreateMultipartPropertySerializations(this).ToArray();
+                return new MultipartObjectSerialization(this, SerializationConstructorSignature.Parameters, properties, additionalProperties, Discriminator, false);
+            }
+            return null;
+        }
+
+        /* handle additionalProperty serialization */
+        private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization()
         {
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
@@ -597,28 +621,85 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            JsonSerialization valueSerialization;
+            MultipartSerialization valueSerialization;
+            var declaredName = additionalPropertiesProperty.Declaration.Name;
+            var memberValueExpression = new TypedMemberExpression(null, declaredName, additionalPropertiesProperty.Declaration.Type);
             if (additionalPropertiesValueType is not null)
             {
                 // build the serialization when there is an input type corresponding to it
-                valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, dictionaryValueType, false, SerializationFormat.Default);
+                valueSerialization = SerializationBuilder.BuildMultipartSerialization(additionalPropertiesValueType, dictionaryValueType, false, SerializationFormat.Default, memberValueExpression);
             }
             else
             {
                 // build a simple one from its type when there is not an input type corresponding to it (indicating it is a raw data field)
-                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+                valueSerialization = new MultipartValueSerialization(dictionaryValueType, SerializationFormat.Default, true);//TODO support dictionary type
             }
 
-            return new JsonAdditionalPropertiesSerialization(
+            return new MultipartAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,
-                valueSerialization,
                 new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                valueSerialization,
                 shouldExcludeInWireSerialization);
+        }
+
+        private (JsonAdditionalPropertiesSerialization? AdditionalPropertiesSerialization, JsonAdditionalPropertiesSerialization? RawDataFieldSerialization) CreateAdditionalPropertiesSerialization()
+        {
+            // collect additional properties and raw data field
+            ObjectTypeProperty? additionalPropertiesProperty = null;
+            ObjectTypeProperty? rawDataField = null;
+            InputType? additionalPropertiesValueInputType = null;
+            foreach (var model in EnumerateHierarchy())
+            {
+                additionalPropertiesProperty ??= model.AdditionalPropertiesProperty;
+                if (additionalPropertiesProperty != null && additionalPropertiesValueInputType == null)
+                {
+                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                    {
+                        additionalPropertiesValueInputType = inheritedDictionaryType.ValueType;
+                    }
+                }
+                rawDataField ??= (model as SerializableObjectType)?.RawDataField;
+            }
+
+            if (additionalPropertiesProperty == null && rawDataField == null)
+            {
+                return (null, null);
+            }
+
+            // build serialization for additional properties property (if any)
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false);
+            // build serialization for raw data field (if any)
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
+
+            return (additionalPropertiesSerialization, rawDataFieldSerialization);
+
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
+            {
+                if (additionalPropertiesProperty is null)
+                    return null;
+
+                var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+                JsonSerialization valueSerialization;
+                if (additionalPropertiesValueType is not null)
+                {
+                    valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false, SerializationFormat.Default);
+                }
+                else
+                {
+                    valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
+                }
+
+                return new JsonAdditionalPropertiesSerialization(
+                    additionalPropertiesProperty,
+                    valueSerialization,
+                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                    shouldExcludeInWireSerialization);
+            }
         }
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _inputModelSerialization.Xml is {} xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
+            return _inputModelSerialization.Xml is { } xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
         }
 
         protected override bool EnsureIncludeSerializer()
@@ -640,14 +721,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return method;
             }
 
-            // [TODO]: Generate FromOperationResponse and ToRequestContent in HLC
-            if (Configuration.Generation1ConvenienceClient)
+            if (Serialization.Json is null)
+            {
                 yield break;
+            }
 
             if (IncludeDeserializer)
+            {
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+            }
+
             if (IncludeSerializer)
-                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), Type);
+            {
+                var type = IsUnknownDerivedType ? Inherits! : Type;
+                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers(), type);
+            }
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
@@ -742,17 +830,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 yield return new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedModel.Type);
             }
-        }
-
-        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
-        {
-            var result = new ModelTypeProvider(
-                _inputModel.ReplaceProperty(property, inputType),
-                DefaultNamespace,
-                _sourceInputModel,
-                _typeFactory,
-                _defaultDerivedType);
-            return result;
         }
     }
 }

@@ -32,10 +32,9 @@
     }
    ],
    "Namespace": "Client.Structure.Service",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [],

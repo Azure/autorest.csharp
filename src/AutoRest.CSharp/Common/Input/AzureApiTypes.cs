@@ -5,6 +5,7 @@ using System;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -36,12 +37,17 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestContext);
 
+        public override string RequestContextName => "context";
+        public override string RequestContextDescription => "The request context, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
         public override Type KeyCredentialPolicyType => typeof(AzureKeyCredentialPolicy);
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, new {Configuration.ApiTypes.ResponseClassifierType}());";
+
+        public override FormattableString CredentialDescription => $"A credential used to authenticate to an Azure Service.";
 
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);
         public override string HttpMessageRequestName => nameof(HttpMessage.Request);
@@ -51,7 +57,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName};";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeader;
+        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields> WriteHeaderMethod => RequestWriterHelpers.WriteHeader;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
@@ -59,6 +65,8 @@ namespace AutoRest.CSharp.Common.Input
         public override CSharpType RequestUriType => typeof(RawRequestUriBuilder);
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
+        public override string MultipartRequestContentTypeName => "MultipartFormDataRequestContent";
+        public override string ToMultipartRequestContentName => "ToMultipartRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
 
         public override Type IXmlSerializableType => typeof(IXmlSerializable);

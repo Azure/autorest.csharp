@@ -44,7 +44,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel));
+            CodeModelTransformer.TransformForMgmt(model);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel, new SchemaUsageProvider(model)));
         }
 
         [Test]
@@ -112,14 +113,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     leastParamCtor = ctor;
             }
             return leastParamCtor;
-        }
-
-        [Test]
-        public void ValidateResourceDataCount()
-        {
-            var count = MgmtContext.Library.ResourceSchemaMap.Value.Count;
-
-            Assert.AreEqual(count, MgmtContext.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
         [TestCase("Delete")]

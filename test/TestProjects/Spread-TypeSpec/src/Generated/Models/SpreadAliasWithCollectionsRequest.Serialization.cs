@@ -16,7 +16,7 @@ namespace SpreadTypeSpec.Models
 {
     internal partial class SpreadAliasWithCollectionsRequest : IUtf8JsonSerializable, IJsonModel<SpreadAliasWithCollectionsRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithCollectionsRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithCollectionsRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SpreadAliasWithCollectionsRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -76,7 +76,7 @@ namespace SpreadTypeSpec.Models
 
         internal static SpreadAliasWithCollectionsRequest DeserializeSpreadAliasWithCollectionsRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace SpreadTypeSpec.Models
             IList<string> requiredStringList = default;
             IList<string> optionalStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringList"u8))
@@ -114,10 +114,10 @@ namespace SpreadTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SpreadAliasWithCollectionsRequest(requiredStringList, optionalStringList ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
@@ -160,11 +160,11 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadAliasWithCollectionsRequest(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SpreadAliasWithCollectionsRequest>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

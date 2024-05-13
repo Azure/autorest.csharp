@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class TerminateNotificationProfile : IUtf8JsonSerializable, IJsonModel<TerminateNotificationProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TerminateNotificationProfile>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TerminateNotificationProfile>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<TerminateNotificationProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -70,7 +70,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static TerminateNotificationProfile DeserializeTerminateNotificationProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             string notBeforeTimeout = default;
             bool? enable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("notBeforeTimeout"u8))
@@ -98,10 +98,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new TerminateNotificationProfile(notBeforeTimeout, enable, serializedAdditionalRawData);
         }
 
@@ -117,15 +117,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NotBeforeTimeout), out propertyOverride);
-            if (Optional.IsDefined(NotBeforeTimeout) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  notBeforeTimeout: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NotBeforeTimeout))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  notBeforeTimeout: ");
                     if (NotBeforeTimeout.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -139,15 +140,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enable), out propertyOverride);
-            if (Optional.IsDefined(Enable) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enable: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Enable))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  enable: ");
                     var boolValue = Enable.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

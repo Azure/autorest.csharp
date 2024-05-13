@@ -4,10 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -20,6 +22,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -65,6 +68,7 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
                 InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
                 InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
+                InputTypeKind.DurationSecondsDouble => SerializationFormat.Duration_Seconds_Double,
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
             },
@@ -91,11 +95,11 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 case InputListType listType:
                     var wrapped = isRoot || listType.Serialization.Xml?.IsWrapped == true;
-                    var arrayElement = BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false);
-                    return new XmlArraySerialization(TypeFactory.GetImplementationType(type), arrayElement, xmlName, wrapped);
+                    var arrayElement = BuildXmlElementSerialization(listType.ElementType, type.ElementType, null, false);
+                    return new XmlArraySerialization(type.InitializationType, arrayElement, xmlName, wrapped);
                 case InputDictionaryType dictionaryType:
-                    var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false);
-                    return new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), valueElement, xmlName);
+                    var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, type.ElementType, null, false);
+                    return new XmlDictionarySerialization(type.InitializationType, valueElement, xmlName);
                 case CodeModelType cmt:
                     return BuildXmlElementSerialization(cmt.Schema, type, name, isRoot);
                 default:
@@ -126,15 +130,15 @@ namespace AutoRest.CSharp.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), null, false),
+                        type.InitializationType,
+                        BuildXmlElementSerialization(arraySchema.ElementType, type.ElementType, null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), null, false),
+                        type.InitializationType,
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, type.ElementType, null, false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
@@ -171,8 +175,8 @@ namespace AutoRest.CSharp.Output.Builders
             return inputType switch
             {
                 CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
-                InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ElementType, valueType.ElementType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
@@ -182,13 +186,14 @@ namespace AutoRest.CSharp.Output.Builders
 
         private static JsonSerialization BuildJsonSerializationFromValue(CSharpType valueType, bool isCollectionElement)
         {
-            if (TypeFactory.IsList(valueType, out var elementType))
+            if (valueType.IsList)
             {
-                return new JsonArraySerialization(valueType, BuildJsonSerializationFromValue(elementType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
+                return new JsonArraySerialization(valueType, BuildJsonSerializationFromValue(valueType.ElementType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
             }
 
-            if (TypeFactory.IsDictionary(valueType, out _, out var dictionaryValueType))
+            if (valueType.IsDictionary)
             {
+                var dictionaryValueType = valueType.Arguments[1];
                 return new JsonDictionarySerialization(valueType, BuildJsonSerializationFromValue(dictionaryValueType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
             }
 
@@ -207,9 +212,9 @@ namespace AutoRest.CSharp.Output.Builders
                 case ConstantSchema constantSchema:
                     return BuildSerialization(constantSchema.ValueType, type, isCollectionElement);
                 case ArraySchema arraySchema:
-                    return new JsonArraySerialization(type, BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                    return new JsonArraySerialization(type, BuildSerialization(arraySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 case DictionarySchema dictionarySchema:
-                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 default:
                     JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
                     return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType), options);
@@ -310,6 +315,7 @@ namespace AutoRest.CSharp.Output.Builders
                     BuildJsonSerializationFromValue(propertyType, false),
                     property.IsRequired,
                     property.IsReadOnly,
+                    property,
                     serializationHooks: new CustomSerializationHooks(
                         serializationMapping?.JsonSerializationValueHook,
                         serializationMapping?.JsonDeserializationValueHook,
@@ -329,6 +335,7 @@ namespace AutoRest.CSharp.Output.Builders
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),
+                property,
                 serializationHooks: new CustomSerializationHooks(
                     serializationMapping?.JsonSerializationValueHook,
                     serializationMapping?.JsonDeserializationValueHook,
@@ -372,39 +379,75 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties)
             {
-                var schemaProperty = property.SchemaProperty!; // we ensured this is never null when constructing the list
-                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
-                if (parameter is null)
+                if (property.SchemaProperty == null)
                 {
-                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    // Property is not part of specification,
+                    var declaredName = property.Declaration.Name;
+                    var propertyType = property.Declaration.Type;
+                    var varName = declaredName.ToVariableName();
+                    yield return new JsonPropertySerialization(
+                        varName,
+                        new TypedMemberExpression(null, property.Declaration.Name, propertyType),
+                        serializationMapping?.SerializationPath?[^1] ?? varName,
+                        propertyType,
+                        BuildJsonSerializationFromValue(propertyType, false),
+                        property.IsRequired,
+                        property.IsReadOnly,
+                        property,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook));
                 }
-
-                var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
-                var isRequired = schemaProperty.IsRequired;
-                var shouldExcludeInWireSerialization = (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) && property.InitializationValue is null && schemaProperty.IsReadOnly;
-                var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
-
-                var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
-                TypedMemberExpression? enumerableExpression = null;
-                if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                else
                 {
-                    enumerableExpression = property.Declaration.Type.IsNullable
-                        ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                        : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    var schemaProperty = property.SchemaProperty;
+                    var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+                    if (parameter is null)
+                    {
+                        throw new InvalidOperationException(
+                            $"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                    }
+
+                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
+                    var isRequired = schemaProperty.IsRequired;
+                    var shouldExcludeInWireSerialization =
+                        (schemaProperty.IsDiscriminator == null || !schemaProperty.IsDiscriminator.Value) &&
+                        property.InitializationValue is null && schemaProperty.IsReadOnly;
+                    var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+
+                    var memberValueExpression =
+                        new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null &&
+                        property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null,
+                                $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}",
+                                typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0]
+                                    .FrameworkType))
+                            : new TypedMemberExpression(null,
+                                $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}",
+                                typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0]
+                                    .FrameworkType));
+                    }
+
+                    yield return new JsonPropertySerialization(
+                        parameter.Name,
+                        memberValueExpression,
+                        serializedName,
+                        property.ValueType,
+                        serialization,
+                        isRequired,
+                        shouldExcludeInWireSerialization,
+                        property,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook),
+                        enumerableExpression: enumerableExpression);
                 }
-                yield return new JsonPropertySerialization(
-                    parameter.Name,
-                    memberValueExpression,
-                    serializedName,
-                    property.ValueType,
-                    serialization,
-                    isRequired,
-                    shouldExcludeInWireSerialization,
-                    serializationHooks: new CustomSerializationHooks(
-                        serializationMapping?.JsonSerializationValueHook,
-                        serializationMapping?.JsonDeserializationValueHook,
-                        serializationMapping?.BicepSerializationValueHook),
-                    enumerableExpression: enumerableExpression);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
@@ -421,17 +464,16 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    if (objectTypeProperty.SchemaProperty != null)
-                    {
-                        propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
-                    }
+                    if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
+                        continue;
+                    propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
 
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
-            var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.JsonConverter);
+            var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization(objectSchema, objectType);
+            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, rawDataField, objectType.Discriminator, objectType.JsonConverter);
         }
 
         public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model, TypeFactory typeFactory)
@@ -447,8 +489,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
-                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
-                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
+                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? property.SchemaProperty?.FlattenedNames ?? new List<string>();
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;
@@ -555,7 +596,96 @@ namespace AutoRest.CSharp.Output.Builders
                 ? inputFlattenedNames[depthIndex]
                 : null;
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
+        private (JsonAdditionalPropertiesSerialization? AdditionalPropertiesSerialization, JsonAdditionalPropertiesSerialization? RawDataFieldSerialization) CreateAdditionalPropertiesSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        {
+            // collect additional properties and raw data field
+            ObjectTypeProperty? additionalPropertiesProperty = null;
+            ObjectTypeProperty? rawDataField = null;
+            foreach (var obj in objectType.EnumerateHierarchy())
+            {
+                additionalPropertiesProperty ??= obj.AdditionalPropertiesProperty;
+                rawDataField ??= (obj as SerializableObjectType)?.RawDataField;
+            }
+            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
+
+            if (additionalPropertiesProperty == null && rawDataField == null)
+            {
+                return (null, null);
+            }
+
+            // build serialization for additional properties property (if any)
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, inheritedDictionarySchema, false);
+            // build serialization for raw data field (if any)
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
+
+            return (additionalPropertiesSerialization, rawDataFieldSerialization);
+
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, DictionarySchema? inheritedDictionarySchema, bool shouldExcludeInWireSerialization)
+            {
+                if (additionalPropertiesProperty == null)
+                {
+                    return null;
+                }
+
+                var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+                JsonSerialization valueSerialization;
+                if (inheritedDictionarySchema is not null)
+                {
+                    valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, additionalPropertyValueType, false);
+                }
+                else
+                {
+                    valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
+                }
+
+                return new JsonAdditionalPropertiesSerialization(
+                    additionalPropertiesProperty,
+                    valueSerialization,
+                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                    shouldExcludeInWireSerialization);
+            }
+        }
+        public MultipartObjectSerialization BuildMultipartObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        {
+            /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
+             *Need to consider the polymorphism and the base class properties.
+             **/
+            var properties = new List<MultipartPropertySerialization>();
+            foreach (ObjectTypeProperty property in objectType.Properties.ToArray())
+            {
+                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
+                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+                if (parameter is null)
+                {
+                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                }
+
+                var serializedName = schemaProperty.SerializedName;
+                var isRequired = schemaProperty.IsRequired;
+                var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
+                var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                MultipartSerialization valueSerialization = BuildMultipartSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+                var propertySerialization = new MultipartPropertySerialization(
+                    parameter.Name,
+                    memberValueExpression,
+                    serializedName,
+                    property.ValueType,
+                    valueSerialization,
+                    isRequired,
+                    shouldExcludeInWireSerialization);
+                properties.Add(propertySerialization);
+            }
+
+            /*build serialization for additional properties*/
+            var additionalProperties = CreateMultipartAdditionalPropertiesSerialization(objectSchema, objectType);
+            return new MultipartObjectSerialization(objectType,
+                objectType.SerializationConstructor.Signature.Parameters,
+                properties,
+                additionalProperties,
+                objectType.Discriminator,
+                false);
+        }
+        private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
             bool shouldExcludeInWireSerialization = false;
@@ -578,21 +708,97 @@ namespace AutoRest.CSharp.Output.Builders
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            JsonSerialization valueSerialization;
+            MultipartSerialization valueSerialization;
             if (inheritedDictionarySchema is not null)
             {
-                valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType, false);
+                valueSerialization = BuildMultipartSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType, false);
             }
             else
             {
-                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+                valueSerialization = new MultipartValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
             }
 
-            return new JsonAdditionalPropertiesSerialization(
-                    additionalPropertiesProperty,
-                    valueSerialization,
-                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                    shouldExcludeInWireSerialization);
+            return new MultipartAdditionalPropertiesSerialization(
+                additionalPropertiesProperty,
+                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                valueSerialization,
+                shouldExcludeInWireSerialization);
+        }
+        public static MultipartSerialization BuildMultipartSerialization(InputType? inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat, ValueExpression memberValueExpression)
+        {
+            /*TODO: need to update to use InputType to identify if it is a Multipart File or not. Current we will set contentType for Bytes and Stream*/
+            if (inputType != null && inputType.Name == InputPrimitiveType.Bytes.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
+            {
+                var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
+                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type from InputType
+                return valueSerialization;
+            }
+            if (inputType != null && inputType.Name == InputPrimitiveType.Stream.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream))
+            {
+                var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
+                valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type from InputType
+                return valueSerialization;
+            }
+            return inputType switch
+            {
+                CodeModelType codeModelType => BuildMultipartSerialization(codeModelType.Schema, valueType, isCollectionElement),
+                InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType => new MultipartDictionarySerialization(valueType, BuildMultipartSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
+            };
+        }
+        public static MultipartSerialization BuildMultipartSerialization(Schema schema, CSharpType type, bool isCollectionElement)
+        {
+            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
+            {
+                return new MultipartValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
+            }
+
+            switch (schema)
+            {
+                case ConstantSchema constantSchema:
+                    return BuildMultipartSerialization(constantSchema.ValueType, type, isCollectionElement);
+                case ArraySchema arraySchema:
+                    return new MultipartArraySerialization(type, BuildMultipartSerialization(arraySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                case DictionarySchema dictionarySchema:
+                    return new MultipartDictionarySerialization(type, BuildMultipartSerialization(dictionarySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
+                default:
+                    return new MultipartValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType));
+            }
+        }
+        public static IEnumerable<MultipartPropertySerialization> CreateMultipartPropertySerializations(ModelTypeProvider model)
+        {
+            foreach (var objType in model.EnumerateHierarchy())
+            {
+                foreach (var property in objType.Properties)
+                {
+                    if (property.InputModelProperty is not { } inputModelProperty)
+                        continue;
+
+                    var declaredName = property.Declaration.Name;
+                    var serializedName = inputModelProperty.SerializedName;
+                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
+                    var valueSerialization = BuildMultipartSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat, memberValueExpression.NullableStructValue());
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (property.Declaration.Type.IsReadOnlyMemory)
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    }
+
+                    yield return new MultipartPropertySerialization(
+                        declaredName.ToVariableName(),
+                        memberValueExpression,
+                        serializedName,
+                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
+                        valueSerialization,
+                        property.IsRequired,
+                        ShouldExcludeInWireSerialization(property, inputModelProperty),
+                        null,
+                        enumerableExpression: enumerableExpression);
+                }
+            }
         }
     }
 }

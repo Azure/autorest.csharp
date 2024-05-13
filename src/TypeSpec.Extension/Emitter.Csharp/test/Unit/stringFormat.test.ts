@@ -1,6 +1,15 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import { getAllHttpServices } from "@typespec/http";
+import assert from "assert";
 import isEqual from "lodash.isequal";
+import { loadOperation } from "../../src/lib/operation.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType
+} from "../../src/type/inputType.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -8,15 +17,6 @@ import {
     navigateModels,
     typeSpecCompile
 } from "./utils/TestUtil.js";
-import { getAllHttpServices } from "@typespec/http";
-import { loadOperation } from "../../src/lib/operation.js";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType
-} from "../../src/type/inputType.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 
 describe("Test string format", () => {
     let runner: TestHost;
@@ -92,7 +92,7 @@ describe("Test string format", () => {
     it("format uri on operation parameter", async () => {
         const program = await typeSpecCompile(
             `
-            op test(@path @format("Uri")sourceUrl: string): void;
+            op test(@path @format("uri")sourceUrl: string): void;
       `,
             runner
         );
@@ -128,7 +128,7 @@ describe("Test string format", () => {
             @doc("This is a model.")
             model Foo {
                 @doc("The source url.")
-                @format("Uri")
+                @format("uri")
                 source: string
             }
       `,
@@ -150,7 +150,10 @@ describe("Test string format", () => {
                     IsNullable: false
                 },
                 foo.Properties[0].Type
-            )
+            ),
+            `string property format is not correct. Got ${JSON.stringify(
+                foo.Properties[0].Type
+            )} `
         );
     });
 

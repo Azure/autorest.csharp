@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Client.Structure.Service.rename.operation.Models;
 
 namespace Client.Structure.Service.rename.operation
 {
@@ -20,7 +21,7 @@ namespace Client.Structure.Service.rename.operation
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _client;
+        private readonly ClientType _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -35,23 +36,20 @@ namespace Client.Structure.Service.rename.operation
 
         /// <summary> Initializes a new instance of RenamedOperationClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedOperationClient(Uri endpoint, string client) : this(endpoint, client, new RenamedOperationClientOptions())
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public RenamedOperationClient(Uri endpoint, ClientType client) : this(endpoint, client, new RenamedOperationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenamedOperationClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedOperationClient(Uri endpoint, string client, RenamedOperationClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public RenamedOperationClient(Uri endpoint, ClientType client, RenamedOperationClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
             options ??= new RenamedOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -62,7 +60,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -93,7 +91,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -124,7 +122,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed three.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -155,7 +153,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed three.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -186,7 +184,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed five.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +215,7 @@ namespace Client.Structure.Service.rename.operation
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Renamed five.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -262,7 +260,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/one", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -277,7 +275,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/three", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -292,7 +290,7 @@ namespace Client.Structure.Service.rename.operation
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/five", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

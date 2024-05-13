@@ -132,7 +132,6 @@ model ModelWithCustomizedProperties {
 }
 
 @doc("Renamed enum (original name: EnumToRename)")
-@fixed
 enum EnumToRename {
     One: "1",
     Two: "2",
@@ -140,7 +139,6 @@ enum EnumToRename {
 }
 
 @doc("Enum with renamed value (original name: ValueToRename)")
-@fixed
 enum EnumWithValueToRename {
     One: "1",
     Two: "2",

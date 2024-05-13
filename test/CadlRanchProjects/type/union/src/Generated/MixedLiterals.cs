@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,26 +45,28 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteralAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse8>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse1>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedLiteralAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse8.FromResponse(response), response);
+            return Response.FromValue(GetResponse1.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteral(CancellationToken)']/*" />
-        public virtual Response<GetResponse8> GetMixedLiteral(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse1> GetMixedLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedLiteral(context);
-            return Response.FromValue(GetResponse8.FromResponse(response), response);
+            return Response.FromValue(GetResponse1.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,6 +135,7 @@ namespace _Type.Union
             }
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -140,12 +144,13 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
+            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
-            Response response = await SendAsync(sendRequest8.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest1.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
@@ -154,14 +159,14 @@ namespace _Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
+            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
-            Response response = Send(sendRequest8.ToRequestContent(), context);
+            Response response = Send(sendRequest1.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -200,7 +205,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>

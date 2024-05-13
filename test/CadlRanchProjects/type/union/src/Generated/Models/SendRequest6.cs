@@ -47,18 +47,15 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest6"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public SendRequest6(EnumsOnlyCases prop)
+        public SendRequest6(GetResponseProp2 prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="SendRequest6"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SendRequest6(EnumsOnlyCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SendRequest6(GetResponseProp2 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -70,6 +67,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public EnumsOnlyCases Prop { get; }
+        public GetResponseProp2 Prop { get; }
     }
 }

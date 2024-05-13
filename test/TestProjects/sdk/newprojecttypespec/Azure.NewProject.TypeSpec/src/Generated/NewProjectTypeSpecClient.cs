@@ -317,8 +317,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -332,8 +332,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AnonymousBody(content, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
@@ -425,8 +425,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -440,8 +440,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(friend, nameof(friend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FriendlyModel(content, context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
@@ -525,7 +525,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -555,7 +555,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Add time header.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -594,8 +594,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return response;
         }
@@ -610,8 +610,8 @@ namespace Azure.NewProject.TypeSpec
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = StringFormat(subscriptionId, content, context);
             return response;
         }

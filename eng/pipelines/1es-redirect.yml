@@ -1,0 +1,87 @@
+resources:
+  repositories:
+    - repository: 1ESPipelineTemplates
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+    - repository: azure-sdk-build-tools
+      type: git
+      name: internal/azure-sdk-build-tools
+      ref: refs/tags/azure-sdk-build-tools_20240507.1
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: azure
+      ref: refs/heads/main
+    - repository: azure-sdk-for-net
+      type: github
+      name: Azure/azure-sdk-for-net
+      endpoint: azure
+      ref: main
+
+parameters:
+- name: stages
+  type: stageList
+  default: []
+- name: variables
+  type: object
+  default: {}
+- name: Use1ESOfficial
+  type: boolean
+  default: true
+- name: BinSkimSettings
+  type: object
+  default: {}
+
+extends:
+  ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
+    template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  ${{ else }}:
+    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    settings:
+      skipBuildTagsForGitHubPullRequests: true
+    sdl:
+      sourceAnalysisPool:
+        name: azsdk-pool-mms-win-2022-general
+        image: azsdk-pool-mms-win-2022-1espt
+        os: windows
+      sourceRepositoriesToScan:
+        exclude:
+          - repository: azure-sdk-build-tools
+          - repository: azure-sdk-tools 
+          - repository: azure-sdk-for-net
+      psscriptanalyzer:
+        compiled: true
+        break: true
+      eslint:
+        enabled: false
+        justificationForDisabling: "ESLint injected task has failures because it uses an old version of mkdirp. We should not fail for tools not controlled by the repo. See: https://dev.azure.com/azure-sdk/internal/_build/results?buildId=3556850"
+      ${{ if parameters.BinSkimSettings }}: 
+        binskim:
+          ${{ parameters.BinSkimSettings }}
+
+    stages:
+    - ${{ each stage in parameters.stages }}:
+      - ${{ each pair in stage }}:
+          ${{ if ne(pair.key, 'variables') }}:
+            ${{ pair.key }}: ${{ pair.value }}
+
+        variables:
+          - template: /eng/pipelines/variables/image.yml@self
+          - ${{ each variable in parameters.variables }}:
+              - ${{ if variable.key }}:
+                  # turn objects into name/value lists
+                  - name: ${{ variable.key }}
+                    value: ${{ variable.value }}
+              - ${{ else }}:
+                  # preserve all other variables
+                  - ${{ variable }}
+          - ${{ each variable in stage.variables }}:
+              - ${{ if variable.key }}:
+                  # turn objects into name/value lists
+                  - name: ${{ variable.key }}
+                    value: ${{ variable.value }}
+              - ${{ else }}:
+                  # preserve all other variables
+                  - ${{ variable }}

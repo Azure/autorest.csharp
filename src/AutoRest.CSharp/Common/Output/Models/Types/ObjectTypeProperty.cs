@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
@@ -184,7 +183,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="unionItems">the list of union type items.</param>
         /// <returns>A list of FormattableString representing the description of each union item.
         /// </returns>
-        public static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
+        internal static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
         {
             var values = new List<FormattableString>();
 
@@ -238,12 +237,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 typeDescription = $"<see cref=\"{input}\"/>";
             }
 
-            if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+            if (input.IsList || input.IsArray)
             {
-                elementType = TypeFactory.GetElementType(input);
+                elementType = input.ElementType;
                 typeDescription = $"{itemName}";
             }
-            else if (TypeFactory.IsDictionary(input))
+            else if (input.IsDictionary)
             {
                 typeDescription = $"{itemName}{{TKey, TValue}}";
             }
@@ -297,7 +296,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="parameterDescription">The parameter description.</param>
         /// <param name="isPropReadOnly">Flag to determine if a property is read only.</param>
         /// <returns>The formatted property description string.</returns>
-        internal FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
+        private FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
         {
             FormattableString description;
             if (string.IsNullOrEmpty(parameterDescription))
@@ -326,17 +325,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (type.IsFrameworkType)
             {
+                // TODO -- need to fix this so that we could have the reference of unioned models.
                 string typeSpecificDesc;
+                var unionTypes = GetUnionTypes(type);
                 IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();
-                if (type.IsUnion || ValueType is { IsUnion: true })
+                if (unionTypes.Count > 0)
                 {
-                    // get the union types, if any
-                    var items = type.IsUnion ? type.UnionItemTypes : ValueType.UnionItemTypes;
-
-                    if (items is { Count: > 0 })
-                    {
-                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
-                    }
+                    unionTypeDescriptions = GetUnionTypesDescriptions(unionTypes);
                 }
 
                 if (type.FrameworkType == typeof(BinaryData))
@@ -344,22 +339,44 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsList(type) &&
-                    type.Arguments[0].IsFrameworkType &&
-                    type.Arguments[0].FrameworkType == typeof(BinaryData))
+                if (type.IsList && HasBinaryData(type.ElementType))
                 {
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsDictionary(type) &&
-                    type.Arguments[1].IsFrameworkType &&
-                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                if (type.IsDictionary && HasBinaryData(type.ElementType))
                 {
                     typeSpecificDesc = "the value of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
             }
-            return $"";
+            return FormattableStringHelpers.Empty;
+
+            // recursively get the union types if any.
+            static IReadOnlyList<CSharpType> GetUnionTypes(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return GetUnionTypes(type.ElementType);
+                }
+                else if (type.IsUnion)
+                {
+                    return type.UnionItemTypes;
+                }
+
+                return Array.Empty<CSharpType>();
+            }
+
+            // recursively get if any element or argument of this type is BinaryData
+            static bool HasBinaryData(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return HasBinaryData(type.ElementType);
+                }
+
+                return type.IsFrameworkType && type.FrameworkType == typeof(BinaryData);
+            }
         }
 
         private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat, IReadOnlyList<FormattableString> unionTypeDescriptions)
@@ -431,14 +448,14 @@ Examples:
             FormattableString? updatedDescription = null;
             if (valueType.IsFrameworkType)
             {
-                if (TypeFactory.IsList(valueType))
+                if (valueType.IsList)
                 {
                     if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
-                else if (TypeFactory.IsDictionary(valueType))
+                else if (valueType.IsDictionary)
                 {
                     var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
                     if (objectTypes.Any())

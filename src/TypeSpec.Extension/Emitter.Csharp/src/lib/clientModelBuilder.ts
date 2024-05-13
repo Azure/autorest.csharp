@@ -3,6 +3,7 @@
 
 import {
     SdkClient,
+    getAllModels,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -12,28 +13,28 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
-    listServices,
+    NoTarget,
     Service,
     getDoc,
     getNamespaceFullName,
-    Operation,
     ignoreDiagnostics,
-    NoTarget,
-    Namespace,
-    Interface,
-    getLocationContext
+    listServices
 } from "@typespec/compiler";
 import {
-    getAuthentication,
-    getServers,
     HttpOperation,
     getAllHttpServices,
-    getHttpOperation
+    getAuthentication,
+    getHttpOperation,
+    getServers
 } from "@typespec/http";
 import { getVersions } from "@typespec/versioning";
+import { $lib } from "../emitter.js";
 import { NetEmitterOptions, resolveOptions } from "../options.js";
+import { ClientKind } from "../type/clientKind.js";
 import { CodeModel } from "../type/codeModel.js";
+import { InputClient } from "../type/inputClient.js";
 import { InputConstant } from "../type/inputConstant.js";
+import { InputOperation } from "../type/inputOperation.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
 import { InputParameter } from "../type/inputParameter.js";
 import {
@@ -43,23 +44,21 @@ import {
 } from "../type/inputType.js";
 import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
-import { getExternalDocs } from "./decorators.js";
+import { Usage } from "../type/usage.js";
+import { logger } from "./logger.js";
+import { getUsages, navigateModels } from "./model.js";
+import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./serviceAuthentication.js";
 import { resolveServers } from "./typespecServer.js";
-import { InputClient } from "../type/inputClient.js";
-import { ClientKind } from "../type/clientKind.js";
-import { InputOperation } from "../type/inputOperation.js";
-import { getUsages, navigateModels } from "./model.js";
-import { Usage } from "../type/usage.js";
-import { loadOperation } from "./operation.js";
-import { logger } from "./logger.js";
-import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function createModel(
     sdkContext: SdkContext<NetEmitterOptions>
 ): CodeModel {
+    // initialize tcgc model
+    if (!sdkContext.operationModelsMap) getAllModels(sdkContext);
+
     const services = listServices(sdkContext.emitContext.program);
     if (services.length === 0) {
         services.push({
@@ -81,7 +80,6 @@ export function createModelForService(
     sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(sdkContext.emitContext);
     const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
 
@@ -107,7 +105,6 @@ export function createModelForService(
             : undefined;
 
     const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
@@ -155,8 +152,44 @@ export function createModelForService(
         addChildClients(sdkContext.emitContext, client, clients);
     }
 
+    navigateModels(sdkContext, modelMap, enumMap);
+
+    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
+    setUsage(usages, modelMap);
+    setUsage(usages, enumMap);
+
     for (const client of clients) {
         for (const op of client.Operations) {
+            /* TODO: remove this when adopt tcgc.
+             *set Multipart usage for models.
+             */
+            const bodyParameter = op.Parameters.find(
+                (value) => value.Location === RequestLocation.Body
+            );
+            if (
+                bodyParameter &&
+                bodyParameter.Type &&
+                (bodyParameter.Type as InputModelType)
+            ) {
+                const inputModelType = bodyParameter.Type as InputModelType;
+                op.RequestMediaTypes?.forEach((item) => {
+                    if (
+                        item === "multipart/form-data" &&
+                        !inputModelType.Usage.includes(Usage.Multipart)
+                    ) {
+                        if (inputModelType.Usage.trim().length === 0) {
+                            inputModelType.Usage = inputModelType.Usage.concat(
+                                Usage.Multipart
+                            );
+                        } else {
+                            inputModelType.Usage = inputModelType.Usage.trim()
+                                .concat(",")
+                                .concat(Usage.Multipart);
+                        }
+                    }
+                });
+            }
+
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
@@ -174,12 +207,6 @@ export function createModelForService(
             }
         }
     }
-
-    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
-
-    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    setUsage(usages, modelMap);
-    setUsage(usages, enumMap);
 
     const clientModel = {
         Name: namespace,
@@ -202,7 +229,7 @@ export function createModelForService(
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
-            var subClient = emitClient(dpgGroup, client);
+            const subClient = emitClient(dpgGroup, client);
             clients.push(subClient);
             addChildClients(context, dpgGroup, clients);
         }
@@ -213,13 +240,24 @@ export function createModelForService(
             return client.name;
         }
 
-        var pathParts = client.groupPath.split(".");
+        const pathParts = client.groupPath.split(".");
         if (pathParts?.length >= 3) {
             return pathParts.slice(pathParts.length - 2).join("");
         }
 
-        var clientName = getLibraryName(sdkContext, client.type);
-        return clientName === "Models" ? "ModelsOps" : clientName;
+        const clientName = getLibraryName(sdkContext, client.type);
+        if (
+            clientName === "Models" &&
+            resolveOptions(sdkContext.emitContext)["model-namespace"] !== false
+        ) {
+            $lib.reportDiagnostic(program, {
+                code: "Invalid-Name",
+                format: { name: clientName },
+                target: client.type
+            });
+            return "ModelsOps";
+        }
+        return clientName;
     }
 
     function emitClient(

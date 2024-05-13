@@ -19,8 +19,7 @@
     }
    ],
    "Namespace": "SpreadTypeSpec",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

@@ -83,11 +83,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             var dateTimeValue = (ValueExpression)dateTimeParameter;
             var dateTimeValueKind = dateTimeValue.Property(nameof(DateTime.Kind));
             var format = new StringExpression(formatParameter);
+            var sdkName = Configuration.IsBranded ? "Azure SDK requires" : "Generated clients require";
             yield return new Method(dateTimeSignature,
                 new SwitchExpression(dateTimeValueKind, new SwitchCaseExpression[]
                 {
                     new(new MemberExpression(typeof(DateTimeKind), nameof(DateTimeKind.Utc)), ToString(dateTimeValue.CastTo(typeof(DateTimeOffset)), format)),
-                    SwitchCaseExpression.Default(ThrowExpression(New.NotSupportedException(new FormattableStringExpression("DateTime {0} has a Kind of {1}. Azure SDK requires it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.", dateTimeValue, dateTimeValueKind))))
+                    SwitchCaseExpression.Default(ThrowExpression(New.NotSupportedException(new FormattableStringExpression($"DateTime {{0}} has a Kind of {{1}}. {sdkName} it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.", dateTimeValue, dateTimeValueKind))))
                 }));
 
             var dateTimeOffsetParameter = boolValueParameter with { Type = typeof(DateTimeOffset) };

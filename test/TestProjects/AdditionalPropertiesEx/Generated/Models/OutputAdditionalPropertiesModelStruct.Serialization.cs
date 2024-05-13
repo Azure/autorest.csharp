@@ -9,13 +9,14 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
     public partial struct OutputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<OutputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OutputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -32,6 +33,21 @@ namespace AdditionalPropertiesEx.Models
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -54,11 +70,13 @@ namespace AdditionalPropertiesEx.Models
 
         internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -66,10 +84,19 @@ namespace AdditionalPropertiesEx.Models
                     id = property.Value.GetInt32();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (property.Value.ValueKind == JsonValueKind.String || property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OutputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
@@ -108,5 +135,21 @@ namespace AdditionalPropertiesEx.Models
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
         string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static OutputAdditionalPropertiesModelStruct FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

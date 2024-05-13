@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions
@@ -22,7 +21,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         {
             public virtual Method BuildConversionToRequestBodyMethod(MethodSignatureModifiers modifiers, CSharpType type)
             {
-                var utf8RequestContent = Utf8JsonRequestContentProvider.Instance;
                 var bodyStatements = Configuration.IsBranded
                     ? new[]
                     {
@@ -32,11 +30,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                     }
                     : new[]
                     {
-                        Return(BinaryContentExpression.Create(This, ModelReaderWriterOptionsExpression.Wire))
+                        Return(BinaryContentExpression.Create(This, ModelReaderWriterOptionsExpression.Wire, type))
                     };
                 return new Method
                 (
-                    new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a {utf8RequestContent.Declaration.Name}.", modifiers, utf8RequestContent.Inherits, null, Array.Empty<Parameter>()),
+                    new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a {Configuration.ApiTypes.RequestContentType:C}.", modifiers, Configuration.ApiTypes.RequestContentType, null, Array.Empty<Parameter>()),
                     bodyStatements
                 );
             }

@@ -19,7 +19,6 @@ union ImputeMode {
   NotFill: "notFill",
 }
 
-@fixed
 enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",
@@ -35,7 +34,6 @@ enum AnomalyDetectorErrorCodes {
 }
 
 @doc("the time granularity of the data points.")
-@fixed
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",

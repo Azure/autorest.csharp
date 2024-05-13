@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetSpreadModelArrayAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadModelArrayAsync.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response<SpreadModelArrayRecord> response = await client.GetSpreadModelArrayAsync();
+]]></code>
+This sample shows how to call GetSpreadModelArrayAsync with all parameters.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response<SpreadModelArrayRecord> response = await client.GetSpreadModelArrayAsync();
+]]></code></example>
+    </member>
+    <member name="GetSpreadModelArray(CancellationToken)">
+      <example>
+This sample shows how to call GetSpreadModelArray.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response<SpreadModelArrayRecord> response = client.GetSpreadModelArray();
+]]></code>
+This sample shows how to call GetSpreadModelArray with all parameters.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response<SpreadModelArrayRecord> response = client.GetSpreadModelArray();
+]]></code></example>
+    </member>
+    <member name="GetSpreadModelArrayAsync(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadModelArrayAsync and parse the result.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response response = await client.GetSpreadModelArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+]]></code>
+This sample shows how to call GetSpreadModelArrayAsync with all parameters and parse the result.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response response = await client.GetSpreadModelArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+]]></code></example>
+    </member>
+    <member name="GetSpreadModelArray(RequestContext)">
+      <example>
+This sample shows how to call GetSpreadModelArray and parse the result.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response response = client.GetSpreadModelArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+]]></code>
+This sample shows how to call GetSpreadModelArray with all parameters and parse the result.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+Response response = client.GetSpreadModelArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(SpreadModelArrayRecord,CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+SpreadModelArrayRecord body = new SpreadModelArrayRecord(new ModelForRecord[]
+{
+    new ModelForRecord("<state>")
+});
+Response response = await client.PutAsync(body);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+SpreadModelArrayRecord body = new SpreadModelArrayRecord(new ModelForRecord[]
+{
+    new ModelForRecord("<state>")
+});
+Response response = await client.PutAsync(body);
+]]></code></example>
+    </member>
+    <member name="Put(SpreadModelArrayRecord,CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+SpreadModelArrayRecord body = new SpreadModelArrayRecord(new ModelForRecord[]
+{
+    new ModelForRecord("<state>")
+});
+Response response = client.Put(body);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+SpreadModelArrayRecord body = new SpreadModelArrayRecord(new ModelForRecord[]
+{
+    new ModelForRecord("<state>")
+});
+Response response = client.Put(body);
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    knownProp = new object[]
+    {
+        new
+        {
+            state = "<state>",
+        }
+    },
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    knownProp = new object[]
+    {
+        new
+        {
+            state = "<state>",
+        }
+    },
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    knownProp = new object[]
+    {
+        new
+        {
+            state = "<state>",
+        }
+    },
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+SpreadModelArray client = new AdditionalPropertiesClient().GetSpreadModelArrayClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    knownProp = new object[]
+    {
+        new
+        {
+            state = "<state>",
+        }
+    },
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

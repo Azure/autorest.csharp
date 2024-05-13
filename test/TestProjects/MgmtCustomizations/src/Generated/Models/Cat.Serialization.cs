@@ -15,7 +15,7 @@ namespace MgmtCustomizations.Models
 {
     public partial class Cat : IUtf8JsonSerializable, IJsonModel<Cat>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cat>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cat>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Cat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -49,12 +49,31 @@ namespace MgmtCustomizations.Models
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("size"u8);
-            SerializeSizeProperty(writer);
+            SerializeSizeProperty(writer, options);
             if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
-                SerializeDateOfBirthProperty(writer);
+                SerializeDateOfBirthProperty(writer, options);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color"u8);
+                SerializeColorProperty(writer, options);
+            }
+            writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -87,7 +106,7 @@ namespace MgmtCustomizations.Models
 
         internal static Cat DeserializeCat(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,8 +119,10 @@ namespace MgmtCustomizations.Models
             string name = default;
             int size = default;
             DateTimeOffset? dateOfBirth = default;
+            IDictionary<string, string> tags = default;
+            string color = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sleep"u8))
@@ -143,17 +164,50 @@ namespace MgmtCustomizations.Models
                     dateOfBirth = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("color"u8))
+                        {
+                            DeserializeColorProperty(property0, ref color);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Cat(
                 kind,
                 name,
                 size,
                 dateOfBirth,
+                color,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
                 serializedAdditionalRawData,
                 sleep,
                 jump,

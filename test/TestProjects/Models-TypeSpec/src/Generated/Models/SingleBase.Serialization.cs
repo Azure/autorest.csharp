@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
     [PersistableModelProxy(typeof(UnknownSingleBase))]
     public partial class SingleBase : IUtf8JsonSerializable, IJsonModel<SingleBase>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingleBase>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingleBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SingleBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
 
         internal static SingleBase DeserializeSingleBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,11 +111,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeSingleBase(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SingleBase>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

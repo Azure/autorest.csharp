@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
-                    writer.WriteObjectValue<NetworkInterfaceReference>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

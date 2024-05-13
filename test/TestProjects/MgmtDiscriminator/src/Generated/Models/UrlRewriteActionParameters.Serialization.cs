@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlRewriteActionParameters : IUtf8JsonSerializable, IJsonModel<UrlRewriteActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteActionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UrlRewriteActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -71,7 +71,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRewriteActionParameters DeserializeUrlRewriteActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,7 +82,7 @@ namespace MgmtDiscriminator.Models
             string destination = default;
             bool? preserveUnmatchedPath = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -111,10 +111,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UrlRewriteActionParameters(typeName, sourcePattern, destination, preserveUnmatchedPath, serializedAdditionalRawData);
         }
 
@@ -130,26 +130,28 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride);
-            if (Optional.IsDefined(SourcePattern) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  sourcePattern: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(SourcePattern))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  sourcePattern: ");
                     if (SourcePattern.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -163,15 +165,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride);
-            if (Optional.IsDefined(Destination) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  destination: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Destination))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  destination: ");
                     if (Destination.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -185,15 +188,16 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride);
-            if (Optional.IsDefined(PreserveUnmatchedPath) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  preserveUnmatchedPath: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(PreserveUnmatchedPath))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  preserveUnmatchedPath: ");
                     var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

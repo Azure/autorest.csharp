@@ -10,7 +10,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
 $root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
-. "$root/eng/scripts/preview/CommandInvocation-Helpers.ps1"
+. "$root/eng/scripts/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
 $artifactsPath = "$root/artifacts"
@@ -32,7 +32,6 @@ if ($BuildNumber) {
     # set package versions
     $versionTag = $Prerelease ? "-alpha" : "-beta"
 
-    # TODO: Remove 'x' suffix before merge    
     $generatorVersion = "$generatorVersion$versionTag.$BuildNumber"
     Write-Host "Setting output variable 'generatorVersion' to $generatorVersion"
     Write-Host "##vso[task.setvariable variable=generatorVersion;isoutput=true]$generatorVersion"

@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -73,39 +72,6 @@ namespace AutoRest.CSharp.Output.Models
                 var ns = Configuration.Generation1ConvenienceClient ? inputEnum.Namespace : null;
                 enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
-
-            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
-            foreach (var model in models.Keys)
-            {
-                foreach (var property in model.Properties)
-                {
-                    if (property.Type is not InputUnionType union)
-                        continue;
-
-                    if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
-                    {
-                        string modelName = models[model].Type.Name;
-                        InputEnumType inputEnum = new InputEnumType(
-                            $"{modelName}{GetNameWithCorrectPluralization(union, property.Name)}",
-                            model.Namespace,
-                            model.Accessibility,
-                            null,
-                            $"Enum for {property.Name} in {modelName}",
-                            model.Usage,
-                            InputPrimitiveType.String,
-                            union.GetEnum(),
-                            true,
-                            union.IsNullable);
-                        enumsToReplace.Add((model, property, inputEnum));
-                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
-                    }
-                }
-            }
-
-            foreach (var (containingModel, property, enumType) in enumsToReplace)
-            {
-                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
-            }
         }
 
         public static void CreateModels(IReadOnlyList<InputModelType> inputModels, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
@@ -118,34 +84,6 @@ namespace AutoRest.CSharp.Output.Models
                 var ns = Configuration.Generation1ConvenienceClient ? model.Namespace : null;
                 var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
-            }
-        }
-
-        public static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-        {
-            var models = new Dictionary<InputModelType, ModelTypeProvider>();
-            CreateModels(inputModels, models, typeFactory, sourceInputModel);
-            return models;
-        }
-
-        public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-        {
-            var enums = new Dictionary<InputEnumType, EnumType>();
-            CreateEnums(inputEnums, enums, models, typeFactory, sourceInputModel);
-            return enums;
-        }
-
-        private static string GetNameWithCorrectPluralization(InputType type, string name)
-        {
-            //TODO: Probably needs special casing for ipThing to become IPThing
-            string result = name.FirstCharToUpperCase();
-            switch (type)
-            {
-                case InputListType:
-                case InputDictionaryType:
-                    return result.ToSingular();
-                default:
-                    return result;
             }
         }
 
@@ -389,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        //Assgin parent according to the customized inputModel
+        //Assign parent according to the customized inputModel
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;

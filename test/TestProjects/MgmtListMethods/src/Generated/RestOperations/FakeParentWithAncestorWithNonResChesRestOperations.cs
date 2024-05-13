@@ -37,6 +37,20 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithNonResChes/", false);
+            uri.AppendPath(fakeParentWithAncestorWithNonResChName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData data)
         {
             var message = _pipeline.CreateMessage();
@@ -55,7 +69,7 @@ namespace MgmtListMethods
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<FakeParentWithAncestorWithNonResChData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -121,6 +135,20 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithNonResChes/", false);
+            uri.AppendPath(fakeParentWithAncestorWithNonResChName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName)
@@ -205,6 +233,19 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListTestRequestUri(string subscriptionId, string fakeName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithNonResChes", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListTestRequest(string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -276,6 +317,21 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNonResourceChildRequestUri(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithNonResChes/", false);
+            uri.AppendPath(fakeParentWithAncestorWithNonResChName, true);
+            uri.AppendPath("/nonResourceChild", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateListNonResourceChildRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChName)
@@ -357,6 +413,17 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListBySubscriptionRequestUri(string subscriptionId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -422,6 +489,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListTestNextPageRequestUri(string nextLink, string subscriptionId, string fakeName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListTestNextPageRequest(string nextLink, string subscriptionId, string fakeName)
@@ -494,6 +569,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListBySubscriptionNextPageRequestUri(string nextLink, string subscriptionId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)

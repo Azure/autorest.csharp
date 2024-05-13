@@ -77,11 +77,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format == SerializationFormat.Duration_Seconds)
+                if (format is SerializationFormat.Duration_Seconds)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
                 }
-                else if (format == SerializationFormat.Duration_Seconds_Float)
+                else if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }

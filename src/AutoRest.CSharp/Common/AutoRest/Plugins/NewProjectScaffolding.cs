@@ -343,7 +343,7 @@ extends:
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.1.0-beta.2"),
+            new("System.ClientModel", "1.1.0-beta.3"),
             new("System.Text.Json", "4.7.2")
         };
 

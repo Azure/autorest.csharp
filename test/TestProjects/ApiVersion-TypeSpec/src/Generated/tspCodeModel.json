@@ -9,6 +9,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "APIVersion",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -46,8 +47,7 @@
     }
    ],
    "Namespace": "ApiVersionInTsp",
-   "Description": "",
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "None"
   }

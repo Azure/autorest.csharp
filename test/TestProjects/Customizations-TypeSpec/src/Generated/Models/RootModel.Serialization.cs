@@ -16,7 +16,7 @@ namespace CustomizationsInTsp.Models
 {
     public partial class RootModel : IUtf8JsonSerializable, IJsonModel<RootModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RootModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -40,17 +40,17 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                writer.WriteObjectValue<RenamedModel>(PropertyModelToRename, options);
+                writer.WriteObjectValue(PropertyModelToRename, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                writer.WriteObjectValue<ModelToChangeNamespace>(PropertyModelToChangeNamespace, options);
+                writer.WriteObjectValue(PropertyModelToChangeNamespace, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                writer.WriteObjectValue<ModelWithCustomizedProperties>(PropertyModelWithCustomizedProperties, options);
+                writer.WriteObjectValue(PropertyModelWithCustomizedProperties, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -70,7 +70,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                writer.WriteObjectValue<ModelToAddAdditionalSerializableProperty>(PropertyModelToAddAdditionalSerializableProperty, options);
+                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
@@ -80,7 +80,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelStruct))
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
-                writer.WriteObjectValue<ModelStruct?>(PropertyModelStruct, options);
+                writer.WriteObjectValue(PropertyModelStruct, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -114,7 +114,7 @@ namespace CustomizationsInTsp.Models
 
         internal static RootModel DeserializeRootModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -132,7 +132,7 @@ namespace CustomizationsInTsp.Models
             NormalEnum? propertyToMoveToCustomization = default;
             ModelStruct? propertyModelStruct = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyExtensibleEnum"u8))
@@ -236,10 +236,10 @@ namespace CustomizationsInTsp.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RootModel(
                 propertyExtensibleEnum,
                 propertyModelToMakeInternal,
@@ -294,11 +294,11 @@ namespace CustomizationsInTsp.Models
             return DeserializeRootModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RootModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

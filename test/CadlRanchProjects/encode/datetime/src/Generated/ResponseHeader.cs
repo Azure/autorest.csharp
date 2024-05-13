@@ -44,7 +44,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -75,7 +75,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -106,7 +106,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 3339.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,7 +137,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 3339.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -168,7 +168,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 7231.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -199,7 +199,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 7231.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -230,7 +230,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -261,7 +261,7 @@ namespace Encode.Datetime
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp.
         /// <list type="bullet">
         /// <item>
         /// <description>

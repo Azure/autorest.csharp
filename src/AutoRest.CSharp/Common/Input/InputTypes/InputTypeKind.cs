@@ -24,6 +24,7 @@ internal enum InputTypeKind
     DurationConstant,
     DurationSeconds,
     DurationSecondsFloat,
+    DurationSecondsDouble,
     ETag,
     Float32,
     Float64,
@@ -42,5 +43,6 @@ internal enum InputTypeKind
     Time,
     Uri,
     SByte,
-    Byte
+    Byte,
+    Char
 }

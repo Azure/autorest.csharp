@@ -44,6 +44,7 @@ namespace Client.Naming
             _endpoint = endpoint;
         }
 
+        /// <summary> Client. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -52,12 +53,13 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Client. </summary>
         /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
@@ -66,14 +68,14 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Client(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Client.Naming
             }
         }
 
+        /// <summary> Language. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -158,12 +161,13 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(csModel, nameof(csModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Language. </summary>
         /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
@@ -172,14 +176,14 @@ namespace Client.Naming
         {
             Argument.AssertNotNull(csModel, nameof(csModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Language.
         /// <list type="bullet">
         /// <item>
         /// <description>

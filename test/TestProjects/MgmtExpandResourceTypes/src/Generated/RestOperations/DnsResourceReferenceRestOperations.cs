@@ -37,6 +37,17 @@ namespace MgmtExpandResourceTypes
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateGetByTargetResourcesRequestUri(string subscriptionId, DnsResourceReferenceContent content)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Network/getDnsResourceReference", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetByTargetResourcesRequest(string subscriptionId, DnsResourceReferenceContent content)
         {
             var message = _pipeline.CreateMessage();
@@ -52,7 +63,7 @@ namespace MgmtExpandResourceTypes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue<DnsResourceReferenceContent>(content);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

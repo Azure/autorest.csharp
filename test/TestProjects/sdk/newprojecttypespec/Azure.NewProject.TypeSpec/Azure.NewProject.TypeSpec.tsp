@@ -33,7 +33,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @doc("float fixed enum")
-@fixed
 enum FloatFixedEnum {
     One: 1.1,
     Two: 2.2,
@@ -41,7 +40,6 @@ enum FloatFixedEnum {
 }
 
 @doc("int fixed enum")
-@fixed
 enum IntFixedEnum {
     One: 1,
     Two: 2,
@@ -49,7 +47,6 @@ enum IntFixedEnum {
 }
 
 @doc("Simple enum")
-@fixed
 enum StringFixedEnum {
     One: "1",
     Two: "2",
@@ -201,7 +198,7 @@ union DaysOfWeekExtensibleEnum {
 
 model ModelWithFormat {
     @doc("url format")
-    @format("Uri")
+    @format("uri")
     sourceUrl: string;
 
     @doc("uuid format")
@@ -296,11 +293,12 @@ op addTimeHeader(
 @convenientAPI(true)
 op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
+// TODO: https://github.com/Azure/typespec-azure/issues/509
 namespace EnumTest {
-    @get
+    @put
     @route("/unknown-value")
-    @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
+    @doc("create extensible enum")
+    op getUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
 namespace ProtocolAndConvenient {

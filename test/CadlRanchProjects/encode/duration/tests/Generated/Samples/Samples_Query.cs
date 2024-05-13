@@ -194,6 +194,50 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Float64Seconds_ShortVersion()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Float64Seconds_ShortVersion_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Float64Seconds_AllParameters()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Float64Seconds_AllParameters_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Query_Int32SecondsArray_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient();
