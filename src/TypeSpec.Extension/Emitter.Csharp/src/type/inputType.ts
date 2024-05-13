@@ -21,9 +21,7 @@ export interface InputLiteralType extends InputType {
     Kind: InputTypeKind.Literal;
     Name: InputTypeKind.Literal; // literal type does not really have a name right now, we just use its kind
     LiteralValueType: InputType;
-    /* eslint-disable @typescript-eslint/no-explicit-any -- TODO: can we specify the range of value types? */
     Value: any;
-    /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 export function isInputLiteralType(type: InputType): type is InputLiteralType {

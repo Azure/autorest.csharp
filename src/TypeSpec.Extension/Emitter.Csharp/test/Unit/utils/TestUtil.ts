@@ -113,21 +113,17 @@ export function navigateModels(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeModel = (x: Type) => {
-        getInputType(context, x, models, enums);
-    };
+    const computeModel = (x: Type) =>
+        getInputType(context, x, models, enums) as any;
     const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
     navigateTypesInNamespace(
         namespace,
         {
-            model: (x) => {
-                if (x.name !== "" && x.kind === "Model") computeModel(x);
-            },
+            model: (x) =>
+                x.name !== "" && x.kind === "Model" && computeModel(x),
             scalar: computeModel,
             enum: computeModel,
-            union: (x) => {
-                if (x.name !== undefined) computeModel(x);
-            }
+            union: (x) => x.name !== undefined && computeModel(x)
         },
         { skipSubNamespaces }
     );

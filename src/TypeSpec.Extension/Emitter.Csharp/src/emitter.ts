@@ -214,13 +214,10 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
                 try {
                     execSync(command, { stdio: "inherit" });
-                } catch (error: unknown) {
-                    if (error instanceof Error) {
-                        logger.error(error.message);
-                        logger.error(error.stack);
-                    } else {
-                        logger.error(`Error: ${error}`);
-                    }
+                } catch (error: any) {
+                    if (error.message) logger.info(error.message);
+                    if (error.stderr) logger.error(error.stderr);
+                    if (error.stdout) logger.verbose(error.stdout);
                     throw error;
                 }
             }
