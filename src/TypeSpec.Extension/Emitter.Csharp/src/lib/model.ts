@@ -84,7 +84,6 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any -- A special recursion */
 export function getDefaultValue(type: Type): any {
     switch (type.kind) {
         case "String":
@@ -99,7 +98,6 @@ export function getDefaultValue(type: Type): any {
             return undefined;
     }
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function getInputType(
     context: SdkContext<NetEmitterOptions>,
