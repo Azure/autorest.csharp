@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
                 InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
                 InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
+                InputTypeKind.DurationSecondsDouble => SerializationFormat.Duration_Seconds_Double,
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
             },

@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -30,7 +31,7 @@ namespace MgmtCustomizations.Models
         public IDictionary<string, string> Tags { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void SerializeSizeProperty(Utf8JsonWriter writer)
+        internal void SerializeSizeProperty(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(Size.ToString());
         }
@@ -49,13 +50,13 @@ namespace MgmtCustomizations.Models
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void SerializeDateOfBirthProperty(Utf8JsonWriter writer)
+        internal void SerializeDateOfBirthProperty(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(DateOfBirth.Value, "yyyy-MM-dd HH:mm");
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void SerializeColorProperty(Utf8JsonWriter writer)
+        internal void SerializeColorProperty(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(Color.ToString());
         }

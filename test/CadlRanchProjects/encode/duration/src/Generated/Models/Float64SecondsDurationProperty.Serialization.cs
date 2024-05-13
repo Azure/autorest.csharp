@@ -14,21 +14,21 @@ using Azure.Core;
 
 namespace Encode.Duration.Models
 {
-    public partial class FloatSecondsDurationProperty : IUtf8JsonSerializable, IJsonModel<FloatSecondsDurationProperty>
+    public partial class Float64SecondsDurationProperty : IUtf8JsonSerializable, IJsonModel<Float64SecondsDurationProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatSecondsDurationProperty>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Float64SecondsDurationProperty>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<FloatSecondsDurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Float64SecondsDurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Float64SecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FloatSecondsDurationProperty)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(Float64SecondsDurationProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteNumberValue(Convert.ToDouble(Value.ToString("s\\.FFF")));
+            writer.WriteNumberValue(Convert.ToDouble(Value.ToString("s\\.FFFFFF")));
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -47,19 +47,19 @@ namespace Encode.Duration.Models
             writer.WriteEndObject();
         }
 
-        FloatSecondsDurationProperty IJsonModel<FloatSecondsDurationProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Float64SecondsDurationProperty IJsonModel<Float64SecondsDurationProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Float64SecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FloatSecondsDurationProperty)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(Float64SecondsDurationProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFloatSecondsDurationProperty(document.RootElement, options);
+            return DeserializeFloat64SecondsDurationProperty(document.RootElement, options);
         }
 
-        internal static FloatSecondsDurationProperty DeserializeFloatSecondsDurationProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Float64SecondsDurationProperty DeserializeFloat64SecondsDurationProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -83,46 +83,46 @@ namespace Encode.Duration.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new FloatSecondsDurationProperty(value, serializedAdditionalRawData);
+            return new Float64SecondsDurationProperty(value, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<FloatSecondsDurationProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Float64SecondsDurationProperty>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Float64SecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FloatSecondsDurationProperty)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Float64SecondsDurationProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
-        FloatSecondsDurationProperty IPersistableModel<FloatSecondsDurationProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Float64SecondsDurationProperty IPersistableModel<Float64SecondsDurationProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Float64SecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFloatSecondsDurationProperty(document.RootElement, options);
+                        return DeserializeFloat64SecondsDurationProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FloatSecondsDurationProperty)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Float64SecondsDurationProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<FloatSecondsDurationProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Float64SecondsDurationProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static FloatSecondsDurationProperty FromResponse(Response response)
+        internal static Float64SecondsDurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatSecondsDurationProperty(document.RootElement);
+            return DeserializeFloat64SecondsDurationProperty(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

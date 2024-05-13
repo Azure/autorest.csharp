@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +21,7 @@ namespace MgmtCustomizations.Models
         public Pet Friend { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SerializeBarkProperty(Utf8JsonWriter writer)
+        private void SerializeBarkProperty(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(Bark.ToUpperInvariant());
         }

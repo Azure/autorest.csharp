@@ -152,6 +152,446 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> Spread composite request only with body. </summary>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadCompositeRequestOnlyWithBodyAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread composite request only with body. </summary>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBody(BodyParameter,CancellationToken)']/*" />
+        public virtual Response SpreadCompositeRequestOnlyWithBody(BodyParameter body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadCompositeRequestOnlyWithBody(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request only with body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestOnlyWithBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestOnlyWithBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestOnlyWithBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request only with body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequestOnlyWithBody(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBody(RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadCompositeRequestOnlyWithBody(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestOnlyWithBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestOnlyWithBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Spread composite request without body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="testHeader"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestWithoutBodyAsync(string,string,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestWithoutBodyAsync(string name, string testHeader, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestWithoutBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestWithoutBodyRequest(name, testHeader, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Spread composite request without body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="testHeader"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestWithoutBody(string,string,RequestContext)']/*" />
+        public virtual Response SpreadCompositeRequestWithoutBody(string name, string testHeader, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestWithoutBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestWithoutBodyRequest(name, testHeader, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Spread composite request. </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestAsync(string,string,BodyParameter,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestAsync(string name, string testHeader, BodyParameter body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadCompositeRequestAsync(name, testHeader, content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread composite request. </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequest(string,string,BodyParameter,CancellationToken)']/*" />
+        public virtual Response SpreadCompositeRequest(string name, string testHeader, BodyParameter body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadCompositeRequest(name, testHeader, content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequestAsync(string,string,BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestAsync(string name, string testHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequest");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestRequest(name, testHeader, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequest(string,string,BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequest(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadCompositeRequest(string name, string testHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequest");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestRequest(name, testHeader, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Spread composite request mix. </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestMixAsync(string name, string testHeader, CompositeRequestMix compositeRequestMix, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+
+            using RequestContent content = compositeRequestMix.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread composite request mix. </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMix(string,string,CompositeRequestMix,CancellationToken)']/*" />
+        public virtual Response SpreadCompositeRequestMix(string name, string testHeader, CompositeRequestMix compositeRequestMix, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+
+            using RequestContent content = compositeRequestMix.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadCompositeRequestMix(name, testHeader, content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request mix.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMixAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestMixAsync(string name, string testHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestMix");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestMixRequest(name, testHeader, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread composite request mix.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,CompositeRequestMix,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="testHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMix(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadCompositeRequestMix(string name, string testHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(testHeader, nameof(testHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Model.SpreadCompositeRequestMix");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadCompositeRequestMixRequest(name, testHeader, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSpreadAsRequestBodyRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -161,6 +601,70 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadCompositeRequestOnlyWithBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadCompositeRequestWithoutBodyRequest(string name, string testHeader, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/model/composite-request-without-body/", false);
+            uri.AppendPath(name, true);
+            request.Uri = uri;
+            request.Headers.Add("test-header", testHeader);
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadCompositeRequestRequest(string name, string testHeader, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/model/composite-request/", false);
+            uri.AppendPath(name, true);
+            request.Uri = uri;
+            request.Headers.Add("test-header", testHeader);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadCompositeRequestMixRequest(string name, string testHeader, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/model/composite-request-mix/", false);
+            uri.AppendPath(name, true);
+            request.Uri = uri;
+            request.Headers.Add("test-header", testHeader);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

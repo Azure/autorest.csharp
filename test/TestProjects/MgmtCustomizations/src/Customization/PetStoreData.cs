@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Azure.Core;
@@ -13,7 +14,7 @@ namespace MgmtCustomizations
     public partial class PetStoreData
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void WriteId(Utf8JsonWriter writer)
+        internal void WriteId(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             if (Id != null)
                 writer.WriteStringValue(Id);

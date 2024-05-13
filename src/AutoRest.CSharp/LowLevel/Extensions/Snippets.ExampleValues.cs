@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 {
                     switch (serializationFormat)
                     {
-                        case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float:
+                        case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double:
                             if (rawValue.RawValue is int or float or double)
                                 return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { Literal(rawValue.RawValue) });
                             break;

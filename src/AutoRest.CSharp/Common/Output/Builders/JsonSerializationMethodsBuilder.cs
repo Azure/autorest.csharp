@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
-                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
+                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter, options)
                     : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value, options)
             };
         }
@@ -430,7 +430,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).InvokeToString(format)));
                 }
 
-                if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float)
+                if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).InvokeToString(format)));
                 }
@@ -1153,12 +1153,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetDateTime();
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format == SerializationFormat.Duration_Seconds)
+                if (format is SerializationFormat.Duration_Seconds)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetInt32());
                 }
 
-                if (format == SerializationFormat.Duration_Seconds_Float)
+                if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetDouble());
                 }
