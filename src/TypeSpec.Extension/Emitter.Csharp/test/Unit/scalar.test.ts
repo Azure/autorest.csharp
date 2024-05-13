@@ -1,17 +1,15 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
+import isEqual from "lodash.isequal";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 import {
-    typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
-    createNetSdkContext
+    createNetSdkContext,
+    typeSpecCompile
 } from "./utils/TestUtil.js";
-import { InputEnumType, InputListType } from "../../src/type/inputType.js";
-import isEqual from "lodash.isequal";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
-import { Console } from "console";
 
 describe("Test GetInputType for scalar", () => {
     let runner: TestHost;

@@ -7,5 +7,7 @@ export interface OperationPaging {
     NextLinkName?: string;
     ItemName?: string;
     NextLinkOperation?: InputOperation;
+    /* eslint-disable @typescript-eslint/no-explicit-any -- TODO: can we specify the range of parameter p? */
     NextLinkOperationRef?: (p: any) => void;
+    /* eslint-enable @typescript-eslint/no-explicit-any */
 }

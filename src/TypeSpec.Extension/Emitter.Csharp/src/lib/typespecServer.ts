@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getDoc, getFormat, Program, Type } from "@typespec/compiler";
+import { getDoc } from "@typespec/compiler";
 import { HttpServer } from "@typespec/http";
 import { InputConstant } from "../type/inputConstant.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
@@ -14,7 +14,7 @@ import {
 } from "../type/inputType.js";
 import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
-import { getInputType } from "./model.js";
+import { getDefaultValue, getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { NetEmitterOptions } from "../options.js";
@@ -23,21 +23,6 @@ export interface TypeSpecServer {
     url: string;
     description?: string;
     parameters: InputParameter[];
-}
-
-function getDefaultValue(type: Type): any {
-    switch (type.kind) {
-        case "String":
-            return type.value;
-        case "Number":
-            return type.value;
-        case "Boolean":
-            return type.value;
-        case "Tuple":
-            return type.values.map(getDefaultValue);
-        default:
-            return undefined;
-    }
 }
 
 export function resolveServers(

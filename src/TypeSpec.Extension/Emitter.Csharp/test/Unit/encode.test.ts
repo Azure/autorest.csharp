@@ -1,6 +1,15 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import { getAllHttpServices } from "@typespec/http";
+import assert from "assert";
 import isEqual from "lodash.isequal";
+import { loadOperation } from "../../src/lib/operation.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType
+} from "../../src/type/inputType.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -8,15 +17,6 @@ import {
     navigateModels,
     typeSpecCompile
 } from "./utils/TestUtil.js";
-import { getAllHttpServices } from "@typespec/http";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType
-} from "../../src/type/inputType.js";
-import { loadOperation } from "../../src/lib/operation.js";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 
 describe("Test encode duration", () => {
     let runner: TestHost;

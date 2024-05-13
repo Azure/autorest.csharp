@@ -45,7 +45,6 @@ import {
 import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { Usage } from "../type/usage.js";
-import { getExternalDocs } from "./decorators.js";
 import { logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
@@ -81,7 +80,6 @@ export function createModelForService(
     sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(sdkContext.emitContext);
     const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
 
@@ -107,7 +105,6 @@ export function createModelForService(
             : undefined;
 
     const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
@@ -232,7 +229,7 @@ export function createModelForService(
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
-            var subClient = emitClient(dpgGroup, client);
+            const subClient = emitClient(dpgGroup, client);
             clients.push(subClient);
             addChildClients(context, dpgGroup, clients);
         }
@@ -243,12 +240,12 @@ export function createModelForService(
             return client.name;
         }
 
-        var pathParts = client.groupPath.split(".");
+        const pathParts = client.groupPath.split(".");
         if (pathParts?.length >= 3) {
             return pathParts.slice(pathParts.length - 2).join("");
         }
 
-        var clientName = getLibraryName(sdkContext, client.type);
+        const clientName = getLibraryName(sdkContext, client.type);
         if (
             clientName === "Models" &&
             resolveOptions(sdkContext.emitContext)["model-namespace"] !== false

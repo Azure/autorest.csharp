@@ -27,7 +27,6 @@ import {
     getQueryParamName,
     isStatusCode
 } from "@typespec/http";
-import { getResourceOperation } from "@typespec/rest";
 import { NetEmitterOptions } from "../options.js";
 import {
     fromSdkEnumType,
@@ -85,6 +84,7 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- A special recursion */
 export function getDefaultValue(type: Type): any {
     switch (type.kind) {
         case "String":
@@ -99,6 +99,7 @@ export function getDefaultValue(type: Type): any {
             return undefined;
     }
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function getInputType(
     context: SdkContext<NetEmitterOptions>,
@@ -151,7 +152,7 @@ export function getUsages(
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
-        let effectiveType = type;
+        const effectiveType = type;
         if (type.kind === "Enum") {
             typeName = getTypeName(context, type);
         }
@@ -159,7 +160,7 @@ export function getUsages(
             typeName = getTypeName(context, effectiveType as Model);
         }
         if (type.kind === "Union") {
-            let clientType = getClientType(context, type); // TODO -- we should also pass in an operation as well
+            const clientType = getClientType(context, type); // TODO -- we should also pass in an operation as well
             if (clientType.kind === "enum" && clientType.isFixed === false) {
                 typeName = clientType.name;
             }
@@ -192,9 +193,8 @@ export function getUsages(
     }
 
     for (const op of ops) {
-        const resourceOperation = getResourceOperation(program, op.operation);
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
-            var effectiveBodyType = undefined;
+            let effectiveBodyType = undefined;
             const affectTypes: Set<string> = new Set<string>();
             effectiveBodyType = getEffectiveSchemaType(
                 context,
@@ -279,7 +279,7 @@ export function getUsages(
         // iterate all models to find if it contains literal type properties
         for (const [name, model] of modelMap) {
             // get the usage of this model
-            let usage = usagesMap.get(name);
+            const usage = usagesMap.get(name);
             for (const prop of model.Properties) {
                 const type = prop.Type;
                 if (!isInputLiteralType(type)) continue;
@@ -333,14 +333,14 @@ export function getUsages(
                 result.push(getTypeName(context, derivedModel));
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }
-            for (const [_, prop] of model.properties) {
+            for (const prop of model.properties.values()) {
                 if (prop.type.kind === "Model") {
                     result.push(...getAllEffectedModels(prop.type, visited));
                 }
             }
             /*propagate usage to the property type of the base model. */
             if (model.baseModel) {
-                for (const [_, prop] of model.baseModel.properties) {
+                for (const prop of model.baseModel.properties.values()) {
                     if (prop.type.kind === "Model") {
                         result.push(
                             ...getAllEffectedModels(prop.type, visited)

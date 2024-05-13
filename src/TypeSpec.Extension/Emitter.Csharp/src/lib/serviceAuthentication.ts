@@ -5,7 +5,6 @@ import { ServiceAuthentication } from "@typespec/http";
 import { InputApiKeyAuth } from "../type/inputApiKeyAuth.js";
 import { InputAuth } from "../type/inputAuth.js";
 import { InputOAuth2Auth } from "../type/inputOAuth2Auth.js";
-import { Logger } from "winston";
 import { logger } from "./logger.js";
 
 export function processServiceAuthentication(
@@ -31,21 +30,23 @@ export function processServiceAuthentication(
                     }
                     break;
                 case "http":
-                    const schemeOrApiKeyPrefix = scheme.scheme;
-                    if (schemeOrApiKeyPrefix === "basic") {
-                        logger.warn(
-                            `{schemeOrApiKeyPrefix} auth method is currently not supported.`
-                        );
-                    } else if (schemeOrApiKeyPrefix === "bearer") {
-                        auth.ApiKey = {
-                            Name: "Authorization",
-                            Prefix: "Bearer"
-                        } as InputApiKeyAuth;
-                    } else {
-                        auth.ApiKey = {
-                            Name: "Authorization",
-                            Prefix: schemeOrApiKeyPrefix
-                        } as InputApiKeyAuth;
+                    {
+                        const schemeOrApiKeyPrefix = scheme.scheme;
+                        if (schemeOrApiKeyPrefix === "basic") {
+                            logger.warn(
+                                `{schemeOrApiKeyPrefix} auth method is currently not supported.`
+                            );
+                        } else if (schemeOrApiKeyPrefix === "bearer") {
+                            auth.ApiKey = {
+                                Name: "Authorization",
+                                Prefix: "Bearer"
+                            } as InputApiKeyAuth;
+                        } else {
+                            auth.ApiKey = {
+                                Name: "Authorization",
+                                Prefix: schemeOrApiKeyPrefix
+                            } as InputApiKeyAuth;
+                        }
                     }
                     break;
                 default:

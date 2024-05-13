@@ -1,26 +1,26 @@
-import { createTestHost, TestHost } from "@typespec/compiler/testing";
-import { RestTestLibrary } from "@typespec/rest/testing";
-import { HttpTestLibrary } from "@typespec/http/testing";
-import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
 import {
+    createSdkContext,
+    getAllModels,
+    SdkContext
+} from "@azure-tools/typespec-client-generator-core";
+import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
+import {
+    CompilerOptions,
     EmitContext,
     isGlobalNamespace,
     Namespace,
     navigateTypesInNamespace,
     Program,
-    Type,
-    CompilerOptions
+    Type
 } from "@typespec/compiler";
+import { createTestHost, TestHost } from "@typespec/compiler/testing";
+import { HttpTestLibrary } from "@typespec/http/testing";
+import { RestTestLibrary } from "@typespec/rest/testing";
+import { VersioningTestLibrary } from "@typespec/versioning/testing";
+import { getInputType } from "../../../src/lib/model.js";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
-import { getInputType } from "../../../src/lib/model.js";
-import {
-    SdkContext,
-    createSdkContext,
-    getAllModels
-} from "@azure-tools/typespec-client-generator-core";
-import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
@@ -113,17 +113,21 @@ export function navigateModels(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeModel = (x: Type) =>
-        getInputType(context, x, models, enums) as any;
+    const computeModel = (x: Type) => {
+        getInputType(context, x, models, enums);
+    };
     const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
     navigateTypesInNamespace(
         namespace,
         {
-            model: (x) =>
-                x.name !== "" && x.kind === "Model" && computeModel(x),
+            model: (x) => {
+                if (x.name !== "" && x.kind === "Model") computeModel(x);
+            },
             scalar: computeModel,
             enum: computeModel,
-            union: (x) => x.name !== undefined && computeModel(x)
+            union: (x) => {
+                if (x.name !== undefined) computeModel(x);
+            }
         },
         { skipSubNamespaces }
     );
