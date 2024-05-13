@@ -32,9 +32,12 @@ namespace MgmtDiscriminator.Models
         /// <param name="nestedName"> The top level sku property. </param>
         /// <param name="unflattened"> The unflattened property. </param>
         /// <param name="properties"> The properties. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, string nestedName = null, Unflattened unflattened = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, string nestedName = null, Unflattened unflattened = null, DeliveryRuleProperties properties = null, IDictionary<string, string> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, string>();
+
             return new DeliveryRuleData(
                 id,
                 name,
@@ -51,6 +54,7 @@ namespace MgmtDiscriminator.Models
                 nestedName != null ? new Sku1(new Sku2(nestedName, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null,
                 unflattened,
                 properties,
+                additionalProperties,
                 serializedAdditionalRawData: null);
         }
 
