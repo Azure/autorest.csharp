@@ -112,7 +112,7 @@ export function loadOperation(
             typespecParameters.body.type
         );
         if (effectiveBodyType.kind === "Model") {
-            let bodyParameter = loadBodyParameter(
+            const bodyParameter = loadBodyParameter(
                 sdkContext,
                 effectiveBodyType
             );
@@ -127,7 +127,7 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = bodyParameter.Type as InputModelType;
+                const bodyModelType = bodyParameter.Type as InputModelType;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
@@ -403,7 +403,7 @@ export function loadOperation(
             return undefined;
         }
 
-        var bodyType = undefined;
+        let bodyType = undefined;
         if (
             op.verb !== "delete" &&
             metadata.finalResult !== undefined &&

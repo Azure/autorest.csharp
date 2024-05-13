@@ -44,6 +44,7 @@ try {
         Push-Location "$root/src/TypeSpec.Extension/Emitter.Csharp"
         try {
             Invoke-LoggedCommand "npm run prettier" -GroupOutput
+            Invoke-LoggedCommand "npm run lint" -GroupOutput
             Invoke-LoggedCommand "npm run build" -GroupOutput
             Invoke-LoggedCommand "npm run test" -GroupOutput
         }

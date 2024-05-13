@@ -1,13 +1,13 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import { getAllHttpServices } from "@typespec/http";
+import assert from "assert";
+import { getUsages } from "../../src/lib/model.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext,
     typeSpecCompile
 } from "./utils/TestUtil.js";
-import { getAllHttpServices } from "@typespec/http";
-import { getUsages } from "../../src/lib/model.js";
 
 describe("Test getUsages", () => {
     let runner: TestHost;
