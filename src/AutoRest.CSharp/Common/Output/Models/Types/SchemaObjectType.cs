@@ -582,7 +582,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(InputModelProperty property)
         {
-            var valueType = _typeFactory.CreateType(property.Type, property.Format, property);
+            var valueType = _typeFactory.CreateType(property.Type);
             if (!_usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {

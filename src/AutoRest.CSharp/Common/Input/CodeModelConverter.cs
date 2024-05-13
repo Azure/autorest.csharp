@@ -398,23 +398,7 @@ namespace AutoRest.CSharp.Common.Input
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
             IsNullable: property.IsNullable,
-            FlattenedNames: property.FlattenedNames.ToList(),
-            Format: property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format,
-            ElementTypeFormat: GetElementType(property)
-        );
-
-        private string? GetElementType(Property property)
-        {
-            if (property.Extensions is null)
-            {
-                return null;
-            }
-            if (!property.Extensions.TryGetValue("x-ms-format-element-type", out object? value))
-            {
-                return null;
-            }
-            return value.ToString();
-        }
+            FlattenedNames: property.FlattenedNames.ToList());
 
         private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
@@ -512,21 +496,24 @@ namespace AutoRest.CSharp.Common.Input
         {
             var name = property.Schema.Name;
             var type = typeof(DataFactoryElement<>);
-            return property.Extensions?.Format switch
+            object? elementType = null;
+            if ((property.Schema is AnyObjectSchema || property.Schema is StringSchema) && true == property.Extensions?.TryGetValue("x-ms-format-element-type", out elementType))
             {
-                XMsFormat.DataFactoryElementOfObject => new InputGenericType(type, InputPrimitiveType.BinaryData, property.IsNullable),
-                XMsFormat.DataFactoryElementOfString => new InputGenericType(type, InputPrimitiveType.String, property.IsNullable),
-                XMsFormat.DataFactoryElementOfInt => new InputGenericType(type, InputPrimitiveType.Int32, property.IsNullable),
-                XMsFormat.DataFactoryElementOfDouble => new InputGenericType(type, InputPrimitiveType.Float64, property.IsNullable),
-                XMsFormat.DataFactoryElementOfBool => new InputGenericType(type, InputPrimitiveType.Boolean, property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfT => new InputGenericType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, false), property.IsNullable),
-                XMsFormat.DataFactoryElementOfListOfString => new InputGenericType(type, new InputListType(name, InputPrimitiveType.String, false, false), false),
-                XMsFormat.DataFactoryElementOfKeyValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), property.IsNullable),
-                XMsFormat.DataFactoryElementOfDateTime => new InputGenericType(type, InputPrimitiveType.DateTime, property.IsNullable),
-                XMsFormat.DataFactoryElementOfDuration => new InputGenericType(type, InputPrimitiveType.Time, property.IsNullable),
-                XMsFormat.DataFactoryElementOfUri => new InputGenericType(type, InputPrimitiveType.Uri, property.IsNullable),
-                _ => GetOrCreateType(property.Schema, property.Schema.Extensions?.Format, _modelsCache, property.IsNullable)
-            };
+                return ToXMsFormatType(name, property.Extensions?.Format, property.IsNullable, (Schema)elementType!) ?? GetOrCreateType(property.Schema, property.Schema.Extensions?.Format, _modelsCache, property.IsNullable);
+            }
+            else
+            {
+                return GetOrCreateType(property.Schema, GetFormat(property), _modelsCache, property.IsNullable);
+            }
+        }
+
+        private string? GetFormat(Property property)
+        {
+            if (!string.IsNullOrEmpty(property.Extensions?.Format))
+            {
+                return property.Extensions.Format;
+            }
+            return property.Schema.Extensions?.Format;
         }
 
         private InputType GetOrCreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
@@ -607,7 +594,7 @@ namespace AutoRest.CSharp.Common.Input
             ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache, isNullable).Type,
 
             CredentialSchema => new InputPrimitiveType(InputTypeKind.String, isNullable),
-            { Type: AllSchemaTypes.String } => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            { Type: AllSchemaTypes.String } => ToXMsFormatType(schema.Name, format, isNullable) ?? new InputPrimitiveType(InputTypeKind.String, isNullable),
             { Type: AllSchemaTypes.Boolean } => new InputPrimitiveType(InputTypeKind.Boolean, isNullable),
             { Type: AllSchemaTypes.Uuid } => new InputPrimitiveType(InputTypeKind.Guid, isNullable),
             { Type: AllSchemaTypes.Uri } => new InputPrimitiveType(InputTypeKind.Uri, isNullable),
@@ -617,21 +604,29 @@ namespace AutoRest.CSharp.Common.Input
 
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, isNullable),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), isNullable),
-            ObjectSchema objectSchema when modelsCache != null => modelsCache[objectSchema],
-            StringSchema stringSchema => CreateTypeForStringSchema(stringSchema, format, isNullable),
+            ObjectSchema objectSchema => CreateTypeForObjectSchema(objectSchema),
+            StringSchema stringSchema => ToXMsFormatType(stringSchema.Name, format, isNullable) ?? CreateTypeForStringSchema(stringSchema, isNullable),
 
             CharSchema => InputPrimitiveType.Char,
 
             AnySchema => InputIntrinsicType.Unknown,
-            AnyObjectSchema => InputIntrinsicType.Unknown,
+            AnyObjectSchema => ToXMsFormatType(schema.Name, format, isNullable) ?? InputIntrinsicType.Unknown,
 
             _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
 
-        private InputType CreateTypeForStringSchema(StringSchema schema, string? format, bool isNullable) => schema.Type switch
+        private InputType CreateTypeForObjectSchema(ObjectSchema objectSchema)
         {
-            // TODO: Handle char case
-            AllSchemaTypes.Char => new InputPrimitiveType(InputTypeKind.String, isNullable),
+            const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement-";
+            if (objectSchema.Language.Default.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            {
+                return new InputGenericType(typeof(DataFactoryElement<>), InputPrimitiveType.String, false);
+            }
+            return _modelsCache[objectSchema];
+        }
+
+        private InputType CreateTypeForStringSchema(StringSchema schema, bool isNullable) => schema.Type switch
+        {
             AllSchemaTypes.Date => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
             AllSchemaTypes.DateTime => new InputPrimitiveType(InputTypeKind.DateTime, isNullable),
             AllSchemaTypes.Duration => new InputPrimitiveType(InputTypeKind.DurationConstant, isNullable),
@@ -650,7 +645,7 @@ namespace AutoRest.CSharp.Common.Input
             _ => InputIntrinsicType.Null
         };
 
-        private InputType? ToXMsFormatType(string? format, bool isNullable)
+        private InputType? ToXMsFormatType(string name, string? format, bool isNullable, Schema? elementType = null)
         {
             var type = typeof(DataFactoryElement<>);
             return format switch
@@ -660,12 +655,13 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfInt => new InputGenericType(type, InputPrimitiveType.Int32, isNullable),
                 XMsFormat.DataFactoryElementOfDouble => new InputGenericType(type, InputPrimitiveType.Float64, isNullable),
                 XMsFormat.DataFactoryElementOfBool => new InputGenericType(type, InputPrimitiveType.Boolean, isNullable),
-                //XMsFormat.DataFactoryElementOfListOfT => new InputGenericType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false), false, false), isNullable),
-                //XMsFormat.DataFactoryElementOfListOfString => new InputGenericType(type, new InputListType(name, InputPrimitiveType.String, false, false), isNullable),
-                //XMsFormat.DataFactoryElementOfKeyValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), isNullable),
+                XMsFormat.DataFactoryElementOfListOfT => new InputGenericType(type, new InputListType(name, GetOrCreateType(elementType!, _modelsCache, false), false, false), isNullable),
+                XMsFormat.DataFactoryElementOfListOfString => new InputGenericType(type, new InputListType(name, InputPrimitiveType.String, false, false), isNullable),
+                XMsFormat.DataFactoryElementOfKeyValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), isNullable),
                 XMsFormat.DataFactoryElementOfDateTime => new InputGenericType(type, InputPrimitiveType.DateTime, isNullable),
                 XMsFormat.DataFactoryElementOfDuration => new InputGenericType(type, InputPrimitiveType.Time, isNullable),
                 XMsFormat.DataFactoryElementOfUri => new InputGenericType(type, InputPrimitiveType.Uri, isNullable),
+                XMsFormat.DataFactoryElementOfKeyObjectValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.BinaryData, false), isNullable),
                 _ => null
             };
         }

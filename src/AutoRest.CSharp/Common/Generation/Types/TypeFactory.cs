@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="inputType">The input type to convert.</param>
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
-        public CSharpType CreateType(InputType inputType, string? format = null, InputModelProperty? property = null) => inputType switch
+        public CSharpType CreateType(InputType inputType, string? format = null) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(x => CreateType(x)).ToArray(), unionType.IsNullable),
@@ -83,10 +83,6 @@ namespace AutoRest.CSharp.Generation.Types
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
-            _ when property?.Format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
-                typeof(DataFactoryElement<>),
-                isNullable: inputType.IsNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeByName(property!.ElementTypeFormat!)!)),
             _ when ToXMsFormatType(format) is Type type => new CSharpType(type, inputType.IsNullable),
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => UnknownType,
             _ => throw new Exception("Unknown type")
@@ -118,22 +114,6 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
             XMsFormat.DataFactoryElementOfKeyObjectValuePairs => typeof(DataFactoryElement<IDictionary<string, BinaryData>>),
             _ => null
-        };
-
-        private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
-        {
-            AllSchemaTypes.Number => schema.Precision switch
-            {
-                32 => typeof(float),
-                128 => typeof(decimal),
-                _ => typeof(double)
-            },
-            // Assumes AllSchemaTypes.Integer
-            _ => schema.Precision switch
-            {
-                64 => typeof(long),
-                _ => typeof(int)
-            }
         };
 
         public CSharpType CreateType(ITypeSymbol symbol)
