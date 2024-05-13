@@ -78,7 +78,6 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
                 InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
                 InputTypeKind.String => ToXMsFormatType(format) ?? new CSharpType(typeof(string), inputType.IsNullable),
-                InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
