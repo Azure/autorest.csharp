@@ -26,7 +26,8 @@ import {
     DurationKnownEncoding,
     EncodeData,
     IntrinsicType,
-    Model} from "@typespec/compiler";
+    Model
+} from "@typespec/compiler";
 import { logger } from "./logger.js";
 import { getFullNamespaceString } from "./utils.js";
 import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
@@ -76,12 +77,9 @@ export function fromSdkType(
         return fromUnionType(sdkType, context, models, enums);
     if (sdkType.kind === "utcDateTime" || sdkType.kind == "offsetDateTime")
         return fromSdkDatetimeType(sdkType);
-    if (sdkType.kind === "duration")
-        return fromSdkDurationType(sdkType);
-    if (sdkType.kind === "bytes")
-        return fromBytesType(sdkType);
-    if (sdkType.kind === "string")
-        return fromStringType(sdkType);
+    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType);
+    if (sdkType.kind === "bytes") return fromBytesType(sdkType);
+    if (sdkType.kind === "string") return fromStringType(sdkType);
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
     // TODO -- refine the other types from TCGC
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
@@ -387,9 +385,7 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
     };
 }
 
-function fromStringType(
-    stringType: SdkType
-): InputPrimitiveType {
+function fromStringType(stringType: SdkType): InputPrimitiveType {
     return {
         Kind: InputTypeKind.Primitive,
         Name: InputPrimitiveTypeKind.String,
@@ -487,7 +483,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
         Kind: InputTypeKind.Primitive,
         Name: getCSharpInputTypeKindByPrimitiveModelName(
             scalarType.kind,
-            scalarType.kind,
             undefined // To-DO: encode not compatible
         ),
         IsNullable: scalarType.nullable
@@ -495,7 +490,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
 
     function getCSharpInputTypeKindByPrimitiveModelName(
         name: string,
-        format?: string,
         encode?: EncodeData
     ): InputPrimitiveTypeKind {
         switch (name) {
@@ -540,20 +534,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
             case "eTag":
                 return InputPrimitiveTypeKind.String;
             case "string":
-                switch (format?.toLowerCase()) {
-                    case "date":
-                        return InputPrimitiveTypeKind.DateTime;
-                    case "uri":
-                    case "url":
-                        return InputPrimitiveTypeKind.Uri;
-                    case "uuid":
-                        return InputPrimitiveTypeKind.Guid;
-                    default:
-                        if (format) {
-                            logger.warn(`invalid format ${format}`);
-                        }
-                        return InputPrimitiveTypeKind.String;
-                }
+                return InputPrimitiveTypeKind.String;
             case "boolean":
                 return InputPrimitiveTypeKind.Boolean;
             case "date":
@@ -592,6 +573,8 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                             encode.type?.name === "float32"
                         ) {
                             return InputPrimitiveTypeKind.DurationSecondsFloat;
+                        } else if (encode.type?.name === "float64") {
+                            return InputPrimitiveTypeKind.DurationSecondsDouble;
                         } else {
                             return InputPrimitiveTypeKind.DurationSeconds;
                         }

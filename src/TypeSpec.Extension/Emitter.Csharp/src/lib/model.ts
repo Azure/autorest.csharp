@@ -5,7 +5,8 @@ import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     SdkContext,
     getAllModels,
-    getClientType} from "@azure-tools/typespec-client-generator-core";
+    getClientType
+} from "@azure-tools/typespec-client-generator-core";
 import {
     Model,
     ModelProperty,
@@ -25,11 +26,7 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
-import {
-    fromSdkEnumType,
-    fromSdkModelType,
-    fromSdkType
-} from "./converter.js";
+import { fromSdkEnumType, fromSdkModelType, fromSdkType } from "./converter.js";
 import {
     InputEnumType,
     InputModelType,
