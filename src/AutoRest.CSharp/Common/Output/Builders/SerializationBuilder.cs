@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
@@ -119,21 +118,6 @@ namespace AutoRest.CSharp.Output.Builders
             return false;
         }
 
-        private static bool IsManagedServiceIdentityV3(Schema schema, CSharpType type)
-        {
-            // If the type is the common type ManagedServiceIdentity and the schema contains a type property with sealed enum or extensible enum schema which has a choice of v3 "SystemAssigned,UserAssigned" value,
-            // then this is a v3 version of ManagedServiceIdentity.
-            if (!type.IsFrameworkType && type.Implementation is SystemObjectType systemObjectType
-                && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
-                && schema is ObjectSchema objectSchema
-                && (objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Schema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value)
-                    || objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Schema is ChoiceSchema choiceSchema && choiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value)))
-            {
-                return true;
-            }
-            return false;
-        }
-
         public static JsonSerialization BuildJsonSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
         {
             if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(JsonElement))
@@ -169,27 +153,6 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return new JsonValueSerialization(valueType, GetDefaultSerializationFormat(valueType), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
-        }
-
-        public static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
-        {
-            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
-            {
-                return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
-            }
-
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return BuildSerialization(constantSchema.ValueType, type, isCollectionElement);
-                case ArraySchema arraySchema:
-                    return new JsonArraySerialization(type, BuildSerialization(arraySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
-                case DictionarySchema dictionarySchema:
-                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, type.ElementType, true), type.IsNullable || (isCollectionElement && !type.IsValueType));
-                default:
-                    JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
-                    return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType), options);
-            }
         }
 
         public static XmlObjectSerialization BuildXmlObjectSerialization(string serializationName, SerializableObjectType model, TypeFactory typeFactory)
@@ -558,7 +521,7 @@ namespace AutoRest.CSharp.Output.Builders
             ObjectTypeProperty? additionalPropertiesProperty = null;
             ObjectTypeProperty? rawDataField = null;
 
-            var inheritedDictionarySchema = inputModel.GetSelfAndBaseModels().OfType<DictionarySchema>().FirstOrDefault();
+            var inheritedDictionarySchema = inputModel.GetSelfAndBaseModels().OfType<InputDictionaryType>().FirstOrDefault();
             foreach (var obj in objectType.EnumerateHierarchy())
             {
                 additionalPropertiesProperty ??= obj.AdditionalPropertiesProperty;
@@ -577,7 +540,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, DictionarySchema? inheritedDictionarySchema, bool shouldExcludeInWireSerialization)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputDictionaryType? inheritedDictionarySchema, bool shouldExcludeInWireSerialization)
             {
                 if (additionalPropertiesProperty == null)
                 {
@@ -588,7 +551,7 @@ namespace AutoRest.CSharp.Output.Builders
                 JsonSerialization valueSerialization;
                 if (inheritedDictionarySchema is not null)
                 {
-                    valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, additionalPropertyValueType, false);
+                    valueSerialization = BuildJsonSerialization(inheritedDictionarySchema.ValueType, additionalPropertyValueType, false);
                 }
                 else
                 {
@@ -603,7 +566,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public MultipartObjectSerialization BuildMultipartObjectSerialization(InputModelType objectSchema, SchemaObjectType objectType)
+        public MultipartObjectSerialization BuildMultipartObjectSerialization(InputModelType inputModel, SchemaObjectType objectType)
         {
             /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
              *Need to consider the polymorphism and the base class properties.
@@ -635,7 +598,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             /*build serialization for additional properties*/
-            var additionalProperties = CreateMultipartAdditionalPropertiesSerialization(objectSchema, objectType);
+            var additionalProperties = CreateMultipartAdditionalPropertiesSerialization(inputModel, objectType);
             return new MultipartObjectSerialization(objectType,
                 objectType.SerializationConstructor.Signature.Parameters,
                 properties,
