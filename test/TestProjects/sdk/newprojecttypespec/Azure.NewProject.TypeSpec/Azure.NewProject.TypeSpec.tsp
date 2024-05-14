@@ -198,12 +198,10 @@ union DaysOfWeekExtensibleEnum {
 
 model ModelWithFormat {
     @doc("url format")
-    @format("uri")
-    sourceUrl: string;
+    sourceUrl: url;
 
     @doc("uuid format")
-    @format("uuid")
-    guid: string;
+    guid: uuid;
 }
 
 @doc("Hello world service")
@@ -257,7 +255,7 @@ namespace Hello.Demo2 {
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -291,7 +289,7 @@ op addTimeHeader(
 @doc("paramete has string format.")
 @post
 @convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
+op stringFormat(@path subscriptionId: uuid, @body body: ModelWithFormat): void;
 
 // TODO: https://github.com/Azure/typespec-azure/issues/509
 namespace EnumTest {
