@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Common.Input
         /// Indicates if this model is the Unknown derived version of a model with discriminator
         /// </summary>
         public bool IsUnknownDiscriminatorModel { get; init; } = false;
-
         /// <summary>
         /// Indicates if this model is a property bag
         /// </summary>
@@ -40,21 +39,22 @@ namespace AutoRest.CSharp.Common.Input
             BaseModel = baseModel;
         }
 
-        public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
+        public IEnumerable<InputModelType> GetSelfAndBaseModels()
+        {
+            yield return this;
+            if (Parents is not null)
+            {
+                foreach (var baseModel in Parents)
+                {
+                    yield return baseModel;
+                }
+            }
+        }
 
         public IReadOnlyList<InputModelType> GetAllBaseModels() => Parents ?? Array.Empty<InputModelType>();
 
         // TODO: remove the workaround for immediate base models
         public IReadOnlyList<InputModelType> GetImmediateBaseModels() => Parents?.Where(x => x.Name != "AzureResourceBase")?.ToArray() ?? Array.Empty<InputModelType>();
-
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
-        {
-            while (model != null)
-            {
-                yield return model;
-                model = model.BaseModel;
-            }
-        }
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {

@@ -23,7 +23,6 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
-        private readonly ICollection<ExampleGroup>? _exampleGroups;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
         {
@@ -35,7 +34,6 @@ namespace AutoRest.CSharp.Common.Input
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
-            _exampleGroups = codeModel.TestModel?.MockTest.ExampleGroups;
         }
 
         public InputNamespace CreateNamespace() => CreateNamespace(null, null);
@@ -162,7 +160,7 @@ namespace AutoRest.CSharp.Common.Input
         private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
         {
             var result = new List<InputOperationExample>();
-            var exampleOperation = _exampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
+            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
             if (exampleOperation is null)
             {
                 return result;
@@ -502,11 +500,11 @@ namespace AutoRest.CSharp.Common.Input
             }
             else
             {
-                return GetOrCreateType(property.Schema, GetFormat(property), _modelsCache, property.IsNullable);
+                return GetOrCreateType(property.Schema, GetPropertyFormat(property), _modelsCache, property.IsNullable);
             }
         }
 
-        private string? GetFormat(Property property)
+        private string? GetPropertyFormat(Property property)
         {
             if (!string.IsNullOrEmpty(property.Extensions?.Format))
             {

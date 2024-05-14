@@ -33,7 +33,7 @@ internal record InputOperation
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     bool keepClientDefaultValue,
-    string? operationId)
+    string? operationId = null)
     {
         Name = name;
         SpecName = name;
@@ -79,8 +79,7 @@ internal record InputOperation
         paging: null,
         generateProtocolMethod: true,
         generateConvenienceMethod: false,
-        keepClientDefaultValue: false,
-        operationId: null)
+        keepClientDefaultValue: false)
     {
         SpecName = string.Empty;
     }

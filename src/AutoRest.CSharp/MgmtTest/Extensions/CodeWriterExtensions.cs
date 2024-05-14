@@ -345,7 +345,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType) => type switch
         {
             _ when inputType == InputPrimitiveType.Int32 || inputType == InputPrimitiveType.Int64 || inputType == InputPrimitiveType.Float32 || inputType == InputPrimitiveType.Float64 || inputType == InputPrimitiveType.Float128 => writer.AppendRaw(value),
-            _ when inputType == InputPrimitiveType.DurationConstant || inputType == InputPrimitiveType.DurationISO8601 => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
+            _ when inputType == InputPrimitiveType.DurationISO8601 => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
             _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
             _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
             _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
