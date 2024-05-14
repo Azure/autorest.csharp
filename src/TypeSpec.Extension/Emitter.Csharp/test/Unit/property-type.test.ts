@@ -1,16 +1,16 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
-import { createModel } from "../../src/lib/clientModelBuilder.js";
+import { createModel } from "../../src/lib/client-model-builder.js";
 import {
     typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext
-} from "./utils/TestUtil.js";
-import { InputEnumType, InputListType } from "../../src/type/inputType.js";
+} from "./utils/test-util.js";
+import { InputEnumType, InputListType } from "../../src/type/input-type.js";
 import isEqual from "lodash.isequal";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputTypeKind } from "../../src/type/input-type-kind.js";
+import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
 
 describe("Test GetInputType for array", () => {
     let runner: TestHost;

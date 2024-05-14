@@ -40,8 +40,8 @@ import {
     InputType,
     isInputEnumType,
     isInputLiteralType
-} from "../type/inputType.js";
-import { LiteralTypeContext } from "../type/literalTypeContext.js";
+} from "../type/input-type.js";
+import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { logger } from "./logger.js";
 import { capitalize, getTypeName } from "./utils.js";
 
