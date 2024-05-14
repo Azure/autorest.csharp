@@ -89,7 +89,7 @@ function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $s
         Try
         {
             $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
-            $emitCommand = "npx tsp compile $typespecFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $emitCommand = "npx tsp compile $typespecFileName--trace @typespec/http-client-csharp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }
         Finally 

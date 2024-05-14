@@ -42,7 +42,7 @@ import {
     isInputLiteralType
 } from "../type/input-type.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import { capitalize, getTypeName } from "./utils.js";
 
 /**
@@ -107,7 +107,7 @@ export function getInputType(
     operation?: Operation,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    logger.debug(`getInputType for kind: ${type.kind}`);
+    Logger.getInstance().debug(`getInputType for kind: ${type.kind}`);
 
     // TODO -- we might could remove this workaround when we adopt getAllOperations
     //         or when we decide not to honor the `@format` decorators on parameters

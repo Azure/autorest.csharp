@@ -56,7 +56,7 @@ import {
     RequestMethod
 } from "../type/request-method.js";
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
@@ -86,7 +86,7 @@ export function loadOperation(
         parameters: typespecParameters
     } = operation;
     const program = sdkContext.program;
-    logger.info(`load operation: ${op.name}, path:${fullPath} `);
+    Logger.getInstance().info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
