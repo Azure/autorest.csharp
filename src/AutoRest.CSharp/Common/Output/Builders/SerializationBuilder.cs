@@ -143,7 +143,6 @@ namespace AutoRest.CSharp.Output.Builders
 
             return inputType switch
             {
-                CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
                 InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ =>
@@ -390,13 +389,6 @@ namespace AutoRest.CSharp.Output.Builders
                         new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                     TypedMemberExpression? enumerableExpression = null;
 
-                    // TODO: handle this later
-                    //if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
-                    //{
-                    //    enumerableExpression = property.Declaration.Type.IsNullable
-                    //        ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                    //        : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
-                    //}
                     yield return new JsonPropertySerialization(
                         parameter.Name,
                         memberValueExpression,

@@ -45,7 +45,6 @@ namespace AutoRest.CSharp.Common.Input
             bool explode = false;
             string? arraySerializationDelimiter = null;
             string? headerCollectionPrefix = null;
-            string? format = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -65,8 +64,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean(nameof(InputParameter.SkipUrlEncoding), ref skipUrlEncoding)
                     || reader.TryReadBoolean(nameof(InputParameter.Explode), ref explode)
                     || reader.TryReadString(nameof(InputParameter.ArraySerializationDelimiter), ref arraySerializationDelimiter)
-                    || reader.TryReadString(nameof(InputParameter.HeaderCollectionPrefix), ref headerCollectionPrefix)
-                    || reader.TryReadString(nameof(InputParameter.Format), ref format);
+                    || reader.TryReadString(nameof(InputParameter.HeaderCollectionPrefix), ref headerCollectionPrefix);
 
                 if (!isKnownProperty)
                 {
@@ -108,8 +106,7 @@ namespace AutoRest.CSharp.Common.Input
                 SkipUrlEncoding: skipUrlEncoding,
                 Explode: explode,
                 ArraySerializationDelimiter: arraySerializationDelimiter,
-                HeaderCollectionPrefix: headerCollectionPrefix,
-                Format: format);
+                HeaderCollectionPrefix: headerCollectionPrefix);
 
             if (id != null)
             {

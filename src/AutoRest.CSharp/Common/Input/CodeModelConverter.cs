@@ -228,8 +228,7 @@ namespace AutoRest.CSharp.Common.Input
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             FlattenedBodyProperty: input is VirtualParameter vp and ({ Schema: not ConstantSchema } or { Required: not true })
                 ? CreateProperty(vp.TargetProperty)
-                : null,
-            Format: input.Extensions?.Format
+                : null
         );
 
         private OperationResponse CreateOperationResponse(ServiceResponse response) => new(

@@ -348,7 +348,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Type, groupedByParameter.Format).Implementation;
+            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Type).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Name);
 
             return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);

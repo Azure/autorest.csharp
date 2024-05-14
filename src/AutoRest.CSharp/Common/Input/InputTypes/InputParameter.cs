@@ -21,8 +21,7 @@ internal record InputParameter(
     bool SkipUrlEncoding,
     bool Explode,
     string? ArraySerializationDelimiter,
-    string? HeaderCollectionPrefix,
-    string? Format = null)
+    string? HeaderCollectionPrefix)
 {
     public InputParameter() : this(
         Name: string.Empty,
@@ -42,8 +41,7 @@ internal record InputParameter(
         SkipUrlEncoding: false,
         Explode: false,
         ArraySerializationDelimiter: null,
-        HeaderCollectionPrefix: null,
-        Format: null)
+        HeaderCollectionPrefix: null)
     { }
 
     public string Name { get; internal set; } = Name;
