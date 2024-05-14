@@ -61,14 +61,14 @@ namespace Scm._Type.Union.Models
             {
                 return null;
             }
-            GetResponseProp3 prop = default;
+            GetResponseProp4 prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = new GetResponseProp3(property.Value.GetString());
+                    prop = new GetResponseProp4(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")
