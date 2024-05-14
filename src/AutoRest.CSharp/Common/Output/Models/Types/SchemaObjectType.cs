@@ -407,8 +407,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
+            // If the parent discriminator exists, the current discriminator should have the same name
             var parentDiscriminator = GetBaseObjectType()?.Discriminator;
-            var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator)
+            var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator && (parentDiscriminator is null || (parentDiscriminator != null && p.InputModelProperty.Name == parentDiscriminator.Property.SerializedName)))
                 ?? parentDiscriminator?.Property;
 
             //neither me nor my parent are discriminators so I can bail
