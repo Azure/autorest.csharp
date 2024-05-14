@@ -47,29 +47,11 @@ namespace AutoRest.CSharp.Common.Input
         // TODO: remove the workaround for immediate base models
         public IReadOnlyList<InputModelType> GetImmediateBaseModels() => Parents?.Where(x => x.Name != "AzureResourceBase")?.ToArray() ?? Array.Empty<InputModelType>();
 
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model, string? skipModelName = null)
+        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
             while (model != null)
             {
-                if (skipModelName is null)
-                {
-                    yield return model;
-                }
-                else if (model.Name != skipModelName)
-                {
-                    yield return model;
-                }
+                yield return model;
                 model = model.BaseModel;
             }
         }
