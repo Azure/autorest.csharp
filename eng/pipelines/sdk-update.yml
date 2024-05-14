@@ -63,6 +63,10 @@ extends:
                     npm run prettier
                   displayName: "Emitter format check"
                   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+                - script: |
+                    npm run lint
+                  displayName: "Emitter linter check"
+                  workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
               - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
                 name: Package
                 displayName: "Pack Artifacts"

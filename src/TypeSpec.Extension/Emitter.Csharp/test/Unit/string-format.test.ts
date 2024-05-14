@@ -1,23 +1,22 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import { getAllHttpServices } from "@typespec/http";
+import assert from "assert";
 import isEqual from "lodash.isequal";
+import { loadOperation } from "../../src/lib/operation.js";
+import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType
+} from "../../src/type/input-type.js";
+import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext,
     navigateModels,
     typeSpecCompile
-} from "./utils/TestUtil.js";
-import { getAllHttpServices } from "@typespec/http";
-import { loadOperation } from "../../src/lib/operation.js";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType
-} from "../../src/type/inputType.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { stringify } from "querystring";
+} from "./utils/test-util.js";
 
 describe("Test string format", () => {
     let runner: TestHost;

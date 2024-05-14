@@ -30,29 +30,28 @@ import {
 import { getVersions } from "@typespec/versioning";
 import { $lib } from "../emitter.js";
 import { NetEmitterOptions, resolveOptions } from "../options.js";
-import { ClientKind } from "../type/clientKind.js";
-import { CodeModel } from "../type/codeModel.js";
-import { InputClient } from "../type/inputClient.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputOperation } from "../type/inputOperation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputParameter } from "../type/inputParameter.js";
+import { ClientKind } from "../type/client-kind.js";
+import { CodeModel } from "../type/code-model.js";
+import { InputClient } from "../type/input-client.js";
+import { InputConstant } from "../type/input-constant.js";
+import { InputOperation } from "../type/input-operation.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
     InputModelType,
     InputPrimitiveType
-} from "../type/inputType.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
-import { RequestLocation } from "../type/requestLocation.js";
+} from "../type/input-type.js";
+import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
+import { RequestLocation } from "../type/request-location.js";
 import { Usage } from "../type/usage.js";
-import { getExternalDocs } from "./decorators.js";
 import { logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
-import { processServiceAuthentication } from "./serviceAuthentication.js";
+import { processServiceAuthentication } from "./service-authentication.js";
 import { resolveServers } from "./typespecServer.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function createModel(
     sdkContext: SdkContext<NetEmitterOptions>
@@ -81,7 +80,6 @@ export function createModelForService(
     sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(sdkContext.emitContext);
     const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
 
@@ -107,7 +105,6 @@ export function createModelForService(
             : undefined;
 
     const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
@@ -232,7 +229,7 @@ export function createModelForService(
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
-            var subClient = emitClient(dpgGroup, client);
+            const subClient = emitClient(dpgGroup, client);
             clients.push(subClient);
             addChildClients(context, dpgGroup, clients);
         }
@@ -243,12 +240,12 @@ export function createModelForService(
             return client.name;
         }
 
-        var pathParts = client.groupPath.split(".");
+        const pathParts = client.groupPath.split(".");
         if (pathParts?.length >= 3) {
             return pathParts.slice(pathParts.length - 2).join("");
         }
 
-        var clientName = getLibraryName(sdkContext, client.type);
+        const clientName = getLibraryName(sdkContext, client.type);
         if (
             clientName === "Models" &&
             resolveOptions(sdkContext.emitContext)["model-namespace"] !== false

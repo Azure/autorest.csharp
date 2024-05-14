@@ -1,25 +1,18 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert from "assert";
-import { createModel } from "../../src/lib/clientModelBuilder.js";
+import isEqual from "lodash.isequal";
+import { createModel } from "../../src/lib/client-model-builder.js";
+import { InputIntrinsicTypeKind } from "../../src/type/input-intrinsic-type-kind.js";
+import { InputModelProperty } from "../../src/type/input-model-property.js";
+import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
+import { InputDictionaryType } from "../../src/type/input-type.js";
+import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import {
-    typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
-    navigateModels,
-    createNetSdkContext
-} from "./utils/TestUtil.js";
-import isEqual from "lodash.isequal";
-import {
-    InputDictionaryType,
-    InputEnumType,
-    InputListType,
-    InputModelType
-} from "../../src/type/inputType.js";
-import { getAllHttpServices } from "@typespec/http";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
-import { InputIntrinsicTypeKind } from "../../src/type/inputIntrinsicTypeKind.js";
-import { InputModelProperty } from "../../src/type/inputModelProperty.js";
+    createNetSdkContext,
+    typeSpecCompile
+} from "./utils/test-util.js";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
