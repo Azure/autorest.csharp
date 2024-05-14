@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -820,7 +819,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema or ChoiceSchema => new EnumType(_schemaToInputEnumMap[schema], schema, MgmtContext.Context),
-            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
+            ObjectSchema objectSchema => (MgmtReferenceType.IsPropertyReferenceType(schema) || MgmtReferenceType.IsTypeReferenceType(schema) || MgmtReferenceType.IsReferenceType(schema))
                 ? new MgmtReferenceType(objectSchema)
                 : new MgmtObjectType(objectSchema),
             _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")

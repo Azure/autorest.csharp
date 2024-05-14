@@ -26,7 +26,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="derivedProp"> The index property. </param>
-        internal DifferentSpreadModelDerived(string knownProp, IDictionary<string, ModelForRecord> additionalProperties, ModelForRecord derivedProp) : base(knownProp, additionalProperties)
+        internal DifferentSpreadModelDerived(string knownProp, IDictionary<string, BinaryData> additionalProperties, ModelForRecord derivedProp) : base(knownProp, additionalProperties)
         {
             DerivedProp = derivedProp;
         }

@@ -235,5 +235,49 @@ namespace Encode.Duration.Samples
 
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Float64Seconds_ShortVersion()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Float64Seconds_ShortVersion_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Float64Seconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Float64Seconds_AllParameters_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+            Console.WriteLine(response.Status);
+        }
     }
 }

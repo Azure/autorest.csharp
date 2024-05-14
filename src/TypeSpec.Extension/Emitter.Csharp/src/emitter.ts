@@ -22,7 +22,7 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
-import { createModel } from "./lib/clientModelBuilder.js";
+import { createModel } from "./lib/client-model-builder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
 import { tspOutputFileName, configurationFileName } from "./constants.js";
 
@@ -178,7 +178,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "use-model-reader-writer":
                     options["use-model-reader-writer"] ?? true,
                 "azure-arm":
-                    sdkContext.arm === false ? undefined : sdkContext.arm
+                    sdkContext.arm === false ? undefined : sdkContext.arm,
+                "disable-xml-docs":
+                    options["disable-xml-docs"] === false
+                        ? undefined
+                        : options["disable-xml-docs"]
             };
 
             await program.host.writeFile(

@@ -24,6 +24,7 @@ internal enum InputTypeKind
     DurationConstant,
     DurationSeconds,
     DurationSecondsFloat,
+    DurationSecondsDouble,
     ETag,
     Float32,
     Float64,

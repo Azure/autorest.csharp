@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -12,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
+using static AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -92,13 +95,19 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static StreamExpression InvokeFileOpenWrite(string filePath)
             => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[] { Literal(filePath) }));
 
-        // Expected signature: MethodName(Utf8JsonWriter writer);
-        public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)
-            => new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter);
+        // Expected signature: MethodName(Utf8JsonWriter writer, ModelReaderWriterOptions? options);
+        public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options)
+        {
+            // If options is null, the method signature should not include the parameter
+            return options is null
+                ? new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter)
+                : new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter, options);
+        }
 
+        // TODO: https://github.com/Azure/autorest.csharp/issues/4633
         // Expected signature: MethodName(StringBuilder builder);
         public static MethodBodyStatement InvokeCustomBicepSerializationMethod(string methodName, StringBuilderExpression stringBuilder)
-            => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
+        => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
 
         // Expected signature: MethodName(JsonProperty property, ref T optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)

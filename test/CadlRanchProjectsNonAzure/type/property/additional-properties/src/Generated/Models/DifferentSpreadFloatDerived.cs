@@ -24,8 +24,9 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/>. </summary>
         /// <param name="name"> The id property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="derivedProp"> The index property. </param>
-        internal DifferentSpreadFloatDerived(string name, IDictionary<string, float> additionalProperties, float derivedProp) : base(name, additionalProperties)
+        internal DifferentSpreadFloatDerived(string name, IDictionary<string, float> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData, float derivedProp) : base(name, additionalProperties, serializedAdditionalRawData)
         {
             DerivedProp = derivedProp;
         }

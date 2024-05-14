@@ -23,6 +23,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -190,6 +191,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField),
                 utf8JsonWriter.WriteEndObject()
             };
 
@@ -245,7 +247,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
-                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
+                    ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter, options)
                     : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value, options)
             };
         }
@@ -258,7 +260,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return EmptyStatement;
             }
 
-            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
+            var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.ImplementationType.Arguments[0], additionalProperties.ImplementationType.Arguments[1], additionalProperties.Value);
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
                 utf8JsonWriter.WritePropertyName(item.Key),
@@ -428,7 +430,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).InvokeToString(format)));
                 }
 
-                if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float)
+                if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).InvokeToString(format)));
                 }
@@ -552,13 +554,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // collect all properties and initialize the dictionary
             var propertyVariables = new Dictionary<JsonPropertySerialization, VariableReference>();
 
-            CollectPropertiesForDeserialization(propertyVariables, serialization.Properties);
-
-            var additionalProperties = serialization.AdditionalProperties;
-            if (additionalProperties != null)
-            {
-                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
-            }
+            CollectPropertiesForDeserialization(propertyVariables, serialization);
 
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
 
@@ -579,24 +575,37 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var shouldTreatEmptyStringAsNull = Configuration.ModelsToTreatEmptyStringAsNull.Contains(serialization.Type.Name);
-            var objAdditionalProperties = serialization.AdditionalProperties;
-            if (objAdditionalProperties != null)
+            var additionalProperties = serialization.AdditionalProperties;
+            DictionaryExpression? additionalPropertiesDictionary = null;
+            var rawDataField = serialization.RawDataField;
+            DictionaryExpression? rawDataFieldDictionary = null;
+            // if there is additional properties, we need to declare the dictionary first
+            if (additionalProperties != null)
             {
-                var localVarName = objAdditionalProperties.ShouldExcludeInWireSerialization ? "rawDataDictionary" : "additionalPropertiesDictionary";
-                var dictionary = new VariableReference(objAdditionalProperties.Type, localVarName);
-                yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
-                yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
-                {
-                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(objAdditionalProperties.Type.Arguments[0], objAdditionalProperties.Type.Arguments[1], dictionary), options, propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
-                };
-                yield return Assign(propertyVariables[objAdditionalProperties], dictionary);
+                yield return Declare("additionalPropertiesDictionary",
+                    new DictionaryExpression(additionalProperties.ImplementationType.Arguments[0], additionalProperties.ImplementationType.Arguments[1], New.Instance(additionalProperties.ImplementationType)),
+                    out additionalPropertiesDictionary);
             }
-            else
+            // if there is raw data field, we need to declare the dictionary first
+            if (rawDataField != null)
             {
-                yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
-                {
-                    DeserializeIntoObjectProperties(serialization.Properties, new JsonPropertyExpression(property), propertyVariables, shouldTreatEmptyStringAsNull, options)
-                };
+                yield return Declare("rawDataDictionary",
+                    new DictionaryExpression(rawDataField.ImplementationType.Arguments[0], rawDataField.ImplementationType.Arguments[1], New.Instance(rawDataField.ImplementationType)),
+                    out rawDataFieldDictionary);
+            }
+
+            yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
+            {
+                DeserializeIntoObjectProperties(serialization.Properties, new JsonPropertyExpression(property), additionalProperties, additionalPropertiesDictionary, rawDataField, rawDataFieldDictionary, propertyVariables, shouldTreatEmptyStringAsNull, options).ToArray()
+            };
+
+            if (additionalProperties != null && additionalPropertiesDictionary != null)
+            {
+                yield return Assign(propertyVariables[additionalProperties], additionalPropertiesDictionary);
+            }
+            if (rawDataField != null && rawDataFieldDictionary != null)
+            {
+                yield return Assign(propertyVariables[rawDataField], rawDataFieldDictionary);
             }
 
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => GetOptional(v.Key, v.Value));
@@ -608,17 +617,54 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression? options, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(
+            IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty,
+            JsonAdditionalPropertiesSerialization? additionalProperties, DictionaryExpression? additionalPropertiesDictionary,
+            JsonAdditionalPropertiesSerialization? rawDataField, DictionaryExpression? rawDataFieldDictionary,
+            IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables,
+            bool shouldTreatEmptyStringAsNull,
+            ModelReaderWriterOptionsExpression? options)
         {
             yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull, options);
-            // in the case here, this line returns an empty statement, we only want the value here
-            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, options, out var value);
-            var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
-            yield return Serializations.WrapInCheckNotWire(
-                additionalPropertiesSerialization,
-                options?.Format,
-                additionalPropertiesStatement);
+            if (additionalProperties != null && additionalPropertiesDictionary != null)
+            {
+                var valueSerialization = additionalProperties.ValueSerialization ?? throw new InvalidOperationException("ValueSerialization of AdditionalProperties property should never be null");
+                var deserializationStatement = TryDeserializeValue(valueSerialization, jsonProperty.Value, options, out var value);
+
+                var additionalPropertiesStatement = additionalPropertiesDictionary.Add(jsonProperty.Name, value);
+                additionalPropertiesStatement = Serializations.WrapInCheckNotWire(
+                    additionalProperties,
+                    options?.Format,
+                    additionalPropertiesStatement);
+
+                if (deserializationStatement is IfStatement tryDeserializationStatement)
+                {
+                    // when we have a verifier, the statement is a if statement, the following value processing statements should be wrapped by this if statement
+                    tryDeserializationStatement.Add(additionalPropertiesStatement);
+                    // we also need to add "continue" to let the raw data field be skipped
+                    tryDeserializationStatement.Add(Continue);
+                    yield return tryDeserializationStatement;
+                }
+                else
+                {
+                    // when we do not have a verifier, the statement is not a if statement
+                    yield return deserializationStatement;
+                    yield return additionalPropertiesStatement;
+                }
+            }
+
+            if (rawDataField != null && rawDataFieldDictionary != null)
+            {
+                var valueSerialization = rawDataField.ValueSerialization ?? throw new InvalidOperationException("ValueSerialization of raw data field should never be null");
+                yield return DeserializeValue(valueSerialization, jsonProperty.Value, options, out var value);
+                var rawDataFieldStatement = rawDataFieldDictionary.Add(jsonProperty.Name, value);
+
+                yield return Serializations.WrapInCheckNotWire(
+                    rawDataField,
+                    options?.Format,
+                    rawDataFieldStatement);
+            }
         }
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull, ModelReaderWriterOptionsExpression? options)
@@ -754,7 +800,31 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         }
 
+        /// <summary>
+        /// Collects all the properties, additional properties property, raw data field for deserialization
+        /// </summary>
+        /// <param name="propertyVariables"></param>
+        /// <param name="serialization"></param>
+        private static void CollectPropertiesForDeserialization(IDictionary<JsonPropertySerialization, VariableReference> propertyVariables, JsonObjectSerialization serialization)
+        {
+            CollectPropertiesForDeserialization(propertyVariables, serialization.Properties);
+
+            if (serialization.AdditionalProperties is { } additionalProperties)
+            {
+                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
+            }
+
+            if (serialization.RawDataField is { } rawDataField)
+            {
+                propertyVariables.Add(rawDataField, new VariableReference(rawDataField.Value.Type, rawDataField.SerializationConstructorParameterName));
+            }
+        }
+
+        /// <summary>
         /// Collects a list of properties being read from all level of object hierarchy
+        /// </summary>
+        /// <param name="propertyVariables"></param>
+        /// <param name="jsonProperties"></param>
         private static void CollectPropertiesForDeserialization(IDictionary<JsonPropertySerialization, VariableReference> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties)
@@ -798,6 +868,49 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new[]{deserializeValueBlock, AssignOrReturn(variable, value)}
                 )
             };
+        }
+
+        // TODO -- make options parameter non-nullable again when we remove the `use-model-reader-writer` flag
+        public static MethodBodyStatement TryDeserializeValue(JsonSerialization serialization, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
+        {
+            if (serialization.Type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && BuilderHelpers.IsVerifiableType(frameworkType))
+            {
+                if (frameworkType == typeof(string))
+                {
+                    DeserializeValue(serialization, element, options, out value);
+                    return new IfStatement(Or(element.ValueKindEqualsString(), element.ValueKindEqualsNull()));
+                }
+                else if (frameworkType == typeof(bool))
+                {
+                    DeserializeValue(serialization, element, options, out value);
+                    var valueKind = element.ValueKind;
+                    return new IfStatement(Or(Equal(valueKind, JsonValueKindExpression.True), Equal(valueKind, JsonValueKindExpression.False)));
+                }
+                else
+                {
+                    var declarationExpression = new DeclarationExpression(frameworkType, "value", out var variable, isOut: true);
+                    value = variable;
+                    return new IfStatement(new BoolExpression(element.Invoke($"TryGet{frameworkType.Name}", declarationExpression)));
+                }
+            }
+            else if (serialization.Type.IsList)
+            {
+                return new IfStatement(Equal(element.ValueKind, JsonValueKindExpression.Array))
+                {
+                    DeserializeValue(serialization, element, options, out value)
+                };
+            }
+            else if (serialization.Type.IsDictionary)
+            {
+                return new IfStatement(Equal(element.ValueKind, JsonValueKindExpression.Object))
+                {
+                    DeserializeValue(serialization, element, options, out value)
+                };
+            }
+            else
+            {
+                return DeserializeValue(serialization, element, options, out value);
+            }
         }
 
         // TODO -- make options parameter non-nullable again when we remove the `use-model-reader-writer` flag
@@ -1040,12 +1153,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetDateTime();
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format == SerializationFormat.Duration_Seconds)
+                if (format is SerializationFormat.Duration_Seconds)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetInt32());
                 }
 
-                if (format == SerializationFormat.Duration_Seconds_Float)
+                if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetDouble());
                 }

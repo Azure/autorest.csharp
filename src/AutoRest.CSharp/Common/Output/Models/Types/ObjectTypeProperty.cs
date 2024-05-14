@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
@@ -326,6 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (type.IsFrameworkType)
             {
+                // TODO -- need to fix this so that we could have the reference of unioned models.
                 string typeSpecificDesc;
                 var unionTypes = GetUnionTypes(type);
                 IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();

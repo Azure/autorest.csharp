@@ -153,6 +153,10 @@ model RoundTripModel {
 
     @doc("Required int, illustrating a value type property.")
     requiredInt: int32;
+
+    @doc("Required readonly int")
+    @visibility("read")
+    requiredReadonlyInt: int32;
 }
 
 union DaysOfWeekExtensibleEnum {
