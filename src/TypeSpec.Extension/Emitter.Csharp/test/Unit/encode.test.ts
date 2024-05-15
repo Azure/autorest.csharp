@@ -3,20 +3,20 @@ import { getAllHttpServices } from "@typespec/http";
 import assert from "assert";
 import isEqual from "lodash.isequal";
 import { loadOperation } from "../../src/lib/operation.js";
-import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 import {
     InputEnumType,
     InputModelType,
     InputPrimitiveType
-} from "../../src/type/input-type.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
+} from "../../src/type/inputType.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext,
     navigateModels,
     typeSpecCompile
-} from "./utils/test-util.js";
+} from "./utils/TestUtil.js";
 
 describe("Test encode duration", () => {
     let runner: TestHost;
