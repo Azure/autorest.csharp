@@ -7,7 +7,7 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "GetResponseProp4",
+   "Name": "GetResponseProp5",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -34,7 +34,7 @@
   {
    "$id": "6",
    "Kind": "Enum",
-   "Name": "GetResponseProp3",
+   "Name": "GetResponseProp4",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -78,7 +78,7 @@
   {
    "$id": "12",
    "Kind": "Enum",
-   "Name": "GetResponseProp2",
+   "Name": "GetResponseProp3",
    "EnumValueType": "Int32",
    "AllowedValues": [
     {
