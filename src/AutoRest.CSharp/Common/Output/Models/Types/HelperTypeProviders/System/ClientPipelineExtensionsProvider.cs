@@ -134,7 +134,8 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Throw(New.Instance(typeof(ClientResultException), _message.Response))
                 },
                 EmptyLine,
-                Return(_message.Response)
+                Declare("response", new TypedValueExpression(typeof(PipelineResponse), new TernaryConditionalOperator(_message.BufferResponse, _message.Response, _message.ExtractResponse())), out var response),
+                Return(response)
             });
         }
 
@@ -169,7 +170,8 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Throw(new InvokeStaticMethodExpression(typeof(ClientResultException), nameof(ClientResultException.CreateAsync), new[] { _message.Response }, CallAsAsync: true))
                 },
                 EmptyLine,
-                Return(_message.Response)
+                Declare("response", new TypedValueExpression(typeof(PipelineResponse), new TernaryConditionalOperator(_message.BufferResponse, _message.Response, _message.ExtractResponse())), out var response),
+                Return(response)
             });
         }
 
