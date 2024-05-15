@@ -20,7 +20,7 @@ import { RestTestLibrary } from "@typespec/rest/testing";
 import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { getInputType } from "../../../src/lib/model.js";
 import { NetEmitterOptions } from "../../../src/options.js";
-import { InputEnumType, InputModelType } from "../../../src/type/input-type.js";
+import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({

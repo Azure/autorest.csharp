@@ -1,18 +1,18 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert from "assert";
 import isEqual from "lodash.isequal";
-import { createModel } from "../../src/lib/client-model-builder.js";
-import { InputIntrinsicTypeKind } from "../../src/type/input-intrinsic-type-kind.js";
-import { InputModelProperty } from "../../src/type/input-model-property.js";
-import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
-import { InputDictionaryType } from "../../src/type/input-type.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
+import { createModel } from "../../src/lib/clientModelBuilder.js";
+import { InputIntrinsicTypeKind } from "../../src/type/inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "../../src/type/inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputDictionaryType } from "../../src/type/inputType.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext,
     typeSpecCompile
-} from "./utils/test-util.js";
+} from "./utils/TestUtil.js";
 
 describe("Discriminator property", () => {
     let runner: TestHost;

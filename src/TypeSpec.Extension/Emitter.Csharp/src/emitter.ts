@@ -22,7 +22,7 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
-import { createModel } from "./lib/client-model-builder.js";
+import { createModel } from "./lib/clientModelBuilder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
 import { tspOutputFileName, configurationFileName } from "./constants.js";
 

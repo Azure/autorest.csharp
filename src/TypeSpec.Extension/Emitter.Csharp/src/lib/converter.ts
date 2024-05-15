@@ -33,10 +33,10 @@ import {
 } from "@typespec/compiler";
 import { logger } from "./logger.js";
 import { getFullNamespaceString } from "./utils.js";
-import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
-import { InputIntrinsicTypeKind } from "../type/input-intrinsic-type-kind.js";
-import { InputModelProperty } from "../type/input-model-property.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -47,9 +47,9 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType
-} from "../type/input-type.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
-import { LiteralTypeContext } from "../type/literal-type-context.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 
 export function fromSdkType(

@@ -12,13 +12,13 @@ import {
     getLibraryName,
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
-import { InputParameter } from "../type/input-parameter.js";
-import { InputPrimitiveType, InputType } from "../type/input-type.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
-import { RequestLocation } from "../type/request-location.js";
-import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
-import { InputConstant } from "../type/input-constant.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
+import { InputParameter } from "../type/inputParameter.js";
+import { InputPrimitiveType, InputType } from "../type/inputType.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
+import { RequestLocation } from "../type/requestLocation.js";
+import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
+import { InputConstant } from "../type/inputConstant.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);

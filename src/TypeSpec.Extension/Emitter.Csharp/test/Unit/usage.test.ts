@@ -7,7 +7,7 @@ import {
     createEmitterTestHost,
     createNetSdkContext,
     typeSpecCompile
-} from "./utils/test-util.js";
+} from "./utils/TestUtil.js";
 
 describe("Test getUsages", () => {
     let runner: TestHost;

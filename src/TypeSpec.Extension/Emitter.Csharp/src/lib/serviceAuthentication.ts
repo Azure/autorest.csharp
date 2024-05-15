@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { ServiceAuthentication } from "@typespec/http";
-import { InputApiKeyAuth } from "../type/input-api-key-auth.js";
-import { InputAuth } from "../type/input-auth.js";
-import { InputOAuth2Auth } from "../type/input-oauth2-auth.js";
+import { InputApiKeyAuth } from "../type/inputApiKeyAuth.js";
+import { InputAuth } from "../type/inputAuth.js";
+import { InputOAuth2Auth } from "../type/inputOAuth2Auth.js";
 import { logger } from "./logger.js";
 
 export function processServiceAuthentication(
