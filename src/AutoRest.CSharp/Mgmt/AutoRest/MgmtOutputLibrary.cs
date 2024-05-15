@@ -258,7 +258,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var updatedTypes = UpdateBodyParameters();
             foreach (var type in updatedTypes)
             {
-                _schemaToModels[type] = BuildModel(type);
+                if (type is InputModelType inputModel)
+                {
+                    _schemaToModels[type] = BuildModel(type, GetDefaultDerivedType(inputModel, defaultDerivedTypes));
+                }
+                else
+                {
+                    _schemaToModels[type] = BuildModel(type);
+                }
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
@@ -309,14 +316,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtObjectType? GetDefaultDerivedType(InputModelType model, Dictionary<string, MgmtObjectType> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
-            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
-            if (!isBasePolyType && !isChildPolyType)
+            if (!model.IsBasePolySchema && !isChildPolyType)
             {
                 return null;
             }
 
-            var actualBase = isBasePolyType ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
+            var actualBase = model.IsBasePolySchema ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
             if (actualBase is null)
                 throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
 

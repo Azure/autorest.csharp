@@ -348,7 +348,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false,
-                Parents: schema.Parents?.All is null ? null : schema.Parents.All.OfType<ObjectSchema>().Select(GetOrCreateModel).ToArray())
+                Parents: schema.Parents?.All is null ? null : schema.Parents.All.OfType<ObjectSchema>().Select(GetOrCreateModel).ToArray(),
+                IsBasePolyType: IsBasePolyType(schema))
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select<global::AutoRest.CSharp.Input.ObjectSchema, global::AutoRest.CSharp.Common.Input.InputModelType>(GetOrCreateModel).ToList<global::AutoRest.CSharp.Common.Input.InputModelType>() : global::System.Array.Empty<global::AutoRest.CSharp.Common.Input.InputModelType>(),
                 Serialization = GetSerialization(schema, usage),
@@ -360,6 +361,17 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache[schema] = derived;
 
             return model;
+        }
+
+        private bool IsBasePolyType(ObjectSchema schema)
+        {
+            return schema.Discriminator?.All is not null ||
+                (schema.Discriminator is not null && !HasParentsWithDiscriminator(schema)); //this is the case where I am a solo placeholder but might have derived types later
+        }
+
+        private bool HasParentsWithDiscriminator(ObjectSchema schema)
+        {
+            return schema.Parents?.All.Count > 0 && schema.Parents.All.Any(parent => parent is ObjectSchema objectSchema && objectSchema.Discriminator is not null);
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
