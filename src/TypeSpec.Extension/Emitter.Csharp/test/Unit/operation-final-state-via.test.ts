@@ -4,7 +4,7 @@ import { FinalStateValue } from "@azure-tools/typespec-azure-core";
 import {
     OperationFinalStateVia,
     convertLroFinalStateVia
-} from "../../src/type/operationFinalStateVia.js";
+} from "../../src/type/operation-final-state-via.js";
 import assert from "assert";
 import { describe } from "mocha";
 
