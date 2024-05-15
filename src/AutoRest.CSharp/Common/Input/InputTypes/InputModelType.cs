@@ -39,18 +39,18 @@ namespace AutoRest.CSharp.Common.Input
             BaseModel = baseModel;
         }
 
-        public IEnumerable<InputModelType> GetSelfAndBaseModels()
+        public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
+
+        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
-            yield return this;
-            if (Parents is not null)
+            while (model != null)
             {
-                foreach (var baseModel in Parents)
-                {
-                    yield return baseModel;
-                }
+                yield return model;
+                model = model.BaseModel;
             }
         }
 
+        // TODO: Parents is needed for multiple parents in MPG, DPG doesn't implement Parents, need further consolidation
         public IReadOnlyList<InputModelType> GetAllBaseModels() => Parents ?? Array.Empty<InputModelType>();
 
         // TODO: remove the workaround for immediate base models
