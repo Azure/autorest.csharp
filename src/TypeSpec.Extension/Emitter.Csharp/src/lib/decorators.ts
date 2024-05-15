@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { DecoratedType, Operation, Type } from "@typespec/compiler";
-import { ExternalDocs } from "../type/externalDocs.js";
+import { ExternalDocs } from "../type/external-docs.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
 const externalDocsKey = Symbol("externalDocs");

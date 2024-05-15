@@ -358,7 +358,7 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
-op returnsAnonymousModel(): {@body body:{}};
+op returnsAnonymousModel(): {};
 
 // TODO: https://github.com/Azure/typespec-azure/issues/509 
 namespace EnumTest {
