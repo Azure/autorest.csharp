@@ -317,12 +317,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             //only want to create one instance of the default derived per polymorphic set
             bool isChildPolyType = model.DiscriminatorValue is not null;
-            if (!model.IsBasePolySchema && !isChildPolyType)
+            if (!model.IsBasePolyType && !isChildPolyType)
             {
                 return null;
             }
 
-            var actualBase = model.IsBasePolySchema ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
+            var actualBase = model.IsBasePolyType ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
             if (actualBase is null)
                 throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
 
