@@ -2102,45 +2102,6 @@
   {
    "$id": "279",
    "Kind": "Model",
-   "Name": "ResponseError",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Error response",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "280",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "The error code.",
-     "Type": {
-      "$id": "281",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "282",
-     "Name": "message",
-     "SerializedName": "message",
-     "Description": "The message explaining the error reported by the service.",
-     "Type": {
-      "$id": "283",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "284",
-   "Kind": "Model",
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
@@ -2148,7 +2109,7 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "285",
+     "$id": "280",
      "Name": "code",
      "SerializedName": "code",
      "Description": "The error code.",
@@ -2159,12 +2120,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "286",
+     "$id": "281",
      "Name": "message",
      "SerializedName": "message",
      "Description": "A message explaining the error reported by the service.",
      "Type": {
-      "$id": "287",
+      "$id": "282",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2177,34 +2138,34 @@
  ],
  "Clients": [
   {
-   "$id": "288",
+   "$id": "283",
    "Name": "AnomalyDetectorClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "289"
+    "$id": "284"
    },
    "Creatable": true
   },
   {
-   "$id": "290",
+   "$id": "285",
    "Name": "Univariate",
    "Description": "",
    "Operations": [
     {
-     "$id": "291",
+     "$id": "286",
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
      "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
      "Parameters": [
       {
-       "$id": "292",
+       "$id": "287",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
-        "$id": "293",
+        "$id": "288",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -2220,7 +2181,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "294",
+       "$id": "289",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
@@ -2237,9 +2198,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "295",
+        "$id": "290",
         "Type": {
-         "$id": "296",
+         "$id": "291",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -2248,7 +2209,7 @@
        }
       },
       {
-       "$id": "297",
+       "$id": "292",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2266,11 +2227,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "298",
+       "$id": "293",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "299",
+        "$id": "294",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2285,19 +2246,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "300",
+        "$id": "295",
         "Type": {
-         "$ref": "299"
+         "$ref": "294"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "301",
+       "$id": "296",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "302",
+        "$id": "297",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2312,9 +2273,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "303",
+        "$id": "298",
         "Type": {
-         "$ref": "302"
+         "$ref": "297"
         },
         "Value": "application/json"
        }
@@ -2322,7 +2283,7 @@
      ],
      "Responses": [
       {
-       "$id": "304",
+       "$id": "299",
        "StatusCodes": [
         200
        ],
@@ -2349,20 +2310,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "305",
+     "$id": "300",
      "Name": "DetectUnivariateLastPoint",
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
      "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "306",
+       "$id": "301",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2380,11 +2341,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "307",
+       "$id": "302",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "308",
+        "$id": "303",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2399,19 +2360,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "309",
+        "$id": "304",
         "Type": {
-         "$ref": "308"
+         "$ref": "303"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "310",
+       "$id": "305",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "311",
+        "$id": "306",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2426,9 +2387,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "312",
+        "$id": "307",
         "Type": {
-         "$ref": "311"
+         "$ref": "306"
         },
         "Value": "application/json"
        }
@@ -2436,7 +2397,7 @@
      ],
      "Responses": [
       {
-       "$id": "313",
+       "$id": "308",
        "StatusCodes": [
         200
        ],
@@ -2463,20 +2424,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "314",
+     "$id": "309",
      "Name": "DetectUnivariateChangePoint",
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
      "Description": "Evaluate change point score of every series point",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "315",
+       "$id": "310",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2494,11 +2455,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "316",
+       "$id": "311",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "317",
+        "$id": "312",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2513,19 +2474,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "318",
+        "$id": "313",
         "Type": {
-         "$ref": "317"
+         "$ref": "312"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "319",
+       "$id": "314",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "320",
+        "$id": "315",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2540,9 +2501,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "321",
+        "$id": "316",
         "Type": {
-         "$ref": "320"
+         "$ref": "315"
         },
         "Value": "application/json"
        }
@@ -2550,7 +2511,7 @@
      ],
      "Responses": [
       {
-       "$id": "322",
+       "$id": "317",
        "StatusCodes": [
         200
        ],
@@ -2578,36 +2539,36 @@
     }
    ],
    "Protocol": {
-    "$id": "323"
+    "$id": "318"
    },
    "Creatable": false,
    "Parent": "AnomalyDetectorClient"
   },
   {
-   "$id": "324",
+   "$id": "319",
    "Name": "Multivariate",
    "Description": "",
    "Operations": [
     {
-     "$id": "325",
+     "$id": "320",
      "Name": "GetMultivariateBatchDetectionResult",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "326",
+       "$id": "321",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Description": "ID of a batch detection result.",
        "Type": {
-        "$id": "327",
+        "$id": "322",
         "Kind": "Primitive",
         "Name": "Guid",
         "IsNullable": false
@@ -2623,11 +2584,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "328",
+       "$id": "323",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "329",
+        "$id": "324",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2642,9 +2603,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "330",
+        "$id": "325",
         "Type": {
-         "$ref": "329"
+         "$ref": "324"
         },
         "Value": "application/json"
        }
@@ -2652,7 +2613,7 @@
      ],
      "Responses": [
       {
-       "$id": "331",
+       "$id": "326",
        "StatusCodes": [
         200
        ],
@@ -2676,20 +2637,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "332",
+     "$id": "327",
      "Name": "TrainMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Train a Multivariate Anomaly Detection Model",
      "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "333",
+       "$id": "328",
        "Name": "modelInfo",
        "NameInRequest": "modelInfo",
        "Description": "Model information.",
@@ -2707,11 +2668,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "334",
+       "$id": "329",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "335",
+        "$id": "330",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2726,19 +2687,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "336",
+        "$id": "331",
         "Type": {
-         "$ref": "335"
+         "$ref": "330"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "337",
+       "$id": "332",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "338",
+        "$id": "333",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2753,9 +2714,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "339",
+        "$id": "334",
         "Type": {
-         "$ref": "338"
+         "$ref": "333"
         },
         "Value": "application/json"
        }
@@ -2763,7 +2724,7 @@
      ],
      "Responses": [
       {
-       "$id": "340",
+       "$id": "335",
        "StatusCodes": [
         201
        ],
@@ -2773,12 +2734,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "341",
+         "$id": "336",
          "Name": "location",
          "NameInResponse": "Location",
          "Description": "Location and ID of the model.",
          "Type": {
-          "$id": "342",
+          "$id": "337",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -2803,25 +2764,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "343",
+     "$id": "338",
      "Name": "ListMultivariateModels",
      "ResourceName": "Multivariate",
      "Summary": "List Multivariate Models",
      "Description": "List models of a resource.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "344",
+       "$id": "339",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
-        "$id": "345",
+        "$id": "340",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -2837,12 +2798,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "346",
+       "$id": "341",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
-        "$id": "347",
+        "$id": "342",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -2858,11 +2819,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "348",
+       "$id": "343",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "349",
+        "$id": "344",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2877,9 +2838,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "350",
+        "$id": "345",
         "Type": {
-         "$ref": "349"
+         "$ref": "344"
         },
         "Value": "application/json"
        }
@@ -2887,7 +2848,7 @@
      ],
      "Responses": [
       {
-       "$id": "351",
+       "$id": "346",
        "StatusCodes": [
         200
        ],
@@ -2908,7 +2869,7 @@
      "Path": "/multivariate/models",
      "BufferResponse": true,
      "Paging": {
-      "$id": "352",
+      "$id": "347",
       "NextLinkName": "nextLink",
       "ItemName": "models"
      },
@@ -2916,25 +2877,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "353",
+     "$id": "348",
      "Name": "DeleteMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
      "Description": "Delete an existing multivariate model according to the modelId",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "354",
+       "$id": "349",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "355",
+        "$id": "350",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2950,11 +2911,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "356",
+       "$id": "351",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "357",
+        "$id": "352",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2969,9 +2930,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "358",
+        "$id": "353",
         "Type": {
-         "$ref": "357"
+         "$ref": "352"
         },
         "Value": "application/json"
        }
@@ -2979,7 +2940,7 @@
      ],
      "Responses": [
       {
-       "$id": "359",
+       "$id": "354",
        "StatusCodes": [
         204
        ],
@@ -2997,25 +2958,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "360",
+     "$id": "355",
      "Name": "GetMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
      "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "361",
+       "$id": "356",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "362",
+        "$id": "357",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3031,11 +2992,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "363",
+       "$id": "358",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "364",
+        "$id": "359",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3050,9 +3011,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "365",
+        "$id": "360",
         "Type": {
-         "$ref": "364"
+         "$ref": "359"
         },
         "Value": "application/json"
        }
@@ -3060,7 +3021,7 @@
      ],
      "Responses": [
       {
-       "$id": "366",
+       "$id": "361",
        "StatusCodes": [
         200
        ],
@@ -3084,25 +3045,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "367",
+     "$id": "362",
      "Name": "DetectMultivariateBatchAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "368",
+       "$id": "363",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "369",
+        "$id": "364",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3118,7 +3079,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "370",
+       "$id": "365",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of multivariate anomaly detection.",
@@ -3136,11 +3097,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "371",
+       "$id": "366",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "372",
+        "$id": "367",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3155,19 +3116,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "373",
+        "$id": "368",
         "Type": {
-         "$ref": "372"
+         "$ref": "367"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "374",
+       "$id": "369",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "375",
+        "$id": "370",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3182,9 +3143,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "376",
+        "$id": "371",
         "Type": {
-         "$ref": "375"
+         "$ref": "370"
         },
         "Value": "application/json"
        }
@@ -3192,7 +3153,7 @@
      ],
      "Responses": [
       {
-       "$id": "377",
+       "$id": "372",
        "StatusCodes": [
         202
        ],
@@ -3202,24 +3163,24 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "378",
+         "$id": "373",
          "Name": "operation-id",
          "NameInResponse": "Operation-Id",
          "Description": "Id of the detection result.",
          "Type": {
-          "$id": "379",
+          "$id": "374",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
          }
         },
         {
-         "$id": "380",
+         "$id": "375",
          "Name": "operation-location",
          "NameInResponse": "Operation-Location",
          "Description": "Location of the detection result.",
          "Type": {
-          "$id": "381",
+          "$id": "376",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -3244,25 +3205,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "382",
+     "$id": "377",
      "Name": "DetectMultivariateLastAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
      "Parameters": [
       {
-       "$ref": "292"
+       "$ref": "287"
       },
       {
-       "$ref": "294"
+       "$ref": "289"
       },
       {
-       "$id": "383",
+       "$id": "378",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "384",
+        "$id": "379",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3278,7 +3239,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "385",
+       "$id": "380",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of last detection.",
@@ -3296,11 +3257,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "386",
+       "$id": "381",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "387",
+        "$id": "382",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3315,19 +3276,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "388",
+        "$id": "383",
         "Type": {
-         "$ref": "387"
+         "$ref": "382"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "389",
+       "$id": "384",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "390",
+        "$id": "385",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3342,9 +3303,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "391",
+        "$id": "386",
         "Type": {
-         "$ref": "390"
+         "$ref": "385"
         },
         "Value": "application/json"
        }
@@ -3352,7 +3313,7 @@
      ],
      "Responses": [
       {
-       "$id": "392",
+       "$id": "387",
        "StatusCodes": [
         200
        ],
@@ -3380,16 +3341,16 @@
     }
    ],
    "Protocol": {
-    "$id": "393"
+    "$id": "388"
    },
    "Creatable": false,
    "Parent": "AnomalyDetectorClient"
   }
  ],
  "Auth": {
-  "$id": "394",
+  "$id": "389",
   "ApiKey": {
-   "$id": "395",
+   "$id": "390",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }
