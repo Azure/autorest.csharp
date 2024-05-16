@@ -463,17 +463,25 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
+        /// <param name="action"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<ClientResult<Thing>> TopActionAsync(string action)
         {
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
+
             ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
+        /// <param name="action"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual ClientResult<Thing> TopAction(string action)
         {
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
+
             ClientResult result = TopAction(action, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -488,17 +496,21 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopActionAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <param name="action"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions options)
+        public virtual async Task<ClientResult> TopActionAsync(string action, RequestOptions options)
         {
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
+
             using PipelineMessage message = CreateTopActionRequest(action, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
@@ -513,17 +525,21 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopAction(DateTimeOffset)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopAction(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <param name="action"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions options)
+        public virtual ClientResult TopAction(string action, RequestOptions options)
         {
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
+
             using PipelineMessage message = CreateTopActionRequest(action, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
@@ -1357,7 +1373,7 @@ namespace CustomizedTypeSpec.Models
             return message;
         }
 
-        internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions options)
+        internal PipelineMessage CreateTopActionRequest(string action, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -1366,7 +1382,7 @@ namespace CustomizedTypeSpec.Models
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action.ToString("O"), true);
+            uri.AppendPath(action, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
