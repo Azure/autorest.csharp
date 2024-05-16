@@ -463,25 +463,17 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult<Thing>> TopActionAsync(string action)
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult<Thing> TopAction(string action)
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             ClientResult result = TopAction(action, null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -496,21 +488,17 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopActionAsync(string)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> TopActionAsync(string action, RequestOptions options)
+        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions options)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             using PipelineMessage message = CreateTopActionRequest(action, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
@@ -525,21 +513,17 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopAction(string)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopAction(DateTimeOffset)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult TopAction(string action, RequestOptions options)
+        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions options)
         {
-            Argument.AssertNotNullOrEmpty(action, nameof(action));
-
             using PipelineMessage message = CreateTopActionRequest(action, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
@@ -823,90 +807,6 @@ namespace CustomizedTypeSpec.Models
         public virtual ClientResult AddTimeHeader(RequestOptions options = null)
         {
             using PipelineMessage message = CreateAddTimeHeaderRequest(options);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
-        }
-
-        /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using BinaryContent content = body.ToBinaryContent();
-            ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using BinaryContent content = body.ToBinaryContent();
-            ClientResult result = StringFormat(subscriptionId, content, null);
-            return result;
-        }
-
-        /// <summary>
-        /// [Protocol Method] parameter has string format.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringFormatAsync(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-        }
-
-        /// <summary>
-        /// [Protocol Method] parameter has string format.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringFormat(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult StringFormat(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -1373,7 +1273,7 @@ namespace CustomizedTypeSpec.Models
             return message;
         }
 
-        internal PipelineMessage CreateTopActionRequest(string action, RequestOptions options)
+        internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -1382,7 +1282,7 @@ namespace CustomizedTypeSpec.Models
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action, true);
+            uri.AppendPath(action.ToString("O"), true);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
@@ -1467,24 +1367,6 @@ namespace CustomizedTypeSpec.Models
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
-            message.Apply(options);
-            return message;
-        }
-
-        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions options)
-        {
-            var message = _pipeline.CreateMessage();
-            message.ResponseClassifier = PipelineMessageClassifier204;
-            var request = message.Request;
-            request.Method = "POST";
-            var uri = new ClientUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/stringFormat/", false);
-            uri.AppendPath(subscriptionId.ToString(), true);
-            request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", "application/json");
-            request.Content = content;
             message.Apply(options);
             return message;
         }
